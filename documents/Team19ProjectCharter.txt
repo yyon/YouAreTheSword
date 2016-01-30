@@ -1,0 +1,45 @@
+﻿Team 19 Project Charter
+
+You Are the Sword
+
+
+Team Members:
+Ian Campbell, Josh Newlin, Chris Schlatter, Yidi Xiao
+
+
+Problem Statement:
+        In current society, there is a high demand for entertainment, namely video games. While the market is flooded with AAA games and indie games alike, the 2D dungeon crawler is lost in this generation. Our idea is unique enough to have a good stake in the video game industry by taking a well-known genre and adding a twist to the gameplay. 
+
+
+Project Objectives:
+* Core game:
+   * Top-down 2d roguelike rpg
+   * NPC possession game mechanic
+   * Multiplayer (optional)
+* Design NPCs
+   * Different classes of adventurers (e.g. rogue, mage, etc.)
+      * Class abilities:
+         * Standard attack
+         * Special moves/equipment
+         * defense moves
+         * Ability to transform sword (ex. increased attack range, extra skill like multi shot for ranger) (this adds abilities to the standard attack)
+   * Different classes of monsters
+* Design User interface & control:
+   * Skill slots 
+   * Inventories (optional)
+   * Keyboard and mouse controls
+* Game environment and storytelling
+   * Create dungeons, villages, etc. (optional)
+   * Story (optional)
+   * Random map generation (Optional)
+
+
+Stakeholders:
+Users: The average user for our game will be a moderately experienced gamer who has played RPG games before.
+Developers: Ian Campbell, Josh Newlin, Chris Schlatter, Yidi Xiao
+Project Manager: Ian Campbell
+Project Owners: Ian Campbell, Josh Newlin, Chris Schlatter, Yidi Xiao
+
+
+Deliverables:
+* Application written using the Solarus game engine in lua for Windows, Mac, and Linux.

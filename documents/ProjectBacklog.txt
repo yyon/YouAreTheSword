@@ -1,0 +1,44 @@
+﻿CS 30700 Group 19 
+Project Name: You Are the Demon Lord!...’s Sword
+Ian Campbell, Josh Newlin, Chris Schlatter, Yidi Xiao
+
+
+Product Backlog
+1. Problem Statement:
+In current society, there is a high demand for entertainment, namely video games. While the market is flooded with AAA games and indie games alike, the 2D dungeon crawler is lost in this generation. Our idea is unique enough to have a good stake in the video game industry by taking a well-known genre and adding a twist to the gameplay.
+
+
+1. Background Information:
+There are several games that have 2D top-down sword play, but none that actually focus on a crucial character in them: the sword.  You Are the Sword, unlike the other titles that are considered dungeon-crawlers, positions the player in the swords perspective.  As the name suggests, you play the part of a parasitic sword who possesses wanderers to fight for you. The ability to possess adventurers with different abilities allows the player to combine different adventurer’s abilities in unique ways. 
+
+
+1. Requirements:
+Functional:
+1. As a user, I want to be able to have different save slots.
+2. As a user, I would like to be able to possess adventurers.
+3. As a user, I want multiple classes of adventurers.
+4. As a user, I want different classes to have different types of attacks.
+5. As a user, I want the ability to dodge or block attacks. 
+6. As a user, I would like the ability to get temporary boosts or buffs to my character. 
+   1. As a user, I want different classes to be able to add a buff to my sword. 
+   2. As a user, I want a possess-o-meter so that I get buffs when I possess people. 
+   3. As a user, I would like enemies to have the ability to give me temporary debuffs.
+1. As a user, I want an amazingly awesome and funny story.
+2. As a user, I want to be able to save and load the game.
+3. As a user, I would like to be able to strategically kill the player holding me.
+4. As a user, I would like to be able to level up my character (the sword).
+5. As a user, I want a shop. 
+6. As a user, I would like multiple endings. 
+7. As a user, I would like the gameplay to get more difficult as it goes on. 
+8. As a developer, I would like to have the players’ choices have consequences throughout the game.
+9. As a user, I would like to be able to possess enemies as well as allies.
+Non-Functional:
+1. As a user, I want to be able to load the game as quickly as possible.
+2. As a developer, I want saves to be efficiently stored.
+3. As a developer, I want to make this game easy and fun to play.
+4. As a user, I want keyboard and mouse controls
+5. As a user, I would like controller controls.
+6. As a developer, I want to deploy this game on PC.
+7. As a developer, I would like the ability to add features and content to the game easily.
+8. As a developer, I want to enable console command to test my game.
+9. As a developer, I would like to be able to generate the NPCs/possession victims stats via a class-specific function/class.
