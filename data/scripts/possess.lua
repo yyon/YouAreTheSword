@@ -22,8 +22,6 @@ function possess:possessrandom()
 		
 		hero:set_tunic_sprite_id(entity.main_sprite)
 		
-		print(entity:get_breed())
-		
 		entity:remove()
 	end
 end

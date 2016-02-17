@@ -22,14 +22,14 @@ local enemy = ...
 -- Its values are all optional except main_sprite
 -- and sword_sprite.
 
-local properties = {}
+-- local properties = {}
 local going_hero = false
 local being_pushed = false
 local main_sprite = nil
 local sword_sprite = nil
 
-function enemy:set_properties(prop)
-
+function enemy:set_class(class)
+--[[
 	properties = prop
 	-- Set default values.
 	if properties.life == nil then
@@ -50,6 +50,7 @@ function enemy:set_properties(prop)
 	if properties.hurt_style == nil then
 		properties.hurt_style = "normal"
 	end
+--]]
 end
 
 function enemy:on_created()
@@ -67,7 +68,6 @@ function enemy:on_created()
 end
 
 function enemy:on_restarted()
-
 	if not being_pushed then
 		if going_hero then
 			self:go_hero()
@@ -78,13 +78,16 @@ function enemy:on_restarted()
 	end
 end
 
-function enemy:check_hero()
+function enemy:close_to(entity)
+	local _, _, layer = self:get_position()
+	local _, _, hero_layer = entity:get_position()
+	return layer == hero_layer and self:get_distance(entity) < 40
+end
 
+function enemy:check_hero()
 	local hero = self:get_map():get_entity("hero")
 	local _, _, layer = self:get_position()
 	local _, _, hero_layer = hero:get_position()
-	local really_near_hero = layer == hero_layer
-		and self:get_distance(hero) < 20
 	local near_hero = layer == hero_layer
 		and self:get_distance(hero) < 100
 
@@ -96,17 +99,18 @@ function enemy:check_hero()
 	elseif not near_hero and going_hero then
 		self:go_random()
 	end
-	if really_near_hero then
-		self:go_attack()
+	
+	if self:close_to(hero) then
+		self:go_attack(hero)
 	else
-		self:dont_attack()
+		self:dont_attack(hero)
 	end
+	
 	sol.timer.stop_all(self)
-	sol.timer.start(self, 1000, function() self:check_hero() end)
+	sol.timer.start(self, 500, function() self:check_hero() end)
 end
 
 function enemy:on_movement_changed(movement)
-
 	if not being_pushed then
 		local direction4 = movement:get_direction4()
 		main_sprite:set_direction(direction4)
@@ -122,14 +126,12 @@ function enemy:on_movement_finished(movement)
 end
 
 function enemy:on_obstacle_reached(movement)
-
 	if being_pushed then
 		self:go_hero()
 	end
 end
 
 function enemy:on_custom_attack_received(attack, sprite)
-
 	if attack == "sword" and sprite == sword_sprite then
 		sol.audio.play_sound("sword_tapping")
 		being_pushed = true
@@ -160,23 +162,44 @@ function enemy:go_hero()
 	going_hero = true
 end
 
-function enemy:go_attack()
-	local movement = sol.movement.create("target")
-	movement:set_speed(0)
-	movement:start(self)
+function enemy:go_attack(hero)
+--	local movement = sol.movement.create("target")
+--	movement:set_speed(0)
+--	movement:start(self)
 	if sword_sprite:get_animation() ~= "sword" then
 		print("go")
+		movement = self:get_movement()
+		if movement ~= nil then
+			movement:stop(self)
+		end
 		sword_sprite:set_animation("sword")
+		sword_sprite:set_paused(false)
 		main_sprite:set_animation("sword")
+		sword_sprite:synchronize(main_sprite)
+		sol.timer.start(self, 100, function() self:actually_attack(hero) end)
 	end
-	sword_sprite:set_paused(false)
+	direction = self:get_direction4_to(hero)
+	main_sprite:set_direction(direction)
+	sword_sprite:set_direction(direction)
 end
 
-function enemy:dont_attack()
+function enemy:dont_attack(hero)
 	if sword_sprite:get_animation() ~= "walking" then
 		print("stop")
+		movement = self:get_movement()
+		if movement ~= nil then
+			movement:start(self)
+		else
+			self:go_hero()
+		end
 		sword_sprite:set_animation("walking")
 		main_sprite:set_animation("walking")
+	end
+end
+
+function enemy:actually_attack(hero)
+	if self:close_to(hero) then
+		print("hit")
 	end
 end
 
