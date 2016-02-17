@@ -1,0 +1,144 @@
+properties{
+  x = 1,
+  y = 0,
+  width = 320,
+  height = 240,
+  world = "inside",
+  tileset = "castle",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 104,
+  width = 16,
+  height = 16,
+  pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 88,
+  width = 16,
+  height = 16,
+  pattern = "34",
+}
+
+tile{
+  layer = 0,
+  x = 8,
+  y = 24,
+  width = 8,
+  height = 64,
+  pattern = "31",
+}
+
+tile{
+  layer = 0,
+  x = 16,
+  y = 24,
+  width = 288,
+  height = 16,
+  pattern = "33",
+}
+
+tile{
+  layer = 0,
+  x = 24,
+  y = 216,
+  width = 272,
+  height = 16,
+  pattern = "37",
+}
+
+tile{
+  layer = 0,
+  x = 8,
+  y = 120,
+  width = 8,
+  height = 112,
+  pattern = "31",
+}
+
+tile{
+  layer = 0,
+  x = 8,
+  y = 216,
+  width = 16,
+  height = 16,
+  pattern = "37",
+}
+
+tile{
+  layer = 0,
+  x = 8,
+  y = 216,
+  width = 16,
+  height = 16,
+  pattern = "36",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 120,
+  width = 16,
+  height = 16,
+  pattern = "33",
+}
+
+tile{
+  layer = 0,
+  x = 16,
+  y = 40,
+  width = 288,
+  height = 176,
+  pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 304,
+  y = 24,
+  width = 8,
+  height = 208,
+  pattern = "30",
+}
+
+tile{
+  layer = 0,
+  x = 288,
+  y = 216,
+  width = 16,
+  height = 16,
+  pattern = "37",
+}
+
+destination{
+  name = "main_entry",
+  layer = 0,
+  x = 24,
+  y = 117,
+  direction = 0,
+}
+
+enemy{
+  name = "red1",
+  layer = 0,
+  x = 264,
+  y = 117,
+  direction = 0,
+  breed = "red_knight_soldier",
+}
+
+teletransporter{
+  layer = 0,
+  x = 0,
+  y = 104,
+  width = 16,
+  height = 16,
+  destination_map = "first_map",
+  destination = "combat_entry",
+}
+
