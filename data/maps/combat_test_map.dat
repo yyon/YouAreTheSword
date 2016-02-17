@@ -129,7 +129,7 @@ enemy{
   x = 264,
   y = 117,
   direction = 0,
-  breed = "red_knight_soldier",
+  breed = "purple_test",
 }
 
 teletransporter{

@@ -113,7 +113,7 @@ sound{ id = "wrong", description = "wrong" }
 
 item{ id = "bomb", description = "Bomb" }
 
-enemy{ id = "red_knight_soldier", description = "Test Red Knight Soldier" }
+enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
 
 
 language{ id = "en", description = "English" }
