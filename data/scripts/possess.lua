@@ -10,19 +10,18 @@ function possess:possessrandom()
 	
 	entitieslist = {}
 	for entity in map:get_entities("") do
-		if entity:get_type() == "enemy" then
-			entitieslist[#entitieslist+1] = entity
+		if entity.entitydata ~= nil then
+			if not entity.entitydata.ishero then
+				entitieslist[#entitieslist+1] = entity
+			end
 		end
 	end
 	
 	entity = entitieslist[math.random(#entitieslist)]
+	
 	if entity ~= nil then
-		hero:set_position(entity:get_position())
-		hero:set_direction(entity:get_movement():get_direction4())
-		
-		hero:set_tunic_sprite_id(entity.main_sprite)
-		
-		entity:remove()
+		hero.entitydata:unpossess()
+		entity.entitydata:bepossessedbyhero()
 	end
 end
 

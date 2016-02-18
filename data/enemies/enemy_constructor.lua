@@ -1,0 +1,3 @@
+enemy = ...
+
+sol.main.load_file("enemies/NPC")(enemy)
