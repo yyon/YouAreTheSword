@@ -40,6 +40,8 @@ play_hero_seen_sound = false
 normal_speed = 32
 faster_speed = 64
 
+enemy.hasbeeninitialized = false
+
 function enemy:set_class(class_string)
 	self.class = class_string
 end
@@ -162,6 +164,8 @@ end
 
 function enemy:tick(newstate)
 	if self.entitydata ~= nil then
+	
+	self.hasbeeninitialized = true
 	
 	prevstate = self.state
 	preventitytoattack = self.entitytoattack

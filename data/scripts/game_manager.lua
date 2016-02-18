@@ -33,6 +33,11 @@ function game_manager:start_game()
 end
 
 function sol.main:on_key_pressed(key, modifiers)
+	if game:is_paused() or game:is_suspended() then
+		print("PAUSED!")
+		return
+	end
+	
 	hero = game:get_hero()
 	if hero:get_state() ~= "freezed" then
 		if key == "a" then

@@ -58,6 +58,8 @@ function entitydata:bepossessedbyhero()
 	self:applytoentity()
 	
 	self.entity.is_possessing = true
+	
+	print("sword has possessed", self.class)
 end
 
 function entitydata:unpossess()
@@ -86,6 +88,8 @@ function entitydata:unpossess()
 	self:applytoentity()
 	
 	self.entity:setdirection(d)
+	
+	print("sword has left", self.class)
 	
 	return self.entity
 end
@@ -226,6 +230,7 @@ function entitydata:kill()
 end
 
 function entitydata:throwsword(entitydata2)
+	print("going to throw to", entitydata2.class)
 	if self.entity.ishero then
 		if self.usingability ~= nil then
 			return
@@ -234,12 +239,23 @@ function entitydata:throwsword(entitydata2)
 		if hero.isthrown then
 			return
 		end
-		hero.isthrown = true
 		
 		if entitydata2 == nil then
 			print("no entity!")
 			return
 		end
+		
+		if not entitydata2.entity:exists() then
+			print("doesn't exist!")
+			return
+		end
+		
+		if not entitydata2.entity.hasbeeninitialized then
+			print("Not init!")
+			return
+		end
+		
+		hero.isthrown = true
 		
 		hero = self.entity
 		hero.isthrown = true
@@ -251,6 +267,9 @@ function entitydata:throwsword(entitydata2)
 		
 		hero:set_tunic_sprite_id("hero/thrownsword")
 		hero:set_animation("stopped")
+		
+		hero:stop_movement()
+		print(entitydata2.entity:get_position())
 		
 		local movement = sol.movement.create("target")
 		movement:set_speed(500)
