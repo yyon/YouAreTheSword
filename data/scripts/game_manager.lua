@@ -14,8 +14,8 @@ function game_manager:start_game()
 		-- Initialize a new savegame.
 		game:set_max_life(1)
 		game:set_life(game:get_max_life())
-		game:set_ability("lift", 2)
-		game:set_ability("sword", 1)--"sprites/hero/sword1")
+--		game:set_ability("lift", 2)
+--		game:set_ability("sword", 1)--"sprites/hero/sword1")
 		game:set_starting_location("combat_test_map")
 	end
 	game:start()

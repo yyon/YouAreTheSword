@@ -26,8 +26,6 @@ function ability:cancel()
 end
 
 function ability:finish()
---	self.swordentity.sword_sprite:set_paused(true)
---	self.swordentity:set_visible(false)
 	self.swordentity:remove()
 	self.swordentity = nil
 	self:finishability()

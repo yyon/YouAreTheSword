@@ -5,6 +5,7 @@ possess = {}
 require "math"
 
 function possess:possessrandom()
+	-- throw sword to random entity
 	map = game:get_map()
 	hero = game:get_hero()
 	

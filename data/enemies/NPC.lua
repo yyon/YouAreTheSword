@@ -174,6 +174,8 @@ function enemy:tick(newstate)
 		else
 			target = self.entitytoattack.entity
 		end
+	else
+		target = nil
 	end
 	
 	if (newstate == nil) then
@@ -187,7 +189,7 @@ function enemy:tick(newstate)
 	if changedstates then
 		-- changed states
 		self:reset_everything()
---		print(self.entitydata.team, "changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
+		print(self.entitydata.team, "changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
 
 --		if prevstate == ATTACK then
 --			self:dont_attack(target)
@@ -263,6 +265,7 @@ end
 
 function enemy:go_random(changedstates)
 	if changedstates then
+		print(self.entitydata.class, "random", changedstates)
 		local movement = sol.movement.create("random_path")
 		movement:set_speed(normal_speed)
 		movement:start(self)

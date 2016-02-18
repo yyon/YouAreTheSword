@@ -1,7 +1,9 @@
 entitydata = {}
 
-function entitydata:new(entity, main_sprite, life, team, swordability)
+function entitydata:new(entity, class, main_sprite, life, team, swordability)
+	-- use createfromclass
 	self.entity = entity
+	self.class = class
 	self.main_sprite = main_sprite
 	self.life = life
 	self.team = team
@@ -10,17 +12,18 @@ end
 
 function entitydata:createfromclass(entity, class)
 	if class == "purple" then
-		self:new(entity, "hero/tunic3", 10, "purple", sol.main.load_file("abilities/sword")(self))
+		self:new(entity, class, "hero/tunic3", 10, "purple", sol.main.load_file("abilities/sword")(self))
 	elseif class == "green" then
-		self:new(entity, "hero/tunic1", 10, "green", sol.main.load_file("abilities/sword")(self))
+		self:new(entity, class, "hero/tunic1", 10, "green", sol.main.load_file("abilities/sword")(self))
 	elseif class == "yellow" then
-		self:new(entity, "hero/tunic2", 10, "yellow", sol.main.load_file("abilities/sword")(self))
+		self:new(entity, class, "hero/tunic2", 10, "yellow", sol.main.load_file("abilities/sword")(self))
 	else
 		print("ERROR! no such class")
 	end
 end
 
 function entitydata:applytoentity()
+	-- changes entities appearance to reflect self
 	self.entity.entitydata = self
 	
 	if self.entity.ishero then
@@ -31,6 +34,8 @@ function entitydata:applytoentity()
 end
 
 function entitydata:bepossessedbyhero()
+	-- control this entitydata
+	
 	if self.usingability ~= nil then
 		self.usingability:cancel()
 	end
@@ -56,6 +61,8 @@ function entitydata:bepossessedbyhero()
 end
 
 function entitydata:unpossess()
+	-- create NPC entity for entitydata
+	
 	self.entity.is_possessing = false
 	
 	hero = map:get_hero()
@@ -86,6 +93,8 @@ end
 
 
 function entitydata:isvisible()
+	-- can be seen
+	
 	if self.entity.ishero and not self.entity.is_possessing then
 		return false
 	end
@@ -93,12 +102,14 @@ function entitydata:isvisible()
 end
 
 function entitydata:getability(ability)
+	-- string to object
 	if ability == "sword" then
 		return self.swordability
 	end
 end
 
 function entitydata:startability(ability)
+	-- call this to use an ability
 	if self.usingability == nil then
 		ability = self:getability(ability)
 		ability:start()
@@ -106,6 +117,7 @@ function entitydata:startability(ability)
 end
 
 function entitydata:withinrange(ability, entitydata)
+	-- if an entity can be attacked using the ability
 	ability = self:getability(ability)
 	range = ability.range
 	d = self.entity:get_distance(entitydata.entity)
@@ -131,6 +143,7 @@ function entitydata:setanimation(anim)
 end
 
 function entitydata:freeze()
+	-- prevent movement due to input or AI
 	if self.entity.ishero then
 		self.entity:freeze()
 	else
@@ -151,6 +164,7 @@ function entitydata:unfreeze(dotick)
 end
 
 function entitydata:dodamage(target, damage)
+	-- call this to damage the target
 	target.life = target.life - damage
 	
 	print(target.team, "damaged", damage, "life", target.life)
@@ -190,7 +204,9 @@ function entitydata:dodamage(target, damage)
 end
 
 function entitydata:kill()
+	-- adventurer/monster is killed
 	if self.entity.ishero then
+		-- drop sword
 		hero = self.entity
 		newentity = self:unpossess()
 		newentity.entitydata:kill()
