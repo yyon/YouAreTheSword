@@ -35,6 +35,7 @@ GOHERO = "go_towards"
 --ATTACK = "attack"
 PUSHED = "being_pushed"
 FROZEN = "frozen"
+GOPICKUP = "pickup"
 play_hero_seen_sound = false
 normal_speed = 32
 faster_speed = 64
@@ -99,6 +100,10 @@ function enemy:targetenemy()
 		entitieslist[#entitieslist+1] = hero.entitydata
 	end
 	
+	if hero.isdropped then
+		return hero
+	end
+	
 	map = self:get_map()
 	for entity in map:get_entities("") do
 		if self:cantargetentity(entity) and entity ~= hero then
@@ -144,6 +149,10 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 		return RANDOM
 	end
 	
+	if entitytoattack.isdropped then
+		return GOPICKUP
+	end
+	
 --	if self:close_to(entitytoattack.entity) then
 --		return ATTACK
 --	end
@@ -159,11 +168,16 @@ function enemy:tick(newstate)
 	
 	self.entitytoattack = self:targetenemy()
 	if (self.entitytoattack ~= nil) then
-		target = self.entitytoattack.entity
+		if self.entitytoattack.isdropped then
+			target = self.entitytoattack
+			self.entitytoattack = nil
+		else
+			target = self.entitytoattack.entity
+		end
 	end
 	
 	if (newstate == nil) then
-		self.state = self:determinenewstate(self.entitytoattack, self.state)
+		self.state = self:determinenewstate(target, self.state)
 	else
 		self.state = newstate
 	end
@@ -173,7 +187,8 @@ function enemy:tick(newstate)
 	if changedstates then
 		-- changed states
 		self:reset_everything()
-		print(self.entitydata.team, "changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
+--		print(self.entitydata.team, "changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
+
 --		if prevstate == ATTACK then
 --			self:dont_attack(target)
 --		end
@@ -187,6 +202,8 @@ function enemy:tick(newstate)
 		self:go_random(changedstates)
 	elseif self.state == PUSHED then
 		self:go_pushed(changedstates)
+	elseif self.state == GOPICKUP then
+		self:go_pickup(changedstates, target)
 	end
 	
 	end
@@ -227,7 +244,6 @@ function enemy:on_custom_attack_received(attack, sprite)
 end
 
 function enemy:receive_attack_animation(entity)
-	print("going to push")
 	self.hitbyentity = entity
 	self:tick(PUSHED)
 end
@@ -263,8 +279,24 @@ function enemy:go_hero(changedstates)
 		end
 	end
 	
-	if self.entitydata:withinrange("sword", self.entitytoattack) then
-		self.entitydata:startability("sword")
+	if self.entitytoattack ~= nil then
+		if self.entitydata:withinrange("sword", self.entitytoattack) then
+			self.entitydata:startability("sword")
+		end
+	end
+end
+
+function enemy:go_pickup(changedstates, target)
+	if changedstates then
+		local movement = sol.movement.create("target")
+		movement:set_speed(faster_speed)
+		movement:set_target(target)
+		movement:start(self)
+	end
+	
+	if self:get_distance(target) < 20 then
+		print("POSSESS")
+		self.entitydata:bepossessedbyhero()
 	end
 end
 
@@ -301,7 +333,6 @@ function enemy:dont_attack(hero)
 	self.is_swinging_sword = false
 end
 --]]
-
 function enemy:reset_everything()
 --	self.sword_sprite:set_animation("walking")
 	self.main_sprite:set_animation("walking")

@@ -22,16 +22,17 @@ function ability:doability()
 end
 
 function ability:cancel()
-	print("CANCEL")
 	self:finish()
 end
 
 function ability:finish()
-	print("FINISH")
+--	self.swordentity.sword_sprite:set_paused(true)
+--	self.swordentity:set_visible(false)
 	self.swordentity:remove()
+	self.swordentity = nil
 	self:finishability()
 	
-	self.entitydata:unfreeze()
+	self.entitydata:unfreeze(false)
 end
 
 function ability:attack(entitydata)

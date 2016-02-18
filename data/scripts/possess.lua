@@ -20,8 +20,11 @@ function possess:possessrandom()
 	entity = entitieslist[math.random(#entitieslist)]
 	
 	if entity ~= nil then
-		hero.entitydata:unpossess()
-		entity.entitydata:bepossessedbyhero()
+		if hero.entitydata ~= nil then
+			hero.entitydata:throwsword(entity.entitydata)
+		end
+--		hero.entitydata:unpossess()
+--		entity.entitydata:bepossessedbyhero()
 	end
 end
 
