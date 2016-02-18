@@ -138,6 +138,7 @@ function enemy:cantargetentity(entity)
 	return true
 end
 
+
 function enemy:determinenewstate(entitytoattack, currentstate)
 	if currentstate == PUSHED then
 		return PUSHED
@@ -163,7 +164,7 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 end
 
 function enemy:tick(newstate)
-	if self.entitydata ~= nil then
+	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
 	
 	self.hasbeeninitialized = true
 	

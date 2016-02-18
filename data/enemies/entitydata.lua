@@ -169,6 +169,11 @@ end
 
 function entitydata:dodamage(target, damage)
 	-- call this to damage the target
+	if target.team == self.team then
+		print("friendly fire off")
+		return
+	end
+	
 	target.life = target.life - damage
 	
 	print(target.team, "damaged", damage, "life", target.life)
