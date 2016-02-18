@@ -5,9 +5,11 @@ local game_manager = {}
 
 possess = sol.main.load_file("scripts/possess")
 
+game = nil
+
 function game_manager:start_game()
 	local exists = sol.game.exists("save1.dat")
-	local game = sol.game.load("save1.dat")
+	game = sol.game.load("save1.dat")
 	if not exists then
 		-- Initialize a new savegame.
 		game:set_max_life(12)
@@ -18,6 +20,15 @@ function game_manager:start_game()
 	end
 	game:start()
 	possess(game)
+	
+	hero = game:get_hero()
+	if hero.entitydata == nil then
+		hero.ishero = true
+		hero.is_possessing = true
+		hero.entitydata = sol.main.load_file("enemies/entitydata")()
+		hero.entitydata:createfromclass(hero, "green")
+		hero.entitydata:applytoentity()
+	end
 end
 
 function sol.main:on_key_pressed(key, modifiers)

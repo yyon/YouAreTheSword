@@ -1,0 +1,1 @@
+Error: In on_key_pressed: [string "enemies/entitydata.lua"]:51: bad argument #1 to create_enemy (Bad field 'direction' (integer expected, got nil))
