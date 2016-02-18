@@ -1,9 +1,19 @@
 ability = {}
 
-ability.entitydata = arg[1]
-ability.entity = arg[2]
-ability.range = arg[3]
-ability.warmup = arg[4]
-ability.cooldown = arg[5]
+ability.entitydata, ability.range, ability.warmup, ability.cooldown, ability.entityname, ability.damage = ...
+
+function ability:start()
+	self.entitydata.usingability = self
+	self:doability()
+end
+
+function ability:finishability()
+	self.entitydata.usingability = nil
+end
+
+function ability:dodamage(entitydata)
+	damage = self.damage
+	self.entitydata:dodamage(entitydata, damage)
+end
 
 return ability

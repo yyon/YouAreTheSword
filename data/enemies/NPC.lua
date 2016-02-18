@@ -27,11 +27,14 @@ local enemy = ...
 -- local being_pushed = false
 -- local main_sprite = nil
 
+require "math"
+
 -- constants:
 RANDOM = "random"
 GOHERO = "go_towards"
-ATTACK = "attack"
+--ATTACK = "attack"
 PUSHED = "being_pushed"
+FROZEN = "frozen"
 play_hero_seen_sound = false
 normal_speed = 32
 faster_speed = 64
@@ -52,6 +55,7 @@ function enemy:on_created()
 	self:set_damage(0)
 	self:set_hurt_style("normal")
 	self.direction = 0
+	self:set_invincible()
 	
 	self.ishero = false
 	
@@ -59,14 +63,16 @@ function enemy:on_created()
 	self.state = nil
 	self.hitbyentity = nil
 	
-	self.sword_sprite = self:create_sprite("hero/sword3")
+--	self.sword_sprite = self:create_sprite("hero/sword3")
 	self:set_size(16, 16)
 	self:set_origin(8, 13)
 
-	self:set_invincible_sprite(self.sword_sprite)
-	self:set_attack_consequence_sprite(self.sword_sprite, "sword", "custom")
+--	self:set_invincible_sprite(self.sword_sprite)
+--	self:set_attack_consequence_sprite(self.sword_sprite, "sword", "custom")
 	
-	self:reset_everything()
+	if self.class ~= nil then
+		self:reset_everything()
+	end
 end
 
 function enemy:load_entitydata()
@@ -130,13 +136,17 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 		return PUSHED
 	end
 	
+	if currentstate == FROZEN then
+		return FROZEN
+	end
+	
 	if entitytoattack == nil then
 		return RANDOM
 	end
-			
-	if self:close_to(entitytoattack.entity) then
-		return ATTACK
-	end
+	
+--	if self:close_to(entitytoattack.entity) then
+--		return ATTACK
+--	end
 	
 	return GOHERO
 end
@@ -153,7 +163,7 @@ function enemy:tick(newstate)
 	end
 	
 	if (newstate == nil) then
-		self.state = self:determinenewstate(self.entitytoattack, currentstate)
+		self.state = self:determinenewstate(self.entitytoattack, self.state)
 	else
 		self.state = newstate
 	end
@@ -164,14 +174,14 @@ function enemy:tick(newstate)
 		-- changed states
 		self:reset_everything()
 		print(self.entitydata.team, "changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
-		if prevstate == ATTACK then
-			self:dont_attack(target)
-		end
+--		if prevstate == ATTACK then
+--			self:dont_attack(target)
+--		end
 	end
 	
-	if self.state == ATTACK then
-		self:go_attack(changedstates, target)
-	elseif self.state == GOHERO then
+--	if self.state == ATTACK then
+--		self:go_attack(changedstates, target)
+	if self.state == GOHERO then
 		self:go_hero(changedstates)
 	elseif self.state == RANDOM then
 		self:go_random(changedstates)
@@ -192,7 +202,7 @@ end
 function enemy:setdirection(d)
 	self.direction = d
 	self.main_sprite:set_direction(d)
-	self.sword_sprite:set_direction(d)
+--	self.sword_sprite:set_direction(d)
 end
 
 function enemy:on_movement_finished(movement)
@@ -210,10 +220,10 @@ function enemy:on_obstacle_reached(movement)
 end
 
 function enemy:on_custom_attack_received(attack, sprite)
-	if attack == "sword" and sprite == self.sword_sprite then
-		sol.audio.play_sound("sword_tapping")
-		self:receive_attack_animation(self:get_map():get_entity("hero"))
-	end
+--	if attack == "sword" and sprite == self.sword_sprite then
+--		sol.audio.play_sound("sword_tapping")
+--		self:receive_attack_animation(self:get_map():get_entity("hero"))
+--	end
 end
 
 function enemy:receive_attack_animation(entity)
@@ -252,8 +262,13 @@ function enemy:go_hero(changedstates)
 			movement:start(self)
 		end
 	end
+	
+	if self.entitydata:withinrange("sword", self.entitytoattack) then
+		self.entitydata:startability("sword")
+	end
 end
 
+--[[
 function enemy:go_attack(changedstates, hero)
 	if not self.is_swinging_sword then
 		self:swingsword(hero)
@@ -285,12 +300,17 @@ end
 function enemy:dont_attack(hero)
 	self.is_swinging_sword = false
 end
+--]]
 
 function enemy:reset_everything()
-	self.sword_sprite:set_animation("walking")
+--	self.sword_sprite:set_animation("walking")
 	self.main_sprite:set_animation("walking")
-	self.sword_sprite:synchronize(nil)
+--	self.sword_sprite:synchronize(nil)
 	self.main_sprite:set_paused(false)
+	
+	if self:get_movement() ~= nil then
+		self:get_movement():stop()
+	end
 end
 
 
