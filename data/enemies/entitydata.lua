@@ -12,6 +12,8 @@ function entitydata:createfromclass(entity, class)
 		self:new(entity, "hero/tunic3", 5, "purple")
 	elseif class == "green" then
 		self:new(entity, "hero/tunic1", 5, "green")
+	elseif class == "yellow" then
+		self:new(entity, "hero/tunic2", 5, "yellow")
 	else
 		print("ERROR! no such class")
 	end

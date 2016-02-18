@@ -29,12 +29,12 @@ local enemy = ...
 
 -- constants:
 RANDOM = "random"
-GOHERO = "go_hero"
+GOHERO = "go_towards"
 ATTACK = "attack"
 PUSHED = "being_pushed"
 play_hero_seen_sound = false
 normal_speed = 32
-faster_speed = 32--64
+faster_speed = 64
 
 function enemy:set_class(class_string)
 	self.class = class_string
@@ -90,13 +90,13 @@ function enemy:targetenemy()
 	
 	local hero = self:get_map():get_entity("hero")
 	if self:cantargetentity(hero) then
-		entitieslist[#entitieslist+1] = hero
+		entitieslist[#entitieslist+1] = hero.entitydata
 	end
 	
 	map = self:get_map()
 	for entity in map:get_entities("") do
 		if self:cantargetentity(entity) and entity ~= hero then
-			entitieslist[#entitieslist+1] = entity
+			entitieslist[#entitieslist+1] = entity.entitydata
 		end
 	end
 	
@@ -134,7 +134,7 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 		return RANDOM
 	end
 			
-	if self:close_to(entitytoattack) then
+	if self:close_to(entitytoattack.entity) then
 		return ATTACK
 	end
 	
@@ -148,7 +148,10 @@ function enemy:tick(newstate)
 	preventitytoattack = self.entitytoattack
 	
 	self.entitytoattack = self:targetenemy()
-
+	if (self.entitytoattack ~= nil) then
+		target = self.entitytoattack.entity
+	end
+	
 	if (newstate == nil) then
 		self.state = self:determinenewstate(self.entitytoattack, currentstate)
 	else
@@ -160,14 +163,14 @@ function enemy:tick(newstate)
 	if changedstates then
 		-- changed states
 		self:reset_everything()
-		print("changed states from", prevstate, "to", self.state)
+		print(self.entitydata.team, "changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
 		if prevstate == ATTACK then
-			self:dont_attack(self.entitytoattack)
+			self:dont_attack(target)
 		end
 	end
 	
 	if self.state == ATTACK then
-		self:go_attack(changedstates, self.entitytoattack)
+		self:go_attack(changedstates, target)
 	elseif self.state == GOHERO then
 		self:go_hero(changedstates)
 	elseif self.state == RANDOM then
@@ -177,7 +180,7 @@ function enemy:tick(newstate)
 	end
 	
 	end
-	sol.timer.start(self, 500, function() self:tick() end)
+	sol.timer.start(self, 100, function() self:tick() end)
 end
 
 function enemy:on_movement_changed(movement)
@@ -242,9 +245,12 @@ end
 
 function enemy:go_hero(changedstates)
 	if changedstates then
-		local movement = sol.movement.create("target")
-		movement:set_speed(faster_speed)
-		movement:start(self)
+		if self.entitytoattack ~= nil then
+			local movement = sol.movement.create("target")
+			movement:set_speed(faster_speed)
+			movement:set_target(self.entitytoattack.entity)
+			movement:start(self)
+		end
 	end
 end
 

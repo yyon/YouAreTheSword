@@ -115,6 +115,7 @@ item{ id = "bomb", description = "Bomb" }
 
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
+enemy{ id = "yellow_test", description = "Test yellow" }
 
 entity{ id = "sword", description = "sword" }
 
