@@ -47,6 +47,8 @@ function enemy:set_class(class_string)
 end
 
 function enemy:on_created()
+	-- initialize
+	
 	if self.class ~= nil then
 		self.entitydata = sol.main.load_file("enemies/entitydata")()
 		self.entitydata:createfromclass(self, self.class)
@@ -54,7 +56,7 @@ function enemy:on_created()
 		self:load_entitydata()
 	end
 	
-	self:set_life(9999)
+	self:set_life(9999) -- life is now managed by entitydata not by solarus
 	self:set_damage(0)
 	self:set_hurt_style("normal")
 	self.direction = 0

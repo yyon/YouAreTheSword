@@ -3,8 +3,6 @@ local game_manager = {}
 -- controls: o : sword
 -- a: possess
 
-possess = sol.main.load_file("scripts/possess")
-
 game = nil
 
 function game_manager:start_game()
@@ -19,7 +17,6 @@ function game_manager:start_game()
 		game:set_starting_location("combat_test_map")
 	end
 	game:start()
-	possess(game)
 	
 	hero = game:get_hero()
 	if hero.entitydata == nil then
@@ -41,7 +38,7 @@ function sol.main:on_key_pressed(key, modifiers)
 	hero = game:get_hero()
 	if hero:get_state() ~= "freezed" then
 		if key == "a" then
-			possess:possessrandom()
+			hero.entitydata:throwrandom()
 		elseif key == "o" then
 			hero.entitydata:startability("sword")
 		end
