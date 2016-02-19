@@ -196,7 +196,7 @@ function enemy:tick(newstate)
 	if changedstates then
 		-- changed states
 		self:reset_everything()
-		print(self.entitydata.team, "changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
+		self.entitydata:log("changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
 
 --		if prevstate == ATTACK then
 --			self:dont_attack(target)
@@ -272,7 +272,7 @@ end
 
 function enemy:go_random(changedstates)
 	if changedstates then
-		print(self.entitydata.class, "random", changedstates)
+		self.entitydata:log("random", changedstates)
 		local movement = sol.movement.create("random_path")
 		movement:set_speed(normal_speed)
 		movement:start(self)
@@ -305,7 +305,7 @@ function enemy:go_pickup(changedstates, target)
 	end
 	
 	if self:get_distance(target) < 20 then
-		print("POSSESS")
+		self.entitydata:log("POSSESS")
 		self.entitydata:bepossessedbyhero()
 	end
 end
@@ -322,7 +322,7 @@ end
 
 function enemy:swingsword(hero)
 	self.is_swinging_sword = true
-	print("swinging sword")
+	self.entitydata:log("swinging sword")
 	movement = self:get_movement()
 	if movement ~= nil then
 		movement:stop(self)
@@ -358,7 +358,7 @@ end
 function enemy:actually_attack(hero)
 	-- TODO: pixel collision
 	if self:close_to(hero) then
-		print("hit")
+		self.entitydata:log("hit")
 	end
 end
 

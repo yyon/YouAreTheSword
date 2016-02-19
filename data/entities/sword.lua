@@ -3,15 +3,16 @@ local entity = ...
 function entity:on_created()
 end
 
-function entity:start()
-	self.sword_sprite = self:create_sprite("hero/sword3")
+function entity:start(appearance)
+	self.sword_sprite = self:create_sprite(appearance)
 	self.sword_sprite:set_paused(false)
 	
 	self.sword_sprite:set_direction(self:get_direction())
 	
-	self.ability.entitydata:setanimation("sword")
+	self.ability.entitydata:log("sword created")
 	
 	function self.sword_sprite.on_animation_finished (sword_sprite, sprite, animation)
+		self.ability.entitydata:log("sword finish")
 		self.ability:finish()
 	end
 	

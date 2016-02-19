@@ -1,6 +1,10 @@
 entitydata = {}
 
-function entitydata:new(entity, class, main_sprite, life, team, swordability)
+function entitydata:log(...)
+	print(self.class, ...)
+end
+
+function entitydata:new(entity, class, main_sprite, life, team, swordability, transformability)
 	-- use createfromclass
 	self.entity = entity
 	self.class = class
@@ -8,17 +12,18 @@ function entitydata:new(entity, class, main_sprite, life, team, swordability)
 	self.life = life
 	self.team = team
 	self.swordability = swordability
+	self.transformability = transformability
 end
 
 function entitydata:createfromclass(entity, class)
 	if class == "purple" then
-		self:new(entity, class, "hero/tunic3", 10, "purple", sol.main.load_file("abilities/sword")(self))
+		self:new(entity, class, "hero/tunic3", 10, "purple", sol.main.load_file("abilities/sword")(self), sol.main.load_file("abilities/swordtransform")(self, "fire"))
 	elseif class == "green" then
-		self:new(entity, class, "hero/tunic1", 10, "green", sol.main.load_file("abilities/sword")(self))
+		self:new(entity, class, "hero/tunic1", 10, "green", sol.main.load_file("abilities/sword")(self), sol.main.load_file("abilities/swordtransform")(self, "ap"))
 	elseif class == "yellow" then
-		self:new(entity, class, "hero/tunic2", 10, "yellow", sol.main.load_file("abilities/sword")(self))
+		self:new(entity, class, "hero/tunic2", 10, "yellow", sol.main.load_file("abilities/sword")(self), sol.main.load_file("abilities/swordtransform")(self, "electric"))
 	else
-		print("ERROR! no such class")
+		self:log("ERROR! no such class")
 	end
 end
 
@@ -59,7 +64,7 @@ function entitydata:bepossessedbyhero()
 	
 	self.entity.is_possessing = true
 	
-	print("sword has possessed", self.class)
+	self:log("sword has possessed")
 end
 
 function entitydata:unpossess()
@@ -89,7 +94,7 @@ function entitydata:unpossess()
 	
 	self.entity:setdirection(d)
 	
-	print("sword has left", self.class)
+	self:log("sword has left")
 	
 	return self.entity
 end
@@ -109,6 +114,8 @@ function entitydata:getability(ability)
 	-- string to object
 	if ability == "sword" then
 		return self.swordability
+	elseif ability == "swordtransform" then
+		return self.transformability
 	end
 end
 
@@ -146,37 +153,111 @@ function entitydata:setanimation(anim)
 	end
 end
 
-function entitydata:freeze()
+function entitydata:freeze(type, priority, cancelfunction)
 	-- prevent movement due to input or AI
-	if self.entity.ishero then
-		self.entity:freeze()
-	else
-		self.entity:tick("frozen")
-	end
-end
-
-function entitydata:unfreeze(dotick)
-	if dotick == nil then dotick = true end
-	if self.entity.ishero then
-		self.entity:unfreeze()
-	else
-		self.entity.state = nil
-		if dotick then
-			self.entity:tick()
+	if self.freezetype == nil or self.freezepriority == nil or priority >= self.freezepriority then
+		if self.freezetype ~= nil then self:log("overriding freeze", self.freezetype,"->",type, self.freezepriority,"->",priority) end
+		if self.freezecancel ~= nil then
+			self:log("cancel freeze", self.freezetype, self.freezecancel()) 
+			self.freezecancel()
 		end
+		self.freezetype = type
+		self.freezepriority = priority
+		
+		if self.entity.ishero then
+			self.entity:freeze()
+		else
+			self.entity:tick("frozen")
+		end
+		
+		self:log("freezing", type)
+		
+		return true
+	else
+		self:log("couldn't freeze", type, self.freezetype)
 	end
+	
+	return false
 end
 
-function entitydata:dodamage(target, damage)
+function entitydata:unfreeze(type, dotick)
+	if dotick == nil then dotick = true end
+	if type == "all" or type == self.freezetype then
+		if self.entity.ishero then
+			self.entity:unfreeze()
+		else
+			self.entity.state = nil
+			if dotick then
+				self.entity:tick()
+			end
+		end
+		
+		self.freezetype = nil
+		self.freezepriority = 0
+		self.freezecancel = nil
+		
+		self:log("unfreezing", type)
+		
+		return true
+	else
+		self:log("couldn't unfreeze", type, self.freezetype)
+	end
+	
+	return false
+end
+
+function entitydata:dodamage(target, damage, aspects)
 	-- call this to damage the target
 	if target.team == self.team then
-		print("friendly fire off")
+		self:log("friendly fire off")
 		return
 	end
 	
-	target.life = target.life - damage
+	-- aspects
+	knockback = 26
+	if aspects == nil then
+		aspects = {}
+		self:log("reset aspects")
+	end
+	if aspects.ap ~= nil then
+		self:log("armor piercing")
+	end
+	if aspects.stun ~= nil then
+		self:log("stun")
+		knockback = 0
+		
+		if target.freezetype ~= "stun" then
+			pa = target:physicaleffectanimation("stun", aspects.stun)
+			
+			target:freeze("stun", 3, function() pa:cancel() end)
+			sol.timer.start(self, aspects.stun, function() target:unfreeze("stun") end)
+		end
+	end
+	if aspects.fire ~= nil then
+		-- TODO: put into generic time-based effect thingy
+		time = aspects.fire.time
+		firedamage = aspects.fire.damage
+		timestep = aspects.fire.timestep
+		counter = time
+		
+		function dofiredamage()
+			self:dodamage(target, firedamage, {firedamage=true})
+			counter = counter - timestep
+			if counter > 0 then
+				sol.timer.start(self, timestep, function() dofiredamage() end)
+			end
+		end
+		dofiredamage()
+		
+		pa = target:physicaleffectanimation("fire", time)
+	end
+	if aspects.firedamage ~= nil then
+		knockback = 0
+	end
 	
-	print(target.team, "damaged", damage, "life", target.life)
+	-- do damage
+	target.life = target.life - damage
+	target:log("damaged", damage, "life", target.life)
 	
 	--aggro
 	if not target.entity.ishero then
@@ -189,22 +270,23 @@ function entitydata:dodamage(target, damage)
 	end
 	
 	--knockback
-	if target.entity.ishero then
-		target:freeze()
-		local x, y = target.entity:get_position()
-		local angle = target.entity:get_angle(self.entity) + math.pi
-		local movement = sol.movement.create("straight")
-		movement:set_speed(128)
-		movement:set_angle(angle)
-		movement:set_max_distance(26)
-		movement:set_smooth(true)
-		movement:start(target.entity)
-		function movement:on_finished()
-			print("unfreeze")
-			target:unfreeze()
+	if knockback ~= 0 then
+		if target.entity.ishero then
+			target:freeze("knockback", 2)
+			local x, y = target.entity:get_position()
+			local angle = target.entity:get_angle(self.entity) + math.pi
+			local movement = sol.movement.create("straight")
+			movement:set_speed(128)
+			movement:set_angle(angle)
+			movement:set_max_distance(26)
+			movement:set_smooth(true)
+			movement:start(target.entity)
+			function movement:on_finished()
+				target:unfreeze("knockback")
+			end
+		else
+			target.entity:receive_attack_animation(self.entity)
 		end
-	else
-		target.entity:receive_attack_animation(self.entity)
 	end
 	
 	if target.life <= 0 then
@@ -212,8 +294,23 @@ function entitydata:dodamage(target, damage)
 	end
 end
 
+function entitydata:physicaleffectanimation(name, time)
+	-- TODO: put into generic time-based effect thingy
+	entity = self.entity
+	map = entity:get_map()
+	x,y,layer = entity:get_position()
+	w,h = entity:get_size()
+	
+	paentity = map:create_custom_entity({model="physicaleffect", x=x, y=y, layer=layer, direction=0, width=w, height=h})
+	
+	paentity:start(self, name, time)
+	
+	return paentity
+end
+
 function entitydata:kill()
 	-- adventurer/monster is killed
+	self:unfreeze("all")
 	if self.entity.ishero then
 		-- drop sword
 		hero = self.entity
@@ -227,7 +324,7 @@ function entitydata:kill()
 		hero.isdropped = true
 		
 	else
-		self:freeze()
+		self:freeze("dead", 5)
 		self.entity:set_life(0)
 	end
 	
@@ -235,7 +332,7 @@ function entitydata:kill()
 end
 
 function entitydata:throwsword(entitydata2)
-	print("going to throw to", entitydata2.class)
+	self:log("going to throw to", entitydata2.class)
 	if self.entity.ishero then
 		if self.usingability ~= nil then
 			return
@@ -246,17 +343,17 @@ function entitydata:throwsword(entitydata2)
 		end
 		
 		if entitydata2 == nil then
-			print("no entity!")
+			self:log("no entity!")
 			return
 		end
 		
 		if not entitydata2.entity:exists() then
-			print("doesn't exist!")
+			self:log("doesn't exist!")
 			return
 		end
 		
 		if not entitydata2.entity.hasbeeninitialized then
-			print("Not init!")
+			self:log("Not init!")
 			return
 		end
 		
@@ -266,7 +363,7 @@ function entitydata:throwsword(entitydata2)
 		hero.isthrown = true
 		hero:freeze()
 		
-		print("throwing to", entitydata2.team)
+		self:log("throwing to", entitydata2.team)
 		
 		newentity = self:unpossess()
 		
@@ -274,7 +371,7 @@ function entitydata:throwsword(entitydata2)
 		hero:set_animation("stopped")
 		
 		hero:stop_movement()
-		print(entitydata2.entity:get_position())
+		self:log(entitydata2.entity:get_position())
 		
 		local movement = sol.movement.create("target")
 		movement:set_speed(500)

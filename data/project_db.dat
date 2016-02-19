@@ -62,6 +62,8 @@ sprite{ id = "hero/tunic1", description = "Hero tunic 1" }
 sprite{ id = "hero/tunic2", description = "Hero tunic 2" }
 sprite{ id = "hero/tunic3", description = "Hero tunic 3" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
+sprite{ id = "physicaleffects/fire", description = "fire" }
+sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 
 music{ id = "village", description = "Village" }
 
@@ -116,9 +118,11 @@ sound{ id = "wrong", description = "wrong" }
 item{ id = "bomb", description = "Bomb" }
 
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
+enemy{ id = "green_test", description = "Test green" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
 enemy{ id = "yellow_test", description = "Test yellow" }
 
+entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "sword", description = "sword" }
 
 language{ id = "en", description = "English" }

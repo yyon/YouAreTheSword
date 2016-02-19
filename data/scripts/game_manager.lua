@@ -23,7 +23,7 @@ function game_manager:start_game()
 		hero.ishero = true
 		hero.is_possessing = true
 		hero.entitydata = sol.main.load_file("enemies/entitydata")()
-		hero.entitydata:createfromclass(hero, "green")
+		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
 	end
@@ -41,6 +41,8 @@ function sol.main:on_key_pressed(key, modifiers)
 			hero.entitydata:throwrandom()
 		elseif key == "o" then
 			hero.entitydata:startability("sword")
+		elseif key == "e" then
+			hero.entitydata:startability("swordtransform")
 		end
 	end
 end
