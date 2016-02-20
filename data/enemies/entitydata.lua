@@ -63,9 +63,11 @@ function EntityData:applytoentity()
 	end
 	
 	function self.entity:on_position_changed(x, y, layer)
-		for index, value in pairs(self.entitydata.positionlisteners) do
-			if value ~= nil then
-				value(x, y, layer)
+		if self.entitydata ~= nil then
+			for index, value in pairs(self.entitydata.positionlisteners) do
+				if value ~= nil then
+					value(x, y, layer)
+				end
 			end
 		end
 	end
@@ -437,8 +439,8 @@ end
 function EntityData:drop(hero)
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
-		hero:set_tunic_sprite_id("hero/droppedsword")
 		hero:set_animation("stopped")
+		hero:set_tunic_sprite_id("hero/droppedsword")
 		hero:freeze()
 		hero.isdropped = true
 	end
