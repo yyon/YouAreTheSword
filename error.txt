@@ -1,2 +1,8 @@
-Error: In collision callback: [string "enemies/NPC.lua"]:86: attempt to call method 'get_position' (a nil value)
-Error: In timer callback: [string "enemies/NPC.lua"]:86: attempt to call method 'get_position' (a nil value)
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value

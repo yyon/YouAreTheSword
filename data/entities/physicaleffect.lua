@@ -3,15 +3,15 @@ local entity = ...
 function entity:on_created()
 end
 
-function entity:start(entitydata, name, time)
-	self.entity_data = entitydata
+function entity:start(effect, name, time)
+	self.effect = effect
 	
 	self.sprite = self:create_sprite("physicaleffects/"..name)
 	self.sprite:set_paused(false)
 	
 	self.sprite:set_direction(0)
 	
-	sol.timer.start(self, time, function() self:finish() end)
+--	sol.timer.start(self, time, function() self:finish() end)
 	
 	self:tick()
 end
@@ -21,7 +21,7 @@ function entity:cancel()
 end
 
 function entity:tick()
-	entity = self.entity_data.entity
+	entity = self.effect.entitydata.entity
 	
 	x,y,layer = entity:get_position()
 	

@@ -4,6 +4,7 @@ EntityData = class("EntityData")
 
 SwordAbility = require "abilities/sword"
 TransformAbility = require "abilities/swordtransform"
+Effects = require "enemies/effect"
 
 function EntityData:log(...)
 	print(self.class, ...)
@@ -18,6 +19,7 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	self.team = team
 	self.swordability = swordability
 	self.transformability = transformability
+	self.effects = {}
 end
 
 --[[
@@ -160,6 +162,7 @@ function EntityData:setanimation(anim)
 	end
 end
 
+--[[
 function EntityData:freeze(type, priority, cancelfunction)
 	-- prevent movement due to input or AI
 	if self.freezetype == nil or self.freezepriority == nil or priority >= self.freezepriority then
@@ -212,10 +215,19 @@ function EntityData:unfreeze(type, dotick)
 	
 	return false
 end
+--]]
+
+function EntityData:freeze()
+	Effects.FreezeEffect(self)
+end
+
+function EntityData:unfreeze()
+	Effects.FreezeEffect:get(self):remove()
+end
 
 function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
-	if target.team == self.team then
+	if target.team == self.team and aspects.natural == nil then
 		self:log("friendly fire off")
 		return
 	end
@@ -233,30 +245,19 @@ function EntityData:dodamage(target, damage, aspects)
 		self:log("stun")
 		knockback = 0
 		
-		if target.freezetype ~= "stun" then
-			pa = target:physicaleffectanimation("stun", aspects.stun)
-			
-			target:freeze("stun", 3, function() pa:cancel() end)
-			sol.timer.start(self, aspects.stun, function() target:unfreeze("stun") end)
-		end
+--		if target.freezetype ~= "stun" then
+--			pa = target:physicaleffectanimation("stun", aspects.stun)
+--			
+--			target:freeze("stun", 3, function() pa:cancel() end)
+--			sol.timer.start(self, aspects.stun, function() target:unfreeze("stun") end)
+--		end
+		stuneffect = Effects.StunEffect(target, aspects.stun)
+		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
 	end
 	if aspects.fire ~= nil then
 		-- TODO: put into generic time-based effect thingy
-		time = aspects.fire.time
-		firedamage = aspects.fire.damage
-		timestep = aspects.fire.timestep
-		counter = time
-		
-		function dofiredamage()
-			self:dodamage(target, firedamage, {firedamage=true})
-			counter = counter - timestep
-			if counter > 0 then
-				sol.timer.start(self, timestep, function() dofiredamage() end)
-			end
-		end
-		dofiredamage()
-		
-		pa = target:physicaleffectanimation("fire", time)
+--		pa = target:physicaleffectanimation("fire", time)
+		fireeffect = Effects.FireEffect(target, aspects.fire)
 	end
 	if aspects.firedamage ~= nil then
 		knockback = 0
@@ -302,6 +303,7 @@ function EntityData:dodamage(target, damage, aspects)
 end
 
 function EntityData:physicaleffectanimation(name, time)
+--[[
 	-- TODO: put into generic time-based effect thingy
 	entity = self.entity
 	map = entity:get_map()
@@ -313,6 +315,8 @@ function EntityData:physicaleffectanimation(name, time)
 	paentity:start(self, name, time)
 	
 	return paentity
+--]]
+	
 end
 
 function EntityData:kill()

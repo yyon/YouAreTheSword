@@ -245,6 +245,13 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	return self.gotowardsstate
 end
 
+function enemy:resetstate()
+	self.entitydata:log("reset state")
+	self.prevstate = nil
+	self.state = nil
+	self:tick(self.nilstate)
+end
+
 function enemy:tick(newstate)
 	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
 	
