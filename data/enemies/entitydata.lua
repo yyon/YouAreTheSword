@@ -343,15 +343,10 @@ function EntityData:kill()
 	self:unfreeze()
 	if self.entity.ishero then
 		-- drop sword
-		hero = self.entity
+		self:drop()
+		
 		newentity = self:unpossess()
 		newentity.entitydata:kill()
-		
-		hero:set_tunic_sprite_id("hero/droppedsword")
-		hero:set_animation("stopped")
-		hero:freeze()
-		hero.isdropped = true
-		
 	else
 		self:freeze()
 		self.entity:set_life(0)
@@ -362,6 +357,16 @@ function EntityData:kill()
 	end
 	
 	self.entity.entitydata = nil
+end
+
+function EntityData:drop(hero)
+	if hero == nil then hero = self.entity end
+	if hero.ishero then
+		hero:set_tunic_sprite_id("hero/droppedsword")
+		hero:set_animation("stopped")
+		hero:freeze()
+		hero.isdropped = true
+	end
 end
 
 function EntityData:throwsword(entitydata2)
@@ -410,6 +415,10 @@ function EntityData:throwsword(entitydata2)
 		movement:set_speed(500)
 		movement:set_target(entitydata2.entity)
 		movement:start(hero)
+--		movement:set_ignore_obstacles()
+		function movement:on_obstacle_reached()
+			EntityData:drop(hero)
+		end
 		function movement:on_finished()
 			entitydata2:bepossessedbyhero()
 		end
@@ -445,6 +454,48 @@ function EntityData:throwrandom()
 		end
 --		hero.entitydata:unpossess()
 --		entity.entitydata:bepossessedbyhero()
+	end
+end
+
+function EntityData:getclosestentity(x, y)
+	mindist = 99999
+	minentity = nil
+	
+	map = game:get_map()
+	hero = game:get_hero()
+
+	for entity in map:get_entities("") do
+		if entity.entitydata ~= nil then
+			if not entity.entitydata.ishero then
+				d = entity:get_distance(x, y)
+				if d < mindist then
+					mindist = d
+					minentity = entity.entitydata
+				end
+			end
+		end
+	end
+	
+	return minentity
+end
+
+function EntityData:throwclosest(mousex, mousey)
+--[[
+	for entity in self.entity:get_map():get_entities("") do
+		if entity.entitydata ~= nil then
+			x, y = entity:get_position()
+			entity.entitydata:log(x, y)
+		end
+	end
+	print("closest", mousex, mousey, self:getclosestentity(mousex,mousey).class)
+	
+	return
+--]]
+	entity = self:getclosestentity(x, y)
+	if entity ~= nil then
+		if hero.entitydata ~= nil then
+			hero.entitydata:throwsword(entity)
+		end
 	end
 end
 
