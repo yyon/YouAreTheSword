@@ -1,8 +1,12 @@
-ability = {}
+local class = require "middleclass"
 
-ability.entitydata, ability.name, ability.range, ability.warmup, ability.cooldown, ability.dofreeze = ...
+Ability = class("Ability")
 
-function ability:start()
+function Ability:initialize(...)
+	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze = ...
+end
+
+function Ability:start()
 	self.entitydata.usingability = self
 	if self.dofreeze then
 		self.entitydata:freeze(self.name, 1, function() self:cancel() end)
@@ -10,7 +14,7 @@ function ability:start()
 	self:doability()
 end
 
-function ability:finishability()
+function Ability:finishability()
 	self.entitydata:log("ability finish")
 	self.entitydata.usingability = nil
 	if self.dofreeze then
@@ -19,8 +23,8 @@ function ability:finishability()
 	end
 end
 
-function ability:dodamage(entitydata, damage, aspects)
+function Ability:dodamage(entitydata, damage, aspects)
 	self.entitydata:dodamage(entitydata, damage, aspects)
 end
 
-return ability
+return Ability

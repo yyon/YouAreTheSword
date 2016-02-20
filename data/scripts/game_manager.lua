@@ -1,9 +1,8 @@
 local game_manager = {}
 
--- controls: o : sword
--- a: possess
-
 game = nil
+
+entitydatas = require "enemies/entitydata"
 
 function game_manager:start_game()
 	local exists = sol.game.exists("save1.dat")
@@ -22,8 +21,8 @@ function game_manager:start_game()
 	if hero.entitydata == nil then
 		hero.ishero = true
 		hero.is_possessing = true
-		hero.entitydata = sol.main.load_file("enemies/entitydata")()
-		hero.entitydata:createfromclass(hero, "purple")
+		hero.entitydata = entitydatas.purpleclass:new(hero)--sol.main.load_file("enemies/entitydata")()
+--		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
 	end
@@ -37,11 +36,11 @@ function sol.main:on_key_pressed(key, modifiers)
 	
 	hero = game:get_hero()
 	if hero:get_state() ~= "freezed" then
-		if key == "a" then
+		if key == "1" then
 			hero.entitydata:throwrandom()
-		elseif key == "o" then
+		elseif key == "2" then
 			hero.entitydata:startability("sword")
-		elseif key == "e" then
+		elseif key == "3" then
 			hero.entitydata:startability("swordtransform")
 		end
 	end

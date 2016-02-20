@@ -1,8 +1,13 @@
-entitydata = ...
+local class = require "middleclass"
+Ability = require "abilities/ability"
 
-ability = sol.main.load_file("abilities/ability")(entitydata, "sword", 25, 0, 0, true)
+SwordAbility = Ability:subclass("SwordAbility")
 
-function ability:doability()
+function SwordAbility:initialize(entitydata)
+	Ability.initialize(self, entitydata, "sword", 25, 0, 0, true)
+end
+
+function SwordAbility:doability()
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()
@@ -19,11 +24,11 @@ function ability:doability()
 	self.swordentity:start(self:get_appearance())
 end
 
-function ability:cancel()
+function SwordAbility:cancel()
 	self:finish()
 end
 
-function ability:finish()
+function SwordAbility:finish()
 	self.entitydata:setanimation("walking")
 	
 	self.swordentity:remove()
@@ -32,7 +37,7 @@ function ability:finish()
 	self:finishability()
 end
 
-function ability:attack(entitydata)
+function SwordAbility:attack(entitydata)
 	damage = 1
 	aspects = {}
 	
@@ -49,7 +54,7 @@ function ability:attack(entitydata)
 	self:dodamage(entitydata, damage, aspects)
 end
 
-function ability:gettransform()
+function SwordAbility:gettransform()
 	entity = self.entitydata.entity
 	if entity.ishero then
 		if entity.swordtransform ~= nil then
@@ -60,7 +65,7 @@ function ability:gettransform()
 	return "normal"
 end
 
-function ability:get_appearance()
+function SwordAbility:get_appearance()
 	transform = self:gettransform()
 	
 	if transform == "normal" then
@@ -76,4 +81,4 @@ function ability:get_appearance()
 	end
 end
 
-return ability
+return SwordAbility

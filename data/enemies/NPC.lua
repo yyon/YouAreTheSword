@@ -27,34 +27,121 @@ local enemy = ...
 -- local being_pushed = false
 -- local main_sprite = nil
 
+local class = require "middleclass"
 require "math"
 
 -- constants:
+--[[
 RANDOM = "random"
 GOHERO = "go_towards"
 --ATTACK = "attack"
 PUSHED = "being_pushed"
 FROZEN = "frozen"
 GOPICKUP = "pickup"
+--]]
 play_hero_seen_sound = false
 normal_speed = 32
 faster_speed = 64
 
 enemy.hasbeeninitialized = false
 
-function enemy:set_class(class_string)
-	self.class = class_string
+State = class("State")
+
+function State:initialize(npc)
+	self.npc = npc
 end
+
+function State:ontick(changedstates)
+	if changedstates then
+		self:start()
+	end
+	self:tick()
+end
+
+function State:cleanup()
+	self.npc:reset_everything()
+end
+
+NilState = State:subclass("NilState")
+function NilState:start()
+end
+function NilState:tick()
+end
+
+RandomState = State:subclass("RandomState")
+
+function RandomState:start()
+	self.npc.entitydata:log("random", changedstates)
+	local movement = sol.movement.create("random_path")
+	movement:set_speed(normal_speed)
+	movement:start(self.npc)
+end
+
+function RandomState:tick()
+end
+
+PushedState = State:subclass("PushedState")
+
+function PushedState:start()
+	local x, y = self.npc:get_position()
+	local angle = self.npc:get_angle(self.npc.hitbyentity) + math.pi
+	local movement = sol.movement.create("straight")
+	movement:set_speed(128)
+	movement:set_angle(angle)
+	movement:set_max_distance(26)
+	movement:set_smooth(true)
+	movement:start(self.npc)
+end
+
+function PushedState:tick()
+end
+
+FrozenState = State:subclass("FrozenState")
+
+function FrozenState:start()
+end
+
+function FrozenState:tick()
+end
+
+GoTowardsState = State:subclass("GoTowardsState")
+
+function GoTowardsState:start()
+	if self.npc.entitytoattack ~= nil then
+		local movement = sol.movement.create("target")
+		movement:set_speed(faster_speed)
+		movement:set_target(self.npc.entitytoattack.entity)
+		movement:start(self.npc)
+	end
+end
+
+function GoTowardsState:tick()
+	if self.npc.entitytoattack ~= nil then
+		if self.npc.entitydata:withinrange("sword", self.npc.entitytoattack) then
+			self.npc.entitydata:startability("sword")
+		end
+	end
+end
+
+PickupState = State:subclass("PickupState")
+
+function PickupState:start()
+	local movement = sol.movement.create("target")
+	movement:set_speed(faster_speed)
+	movement:set_target(self.npc.target)
+	movement:start(self.npc)
+end
+
+function PickupState:tick()
+	if self.npc:get_distance(self.npc.target) < 20 then
+		self.npc.entitydata:bepossessedbyhero()
+	end
+end
+
+
 
 function enemy:on_created()
 	-- initialize
-	
-	if self.class ~= nil then
-		self.entitydata = sol.main.load_file("enemies/entitydata")()
-		self.entitydata:createfromclass(self, self.class)
-		
-		self:load_entitydata()
-	end
 	
 	self:set_life(9999) -- life is now managed by entitydata not by solarus
 	self:set_damage(0)
@@ -68,16 +155,15 @@ function enemy:on_created()
 	self.state = nil
 	self.hitbyentity = nil
 	
---	self.sword_sprite = self:create_sprite("hero/sword3")
 	self:set_size(16, 16)
 	self:set_origin(8, 13)
-
---	self:set_invincible_sprite(self.sword_sprite)
---	self:set_attack_consequence_sprite(self.sword_sprite, "sword", "custom")
 	
-	if self.class ~= nil then
-		self:reset_everything()
-	end
+	self.nilstate = NilState:new(self)
+	self.randomstate = RandomState:new(self)
+	self.gotowardsstate = GoTowardsState:new(self)
+	self.pushedstate = PushedState:new(self)
+	self.frozenstate = FrozenState:new(self)
+	self.pickupstate = PickupState:new(self)
 end
 
 function enemy:load_entitydata()
@@ -85,9 +171,7 @@ function enemy:load_entitydata()
 end
 
 function enemy:on_restarted()
-	if self.state ~= PUSHED then
-		self:tick()
-	end
+	self:tick()
 end
 
 function enemy:close_to(entity)
@@ -142,27 +226,23 @@ end
 
 
 function enemy:determinenewstate(entitytoattack, currentstate)
-	if currentstate == PUSHED then
-		return PUSHED
+	if currentstate == self.pushedstate then
+		return currentstate
 	end
 	
-	if currentstate == FROZEN then
-		return FROZEN
+	if currentstate == self.frozenstate then
+		return currentstate
 	end
 	
 	if entitytoattack == nil then
-		return RANDOM
+		return self.randomstate
 	end
 	
 	if entitytoattack.isdropped then
-		return GOPICKUP
+		return self.pickupstate
 	end
 	
---	if self:close_to(entitytoattack.entity) then
---		return ATTACK
---	end
-	
-	return GOHERO
+	return self.gotowardsstate
 end
 
 function enemy:tick(newstate)
@@ -171,6 +251,7 @@ function enemy:tick(newstate)
 	self.hasbeeninitialized = true
 	
 	prevstate = self.state
+	if prevstate == nil then prevstate = self.nilstate end
 	preventitytoattack = self.entitytoattack
 	
 	self.entitytoattack = self:targetenemy()
@@ -184,15 +265,23 @@ function enemy:tick(newstate)
 	else
 		target = nil
 	end
+	self.target = target
 	
 	if (newstate == nil) then
 		self.state = self:determinenewstate(target, self.state)
 	else
 		self.state = newstate
 	end
+	if self.state == nil then self.state = self.NilState end
 	
 	changedstates = (prevstate ~= self.state or preventitytoattack ~= self.entitytoattack)
 	
+	if changedstates then
+		prevstate:cleanup()
+		self.entitydata:log("changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
+	end
+	self.state:ontick(changedstates)
+--[[
 	if changedstates then
 		-- changed states
 		self:reset_everything()
@@ -214,13 +303,14 @@ function enemy:tick(newstate)
 	elseif self.state == GOPICKUP then
 		self:go_pickup(changedstates, target)
 	end
+--]]
 	
 	end
 	sol.timer.start(self, 100, function() self:tick() end)
 end
 
 function enemy:on_movement_changed(movement)
-	if self.state ~= PUSHED then
+	if self.state ~= self.pushedstate then
 		self:setdirection(movement:get_direction4())
 	end
 end
@@ -232,14 +322,14 @@ function enemy:setdirection(d)
 end
 
 function enemy:on_movement_finished(movement)
-	if self.state == PUSHED then
+	if self.state == self.pushedstate then
 		self.state = nil
 		self:tick()
 	end
 end
 
 function enemy:on_obstacle_reached(movement)
-	if self.state == PUSHED then
+	if self.state == self.pushedstate then
 		self.state = nil
 		self:tick()
 	end
@@ -254,9 +344,10 @@ end
 
 function enemy:receive_attack_animation(entity)
 	self.hitbyentity = entity
-	self:tick(PUSHED)
+	self:tick(self.pushedstate)
 end
 
+--[[
 function enemy:go_pushed(changedstates)
 	if changedstates then
 		local x, y = self:get_position()
@@ -309,6 +400,7 @@ function enemy:go_pickup(changedstates, target)
 		self.entitydata:bepossessedbyhero()
 	end
 end
+--]]
 
 --[[
 function enemy:go_attack(changedstates, hero)

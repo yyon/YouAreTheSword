@@ -1,4 +1,7 @@
 local enemy = ...
 
+entitydatas = require "enemies/entitydata"
+
 sol.main.load_file("enemies/NPC")(enemy)
-enemy:set_class("green")
+data = entitydatas.greenclass:new(enemy)
+data:applytoentity()

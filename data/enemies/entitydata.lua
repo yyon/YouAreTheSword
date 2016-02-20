@@ -1,10 +1,15 @@
-entitydata = {}
+local class = require "middleclass"
 
-function entitydata:log(...)
+EntityData = class("EntityData")
+
+SwordAbility = require "abilities/sword"
+TransformAbility = require "abilities/swordtransform"
+
+function EntityData:log(...)
 	print(self.class, ...)
 end
 
-function entitydata:new(entity, class, main_sprite, life, team, swordability, transformability)
+function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability)
 	-- use createfromclass
 	self.entity = entity
 	self.class = class
@@ -15,7 +20,8 @@ function entitydata:new(entity, class, main_sprite, life, team, swordability, tr
 	self.transformability = transformability
 end
 
-function entitydata:createfromclass(entity, class)
+--[[
+function EntityData:createfromclass(entity, class)
 	if class == "purple" then
 		self:new(entity, class, "hero/tunic3", 10, "purple", sol.main.load_file("abilities/sword")(self), sol.main.load_file("abilities/swordtransform")(self, "fire"))
 	elseif class == "green" then
@@ -26,8 +32,9 @@ function entitydata:createfromclass(entity, class)
 		self:log("ERROR! no such class")
 	end
 end
+--]]
 
-function entitydata:applytoentity()
+function EntityData:applytoentity()
 	-- changes entities appearance to reflect self
 	self.entity.entitydata = self
 	
@@ -38,7 +45,7 @@ function entitydata:applytoentity()
 	end
 end
 
-function entitydata:bepossessedbyhero()
+function EntityData:bepossessedbyhero()
 	-- control this entitydata
 	
 	if self.usingability ~= nil then
@@ -67,7 +74,7 @@ function entitydata:bepossessedbyhero()
 	self:log("sword has possessed")
 end
 
-function entitydata:unpossess()
+function EntityData:unpossess()
 	-- create NPC entity for entitydata
 	
 	self.entity.is_possessing = false
@@ -101,7 +108,7 @@ end
 
 
 
-function entitydata:isvisible()
+function EntityData:isvisible()
 	-- can be seen
 	
 	if self.entity.ishero and not self.entity.is_possessing then
@@ -110,7 +117,7 @@ function entitydata:isvisible()
 	return true
 end
 
-function entitydata:getability(ability)
+function EntityData:getability(ability)
 	-- string to object
 	if ability == "sword" then
 		return self.swordability
@@ -119,7 +126,7 @@ function entitydata:getability(ability)
 	end
 end
 
-function entitydata:startability(ability)
+function EntityData:startability(ability)
 	-- call this to use an ability
 	if self.usingability == nil then
 		ability = self:getability(ability)
@@ -127,7 +134,7 @@ function entitydata:startability(ability)
 	end
 end
 
-function entitydata:withinrange(ability, entitydata)
+function EntityData:withinrange(ability, entitydata)
 	-- if an entity can be attacked using the ability
 	ability = self:getability(ability)
 	range = ability.range
@@ -136,7 +143,7 @@ function entitydata:withinrange(ability, entitydata)
 	return withinrange
 end	
 
-function entitydata:getdirection()
+function EntityData:getdirection()
 	if self.entity.ishero then
 		return self.entity:get_direction()
 	else
@@ -144,7 +151,7 @@ function entitydata:getdirection()
 	end
 end
 
-function entitydata:setanimation(anim)
+function EntityData:setanimation(anim)
 	if self.entity.ishero then
 		self.entity:set_animation(anim)
 	else
@@ -153,7 +160,7 @@ function entitydata:setanimation(anim)
 	end
 end
 
-function entitydata:freeze(type, priority, cancelfunction)
+function EntityData:freeze(type, priority, cancelfunction)
 	-- prevent movement due to input or AI
 	if self.freezetype == nil or self.freezepriority == nil or priority >= self.freezepriority then
 		if self.freezetype ~= nil then self:log("overriding freeze", self.freezetype,"->",type, self.freezepriority,"->",priority) end
@@ -167,7 +174,7 @@ function entitydata:freeze(type, priority, cancelfunction)
 		if self.entity.ishero then
 			self.entity:freeze()
 		else
-			self.entity:tick("frozen")
+			self.entity:tick(self.entity.frozenstate)
 		end
 		
 		self:log("freezing", type)
@@ -180,7 +187,7 @@ function entitydata:freeze(type, priority, cancelfunction)
 	return false
 end
 
-function entitydata:unfreeze(type, dotick)
+function EntityData:unfreeze(type, dotick)
 	if dotick == nil then dotick = true end
 	if type == "all" or type == self.freezetype then
 		if self.entity.ishero then
@@ -206,7 +213,7 @@ function entitydata:unfreeze(type, dotick)
 	return false
 end
 
-function entitydata:dodamage(target, damage, aspects)
+function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
 	if target.team == self.team then
 		self:log("friendly fire off")
@@ -294,7 +301,7 @@ function entitydata:dodamage(target, damage, aspects)
 	end
 end
 
-function entitydata:physicaleffectanimation(name, time)
+function EntityData:physicaleffectanimation(name, time)
 	-- TODO: put into generic time-based effect thingy
 	entity = self.entity
 	map = entity:get_map()
@@ -308,7 +315,7 @@ function entitydata:physicaleffectanimation(name, time)
 	return paentity
 end
 
-function entitydata:kill()
+function EntityData:kill()
 	-- adventurer/monster is killed
 	self:unfreeze("all")
 	if self.entity.ishero then
@@ -331,7 +338,7 @@ function entitydata:kill()
 	self.entity.entitydata = nil
 end
 
-function entitydata:throwsword(entitydata2)
+function EntityData:throwsword(entitydata2)
 	self:log("going to throw to", entitydata2.class)
 	if self.entity.ishero then
 		if self.usingability ~= nil then
@@ -383,7 +390,7 @@ function entitydata:throwsword(entitydata2)
 	end
 end
 
-function entitydata:throwrandom()
+function EntityData:throwrandom()
 	-- throw sword to random entity
 	require "math"
 	
@@ -410,5 +417,22 @@ function entitydata:throwrandom()
 	end
 end
 
+purpleclass = EntityData:subclass("purpleclass")
 
-return entitydata
+function purpleclass:initialize(entity)
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"))
+end
+
+yellowclass = EntityData:subclass("yellowclass")
+
+function yellowclass:initialize(entity)
+	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"))
+end
+
+greenclass = EntityData:subclass("greenclass")
+
+function greenclass:initialize(entity)
+	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"))
+end
+
+return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass}

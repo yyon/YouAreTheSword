@@ -1,21 +1,26 @@
-entitydata, transform = ...
+local class = require "middleclass"
+Ability = require "abilities/ability"
 
-ability = sol.main.load_file("abilities/ability")(entitydata, "transform", 0, 1000, 3000, true)
+TransformAbility = Ability:subclass("TransformAbility")
 
-ability.transform = transform
+function TransformAbility:initialize(entitydata, transform)
+	Ability.initialize(self, entitydata, "transform", 0, 1000, 3000, true)
+	
+	self.transform = transform
+end
 
-function ability:doability()
+function TransformAbility:doability()
 	self.entitydata.entity.swordtransform = self.transform
 	
 	self:finish()
 end
 
-function ability:cancel()
+function TransformAbility:cancel()
 	self:finish()
 end
 
-function ability:finish()
+function TransformAbility:finish()
 	self:finishability()
 end
 
-return ability
+return TransformAbility
