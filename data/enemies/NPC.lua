@@ -268,10 +268,12 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 end
 
 function enemy:resetstate()
-	self.entitydata:log("reset state")
-	self.prevstate = nil
-	self.state = nil
-	self:tick(self.nilstate)
+	if self.entitydata ~= nil then
+		self.entitydata:log("reset state")
+		self.prevstate = nil
+		self.state = nil
+		self:tick(self.nilstate)
+	end
 end
 
 function enemy:tick(newstate)

@@ -23,7 +23,7 @@ end
 
 function Effect:remove()
 	if not self.active then
-		self.entitydata:log("timer tried to remove", self:getkey(), "but already removed!")
+		self.entitydata:log("timer tried to remove", self, "but already removed!")
 	else
 		self:endeffect()
 		self.entitydata:log("ending effect", self)
@@ -123,9 +123,18 @@ end
 FreezeEffect = Effect:subclass("FreezeEffect")
 
 function FreezeEffect:start(...)
-	self.count = 1
-	self.entitydata:log("Freeze level start", self.count, self)
-	self:freeze()
+	if self.entitydata.freezeeffects == nil then
+		self.entitydata.freezesize = 0
+		self.entitydata.freezeeffects = {}
+	end
+	self.entitydata.freezeeffects[self] = true
+	self.entitydata.freezesize = self.entitydata.freezesize + 1
+	self.entitydata:log("Freeze level start", self.entitydata.freezesize, self)
+	self.entitydata:log("EHOUSNTHAUTSOHA")
+	self.entitydata:log(#self.entitydata.freezeeffects)
+	if self.entitydata.freezesize == 1 then
+		self:freeze()
+	end
 	self:startfreezeeffects(...)
 end
 
@@ -133,6 +142,7 @@ function FreezeEffect:startfreezeeffects()
 end
 
 function FreezeEffect:freeze()
+	self.entitydata:log("STARTED FREEZE")
 	if self.entitydata.entity.ishero then
 		self.entitydata.entity:freeze()
 	else
@@ -140,26 +150,29 @@ function FreezeEffect:freeze()
 	end
 end
 
+--[[
 function FreezeEffect:alreadyexists(currenteffect, ...)
-	currenteffect.count = currenteffect.count + 1
-	self.entitydata:log("Freeze level plus", currenteffect.count, self)
+--	currenteffect.count = currenteffect.count + 1
+	self.entitydata.stuneffects[self] = true
+	self.entitydata:log("Freeze level plus", #self.entitydata.stuneffects, self)
 	self:startfreezeeffects(...)
 end
+--]]
 
-function FreezeEffect:remove()
-	currenteffect = self:get()
-	if currenteffect ~= nil then
-		currenteffect.count = currenteffect.count - 1
-		self.entitydata:log("Freeze level minus", currenteffect.count, self)
-		if currenteffect.count == 0 then
-			Effect.remove(currenteffect)
-		end
-	else
-		self.entitydata:log("freeze tried to remove", self, "but already removed!")
+function FreezeEffect:endeffect()
+--	currenteffect = self:get()
+--	if currenteffect ~= nil then
+--		currenteffect.count = currenteffect.count - 1
+	self.entitydata.freezeeffects[self] = nil
+	self.entitydata.freezesize = self.entitydata.freezesize - 1
+	self.entitydata:log("Freeze level minus", self.entitydata.freezesize, self)
+	if self.entitydata.freezesize == 0 then
+		self:endfreeze()
 	end
 end
 
-function FreezeEffect:endeffect()
+function FreezeEffect:endfreeze()
+	self.entitydata:log("ENDED FREEZE")
 	if self.entitydata.entity.ishero then
 		self.entitydata.entity:unfreeze()
 	else
@@ -168,7 +181,7 @@ function FreezeEffect:endeffect()
 end
 
 function FreezeEffect:getkey()
-	return "FreezeEffect"
+	return self
 end
 
 StunEffect = FreezeEffect:subclass("StunEffect")
@@ -249,6 +262,5 @@ function KnockBackEffect:endtimer()
 		self:remove()
 	end
 end
-
 
 return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect}

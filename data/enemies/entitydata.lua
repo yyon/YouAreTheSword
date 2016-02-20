@@ -10,7 +10,14 @@ ChargeAbility = require "abilities/charge"
 Effects = require "enemies/effect"
 
 function EntityData:log(...)
-	print(self.class, ...)
+	colstart = ""
+	colend = ""
+	if self.getlogcolor ~= nil then
+		colstart = string.char(27) .. '[' .. self:getlogcolor() .. 'm' 
+		colend = string.char(27) .. '[' .. "0" .. 'm' 
+	end
+	
+	print(colstart .. self.class, ... .. colend)
 end
 
 function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability)
@@ -78,9 +85,10 @@ function EntityData:bepossessedbyhero()
 	
 	self.entity.is_possessing = true
 	
-	if self:getfrozen() ~= nil then
-		self:getfrozen():freeze()
-	end
+	--TODO: re-freeze hero
+--	if self:getfrozen() ~= nil then
+--		self:getfrozen():freeze()
+--	end
 	
 	self:log("sword has possessed")
 end
@@ -245,6 +253,7 @@ function EntityData:unfreeze(type, dotick)
 end
 --]]
 
+--[[
 function EntityData:freeze()
 	Effects.FreezeEffect(self)
 end
@@ -258,8 +267,14 @@ function EntityData:unfreeze()
 end
 
 function EntityData:getfrozen()
-	return Effects.FreezeEffect:get(self)
+--	return Effects.FreezeEffect:get(self)
+	for index, value in pairs(self.freezeeffects) do
+		if index.active then
+			return index
+		end
+	end
 end
+--]]
 
 function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
@@ -332,7 +347,7 @@ function EntityData:dodamage(target, damage, aspects)
 	
 	--knockback
 	if aspects.knockback ~= 0 then
-		self:log("knockback")
+		target:log("knockback")
 --		if target:getfrozen() == nil then
 			kbe = KnockBackEffect:new(target, self, aspects.knockback)
 --[[
@@ -387,7 +402,6 @@ end
 
 function EntityData:kill()
 	-- adventurer/monster is killed
-	self:unfreeze()
 	if self.entity.ishero then
 		-- drop sword
 		self:drop()
@@ -395,7 +409,8 @@ function EntityData:kill()
 		newentity = self:unpossess()
 		newentity.entitydata:kill()
 	else
-		self:freeze()
+--		self:freeze()
+		freezeeffect = Effects.FreezeEffect:new(self)
 		self.entity:set_life(0)
 	end
 	
@@ -553,16 +568,28 @@ function purpleclass:initialize(entity)
 	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), ChargeAbility:new(self))
 end
 
+function purpleclass:getlogcolor()
+	return "95"
+end
+
 yellowclass = EntityData:subclass("yellowclass")
 
 function yellowclass:initialize(entity)
 	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"), Ability:new(self), Ability:new(self))
 end
 
+function yellowclass:getlogcolor()
+	return "93"
+end
+
 greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
 	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), Ability:new(self), Ability:new(self))
+end
+
+function greenclass:getlogcolor()
+	return "92"
 end
 
 return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass}

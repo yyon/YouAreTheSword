@@ -1,6 +1,7 @@
 local class = require "middleclass"
 
 Ability = class("Ability")
+Effects = require "enemies/effect"
 
 function Ability:initialize(...)
 	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze = ...
@@ -9,7 +10,8 @@ end
 function Ability:start(...)
 	self.entitydata.usingability = self
 	if self.dofreeze then
-		self.entitydata:freeze(self.name, 1, function() self:cancel() end)
+--		self.entitydata:freeze(self.name, 1, function() self:cancel() end)
+		self.freezeeffect = Effects.FreezeEffect(self.entitydata)
 	end
 	self:doability(...)
 end
@@ -19,7 +21,8 @@ function Ability:finishability()
 	self.entitydata.usingability = nil
 	if self.dofreeze then
 		self.entitydata:log("unfreeze", self.name)
-		self.entitydata:unfreeze(self.name, false)
+		self.freezeeffect:remove()
+--		self.entitydata:unfreeze(self.name, false)
 	end
 end
 
