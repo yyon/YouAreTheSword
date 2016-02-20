@@ -4,13 +4,14 @@ EntityData = class("EntityData")
 
 SwordAbility = require "abilities/sword"
 TransformAbility = require "abilities/swordtransform"
+ShieldAbility = require "abilities/shield"
 Effects = require "enemies/effect"
 
 function EntityData:log(...)
 	print(self.class, ...)
 end
 
-function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability)
+function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability)
 	-- use createfromclass
 	self.entity = entity
 	self.class = class
@@ -19,6 +20,8 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	self.team = team
 	self.swordability = swordability
 	self.transformability = transformability
+	self.blockability = blockability
+	self.specialability = specialability
 	self.effects = {}
 end
 
@@ -129,14 +132,34 @@ function EntityData:getability(ability)
 		return self.swordability
 	elseif ability == "swordtransform" then
 		return self.transformability
+	elseif ability == "block" then
+		return self.blockability
+	elseif ability == "special" then
+		return self.specialability
 	end
 end
 
-function EntityData:startability(ability)
+function EntityData:startability(ability, ...)
 	-- call this to use an ability
 	if self.usingability == nil then
 		ability = self:getability(ability)
-		ability:start()
+		ability:start(...)
+	end
+end
+
+function EntityData:endability(ability, ...)
+	if self.usingability ~= nil then
+		if self.usingability == self:getability(ability) then
+			self.usingability:finish(...)
+		end
+	end
+end
+
+function EntityData:tickability(ability, ...)
+	if self.usingability ~= nil then
+		if self.usingability == self:getability(ability) then
+			self.usingability:tick(...)
+		end
 	end
 end
 
@@ -244,13 +267,16 @@ function EntityData:dodamage(target, damage, aspects)
 		return
 	end
 	
+	if target.usingability ~= nil then
+		damage, aspects = target.usingability:blockdamage(self, damage, aspects)
+	end
+	
 	--cancel enemy's ability
-	if aspects.natural == nil then
+	if aspects.natural == nil and aspects.dontcancel == nil then
 		if target.usingability ~= nil then
 			target.usingability:cancel()
 		end
 	end
-	
 	-- aspects
 	knockback = 26
 	if aspects == nil then
@@ -259,6 +285,7 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 	if aspects.ap ~= nil then
 		self:log("armor piercing")
+		-- TODO: implement
 	end
 	if aspects.stun ~= nil then
 		self:log("stun")
@@ -314,6 +341,11 @@ function EntityData:dodamage(target, damage, aspects)
 		else
 			self:log("already frozen:", self:getfrozen())
 		end
+	end
+	
+	--reverse cancel
+	if aspects.reversecancel ~= nil then
+		target:dodamage(self, 0, {})
 	end
 	
 	if target.life <= 0 then
@@ -417,6 +449,7 @@ function EntityData:throwsword(entitydata2)
 		movement:start(hero)
 --		movement:set_ignore_obstacles()
 		function movement:on_obstacle_reached()
+			movement:stop()
 			EntityData:drop(hero)
 		end
 		function movement:on_finished()
@@ -502,19 +535,19 @@ end
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"))
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), Ability:new(self))
 end
 
 yellowclass = EntityData:subclass("yellowclass")
 
 function yellowclass:initialize(entity)
-	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"))
+	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"), Ability:new(self), Ability:new(self))
 end
 
 greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
-	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"))
+	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), Ability:new(self), Ability:new(self))
 end
 
 return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass}

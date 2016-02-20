@@ -216,8 +216,8 @@ destination{
 enemy{
   name = "red1",
   layer = 0,
-  x = 248,
-  y = 77,
+  x = 424,
+  y = 189,
   direction = 0,
   breed = "yellow_test",
 }

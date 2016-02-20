@@ -42,6 +42,8 @@ function game_manager:start_game()
 		hero:set_sword_sprite_id("")
 --		hero:set_walking_speed(64) -- currently slightly higher than NPCs for testing
 	end
+	
+	tick()
 end
 
 function convert_to_map(mousex, mousey)
@@ -65,7 +67,9 @@ function sol.main:on_key_pressed(key, modifiers)
 	mousex, mousey = sol.input.get_mouse_position()
 	x, y = convert_to_map(mousex, mousey)
 	
-	hero:set_direction(hero:get_direction4_to(x, y))
+	if x ~= nil then
+		hero:set_direction(hero:get_direction4_to(x, y))
+	end
 	
 	hero = game:get_hero()
 	if hero:get_state() ~= "freezed" then
@@ -74,7 +78,7 @@ function sol.main:on_key_pressed(key, modifiers)
 		elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
 			hero.entitydata:startability("swordtransform")
 		elseif key == "left shift" then
-			print("TODO: block")
+			hero.entitydata:startability("block")
 		elseif key == "escape" then
 			print("TODO: pause menu")
 		--debug keys
@@ -83,6 +87,26 @@ function sol.main:on_key_pressed(key, modifiers)
 		elseif key == "k" then
 			hero.entitydata:kill()
 		end
+	end
+end
+
+function  sol.main:on_key_released(key, modifiers)
+	if game:is_paused() or game:is_suspended() then
+		print("PAUSED!")
+		return
+	end
+	
+	mousex, mousey = sol.input.get_mouse_position()
+	x, y = convert_to_map(mousex, mousey)
+	
+	if x ~= nil then
+		hero:set_direction(hero:get_direction4_to(x, y))
+	end
+	
+	hero = game:get_hero()
+	if key == "left shift" then
+		print("ending block")
+		hero.entitydata:endability("block")
 	end
 end
 
@@ -105,11 +129,28 @@ function sol.main:on_mouse_pressed(button, ...)
 		if button == "right" then
 			hero.entitydata:throwclosest(x, y)
 		elseif button == "left" then
-			print("TODO: special")
+			hero.entitydata:startability("special", x, y)
 		end
 	end
 end
 
+function tick()
+	hero = game:get_hero()
+	
+	if not (game:is_paused() or game:is_suspended()) then
+		mousex, mousey = sol.input.get_mouse_position()
+		x, y = convert_to_map(mousex, mousey)
+	
+		if sol.input.is_key_pressed("left shift") then
+			if x ~= nil then
+--				hero:set_direction(hero:get_direction4_to(x, y))
+				hero.entitydata:tickability("block", x, y)
+			end
+		end
+	end
+	
+	sol.timer.start(hero, 100, function() tick() end)
+end
 
 return game_manager
 

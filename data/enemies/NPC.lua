@@ -122,7 +122,7 @@ GoTowardsState = State:subclass("GoTowardsState")
 
 function GoTowardsState:start()
 	if self.npc.entitytoattack ~= nil then
-		local movement = sol.movement.create("target")
+		local movement = sol.movement.create("target") -- "path_finding")
 		movement:set_speed(faster_speed)
 		movement:set_target(self.npc.entitytoattack.entity)
 		movement:start(self.npc)
@@ -241,7 +241,7 @@ function enemy:cantargetentity(entity)
 	if entity.entitydata == nil then return false end
 	if entity.entitydata.team == self.entitydata.team then return false end
 	if not entity.entitydata:isvisible() then return false end
-	if self:get_distance(entity) > 100 then return false end
+	if self:get_distance(entity) > 200 then return false end
 	
 	return true
 end
