@@ -6,6 +6,7 @@ end
 function entity:start(appearance)
 	self.shield_sprite = self:create_sprite(appearance)
 	self.shield_sprite:set_paused(false)
+	self.shield_sprite:set_animation("walking")
 	
 	self:updatedirection()
 	

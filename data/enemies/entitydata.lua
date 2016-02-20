@@ -6,6 +6,7 @@ SwordAbility = require "abilities/sword"
 TransformAbility = require "abilities/swordtransform"
 ShieldAbility = require "abilities/shield"
 ChargeAbility = require "abilities/charge"
+ShieldBashAbility = require "abilities/shieldbash"
 
 Effects = require "enemies/effect"
 
@@ -492,11 +493,15 @@ function EntityData:throwsword(entitydata2)
 		movement:set_speed(500)
 		movement:set_target(entitydata2.entity)
 		movement:start(hero)
---		movement:set_ignore_obstacles()
+
+		movement:set_ignore_obstacles()
+--[[
 		function movement:on_obstacle_reached()
 			movement:stop()
 			EntityData:drop(hero)
 		end
+--]]
+
 		function movement:on_finished()
 			entitydata2:bepossessedbyhero()
 		end
@@ -535,16 +540,43 @@ function EntityData:throwrandom()
 	end
 end
 
+function EntityData:getstraightestentity(x, y)
+	local math = require "math"
+	
+	angle = self.entity:get_angle(x, y)
+	
+	minangle = 999
+	minentity = nil
+	
+	map = game:get_map()
+	hero = self.entity
+	
+	for entity in map:get_entities("") do
+		if entity.entitydata ~= nil then
+			if entity ~= self.entity then
+				angle2 = self.entity:get_angle(entity)
+				d = math.abs(angle - angle2)
+				if d < minangle then
+					minangle = d
+					minentity = entity.entitydata
+				end
+			end
+		end
+	end
+	
+	return minentity
+end
+
 function EntityData:getclosestentity(x, y)
 	mindist = 99999
 	minentity = nil
 	
 	map = game:get_map()
-	hero = game:get_hero()
+	hero = self.entity
 
 	for entity in map:get_entities("") do
 		if entity.entitydata ~= nil then
-			if not entity.entitydata.ishero then
+			if entity ~= self.entity then
 				d = entity:get_distance(x, y)
 				if d < mindist then
 					mindist = d
@@ -569,18 +601,21 @@ function EntityData:throwclosest(mousex, mousey)
 	
 	return
 --]]
+	self:log("throwing to closest")
 	entity = self:getclosestentity(x, y)
 	if entity ~= nil then
 		if hero.entitydata ~= nil then
 			hero.entitydata:throwsword(entity)
 		end
+	else
+		self:log("couldn't find person to throw to", x, y)
 	end
 end
 
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), ChargeAbility:new(self))
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), ShieldBashAbility:new(self))
 end
 
 function purpleclass:getlogcolor()
@@ -590,7 +625,7 @@ end
 yellowclass = EntityData:subclass("yellowclass")
 
 function yellowclass:initialize(entity)
-	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"), Ability:new(self), Ability:new(self))
+	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), ChargeAbility:new(self))
 end
 
 function yellowclass:getlogcolor()
@@ -600,7 +635,7 @@ end
 greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
-	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), Ability:new(self), Ability:new(self))
+	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), Ability:new(self))
 end
 
 function greenclass:getlogcolor()

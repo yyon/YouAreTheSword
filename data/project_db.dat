@@ -127,6 +127,7 @@ enemy{ id = "yellow_test", description = "Test yellow" }
 entity{ id = "charge", description = "charge" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "shield", description = "shield" }
+entity{ id = "shieldbash", description = "shieldbash" }
 entity{ id = "sword", description = "sword" }
 
 language{ id = "en", description = "English" }

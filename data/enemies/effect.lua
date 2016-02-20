@@ -68,6 +68,19 @@ function Effect:get(entitydata)
 	return entitydata.effects[self:getkey()]
 end
 
+SimpleTimer = Effect:subclass("SimpleTimer")
+function SimpleTimer:start(time, endfunction)
+	self.endfunction = endfunction
+	self:removeeffectafter(time)
+end
+function SimpleTimer:endeffect()
+	self.endfunction()
+end
+function SimpleTimer:getkey()
+	return self
+end
+
+
 PhysicalEffect = Effect:subclass("PhysicalEffect")
 
 function PhysicalEffect:start(time)
