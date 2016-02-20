@@ -17,7 +17,8 @@ function EntityData:log(...)
 		colend = string.char(27) .. '[' .. "0" .. 'm' 
 	end
 	
-	print(colstart .. self.class, ... .. colend)
+	print(colstart .. self.class, ...)
+	io.write(colend)
 end
 
 function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability)

@@ -130,8 +130,6 @@ function FreezeEffect:start(...)
 	self.entitydata.freezeeffects[self] = true
 	self.entitydata.freezesize = self.entitydata.freezesize + 1
 	self.entitydata:log("Freeze level start", self.entitydata.freezesize, self)
-	self.entitydata:log("EHOUSNTHAUTSOHA")
-	self.entitydata:log(#self.entitydata.freezeeffects)
 	if self.entitydata.freezesize == 1 then
 		self:freeze()
 	end
