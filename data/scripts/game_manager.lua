@@ -42,6 +42,8 @@ function sol.main:on_key_pressed(key, modifiers)
 			hero.entitydata:startability("sword")
 		elseif key == "3" then
 			hero.entitydata:startability("swordtransform")
+		elseif key == "k" then
+			hero.entitydata:kill()
 		end
 	end
 end

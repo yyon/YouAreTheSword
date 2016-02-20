@@ -286,21 +286,25 @@ function EntityData:dodamage(target, damage, aspects)
 	--knockback
 	if knockback ~= 0 then
 		self:log("knockback")
-		if target.entity.ishero then
-			target:freeze("knockback", 2)
-			local x, y = target.entity:get_position()
-			local angle = target.entity:get_angle(self.entity) + math.pi
-			local movement = sol.movement.create("straight")
-			movement:set_speed(128)
-			movement:set_angle(angle)
-			movement:set_max_distance(26)
-			movement:set_smooth(true)
-			movement:start(target.entity)
-			function movement:on_finished()
-				target:unfreeze("knockback")
+		if target:getfrozen() == nil then
+			if target.entity.ishero then
+				target:freeze()
+				local x, y = target.entity:get_position()
+				local angle = target.entity:get_angle(self.entity) + math.pi
+				local movement = sol.movement.create("straight")
+				movement:set_speed(128)
+				movement:set_angle(angle)
+				movement:set_max_distance(knockback)
+				movement:set_smooth(true)
+				movement:start(target.entity)
+				function movement:on_finished()
+					target:unfreeze()
+				end
+			else
+				target.entity:receive_attack_animation(self.entity)
 			end
 		else
-			target.entity:receive_attack_animation(self.entity)
+			self:log("already frozen:", self:getfrozen())
 		end
 	end
 	
@@ -328,21 +332,20 @@ end
 
 function EntityData:kill()
 	-- adventurer/monster is killed
-	self:unfreeze("all")
+	self:unfreeze()
 	if self.entity.ishero then
 		-- drop sword
 		hero = self.entity
 		newentity = self:unpossess()
 		newentity.entitydata:kill()
 		
-		hero:unfreeze()
 		hero:set_tunic_sprite_id("hero/droppedsword")
 		hero:set_animation("stopped")
 		hero:freeze()
 		hero.isdropped = true
 		
 	else
-		self:freeze("dead", 5)
+		self:freeze()
 		self.entity:set_life(0)
 	end
 	
@@ -405,8 +408,7 @@ function EntityData:throwsword(entitydata2)
 	end
 end
 
-function EntityData:throwrandom()
-	-- throw sword to random entity
+function EntityData:getrandom()
 	require "math"
 	
 	map = game:get_map()
@@ -422,6 +424,12 @@ function EntityData:throwrandom()
 	end
 	
 	entity = entitieslist[math.random(#entitieslist)]
+	return entity
+end
+
+function EntityData:throwrandom()
+	-- throw sword to random entity
+	entity = self:getrandom()
 	
 	if entity ~= nil then
 		if hero.entitydata ~= nil then

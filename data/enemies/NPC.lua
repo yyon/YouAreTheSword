@@ -313,7 +313,10 @@ function enemy:tick(newstate)
 --]]
 	
 	end
-	sol.timer.start(self, 100, function() self:tick() end)
+	
+	if self:exists() then
+		sol.timer.start(self, 100, function() self:tick() end)
+	end
 end
 
 function enemy:on_movement_changed(movement)
