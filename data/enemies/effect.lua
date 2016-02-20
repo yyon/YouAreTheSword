@@ -43,8 +43,12 @@ function Effect:removeeffectafter(time)
 	if not self.active then
 		self.entitydata:log("timer tried to remove", self:getkey(), "but already removed!")
 	else
-		sol.timer.start(self, time, function() self:remove() end)
+		sol.timer.start(self, time, function() self:endtimer() end)
 	end
+end
+
+function Effect:endtimer()
+	self:remove()
 end
 
 function Effect:starttick(timestep)
@@ -71,8 +75,10 @@ function PhysicalEffect:start(time)
 	paentity = map:create_custom_entity({model="physicaleffect", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	paentity:start(self, self:getspritename())
 	self.paentity = paentity
-		
-	self:removeeffectafter(time)
+	
+	if time ~= nil then
+		self:removeeffectafter(time)
+	end
 end
 
 function PhysicalEffect:endeffect()
@@ -136,10 +142,14 @@ end
 
 function FreezeEffect:remove()
 	currenteffect = self:get()
-	currenteffect.count = currenteffect.count - 1
-	self.entitydata:log("Freeze level", currenteffect.count)
-	if currenteffect.count == 0 then
-		Effect.remove(currenteffect)
+	if currenteffect ~= nil then
+		currenteffect.count = currenteffect.count - 1
+		self.entitydata:log("Freeze level", currenteffect.count)
+		if currenteffect.count == 0 then
+			Effect.remove(currenteffect)
+		end
+	else
+		self.entitydata:log("freeze tried to remove", self:getkey(), "but already removed!")
 	end
 end
 
@@ -162,9 +172,55 @@ function StunEffect:alreadyexists(currenteffect, time)
 	self:removeeffectafter(time)
 end
 
+function StunEffect:alreadyexists(currenteffect, time)
+	FreezeEffect.alreadyexists(self, currenteffect)
+	self:removeeffectafter(time)
+end
+
 function StunEffect:start(time)
 	FreezeEffect.start(self)
 	self:removeeffectafter(time)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect}
+ElectricalStunEffect = StunEffect:subclass("ElectricalStunEffect")
+
+function ElectricalStunEffect:initialize(entitydata, ...)
+	self.electricaleffect = ElectricalEffect:new(entitydata)
+	StunEffect.initialize(self, entitydata, ...)
+end
+function ElectricalStunEffect:remove(...)
+	self.electricaleffect:remove(...)
+	StunEffect.remove(self, ...)
+end
+
+KnockBackEffect = FreezeEffect:subclass("KnockBackEffect")
+
+function KnockBackEffect:start(fromentitydata, knockbackdist)
+	self.entitydata:log("starting knockback")
+	FreezeEffect.start(self, 5000) -- timeout 5 seconds
+	
+	local x, y = self.entitydata.entity:get_position()
+	local angle = self.entitydata.entity:get_angle(fromentitydata.entity) + math.pi
+	local movement = sol.movement.create("straight")
+	movement:set_speed(128)
+	movement:set_angle(angle)
+	movement:set_max_distance(knockbackdist)
+	movement:set_smooth(true)
+	movement:start(self.entitydata.entity)
+	local kbe = self
+	self.finished = false
+	function movement:on_finished()
+		kbe.entitydata:log("finished knockback")
+		kbe.finished = true
+		kbe:remove()
+	end
+end
+
+function KnockBackEffect:endtimer()
+	if not self.finished then
+		self:remove()
+	end
+end
+
+
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect}

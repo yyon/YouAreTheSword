@@ -62,6 +62,20 @@ function State:cleanup()
 	self.npc:reset_everything()
 end
 
+function State:vartorecord()
+end
+
+function State:prevvar()
+	self.prev_var = self:vartorecord()
+end
+
+function State:requiresupdate()
+	if self.prev_var ~= self:vartorecord() then
+		return true
+	end
+	return false
+end
+
 NilState = State:subclass("NilState")
 function NilState:start()
 end
@@ -123,6 +137,10 @@ function GoTowardsState:tick()
 	end
 end
 
+function GoTowardsState:vartorecord()
+	return self.npc.entitytoattack
+end
+
 PickupState = State:subclass("PickupState")
 
 function PickupState:start()
@@ -136,6 +154,10 @@ function PickupState:tick()
 	if self.npc:get_distance(self.npc.target) < 20 then
 		self.npc.entitydata:bepossessedbyhero()
 	end
+end
+
+function PickupState:vartorecord()
+	return self.npc.target
 end
 
 
@@ -259,7 +281,8 @@ function enemy:tick(newstate)
 	
 	prevstate = self.state
 	if prevstate == nil then prevstate = self.nilstate end
-	preventitytoattack = self.entitytoattack
+--	preventitytoattack = self.entitytoattack
+	prevstate:prevvar()
 	
 	self.entitytoattack = self:targetenemy()
 	if (self.entitytoattack ~= nil) then
@@ -281,7 +304,7 @@ function enemy:tick(newstate)
 	end
 	if self.state == nil then self.state = self.NilState end
 	
-	changedstates = (prevstate ~= self.state or preventitytoattack ~= self.entitytoattack)
+	changedstates = (prevstate ~= self.state or self.state:requiresupdate())
 	
 	if changedstates then
 		prevstate:cleanup()

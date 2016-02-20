@@ -244,6 +244,13 @@ function EntityData:dodamage(target, damage, aspects)
 		return
 	end
 	
+	--cancel enemy's ability
+	if aspects.natural == nil then
+		if target.usingability ~= nil then
+			target.usingability:cancel()
+		end
+	end
+	
 	-- aspects
 	knockback = 26
 	if aspects == nil then
@@ -257,8 +264,11 @@ function EntityData:dodamage(target, damage, aspects)
 		self:log("stun")
 		knockback = 0
 		
-		stuneffect = Effects.StunEffect(target, aspects.stun)
-		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
+--		stuneffect = Effects.StunEffect(target, aspects.stun)
+--		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
+		if target:getfrozen() == nil then
+			electricstuneffect = Effects.ElectricalStunEffect(target, aspects.stun)
+		end
 	end
 	if aspects.fire ~= nil then
 		self:log("catch on fire", knockback)
@@ -274,19 +284,16 @@ function EntityData:dodamage(target, damage, aspects)
 	target:log("damaged", damage, "life", target.life)
 	
 	--aggro
-	if not target.entity.ishero then
+	if not target.entity.ishero and target ~= self then
 		target.entity.entitytoattack = self
-	end
-	
-	--cancel enemy's ability
-	if target.usingability ~= nil then
-		target.usingability:cancel()
 	end
 	
 	--knockback
 	if knockback ~= 0 then
 		self:log("knockback")
 		if target:getfrozen() == nil then
+			kbe = KnockBackEffect:new(target, self, knockback)
+--[[
 			if target.entity.ishero then
 				target:freeze()
 				local x, y = target.entity:get_position()
@@ -303,6 +310,7 @@ function EntityData:dodamage(target, damage, aspects)
 			else
 				target.entity:receive_attack_animation(self.entity)
 			end
+--]]
 		else
 			self:log("already frozen:", self:getfrozen())
 		end
