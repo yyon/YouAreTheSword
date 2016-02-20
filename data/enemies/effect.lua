@@ -9,7 +9,7 @@ function Effect:initialize(entitydata, ...)
 	else
 		self.entitydata.effects[self:getkey()] = self
 		self.active = true
-		self.entitydata:log("starting effect", self:getkey())
+		self.entitydata:log("starting effect", self)
 		self:start(...)
 	end
 end
@@ -26,7 +26,7 @@ function Effect:remove()
 		self.entitydata:log("timer tried to remove", self:getkey(), "but already removed!")
 	else
 		self:endeffect()
-		self.entitydata:log("ending effect", self:getkey())
+		self.entitydata:log("ending effect", self)
 		self.entitydata.effects[self:getkey()] = nil
 		self.active = false
 	end
@@ -40,11 +40,12 @@ function Effect:endeffect()
 end
 
 function Effect:removeeffectafter(time)
-	if not self.active then
-		self.entitydata:log("timer tried to remove", self:getkey(), "but already removed!")
-	else
-		sol.timer.start(self, time, function() self:endtimer() end)
-	end
+	print("going to remove", self, time)
+--	if not self.active then
+--		self.entitydata:log("timer tried to remove", self, "but already removed!")
+--	else
+	sol.timer.start(self, time, function() self:endtimer() end)
+--	end
 end
 
 function Effect:endtimer()
@@ -121,10 +122,14 @@ end
 
 FreezeEffect = Effect:subclass("FreezeEffect")
 
-function FreezeEffect:start()
+function FreezeEffect:start(...)
 	self.count = 1
-	self.entitydata:log("Freeze level", self.count)
+	self.entitydata:log("Freeze level start", self.count, self)
 	self:freeze()
+	self:startfreezeeffects(...)
+end
+
+function FreezeEffect:startfreezeeffects()
 end
 
 function FreezeEffect:freeze()
@@ -135,21 +140,22 @@ function FreezeEffect:freeze()
 	end
 end
 
-function FreezeEffect:alreadyexists(currenteffect)
+function FreezeEffect:alreadyexists(currenteffect, ...)
 	currenteffect.count = currenteffect.count + 1
-	self.entitydata:log("Freeze level", currenteffect.count)
+	self.entitydata:log("Freeze level plus", currenteffect.count, self)
+	self:startfreezeeffects(...)
 end
 
 function FreezeEffect:remove()
 	currenteffect = self:get()
 	if currenteffect ~= nil then
 		currenteffect.count = currenteffect.count - 1
-		self.entitydata:log("Freeze level", currenteffect.count)
+		self.entitydata:log("Freeze level minus", currenteffect.count, self)
 		if currenteffect.count == 0 then
 			Effect.remove(currenteffect)
 		end
 	else
-		self.entitydata:log("freeze tried to remove", self:getkey(), "but already removed!")
+		self.entitydata:log("freeze tried to remove", self, "but already removed!")
 	end
 end
 
@@ -184,9 +190,10 @@ end
 
 ElectricalStunEffect = StunEffect:subclass("ElectricalStunEffect")
 
-function ElectricalStunEffect:initialize(entitydata, ...)
-	self.electricaleffect = ElectricalEffect:new(entitydata)
-	StunEffect.initialize(self, entitydata, ...)
+function ElectricalStunEffect:startfreezeeffects(...)
+	self.electricaleffect = ElectricalEffect:new(self.entitydata)
+--	StunEffect.initialize(self, entitydata, ...)
+	StunEffect.startfreezeeffects(...)
 end
 function ElectricalStunEffect:remove(...)
 	self.electricaleffect:remove(...)
@@ -195,16 +202,31 @@ end
 
 KnockBackEffect = FreezeEffect:subclass("KnockBackEffect")
 
+--[[
 function KnockBackEffect:start(fromentitydata, knockbackdist)
 	self.entitydata:log("starting knockback")
-	FreezeEffect.start(self, 5000) -- timeout 5 seconds
+	FreezeEffect.start(self)
+	
+	self:doknockback(fromentitydata, knockbackdist)
+end
+
+function KnockBackEffect:alreadyexists(currenteffect, fromentitydata, knockbackdist)
+	FreezeEffect.alreadyexists(self, currenteffect)
+	
+	self:doknockback(fromentitydata, knockbackdist)
+end
+--]]
+
+function KnockBackEffect:startfreezeeffects(fromentitydata, knockbackdist)
+	self:removeeffectafter(500)
 	
 	local x, y = self.entitydata.entity:get_position()
 	local angle = self.entitydata.entity:get_angle(fromentitydata.entity) + math.pi
 	local movement = sol.movement.create("straight")
-	movement:set_speed(128)
+	self.movement = movement
+	movement:set_speed(knockbackdist)
 	movement:set_angle(angle)
-	movement:set_max_distance(knockbackdist)
+--	movement:set_max_distance(knockbackdist)
 	movement:set_smooth(true)
 	movement:start(self.entitydata.entity)
 	local kbe = self
@@ -214,6 +236,12 @@ function KnockBackEffect:start(fromentitydata, knockbackdist)
 		kbe.finished = true
 		kbe:remove()
 	end
+end
+
+function KnockBackEffect:endeffect()
+	print("KNOCKBACKEND")
+	FreezeEffect.endeffect(self)
+	self.movement:stop()
 end
 
 function KnockBackEffect:endtimer()

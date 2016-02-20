@@ -45,8 +45,7 @@ function SwordAbility:attack(entitydata)
 	if transform == "ap" then
 		aspects.ap = true
 	elseif transform == "electric" then
-		self.entitydata:log("going to stun")
-		aspects.stun = 2000
+		aspects.electric = 2000
 	elseif transform == "fire" then
 		aspects.fire = {damage=0.1, time=5000, timestep=500}
 	end

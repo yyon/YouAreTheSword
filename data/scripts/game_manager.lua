@@ -59,7 +59,7 @@ function convert_to_map(mousex, mousey)
 end
 
 function sol.main:on_key_pressed(key, modifiers)
-	if game:is_paused() or game:is_suspended() then
+	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return
 	end
@@ -91,7 +91,7 @@ function sol.main:on_key_pressed(key, modifiers)
 end
 
 function  sol.main:on_key_released(key, modifiers)
-	if game:is_paused() or game:is_suspended() then
+	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return
 	end
@@ -111,7 +111,7 @@ function  sol.main:on_key_released(key, modifiers)
 end
 
 function sol.main:on_mouse_pressed(button, ...)
-	if game:is_paused() or game:is_suspended() then
+	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return
 	end
@@ -139,7 +139,7 @@ end
 function tick()
 	hero = game:get_hero()
 	
-	if not (game:is_paused() or game:is_suspended()) then
+	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
 		mousex, mousey = sol.input.get_mouse_position()
 		x, y = convert_to_map(mousex, mousey)
 		
@@ -151,7 +151,7 @@ function tick()
 --		end
 	end
 	
-	sol.timer.start(hero, 100, function() tick() end)
+	sol.timer.start(hero, 50, function() tick() end)
 end
 
 return game_manager

@@ -283,7 +283,9 @@ function EntityData:dodamage(target, damage, aspects)
 		end
 	end
 	-- aspects
-	knockback = 26
+	if aspects.knockback == nil then
+		aspects.knockback = 128--26
+	end
 	if aspects == nil then
 		aspects = {}
 		self:log("reset aspects")
@@ -292,15 +294,23 @@ function EntityData:dodamage(target, damage, aspects)
 		self:log("armor piercing")
 		-- TODO: implement
 	end
-	if aspects.stun ~= nil then
-		self:log("stun")
-		knockback = 0
+	if aspects.electric ~= nil then
+--		aspects.knockback = 0
 		
 --		stuneffect = Effects.StunEffect(target, aspects.stun)
 --		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
-		if target:getfrozen() == nil then
-			electricstuneffect = Effects.ElectricalStunEffect(target, aspects.stun)
-		end
+--		if target:getfrozen() == nil then
+			electricstuneffect = Effects.ElectricalStunEffect(target, aspects.electric)
+--		end
+	end
+	if aspects.stun ~= nil then
+--		aspects.knockback = 0
+		
+--		stuneffect = Effects.StunEffect(target, aspects.stun)
+--		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
+--		if target:getfrozen() == nil then
+			stun = Effects.StunEffect(target, aspects.stun)
+--		end
 	end
 	if aspects.fire ~= nil then
 		self:log("catch on fire", knockback)
@@ -308,7 +318,7 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 	if aspects.flame ~= nil then
 		self:log("fire damage")
-		knockback = 0
+		aspects.knockback = 0
 	end
 	
 	-- do damage
@@ -321,10 +331,10 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 	
 	--knockback
-	if knockback ~= 0 then
+	if aspects.knockback ~= 0 then
 		self:log("knockback")
-		if target:getfrozen() == nil then
-			kbe = KnockBackEffect:new(target, self, knockback)
+--		if target:getfrozen() == nil then
+			kbe = KnockBackEffect:new(target, self, aspects.knockback)
 --[[
 			if target.entity.ishero then
 				target:freeze()
@@ -343,9 +353,9 @@ function EntityData:dodamage(target, damage, aspects)
 				target.entity:receive_attack_animation(self.entity)
 			end
 --]]
-		else
-			self:log("already frozen:", self:getfrozen())
-		end
+--		else
+--			self:log("already frozen:", self:getfrozen())
+--		end
 	end
 	
 	--reverse cancel

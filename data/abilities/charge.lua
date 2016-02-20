@@ -75,7 +75,6 @@ function ChargeAbility:blockdamage(fromentity, damage, aspects)
 end
 
 function ChargeAbility:tick()
-	print("tick")
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	
@@ -95,10 +94,14 @@ function ChargeAbility:tick()
 end
 
 function ChargeAbility:attack(entitydata)
-	damage = 1
-	aspects = {}
+	damage = 2
+	aspects = {stun=500, knockback=0}
 	
 	self:dodamage(entitydata, damage, aspects)
+	
+	self:finish()
+	
+	self.entitydata:startability("sword")
 end
 
 return ChargeAbility
