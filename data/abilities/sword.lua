@@ -54,8 +54,11 @@ function SwordAbility:attack(entitydata)
 	self:dodamage(entitydata, damage, aspects)
 end
 
-function SwordAbility:gettransform()
-	entity = self.entitydata.entity
+function SwordAbility:gettransform(entity)
+	if entity == nil then
+		entity = self.entitydata.entity
+	end
+	
 	if entity.ishero then
 		if entity.swordtransform ~= nil then
 			return entity.swordtransform
@@ -65,8 +68,8 @@ function SwordAbility:gettransform()
 	return "normal"
 end
 
-function SwordAbility:get_appearance()
-	transform = self:gettransform()
+function SwordAbility:get_appearance(entity)
+	transform = self:gettransform(entity)
 	
 	if transform == "normal" then
 		return "hero/sword1"
@@ -76,8 +79,6 @@ function SwordAbility:get_appearance()
 		return "hero/sword3"
 	elseif transform == "electric" then
 		return "hero/sword4"
-	else
-		self.entitydata:log("Couldn't find appearance!", transform)
 	end
 end
 

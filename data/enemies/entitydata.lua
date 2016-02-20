@@ -5,6 +5,8 @@ EntityData = class("EntityData")
 SwordAbility = require "abilities/sword"
 TransformAbility = require "abilities/swordtransform"
 ShieldAbility = require "abilities/shield"
+ChargeAbility = require "abilities/charge"
+
 Effects = require "enemies/effect"
 
 function EntityData:log(...)
@@ -142,8 +144,9 @@ end
 function EntityData:startability(ability, ...)
 	-- call this to use an ability
 	if self.usingability == nil then
-		ability = self:getability(ability)
-		ability:start(...)
+		actualability = self:getability(ability)
+		print("ABILITY", ability, actualability)
+		actualability:start(...)
 	end
 end
 
@@ -155,11 +158,9 @@ function EntityData:endability(ability, ...)
 	end
 end
 
-function EntityData:tickability(ability, ...)
+function EntityData:tickability(...)
 	if self.usingability ~= nil then
-		if self.usingability == self:getability(ability) then
-			self.usingability:tick(...)
-		end
+		self.usingability:tick(...)
 	end
 end
 
@@ -269,6 +270,10 @@ function EntityData:dodamage(target, damage, aspects)
 	
 	if target.usingability ~= nil then
 		damage, aspects = target.usingability:blockdamage(self, damage, aspects)
+	end
+	
+	if aspects.donothing then
+		return
 	end
 	
 	--cancel enemy's ability
@@ -535,7 +540,7 @@ end
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), Ability:new(self))
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), ChargeAbility:new(self))
 end
 
 yellowclass = EntityData:subclass("yellowclass")

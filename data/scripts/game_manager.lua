@@ -122,6 +122,8 @@ function sol.main:on_mouse_pressed(button, ...)
 	if x == nil then
 		print("No mouse position!")
 		return
+	else
+		hero:set_direction(hero:get_direction4_to(x, y))
 	end
 	
 	hero = game:get_hero()
@@ -140,13 +142,13 @@ function tick()
 	if not (game:is_paused() or game:is_suspended()) then
 		mousex, mousey = sol.input.get_mouse_position()
 		x, y = convert_to_map(mousex, mousey)
-	
-		if sol.input.is_key_pressed("left shift") then
-			if x ~= nil then
+		
+		hero.entitydata:tickability(x, y)
+--		if sol.input.is_key_pressed("left shift") then
+--			if x ~= nil then
 --				hero:set_direction(hero:get_direction4_to(x, y))
-				hero.entitydata:tickability("block", x, y)
-			end
-		end
+--			end
+--		end
 	end
 	
 	sol.timer.start(hero, 100, function() tick() end)

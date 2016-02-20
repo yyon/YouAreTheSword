@@ -124,6 +124,7 @@ enemy{ id = "green_test", description = "Test green" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
 enemy{ id = "yellow_test", description = "Test yellow" }
 
+entity{ id = "charge", description = "charge" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "sword", description = "sword" }
