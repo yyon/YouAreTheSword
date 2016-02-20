@@ -13,24 +13,26 @@ function entity:start(effect, name, time)
 	
 --	sol.timer.start(self, time, function() self:finish() end)
 	
-	self:tick()
+--	self:tick()
+	self.effect.entitydata.positionlisteners[self] = function(x,y,layer) self:updateposition(x,y,layer) end
 end
 
 function entity:cancel()
 	self:finish()
 end
 
-function entity:tick()
-	entity = self.effect.entitydata.entity
+function entity:updateposition(x, y, layer)
+--	entity = self.effect.entitydata.entity
 	
-	x,y,layer = entity:get_position()
+--	x,y,layer = entity:get_position()
 	
 	self:set_position(x, y, layer+1)
 	
-	sol.timer.start(self, 100, function() self:tick() end)
+--	sol.timer.start(self, 100, function() self:tick() end)
 end
 
 function entity:finish()
-	sol.timer.stop_all(self)
+	self.effect.entitydata.positionlisteners[self] = nil
+--	sol.timer.stop_all(self)
 	self:remove()
 end

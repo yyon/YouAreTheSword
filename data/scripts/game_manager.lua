@@ -144,6 +144,7 @@ function tick()
 		x, y = convert_to_map(mousex, mousey)
 		
 		hero.entitydata:tickability(x, y)
+		
 --		if sol.input.is_key_pressed("left shift") then
 --			if x ~= nil then
 --				hero:set_direction(hero:get_direction4_to(x, y))

@@ -41,9 +41,9 @@ end
 
 function ShieldAbility:blockdamage(fromentity, damage, aspects)
 	if self.entitydata.entity:get_direction4_to(fromentity.entity) == self.entitydata:getdirection() then
-		-- sword can block
-		aspects.dontcancel = true
-		aspects.reversecancel = true
+		-- shield can block
+		self.entitydata:log("Blocked Damage using shield!")
+		aspects.reversecancel = 500
 		return 0, aspects
 	end
 	

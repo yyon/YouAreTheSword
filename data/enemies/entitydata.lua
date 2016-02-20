@@ -33,6 +33,9 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	self.blockability = blockability
 	self.specialability = specialability
 	self.effects = {}
+	self.positionlisteners = {}
+	
+	self:log("initialized")
 end
 
 --[[
@@ -57,6 +60,14 @@ function EntityData:applytoentity()
 		self.entity:set_tunic_sprite_id(self.main_sprite)
 	else
 		self.entity:load_entitydata()
+	end
+	
+	function self.entity:on_position_changed(x, y, layer)
+		for index, value in pairs(self.entitydata.positionlisteners) do
+			if value ~= nil then
+				value(x, y, layer)
+			end
+		end
 	end
 end
 
@@ -154,7 +165,7 @@ function EntityData:startability(ability, ...)
 	-- call this to use an ability
 	if self.usingability == nil then
 		actualability = self:getability(ability)
-		print("ABILITY", ability, actualability)
+		self:log("ABILITY", ability, actualability)
 		actualability:start(...)
 	end
 end
@@ -291,6 +302,12 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.donothing then
 		return
 	end
+	--reverse cancel
+	if aspects.reversecancel ~= nil then
+		target:dodamage(self, 0, {knockback=0, stun=aspects.reversecancel})
+		return
+	end
+	
 	
 	--cancel enemy's ability
 	if aspects.natural == nil and aspects.dontcancel == nil then
@@ -372,11 +389,6 @@ function EntityData:dodamage(target, damage, aspects)
 --		else
 --			self:log("already frozen:", self:getfrozen())
 --		end
-	end
-	
-	--reverse cancel
-	if aspects.reversecancel ~= nil then
-		target:dodamage(self, 0, {})
 	end
 	
 	if target.life <= 0 then

@@ -86,6 +86,10 @@ function PhysicalEffect:endeffect()
 	self.paentity:finish()
 end
 
+function PhysicalEffect:getkey()
+	return "physicaleffect" .. self:getspritename()
+end
+
 FireEffect = PhysicalEffect:subclass("FireEffect")
 
 function FireEffect:getspritename()

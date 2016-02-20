@@ -1,6 +1,33 @@
 local class = require "middleclass"
 Ability = require "abilities/ability"
 
+--[[
+Effects = require "enemies/effect"
+FireEffect = Effects.PhysicalEffect:subclass("SwordSwinging")
+
+function FireEffect:getspritename()
+	return "fire"
+end
+
+function FireEffect:start(aspect)
+	time = aspect.time
+	self.firedamage = aspect.damage
+	timestep = aspect.timestep
+	
+	self:starttick(timestep)
+	
+	PhysicalEffect.start(self, time)
+end
+
+function FireEffect:tick()
+	self.entitydata:dodamage(self.entitydata, self.firedamage, {flame=true, natural=true})
+end
+
+function FireEffect:getkey()
+	return "FireEffect"
+end
+--]]
+
 SwordAbility = Ability:subclass("SwordAbility")
 
 function SwordAbility:initialize(entitydata)

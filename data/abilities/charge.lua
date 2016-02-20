@@ -20,8 +20,6 @@ function ChargeAbility:doability(tox, toy)
 	
 	self.collided = {}
 	
-	print(layer)
-	
 	d = entitydata:getdirection()
 	
 	self.swordentity = map:create_custom_entity({model="charge", x=x, y=y, layer=layer, direction=d, width=w, height=h})
@@ -54,7 +52,8 @@ function ChargeAbility:doability(tox, toy)
 	function movement:on_finished()
 		ca:finish()
 	end
-
+	
+	self.entitydata.positionlisteners[self] = function(x, y, layer) self:updatepos(x, y, layer) end
 end
 
 function ChargeAbility:cancel()
@@ -63,6 +62,8 @@ end
 
 function ChargeAbility:finish()
 	self.entitydata:setanimation("walking")
+	
+	self.entitydata.positionlisteners[self] = nil
 	
 	self.swordentity:remove()
 	self.swordentity = nil
@@ -74,7 +75,7 @@ function ChargeAbility:blockdamage(fromentity, damage, aspects)
 	return 0, aspects
 end
 
-function ChargeAbility:tick()
+function ChargeAbility:updatepos(x, y, layer)
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	
