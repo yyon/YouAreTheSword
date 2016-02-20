@@ -1,8 +1,14 @@
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
-Error: In collision callback: [string "enemies/entitydata.lua"]:225: attempt to index a nil value
+Error: Failed to load script 'enemies/effect': [string "enemies/effect.lua"]:41: ')' expected (to close '(' at line 40) near 'else'
+Error: In main: [string "enemies/entitydata.lua"]:7: module 'enemies/effect' not found:
+	no field package.preload['enemies/effect']
+	no quest file 'enemies/effect.lua' in 'data/', 'data.solarus' or 'data.solarus.zip'
+	no file './enemies/effect.lua'
+	no file '/usr/share/luajit-2.0.4/enemies/effect.lua'
+	no file '/usr/local/share/lua/5.1/enemies/effect.lua'
+	no file '/usr/local/share/lua/5.1/enemies/effect/init.lua'
+	no file '/usr/share/lua/5.1/enemies/effect.lua'
+	no file '/usr/share/lua/5.1/enemies/effect/init.lua'
+	no file './enemies/effect.so'
+	no file '/usr/local/lib/lua/5.1/enemies/effect.so'
+	no file '/usr/lib/x86_64-linux-gnu/lua/5.1/enemies/effect.so'
+	no file '/usr/local/lib/lua/5.1/loadall.so'

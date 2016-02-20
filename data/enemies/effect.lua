@@ -15,29 +15,47 @@ function Effect:initialize(entitydata, ...)
 end
 
 function Effect:alreadyexists(currenteffect)
+	self.entitydata:log("WARNING! tried to add a new effect when one already exists", self:getkey())
 end
 
 function Effect:start()
 end
 
 function Effect:remove()
-	self.entitydata.effects[self:getkey()] = nil
-	self.active = false
-	self:endeffect()
-	self.entitydata:log("ending effect", self:getkey())
+	if not self.active then
+		self.entitydata:log("timer tried to remove", self:getkey(), "but already removed!")
+	else
+		self.entitydata.effects[self:getkey()] = nil
+		self.active = false
+		self:endeffect()
+		self.entitydata:log("ending effect", self:getkey())
+	end
+end
+
+function Effect:forceremove()
+	Effect.remove(self)
 end
 
 function Effect:endeffect()
 end
 
 function Effect:removeeffectafter(time)
-	sol.timer.start(self, time, function() self:remove() end)
+	if not self.active then
+		self.entitydata:log("timer tried to remove", self:getkey(), "but already removed!")
+	else
+		sol.timer.start(self, time, function() self:remove() end)
+	end
 end
 
 function Effect:starttick(timestep)
+	self.timestep = timestep
+	sol.timer.start(self, self.timestep, function() self:dotick() end) -- starting tick immediately causes strange bugs
+end
+
+function Effect:dotick()
 	if not self.active then return end
 	self:tick()
-	sol.timer.start(self, timestep, function() self:starttick(timestep) end)
+	sol.timer.start(self, self.timestep, function() self:dotick() end)
 end
 
 function Effect:get(entitydata)
@@ -78,7 +96,7 @@ function FireEffect:start(aspect)
 end
 
 function FireEffect:tick()
-	self.entitydata:dodamage(self.entitydata, self.firedamage, {firedamage=true, natural=true})
+	self.entitydata:dodamage(self.entitydata, self.firedamage, {flame=true, natural=true})
 end
 
 function FireEffect:getkey()
@@ -100,6 +118,10 @@ FreezeEffect = Effect:subclass("FreezeEffect")
 function FreezeEffect:start()
 	self.count = 1
 	self.entitydata:log("Freeze level", self.count)
+	self:freeze()
+end
+
+function FreezeEffect:freeze()
 	if self.entitydata.entity.ishero then
 		self.entitydata.entity:freeze()
 	else

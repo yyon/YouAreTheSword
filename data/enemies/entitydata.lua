@@ -73,6 +73,10 @@ function EntityData:bepossessedbyhero()
 	
 	self.entity.is_possessing = true
 	
+	if self:getfrozen() ~= nil then
+		self:getfrozen():freeze()
+	end
+	
 	self:log("sword has possessed")
 end
 
@@ -222,7 +226,15 @@ function EntityData:freeze()
 end
 
 function EntityData:unfreeze()
-	Effects.FreezeEffect:get(self):remove()
+	if self:getfrozen() ~= nil then
+		self:getfrozen():remove()
+	else
+		self:log("Tried to unfreeze when not frozen")
+	end
+end
+
+function EntityData:getfrozen()
+	return Effects.FreezeEffect:get(self)
 end
 
 function EntityData:dodamage(target, damage, aspects)
@@ -245,21 +257,15 @@ function EntityData:dodamage(target, damage, aspects)
 		self:log("stun")
 		knockback = 0
 		
---		if target.freezetype ~= "stun" then
---			pa = target:physicaleffectanimation("stun", aspects.stun)
---			
---			target:freeze("stun", 3, function() pa:cancel() end)
---			sol.timer.start(self, aspects.stun, function() target:unfreeze("stun") end)
---		end
 		stuneffect = Effects.StunEffect(target, aspects.stun)
 		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
 	end
 	if aspects.fire ~= nil then
-		-- TODO: put into generic time-based effect thingy
---		pa = target:physicaleffectanimation("fire", time)
+		self:log("catch on fire", knockback)
 		fireeffect = Effects.FireEffect(target, aspects.fire)
 	end
-	if aspects.firedamage ~= nil then
+	if aspects.flame ~= nil then
+		self:log("fire damage")
 		knockback = 0
 	end
 	
@@ -279,6 +285,7 @@ function EntityData:dodamage(target, damage, aspects)
 	
 	--knockback
 	if knockback ~= 0 then
+		self:log("knockback")
 		if target.entity.ishero then
 			target:freeze("knockback", 2)
 			local x, y = target.entity:get_position()
@@ -337,6 +344,10 @@ function EntityData:kill()
 	else
 		self:freeze("dead", 5)
 		self.entity:set_life(0)
+	end
+	
+	for key, effect in pairs(self.effects) do
+		effect:forceremove()
 	end
 	
 	self.entity.entitydata = nil
