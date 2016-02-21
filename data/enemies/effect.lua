@@ -245,11 +245,11 @@ function KnockBackEffect:alreadyexists(currenteffect, fromentitydata, knockbackd
 end
 --]]
 
-function KnockBackEffect:startfreezeeffects(fromentitydata, knockbackdist)
+function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist)
 	self:removeeffectafter(500)
 	
 	local x, y = self.entitydata.entity:get_position()
-	local angle = self.entitydata.entity:get_angle(fromentitydata.entity) + math.pi
+	local angle = self.entitydata.entity:get_angle(fromentity) + math.pi
 	local movement = sol.movement.create("straight")
 	self.movement = movement
 	movement:set_speed(knockbackdist)
@@ -278,4 +278,4 @@ function KnockBackEffect:endtimer()
 	end
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer}

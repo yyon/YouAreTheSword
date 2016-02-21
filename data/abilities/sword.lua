@@ -64,7 +64,13 @@ function SwordAbility:finish()
 	self:finishability()
 end
 
-function SwordAbility:attack(entitydata)
+function SwordAbility:attack(entity)
+	if not self.entitydata:cantargetentity(entity) then
+		return
+	end
+	
+	entitydata = entity.entitydata
+	
 	damage = 1
 	aspects = {}
 	

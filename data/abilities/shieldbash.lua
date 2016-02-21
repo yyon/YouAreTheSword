@@ -27,7 +27,7 @@ function ShieldBashAbility:doability()
 	
 	self.shieldentity:start("hero/shield3")
 	
-	SimpleTimer:new(self.entitydata, 400, function() self:finish() end)
+	Effects.SimpleTimer:new(self.entitydata, 400, function() self:finish() end)
 	
 	self:attackall()
 end
@@ -59,13 +59,11 @@ function ShieldBashAbility:attackall()
 		dist = entity:get_distance(entity2)
 		if dist <= self.range then
 			if entity:get_direction4_to(entity2) == self.entitydata:getdirection() then
-				if entity2.entitydata ~= nil then
-					if entity2 ~= entity then
-						if self.collided[entity2] == nil then
-							self.collided[entity2] = true
-					
-							self:attack(entity2.entitydata)
-						end
+				if self.entitydata:cantargetentity(entity2) then
+					if self.collided[entity2] == nil then
+						self.collided[entity2] = true
+				
+						self:attack(entity2.entitydata)
 					end
 				end
 			end

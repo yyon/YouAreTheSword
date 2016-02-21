@@ -34,6 +34,7 @@ sprite{ id = "entities/bush", description = "Bush" }
 sprite{ id = "entities/chest", description = "Chest" }
 sprite{ id = "entities/conveyor_belt", description = "Conveyor belt" }
 sprite{ id = "entities/crystal", description = "Crystal" }
+sprite{ id = "entities/explosion", description = "explosion" }
 sprite{ id = "entities/explostion", description = "Explosion" }
 sprite{ id = "entities/fire", description = "Fire" }
 sprite{ id = "entities/grass", description = "Grass" }
@@ -124,6 +125,7 @@ enemy{ id = "green_test", description = "Test green" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
 enemy{ id = "yellow_test", description = "Test yellow" }
 
+entity{ id = "bomb", description = "bomb" }
 entity{ id = "charge", description = "charge" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "shield", description = "shield" }

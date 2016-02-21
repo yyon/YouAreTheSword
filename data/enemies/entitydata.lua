@@ -7,6 +7,7 @@ TransformAbility = require "abilities/swordtransform"
 ShieldAbility = require "abilities/shield"
 ChargeAbility = require "abilities/charge"
 ShieldBashAbility = require "abilities/shieldbash"
+BombThrowAbility = require "abilities/throwbomb"
 
 Effects = require "enemies/effect"
 
@@ -140,7 +141,38 @@ function EntityData:unpossess()
 	return self.entity
 end
 
+function EntityData:cantarget(entitydata)
+	if entitydata == nil then
+		self:log("can't target", entitydata, "because entitydata nil")
+		return false
+	end
+	
+	if entitydata == self then
+		self:log("can't target", entitydata, "because self-targeting")
+		return false
+	end
+	
+	if not entitydata:isvisible() then
+		self:log("can't target", entitydata, "because invisible")
+		return false
+	end
+	
+	if entitydata.team == self.team then
+		self:log("can't target", entitydata, "because same team")
+		return false
+	end
+	
+	return true
+end
 
+function EntityData:cantargetentity(entity)
+	if entity == nil then
+		self:log("can't target", entitydata, "because entity nil")
+		return false
+	end
+	
+	return self:cantarget(entity.entitydata)
+end
 
 function EntityData:isvisible()
 	-- can be seen
@@ -293,8 +325,8 @@ end
 
 function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
-	if target.team == self.team and aspects.natural == nil then
-		self:log("friendly fire off")
+	if not self:cantarget(target) and aspects.natural == nil then
+		self:log("Can't target!")
 		return
 	end
 	
@@ -318,10 +350,15 @@ function EntityData:dodamage(target, damage, aspects)
 			target.usingability:cancel()
 		end
 	end
+	
 	-- aspects
 	if aspects.knockback == nil then
 		aspects.knockback = 128--26
 	end
+	if aspects.fromentity == nil then
+		aspects.fromentity = self.entity
+	end
+	
 	if aspects == nil then
 		aspects = {}
 		self:log("reset aspects")
@@ -370,7 +407,7 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.knockback ~= 0 then
 		target:log("knockback")
 --		if target:getfrozen() == nil then
-			kbe = KnockBackEffect:new(target, self, aspects.knockback)
+			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback)
 --[[
 			if target.entity.ishero then
 				target:freeze()
@@ -615,7 +652,7 @@ end
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), ShieldBashAbility:new(self))
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), BombThrowAbility:new(self))
 end
 
 function purpleclass:getlogcolor()
@@ -635,7 +672,7 @@ end
 greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
-	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), Ability:new(self))
+	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self))
 end
 
 function greenclass:getlogcolor()

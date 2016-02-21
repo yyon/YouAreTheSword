@@ -23,12 +23,10 @@ end
 
 function entity:oncollision(entity2, sprite1, sprite2)
 	if entity2.entitydata ~= nil then
-		if entity2 ~= self.ability.entitydata.entity then
-			if self.collided[entity2] == nil then
-				self.collided[entity2] = true
-				
-				self.ability:attack(entity2.entitydata)
-			end
+		if self.collided[entity2] == nil then
+			self.collided[entity2] = true
+			
+			self.ability:attack(entity2)
 		end
 	end
 end

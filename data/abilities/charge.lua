@@ -81,13 +81,11 @@ function ChargeAbility:updatepos(x, y, layer)
 	
 	for entity2 in map:get_entities("") do
 		if self.entitydata.entity:overlaps(entity2) then
-			if entity2.entitydata ~= nil then
-				if entity2 ~= entity then
-					if self.collided[entity2] == nil then
-						self.collided[entity2] = true
+			if self.entitydata:cantargetentity(entity2) then
+				if self.collided[entity2] == nil then
+					self.collided[entity2] = true
 				
-						self:attack(entity2.entitydata)
-					end
+					self:attack(entity2.entitydata)
 				end
 			end
 		end
