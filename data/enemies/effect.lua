@@ -44,7 +44,7 @@ function Effect:removeeffectafter(time)
 --	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 --	else
-	sol.timer.start(self, time, function() self:endtimer() end)
+	sol.timer.start(self.entitydata.entity, time, function() self:endtimer() end)
 --	end
 end
 
@@ -54,13 +54,13 @@ end
 
 function Effect:starttick(timestep)
 	self.timestep = timestep
-	sol.timer.start(self, self.timestep, function() self:dotick() end) -- starting tick immediately causes strange bugs
+	sol.timer.start(self.entitydata.entity, self.timestep, function() self:dotick() end) -- starting tick immediately causes strange bugs
 end
 
 function Effect:dotick()
 	if not self.active then return end
 	self:tick()
-	sol.timer.start(self, self.timestep, function() self:dotick() end)
+	sol.timer.start(self.entitydata.entity, self.timestep, function() self:dotick() end)
 end
 
 function Effect:get(entitydata)
