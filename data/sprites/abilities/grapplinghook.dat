@@ -1,0 +1,24 @@
+animation{
+  name = "rope",
+  src_image = "abilities/grapplinghook.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+    { x = 6, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+    { x = 12, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+    { x = 18, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+    { x = 24, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+    { x = 30, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+    { x = 36, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+    { x = 42, y = 0, frame_width = 6, frame_height = 6, origin_x = 3, origin_y = 3 },
+  },
+}
+animation{
+  name = "hook",
+  src_image = "abilities/grapplinghook.png",
+  directions = {
+    { x = 0, y = 6, frame_width = 10, frame_height = 10, origin_x = 5, origin_y = 5 },
+    { x = 10, y = 6, frame_width = 10, frame_height = 10, origin_x = 5, origin_y = 5 },
+    { x = 20, y = 6, frame_width = 10, frame_height = 10, origin_x = 5, origin_y = 5 },
+    { x = 30, y = 6, frame_width = 10, frame_height = 10, origin_x = 5, origin_y = 5 },
+  },
+}

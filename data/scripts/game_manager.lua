@@ -40,7 +40,8 @@ function game_manager:start_game()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
---		hero:set_walking_speed(64) -- currently slightly higher than NPCs for testing
+--		hero:set_walking_speed(200) -- higher than NPCs for testing
+		hero:set_walking_speed(64) 
 	end
 	
 	tick()

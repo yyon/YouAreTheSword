@@ -8,6 +8,7 @@ ShieldAbility = require "abilities/shield"
 ChargeAbility = require "abilities/charge"
 ShieldBashAbility = require "abilities/shieldbash"
 BombThrowAbility = require "abilities/throwbomb"
+GrapplingHookAbility = require "abilities/grapplinghook"
 
 Effects = require "enemies/effect"
 
@@ -143,22 +144,22 @@ end
 
 function EntityData:cantarget(entitydata)
 	if entitydata == nil then
-		self:log("can't target", entitydata, "because entitydata nil")
+--		self:log("can't target", entitydata, "because entitydata nil")
 		return false
 	end
 	
 	if entitydata == self then
-		self:log("can't target", entitydata, "because self-targeting")
+--		self:log("can't target", entitydata, "because self-targeting")
 		return false
 	end
 	
 	if not entitydata:isvisible() then
-		self:log("can't target", entitydata, "because invisible")
+--		self:log("can't target", entitydata, "because invisible")
 		return false
 	end
 	
 	if entitydata.team == self.team then
-		self:log("can't target", entitydata, "because same team")
+--		self:log("can't target", entitydata, "because same team")
 		return false
 	end
 	
@@ -167,7 +168,7 @@ end
 
 function EntityData:cantargetentity(entity)
 	if entity == nil then
-		self:log("can't target", entitydata, "because entity nil")
+--		self:log("can't target", entitydata, "because entity nil")
 		return false
 	end
 	
@@ -652,7 +653,7 @@ end
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), BombThrowAbility:new(self))
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), GrapplingHookAbility:new(self))
 end
 
 function purpleclass:getlogcolor()

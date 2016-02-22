@@ -74,12 +74,29 @@ function SimpleTimer:start(time, endfunction)
 	self:removeeffectafter(time)
 end
 function SimpleTimer:endeffect()
-	self.endfunction()
+	if self.endfunction ~= nil then
+		self.endfunction()
+	end
 end
 function SimpleTimer:getkey()
 	return self
 end
+function SimpleTimer:stop()
+	self.endfunction = nil
+	self:remove()
+end
 
+Ticker = Effect:subclass("Ticker")
+function Ticker:start(timestep, tickfunction)
+	self.tickfunction = tickfunction
+	self:starttick(timestep)
+end
+function Ticker:tick()
+	self.tickfunction()
+end
+function Ticker:getkey()
+	return self
+end
 
 PhysicalEffect = Effect:subclass("PhysicalEffect")
 
@@ -278,4 +295,4 @@ function KnockBackEffect:endtimer()
 	end
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker}

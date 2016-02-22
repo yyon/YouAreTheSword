@@ -23,6 +23,7 @@ tileset{ id = "8", description = "Blue Dungeon (DW)" }
 tileset{ id = "9", description = "Green Dungeon (DW)" }
 tileset{ id = "castle", description = "Castle" }
 
+sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
 sprite{ id = "enemies/red_knight_soldier_sword", description = "red_knight_soldier_sword" }
@@ -118,7 +119,6 @@ sound{ id = "walk_on_grass", description = "walk_on_grass" }
 sound{ id = "walk_on_water", description = "walk_on_water" }
 sound{ id = "wrong", description = "wrong" }
 
-item{ id = "bomb", description = "Bomb" }
 
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
 enemy{ id = "green_test", description = "Test green" }
@@ -127,6 +127,8 @@ enemy{ id = "yellow_test", description = "Test yellow" }
 
 entity{ id = "bomb", description = "bomb" }
 entity{ id = "charge", description = "charge" }
+entity{ id = "grapplinghook", description = "grappling hook" }
+entity{ id = "grapplinghookrope", description = "grappling hook rope" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
