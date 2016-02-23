@@ -1,3 +1,1 @@
-Error: In collision callback: [string "enemies/entitydata.lua"]:289: attempt to call method 'getfreeze' (a nil value)
-Error: In collision callback: [string "enemies/entitydata.lua"]:289: attempt to call method 'getfreeze' (a nil value)
-Error: In collision callback: [string "enemies/entitydata.lua"]:289: attempt to call method 'getfreeze' (a nil value)
+Warning: Cannot use quest size 320x240: this quest only supports 640x360 to 640x360. Using 640x360 instead.

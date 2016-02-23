@@ -14,7 +14,7 @@ function entity:start(target)
 	self.hooksprite = self:create_sprite("abilities/grapplinghook")
 	self.hooksprite:set_animation("hook")
 	self.hooksprite:set_paused(false)
-	self.hooksprite:set_direction(self.d4)
+	self.hooksprite:set_direction(self.d8)
 	
 	self.ropesprites = {}
 	
@@ -56,6 +56,8 @@ function entity:pull(target)
 	end
 end
 
+SPACING = 20
+
 function entity:tick()
 	d = self:get_distance(self.ability.entitydata.entity)
 	
@@ -63,7 +65,7 @@ function entity:tick()
 	entityx, entityy = self.ability.entitydata.entity:get_position()
 	entityy = entityy - 10
 	
-	for i = 4,d,4 do
+	for i = SPACING,d-SPACING,SPACING do
 		posx, posy = selfx * (d - i)/d + entityx * i/d,  selfy * (d - i)/d + entityy * i/d
 		if self.ropesprites[i] == nil then
 			self.ropesprites[i] = map:create_custom_entity({model="grapplinghookrope", x=posx, y=posy, layer=layer, direction=self.d8, width=8, height=8})

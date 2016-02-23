@@ -2,7 +2,7 @@ local entity = ...
 
 function entity:on_created()
 	self.ropesprite = self:create_sprite("abilities/grapplinghook")
-	self.ropesprite:set_animation("rope")
+	self.ropesprite:set_animation("longerrope")
 end
 
 function entity:setdirection(d)
