@@ -24,6 +24,7 @@ tileset{ id = "9", description = "Green Dungeon (DW)" }
 tileset{ id = "castle", description = "Castle" }
 
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
+sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
 sprite{ id = "enemies/red_knight_soldier_sword", description = "red_knight_soldier_sword" }

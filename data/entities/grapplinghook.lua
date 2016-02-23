@@ -5,11 +5,20 @@ Effects = require "enemies/effect"
 function entity:on_created()
 end
 
+function round(num, idp)
+	local mult = 10^(idp or 0)
+	return math.floor(num * mult + 0.5) / mult
+end
+
 function entity:start(target)
 	self.target = target
 	
 	self.d4 = self.ability.entitydata.entity:get_direction4_to(self.target.entity)
 	self.d8 = self.ability.entitydata.entity:get_direction8_to(self.target.entity)
+	angle = self.ability.entitydata.entity:get_angle(self.target.entity)
+	
+	self.d16 = round(-angle * 24 / math.pi / 2) % 24
+	
 	
 	self.hooksprite = self:create_sprite("abilities/grapplinghook")
 	self.hooksprite:set_animation("hook")
@@ -56,7 +65,7 @@ function entity:pull(target)
 	end
 end
 
-SPACING = 20
+SPACING = 18
 
 function entity:tick()
 	d = self:get_distance(self.ability.entitydata.entity)
@@ -69,14 +78,14 @@ function entity:tick()
 		posx, posy = selfx * (d - i)/d + entityx * i/d,  selfy * (d - i)/d + entityy * i/d
 		if self.ropesprites[i] == nil then
 			self.ropesprites[i] = map:create_custom_entity({model="grapplinghookrope", x=posx, y=posy, layer=layer, direction=self.d8, width=8, height=8})
-			self.ropesprites[i]:setdirection(self.d8)
+			self.ropesprites[i]:setdirection(self.d16)
 		end
 		
 		self.ropesprites[i]:set_position(posx, posy)
 	end
 	
 	for dist, ropesprite in pairs(self.ropesprites) do
-		if dist > d then
+		if dist > d-SPACING then
 			ropesprite:remove()
 			self.ropesprites[dist] = nil
 		end
