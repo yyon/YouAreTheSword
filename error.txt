@@ -1,1 +1,2 @@
 Warning: Cannot use quest size 320x240: this quest only supports 640x360 to 640x360. Using 640x360 instead.
+Error: In timer callback: [string "abilities/shield.lua"]:41: attempt to index field 'shieldentity' (a nil value)

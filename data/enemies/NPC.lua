@@ -132,7 +132,14 @@ end
 function GoTowardsState:tick()
 	if self.npc.entitytoattack ~= nil then
 		if self.npc.entitydata:withinrange("sword", self.npc.entitytoattack) then
-			self.npc.entitydata:startability("sword")
+			targetability = self.npc.entitytoattack.usingability
+			if targetability ~= nil and targetability.abilitytype ~= "block" then
+				-- block if being attacked
+				ability = self.npc.entitydata:startability("block")
+			else
+				-- attack if close enough
+				self.npc.entitydata:startability("sword")
+			end
 		end
 	end
 end

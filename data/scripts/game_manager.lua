@@ -106,7 +106,6 @@ function  sol.main:on_key_released(key, modifiers)
 	
 	hero = game:get_hero()
 	if key == "left shift" then
-		print("ending block")
 		hero.entitydata:endability("block")
 	end
 end
@@ -146,11 +145,14 @@ function tick()
 		
 		hero.entitydata:tickability(x, y)
 		
---		if sol.input.is_key_pressed("left shift") then
---			if x ~= nil then
+		if sol.input.is_key_pressed("left shift") then
+			if x ~= nil then
+				if hero.entitydata.usingability == nil then
+					hero.entitydata:startability("block", true)
+				end
 --				hero:set_direction(hero:get_direction4_to(x, y))
---			end
---		end
+			end
+		end
 	end
 	
 	sol.timer.start(hero, 50, function() tick() end)

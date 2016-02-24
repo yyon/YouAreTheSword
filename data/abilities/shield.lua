@@ -7,7 +7,7 @@ function ShieldAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "shield", 25, 0, 0, true)
 end
 
-function ShieldAbility:doability()
+function ShieldAbility:doability(playerrelease)
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()
@@ -24,6 +24,11 @@ function ShieldAbility:doability()
 	self.entitydata:setanimation("stopped_with_shield")
 	
 	self.shieldentity:start("hero/shield3")
+	
+	self.playerrelease = playerrelease
+	if not self.playerrelease then
+		self.timer = Effects.SimpleTimer(self.entitydata, 1000, function() self:finish() end)
+	end
 end
 
 function ShieldAbility:cancel()
