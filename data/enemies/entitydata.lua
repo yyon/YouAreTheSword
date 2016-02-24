@@ -186,7 +186,7 @@ end
 
 function EntityData:getability(ability)
 	-- string to object
-	if ability == "sword" then
+	if ability == "normal" then
 		return self.swordability
 	elseif ability == "swordtransform" then
 		return self.transformability
@@ -220,6 +220,11 @@ function EntityData:tickability(...)
 	if self.usingability ~= nil then
 		self.usingability:tick(...)
 	end
+end
+
+function EntityData:canuseability(ability)
+	actualability = self:getability(ability)
+	return actualability.canuse
 end
 
 function EntityData:withinrange(ability, entitydata)

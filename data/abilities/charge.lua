@@ -46,10 +46,10 @@ function ChargeAbility:doability(tox, toy)
 	function movement:on_position_changed()
 		ca.swordentity:updatepos()
 	end
-	function movement:on_obstacle_reached()
+	function movement.on_obstacle_reached(movement)
 		ca:finish()
 	end
-	function movement:on_finished()
+	function movement.on_finished(movement)
 		ca:finish()
 	end
 	
@@ -65,6 +65,7 @@ function ChargeAbility:finish()
 	
 	self.entitydata.positionlisteners[self] = nil
 	
+	self.entitydata.entity:stop_movement()
 	self.swordentity:remove()
 	self.swordentity = nil
 	self:finishability()

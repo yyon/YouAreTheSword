@@ -40,8 +40,7 @@ function game_manager:start_game()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
-		hero:set_walking_speed(64) 
---		hero:set_walking_speed(200) -- higher than NPCs for testing
+		hero:set_walking_speed(64)
 	end
 	
 	tick()
@@ -75,7 +74,7 @@ function sol.main:on_key_pressed(key, modifiers)
 	hero = game:get_hero()
 	if hero:get_state() ~= "freezed" then
 		if key == "space" then
-			hero.entitydata:startability("sword")
+			hero.entitydata:startability("normal")
 		elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
 			hero.entitydata:startability("swordtransform")
 		elseif key == "left shift" then
@@ -83,10 +82,12 @@ function sol.main:on_key_pressed(key, modifiers)
 		elseif key == "escape" then
 			print("TODO: pause menu")
 		--debug keys
-		elseif key == "r" then
-			hero.entitydata:throwrandom()
+--		elseif key == "r" then
+--			hero.entitydata:throwrandom()
 		elseif key == "k" then
 			hero.entitydata:kill()
+		elseif key == "s" then
+			hero:set_walking_speed(250)
 		end
 	end
 end
