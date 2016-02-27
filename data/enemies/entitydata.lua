@@ -10,6 +10,7 @@ ShieldBashAbility = require "abilities/shieldbash"
 BombThrowAbility = require "abilities/throwbomb"
 GrapplingHookAbility = require "abilities/grapplinghook"
 LightningAbility = require "abilities/lightning"
+FireballAbility = require "abilities/fireball"
 
 Effects = require "enemies/effect"
 
@@ -727,11 +728,23 @@ function EntityData:throwclosest(mousex, mousey)
 	end
 end
 
+function EntityData:gettargetpos()
+	if self.entity.ishero then
+		return self.entity.targetx, self.entity.targety
+	else
+		target = self.entity.entitytoattack
+		if target ~= nil then
+			x, y = target.entity:get_position()
+			return x, y
+		end
+	end
+end
+
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), LightningAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", FireballAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), LightningAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()

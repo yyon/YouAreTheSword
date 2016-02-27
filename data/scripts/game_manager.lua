@@ -72,6 +72,8 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	if x ~= nil then
 		hero:set_direction(hero:get_direction4_to(x, y))
+		hero.targetx = x
+		hero.targety = y
 	end
 
 	if hero:get_state() ~= "freezed" then
@@ -131,6 +133,8 @@ function sol.main:on_mouse_pressed(button, ...)
 		return
 	else
 		hero:set_direction(hero:get_direction4_to(x, y))
+		hero.targetx = x
+		hero.targety = y
 	end
 
 	hero = game:get_hero()

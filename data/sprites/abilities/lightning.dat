@@ -1,7 +1,7 @@
 animation{
   name = "lightning",
   src_image = "abilities/lightning.png",
-  frame_delay = 50,
+  frame_delay = 100,
   directions = {
     { x = 0, y = 0, frame_width = 200, frame_height = 200, origin_x = 100, origin_y = 200, num_frames = 4 },
   },

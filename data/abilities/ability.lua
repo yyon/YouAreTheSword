@@ -41,7 +41,9 @@ function Ability:finishcooldown()
 	self.canuse = true
 end
 function Ability:dodamage(entitydata, damage, aspects)
-	self.entitydata:dodamage(entitydata, damage, aspects)
+	if self.entitydata:cantarget(entitydata) then
+		self.entitydata:dodamage(entitydata, damage, aspects)
+	end
 end
 
 function Ability:doability()

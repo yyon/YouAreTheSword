@@ -1,15 +1,15 @@
 local class = require "middleclass"
 Ability = require "abilities/ability"
 
-LighningAbility = Ability:subclass("BombAbility")
+LightningAbility = Ability:subclass("LightningAbility")
 
 RANGE = 400
 
-function LighningAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "LighningAbility", RANGE, 500, 10000, true)
+function LightningAbility:initialize(entitydata)
+	Ability.initialize(self, entitydata, "LightningAbility", RANGE, 500, 10000, true)
 end
 
-function LighningAbility:doability(tox, toy)
+function LightningAbility:doability(tox, toy)
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()
@@ -32,4 +32,4 @@ function LighningAbility:doability(tox, toy)
 end
 
 
-return LighningAbility
+return LightningAbility

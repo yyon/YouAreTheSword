@@ -23,6 +23,8 @@ tileset{ id = "8", description = "Blue Dungeon (DW)" }
 tileset{ id = "9", description = "Green Dungeon (DW)" }
 tileset{ id = "castle", description = "Castle" }
 
+sprite{ id = "abilities/fireball", description = "fireball" }
+sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/lightning", description = "lightning" }
