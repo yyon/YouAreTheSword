@@ -6,7 +6,7 @@ FireballAbility = Ability:subclass("FireballAbility")
 RANGE = 400
 
 function FireballAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "FireballAbility", RANGE, 0, 0, true)
+	Ability.initialize(self, entitydata, "FireballAbility", RANGE, 0, 500, true)
 end
 
 function FireballAbility:doability()

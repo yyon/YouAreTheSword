@@ -26,7 +26,7 @@ function LightningAbility:doability(tox, toy)
 	self.lightningentity.ability = self
 	self.lightningentity:start(tox, toy)
 
-  self:AOE(100, 4, {electric=3000}, self.lightningentity)
+  self:AOE(100, 4, {electric=3000, dontblock=true}, self.lightningentity)
 
 	self:finish()
 end

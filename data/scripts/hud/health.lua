@@ -37,8 +37,15 @@ function health:check()
 
   	local need_rebuild = false
 
+    local nb_max_hearts = 6  --game:get_hero().entitydata:get_max_health() / some number
+    local nb_current_hearts = 24 --game:get_hero().entitydata.life / some number
+
+    hero = game:get_hero().entitydata
+    if hero ~= nil then
+      nb_current_hearts = hero.life
+    end
+
   	--  max life
-  	local nb_max_hearts = 6  --game:get_hero().entitydata:get_max_health() / some number
   	if nb_max_hearts ~= self.nb_max_hearts_displayed then
     		need_rebuild = true
 
@@ -51,7 +58,6 @@ function health:check()
   	end
 
   	-- current life
-  	local nb_current_hearts = 24 --game:get_hero().entitydata.life / some number
   	if nb_current_hearts ~= self.nb_current_hearts_displayed then
 
     		need_rebuild = true
