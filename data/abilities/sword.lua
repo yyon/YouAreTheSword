@@ -13,9 +13,9 @@ function FireEffect:start(aspect)
 	time = aspect.time
 	self.firedamage = aspect.damage
 	timestep = aspect.timestep
-	
+
 	self:starttick(timestep)
-	
+
 	PhysicalEffect.start(self, time)
 end
 
@@ -40,24 +40,20 @@ function SwordAbility:doability()
 	x,y,layer = entity:get_position()
 	w,h = entity:get_size()
 	entitydata = self.entitydata
-	
+
 	d = entitydata:getdirection()
-	
+
 	self.swordentity = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.swordentity.ability = self
-	
+
 	self.entitydata:setanimation("sword")
-	
+
 	self.swordentity:start(self:get_appearance())
 end
 
-function SwordAbility:cancel()
-	self:finish()
-end
-
-function SwordAbility:finish()
+function SwordAbility:onfinish()
 	self.entitydata:setanimation("walking")
-	
+
 	self.swordentity:remove()
 	self.swordentity = nil
 	self.entitydata:log("sword finish 2")
@@ -68,12 +64,12 @@ function SwordAbility:attack(entity)
 	if not self.entitydata:cantargetentity(entity) then
 		return
 	end
-	
+
 	entitydata = entity.entitydata
-	
+
 	damage = 1
 	aspects = {}
-	
+
 	transform = self:gettransform()
 	if transform == "ap" then
 		aspects.ap = true
@@ -82,7 +78,7 @@ function SwordAbility:attack(entity)
 	elseif transform == "fire" then
 		aspects.fire = {damage=0.1, time=5000, timestep=500}
 	end
-	
+
 	self:dodamage(entitydata, damage, aspects)
 end
 
@@ -90,19 +86,19 @@ function SwordAbility:gettransform(entity)
 	if entity == nil then
 		entity = self.entitydata.entity
 	end
-	
+
 	if entity.ishero then
 		if entity.swordtransform ~= nil then
 			return entity.swordtransform
 		end
 	end
-	
+
 	return "normal"
 end
 
 function SwordAbility:get_appearance(entity)
 	transform = self:gettransform(entity)
-	
+
 	if transform == "normal" then
 		return "hero/sword1"
 	elseif transform == "ap" then

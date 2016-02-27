@@ -195,33 +195,18 @@ function EntityData:getotherentities()
 	local map = self.entity:get_map()
 	local heroentity = map:get_hero()
 	local saidhero = false
+	if self.entity.ishero then
+		saidhero = true
+	end
+	if heroentity.entitydata == nil then
+		saidhero = true
+	end
 	local entityiter, iterstate, lastentity = map:get_entities("")
---[[
-	local entities = {}
-	for entity in map:get_entities("") do
-		if entity.entitydata ~= nil then
-			if entity.entitydata ~= self then
-				entities[#entities] = entity.entitydata
-			end
-		end
-		if entity == heroentity then
-			saidhero = true
-		end
-	end
-	if not saidhero then
-		entities[#entities] = heroentity.entitydata
-	end
-	local i = -1
-	return function()
-		i = i + 1
-		return entities[i]
-	end
---	return entities
---]]
+
 	iterfunction = function()
 		if saidhero == false then
 			saidhero = true
-			return hero.entitydata
+			return heroentity.entitydata
 		else
 			while true do
 				newentity, somethingboolean = entityiter(iterstate, lastentity)
@@ -457,6 +442,9 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.flame ~= nil then
 		self:log("fire damage")
 		aspects.knockback = 0
+	end
+	if aspects.method ~= nil then
+		aspects.method()
 	end
 
 	-- do damage

@@ -15,7 +15,7 @@ function Ability:start(...)
 		self.freezeeffect = Effects.FreezeEffect(self.entitydata)
 	end
 	self.canuse = false
-
+	self.usingability = true
 	self:doability(...)
 end
 
@@ -27,6 +27,7 @@ function Ability:finishability()
 		self.freezeeffect:remove()
 --		self.entitydata:unfreeze(self.name, false)
 	end
+	self.usingability = false
 	self.canuse = true
 end
 
@@ -39,10 +40,23 @@ function Ability:doability()
 	self:finish()
 end
 function Ability:cancel()
-	self:finish()
+	if self.usingability then
+		self.entitydata:log("Ability canceled:", self.name)
+		print(debug.traceback())
+		self:oncancel()
+		self:finishability()
+	end
 end
 function Ability:finish()
-	self:finishability()
+	if self.usingability then
+		self:onfinish()
+		self:finishability()
+	end
+end
+function Ability:onfinish()
+end
+function Ability:oncancel()
+	self:onfinish()
 end
 
 function Ability:tick(...)

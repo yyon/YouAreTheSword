@@ -61,6 +61,7 @@ function convert_to_map(mousex, mousey)
 end
 
 function sol.main:on_key_pressed(key, modifiers)
+	hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return
@@ -73,7 +74,6 @@ function sol.main:on_key_pressed(key, modifiers)
 		hero:set_direction(hero:get_direction4_to(x, y))
 	end
 
-	hero = game:get_hero()
 	if hero:get_state() ~= "freezed" then
 		if key == "space" then
 			hero.entitydata:startability("normal")
@@ -97,6 +97,7 @@ function sol.main:on_key_pressed(key, modifiers)
 end
 
 function  sol.main:on_key_released(key, modifiers)
+	hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return
@@ -116,6 +117,7 @@ function  sol.main:on_key_released(key, modifiers)
 end
 
 function sol.main:on_mouse_pressed(button, ...)
+	hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return

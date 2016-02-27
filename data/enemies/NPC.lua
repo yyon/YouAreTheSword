@@ -152,6 +152,7 @@ function GoTowardsState:tick()
 				ability = self.npc.entitydata:startability("block")
 			else
 				-- attack if close enough
+				self.npc.entitydata:log("Special aiming at:", x, y, target.team)
 				self.npc.entitydata:startability(attackability, x, y)
 			end
 		end

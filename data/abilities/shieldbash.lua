@@ -31,14 +31,13 @@ function ShieldBashAbility:doability()
 
 	self:attackall()
 end
-function ShieldBashAbility:finish()
+function ShieldBashAbility:onfinish()
 	if self.shieldentity ~= nil then
 		self.entitydata:setanimation("walking")
 
 		self.shieldentity:remove()
 		self.shieldentity = nil
 		self.entitydata:log("sword finish 2")
-		self:finishability()
 	end
 end
 function ShieldBashAbility:blockdamage(fromentity, damage, aspects)

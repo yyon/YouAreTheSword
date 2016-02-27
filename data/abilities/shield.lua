@@ -31,17 +31,16 @@ function ShieldAbility:doability(playerrelease)
 	end
 end
 
-function ShieldAbility:cancel()
-	self:finish()
-end
-
-function ShieldAbility:finish()
+function ShieldAbility:onfinish()
 	self.entitydata:setanimation("walking")
+
+	if self.timer ~= nil then
+		self.timer:stop()
+	end
 
 	self.shieldentity:remove()
 	self.shieldentity = nil
 	self.entitydata:log("sword finish 2")
-	self:finishability()
 end
 
 function ShieldAbility:blockdamage(fromentity, damage, aspects)

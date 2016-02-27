@@ -56,11 +56,7 @@ function ChargeAbility:doability(tox, toy)
 	self.entitydata.positionlisteners[self] = function(x, y, layer) self:updatepos(x, y, layer) end
 end
 
-function ChargeAbility:cancel()
-	self:finish()
-end
-
-function ChargeAbility:finish()
+function ChargeAbility:onfinish()
 	self.entitydata:setanimation("walking")
 
 	self.entitydata.positionlisteners[self] = nil
@@ -68,7 +64,6 @@ function ChargeAbility:finish()
 	self.entitydata.entity:stop_movement()
 	self.swordentity:remove()
 	self.swordentity = nil
-	self:finishability()
 end
 
 function ChargeAbility:blockdamage(fromentity, damage, aspects)
