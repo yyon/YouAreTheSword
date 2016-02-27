@@ -3,6 +3,7 @@ local game_manager = {}
 game = nil
 
 entitydatas = require "enemies/entitydata"
+local hud_manager = require "scripts/hud/hud"
 
 local os = require "os"
 dvorak = os.getenv("USER") == "yyon" -- TODO: keyboard config
