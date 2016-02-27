@@ -73,10 +73,13 @@ function SwordAbility:attack(entity)
 	transform = self:gettransform()
 	if transform == "ap" then
 		aspects.ap = true
+		aspects.dontblock = true
 	elseif transform == "electric" then
 		aspects.electric = 2000
 	elseif transform == "fire" then
 		aspects.fire = {damage=0.1, time=5000, timestep=500}
+	elseif transform == "poison" then
+		aspects.poison = {weakness=0.1, time=5000}
 	end
 
 	self:dodamage(entitydata, damage, aspects)
@@ -107,6 +110,8 @@ function SwordAbility:get_appearance(entity)
 		return "hero/sword3"
 	elseif transform == "electric" then
 		return "hero/sword4"
+	elseif transform == "poison" then
+		return "hero/poisonsword"
 	end
 end
 

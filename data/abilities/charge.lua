@@ -8,7 +8,7 @@ ChargeAbility = Ability:subclass("ChangeAbility")
 local RANGE = 200
 
 function ChargeAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "charge", RANGE, 500, 10000, true)
+	Ability.initialize(self, entitydata, "charge", RANGE, 500, 2000, true)
 end
 
 function ChargeAbility:doability(tox, toy)

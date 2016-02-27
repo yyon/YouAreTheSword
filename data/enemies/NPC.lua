@@ -41,7 +41,6 @@ GOPICKUP = "pickup"
 --]]
 play_hero_seen_sound = false
 normal_speed = 32
-faster_speed = 64
 
 enemy.hasbeeninitialized = false
 
@@ -123,7 +122,7 @@ GoTowardsState = State:subclass("GoTowardsState")
 function GoTowardsState:start()
 	if self.npc.entitytoattack ~= nil then
 		local movement = sol.movement.create("target") -- "path_finding")
-		movement:set_speed(faster_speed)
+		movement:set_speed(self.npc.entitydata.stats.movementspeed)
 		movement:set_target(self.npc.entitytoattack.entity)
 		movement:start(self.npc)
 	end
@@ -167,7 +166,7 @@ PickupState = State:subclass("PickupState")
 
 function PickupState:start()
 	local movement = sol.movement.create("target")
-	movement:set_speed(faster_speed)
+	movement:set_speed(self.npc.entitydata.stats.movementspeed)
 	movement:set_target(self.npc.target)
 	movement:start(self.npc)
 end

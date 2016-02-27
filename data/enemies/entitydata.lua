@@ -26,8 +26,7 @@ end
 
 local maxhealth
 
-function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability)
-	-- use createfromclass
+function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability, stats)
 	self.entity = entity
 	self.class = class
 	self.main_sprite = main_sprite
@@ -40,6 +39,25 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	self.specialability = specialability
 	self.effects = {}
 	self.positionlisteners = {}
+
+	if stats.damage == nil then
+		stats.damage = 1
+	end
+	if stats.defense == nil then
+		stats.defense = 0.3
+	end
+	if stats.movementspeed == nil then
+		stats.movementspeed = 64
+	end
+	if stats.warmup == nil then
+		stats.warmup = 1
+	end
+	if stats.cooldown == nil then
+		stats.cooldown = 1
+	end
+
+	self.originalstats = stats
+	self.stats = stats
 
 	self:log("initialized")
 end
@@ -72,6 +90,8 @@ function EntityData:applytoentity()
 		self.entity:load_entitydata()
 	end
 
+	self:updatemovementspeed()
+
 	function self.entity:on_position_changed(x, y, layer)
 		if self.entitydata ~= nil then
 			for index, value in pairs(self.entitydata.positionlisteners) do
@@ -80,6 +100,12 @@ function EntityData:applytoentity()
 				end
 			end
 		end
+	end
+end
+
+function EntityData:updatemovementspeed()
+	if self.entity.ishero then
+		self.entity:set_walking_speed(self.stats.movementspeed)
 	end
 end
 
@@ -415,10 +441,7 @@ function EntityData:dodamage(target, damage, aspects)
 		aspects = {}
 		self:log("reset aspects")
 	end
-	if aspects.ap ~= nil then
-		self:log("armor piercing")
-		-- TODO: implement
-	end
+
 	if aspects.electric ~= nil then
 --		aspects.knockback = 0
 
@@ -441,6 +464,9 @@ function EntityData:dodamage(target, damage, aspects)
 		self:log("catch on fire", knockback)
 		fireeffect = Effects.FireEffect(target, aspects.fire)
 	end
+	if aspects.poison ~= nil then
+		poisoneffect = Effects.PoisonWeaknessEffect(target, aspects.poison.weakness, aspects.poison.time)
+	end
 	if aspects.flame ~= nil then
 		self:log("fire damage")
 		aspects.knockback = 0
@@ -450,6 +476,12 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 
 	-- do damage
+	damage = damage * self.stats.damage
+	if aspects.ap == nil then
+		negateddamage = damage * target.stats.defense
+		damage = damage - negateddamage
+	end
+
 	target.life = target.life - damage
 	target:log("damaged", damage, "life", target.life)
 
@@ -680,9 +712,8 @@ function EntityData:throwclosest(mousex, mousey)
 			entity.entitydata:log(x, y)
 		end
 	end
-	print("closest", mousex, mousey, self:getclosestentity(mousex,mousey).class)
+	print("closest", mousex, mousey, selelse
 
-	return
 --]]
 	self:log("throwing to closest")
 	entity = self:getclosestentity(x, y)
@@ -698,7 +729,8 @@ end
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "fire"), ShieldAbility:new(self), GrapplingHookAbility:new(self))
+	basestats = {}
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), GrapplingHookAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()
@@ -708,7 +740,8 @@ end
 yellowclass = EntityData:subclass("yellowclass")
 
 function yellowclass:initialize(entity)
-	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), ChargeAbility:new(self))
+	basestats = {}
+	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", SwordAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), ChargeAbility:new(self), basestats)
 end
 
 function yellowclass:getlogcolor()
@@ -718,7 +751,8 @@ end
 greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
-	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self))
+	basestats = {}
+	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
 end
 
 function greenclass:getlogcolor()

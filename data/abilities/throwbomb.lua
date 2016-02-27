@@ -6,7 +6,7 @@ BombAbility = Ability:subclass("BombAbility")
 RANGE = 400
 
 function BombAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "bomb", RANGE, 500, 10000, true)
+	Ability.initialize(self, entitydata, "bomb", RANGE, 500, 4000, true)
 end
 
 function BombAbility:doability(tox, toy)

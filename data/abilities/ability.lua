@@ -16,18 +16,16 @@ function Ability:start(...)
 	end
 	self.canuse = false
 	self.args = {...}
-	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup, function() self:finishwarmup() end)
+	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 --	self:doability(...)
 end
 
 function Ability:finishwarmup()
-	print("WARMUP DONE", self.name)
 	self.usingability = true
 	self:doability(unpack(self.args))
 end
 
 function Ability:finishability()
-	print("ABILITY DONE", self.name)
 	self.entitydata:log("ability finish")
 	self.entitydata.usingability = nil
 	if self.dofreeze then
@@ -36,11 +34,10 @@ function Ability:finishability()
 --		self.entitydata:unfreeze(self.name, false)
 	end
 	self.usingability = false
-	self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown, function() self:finishcooldown() end)
+	self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 end
 
 function Ability:finishcooldown()
-	print("COOLDOWN DONE", self.name)
 	self.canuse = true
 end
 
@@ -55,7 +52,6 @@ end
 function Ability:cancel()
 	if self.usingability then
 		self.entitydata:log("Ability canceled:", self.name)
-		print(debug.traceback())
 		self:oncancel()
 		self:finishability()
 	end

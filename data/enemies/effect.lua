@@ -102,11 +102,11 @@ PhysicalEffect = Effect:subclass("PhysicalEffect")
 
 function PhysicalEffect:start(time)
 	w,h = self.entitydata.entity:get_size()
-	
+
 	paentity = map:create_custom_entity({model="physicaleffect", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	paentity:start(self, self:getspritename())
 	self.paentity = paentity
-	
+
 	if time ~= nil then
 		self:removeeffectafter(time)
 	end
@@ -130,9 +130,9 @@ function FireEffect:start(aspect)
 	time = aspect.time
 	self.firedamage = aspect.damage
 	timestep = aspect.timestep
-	
+
 	self:starttick(timestep)
-	
+
 	PhysicalEffect.start(self, time)
 end
 
@@ -152,6 +152,16 @@ end
 
 function ElectricalEffect:getkey()
 	return "ElectricalEffect"
+end
+
+PoisonEffect = PhysicalEffect:subclass("PoisonEffect")
+
+function PoisonEffect:getspritename()
+	return "poison"
+end
+
+function PoisonEffect:getkey()
+	return "PoisonEffect"
 end
 
 FreezeEffect = Effect:subclass("FreezeEffect")
@@ -251,20 +261,20 @@ KnockBackEffect = FreezeEffect:subclass("KnockBackEffect")
 function KnockBackEffect:start(fromentitydata, knockbackdist)
 	self.entitydata:log("starting knockback")
 	FreezeEffect.start(self)
-	
+
 	self:doknockback(fromentitydata, knockbackdist)
 end
 
 function KnockBackEffect:alreadyexists(currenteffect, fromentitydata, knockbackdist)
 	FreezeEffect.alreadyexists(self, currenteffect)
-	
+
 	self:doknockback(fromentitydata, knockbackdist)
 end
 --]]
 
 function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist)
 	self:removeeffectafter(500)
-	
+
 	local x, y = self.entitydata.entity:get_position()
 	local angle = self.entitydata.entity:get_angle(fromentity) + math.pi
 	local movement = sol.movement.create("straight")
@@ -295,4 +305,28 @@ function KnockBackEffect:endtimer()
 	end
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker}
+StatEffect = Effect:subclass("StatEffect")
+function StatEffect:start(stat, newvalue, time)
+	self.stat = stat
+	self.entitydata.stats[self.stat] = newvalue
+	self:removeeffectafter(time)
+end
+function StatEffect:endeffect()
+	self.entitydata.stats[self.stat] = self.entityadat.originalstats[self.stat]
+end
+function StatEffect:getkey()
+	return self
+end
+
+PoisonWeaknessEffect = StatEffect:subclass("PoisonWeaknessEffect")
+
+function PoisonWeaknessEffect:start(weakness, time)
+	StatEffect.start(self, "damage", weakness, time)
+	self.poisoneffect = PoisonEffect:new(self.entitydata)
+end
+function PoisonWeaknessEffect:remove(...)
+	self.poisoneffect:remove(...)
+	StatEffect.remove(self, ...)
+end
+
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect}
