@@ -40,7 +40,6 @@ end
 function Ability:finishcooldown()
 	self.canuse = true
 end
-
 function Ability:dodamage(entitydata, damage, aspects)
 	self.entitydata:dodamage(entitydata, damage, aspects)
 end
@@ -72,6 +71,21 @@ function Ability:tick(...)
 end
 function Ability:blockdamage(fromentity, damage, aspects)
 	return damage, aspects
+end
+
+function Ability:AOE(distance, damage, aspects, fromentity)
+	if fromentity == nil then
+		fromentity = self.entitydata.entity
+	else
+		aspects.fromentity = fromentity
+	end
+
+	for entitydata in self.entitydata:getotherentities() do
+		d = fromentity:get_distance(entitydata.entity)
+		if d < distance then
+			self:dodamage(entitydata, damage, aspects)
+		end
+	end
 end
 
 return Ability

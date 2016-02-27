@@ -9,6 +9,7 @@ ChargeAbility = require "abilities/charge"
 ShieldBashAbility = require "abilities/shieldbash"
 BombThrowAbility = require "abilities/throwbomb"
 GrapplingHookAbility = require "abilities/grapplinghook"
+LightningAbility = require "abilities/lightning"
 
 Effects = require "enemies/effect"
 
@@ -730,7 +731,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), GrapplingHookAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "hero/tunic3", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), LightningAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()
