@@ -102,7 +102,7 @@ function ChargeAbility:attack(entitydata)
 
 	self:finish()
 
-	self.entitydata:startability("sword")
+	self.entitydata:startability("normal")
 end
 
 return ChargeAbility
