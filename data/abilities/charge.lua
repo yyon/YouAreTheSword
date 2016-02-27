@@ -17,23 +17,23 @@ function ChargeAbility:doability(tox, toy)
 	x,y,layer = entity:get_position()
 	w,h = entity:get_size()
 	entitydata = self.entitydata
-	
+
 	self.collided = {}
-	
+
 	d = entitydata:getdirection()
-	
+
 	self.swordentity = map:create_custom_entity({model="charge", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.swordentity.ability = self
-	
+
 	self.entitydata:setanimation("sword_loading_stopped")
-	
+
 	self.swordentity:start(SwordAbility:get_appearance(self.entitydata.entity))
-	
+
 	dist = self.entitydata.entity:get_distance(tox, toy)
 	if dist > RANGE then
 		dist = RANGE
 	end
-	
+
 	local x, y = self.entitydata.entity:get_position()
 	local angle = self.entitydata.entity:get_angle(tox, toy)-- + math.pi
 	local movement = sol.movement.create("straight")
@@ -52,7 +52,7 @@ function ChargeAbility:doability(tox, toy)
 	function movement.on_finished(movement)
 		ca:finish()
 	end
-	
+
 	self.entitydata.positionlisteners[self] = function(x, y, layer) self:updatepos(x, y, layer) end
 end
 
@@ -62,9 +62,9 @@ end
 
 function ChargeAbility:finish()
 	self.entitydata:setanimation("walking")
-	
+
 	self.entitydata.positionlisteners[self] = nil
-	
+
 	self.entitydata.entity:stop_movement()
 	self.swordentity:remove()
 	self.swordentity = nil
@@ -79,14 +79,15 @@ end
 function ChargeAbility:updatepos(x, y, layer)
 	entity = self.entitydata.entity
 	map = entity:get_map()
-	
-	for entity2 in map:get_entities("") do
+
+	for entitydata2 in self.entitydata:getotherentities() do
+		entity2 = entitydata2.entity
 		if self.entitydata.entity:overlaps(entity2) then
-			if self.entitydata:cantargetentity(entity2) then
+			if self.entitydata:cantarget(entitydata2) then
 				if self.collided[entity2] == nil then
 					self.collided[entity2] = true
-				
-					self:attack(entity2.entitydata)
+
+					self:attack(entitydata2)
 				end
 			end
 		end
@@ -96,11 +97,11 @@ end
 function ChargeAbility:attack(entitydata)
 	damage = 2
 	aspects = {stun=500, knockback=0}
-	
+
 	self:dodamage(entitydata, damage, aspects)
-	
+
 	self:finish()
-	
+
 	self.entitydata:startability("sword")
 end
 
