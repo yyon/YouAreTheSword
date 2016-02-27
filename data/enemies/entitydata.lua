@@ -114,10 +114,6 @@ end
 function EntityData:bepossessedbyhero()
 	-- control this entitydata
 
-	if self.usingability ~= nil then
-		self.usingability:cancel()
-	end
-
 	hero:unfreeze()
 	hero.isdropped = false
 	hero.isthrown = false
@@ -544,6 +540,11 @@ end
 
 function EntityData:kill()
 	-- adventurer/monster is killed
+	game = self.entity:get_game()
+	if game.nodeaths then
+		return
+	end
+
 	if self.entity.ishero then
 		-- drop sword
 		self:drop()

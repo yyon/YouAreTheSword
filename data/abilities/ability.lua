@@ -28,6 +28,9 @@ end
 function Ability:finishability()
 	self.entitydata:log("ability finish")
 	self.entitydata.usingability = nil
+	if self.warmuptimer ~= nil then
+		self.warmuptimer:stop()
+	end
 	if self.dofreeze then
 		self.entitydata:log("unfreeze", self.name)
 		self.freezeeffect:remove()
@@ -55,6 +58,7 @@ function Ability:cancel()
 		self.entitydata:log("Ability canceled:", self.name)
 		self:oncancel()
 		self:finishability()
+		self.cooldowntimer:remove()
 	end
 end
 function Ability:finish()

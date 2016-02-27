@@ -65,7 +65,7 @@ function entity:getspeed()
 end
 
 function entity:getmaxdist()
-  return 300
+  return 600
 end
 
 function entity:onposchanged()

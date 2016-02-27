@@ -90,6 +90,8 @@ function sol.main:on_key_pressed(key, modifiers)
 --			hero.entitydata:throwrandom()
 		elseif key == "p" then
 			game.dontattack = true
+		elseif key == "i" then
+			game.nodeaths = true
 		elseif key == "k" then
 			hero.entitydata:kill()
 		elseif key == "s" then
