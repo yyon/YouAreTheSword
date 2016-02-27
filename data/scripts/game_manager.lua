@@ -13,7 +13,7 @@ function game_manager:start_game()
 	game = sol.game.load("save1.dat")
 	if not exists then
 		-- Initialize a new savegame.
-		game:set_max_life(1)
+		game:set_max_life(12)
 		game:set_life(game:get_max_life())
 --		game:set_ability("lift", 2)
 --		game:set_ability("sword", 1)--"sprites/hero/sword1")
@@ -32,6 +32,7 @@ function game_manager:start_game()
 	sol.video.set_mode("hq2x") -- for some reason this has to be set for the mouse position to work
 	
 	game:set_pause_allowed(true)
+	local hud = hud_manager:create(game)
 	
 	hero = game:get_hero()
 	if hero.entitydata == nil then

@@ -24,12 +24,15 @@ function EntityData:log(...)
 	io.write(colend)
 end
 
+local maxhealth
+
 function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability)
 	-- use createfromclass
 	self.entity = entity
 	self.class = class
 	self.main_sprite = main_sprite
 	self.life = life
+	self.maxlife = self.life
 	self.team = team
 	self.swordability = swordability
 	self.transformability = transformability
@@ -39,6 +42,10 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	self.positionlisteners = {}
 	
 	self:log("initialized")
+end
+
+function EntityData:get_max_health() 
+	return self.maxhealth
 end
 
 --[[

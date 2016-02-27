@@ -13,6 +13,10 @@ function hud_manager:create(game)
 
 	local health_builder = require("scripts/hud/health")
 
+	local menu = health_builder:new(game)
+  	menu:set_dst_position(580, 10)
+  	hud.elements[#hud.elements + 1] = menu
+
 	function hud:quit()
 		if hud:is_enabled() then
 			hud:set_enabled(false)
