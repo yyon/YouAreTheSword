@@ -15,26 +15,26 @@ function ShieldBashAbility:doability()
 	w,h = entity:get_size()
 	entitydata = self.entitydata
 	self.collided = {}
-	
+
 	print(layer)
-	
+
 	d = entitydata:getdirection()
-	
+
 	self.shieldentity = map:create_custom_entity({model="shieldbash", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.shieldentity.ability = self
-	
+
 	self.entitydata:setanimation("walking_with_shield")
-	
+
 	self.shieldentity:start("hero/shield3")
-	
+
 	Effects.SimpleTimer:new(self.entitydata, 400, function() self:finish() end)
-	
+
 	self:attackall()
 end
 function ShieldBashAbility:finish()
 	if self.shieldentity ~= nil then
 		self.entitydata:setanimation("walking")
-	
+
 		self.shieldentity:remove()
 		self.shieldentity = nil
 		self.entitydata:log("sword finish 2")
@@ -48,22 +48,22 @@ function ShieldBashAbility:blockdamage(fromentity, damage, aspects)
 		aspects.reversecancel = 500
 		return 0, aspects
 	end
-	
+
 	return damage, aspects
 end
 function ShieldBashAbility:attackall()
 	entity = self.entitydata.entity
 	map = entity:get_map()
-	
-	for entity2 in map:get_entities("") do
-		dist = entity:get_distance(entity2)
+
+	for entity2 in self.entitydata:getotherentities() do
+		dist = entity:get_distance(entity2.entity)
 		if dist <= self.range then
-			if entity:get_direction4_to(entity2) == self.entitydata:getdirection() then
-				if self.entitydata:cantargetentity(entity2) then
+			if entity:get_direction4_to(entity2.entity) == self.entitydata:getdirection() then
+				if self.entitydata:cantarget(entity2) then
 					if self.collided[entity2] == nil then
 						self.collided[entity2] = true
-				
-						self:attack(entity2.entitydata)
+
+						self:attack(entity2)
 					end
 				end
 			end
@@ -73,7 +73,7 @@ end
 function ShieldBashAbility:attack(entitydata)
 	damage = 1
 	aspects = {knockback=300}
-	
+
 	self:dodamage(entitydata, damage, aspects)
 end
 

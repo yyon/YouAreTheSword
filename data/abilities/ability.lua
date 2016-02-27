@@ -5,6 +5,7 @@ Effects = require "enemies/effect"
 
 function Ability:initialize(...)
 	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze = ...
+	self.canuse = true
 end
 
 function Ability:start(...)
@@ -13,6 +14,8 @@ function Ability:start(...)
 --		self.entitydata:freeze(self.name, 1, function() self:cancel() end)
 		self.freezeeffect = Effects.FreezeEffect(self.entitydata)
 	end
+	self.canuse = false
+
 	self:doability(...)
 end
 
@@ -24,6 +27,7 @@ function Ability:finishability()
 		self.freezeeffect:remove()
 --		self.entitydata:unfreeze(self.name, false)
 	end
+	self.canuse = true
 end
 
 function Ability:dodamage(entitydata, damage, aspects)

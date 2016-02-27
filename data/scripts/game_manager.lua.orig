@@ -32,8 +32,12 @@ function game_manager:start_game()
 	sol.video.set_mode("hq2x") -- for some reason this has to be set for the mouse position to work
 
 	game:set_pause_allowed(true)
+<<<<<<< HEAD
 	local hud = hud_manager:create(game)
+	
+=======
 
+>>>>>>> getotherentities
 	hero = game:get_hero()
 	if hero.entitydata == nil then
 		hero.ishero = true

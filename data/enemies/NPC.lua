@@ -130,8 +130,11 @@ function GoTowardsState:start()
 end
 
 function GoTowardsState:tick()
+	if self.npc.entitydata.entity:get_game().dontattack then
+		return
+	end
 	target = self.npc.entitytoattack
-	
+
 	attackability = math.random(2) == 1 and "special" or "normal"
 	if not self.npc.entitydata:canuseability("special") then
 		attackability = "normal"
@@ -139,7 +142,7 @@ function GoTowardsState:tick()
 	if not self.npc.entitydata:canuseability("normal") then
 		attackability = "special"
 	end
-		
+
 	x, y = target.entity:get_position()
 	if target ~= nil then
 		if self.npc.entitydata:withinrange(attackability, target) then
@@ -182,22 +185,22 @@ end
 
 function enemy:on_created()
 	-- initialize
-	
+
 	self:set_life(9999) -- life is now managed by entitydata not by solarus
 	self:set_damage(0)
 	self:set_hurt_style("normal")
 	self.direction = 0
 	self:set_invincible()
-	
+
 	self.ishero = false
-	
+
 	self.is_swinging_sword = false
 	self.state = nil
 	self.hitbyentity = nil
-	
+
 	self:set_size(16, 16)
 	self:set_origin(8, 13)
-	
+
 	self.nilstate = NilState:new(self)
 	self.randomstate = RandomState:new(self)
 	self.gotowardsstate = GoTowardsState:new(self)
@@ -222,23 +225,22 @@ end
 
 function enemy:targetenemy()
 	entitieslist = {}
-	
-	local hero = self:get_map():get_entity("hero")
-	if self:cantargetentity(hero) then
-		entitieslist[#entitieslist+1] = hero.entitydata
-	end
-	
+
+--	local hero = self:get_map():get_entity("hero")
+--	if self:cantargetentity(hero) then
+--		entitieslist[#entitieslist+1] = hero.entitydata
+--	end
+
 	if hero.isdropped then
 		return hero
 	end
-	
-	map = self:get_map()
-	for entity in map:get_entities("") do
-		if self:cantargetentity(entity) and entity ~= hero then
-			entitieslist[#entitieslist+1] = entity.entitydata
+
+	for entitydata in self.entitydata:getotherentities() do
+		if self:cantarget(entitydata) then
+			entitieslist[#entitieslist+1] = entitydata
 		end
 	end
-	
+
 	function entitieslist.contains(table, element)
 	  for _, value in pairs(table) do
 	    if value == element then
@@ -247,20 +249,18 @@ function enemy:targetenemy()
 	  end
 	  return false
 	end
-	
+
 	if entitieslist:contains(self.entitytoattack) then
 		return self.entitytoattack
 	end
-	
+
 	return entitieslist[math.random(#entitieslist)]
 end
 
-function enemy:cantargetentity(entity)
-	if entity.entitydata == nil then return false end
-	if entity.entitydata.team == self.entitydata.team then return false end
-	if not entity.entitydata:isvisible() then return false end
-	if self:get_distance(entity) > 200 then return false end
-	
+function enemy:cantarget(entitydata)
+	if not self.entitydata:cantarget(entitydata) then return false end
+	if self:get_distance(entitydata.entity) > 200 then return false end
+
 	return true
 end
 
@@ -269,19 +269,19 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	if currentstate == self.pushedstate then
 		return currentstate
 	end
-	
+
 	if currentstate == self.frozenstate then
 		return currentstate
 	end
-	
+
 	if entitytoattack == nil then
 		return self.randomstate
 	end
-	
+
 	if entitytoattack.isdropped then
 		return self.pickupstate
 	end
-	
+
 	return self.gotowardsstate
 end
 
@@ -296,14 +296,14 @@ end
 
 function enemy:tick(newstate)
 	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
-	
+
 	self.hasbeeninitialized = true
-	
+
 	prevstate = self.state
 	if prevstate == nil then prevstate = self.nilstate end
 --	preventitytoattack = self.entitytoattack
 	prevstate:prevvar()
-	
+
 	self.entitytoattack = self:targetenemy()
 	if (self.entitytoattack ~= nil) then
 		if self.entitytoattack.isdropped then
@@ -316,16 +316,16 @@ function enemy:tick(newstate)
 		target = nil
 	end
 	self.target = target
-	
+
 	if (newstate == nil) then
 		self.state = self:determinenewstate(target, self.state)
 	else
 		self.state = newstate
 	end
 	if self.state == nil then self.state = self.NilState end
-	
+
 	changedstates = (prevstate ~= self.state or self.state:requiresupdate())
-	
+
 	if changedstates then
 		prevstate:cleanup()
 		self.entitydata:log("changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
@@ -341,7 +341,7 @@ function enemy:tick(newstate)
 --			self:dont_attack(target)
 --		end
 	end
-	
+
 --	if self.state == ATTACK then
 --		self:go_attack(changedstates, target)
 	if self.state == GOHERO then
@@ -354,9 +354,9 @@ function enemy:tick(newstate)
 		self:go_pickup(changedstates, target)
 	end
 --]]
-	
+
 	end
-	
+
 	if self:exists() then
 		sol.timer.start(self, 100, function() self:tick() end)
 	end
@@ -432,7 +432,7 @@ function enemy:go_hero(changedstates)
 			movement:start(self)
 		end
 	end
-	
+
 	if self.entitytoattack ~= nil then
 		if self.entitydata:withinrange("sword", self.entitytoattack) then
 			self.entitydata:startability("sword")
@@ -447,7 +447,7 @@ function enemy:go_pickup(changedstates, target)
 		movement:set_target(target)
 		movement:start(self)
 	end
-	
+
 	if self:get_distance(target) < 20 then
 		self.entitydata:log("POSSESS")
 		self.entitydata:bepossessedbyhero()
@@ -477,7 +477,7 @@ function enemy:swingsword(hero)
 	self.main_sprite:set_animation("sword")
 	self.sword_sprite:synchronize(self.main_sprite)
 	sol.timer.start(self, 100, function() self:actually_attack(hero) end)
-	
+
 	function self.main_sprite.on_animation_finished (sprite, animation)
 		self.is_swinging_sword = false
 		self:tick()
@@ -493,7 +493,7 @@ function enemy:reset_everything()
 	self.main_sprite:set_animation("walking")
 --	self.sword_sprite:synchronize(nil)
 	self.main_sprite:set_paused(false)
-	
+
 	if self:get_movement() ~= nil then
 		self:get_movement():stop()
 	end
