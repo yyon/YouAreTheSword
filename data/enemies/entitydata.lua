@@ -44,7 +44,7 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	self:log("initialized")
 end
 
-function EntityData:get_max_health() 
+function EntityData:get_max_health()
 	return self.maxhealth
 end
 
@@ -395,7 +395,7 @@ function EntityData:dodamage(target, damage, aspects)
 		return
 	end
 
-	if target.usingability ~= nil then
+	if target.usingability ~= nil and not aspects.dontblock then
 		damage, aspects = target.usingability:blockdamage(self, damage, aspects)
 	end
 
@@ -404,7 +404,7 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 	--reverse cancel
 	if aspects.reversecancel ~= nil then
-		target:dodamage(self, 0, {knockback=0, stun=aspects.reversecancel})
+		target:dodamage(self, 0, {knockback=0, stun=aspects.reversecancel, dontblock=true})
 		return
 	end
 
