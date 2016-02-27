@@ -6,7 +6,7 @@ LightningAbility = Ability:subclass("LightningAbility")
 RANGE = 10000
 
 function LightningAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "LightningAbility", RANGE, 500, 0, true)
+	Ability.initialize(self, entitydata, "LightningAbility", RANGE, 500, 10000, true)
 end
 
 function LightningAbility:doability(tox, toy)
