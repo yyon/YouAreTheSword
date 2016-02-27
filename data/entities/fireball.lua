@@ -9,6 +9,7 @@ sol.main.load_file("entities/projectile")(entity)
 function entity:getdamage()
   aspects = {}
   aspects.fire = {damage=0.1, time=5000, timestep=500}
+  aspects.knockback = 100
   damage = 1
   return damage, aspects
 end

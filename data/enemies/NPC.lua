@@ -125,6 +125,7 @@ function GoTowardsState:start()
 		movement:set_speed(self.npc.entitydata.stats.movementspeed)
 		movement:set_target(self.npc.entitytoattack.entity)
 		movement:start(self.npc)
+		self.movement = movement
 	end
 end
 
@@ -144,6 +145,17 @@ function GoTowardsState:tick()
 
 	x, y = target.entity:get_position()
 	if target ~= nil then
+		if self.npc.entitydata.entity:get_distance(target.entity) < 20 then
+			if self.movement ~= nil then
+				self.movement:stop()
+				self.movement = nil
+			end
+		else
+			if self.movement == nil then
+				self:start()
+			end
+		end
+
 		if self.npc.entitydata:withinrange(attackability, target) then
 			targetability = target.usingability
 			if targetability ~= nil and targetability.abilitytype ~= "block" then
@@ -151,7 +163,6 @@ function GoTowardsState:tick()
 				ability = self.npc.entitydata:startability("block")
 			else
 				-- attack if close enough
-				self.npc.entitydata:log("Special aiming at:", x, y, target.team)
 				self.npc.entitydata:startability(attackability, x, y)
 			end
 		end
@@ -191,6 +202,7 @@ function enemy:on_created()
 	self:set_hurt_style("normal")
 	self.direction = 0
 	self:set_invincible()
+	self:set_optimization_distance(0)
 
 	self.ishero = false
 

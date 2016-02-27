@@ -1,15 +1,16 @@
 local entity = ...
 
 function entity:on_created()
+	self:set_optimization_distance(0)
 end
 
 function entity:start(appearance)
 	self.shield_sprite = self:create_sprite(appearance)
 	self.shield_sprite:set_paused(false)
 	self.shield_sprite:set_animation("walking")
-	
+
 	self:updatedirection()
-	
+
 	self.ability.entitydata:log("shield created")
 end
 
@@ -23,6 +24,6 @@ function entity:updatedirection()
 		x,y,layer = self:get_position()
 		self:set_position(x,y,2)
 	end
-	
+
 	self.shield_sprite:set_direction(self:get_direction())
 end

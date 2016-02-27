@@ -429,7 +429,7 @@ function EntityData:dodamage(target, damage, aspects)
 
 	-- aspects
 	if aspects.knockback == nil then
-		aspects.knockback = 128--26
+		aspects.knockback = 500
 	end
 	if aspects.fromentity == nil then
 		aspects.fromentity = self.entity

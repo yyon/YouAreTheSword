@@ -58,7 +58,7 @@ function Ability:cancel()
 		self.entitydata:log("Ability canceled:", self.name)
 		self:oncancel()
 		self:finishability()
-		self.cooldowntimer:remove()
+--		self.cooldowntimer:remove()
 	end
 end
 function Ability:finish()

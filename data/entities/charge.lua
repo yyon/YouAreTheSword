@@ -1,16 +1,17 @@
 local entity = ...
 
 function entity:on_created()
+	self:set_optimization_distance(0)
 end
 
 function entity:start(appearance)
 	self.sword_sprite = self:create_sprite(appearance)
 	self.sword_sprite:set_paused(false)
-	
+
 	self.sword_sprite:set_animation("sword_loading_stopped")
-	
+
 	self.sword_sprite:set_direction(self:get_direction())
-	
+
 	self.ability.entitydata:log("charge sword created")
 end
 

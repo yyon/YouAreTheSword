@@ -1,6 +1,7 @@
 local entity = ...
 
 function entity:on_created()
+  self:set_optimization_distance(0)
 end
 
 function entity:start(fireball, angle)
@@ -22,4 +23,6 @@ function entity:start(fireball, angle)
 	function movement.on_finished(movement)
 		self:remove()
 	end
+
+  self:set_enabled()
 end
