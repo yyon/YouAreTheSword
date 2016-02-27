@@ -243,10 +243,12 @@ function EntityData:startability(ability, ...)
 	-- call this to use an ability
 	if self.usingability == nil then
 		actualability = self:getability(ability)
-		actualability.abilitytype = ability
-		self:log("ABILITY", ability, actualability)
-		actualability:start(...)
-		return actualability
+		if actualability.canuse then
+			actualability.abilitytype = ability
+			self:log("ABILITY", ability, actualability)
+			actualability:start(...)
+			return actualability
+		end
 	end
 end
 

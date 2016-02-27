@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 TransformAbility = Ability:subclass("TransformAbility")
 
 function TransformAbility:initialize(entitydata, transform)
-	Ability.initialize(self, entitydata, "transform", 0, 1000, 3000, true)
+	Ability.initialize(self, entitydata, "transform", 0, 1000, 10000, true)
 
 	self.transform = transform
 end

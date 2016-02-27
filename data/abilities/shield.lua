@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 ShieldAbility = Ability:subclass("ShieldAbility")
 
 function ShieldAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "shield", 25, 0, 0, true)
+	Ability.initialize(self, entitydata, "shield", 25, 0, 1000, true)
 end
 
 function ShieldAbility:doability(playerrelease)

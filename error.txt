@@ -1,1 +1,2 @@
 Warning: Cannot use quest size 320x240: this quest only supports 640x360 to 640x360. Using 640x360 instead.
+Error: In timer callback: [string "scripts/hud/hud.lua"]:86: attempt to index field 'item_icon_1' (a nil value)

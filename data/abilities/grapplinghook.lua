@@ -8,7 +8,7 @@ GrapplingHookAbility = Ability:subclass("GrapplingHookAbility")
 RANGE = 400
 
 function GrapplingHookAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "grappling hook", RANGE, 0, 0, true)
+	Ability.initialize(self, entitydata, "grappling hook", RANGE, 500, 10000, true)
 end
 
 function GrapplingHookAbility:doability(tox, toy)
