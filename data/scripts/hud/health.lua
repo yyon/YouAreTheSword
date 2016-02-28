@@ -46,7 +46,7 @@ function health:check()
 		
     	end
 
-	self:set_dst_position(630-9*nb_max_hearts, 10)
+	self:set_dst_position(1360-18*nb_max_hearts, 10)
     
 
   	--  max life
@@ -105,11 +105,11 @@ function health:rebuild_surface()
 
   	-- show the hearts
   	for i = 0, self.nb_max_hearts_displayed - 1 do
-    		local x, y = (i % 10) * 9, math.floor(i / 10) * 9
+    		local x, y = (i % 10) * 18, math.floor(i / 10) * 18
     		self.empty_heart_sprite:draw(self.surface, x, y)
     		if i < math.floor(self.nb_current_hearts_displayed / 4) then
      			 -- full heart
-      			self.all_hearts_img:draw_region(27, 0, 9, 9, self.surface, x, y)
+      			self.all_hearts_img:draw_region(54, 0, 18, 18, self.surface, x, y)
     		end
   	end
 
@@ -117,8 +117,8 @@ function health:rebuild_surface()
   	local i = math.floor(self.nb_current_hearts_displayed / 4)
   	local remaining_fraction = self.nb_current_hearts_displayed % 4
   	if remaining_fraction ~= 0 then
-   		local x, y = (i % 10) * 9, math.floor(i / 10) * 9
-    		self.all_hearts_img:draw_region((remaining_fraction - 1) * 9, 0, 9, 9, self.surface, x, y)
+   		local x, y = (i % 10) * 18, math.floor(i / 10) * 18
+    		self.all_hearts_img:draw_region((remaining_fraction - 1) * 18, 0, 18, 18, self.surface, x, y)
   	end
 end
 
