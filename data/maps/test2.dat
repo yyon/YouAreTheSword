@@ -15,11 +15,21 @@ tile{
   pattern = "1",
 }
 
+tile{
+  layer = 0,
+  x = 56,
+  y = 40,
+  width = 32,
+  height = 32,
+  pattern = "3",
+}
+
 destination{
   layer = 0,
   x = 168,
   y = 237,
   direction = 1,
+  default = true,
 }
 
 enemy{
@@ -36,5 +46,15 @@ enemy{
   y = 613,
   direction = 0,
   breed = "green_test",
+}
+
+teletransporter{
+  layer = 0,
+  x = 56,
+  y = 40,
+  width = 32,
+  height = 32,
+  destination_map = "test2",
+  destination = "_side",
 }
 

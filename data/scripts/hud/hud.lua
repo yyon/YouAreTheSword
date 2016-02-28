@@ -88,11 +88,11 @@ function hud_manager:create(game)
 
       			if opacity ~= nil then
         				hud.top_left_opacity = opacity
-        				hud.item_icon_1.surface:set_opacity(opacity)
-        				hud.item_icon_2.surface:set_opacity(opacity)
-        				hud.pause_icon.surface:set_opacity(opacity)
-        				hud.attack_icon.surface:set_opacity(opacity)
-        				hud.action_icon.surface:set_opacity(opacity)
+--        				hud.item_icon_1.surface:set_opacity(opacity)
+--        				hud.item_icon_2.surface:set_opacity(opacity)
+--        				hud.pause_icon.surface:set_opacity(opacity)
+--        				hud.attack_icon.surface:set_opacity(opacity)
+--        				hud.action_icon.surface:set_opacity(opacity)
       			end
 		end
 		return true
