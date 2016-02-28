@@ -16,17 +16,17 @@ function LightningAbility:doability(tox, toy)
 	w,h = entity:get_size()
 	entitydata = self.entitydata
 
-  dist = self.entitydata.entity:get_distance(tox, toy)
-  if dist > RANGE then
-    self:finish()
-    return
-  end
+	  dist = self.entitydata.entity:get_distance(tox, toy)
+	  if dist > RANGE then
+	    self:finish()
+	    return
+	  end
 
 	self.lightningentity = map:create_custom_entity({model="lightning", x=tox, y=toy, layer=layer, direction=0, width=w, height=h})
 	self.lightningentity.ability = self
 	self.lightningentity:start(tox, toy)
 
-  self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
+	  self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
 
 	self:finish()
 end
