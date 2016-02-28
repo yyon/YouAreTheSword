@@ -114,6 +114,8 @@ end
 function EntityData:bepossessedbyhero()
 	-- control this entitydata
 
+	local hero = self.entity:get_game():get_hero()
+
 	hero:unfreeze()
 	hero.isdropped = false
 	hero.isthrown = false
@@ -146,7 +148,8 @@ function EntityData:unpossess()
 
 	self.entity.is_possessing = false
 
-	hero = map:get_hero()
+	local hero = self.entity:get_game():get_hero()
+
 	hero.entitydata = nil
 
 	map = self.entity:get_map()
@@ -240,7 +243,7 @@ function EntityData:getotherentities()
 				end
 				if newentity.entitydata ~= nil then
 					newentitydata = newentity.entitydata
-					if newentitydata ~= self and newentitydata ~= hero.entitydata then
+					if newentitydata ~= self and newentitydata ~= heroentity.entitydata then
 						return newentitydata
 					end
 				end
@@ -745,7 +748,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), LightningAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), ChargeAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()
@@ -756,7 +759,7 @@ yellowclass = EntityData:subclass("yellowclass")
 
 function yellowclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", FireballAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), ChargeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "yellow", "adventurers/guy2", 10, "yellow", FireballAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), BombThrowAbility:new(self), basestats)
 end
 
 function yellowclass:getlogcolor()
@@ -767,7 +770,7 @@ greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "green", "adventurers/guy3", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
 end
 
 function greenclass:getlogcolor()

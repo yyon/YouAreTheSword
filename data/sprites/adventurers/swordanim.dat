@@ -1,8 +1,0 @@
-animation{
-  name = "sword",
-  src_image = "adventurers/swordanim.png",
-  frame_delay = 60,
-  directions = {
-    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 31, origin_y = 42, num_frames = 6 },
-  },
-}

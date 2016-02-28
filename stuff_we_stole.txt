@@ -1,0 +1,4 @@
+http://opengameart.org/content/lpc-medieval-fantasy-character-sprites 
+	knight, shield
+http://opengameart.org/content/lpc-items-and-game-effects
+	sword

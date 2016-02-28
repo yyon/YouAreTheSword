@@ -2,20 +2,25 @@ local class = require "middleclass"
 
 Effect = class("Effect")
 
-function Effect:initialize(entitydata, ...)
-	self.entitydata = entitydata
+function Effect:initialize(affected, ...)
+	if affected.isgame then
+		self.game = affected
+	else
+		self.entitydata = affected
+	end
+	self.affected = affected
 	if self:get() ~= nil then
 		self:alreadyexists(self:get(), ...)
 	else
-		self.entitydata.effects[self:getkey()] = self
+		self.affected.effects[self:getkey()] = self
 		self.active = true
-		self.entitydata:log("starting effect", self)
+--		self.entitydata:log("starting effect", self)
 		self:start(...)
 	end
 end
 
 function Effect:alreadyexists(currenteffect)
-	self.entitydata:log("WARNING! tried to add a new effect when one already exists", self:getkey())
+	print("WARNING! tried to add a new effect when one already exists", self:getkey())
 end
 
 function Effect:start()
@@ -23,11 +28,11 @@ end
 
 function Effect:remove()
 	if not self.active then
-		self.entitydata:log("timer tried to remove", self, "but already removed!")
+--		self.entitydata:log("timer tried to remove", self, "but already removed!")
 	else
 		self:endeffect()
-		self.entitydata:log("ending effect", self)
-		self.entitydata.effects[self:getkey()] = nil
+--		self.entitydata:log("ending effect", self)
+		self.affected.effects[self:getkey()] = nil
 		self.active = false
 	end
 end
@@ -39,12 +44,20 @@ end
 function Effect:endeffect()
 end
 
+function Effect:getgame()
+	if self.game ~= nil then
+		return self.game
+	else
+		return self.entitydata.entity:get_game()
+	end
+end
+
 function Effect:removeeffectafter(time)
 	print("going to remove", self, time)
 --	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 --	else
-	sol.timer.start(self.entitydata.entity:get_game():get_hero(), time, function() self:endtimer() end)
+	sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
 --	end
 end
 
@@ -54,18 +67,18 @@ end
 
 function Effect:starttick(timestep)
 	self.timestep = timestep
-	sol.timer.start(self.entitydata.entity:get_game():get_hero(), self.timestep, function() self:dotick() end) -- starting tick immediately causes strange bugs
+	sol.timer.start(self:getgame():get_hero(), self.timestep, function() self:dotick() end) -- starting tick immediately causes strange bugs
 end
 
 function Effect:dotick()
 	if not self.active then return end
 	self:tick()
-	sol.timer.start(self.entitydata.entity:get_game():get_hero(), self.timestep, function() self:dotick() end)
+	sol.timer.start(self:getgame():get_hero(), self.timestep, function() self:dotick() end)
 end
 
-function Effect:get(entitydata)
-	if entitydata == nil then entitydata = self.entitydata end
-	return entitydata.effects[self:getkey()]
+function Effect:get(affected)
+	if affected == nil then affected = self.affected end
+	return affected.effects[self:getkey()]
 end
 
 SimpleTimer = Effect:subclass("SimpleTimer")
