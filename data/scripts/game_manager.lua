@@ -30,6 +30,7 @@ function game_manager:start_game()
 	width, height = sol.video.get_quest_size()
 	sol.video.set_window_size(width*2, height*2)
 	sol.video.set_mode("hq2x") -- for some reason this has to be set for the mouse position to work
+--	sol.video.set_window_size(width, height)
 
 	game:set_pause_allowed(true)
 	local hud = hud_manager:create(game)
