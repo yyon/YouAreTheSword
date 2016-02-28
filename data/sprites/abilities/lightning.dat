@@ -3,6 +3,6 @@ animation{
   src_image = "abilities/lightning.png",
   frame_delay = 100,
   directions = {
-    { x = 0, y = 0, frame_width = 200, frame_height = 200, origin_x = 100, origin_y = 200, num_frames = 4 },
+    { x =0, y =0, frame_width =400, frame_height =400, origin_x =200, origin_y =400, num_frames = 4 },
   },
 }

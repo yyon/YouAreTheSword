@@ -5,7 +5,7 @@ SwordAbility = require "abilities/sword"
 
 ChargeAbility = Ability:subclass("ChangeAbility")
 
-local RANGE = 200
+local RANGE = 800
 
 function ChargeAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "charge", RANGE, 500, 2000, true)
@@ -37,7 +37,7 @@ function ChargeAbility:doability(tox, toy)
 	local x, y = self.entitydata.entity:get_position()
 	local angle = self.entitydata.entity:get_angle(tox, toy)-- + math.pi
 	local movement = sol.movement.create("straight")
-	movement:set_speed(300)
+	movement:set_speed(600)
 	movement:set_angle(angle)
 	movement:set_max_distance(dist)
 	movement:set_smooth(true)

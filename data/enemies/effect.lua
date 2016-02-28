@@ -7,12 +7,19 @@ function Effect:initialize(affected, ...)
 		self.game = affected
 	else
 		self.entitydata = affected
+		self.map = self.entitydata.entity:get_map()
 	end
 	self.affected = affected
 	if self:get() ~= nil then
 		self:alreadyexists(self:get(), ...)
 	else
 		self.affected.effects[self:getkey()] = self
+		if self.map ~= nil then
+			if self.map.effects == nil then
+				self.map.effects = {}
+			end
+			self.map.effects[self] = true
+		end
 		self.active = true
 --		self.entitydata:log("starting effect", self)
 		self:start(...)
@@ -33,6 +40,9 @@ function Effect:remove()
 		self:endeffect()
 --		self.entitydata:log("ending effect", self)
 		self.affected.effects[self:getkey()] = nil
+		if self.map ~= nil then
+			self.map.effects[self] = nil
+		end
 		self.active = false
 	end
 end
@@ -292,7 +302,7 @@ function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist)
 	local angle = self.entitydata.entity:get_angle(fromentity) + math.pi
 	local movement = sol.movement.create("straight")
 	self.movement = movement
-	movement:set_speed(128)
+	movement:set_speed(250)
 	movement:set_angle(angle)
 --	movement:set_max_distance(knockbackdist)
 	movement:set_smooth(true)

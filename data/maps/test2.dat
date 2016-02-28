@@ -1,0 +1,123 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 720,
+  tileset = "magecity",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 736,
+  pattern = "1",
+}
+
+tile{
+  layer = 0,
+  x = 960,
+  y = 320,
+  width = 320,
+  height = 96,
+  pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 928,
+  y = 384,
+  width = 32,
+  height = 32,
+  pattern = "148",
+}
+
+tile{
+  layer = 0,
+  x = 928,
+  y = 320,
+  width = 32,
+  height = 32,
+  pattern = "150",
+}
+
+tile{
+  layer = 0,
+  x = 928,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 896,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "132",
+}
+
+tile{
+  layer = 0,
+  x = 960,
+  y = 416,
+  width = 320,
+  height = 32,
+  pattern = "142",
+}
+
+tile{
+  layer = 0,
+  x = 960,
+  y = 288,
+  width = 320,
+  height = 32,
+  pattern = "147",
+}
+
+destination{
+  layer = 0,
+  x = 168,
+  y = 237,
+  direction = 1,
+  default = true,
+}
+
+enemy{
+  layer = 0,
+  x = 784,
+  y = 173,
+  direction = 0,
+  breed = "yellow_test",
+}
+
+enemy{
+  layer = 0,
+  x = 408,
+  y = 613,
+  direction = 0,
+  breed = "green_test",
+}
+
+teletransporter{
+  name = "tele1",
+  layer = 0,
+  x = 1248,
+  y = 320,
+  width = 32,
+  height = 96,
+  destination_map = "maptest",
+  destination = "left_entry",
+}
+
+destination{
+  name = "right",
+  layer = 0,
+  x = 1208,
+  y = 373,
+  direction = 2,
+}
+

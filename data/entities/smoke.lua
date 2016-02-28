@@ -11,9 +11,9 @@ function entity:start(fireball, angle)
   self.sprite:set_paused(false)
 
   local movement = sol.movement.create("straight")
-  movement:set_speed(50)
+  movement:set_speed(100)
   movement:set_angle(angle)
-  movement:set_max_distance(50)
+  movement:set_max_distance(100)
   movement:set_smooth(true)
   movement:start(self)
 

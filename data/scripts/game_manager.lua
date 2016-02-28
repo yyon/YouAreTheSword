@@ -17,7 +17,7 @@ function game_manager:start_game()
 		game:set_life(game:get_max_life())
 --		game:set_ability("lift", 2)
 --		game:set_ability("sword", 1)--"sprites/hero/sword1")
-		game:set_starting_location("combat_test_map")
+		game:set_starting_location("test2")
 	end
 	game:start()
 
@@ -28,9 +28,9 @@ function game_manager:start_game()
 	game:set_command_keyboard_binding("pause", "escape")
 
 	width, height = sol.video.get_quest_size()
-	sol.video.set_window_size(width*2, height*2)
-	sol.video.set_mode("hq2x") -- for some reason this has to be set for the mouse position to work
---	sol.video.set_window_size(width, height)
+--	sol.video.set_window_size(width*2, height*2)
+	sol.video.set_mode("normal") -- for some reason this has to be set for the mouse position to work
+	sol.video.set_window_size(width, height)
 
 	game:set_pause_allowed(true)
 	local hud = hud_manager:create(game)
@@ -45,9 +45,9 @@ function game_manager:start_game()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
-		hero:set_walking_speed(64)
+		hero:set_walking_speed(128)
 	end
-	
+
 	game.isgame = true
 	game.effects = {}
 
@@ -55,6 +55,8 @@ function game_manager:start_game()
 end
 
 function convert_to_map(mousex, mousey)
+	return mousex, mousey
+--[[
 	if mousex == nil then return nil, nil end
 	map = game:get_map()
 
@@ -64,6 +66,7 @@ function convert_to_map(mousex, mousey)
 	minx, miny, width, height = map:get_camera_position()
 
 	return (minx + (mousex / questwidth * width)), (miny + (mousey / questheight * height))
+	--]]
 end
 
 function sol.main:on_key_pressed(key, modifiers)
@@ -75,7 +78,7 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	mousex, mousey = sol.input.get_mouse_position()
 	x, y = convert_to_map(mousex, mousey)
-
+	
 	if x ~= nil then
 		hero:set_direction(hero:get_direction4_to(x, y))
 		hero.targetx = x
@@ -101,7 +104,7 @@ function sol.main:on_key_pressed(key, modifiers)
 		elseif key == "k" then
 			hero.entitydata:kill()
 		elseif key == "s" then
-			hero:set_walking_speed(250)
+			hero:set_walking_speed(500)
 		end
 	end
 end
@@ -158,10 +161,31 @@ end
 function tick()
 	hero = game:get_hero()
 	
-	hero.souls = hero.souls - 0.001
-	if hero.souls < 0 then hero.souls = 0 end
-
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
+		for entity in hero:get_map():get_entities("") do
+			if entity.get_destination_map ~= nil then
+				if hero:overlaps(entity) then
+					print("TELEPORT!")
+					if hero:get_map().effects ~= nil then
+						while true do
+							foundeffect = false
+							for effect, b in pairs(hero:get_map().effects) do
+								foundeffect = true
+								effect:remove()
+							end
+							if not foundeffect then
+								break
+							end
+						end
+					end
+					hero:teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
+				end
+			end
+		end
+	
+		hero.souls = hero.souls - 0.001
+		if hero.souls < 0 then hero.souls = 0 end
+
 		mousex, mousey = sol.input.get_mouse_position()
 		x, y = convert_to_map(mousex, mousey)
 

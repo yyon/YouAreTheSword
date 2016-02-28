@@ -3,7 +3,7 @@ Ability = require "abilities/ability"
 
 LightningAbility = Ability:subclass("LightningAbility")
 
-RANGE = 10000
+RANGE = 20000
 
 function LightningAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "LightningAbility", RANGE, 500, 10000, true)
@@ -26,7 +26,7 @@ function LightningAbility:doability(tox, toy)
 	self.lightningentity.ability = self
 	self.lightningentity:start(tox, toy)
 
-  self:AOE(100, 4, {electric=3000, dontblock=true}, self.lightningentity)
+  self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
 
 	self:finish()
 end
