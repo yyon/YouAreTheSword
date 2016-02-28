@@ -623,7 +623,7 @@ function EntityData:throwsword(entitydata2)
 		self:log(entitydata2.entity:get_position())
 
 		local movement = sol.movement.create("target")
-		movement:set_speed(500)
+		movement:set_speed(1000)
 		movement:set_target(entitydata2.entity)
 		movement:start(hero)
 
