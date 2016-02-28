@@ -85,6 +85,8 @@ function SwordAbility:attack(entity)
 		aspects.fire = {damage=0.1, time=5000, timestep=500}
 	elseif transform == "poison" then
 		aspects.poison = {weakness=0.1, time=5000}
+	elseif transform == "damage" then
+		damage = 3
 	end
 
 	self:dodamage(entitydata, damage, aspects)
@@ -121,6 +123,8 @@ function SwordAbility:get_appearance(entity)
 		return "swords/electric"
 	elseif transform == "poison" then
 		return "swords/poison"
+	elseif transform == "damage" then
+		return "swords/largesword"
 	end
 end
 
