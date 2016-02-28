@@ -40,7 +40,7 @@ FROZEN = "frozen"
 GOPICKUP = "pickup"
 --]]
 play_hero_seen_sound = false
-normal_speed = 32
+normal_speed = 64
 
 enemy.hasbeeninitialized = false
 

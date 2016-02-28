@@ -225,8 +225,8 @@ tile{
 
 tile{
   layer = 0,
-  x = 192,
-  y = 472,
+  x = 272,
+  y = 464,
   width = 24,
   height = 16,
   pattern = "50",
@@ -234,7 +234,7 @@ tile{
 
 tile{
   layer = 0,
-  x = 208,
+  x = 360,
   y = 456,
   width = 672,
   height = 24,
@@ -243,7 +243,7 @@ tile{
 
 tile{
   layer = 0,
-  x = 192,
+  x = 280,
   y = 456,
   width = 24,
   height = 24,
@@ -295,21 +295,12 @@ enemy{
   breed = "green_test",
 }
 
-destination{
-  name = "bottom",
-  layer = 0,
-  x = 184,
-  y = 453,
-  direction = 1,
-}
-
 teletransporter{
   layer = 0,
   x = 176,
   y = 456,
   width = 16,
   height = 16,
-  destination_map = "testmap",
-  destination = "bottomhouse",
+  destination_map = "test2",
 }
 

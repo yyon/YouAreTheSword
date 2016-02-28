@@ -17,7 +17,7 @@ function game_manager:start_game()
 		game:set_life(game:get_max_life())
 --		game:set_ability("lift", 2)
 --		game:set_ability("sword", 1)--"sprites/hero/sword1")
-		game:set_starting_location("combat_test_map")
+		game:set_starting_location("test2")
 	end
 	game:start()
 
@@ -30,7 +30,7 @@ function game_manager:start_game()
 	width, height = sol.video.get_quest_size()
 	sol.video.set_window_size(width*2, height*2)
 	sol.video.set_mode("hq2x") -- for some reason this has to be set for the mouse position to work
---	sol.video.set_window_size(width, height)
+	sol.video.set_window_size(width, height)
 
 	game:set_pause_allowed(true)
 	local hud = hud_manager:create(game)
@@ -43,7 +43,7 @@ function game_manager:start_game()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
-		hero:set_walking_speed(64)
+		hero:set_walking_speed(128)
 	end
 	
 	game.isgame = true
@@ -99,7 +99,7 @@ function sol.main:on_key_pressed(key, modifiers)
 		elseif key == "k" then
 			hero.entitydata:kill()
 		elseif key == "s" then
-			hero:set_walking_speed(250)
+			hero:set_walking_speed(500)
 		end
 	end
 end

@@ -8,7 +8,7 @@ end
 function entity:start(tox, toy)
 	self:set_optimization_distance(0)
 	
-	self.bomb_sprite = self:create_sprite("entities/bomb")
+	self.bomb_sprite = self:create_sprite("abilities/bomb")
 	self.bomb_sprite:set_animation("stopped")
 	self.bomb_sprite:set_paused(false)
 
@@ -46,7 +46,7 @@ function entity:explode()
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
 
-	self.explode_sprite = self:create_sprite("entities/explosion")
+	self.explode_sprite = self:create_sprite("abilities/explosion")
 	self.explode_sprite:set_paused(false)
 	function self.explode_sprite.on_animation_finished(explode_sprite, animation)
 		self:remove()
