@@ -54,24 +54,6 @@ tile{
 
 tile{
   layer = 0,
-  x = 16,
-  y = 456,
-  width = 880,
-  height = 24,
-  pattern = "52",
-}
-
-tile{
-  layer = 0,
-  x = 880,
-  y = 456,
-  width = 24,
-  height = 24,
-  pattern = "48",
-}
-
-tile{
-  layer = 0,
   x = 880,
   y = 24,
   width = 24,
@@ -205,6 +187,78 @@ tile{
   pattern = "54",
 }
 
+tile{
+  layer = 0,
+  x = 160,
+  y = 456,
+  width = 224,
+  height = 32,
+  pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 880,
+  y = 456,
+  width = 24,
+  height = 24,
+  pattern = "48",
+}
+
+tile{
+  layer = 0,
+  x = 16,
+  y = 456,
+  width = 144,
+  height = 24,
+  pattern = "52",
+}
+
+tile{
+  layer = 0,
+  x = 152,
+  y = 472,
+  width = 24,
+  height = 16,
+  pattern = "51",
+}
+
+tile{
+  layer = 0,
+  x = 192,
+  y = 472,
+  width = 24,
+  height = 16,
+  pattern = "50",
+}
+
+tile{
+  layer = 0,
+  x = 208,
+  y = 456,
+  width = 672,
+  height = 24,
+  pattern = "52",
+}
+
+tile{
+  layer = 0,
+  x = 192,
+  y = 456,
+  width = 24,
+  height = 24,
+  pattern = "53",
+}
+
+tile{
+  layer = 0,
+  x = 152,
+  y = 456,
+  width = 24,
+  height = 24,
+  pattern = "54",
+}
+
 destination{
   name = "main_entry",
   layer = 0,
@@ -239,5 +293,23 @@ enemy{
   y = 365,
   direction = 0,
   breed = "green_test",
+}
+
+destination{
+  name = "bottom",
+  layer = 0,
+  x = 184,
+  y = 453,
+  direction = 1,
+}
+
+teletransporter{
+  layer = 0,
+  x = 176,
+  y = 456,
+  width = 16,
+  height = 16,
+  destination_map = "testmap",
+  destination = "bottomhouse",
 }
 

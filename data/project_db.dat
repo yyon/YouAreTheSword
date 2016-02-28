@@ -1,5 +1,6 @@
 map{ id = "combat_test_map", description = "For Testing Combat" }
 map{ id = "first_map", description = "First map" }
+map{ id = "testmap", description = "testmap" }
 
 tileset{ id = "0", description = "House" }
 tileset{ id = "1", description = "Light World" }
@@ -22,6 +23,9 @@ tileset{ id = "7", description = "Brown Dungeon (LW)" }
 tileset{ id = "8", description = "Blue Dungeon (DW)" }
 tileset{ id = "9", description = "Green Dungeon (DW)" }
 tileset{ id = "castle", description = "Castle" }
+tileset{ id = "magecity", description = "magecity" }
+tileset{ id = "magecity2", description = "magecity2" }
+tileset{ id = "silveriv", description = "silveriv" }
 
 sprite{ id = "abilities/charge_sword", description = "charge_sword" }
 sprite{ id = "abilities/fireball", description = "fireball" }
@@ -83,6 +87,31 @@ sprite{ id = "physicaleffects/poison", description = "poison" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 sprite{ id = "swords/swordanim", description = "swordanim" }
 
+music{ id = "8-bit/01 - Opening", description = "01 - Opening" }
+music{ id = "8-bit/02 - BWV 1007 - Prelude", description = "02 - BWV 1007 - Prelude" }
+music{ id = "8-bit/03 - HWV 56 - Why do the nations so furiously rage together", description = "03 - HWV 56 - Why do the nations so furiously rage together" }
+music{ id = "8-bit/04 - Sanctuary", description = "04 - Sanctuary" }
+music{ id = "8-bit/05 - Reunion", description = "05 - Reunion" }
+music{ id = "8-bit/06 - Rebels Be", description = "06 - Rebels Be" }
+music{ id = "8-bit/07 - Town", description = "07 - Town" }
+music{ id = "8-bit/08 - Overworld", description = "08 - Overworld" }
+music{ id = "8-bit/09 - Z 339 - Here the Deities approve", description = "09 - Z 339 - Here the Deities approve" }
+music{ id = "8-bit/10 - The Empire", description = "10 - The Empire" }
+music{ id = "8-bit/11 - Ostrich!", description = "11 - Ostrich!" }
+music{ id = "8-bit/12 - Timeworn Pagoda", description = "12 - Timeworn Pagoda" }
+music{ id = "8-bit/13 - Danger", description = "13 - Danger" }
+music{ id = "8-bit/14 - Barbarian King", description = "14 - Barbarian King" }
+music{ id = "8-bit/15 - Dungeon", description = "15 - Dungeon" }
+music{ id = "8-bit/16 - Enter the Emperor", description = "16 - Enter the Emperor" }
+music{ id = "8-bit/17 - Victory", description = "17 - Victory" }
+music{ id = "8-bit/18 - Nighttide Waltz", description = "18 - Nighttide Waltz" }
+music{ id = "8-bit/19 - Courtesan", description = "19 - Courtesan" }
+music{ id = "8-bit/20 - Game Over", description = "20 - Game Over" }
+music{ id = "8-bit/21 - Fanfare", description = "21 - Fanfare" }
+music{ id = "8-bit/22 - A New Comrade", description = "22 - A New Comrade" }
+music{ id = "8-bit/23 - Inn", description = "23 - Inn" }
+music{ id = "8-bit/24 - RV 610 - Fecit potentiam", description = "24 - RV 610 - Fecit potentiam" }
+music{ id = "8-bit/25 - Finale", description = "25 - Finale" }
 music{ id = "village", description = "Village" }
 
 sound{ id = "arrow_hit", description = "arrow_hit" }

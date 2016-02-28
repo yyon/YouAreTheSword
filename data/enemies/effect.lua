@@ -325,7 +325,7 @@ function StatEffect:start(stat, newvalue, time)
 	self:removeeffectafter(time)
 end
 function StatEffect:endeffect()
-	self.entitydata.stats[self.stat] = self.entityadat.originalstats[self.stat]
+	self.entitydata.stats[self.stat] = self.entitydata.originalstats[self.stat]
 end
 function StatEffect:getkey()
 	return self

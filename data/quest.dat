@@ -14,5 +14,5 @@ quest{
   -- Title of the window. You should probably put the title of your game here.
   title_bar = "You are the Demon Lord! ...'s Sword",
   normal_quest_size="640x360",
+--  normal_quest_size="1280x720",
 }
-
