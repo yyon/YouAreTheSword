@@ -103,7 +103,7 @@ function sol.main:on_key_pressed(key, modifiers)
 			game.nodeaths = true
 		elseif key == "k" then
 			hero.entitydata:kill()
-		elseif key == "s" then
+		elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
 			hero:set_walking_speed(500)
 		end
 	end
