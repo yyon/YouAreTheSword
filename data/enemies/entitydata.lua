@@ -508,7 +508,7 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.knockback ~= 0 then
 		target:log("knockback")
 --		if target:getfrozen() == nil then
-			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, aspects.knockbackrandomang)
+			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, aspects.knockbackrandomangle)
 --[[
 			if target.entity.ishero then
 				target:freeze()
