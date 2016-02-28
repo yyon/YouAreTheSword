@@ -49,12 +49,21 @@ enemy{
 }
 
 teletransporter{
+  name = "tele1",
   layer = 0,
   x = 56,
   y = 40,
   width = 32,
   height = 32,
-  destination_map = "test2",
-  destination = "_side",
+  destination_map = "maptest",
+  destination = "left_entry",
+}
+
+destination{
+  name = "right",
+  layer = 0,
+  x = 1208,
+  y = 365,
+  direction = 2,
 }
 

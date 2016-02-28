@@ -78,7 +78,7 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	mousex, mousey = sol.input.get_mouse_position()
 	x, y = convert_to_map(mousex, mousey)
-
+	
 	if x ~= nil then
 		hero:set_direction(hero:get_direction4_to(x, y))
 		hero.targetx = x
@@ -161,10 +161,19 @@ end
 function tick()
 	hero = game:get_hero()
 	
-	hero.souls = hero.souls - 0.001
-	if hero.souls < 0 then hero.souls = 0 end
-
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
+		for entity in hero:get_map():get_entities("") do
+			if entity.get_destination_map ~= nil then
+				if hero:overlaps(entity) then
+					print("hi")
+					hero:teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
+				end
+			end
+		end
+	
+		hero.souls = hero.souls - 0.001
+		if hero.souls < 0 then hero.souls = 0 end
+
 		mousex, mousey = sol.input.get_mouse_position()
 		x, y = convert_to_map(mousex, mousey)
 

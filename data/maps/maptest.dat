@@ -1096,12 +1096,32 @@ tile{
   pattern = "159",
 }
 
-destination{
-  name = "left",
+tile{
   layer = 0,
-  x = 24,
+  x = 120,
+  y = 152,
+  width = 32,
+  height = 32,
+  pattern = "10",
+}
+
+destination{
+  name = "left_entry",
+  layer = 0,
+  x = 72,
   y = 325,
   direction = 0,
   default = true,
+}
+
+teletransporter{
+  name = "a",
+  layer = 0,
+  x = 0,
+  y = 280,
+  width = 48,
+  height = 80,
+  destination_map = "test2",
+  destination = "right",
 }
 
