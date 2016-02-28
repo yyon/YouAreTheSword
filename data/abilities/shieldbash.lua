@@ -23,9 +23,9 @@ function ShieldBashAbility:doability()
 	self.shieldentity = map:create_custom_entity({model="shieldbash", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.shieldentity.ability = self
 
-	self.entitydata:setanimation("walking_with_shield")
+--	self.entitydata:setanimation("walking_with_shield")
 
-	self.shieldentity:start("hero/shield3")
+	self.shieldentity:start("adventurers/shield")
 
 	Effects.SimpleTimer:new(self.entitydata, 400, function() self:finish() end)
 

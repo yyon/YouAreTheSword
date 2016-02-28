@@ -30,6 +30,7 @@ sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" 
 sprite{ id = "abilities/lightning", description = "lightning" }
 sprite{ id = "adventurers/charge_sword", description = "charge sword" }
 sprite{ id = "adventurers/knight", description = "knight" }
+sprite{ id = "adventurers/shield", description = "shield" }
 sprite{ id = "adventurers/swordanim", description = "swordanim" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }

@@ -21,9 +21,9 @@ function ShieldAbility:doability(playerrelease)
 	self.shieldentity = map:create_custom_entity({model="shield", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.shieldentity.ability = self
 
-	self.entitydata:setanimation("stopped_with_shield")
+--	self.entitydata:setanimation("stopped_with_shield")
 
-	self.shieldentity:start("hero/shield3")
+	self.shieldentity:start("adventurers/shield")
 
 	self.playerrelease = playerrelease
 	if not self.playerrelease then

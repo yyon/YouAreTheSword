@@ -238,7 +238,7 @@ end
 function enemy:targetenemy()
 	entitieslist = {}
 
---	local hero = self:get_map():get_entity("hero")
+	local hero = self:get_map():get_entity("hero")
 --	if self:cantargetentity(hero) then
 --		entitieslist[#entitieslist+1] = hero.entitydata
 --	end

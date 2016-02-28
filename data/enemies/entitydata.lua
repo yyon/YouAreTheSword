@@ -113,6 +113,8 @@ end
 
 function EntityData:bepossessedbyhero()
 	-- control this entitydata
+	
+	local hero = self.entity:get_game():get_hero()
 
 	hero:unfreeze()
 	hero.isdropped = false
@@ -146,7 +148,8 @@ function EntityData:unpossess()
 
 	self.entity.is_possessing = false
 
-	hero = map:get_hero()
+	local hero = self.entity:get_game():get_hero()
+
 	hero.entitydata = nil
 
 	map = self.entity:get_map()
@@ -240,7 +243,7 @@ function EntityData:getotherentities()
 				end
 				if newentity.entitydata ~= nil then
 					newentitydata = newentity.entitydata
-					if newentitydata ~= self and newentitydata ~= hero.entitydata then
+					if newentitydata ~= self and newentitydata ~= heroentity.entitydata then
 						return newentitydata
 					end
 				end
