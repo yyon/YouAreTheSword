@@ -165,7 +165,19 @@ function tick()
 		for entity in hero:get_map():get_entities("") do
 			if entity.get_destination_map ~= nil then
 				if hero:overlaps(entity) then
-					print("hi")
+					print("TELEPORT!")
+					if hero:get_map().effects ~= nil then
+						while true do
+							foundeffect = false
+							for effect, b in pairs(hero:get_map().effects) do
+								foundeffect = true
+								effect:remove()
+							end
+							if not foundeffect then
+								break
+							end
+						end
+					end
 					hero:teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
 				end
 			end

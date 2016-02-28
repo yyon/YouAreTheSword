@@ -17,11 +17,65 @@ tile{
 
 tile{
   layer = 0,
-  x = 56,
-  y = 40,
+  x = 960,
+  y = 320,
+  width = 320,
+  height = 96,
+  pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 928,
+  y = 384,
+  width = 32,
+  height = 32,
+  pattern = "148",
+}
+
+tile{
+  layer = 0,
+  x = 928,
+  y = 320,
+  width = 32,
+  height = 32,
+  pattern = "150",
+}
+
+tile{
+  layer = 0,
+  x = 928,
+  y = 352,
   width = 32,
   height = 32,
   pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 896,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "132",
+}
+
+tile{
+  layer = 0,
+  x = 960,
+  y = 416,
+  width = 320,
+  height = 32,
+  pattern = "142",
+}
+
+tile{
+  layer = 0,
+  x = 960,
+  y = 288,
+  width = 320,
+  height = 32,
+  pattern = "147",
 }
 
 destination{
@@ -51,10 +105,10 @@ enemy{
 teletransporter{
   name = "tele1",
   layer = 0,
-  x = 56,
-  y = 40,
+  x = 1248,
+  y = 320,
   width = 32,
-  height = 32,
+  height = 96,
   destination_map = "maptest",
   destination = "left_entry",
 }
@@ -63,7 +117,7 @@ destination{
   name = "right",
   layer = 0,
   x = 1208,
-  y = 365,
+  y = 373,
   direction = 2,
 }
 
