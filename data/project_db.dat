@@ -80,6 +80,7 @@ sprite{ id = "hero/tunic1", description = "Hero tunic 1" }
 sprite{ id = "hero/tunic2", description = "Hero tunic 2" }
 sprite{ id = "hero/tunic3", description = "Hero tunic 3" }
 sprite{ id = "hud/empty_heart", description = "empty hearts" }
+sprite{ id = "hud/possess_o_meter", description = "sword possess meter" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
 sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/poison", description = "poison" }

@@ -1,8 +1,8 @@
-local health = {}
+local possess_o_meter = {}
 
 local entitydata = require "enemies/entitydata"
 
-function health:new(game)
+function possess_o_meter:new(game)
 
   	local object = {}
   	setmetatable(object, self)
@@ -13,7 +13,7 @@ function health:new(game)
   	return object
 end
 
-function health:initialize(game)
+function possess_o_meter:initialize(game)
 
   	self.game = game
   	self.surface = sol.surface.create(90, 18)
@@ -25,7 +25,7 @@ function health:initialize(game)
   	self.all_hearts_img = sol.surface.create("hud/hearts.png")
 end
 
-function health:on_started()
+function possess_o_meter:on_started()
 	self.danger_sound_timer = nil
   	self:check()
   	self:rebuild_surface()
@@ -33,21 +33,17 @@ function health:on_started()
 end
 
 --  check heart data and fix periodically
-function health:check()
+function possess_o_meter:check()
 
   	local need_rebuild = false
-	local nb_current_hearts = 24
-	local nb_max_hearts = 6
-	
-	hero = game:get_hero().entitydata
-    	if hero ~= nil then
-     		nb_current_hearts = hero.life * 4
-		nb_max_hearts = hero.maxlife
-		
-    	end
 
-	self:set_dst_position(640-9*nb_max_hearts, 10)
-    
+    local nb_max_hearts = 6  --game:get_hero().entitydata:get_max_health() / some number
+    local nb_current_hearts = 24 --game:get_hero().entitydata.life / some number
+
+    hero = game:get_hero().entitydata
+    if hero ~= nil then
+      nb_current_hearts = hero.life
+    end
 
   	--  max life
   	if nb_max_hearts ~= self.nb_max_hearts_displayed then
@@ -75,7 +71,7 @@ function health:check()
 	-- do the danger animation
   	if self.game:is_started() then
 
-    		if nb_current_hearts <= nb_max_hearts
+    		if self.game:get_life() <= self.game:get_max_life() / 4
         			and not self.game:is_suspended() then
       			need_rebuild = true
       			if self.empty_heart_sprite:get_animation() ~= "danger" then
@@ -99,7 +95,7 @@ function health:check()
 end
 
 
-function health:rebuild_surface()
+function possess_o_meter:rebuild_surface()
 
   	self.surface:clear()
 
@@ -122,12 +118,12 @@ function health:rebuild_surface()
   	end
 end
 
-function health:set_dst_position(x, y)
+function possess_o_meter:set_dst_position(x, y)
   	self.dst_x = x
   	self.dst_y = y
 end
 
-function health:on_draw(dst_surface)
+function possess_o_meter:on_draw(dst_surface)
 
   	local x, y = self.dst_x, self.dst_y
   	local width, height = dst_surface:get_size()
