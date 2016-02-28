@@ -36,8 +36,8 @@ end
 function health:check()
 
   	local need_rebuild = false
-	local nb_current_hearts = 24
-	local nb_max_hearts = 6
+	local nb_current_hearts = 0
+	local nb_max_hearts = 0
 	
 	hero = game:get_hero().entitydata
     	if hero ~= nil then
@@ -46,7 +46,7 @@ function health:check()
 		
     	end
 
-	self:set_dst_position(640-9*nb_max_hearts, 10)
+	self:set_dst_position(630-9*nb_max_hearts, 10)
     
 
   	--  max life
@@ -55,7 +55,7 @@ function health:check()
 
     		if nb_max_hearts < self.nb_max_hearts_displayed then
       			-- fix max hearts if it changes (sword is handed off)
-      			self.nb_current_hearts_displayed = 6 --game:get_hero().entitydata.life / some number
+      			self.nb_current_hearts_displayed = nb_max_hearts
     		end
 
     		self.nb_max_hearts_displayed = nb_max_hearts

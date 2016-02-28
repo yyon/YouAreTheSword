@@ -19,103 +19,62 @@ function possess_o_meter:initialize(game)
   	self.surface = sol.surface.create(90, 18)
   	self.dst_x = 0
   	self.dst_y = 0
-  	self.empty_heart_sprite = sol.sprite.create("hud/empty_heart")
+  	self.empty_heart_sprite = sol.sprite.create("hud/possess_o_meter")
   	self.nb_max_hearts_displayed = game:get_max_life() / 4
   	self.nb_current_hearts_displayed = game:get_life()
-  	self.all_hearts_img = sol.surface.create("hud/hearts.png")
+  	self.all_sword_img = sol.surface.create("hud/sword_meter.png")
 end
 
 function possess_o_meter:on_started()
 	self.danger_sound_timer = nil
-  	self:check()
+  	self:check(nil)
   	self:rebuild_surface()
 
 end
 
 --  check heart data and fix periodically
-function possess_o_meter:check()
+function possess_o_meter:check(past_animation_stage)
 
   	local need_rebuild = false
+	
+	-- local animation_stage = 0
+	
+	if past_animation_stage == nil then
+		past_animation_stage = 17
+	end
+	
+	hero = game:get_hero().entitydata
+    	if hero ~= nil then
+		-- animation_stage = math.floor(hero.possess_clock / 7)
+	end
 
-    local nb_max_hearts = 6  --game:get_hero().entitydata:get_max_health() / some number
-    local nb_current_hearts = 24 --game:get_hero().entitydata.life / some number
+--[[	if animation_stage ~= past_animation_stage then
+		need_rebuild = true
+		past_animation_stage = animation_stage
+		
+	end
 
-    hero = game:get_hero().entitydata
-    if hero ~= nil then
-      nb_current_hearts = hero.life
-    end
-
-  	--  max life
-  	if nb_max_hearts ~= self.nb_max_hearts_displayed then
-    		need_rebuild = true
-
-    		if nb_max_hearts < self.nb_max_hearts_displayed then
-      			-- fix max hearts if it changes (sword is handed off)
-      			self.nb_current_hearts_displayed = 6 --game:get_hero().entitydata.life / some number
-    		end
-
-    		self.nb_max_hearts_displayed = nb_max_hearts
-  	end
-
-  	-- current life
-  	if nb_current_hearts ~= self.nb_current_hearts_displayed then
-
-    		need_rebuild = true
-    		if nb_current_hearts < self.nb_current_hearts_displayed then
-      			self.nb_current_hearts_displayed = self.nb_current_hearts_displayed - 1
-    		else
-      			self.nb_current_hearts_displayed = self.nb_current_hearts_displayed + 1
-    		end
-  	end
-
-	-- do the danger animation
-  	if self.game:is_started() then
-
-    		if self.game:get_life() <= self.game:get_max_life() / 4
-        			and not self.game:is_suspended() then
-      			need_rebuild = true
-      			if self.empty_heart_sprite:get_animation() ~= "danger" then
-        				self.empty_heart_sprite:set_animation("danger")
-      			end
-    		elseif self.empty_heart_sprite:get_animation() ~= "normal" then
-      			need_rebuild = true
-      			self.empty_heart_sprite:set_animation("normal")
-    		end
-  	end
+	
 
   	-- redraw only if something has changed
   	if need_rebuild then
-    		self:rebuild_surface()
+    		self:rebuild_surface(animation_stage)
   	end
+
+--]]
 
   	-- check again in 50ms
   	sol.timer.start(self, 50, function()
-    		self:check()
+    		self:check(past_animation_stage)
   	end)
 end
 
 
-function possess_o_meter:rebuild_surface()
+function possess_o_meter:rebuild_surface(animation_stage)
 
   	self.surface:clear()
 
-  	-- show the hearts
-  	for i = 0, self.nb_max_hearts_displayed - 1 do
-    		local x, y = (i % 10) * 9, math.floor(i / 10) * 9
-    		self.empty_heart_sprite:draw(self.surface, x, y)
-    		if i < math.floor(self.nb_current_hearts_displayed / 4) then
-     			 -- full heart
-      			self.all_hearts_img:draw_region(27, 0, 9, 9, self.surface, x, y)
-    		end
-  	end
-
-  	-- last portion of heart
-  	local i = math.floor(self.nb_current_hearts_displayed / 4)
-  	local remaining_fraction = self.nb_current_hearts_displayed % 4
-  	if remaining_fraction ~= 0 then
-   		local x, y = (i % 10) * 9, math.floor(i / 10) * 9
-    		self.all_hearts_img:draw_region((remaining_fraction - 1) * 9, 0, 9, 9, self.surface, x, y)
-  	end
+  	self.all_sword_img:draw_region(animation_stage * 112, 0, 112, 49, self.surface, x, y)
 end
 
 function possess_o_meter:set_dst_position(x, y)
@@ -136,4 +95,4 @@ function possess_o_meter:on_draw(dst_surface)
 	self.surface:draw(dst_surface, x, y)
 end
 
-return health
+return possess_o_meter
