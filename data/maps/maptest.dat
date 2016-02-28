@@ -342,15 +342,6 @@ tile{
 
 tile{
   layer = 0,
-  x = 64,
-  y = 184,
-  width = 64,
-  height = 64,
-  pattern = "186",
-}
-
-tile{
-  layer = 0,
   x = 816,
   y = 120,
   width = 96,
@@ -518,15 +509,6 @@ tile{
   width = 32,
   height = 32,
   pattern = "157",
-}
-
-tile{
-  layer = 0,
-  x = 112,
-  y = 80,
-  width = 64,
-  height = 64,
-  pattern = "127",
 }
 
 tile{
@@ -1105,6 +1087,24 @@ tile{
   pattern = "10",
 }
 
+tile{
+  layer = 0,
+  x = 24,
+  y = 184,
+  width = 40,
+  height = 40,
+  pattern = "166",
+}
+
+tile{
+  layer = 0,
+  x = 136,
+  y = 96,
+  width = 40,
+  height = 40,
+  pattern = "167",
+}
+
 destination{
   name = "left_entry",
   layer = 0,
@@ -1123,5 +1123,13 @@ teletransporter{
   height = 80,
   destination_map = "test2",
   destination = "right",
+}
+
+enemy{
+  layer = 0,
+  x = 1032,
+  y = 125,
+  direction = 0,
+  breed = "green_test",
 }
 

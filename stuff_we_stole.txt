@@ -6,3 +6,9 @@ http://opengameart.org/content/generic-8-bit-jrpg-soundtrack
 	soundtrack
 http://opengameart.org/content/mage-city-arcanos
 	"mage city" tilesheet
+http://opengameart.org/content/dark-fantasy-item-sprites
+	dark sword
+http://opengameart.org/content/character-and-item-sprites-for-ardentryst-by-jordan-trudgett
+	axe
+http://opengameart.org/content/battle-sword
+	normal sword
