@@ -71,7 +71,7 @@ function ShieldBashAbility:attackall()
 end
 function ShieldBashAbility:attack(entitydata)
 	damage = 1
-	aspects = {knockback=300}
+	aspects = {knockback=1000}
 
 	self:dodamage(entitydata, damage, aspects)
 end

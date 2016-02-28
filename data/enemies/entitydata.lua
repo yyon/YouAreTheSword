@@ -759,7 +759,7 @@ yellowclass = EntityData:subclass("yellowclass")
 
 function yellowclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "yellow", "hero/tunic2", 10, "yellow", FireballAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), BombThrowAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "yellow", "adventurers/guy2", 10, "yellow", FireballAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), BombThrowAbility:new(self), basestats)
 end
 
 function yellowclass:getlogcolor()
@@ -770,7 +770,7 @@ greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "green", "hero/tunic1", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "green", "adventurers/guy3", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
 end
 
 function greenclass:getlogcolor()
