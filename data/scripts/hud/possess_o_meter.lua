@@ -2,6 +2,7 @@ local possess_o_meter = {}
 
 local entitydata = require "enemies/entitydata"
 
+
 function possess_o_meter:new(game)
 
   	local object = {}
@@ -16,13 +17,12 @@ end
 function possess_o_meter:initialize(game)
 
   	self.game = game
-  	self.surface = sol.surface.create(90, 18)
+  	self.surface = sol.surface.create(952, 25)
   	self.dst_x = 0
   	self.dst_y = 0
-  	self.empty_heart_sprite = sol.sprite.create("hud/possess_o_meter")
-  	self.nb_max_hearts_displayed = game:get_max_life() / 4
-  	self.nb_current_hearts_displayed = game:get_life()
+	self.stage_displayed = 0
   	self.all_sword_img = sol.surface.create("hud/sword_meter.png")
+	self.sword_anim_setup = sol.sprite.create("hud/possess_o_meter")
 end
 
 function possess_o_meter:on_started()
@@ -33,24 +33,20 @@ function possess_o_meter:on_started()
 end
 
 --  check heart data and fix periodically
-function possess_o_meter:check(past_animation_stage)
+function possess_o_meter:check()
 
   	local need_rebuild = false
 	
-	-- local animation_stage = 0
-	
-	if past_animation_stage == nil then
-		past_animation_stage = 17
-	end
+	local stage = 10
 	
 	hero = game:get_hero().entitydata
     	if hero ~= nil then
-		-- animation_stage = math.floor(hero.possess_clock / 7)
+		-- stage = math.floor(hero.possess_clock / 7)
 	end
 
---[[	if animation_stage ~= past_animation_stage then
+	if stage ~= self.stage_displayed then
 		need_rebuild = true
-		past_animation_stage = animation_stage
+		self.stage_displayed = stage
 		
 	end
 
@@ -58,23 +54,23 @@ function possess_o_meter:check(past_animation_stage)
 
   	-- redraw only if something has changed
   	if need_rebuild then
-    		self:rebuild_surface(animation_stage)
+    		self:rebuild_surface()
   	end
 
---]]
+	--self.sword_anim_setup:set_animation("sword progress bar")
 
   	-- check again in 50ms
   	sol.timer.start(self, 50, function()
-    		self:check(past_animation_stage)
+    		self:check()
   	end)
 end
 
 
-function possess_o_meter:rebuild_surface(animation_stage)
+function possess_o_meter:rebuild_surface()
 
   	self.surface:clear()
-
-  	self.all_sword_img:draw_region(animation_stage * 112, 0, 112, 49, self.surface, x, y)
+	self.all_sword_img:draw_region(self.stage_displayed * 56, 0, 56, 25, self.surface, x, y)
+	
 end
 
 function possess_o_meter:set_dst_position(x, y)

@@ -20,8 +20,8 @@ function health:initialize(game)
   	self.dst_x = 0
   	self.dst_y = 0
   	self.empty_heart_sprite = sol.sprite.create("hud/empty_heart")
-  	self.nb_max_hearts_displayed = game:get_max_life() / 4
-  	self.nb_current_hearts_displayed = game:get_life()
+  	self.nb_max_hearts_displayed = 0
+  	self.nb_current_hearts_displayed = 0
   	self.all_hearts_img = sol.surface.create("hud/hearts.png")
 end
 
