@@ -113,7 +113,7 @@ end
 
 function EntityData:bepossessedbyhero()
 	-- control this entitydata
-	
+
 	local hero = self.entity:get_game():get_hero()
 
 	hero:unfreeze()

@@ -23,15 +23,16 @@ tileset{ id = "8", description = "Blue Dungeon (DW)" }
 tileset{ id = "9", description = "Green Dungeon (DW)" }
 tileset{ id = "castle", description = "Castle" }
 
+sprite{ id = "abilities/charge_sword", description = "charge_sword" }
 sprite{ id = "abilities/fireball", description = "fireball" }
 sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/lightning", description = "lightning" }
-sprite{ id = "adventurers/charge_sword", description = "charge sword" }
+sprite{ id = "adventurers/guy2", description = "guy2" }
+sprite{ id = "adventurers/guy3", description = "guy3" }
 sprite{ id = "adventurers/knight", description = "knight" }
 sprite{ id = "adventurers/shield", description = "shield" }
-sprite{ id = "adventurers/swordanim", description = "swordanim" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
 sprite{ id = "enemies/red_knight_soldier_sword", description = "red_knight_soldier_sword" }
@@ -79,6 +80,7 @@ sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
 sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
+sprite{ id = "swords/swordanim", description = "swordanim" }
 
 music{ id = "village", description = "Village" }
 

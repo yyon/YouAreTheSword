@@ -5,7 +5,7 @@ function entity:on_created()
 end
 
 function entity:start(appearance)
-	self.sword_sprite = self:create_sprite("adventurers/charge_sword")
+	self.sword_sprite = self:create_sprite("abilities/charge_sword")
 	self.sword_sprite:set_paused(false)
 
 --	self.sword_sprite:set_animation("")

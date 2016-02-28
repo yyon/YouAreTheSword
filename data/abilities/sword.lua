@@ -48,7 +48,7 @@ function SwordAbility:doability()
 	self.swordentity = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.swordentity.ability = self
 	self.swordentity:start(self:get_appearance())
-	
+
 	self.topsword = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.topsword.ability = self
 	self.topsword:start(self:get_appearance(), true)
@@ -108,15 +108,15 @@ function SwordAbility:get_appearance(entity)
 	transform = self:gettransform(entity)
 
 	if transform == "normal" then
-		return "adventurers/swordanim"
+		return "swords/swordanim"
 	elseif transform == "ap" then
-		return "hero/sword2"
+		return "swords/mace"
 	elseif transform == "fire" then
-		return "hero/sword3"
+		return "swords/fire"
 	elseif transform == "electric" then
-		return "hero/sword4"
+		return "swords/electric"
 	elseif transform == "poison" then
-		return "hero/poisonsword"
+		return "swords/poison"
 	end
 end
 
