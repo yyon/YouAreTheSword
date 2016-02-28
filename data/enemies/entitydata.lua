@@ -12,6 +12,7 @@ GrapplingHookAbility = require "abilities/grapplinghook"
 LightningAbility = require "abilities/lightning"
 FireballAbility = require "abilities/fireball"
 EarthquakeAbility = require "abilities/earthquake"
+BlackholeAbility = require "abilities/blackhole"
 
 Effects = require "enemies/effect"
 
@@ -27,7 +28,7 @@ function EntityData:log(...)
 	io.write(colend)
 end
 
-local maxhealth
+--local maxhealth
 
 function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability, stats)
 	self.entity = entity
@@ -499,7 +500,7 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.knockback ~= 0 then
 		target:log("knockback")
 --		if target:getfrozen() == nil then
-			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback)
+			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, aspects.knockbackrandomangle)
 --[[
 			if target.entity.ishero then
 				target:freeze()
@@ -752,7 +753,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "damage"), ShieldAbility:new(self), EarthquakeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "damage"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()

@@ -1,5 +1,7 @@
 local class = require "middleclass"
 
+local math = require "math"
+
 Effect = class("Effect")
 
 function Effect:initialize(affected, ...)
@@ -295,11 +297,16 @@ function KnockBackEffect:alreadyexists(currenteffect, fromentitydata, knockbackd
 end
 --]]
 
-function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist)
+function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, randomangle)
 	self:removeeffectafter(knockbackdist)
 
 	local x, y = self.entitydata.entity:get_position()
-	local angle = self.entitydata.entity:get_angle(fromentity) + math.pi
+	local angle
+	if randomangle then
+		angle = math.random() * 2 * math.pi
+	else
+		angle = self.entitydata.entity:get_angle(fromentity) + math.pi
+	end
 	local movement = sol.movement.create("straight")
 	self.movement = movement
 	movement:set_speed(250)

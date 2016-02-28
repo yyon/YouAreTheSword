@@ -28,6 +28,8 @@ tileset{ id = "magecity", description = "magecity" }
 tileset{ id = "magecity2", description = "magecity2" }
 tileset{ id = "silveriv", description = "silveriv" }
 
+sprite{ id = "abilities/blackhole", description = "blackhole" }
+sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
 sprite{ id = "abilities/charge_sword", description = "charge_sword" }
 sprite{ id = "abilities/droppedsword", description = "droppedsword" }
 sprite{ id = "abilities/earthquake", description = "earthquake" }
@@ -173,6 +175,8 @@ enemy{ id = "green_test", description = "Test green" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
 enemy{ id = "yellow_test", description = "Test yellow" }
 
+entity{ id = "blackhole", description = "blackhole" }
+entity{ id = "blackholeparticle", description = "blackholeparticle" }
 entity{ id = "bomb", description = "bomb" }
 entity{ id = "charge", description = "charge" }
 entity{ id = "earthquake", description = "earthquake" }

@@ -1,0 +1,7 @@
+animation{
+  name = "blackhole",
+  src_image = "abilities/blackhole.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 150, frame_height = 150, origin_x = 75, origin_y = 75 },
+  },
+}
