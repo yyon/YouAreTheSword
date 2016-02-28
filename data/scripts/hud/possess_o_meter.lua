@@ -33,7 +33,7 @@ function possess_o_meter:on_started()
 end
 
 --  check heart data and fix periodically
-function health:check()
+function possess_o_meter:check()
 
   	local need_rebuild = false
 
@@ -95,7 +95,7 @@ function health:check()
 end
 
 
-function health:rebuild_surface()
+function possess_o_meter:rebuild_surface()
 
   	self.surface:clear()
 
@@ -118,12 +118,12 @@ function health:rebuild_surface()
   	end
 end
 
-function health:set_dst_position(x, y)
+function possess_o_meter:set_dst_position(x, y)
   	self.dst_x = x
   	self.dst_y = y
 end
 
-function health:on_draw(dst_surface)
+function possess_o_meter:on_draw(dst_surface)
 
   	local x, y = self.dst_x, self.dst_y
   	local width, height = dst_surface:get_size()
