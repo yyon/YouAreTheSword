@@ -37,8 +37,10 @@ function game_manager:start_game()
 
 	hero = game:get_hero()
 	if hero.entitydata == nil then
+		print("START")
 		hero.ishero = true
 		hero.is_possessing = true
+		hero.souls = 1
 		hero.entitydata = entitydatas.purpleclass:new(hero)--sol.main.load_file("enemies/entitydata")()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
@@ -155,6 +157,9 @@ end
 
 function tick()
 	hero = game:get_hero()
+	
+	hero.souls = hero.souls - 0.001
+	if hero.souls < 0 then hero.souls = 0 end
 
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
 		mousex, mousey = sol.input.get_mouse_position()
