@@ -103,7 +103,7 @@ function SwordAbility:get_appearance(entity)
 	transform = self:gettransform(entity)
 
 	if transform == "normal" then
-		return "hero/sword1"
+		return "adventurers/swordanim"
 	elseif transform == "ap" then
 		return "hero/sword2"
 	elseif transform == "fire" then
