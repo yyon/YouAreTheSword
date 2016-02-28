@@ -1,6 +1,6 @@
 animation{
   name = "sword progress bar",
-  src_image = "hud/sword_meter.png",
+  src_image = "hud/sword_soul_meter.png",
   frame_delay = 200,
   frame_to_loop_on = 0,
   directions = {

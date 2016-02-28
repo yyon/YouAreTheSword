@@ -1,0 +1,6 @@
+animation{
+  name = "danger",
+  src_image = "hud/sword_health_meter.png",
+  directions = {
+  },
+}

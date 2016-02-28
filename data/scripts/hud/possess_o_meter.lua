@@ -21,7 +21,7 @@ function possess_o_meter:initialize(game)
   	self.dst_x = 0
   	self.dst_y = 0
 	self.stage_displayed = 0
-  	self.all_sword_img = sol.surface.create("hud/sword_meter.png")
+  	self.all_sword_img = sol.surface.create("hud/sword_soul_meter.png")
 	self.sword_anim_setup = sol.sprite.create("hud/possess_o_meter")
 end
 
