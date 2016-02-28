@@ -49,7 +49,7 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 		stats.defense = 0.3
 	end
 	if stats.movementspeed == nil then
-		stats.movementspeed = 64
+		stats.movementspeed = 128
 	end
 	if stats.warmup == nil then
 		stats.warmup = 1
@@ -574,7 +574,7 @@ function EntityData:drop(hero)
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
 		hero:set_animation("stopped")
-		hero:set_tunic_sprite_id("hero/droppedsword")
+		hero:set_tunic_sprite_id("abilities/droppedsword")
 		hero:freeze()
 		hero.isdropped = true
 	end
@@ -616,7 +616,7 @@ function EntityData:throwsword(entitydata2)
 
 		newentity = self:unpossess()
 
-		hero:set_tunic_sprite_id("hero/thrownsword")
+		hero:set_tunic_sprite_id("abilities/thrownsword")
 		hero:set_animation("stopped")
 
 		hero:stop_movement()
@@ -751,7 +751,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", FireballAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), ChargeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", FireballAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), BombThrowAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()

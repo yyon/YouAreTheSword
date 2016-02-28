@@ -1,6 +1,6 @@
 map{ id = "combat_test_map", description = "For Testing Combat" }
 map{ id = "first_map", description = "First map" }
-map{ id = "testmap", description = "testmap" }
+map{ id = "test2", description = "test2" }
 
 tileset{ id = "0", description = "House" }
 tileset{ id = "1", description = "Light World" }

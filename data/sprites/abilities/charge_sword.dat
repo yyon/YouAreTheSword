@@ -2,9 +2,9 @@ animation{
   name = "sword",
   src_image = "abilities/charge_sword.png",
   directions = {
-    { x = 0, y = 192, frame_width = 64, frame_height = 64, origin_x = 31, origin_y = 42 },
-    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 31, origin_y = 42 },
-    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 31, origin_y = 42 },
-    { x = 0, y = 128, frame_width = 64, frame_height = 64, origin_x = 31, origin_y = 42 },
+    { x =0, y =384, frame_width =128, frame_height =128, origin_x =62, origin_y =84 },
+    { x =0, y =0,frame_width =128,frame_height =128,origin_x =62,origin_y =84 },
+    { x =0, y =128,frame_width =128,frame_height =128,origin_x =62,origin_y =84 },
+    { x =0, y =256,frame_width =128,frame_height =128,origin_x =62,origin_y =84 },
   },
 }

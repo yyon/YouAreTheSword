@@ -3,7 +3,7 @@ Ability = require "abilities/ability"
 
 BombAbility = Ability:subclass("BombAbility")
 
-RANGE = 400
+RANGE = 800
 
 function BombAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "bomb", RANGE, 500, 4000, true)
