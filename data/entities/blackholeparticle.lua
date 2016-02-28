@@ -20,6 +20,8 @@ function entity:start(blackhole)
 	self.ticker = Effects.Ticker(self.blackhole.ability.entitydata, 10, function() self:tick() end)
 end
 
+local PULL = 50
+
 function entity:tick()
 	x, y = self:get_position()
 	
@@ -27,7 +29,7 @@ function entity:tick()
 	dist = self:get_distance(self.blackhole)
 	
 	bx, by = bx - x, by - y
-	bx, by = bx / math.pow(dist, 2) * 20, by / math.pow(dist, 2) * 20
+	bx, by = bx / math.pow(dist, 2) * PULL, by / math.pow(dist, 2) * PULL
 	
 	self.velx = self.velx + bx
 	self.vely = self.vely + by

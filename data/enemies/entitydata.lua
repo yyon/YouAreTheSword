@@ -292,6 +292,14 @@ function EntityData:endability(ability, ...)
 	end
 end
 
+function EntityData:keyrelease(ability)
+	if self.usingability ~= nil then
+		if self.usingability == self:getability(ability) then
+			self.usingability:keyrelease()
+		end
+	end
+end
+
 function EntityData:tickability(...)
 	if self.usingability ~= nil then
 		self.usingability:tick(...)
@@ -500,7 +508,7 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.knockback ~= 0 then
 		target:log("knockback")
 --		if target:getfrozen() == nil then
-			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, aspects.knockbackrandomangle)
+			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, aspects.knockbackrandomang)
 --[[
 			if target.entity.ishero then
 				target:freeze()

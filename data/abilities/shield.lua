@@ -62,4 +62,8 @@ function ShieldAbility:tick(x, y)
 	self.shieldentity:updatedirection()
 end
 
+function ShieldAbility:keyrelease()
+	self:finish()
+end
+
 return ShieldAbility

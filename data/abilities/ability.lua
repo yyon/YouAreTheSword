@@ -94,4 +94,7 @@ function Ability:AOE(distance, damage, aspects, fromentity)
 	end
 end
 
+function Ability:keyrelease()
+end
+
 return Ability

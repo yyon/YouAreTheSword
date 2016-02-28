@@ -124,8 +124,12 @@ function  sol.main:on_key_released(key, modifiers)
 	end
 
 	hero = game:get_hero()
-	if key == "left shift" then
-		hero.entitydata:endability("block")
+	if key == "space" then
+		hero.entitydata:keyrelease("normal")
+	elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
+		hero.entitydata:keyrelease("swordtransform")
+	elseif key == "left shift" then
+		hero.entitydata:keyrelease("block")
 	end
 end
 
