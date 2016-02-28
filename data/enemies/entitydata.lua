@@ -116,6 +116,9 @@ function EntityData:bepossessedbyhero()
 
 	local hero = self.entity:get_game():get_hero()
 
+	hero.souls = hero.souls + 0.1
+	if hero.souls > 1 then hero.souls = 1 end
+
 	hero:unfreeze()
 	hero.isdropped = false
 	hero.isthrown = false

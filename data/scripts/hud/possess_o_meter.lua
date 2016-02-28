@@ -39,9 +39,10 @@ function possess_o_meter:check()
 	
 	local stage = 10
 	
-	hero = game:get_hero().entitydata
-    	if hero ~= nil then
+	hero = game:get_hero()
+    	if hero.entitydata ~= nil then
 		-- stage = math.floor(hero.possess_clock / 7)
+		stage = math.floor(hero.souls * 10)
 	end
 
 	if stage ~= self.stage_displayed then
