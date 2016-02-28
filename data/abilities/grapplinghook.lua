@@ -5,7 +5,7 @@ Effects = require "enemies/effect"
 
 GrapplingHookAbility = Ability:subclass("GrapplingHookAbility")
 
-RANGE = 400
+RANGE = 800
 
 function GrapplingHookAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "grappling hook", RANGE, 500, 2000, true)
@@ -64,7 +64,7 @@ function GrapplingHookAbility:startpull()
 	self.hookentity:pull(self.target.entity)
 
 	self.movement = sol.movement.create("target")
-	self.movement:set_speed(300)
+	self.movement:set_speed(600)
 	self.movement:set_target(self.entitydata.entity)
 	self.movement:set_smooth(true)
 	self.movement:start(self.hookentity.target)

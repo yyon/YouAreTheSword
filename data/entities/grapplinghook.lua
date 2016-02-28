@@ -31,7 +31,7 @@ function entity:start(target)
 --	local x, y = self:get_position()
 --	local angle = self:get_angle(tox, toy)-- + math.pi
 	local movement = sol.movement.create("target")
-	movement:set_speed(300)
+	movement:set_speed(600)
 	movement:set_target(self.target.entity)
 --	movement:set_max_distance(dist)
 	movement:set_smooth(true)
@@ -57,7 +57,7 @@ function entity:pull(target)
 	self:clear_collision_tests()
 
 	movement = sol.movement.create("target")
-	movement:set_speed(300)
+	movement:set_speed(600)
 	movement:set_target(self.ability.entitydata.entity)
 	movement:set_smooth(true)
 	movement:start(self)
@@ -66,7 +66,7 @@ function entity:pull(target)
 	end
 end
 
-SPACING = 18
+SPACING = 36--18
 
 function entity:tick()
 	d = self:get_distance(self.ability.entitydata.entity)

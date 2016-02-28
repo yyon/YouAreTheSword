@@ -748,7 +748,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", FireballAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), ChargeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", FireballAbility:new(self), TransformAbility:new(self, "poison"), ShieldAbility:new(self), BombThrowAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()

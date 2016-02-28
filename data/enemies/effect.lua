@@ -292,7 +292,7 @@ function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist)
 	local angle = self.entitydata.entity:get_angle(fromentity) + math.pi
 	local movement = sol.movement.create("straight")
 	self.movement = movement
-	movement:set_speed(128)
+	movement:set_speed(250)
 	movement:set_angle(angle)
 --	movement:set_max_distance(knockbackdist)
 	movement:set_smooth(true)

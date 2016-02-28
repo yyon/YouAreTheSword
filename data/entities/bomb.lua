@@ -7,7 +7,7 @@ end
 
 function entity:start(tox, toy)
 	self:set_optimization_distance(0)
-	
+
 	self.bomb_sprite = self:create_sprite("abilities/bomb")
 	self.bomb_sprite:set_animation("stopped")
 	self.bomb_sprite:set_paused(false)
@@ -25,7 +25,7 @@ function entity:start(tox, toy)
 	local x, y = self:get_position()
 	local angle = self:get_angle(tox, toy)-- + math.pi
 	local movement = sol.movement.create("straight")
-	movement:set_speed(300)
+	movement:set_speed(600)
 	movement:set_angle(angle)
 	movement:set_max_distance(dist)
 	movement:set_smooth(true)

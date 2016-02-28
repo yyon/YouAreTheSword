@@ -28,8 +28,8 @@ function game_manager:start_game()
 	game:set_command_keyboard_binding("pause", "escape")
 
 	width, height = sol.video.get_quest_size()
-	sol.video.set_window_size(width*2, height*2)
-	sol.video.set_mode("hq2x") -- for some reason this has to be set for the mouse position to work
+--	sol.video.set_window_size(width*2, height*2)
+	sol.video.set_mode("normal") -- for some reason this has to be set for the mouse position to work
 	sol.video.set_window_size(width, height)
 
 	game:set_pause_allowed(true)
@@ -45,7 +45,7 @@ function game_manager:start_game()
 		hero:set_sword_sprite_id("")
 		hero:set_walking_speed(128)
 	end
-	
+
 	game.isgame = true
 	game.effects = {}
 
@@ -53,6 +53,8 @@ function game_manager:start_game()
 end
 
 function convert_to_map(mousex, mousey)
+	return mousex, mousey
+--[[
 	if mousex == nil then return nil, nil end
 	map = game:get_map()
 
@@ -62,6 +64,7 @@ function convert_to_map(mousex, mousey)
 	minx, miny, width, height = map:get_camera_position()
 
 	return (minx + (mousex / questwidth * width)), (miny + (mousey / questheight * height))
+	--]]
 end
 
 function sol.main:on_key_pressed(key, modifiers)
