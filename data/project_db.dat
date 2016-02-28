@@ -28,6 +28,7 @@ sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/lightning", description = "lightning" }
+sprite{ id = "adventurers/charge_sword", description = "charge sword" }
 sprite{ id = "adventurers/knight", description = "knight" }
 sprite{ id = "adventurers/swordanim", description = "swordanim" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }

@@ -25,7 +25,7 @@ function ChargeAbility:doability(tox, toy)
 	self.swordentity = map:create_custom_entity({model="charge", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.swordentity.ability = self
 
-	self.entitydata:setanimation("sword_loading_stopped")
+	self.entitydata:setanimation("charge")
 
 	self.swordentity:start(SwordAbility:get_appearance(self.entitydata.entity))
 
