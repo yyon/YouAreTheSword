@@ -59,6 +59,20 @@ function possess_o_meter:check()
 		
 	end
 
+	if self.game:is_started() then
+
+    		if self.stage_displayed <= 4
+        			and not self.game:is_suspended() then
+      			need_rebuild = true
+      			if self.sword_anim_setup:get_animation() ~= "danger" then
+        				self.sword_anim_setup:set_animation("danger")
+      			end
+    		elseif self.sword_anim_setup:get_animation() ~= "normal" then
+      			need_rebuild = true
+      			self.sword_anim_setup:set_animation("normal")
+    		end
+  	end
+
 	
 
   	-- redraw only if something has changed
@@ -78,6 +92,7 @@ end
 function possess_o_meter:rebuild_surface()
 
   	self.surface:clear()
+	self.sword_anim_setup:draw(self.surface,0,0)
 	self.all_sword_img:draw_region(self.stage_displayed * 112, 0, 112, 50, self.surface, 0, 0)
 	
 end

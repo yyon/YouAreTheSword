@@ -1,9 +1,18 @@
 animation{
-  name = "sword progress bar",
+  name = "normal",
   src_image = "hud/sword_soul_meter.png",
   frame_delay = 200,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 0, frame_width = 112, frame_height = 50, origin_x = 0, origin_y = 0, num_frames = 17 },
+    { x = 0, y = 0, frame_width = 112, frame_height = 50, origin_x = 0, origin_y = 0 },
+  },
+}
+animation{
+  name = "danger",
+  src_image = "hud/sword_soul_meter.png",
+  frame_delay = 200,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 50, frame_width = 112, frame_height = 50, origin_x = 0, origin_y = 0, num_frames = 4 },
   },
 }
