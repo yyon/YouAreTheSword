@@ -14,3 +14,5 @@ http://opengameart.org/content/battle-sword
 	normal sword
 http://www.niffylux.com/components/com_virtuemart/shop_image/product/niffylux_00001466_M_terre-craquelee-10.jpg
 	earthquake texture
+http://opengameart.org/content/hearts-set-01
+	healing ability heart
