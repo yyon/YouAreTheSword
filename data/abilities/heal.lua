@@ -7,6 +7,7 @@ RANGE = 800
 
 function HealAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "HealAbility", RANGE, 0, 500, false)
+	self.heals = true
 end
 
 function HealAbility:doability()

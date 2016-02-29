@@ -119,7 +119,7 @@ function EntityData:bepossessedbyhero()
 
 	local hero = self.entity:get_game():get_hero()
 
-	hero.souls = hero.souls + 0.1
+	hero.souls = hero.souls + 0.4
 	if hero.souls > 1 then hero.souls = 1 end
 
 	hero:unfreeze()
@@ -499,6 +499,13 @@ function EntityData:dodamage(target, damage, aspects)
 
 	target.life = target.life - damage
 	target:log("damaged", damage, "life", target.life)
+	
+	if aspects.lifesteal then
+		self.life = self.life + damage
+		if self.life > self.maxlife then
+			self.life = self.maxlife
+		end
+	end
 
 	--aggro
 	if not target.entity.ishero and target ~= self then
@@ -764,7 +771,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", HealAbility:new(self), TransformAbility:new(self, "damage"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "lifesteal"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()
@@ -786,7 +793,7 @@ greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "green", "adventurers/guy3", 10, "green", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "green", "adventurers/guy3", 10, "green", HealAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
 end
 
 function greenclass:getlogcolor()
