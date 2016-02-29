@@ -68,10 +68,6 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	self:log("initialized")
 end
 
-function EntityData:get_max_health()
-	return self.maxhealth
-end
-
 --[[
 function EntityData:createfromclass(entity, class)
 	if class == "purple" then

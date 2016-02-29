@@ -14,18 +14,35 @@ function hud_manager:create(game)
 	local health_builder = require("scripts/hud/health")
 	local soul_builder = require("scripts/hud/possess_o_meter")
 	local sword_health_builder = require("scripts/hud/sword_health")
+	local panel_builder = require("scripts/hud/panel")
 
-	local menu = health_builder:new(game)
+	menu = health_builder:new(game)
   	menu:set_dst_position(0, 10)
   	hud.elements[#hud.elements + 1] = menu
 
-	local menu = soul_builder:new(game)
+	menu = soul_builder:new(game)
   	menu:set_dst_position(10, 65)
   	hud.elements[#hud.elements + 1] = menu
 
-	local menu = sword_health_builder:new(game)
+	menu = sword_health_builder:new(game)
   	menu:set_dst_position(10, 10)
   	hud.elements[#hud.elements + 1] = menu
+	
+	menu = panel_builder:new(game)
+	menu:set_dst_position(490,645)
+	hud.elements[#hud.elements + 1] = menu
+
+	menu = panel_builder:new(game)
+	menu:set_dst_position(565,645)
+	hud.elements[#hud.elements + 1] = menu
+
+	menu = panel_builder:new(game)
+	menu:set_dst_position(640,645)
+	hud.elements[#hud.elements + 1] = menu
+
+	menu = panel_builder:new(game)
+	menu:set_dst_position(715,645)
+	hud.elements[#hud.elements + 1] = menu
 
 	function hud:quit()
 		if hud:is_enabled() then
