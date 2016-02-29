@@ -17,7 +17,7 @@ end
 function possess_o_meter:initialize(game)
 
   	self.game = game
-  	self.surface = sol.surface.create(952, 50)
+  	self.surface = sol.surface.create(1904, 100)
   	self.dst_x = 0
   	self.dst_y = 0
 	self.stage_displayed = 0
@@ -41,12 +41,16 @@ function possess_o_meter:check()
 	
 	hero = game:get_hero()
     	if hero.entitydata ~= nil then
-		-- stage = math.floor(hero.possess_clock / 7)
-		stage = hero.souls * 16
+		
+		stage = math.floor(hero.souls * 16)
+		--print(math.floor(hero.souls * 16))
 	end
 
-	if stage > 15 then
+	if stage > 16 then
 		stage = 16
+	end
+	if stage < 0 then
+		stage = 0
 	end
 
 	if stage ~= self.stage_displayed then
@@ -74,7 +78,7 @@ end
 function possess_o_meter:rebuild_surface()
 
   	self.surface:clear()
-	self.all_sword_img:draw_region(self.stage_displayed * 56, 0, 56, 25, self.surface, x, y)
+	self.all_sword_img:draw_region(self.stage_displayed * 112, 0, 112, 50, self.surface, 0, 0)
 	
 end
 

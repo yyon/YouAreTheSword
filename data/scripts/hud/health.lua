@@ -16,7 +16,7 @@ end
 function health:initialize(game)
 
   	self.game = game
-  	self.surface = sol.surface.create(90, 18)
+  	self.surface = sol.surface.create(180, 36)
   	self.dst_x = 0
   	self.dst_y = 0
   	self.empty_heart_sprite = sol.sprite.create("hud/empty_heart")
@@ -46,7 +46,7 @@ function health:check()
 		
     	end
 
-	self:set_dst_position(1360-18*nb_max_hearts, 10)
+	self:set_dst_position(1270-18*nb_max_hearts, 10)
     
 
   	--  max life
