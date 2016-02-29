@@ -17,7 +17,7 @@ end
 function sword_health:initialize(game)
 
   	self.game = game
-  	self.surface = sol.surface.create(1904, 50)
+  	self.surface = sol.surface.create(224, 50)
   	self.dst_x = 0
   	self.dst_y = 0
 	self.stage = 0
@@ -72,7 +72,7 @@ function sword_health:rebuild_surface()
   	self.surface:clear()
 	self.sword_anim_setup:draw(self.surface,0,0)
 	self.all_sword_img:draw_region(0,0,112,50,self.surface,0,0)
-	self.all_sword_img:draw_region(1792, 0, math.floor(self.stage*112), 50, self.surface, 0, 0)
+	self.all_sword_img:draw_region(112, 0, math.floor(self.stage*112), 50, self.surface, 0, 0)
 	
 end
 
