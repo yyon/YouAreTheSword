@@ -489,6 +489,11 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.method ~= nil then
 		aspects.method()
 	end
+	if aspects.holy ~= nil then
+		if target.undead then
+			damage = damage + 5
+		end
+	end
 
 	-- do damage
 	damage = damage * self.stats.damage
@@ -771,7 +776,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "lifesteal"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "holy"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()
@@ -793,11 +798,23 @@ greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "green", "adventurers/guy3", 10, "green", HealAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "green", "adventurers/guy3", 10, "green", HealAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), LightningAbility:new(self), basestats)
 end
 
 function greenclass:getlogcolor()
 	return "92"
 end
 
-return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass}
+skeletonclass = EntityData:subclass("skeletonclass")
+
+function skeletonclass:initialize(entity)
+	basestats = {}
+	EntityData.initialize(self, entity, "skeleton", "monsters/skeleton", 10, "monster", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
+	self.undead = true
+end
+
+function skeletonclass :getlogcolor()
+	return "35"
+end
+
+return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass}

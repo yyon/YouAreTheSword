@@ -121,3 +121,11 @@ destination{
   direction = 2,
 }
 
+enemy{
+  layer = 0,
+  x = 976,
+  y = 597,
+  direction = 0,
+  breed = "skeleton",
+}
+

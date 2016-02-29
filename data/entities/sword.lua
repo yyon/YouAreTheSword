@@ -39,7 +39,6 @@ end
 
 function entity:updatedirection()
 	if self:get_direction() == 3 then
-		print("###########")
 		self:bring_to_front()
 		x,y,layer = self:get_position()
 		if self.isontop then

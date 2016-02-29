@@ -90,6 +90,7 @@ sprite{ id = "hud/empty_heart", description = "empty hearts" }
 sprite{ id = "hud/soul_meter", description = "sword possess meter" }
 sprite{ id = "hud/sword_health", description = "sword's health" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
+sprite{ id = "monsters/skeleton", description = "skeleton" }
 sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
@@ -174,6 +175,7 @@ sound{ id = "wrong", description = "wrong" }
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
 enemy{ id = "green_test", description = "Test green" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
+enemy{ id = "skeleton", description = "skeleton" }
 enemy{ id = "yellow_test", description = "Test yellow" }
 
 entity{ id = "blackhole", description = "blackhole" }

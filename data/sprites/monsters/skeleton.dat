@@ -1,0 +1,34 @@
+animation{
+  name = "stopped",
+  src_image = "monsters/skeleton.png",
+  directions = {
+    { x = 0, y = 192, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
+  name = "sword",
+  src_image = "monsters/skeleton.png",
+  frame_delay = 60,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 448, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
+    { x = 0, y = 256, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
+    { x = 0, y = 320, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
+    { x = 0, y = 384, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
+  },
+}
+animation{
+  name = "walking",
+  src_image = "monsters/skeleton.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 192, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+  },
+}
