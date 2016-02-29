@@ -11,7 +11,12 @@ function entity:start(ability, tox, toy)
 	self.sprite:set_paused(false)
 
 	local x, y = self:get_position()
-	local angle = self:get_angle(tox, toy)-- + math.pi
+	local angle
+	if self:isangle() then
+		angle = tox
+	else
+		angle = self:get_angle(tox, toy)-- + math.pi
+	end
 	self.angle = angle
 	local movement = sol.movement.create("straight")
 	movement:set_speed(self:getspeed())
@@ -59,6 +64,10 @@ end
 -- methods to overwrite:
 
 function entity:onfinished()
+end
+
+function entity:isangle()
+	return false
 end
 
 function entity:getspeed()

@@ -5,11 +5,11 @@ BlackHoleAbility= Ability:subclass("BlackHoleAbility")
 
 RANGE = 20000
 
-function EarthquakeAbility:initialize(entitydata)
+function BlackHoleAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "BlackHoleAbility", RANGE, 500, 10000, true)
 end
 
-function EarthquakeAbility:doability(tox, toy)
+function BlackHoleAbility:doability(tox, toy)
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()
@@ -29,7 +29,7 @@ function EarthquakeAbility:doability(tox, toy)
 	self:finish()
 end
 
-function EarthquakeAbility:attack(entity, blackhole)
+function BlackHoleAbility:attack(entity, blackhole)
 	if not self.entitydata:cantargetentity(entity) then
 		return
 	end
@@ -46,4 +46,4 @@ function EarthquakeAbility:attack(entity, blackhole)
 end
 
 
-return EarthquakeAbility
+return BlackHoleAbility

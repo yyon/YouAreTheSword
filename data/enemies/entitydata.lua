@@ -14,6 +14,7 @@ FireballAbility = require "abilities/fireball"
 EarthquakeAbility = require "abilities/earthquake"
 BlackholeAbility = require "abilities/blackhole"
 HealAbility = require "abilities/heal"
+HealExplosionAbility = require "abilities/healexplosion"
 
 Effects = require "enemies/effect"
 
@@ -776,7 +777,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "holy"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "holy"), ShieldAbility:new(self), HealExplosionAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()

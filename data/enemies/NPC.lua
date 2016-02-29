@@ -232,7 +232,14 @@ end
 function enemy:close_to(entity)
 	local _, _, layer = self:get_position()
 	local _, _, hero_layer = entity:get_position()
-	return layer == hero_layer and self:get_distance(entity) < 40
+	dist = self:get_distance(entity)
+	if layer ~= hero_layer then
+		return false
+	end
+	if dist > 40 then
+		return false
+	end
+	return true
 end
 
 function enemy:targetenemy()
@@ -271,7 +278,12 @@ end
 
 function enemy:cantarget(entitydata)
 	if not self.entitydata:cantarget(entitydata) then return false end
-	if self:get_distance(entitydata.entity) > 200 then return false end
+	if self:get_distance(entitydata.entity) > 200 and self.target == nil then
+		return false
+	end
+	if self:get_distance(entitydata.entity) > 800 then
+		return false
+	end
 
 	return true
 end

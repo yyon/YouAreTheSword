@@ -33,6 +33,7 @@ sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
 sprite{ id = "abilities/charge_sword", description = "charge_sword" }
 sprite{ id = "abilities/droppedsword", description = "droppedsword" }
 sprite{ id = "abilities/earthquake", description = "earthquake" }
+sprite{ id = "abilities/explosionheart", description = "explosionheart" }
 sprite{ id = "abilities/fireball", description = "fireball" }
 sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
@@ -186,6 +187,7 @@ entity{ id = "earthquake", description = "earthquake" }
 entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }
 entity{ id = "heart", description = "heart" }
+entity{ id = "heartexplosion", description = "heartexplosion" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
