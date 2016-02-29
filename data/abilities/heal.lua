@@ -6,11 +6,11 @@ HealAbility = Ability:subclass("HealAbility")
 RANGE = 800
 
 function HealAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "HealAbility", RANGE, 0, 500, true)
+	Ability.initialize(self, entitydata, "HealAbility", RANGE, 0, 500, false)
 end
 
 function HealAbility:doability()
-	self.ticker = Effects.Ticker(self.blackhole.ability.entitydata, 100, function() self:sendheart() end)
+	self.ticker = Effects.Ticker(self.entitydata, 100, function() self:sendheart() end)
 end
 
 function HealAbility:sendheart()
@@ -36,4 +36,11 @@ function HealAbility:onfinish()
 	self.ticker:remove()
 end
 
-return FireballAbility
+function HealAbility:heal(target)
+	target.life = target.life + 0.1
+	if target.life > target.maxlife then
+		target.life = target.maxlife
+	end
+end
+
+return HealAbility

@@ -13,6 +13,7 @@ LightningAbility = require "abilities/lightning"
 FireballAbility = require "abilities/fireball"
 EarthquakeAbility = require "abilities/earthquake"
 BlackholeAbility = require "abilities/blackhole"
+HealAbility = require "abilities/heal"
 
 Effects = require "enemies/effect"
 
@@ -747,7 +748,9 @@ end
 
 function EntityData:gettargetpos()
 	if self.entity.ishero then
-		return self.entity.targetx, self.entity.targety
+		mousex, mousey = sol.input.get_mouse_position()
+		return mousex, mousey
+--		return self.entity.targetx, self.entity.targety
 	else
 		target = self.entity.entitytoattack
 		if target ~= nil then
@@ -761,7 +764,7 @@ purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "damage"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
+	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", HealAbility:new(self), TransformAbility:new(self, "damage"), ShieldAbility:new(self), BlackholeAbility:new(self), basestats)
 end
 
 function purpleclass:getlogcolor()

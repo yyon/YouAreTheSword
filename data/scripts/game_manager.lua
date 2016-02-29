@@ -54,21 +54,6 @@ function game_manager:start_game()
 	tick()
 end
 
-function convert_to_map(mousex, mousey)
-	return mousex, mousey
---[[
-	if mousex == nil then return nil, nil end
-	map = game:get_map()
-
-	questwidth, questheight = sol.video.get_window_size()
-	questwidth, questheight = questwidth * 2, questheight * 2
-
-	minx, miny, width, height = map:get_camera_position()
-
-	return (minx + (mousex / questwidth * width)), (miny + (mousey / questheight * height))
-	--]]
-end
-
 function sol.main:on_key_pressed(key, modifiers)
 	hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
@@ -76,13 +61,12 @@ function sol.main:on_key_pressed(key, modifiers)
 		return
 	end
 
-	mousex, mousey = sol.input.get_mouse_position()
-	x, y = convert_to_map(mousex, mousey)
+	x, y = hero.entitydata:gettargetpos()
 	
 	if x ~= nil then
 		hero:set_direction(hero:get_direction4_to(x, y))
-		hero.targetx = x
-		hero.targety = y
+--		hero.targetx = x
+--		hero.targety = y
 	end
 
 	if hero:get_state() ~= "freezed" then
@@ -116,8 +100,9 @@ function  sol.main:on_key_released(key, modifiers)
 		return
 	end
 
-	mousex, mousey = sol.input.get_mouse_position()
-	x, y = convert_to_map(mousex, mousey)
+--	mousex, mousey = sol.input.get_mouse_position()
+--	x, y = convert_to_map(mousex, mousey)
+	x, y = hero.entitydata:gettargetpos()
 
 	if x ~= nil then
 		hero:set_direction(hero:get_direction4_to(x, y))
@@ -140,8 +125,9 @@ function sol.main:on_mouse_pressed(button, ...)
 		return
 	end
 
-	mousex, mousey = sol.input.get_mouse_position()
-	x, y = convert_to_map(mousex, mousey)
+--	mousex, mousey = sol.input.get_mouse_position()
+--	x, y = convert_to_map(mousex, mousey)
+	x, y = hero.entitydata:gettargetpos()
 
 	if x == nil then
 		print("No mouse position!")
@@ -190,8 +176,9 @@ function tick()
 		hero.souls = hero.souls - 0.001
 		if hero.souls < 0 then hero.souls = 0 end
 
-		mousex, mousey = sol.input.get_mouse_position()
-		x, y = convert_to_map(mousex, mousey)
+--		mousex, mousey = sol.input.get_mouse_position()
+--		x, y = convert_to_map(mousex, mousey)
+		x, y = hero.entitydata:gettargetpos()
 
 		hero.entitydata:tickability(x, y)
 
