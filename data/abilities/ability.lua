@@ -6,11 +6,14 @@ Effects = require "enemies/effect"
 local math = require "math"
 
 function Ability:initialize(...)
+	-- called when entitydata is first created
 	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze = ...
 	self.canuse = true
 end
 
 function Ability:start(...)
+	-- call this to use the ability
+	
 	self.entitydata.usingability = self
 	if self.dofreeze then
 --		self.entitydata:freeze(self.name, 1, function() self:cancel() end)
@@ -27,6 +30,7 @@ function Ability:start(...)
 end
 
 function Ability:finishwarmup()
+	-- once the warmup timer is finished, actually uses the ability
 	self.usingability = true
 	self:doability(unpack(self.args))
 end
@@ -34,6 +38,7 @@ end
 COOLDOWNTICKTIME = 50
 
 function Ability:finishability()
+	-- cleans up the ability to be able to use it again
 	self.entitydata:log("ability finish")
 	self.entitydata.usingability = nil
 	if self.warmuptimer ~= nil then
@@ -58,6 +63,7 @@ function Ability:finishability()
 end
 
 function Ability:finishcooldown()
+	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
 	
 	if self.cooldownticker ~= nil then
@@ -71,6 +77,8 @@ function Ability:finishcooldown()
 end
 
 function Ability:cooldowntick()
+	-- updates the HUD cooldown timer
+	
 	self.cooldowntimetracker = self.cooldowntimetracker + COOLDOWNTICKTIME
 	fraction = self.cooldowntimetracker / self.cooldown
 	timeremaining = math.floor((self.cooldown - self.cooldowntimetracker) / 1000)
@@ -79,18 +87,21 @@ function Ability:cooldowntick()
 	-- Add HUD call here
 	-- Hud:UpdateCooldown(self, fraction, timeremaining)
 end
+function Ability:tick(...)
+	-- You should probably use Effects:Ticker instead of this
+end
 
-function Ability:dodamage(entitydata, damage, aspects)
-	if self.entitydata:cantarget(entitydata) then
-		self.entitydata:dodamage(entitydata, damage, aspects)
+-- functions you can call
+function Ability:finish()
+	-- call to finish using ability. You must do this at some point.
+	if self.usingability then
+		self:onfinish()
+		self:finishability()
 	end
 end
 
-function Ability:doability()
-	print("WARNING! a blank ability was called")
-	self:finish()
-end
 function Ability:cancel()
+	-- call this to cancel the ability. Rarely used.
 	if self.usingability then
 		self.entitydata:log("Ability canceled:", self.name)
 		self:oncancel()
@@ -98,25 +109,9 @@ function Ability:cancel()
 --		self.cooldowntimer:remove()
 	end
 end
-function Ability:finish()
-	if self.usingability then
-		self:onfinish()
-		self:finishability()
-	end
-end
-function Ability:onfinish()
-end
-function Ability:oncancel()
-	self:onfinish()
-end
-
-function Ability:tick(...)
-end
-function Ability:blockdamage(fromentity, damage, aspects)
-	return damage, aspects
-end
 
 function Ability:AOE(distance, damage, aspects, fromentity)
+	-- damage all people a certain distance from something.
 	if fromentity == nil then
 		fromentity = self.entitydata.entity
 	else
@@ -131,7 +126,36 @@ function Ability:AOE(distance, damage, aspects, fromentity)
 	end
 end
 
-function Ability:keyrelease()
+
+function Ability:dodamage(entitydata, damage, aspects)
+	-- check if you can attack someone, then attack them
+	if self.entitydata:cantarget(entitydata) then
+		self.entitydata:dodamage(entitydata, damage, aspects)
+	end
 end
+
+
+-- functions you can overwrite
+
+function Ability:doability()
+	-- called when ability is used
+	print("WARNING! a blank ability was called")
+	self:finish()
+end
+function Ability:onfinish()
+	-- called when ability is finished (when ability:finish() is called)
+end
+function Ability:oncancel()
+	-- called when ability is canceled in the middle of using it (for example, when user is damaged by another attack)
+	self:onfinish()
+end
+function Ability:keyrelease()
+	-- called when the keyboard key used to call this ability is released (does not work for mouse buttons currently)
+end
+function Ability:blockdamage(fromentity, damage, aspects)
+	-- if user is damaged while using this ability, the damage can be modified
+	return damage, aspects
+end
+
 
 return Ability

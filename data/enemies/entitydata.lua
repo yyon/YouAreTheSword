@@ -2,6 +2,7 @@ local class = require "middleclass"
 
 EntityData = class("EntityData")
 
+-- import all of the abilities
 SwordAbility = require "abilities/sword"
 TransformAbility = require "abilities/swordtransform"
 ShieldAbility = require "abilities/shield"
@@ -18,7 +19,11 @@ HealExplosionAbility = require "abilities/healexplosion"
 
 Effects = require "enemies/effect"
 
+local math = require "math"
+
 function EntityData:log(...)
+	-- print something in chat using a different color for each person
+	
 	colstart = ""
 	colend = ""
 	if self.getlogcolor ~= nil then
@@ -32,17 +37,24 @@ end
 
 --local maxhealth
 
-function EntityData:initialize(entity, class, main_sprite, life, team, swordability, transformability, blockability, specialability, stats)
+function getrandomfromlist(l)
+	index = math.random(1,#l)
+	return l[index]
+end
+
+function EntityData:initialize(entity, class, main_sprite, life, team, swordabilities, transformabilities, blockabilities, specialabilities, stats)
+	-- called when entitydata is created
+	
 	self.entity = entity
 	self.class = class
 	self.main_sprite = main_sprite
 	self.life = life
 	self.maxlife = self.life
 	self.team = team
-	self.swordability = swordability
-	self.transformability = transformability
-	self.blockability = blockability
-	self.specialability = specialability
+	self.swordability = getrandomfromlist(swordabilities)
+	self.transformability = getrandomfromlist(transformabilities)
+	self.blockability = getrandomfromlist(blockabilities)
+	self.specialability = getrandomfromlist(specialabilities)
 	self.effects = {}
 	self.positionlisteners = {}
 
@@ -180,6 +192,8 @@ function EntityData:unpossess()
 end
 
 function EntityData:cantarget(entitydata)
+	-- is this entitydata a person which can be attacked?
+	
 	if entitydata == nil then
 --		self:log("can't target", entitydata, "because entitydata nil")
 		return false
@@ -204,6 +218,8 @@ function EntityData:cantarget(entitydata)
 end
 
 function EntityData:cantargetentity(entity)
+	-- is this entity a person which can be attacked?
+	
 	if entity == nil then
 --		self:log("can't target", entitydata, "because entity nil")
 		return false
@@ -222,6 +238,10 @@ function EntityData:isvisible()
 end
 
 function EntityData:getotherentities()
+	-- return an iterator of all other people on the map
+	-- does not include self
+	-- usage: for otherentitydata in entitydata:getotherentities()
+	
 	local map = self.entity:get_map()
 	local heroentity = map:get_hero()
 	local saidhero = false
@@ -271,6 +291,8 @@ end
 
 function EntityData:startability(ability, ...)
 	-- call this to use an ability
+	-- example: entitydata:startability("special")
+	
 	if self.usingability == nil then
 		actualability = self:getability(ability)
 		if actualability.canuse then
@@ -283,6 +305,8 @@ function EntityData:startability(ability, ...)
 end
 
 function EntityData:endability(ability, ...)
+	-- stop using a certain ability
+	
 	if self.usingability ~= nil then
 		if self.usingability == self:getability(ability) then
 			self.usingability:finish(...)
@@ -291,6 +315,8 @@ function EntityData:endability(ability, ...)
 end
 
 function EntityData:keyrelease(ability)
+	-- keyboardrelease -> this method -> calls ability's keyrelease method
+	
 	if self.usingability ~= nil then
 		if self.usingability == self:getability(ability) then
 			self.usingability:keyrelease()
@@ -299,18 +325,25 @@ function EntityData:keyrelease(ability)
 end
 
 function EntityData:tickability(...)
+	-- not really used
+	
 	if self.usingability ~= nil then
 		self.usingability:tick(...)
 	end
 end
 
 function EntityData:canuseability(ability)
+	-- can you use this ability?
+	-- for example, is cooldown finished? is another ability currently being used?
+	
 	actualability = self:getability(ability)
 	return actualability.canuse
 end
 
 function EntityData:withinrange(ability, entitydata)
 	-- if an entity can be attacked using the ability
+	-- this is to help the AI decide when to attack
+	
 	ability = self:getability(ability)
 	range = ability.range
 	d = self.entity:get_distance(entitydata.entity)
@@ -319,6 +352,8 @@ function EntityData:withinrange(ability, entitydata)
 end
 
 function EntityData:getdirection()
+	-- facing direction
+	
 	if self.entity.ishero then
 		return self.entity:get_direction()
 	else
@@ -327,6 +362,8 @@ function EntityData:getdirection()
 end
 
 function EntityData:setanimation(anim)
+	-- set current sprite animation
+	
 	if self.entity.ishero then
 		self.entity:set_animation(anim)
 	else
@@ -415,6 +452,7 @@ end
 
 function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
+	
 	if not self:cantarget(target) and aspects.natural == nil then
 		self:log("Can't target!")
 		return
@@ -555,6 +593,7 @@ function EntityData:dodamage(target, damage, aspects)
 end
 
 function EntityData:physicaleffectanimation(name, time)
+	-- Use Effects.<some physical effect> intead
 --[[
 	-- TODO: put into generic time-based effect thingy
 	entity = self.entity
@@ -598,6 +637,8 @@ function EntityData:kill()
 end
 
 function EntityData:swordkill()
+	-- sword health runs out
+	
 	game = self.entity:get_game()
 	if game.nodeaths then
 		return
@@ -616,6 +657,8 @@ function EntityData:swordkill()
 end
 
 function EntityData:drop(hero)
+	-- sword is dropped on the ground if person holding demon sword is killed
+	
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
 		hero:set_animation("stopped")
@@ -626,6 +669,8 @@ function EntityData:drop(hero)
 end
 
 function EntityData:throwsword(entitydata2)
+	-- throws the demon sword to another person
+	
 	self:log("going to throw to", entitydata2.class)
 	if self.entity.ishero then
 		if self.usingability ~= nil then
@@ -687,6 +732,9 @@ function EntityData:throwsword(entitydata2)
 end
 
 function EntityData:getrandom()
+	-- get random person on map
+	-- does not include self
+	
 	require "math"
 
 	map = game:get_map()
@@ -703,7 +751,7 @@ function EntityData:getrandom()
 end
 
 function EntityData:throwrandom()
-	-- throw sword to random entity
+	-- throw sword to random person
 	entity = self:getrandom()
 
 	if entity ~= nil then
@@ -716,6 +764,9 @@ function EntityData:throwrandom()
 end
 
 function EntityData:getstraightestentity(x, y)
+	-- If you want to aim at an entity using the angle between the entity and the mouse, this will find the entity with the closest angle
+	-- getclosestentity is used instead (returns slightly different result)
+	
 	local math = require "math"
 
 	angle = self.entity:get_angle(x, y)
@@ -740,6 +791,10 @@ function EntityData:getstraightestentity(x, y)
 end
 
 function EntityData:getclosestentity(x, y)
+	-- find person closest to a point
+	-- does not include self
+	-- can be used to find person closest to mouse pointer (used with gettargetpos)
+	
 	mindist = 99999
 	minentity = nil
 
@@ -759,6 +814,8 @@ function EntityData:getclosestentity(x, y)
 end
 
 function EntityData:throwclosest(mousex, mousey)
+	-- throw the sword to the person closest to the mouse
+	
 --[[
 	for entity in self.entity:get_map():get_entities("") do
 		if entity.entitydata ~= nil then
@@ -781,6 +838,9 @@ function EntityData:throwclosest(mousex, mousey)
 end
 
 function EntityData:gettargetpos()
+	-- returns the mouse pointer position if hero
+	-- returns AI aiming position if AI
+	
 	if self.entity.ishero then
 		mousex, mousey = sol.input.get_mouse_position()
 		return mousex, mousey
@@ -794,11 +854,22 @@ function EntityData:gettargetpos()
 	end
 end
 
+-- Actual classes
+
 purpleclass = EntityData:subclass("purpleclass")
 
 function purpleclass:initialize(entity)
+	class = "purple"
+	main_sprite = "adventurers/knight"
+	life = 10
+	team = "purple" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "holy")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {HealExplosionAbility:new(self)}
 	basestats = {}
-	EntityData.initialize(self, entity, "purple", "adventurers/knight", 10, "purple", SwordAbility:new(self), TransformAbility:new(self, "holy"), ShieldAbility:new(self), HealExplosionAbility:new(self), basestats)
+	
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 function purpleclass:getlogcolor()
@@ -808,8 +879,17 @@ end
 yellowclass = EntityData:subclass("yellowclass")
 
 function yellowclass:initialize(entity)
+	class = "yellow"
+	main_sprite = "adventurers/guy2"
+	life = 10
+	team = "yellow" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "holy"), TransformAbility:new(self, "lifesteal")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {BombThrowAbility:new(self), GrapplingHookAbility:new(self)}
 	basestats = {}
-	EntityData.initialize(self, entity, "yellow", "adventurers/guy2", 10, "yellow", FireballAbility:new(self), TransformAbility:new(self, "electric"), ShieldAbility:new(self), BombThrowAbility:new(self), basestats)
+	
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 function yellowclass:getlogcolor()
@@ -819,8 +899,17 @@ end
 greenclass = EntityData:subclass("greenclass")
 
 function greenclass:initialize(entity)
+	class = "green"
+	main_sprite = "adventurers/guy3"
+	life = 10
+	team = "green" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {HealAbility:new(self), FireballAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), HealExplosionAbility:new(self)}
 	basestats = {}
-	EntityData.initialize(self, entity, "green", "adventurers/guy3", 10, "green", HealAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), LightningAbility:new(self), basestats)
+	
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 function greenclass:getlogcolor()
@@ -830,9 +919,18 @@ end
 skeletonclass = EntityData:subclass("skeletonclass")
 
 function skeletonclass:initialize(entity)
+	class = "skeleton"
+	main_sprite = "monsters/skeleton"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {ShieldBashAbility:new(self)}
 	basestats = {}
-	EntityData.initialize(self, entity, "skeleton", "monsters/skeleton", 10, "monster", SwordAbility:new(self), TransformAbility:new(self, "ap"), ShieldAbility:new(self), ShieldBashAbility:new(self), basestats)
 	self.undead = true
+	
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 function skeletonclass :getlogcolor()

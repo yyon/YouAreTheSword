@@ -1,5 +1,10 @@
 local game_manager = {}
 
+local math = require "math"
+local os = require "os"
+math.randomseed(os.time())
+math.random()
+
 game = nil
 
 entitydatas = require "enemies/entitydata"

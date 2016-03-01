@@ -3,8 +3,15 @@ local class = require "middleclass"
 local math = require "math"
 
 Effect = class("Effect")
+-- Generic effects - temporary modifications. actual Effects extend the Effect class
 
 function Effect:initialize(affected, ...)
+	-- called when :new() ... is called.
+	-- example: FreezeEffect:new(entitydata, 500) -> starts the freeze effect on entitydata
+	-- affected is a handle to an actual game object
+	-- affected usually points to the entitydata it affects. But it can also point to the game object.
+	-- No 2 abilities with the same key can exist at the same time for the same entitydata
+	
 	if affected.isgame then
 		self.game = affected
 	else
@@ -29,13 +36,14 @@ function Effect:initialize(affected, ...)
 end
 
 function Effect:alreadyexists(currenteffect)
+	-- called if entitydata already has the effect with the same key
+	
 	print("WARNING! tried to add a new effect when one already exists", self:getkey())
 end
 
-function Effect:start()
-end
-
 function Effect:remove()
+	-- call to remove the effect
+	
 	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 	else
@@ -50,13 +58,14 @@ function Effect:remove()
 end
 
 function Effect:forceremove()
+	-- remove the effect even if the effect doesn't exist
+	
 	Effect.remove(self)
 end
 
-function Effect:endeffect()
-end
-
 function Effect:getgame()
+	-- get game object
+	
 	if self.game ~= nil then
 		return self.game
 	else
@@ -65,6 +74,7 @@ function Effect:getgame()
 end
 
 function Effect:removeeffectafter(time)
+	-- call this to automatically remove the effect after a wait
 	print("going to remove", self, time)
 --	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
@@ -72,16 +82,15 @@ function Effect:removeeffectafter(time)
 	sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
 --	end
 end
-
 function Effect:endtimer()
 	self:remove()
 end
 
 function Effect:starttick(timestep)
+	-- call this to call the tick() method every timestep
 	self.timestep = timestep
 	sol.timer.start(self:getgame():get_hero(), self.timestep, function() self:dotick() end) -- starting tick immediately causes strange bugs
 end
-
 function Effect:dotick()
 	if not self.active then return end
 	self:tick()
@@ -89,11 +98,31 @@ function Effect:dotick()
 end
 
 function Effect:get(affected)
+	-- <Effect Class>:get(entiydata) -> returns active effect of type <Effect Class>
 	if affected == nil then affected = self.affected end
 	return affected.effects[self:getkey()]
 end
 
+-- Overwrite these functions:
+
+function Effect:start()
+	-- Actually start the effect
+end
+
+function Effect:endeffect()
+	-- called when effect is ended
+end
+
+function Effect:tick()
+	-- called every tick if starttick() was called at the beginning
+end
+
+-- Different effects
+
 SimpleTimer = Effect:subclass("SimpleTimer")
+-- Simple timer: pass in a time and a function to be called when the timer ends
+-- Example: Effects.SimpleTimer(entitydata, 500, function() dosomething() end)
+
 function SimpleTimer:start(time, endfunction)
 	self.endfunction = endfunction
 	self:removeeffectafter(time)
@@ -124,6 +153,8 @@ function Ticker:getkey()
 end
 
 PhysicalEffect = Effect:subclass("PhysicalEffect")
+-- Displays some animated sprite over the entity
+-- Use classes that extend this instead of this class directly
 
 function PhysicalEffect:start(time)
 	w,h = self.entitydata.entity:get_size()
@@ -146,6 +177,11 @@ function PhysicalEffect:getkey()
 end
 
 FireEffect = PhysicalEffect:subclass("FireEffect")
+-- catches person on fire (draws flames + damages entitydata)
+-- Effects.FireEffect:new(entitydata, aspect)
+-- aspect.time = time that they will be on fire
+-- aspect.damage = damage that they take each timestep
+-- aspect.timestep = damage them every timestep
 
 function FireEffect:getspritename()
 	return "fire"
@@ -170,6 +206,8 @@ function FireEffect:getkey()
 end
 
 ElectricalEffect = PhysicalEffect:subclass("ElectricalEffect")
+-- draws electricity over them
+-- Use electricalstuneffect instead
 
 function ElectricalEffect:getspritename()
 	return "stun"
@@ -180,6 +218,8 @@ function ElectricalEffect:getkey()
 end
 
 PoisonEffect = PhysicalEffect:subclass("PoisonEffect")
+-- draws poison over them
+-- use PoisonWeaknessEffect instead
 
 function PoisonEffect:getspritename()
 	return "poison"
@@ -190,6 +230,11 @@ function PoisonEffect:getkey()
 end
 
 FreezeEffect = Effect:subclass("FreezeEffect")
+-- Prevents the player/AI from moving the person
+-- This will stun the person (if for a certain amount of time, use StunEffect instead)
+-- or allow the person to be moved from other code
+-- Usage: FreezeEffect:new(entitydata)
+-- You must call effect:remove() at some point to end this
 
 function FreezeEffect:start(...)
 	if self.entitydata.freezeeffects == nil then
@@ -252,11 +297,8 @@ function FreezeEffect:getkey()
 end
 
 StunEffect = FreezeEffect:subclass("StunEffect")
-
-function StunEffect:alreadyexists(currenteffect, time)
-	FreezeEffect.alreadyexists(self, currenteffect)
-	self:removeeffectafter(time)
-end
+-- Stuns entity for a certain amount of time
+-- Usage: Effects.StunEffect:new(entitydata, time)
 
 function StunEffect:alreadyexists(currenteffect, time)
 	FreezeEffect.alreadyexists(self, currenteffect)
@@ -269,6 +311,8 @@ function StunEffect:start(time)
 end
 
 ElectricalStunEffect = StunEffect:subclass("ElectricalStunEffect")
+-- Stuns entity for a certain amount of time and draws electricity over them
+-- Usage: Effects.ElectricalStunEffect(entitydata, time)
 
 function ElectricalStunEffect:startfreezeeffects(...)
 	self.electricaleffect = ElectricalEffect:new(self.entitydata)
@@ -281,6 +325,10 @@ function ElectricalStunEffect:remove(...)
 end
 
 KnockBackEffect = FreezeEffect:subclass("KnockBackEffect")
+-- Pushes the person back from an effect
+-- use <attacker's entitydata>:dodamage(<target's entitydata>, damage, aspects)
+-- with aspect.knockback = time
+-- instead of using this directly
 
 --[[
 function KnockBackEffect:start(fromentitydata, knockbackdist)
@@ -336,6 +384,9 @@ function KnockBackEffect:endtimer()
 end
 
 StatEffect = Effect:subclass("StatEffect")
+-- modifies the entitydata's stats for a certain amount of time
+-- example: Effects.StatEffect:new(entitydata, "defense", 0, 1000)
+
 function StatEffect:start(stat, newvalue, time)
 	self.stat = stat
 	self.entitydata.stats[self.stat] = newvalue
@@ -349,6 +400,8 @@ function StatEffect:getkey()
 end
 
 PoisonWeaknessEffect = StatEffect:subclass("PoisonWeaknessEffect")
+-- poisons person for a certain amount of time
+-- Usage: Effects.PoisonWeaknessEffect:new(entitydata, <damage multiplier - poisoned people do less damage>, time)
 
 function PoisonWeaknessEffect:start(weakness, time)
 	StatEffect.start(self, "damage", weakness, time)
