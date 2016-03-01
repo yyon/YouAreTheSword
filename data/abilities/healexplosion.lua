@@ -8,6 +8,7 @@ RANGE = 20000
 
 function HealExplosionAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "HealExplosionAbility", RANGE, 500, 10000, true)
+	self.heals = true
 end
 
 function HealExplosionAbility:doability(tox, toy)

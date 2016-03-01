@@ -16,3 +16,10 @@ http://www.niffylux.com/components/com_virtuemart/shop_image/product/niffylux_00
 	earthquake texture
 http://opengameart.org/content/hearts-set-01
 	healing ability heart
+
+http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator/#?body=skeleton
+http://opengameart.org/content/lpc-spider
+http://opengameart.org/content/lpc-skeleton
+http://opengameart.org/content/lpc-male-sheets
+
+http://opengameart.org/lpc-art-entries
