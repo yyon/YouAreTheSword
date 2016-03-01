@@ -502,6 +502,13 @@ function EntityData:dodamage(target, damage, aspects)
 	target.life = target.life - damage
 	target:log("damaged", damage, "life", target.life)
 	
+	if target.entity.ishero then
+		target.entity.swordhealth = target.entity.swordhealth - damage
+		if target.entity.swordhealth <= 0 then
+			target:swordkill()
+		end
+	end
+	
 	if aspects.lifesteal then
 		self.life = self.life + damage
 		if self.life > self.maxlife then
@@ -588,6 +595,24 @@ function EntityData:kill()
 	end
 
 	self.entity.entitydata = nil
+end
+
+function EntityData:swordkill()
+	game = self.entity:get_game()
+	if game.nodeaths then
+		return
+	end
+	
+	print("HERO DEATH!")
+	
+	for key, effect in pairs(self.effects) do
+		effect:forceremove()
+	end
+	
+	hero.swordhealth = hero.maxswordhealth
+	
+	-- TODO: make this work
+	self.entity:teleport(self.entity:get_map():get_id())
 end
 
 function EntityData:drop(hero)

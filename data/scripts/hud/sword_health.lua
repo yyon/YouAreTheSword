@@ -39,7 +39,7 @@ function sword_health:check()
 	
 	hero = game:get_hero()
     	if hero.entitydata ~= nil then
-		self.stage = hero.souls
+		self.stage = hero.swordhealth / hero.maxswordhealth
 	end
 
 

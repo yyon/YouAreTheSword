@@ -60,9 +60,11 @@ end
 function Ability:finishcooldown()
 	self.canuse = true
 	
-	if self.entitydata.entity.ishero then
+	if self.cooldownticker ~= nil then
 		self.cooldownticker:remove()
+	end
 	
+	if self.entitydata.entity.is_hero then
 		-- Add HUD call here
 		-- Hud:EndCooldown(self)
 	end
