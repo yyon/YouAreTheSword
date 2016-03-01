@@ -3,6 +3,8 @@ local class = require "middleclass"
 Ability = class("Ability")
 Effects = require "enemies/effect"
 
+local math = require "math"
+
 function Ability:initialize(...)
 	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze = ...
 	self.canuse = true
@@ -17,13 +19,19 @@ function Ability:start(...)
 	self.canuse = false
 	self.args = {...}
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
---	self:doability(...)
+	
+	if self.entitydata.entity.ishero then
+		-- Add HUD call here
+		-- Hud:StartAbilityUsed(self)
+	end
 end
 
 function Ability:finishwarmup()
 	self.usingability = true
 	self:doability(unpack(self.args))
 end
+
+COOLDOWNTICKTIME = 50
 
 function Ability:finishability()
 	self.entitydata:log("ability finish")
@@ -37,12 +45,39 @@ function Ability:finishability()
 --		self.entitydata:unfreeze(self.name, false)
 	end
 	self.usingability = false
+	
+	if self.entitydata.entity.ishero then
+		-- Add HUD call here
+		-- Hud:StartCooldown(self)
+	
+		self.cooldowntimetracker = 0
+		self.cooldownticker = Effects.Ticker(self.entitydata, COOLDOWNTICKTIME, function() self:cooldowntick() end)
+	end
+	
 	self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 end
 
 function Ability:finishcooldown()
 	self.canuse = true
+	
+	if self.entitydata.entity.ishero then
+		self.cooldownticker:remove()
+	
+		-- Add HUD call here
+		-- Hud:EndCooldown(self)
+	end
 end
+
+function Ability:cooldowntick()
+	self.cooldowntimetracker = self.cooldowntimetracker + COOLDOWNTICKTIME
+	fraction = self.cooldowntimetracker / self.cooldown
+	timeremaining = math.floor((self.cooldown - self.cooldowntimetracker) / 1000)
+	print(fraction, timeremaining)
+	
+	-- Add HUD call here
+	-- Hud:UpdateCooldown(self, fraction, timeremaining)
+end
+
 function Ability:dodamage(entitydata, damage, aspects)
 	if self.entitydata:cantarget(entitydata) then
 		self.entitydata:dodamage(entitydata, damage, aspects)
