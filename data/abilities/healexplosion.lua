@@ -5,7 +5,7 @@ local math = require "math"
 HealExplosionAbility = Ability:subclass("HealExplosionAbility")
 
 function HealExplosionAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "HealExplosionAbility", 20000, 500, 10000, true)
+	Ability.initialize(self, entitydata, "HealExplosionAbility", 20000, 500, 10000, true, "casting")
 	self.heals = true
 end
 
