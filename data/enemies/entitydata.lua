@@ -18,6 +18,7 @@ HealAbility = require "abilities/heal"
 HealExplosionAbility = require "abilities/healexplosion"
 AngelSummonAbility = require "abilities/angelsummon"
 NormalAbility = require "abilities/normalattack"
+SidestepAbility = require "abilities/sidestep"
 
 Effects = require "enemies/effect"
 
@@ -884,7 +885,7 @@ function yellowclass:initialize(entity)
 	team = "yellow" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy")}
-	blockabilities = {ShieldAbility:new(self)}
+	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {EarthquakeAbility:new(self)}
 	basestats = {}
 	
