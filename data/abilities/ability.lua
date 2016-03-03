@@ -7,7 +7,7 @@ local math = require "math"
 
 function Ability:initialize(...)
 	-- called when entitydata is first created
-	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze = ...
+	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze, self.warmupanimation = ...
 	self.canuse = true
 end
 
@@ -23,6 +23,10 @@ function Ability:start(...)
 	self.args = {...}
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 	
+	if self.warmupanimation ~= nil then
+		self.entitydata:setanimation(self.warmupanimation)
+	end
+	
 	if self.entitydata.entity.ishero then
 		-- Add HUD call here
 		-- Hud:StartAbilityUsed(self)
@@ -31,6 +35,10 @@ end
 
 function Ability:finishwarmup()
 	-- once the warmup timer is finished, actually uses the ability
+	if self.warmupanimation ~= nil then
+		self.entitydata:setanimation("stopped")
+	end
+	
 	self.usingability = true
 	self:doability(unpack(self.args))
 end
