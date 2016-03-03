@@ -587,7 +587,7 @@ function EntityData:dodamage(target, damage, aspects)
 --		end
 	end
 
-	if target.life <= 0 then
+	if target.life <= 0 or aspects.instantdeath then
 		target:kill()
 	end
 end
@@ -661,6 +661,7 @@ function EntityData:drop(hero)
 	
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
+		hero.entitydata = nil
 		hero:set_animation("stopped")
 		hero:set_tunic_sprite_id("abilities/droppedsword")
 		hero:freeze()
