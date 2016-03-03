@@ -863,7 +863,7 @@ function EntityData:gettargetpos()
 		target = self.entity.entitytoattack
 		if target ~= nil then
 			if self.usingability.abilitytype == "block" then
-				x, y = target:getblockposition(target)
+				x, y = self.entity:getblockposition(target)
 			else
 				x, y = target.entity:get_position()
 			end
@@ -947,7 +947,7 @@ function mageclass:initialize(entity)
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self), FireballAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
-	blockabilities = {ShieldAbility:new(self)}
+	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}
 	
@@ -967,7 +967,7 @@ function clericclass:initialize(entity)
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self), HealAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy"), TransformAbility:new(self, "lifesteal")}
-	blockabilities = {ShieldAbility:new(self)}
+	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {AngelSummonAbility:new(self), HealExplosionAbility:new(self)}
 	basestats = {}
 	
@@ -1030,7 +1030,7 @@ function evilmageclass:initialize(entity)
 	team = "monster" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {FireballAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
-	blockabilities = {ShieldAbility:new(self)}
+	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}
 	
@@ -1050,7 +1050,7 @@ function spiderclass:initialize(entity)
 	team = "monster" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {NormalAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "poison")}
-	blockabilities = {ShieldAbility:new(self)}
+	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {BombThrowAbility:new(self)}
 	basestats = {}
 	

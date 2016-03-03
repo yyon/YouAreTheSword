@@ -136,11 +136,17 @@ function GoTowardsState:tick()
 	target = self.npc.entitytoattack
 
 	attackability = math.random(2) == 1 and "special" or "normal"
+	cantusespecial = false
 	if not self.npc.entitydata:canuseability("special") or self.npc.entitydata:getability("special").heals then
+		cantusespecial = true
 		attackability = "normal"
 	end
 	if not self.npc.entitydata:canuseability("normal") or self.npc.entitydata:getability("normal").heals then
-		attackability = "special"
+		if cantusespecial then
+			attackability = nil
+		else
+			attackability = "special"
+		end
 	end
 
 	x, y = target.entity:get_position()
@@ -156,13 +162,13 @@ function GoTowardsState:tick()
 			end
 		end
 
-		if self.npc.entitydata:withinrange(attackability, target) then
-			targetability = target.usingability
-			if targetability ~= nil and targetability.abilitytype ~= "block" then
-				-- block if being attacked
-				ability = self.npc.entitydata:startability("block")
-			else
-				-- attack if close enough
+		targetability = target.usingability
+		if targetability ~= nil and targetability.abilitytype ~= "block" and self.npc:get_distance(target.entity) < targetability.range then
+			-- block if being attacked
+			ability = self.npc.entitydata:startability("block")
+		elseif attackability ~= nil then
+			-- attack if close enough
+			if self.npc.entitydata:withinrange(attackability, target) then
 				self.npc.entitydata:startability(attackability, x, y)
 			end
 		end
