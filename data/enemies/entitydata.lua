@@ -852,8 +852,11 @@ function EntityData:gettargetpos()
 	-- returns AI aiming position if AI
 	
 	if self.entity.ishero then
+		map = self.entity:get_map()
 		mousex, mousey = sol.input.get_mouse_position()
-		return mousex, mousey
+		cx, cy, cw, ch = map:get_camera_position()
+		x, y = mousex + cx, mousey + cy
+		return x, y
 --		return self.entity.targetx, self.entity.targety
 	else
 		target = self.entity.entitytoattack
