@@ -250,7 +250,7 @@ function enemy:targetenemy()
 --		entitieslist[#entitieslist+1] = hero.entitydata
 --	end
 
-	if hero.isdropped then
+	if hero.isdropped and self.entitydata.team == "adventurer" then
 		return hero
 	end
 
