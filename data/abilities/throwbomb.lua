@@ -3,13 +3,14 @@ Ability = require "abilities/ability"
 
 BombAbility = Ability:subclass("BombAbility")
 
-RANGE = 800
-
 function BombAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "bomb", RANGE, 500, 4000, true)
+	Ability.initialize(self, entitydata, "bomb", 800, 500, 4000, true)
 end
 
-function BombAbility:doability(tox, toy)
+function BombAbility:doability()
+	tox, toy = self.entitydata:gettargetpos()
+	tox, toy = self:withinrange(tox, toy)
+	
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()

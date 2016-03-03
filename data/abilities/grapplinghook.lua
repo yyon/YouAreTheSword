@@ -5,10 +5,8 @@ Effects = require "enemies/effect"
 
 GrapplingHookAbility = Ability:subclass("GrapplingHookAbility")
 
-RANGE = 800
-
 function GrapplingHookAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "grappling hook", RANGE, 500, 2000, true)
+	Ability.initialize(self, entitydata, "grappling hook", 800, 500, 2000, true)
 end
 
 function GrapplingHookAbility:doability(tox, toy)

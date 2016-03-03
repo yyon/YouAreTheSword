@@ -44,9 +44,13 @@ sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" 
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
+sprite{ id = "adventurers/angel", description = "angel" }
+sprite{ id = "adventurers/cleric", description = "cleric" }
+sprite{ id = "adventurers/eyes", description = "eyes" }
 sprite{ id = "adventurers/guy2", description = "guy2" }
 sprite{ id = "adventurers/guy3", description = "guy3" }
 sprite{ id = "adventurers/knight", description = "knight" }
+sprite{ id = "adventurers/mage", description = "mage" }
 sprite{ id = "adventurers/shield", description = "shield" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }

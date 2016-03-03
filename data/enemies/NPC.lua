@@ -555,3 +555,9 @@ function enemy:getblockposition(target)
 	
 	return x,y
 end
+
+function enemy:on_position_changed(x, y, layer)
+	if self.entitydata ~= nil then
+		self.entitydata:updatechangepos(x,y,layer)
+	end
+end

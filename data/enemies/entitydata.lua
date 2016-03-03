@@ -108,14 +108,12 @@ function EntityData:applytoentity()
 	end
 
 	self:updatemovementspeed()
+end
 
-	function self.entity:on_position_changed(x, y, layer)
-		if self.entitydata ~= nil then
-			for index, value in pairs(self.entitydata.positionlisteners) do
-				if value ~= nil then
-					value(x, y, layer)
-				end
-			end
+function EntityData:updatechangepos(x, y, layer)
+	for index, value in pairs(self.positionlisteners) do
+		if value ~= nil then
+			value(x, y, layer)
 		end
 	end
 end
@@ -1013,6 +1011,7 @@ function orcclass:initialize(entity)
 	blockabilities = {ShieldAbility:new(self)}
 	specialabilities = {ShieldBashAbility:new(self)}
 	basestats = {}
+	self.cantdraweyes = true
 	
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
@@ -1053,6 +1052,7 @@ function spiderclass:initialize(entity)
 	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {BombThrowAbility:new(self)}
 	basestats = {}
+	self.cantdraweyes = true
 	
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end

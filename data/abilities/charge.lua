@@ -5,10 +5,8 @@ SwordAbility = require "abilities/sword"
 
 ChargeAbility = Ability:subclass("ChangeAbility")
 
-local RANGE = 800
-
 function ChargeAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "charge", RANGE, 500, 2000, true)
+	Ability.initialize(self, entitydata, "charge", 800, 500, 2000, true)
 end
 
 function ChargeAbility:doability(tox, toy)
@@ -30,8 +28,8 @@ function ChargeAbility:doability(tox, toy)
 	self.swordentity:start(SwordAbility:get_appearance(self.entitydata.entity))
 
 	dist = self.entitydata.entity:get_distance(tox, toy)
-	if dist > RANGE then
-		dist = RANGE
+	if dist > self.range then
+		dist = self.range
 	end
 
 	local x, y = self.entitydata.entity:get_position()

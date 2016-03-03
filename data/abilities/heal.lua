@@ -3,10 +3,8 @@ Ability = require "abilities/ability"
 
 HealAbility = Ability:subclass("HealAbility")
 
-RANGE = 800
-
 function HealAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "HealAbility", RANGE, 0, 500, false)
+	Ability.initialize(self, entitydata, "HealAbility", 800, 0, 500, false)
 	self.heals = true
 end
 

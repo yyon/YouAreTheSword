@@ -3,24 +3,19 @@ Ability = require "abilities/ability"
 
 EarthquakeAbility= Ability:subclass("EarthquakeAbility")
 
-RANGE = 20000
-
 function EarthquakeAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "EarthquakeAbility", RANGE, 500, 10000, true)
+	Ability.initialize(self, entitydata, "EarthquakeAbility", 20000, 500, 10000, true)
 end
 
-function EarthquakeAbility:doability(tox, toy)
+function EarthquakeAbility:doability()
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()
 	w,h = entity:get_size()
 	entitydata = self.entitydata
 
-	  dist = self.entitydata.entity:get_distance(tox, toy)
-	  if dist > RANGE then
-	    self:finish()
-	    return
-	  end
+	tox, toy = self.entitydata:gettargetpos()
+	tox, toy = self:withinrange(tox, toy)
 	
 	self.earthquakeentity = map:create_custom_entity({model="earthquake", x=tox, y=toy, layer=layer, direction=0, width=w, height=h})
 	self.earthquakeentity.ability = self

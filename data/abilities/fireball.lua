@@ -3,10 +3,8 @@ Ability = require "abilities/ability"
 
 FireballAbility = Ability:subclass("FireballAbility")
 
-RANGE = 800
-
 function FireballAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "FireballAbility", RANGE, 0, 500, true)
+	Ability.initialize(self, entitydata, "FireballAbility", 800, 0, 500, true)
 end
 
 function FireballAbility:doability()

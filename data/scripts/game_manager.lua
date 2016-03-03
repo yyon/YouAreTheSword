@@ -57,6 +57,39 @@ function game_manager:start_game()
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
 		hero:set_walking_speed(128)
+	
+		hero.eyessprite = sol.sprite.create("adventurers/eyes")
+		
+		function hero:on_position_changed(x, y, layer)
+			if self.entitydata ~= nil then
+				self.entitydata:updatechangepos(x,y,layer)
+			end
+		end
+		
+	end
+	
+	function game:on_map_changed(map)
+		function map:on_draw(dst_surface)
+			hero = map:get_hero()
+			if hero.entitydata ~= nil then
+				if not hero.entitydata.cantdraweyes then
+					anim = hero:get_animation()
+					if hero.eyessprite:has_animation(anim) then
+						if anim ~= hero.eyessprite:get_animation() then
+							hero.eyessprite:set_animation(anim)
+						end
+						d = hero:get_direction()
+						if hero.eyessprite:get_num_directions() < d then
+							d = 0
+						end
+						hero.eyessprite:set_direction(d)
+					
+						x, y = hero:get_position()
+						map:draw_sprite(hero.eyessprite, x, y)
+					end
+				end
+			end
+		end
 	end
 
 	game.isgame = true

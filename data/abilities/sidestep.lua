@@ -4,23 +4,13 @@ Ability = require "abilities/ability"
 SidestepAbility = Ability:subclass("SidestepAbility")
 -- a replacement for sword ability for classes that don't have that animation
 
-RANGE = 300
-
 function SidestepAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "NormalAbility", RANGE, 0, 50, true)
+	Ability.initialize(self, entitydata, "NormalAbility", 300, 0, 50, true)
 end
 
 function SidestepAbility:doability()
-	print("START")
 	tox, toy = self.entitydata:gettargetpos()
-	
-	if self.entitydata.entity:get_distance(tox, toy) > RANGE then
-		x, y = self.entitydata.entity:get_position()
-		d = self.entitydata.entity:get_distance(tox, toy)
-		vx, vy = tox - x, toy - y
-		vx, vy = vx / d * RANGE, vy / d * RANGE
-		tox, toy = x + vx, y + vy
-	end
+	tox, toy = self:withinrange(tox, toy)
 	
 	self.entitydata:setanimation("walking")
 	

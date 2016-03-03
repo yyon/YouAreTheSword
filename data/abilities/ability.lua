@@ -37,7 +37,7 @@ end
 
 COOLDOWNTICKTIME = 50
 
-function Ability:finishability()
+function Ability:finishability(skipcooldown)
 	-- cleans up the ability to be able to use it again
 	self.entitydata:log("ability finish")
 	self.entitydata.usingability = nil
@@ -51,15 +51,19 @@ function Ability:finishability()
 	end
 	self.usingability = false
 	
-	if self.entitydata.entity.ishero then
-		-- Add HUD call here
-		-- Hud:StartCooldown(self)
+	if skipcooldown then
+		self:finishcooldown()
+	else
+		if self.entitydata.entity.ishero then
+			-- Add HUD call here
+			-- Hud:StartCooldown(self)
 	
-		self.cooldowntimetracker = 0
-		self.cooldownticker = Effects.Ticker(self.entitydata, COOLDOWNTICKTIME, function() self:cooldowntick() end)
+			self.cooldowntimetracker = 0
+			self.cooldownticker = Effects.Ticker(self.entitydata, COOLDOWNTICKTIME, function() self:cooldowntick() end)
+		end
+	
+		self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 	end
-	
-	self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 end
 
 function Ability:finishcooldown()
@@ -92,11 +96,11 @@ function Ability:tick(...)
 end
 
 -- functions you can call
-function Ability:finish()
+function Ability:finish(skipcooldown)
 	-- call to finish using ability. You must do this at some point.
 	if self.usingability then
 		self:onfinish()
-		self:finishability()
+		self:finishability(skipcooldown)
 	end
 end
 
@@ -134,6 +138,17 @@ function Ability:dodamage(entitydata, damage, aspects)
 	end
 end
 
+function Ability:withinrange(tox, toy)
+	if self.entitydata.entity:get_distance(tox, toy) > self.range then
+		x, y = self.entitydata.entity:get_position()
+		d = self.entitydata.entity:get_distance(tox, toy)
+		vx, vy = tox - x, toy - y
+		vx, vy = vx / d * self.range, vy / d * self.range
+		tox, toy = x + vx, y + vy
+	end
+	
+	return tox, toy
+end
 
 -- functions you can overwrite
 
