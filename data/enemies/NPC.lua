@@ -533,3 +533,19 @@ end
 
 function enemy:on_attacking_hero(hero, enemy_sprite)
 end
+
+BLOCKJUMP = 100
+
+function enemy:getblockposition(target)
+	angle = self:get_angle(target.entity)
+	if math.random(1,2) == 1 then
+		angle = angle + math.pi/2
+	else
+		angle = angle - math.pi/2
+	end
+	
+	x, y = self:get_position()
+	x, y = x + math.cos(angle)*BLOCKJUMP, y + math.sin(angle)*BLOCKJUMP
+	
+	return x,y
+end

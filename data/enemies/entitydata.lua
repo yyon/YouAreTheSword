@@ -848,7 +848,11 @@ function EntityData:gettargetpos()
 	else
 		target = self.entity.entitytoattack
 		if target ~= nil then
-			x, y = target.entity:get_position()
+			if self.usingability.abilitytype == "block" then
+				x, y = target:getblockposition(target)
+			else
+				x, y = target.entity:get_position()
+			end
 			return x, y
 		end
 	end
