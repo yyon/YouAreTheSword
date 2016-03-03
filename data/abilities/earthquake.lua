@@ -40,7 +40,9 @@ function EarthquakeAbility:attack(entity, earthquake)
 	aspects = {}
 	aspects.knockback = 1000
 	aspects.dontblock = true
+	aspects.knockbackrandomangle = true
 	aspects.fromentity = earthquake
+	
 
 	self:dodamage(entitydata, damage, aspects)
 end
