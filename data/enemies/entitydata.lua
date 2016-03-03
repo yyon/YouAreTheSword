@@ -17,6 +17,7 @@ BlackholeAbility = require "abilities/blackhole"
 HealAbility = require "abilities/heal"
 HealExplosionAbility = require "abilities/healexplosion"
 AngelSummonAbility = require "abilities/angelsummon"
+NormalAbility = require "abilities/normalattack"
 
 Effects = require "enemies/effect"
 
@@ -1036,6 +1037,26 @@ function evilmageclass:getlogcolor()
 	return "35"
 end
 
+spiderclass = EntityData:subclass("spiderclass")
+
+function spiderclass:initialize(entity)
+	class = "spider"
+	main_sprite = "monsters/spiders/spider" .. string.format("%02d", math.random(1,11))
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "poison")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {BombThrowAbility:new(self)}
+	basestats = {}
+	
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function spiderclass:getlogcolor()
+	return "35"
+end
+
 -- Summoned:
 
 angelclass = EntityData:subclass("angelclass")
@@ -1058,4 +1079,4 @@ function angelclass:getlogcolor()
 	return "35"
 end
 
-return {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass}
+return {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass}
