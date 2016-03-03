@@ -18,8 +18,8 @@ function entity:start(tox, toy)
 	self.timer = Effects.SimpleTimer:new(self.ability.entitydata, 1000, function() self:startwarning() end)
 
 	dist = self:get_distance(tox, toy)
-	if dist > RANGE then
-		dist = RANGE
+	if dist > self.ability.range then
+		dist = self.ability.range
 	end
 
 	local x, y = self:get_position()
