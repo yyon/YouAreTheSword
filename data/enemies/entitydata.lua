@@ -883,9 +883,9 @@ function yellowclass:initialize(entity)
 	life = 10
 	team = "yellow" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "holy"), TransformAbility:new(self, "lifesteal")}
+	transformabilities = {TransformAbility:new(self, "holy")}
 	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {BombThrowAbility:new(self), GrapplingHookAbility:new(self)}
+	specialabilities = {EarthquakeAbility:new(self)}
 	basestats = {}
 	
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
