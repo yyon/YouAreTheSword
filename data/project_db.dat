@@ -28,6 +28,7 @@ tileset{ id = "magecity", description = "magecity" }
 tileset{ id = "magecity2", description = "magecity2" }
 tileset{ id = "silveriv", description = "silveriv" }
 
+sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
 sprite{ id = "abilities/blackhole", description = "blackhole" }
 sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
