@@ -95,6 +95,7 @@ sprite{ id = "hero/tunic1", description = "Hero tunic 1" }
 sprite{ id = "hero/tunic2", description = "Hero tunic 2" }
 sprite{ id = "hero/tunic3", description = "Hero tunic 3" }
 sprite{ id = "hud/empty_heart", description = "empty hearts" }
+sprite{ id = "hud/lifebar", description = "lifebar" }
 sprite{ id = "hud/soul_meter", description = "sword possess meter" }
 sprite{ id = "hud/sword_health", description = "sword's health" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }

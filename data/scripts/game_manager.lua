@@ -68,6 +68,8 @@ function game_manager:start_game()
 		
 	end
 	
+	game.lifebarsprite = sol.sprite.create("hud/lifebar")
+	
 	function game:on_map_changed(map)
 		function map:on_draw(dst_surface)
 			hero = map:get_hero()
@@ -87,6 +89,21 @@ function game_manager:start_game()
 						x, y = hero:get_position()
 						map:draw_sprite(hero.eyessprite, x, y)
 					end
+				end
+			end
+			
+			for entity in self:get_entities("") do
+				if entity.entitydata ~= nil then
+					x, y = entity:get_position()
+					y = y - 65
+					
+					if entity.entitydata.life > 0 then
+						frame = math.floor((1 - entity.entitydata.life / entity.entitydata.maxlife) * 49)
+					else
+						frame = 49
+					end
+					game.lifebarsprite:set_frame(frame)
+					map:draw_sprite(game.lifebarsprite, x, y)
 				end
 			end
 		end
