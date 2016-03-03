@@ -129,3 +129,15 @@ enemy{
   breed = "skeleton",
 }
 
+custom_entity{
+  name = "spikeTrap",
+  layer = 0,
+  x = 296,
+  y = 189,
+  width = 32,
+  height = 32,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
