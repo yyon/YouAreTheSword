@@ -141,3 +141,14 @@ custom_entity{
   model = "spiketrap",
 }
 
+custom_entity{
+  layer = 0,
+  x = 616,
+  y = 349,
+  width = 256,
+  height = 256,
+  direction = 0,
+  sprite = "Traps/spikes_larger",
+  model = "spiketrap",
+}
+
