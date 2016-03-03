@@ -345,14 +345,11 @@ function KnockBackEffect:alreadyexists(currenteffect, fromentitydata, knockbackd
 end
 --]]
 
-function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, randomangle)
+function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, angle)
 	self:removeeffectafter(knockbackdist)
 
 	local x, y = self.entitydata.entity:get_position()
-	local angle
-	if randomangle then
-		angle = math.random() * 2 * math.pi
-	else
+	if angle == nil then
 		angle = self.entitydata.entity:get_angle(fromentity) + math.pi
 	end
 	local movement = sol.movement.create("straight")

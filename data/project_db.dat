@@ -2,6 +2,7 @@ map{ id = "combat_test_map", description = "For Testing Combat" }
 map{ id = "first_map", description = "First map" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "test2", description = "test2" }
+map{ id = "traps", description = "traps" }
 
 tileset{ id = "0", description = "House" }
 tileset{ id = "1", description = "Light World" }
@@ -186,6 +187,7 @@ entity{ id = "blackhole", description = "blackhole" }
 entity{ id = "blackholeparticle", description = "blackholeparticle" }
 entity{ id = "bomb", description = "bomb" }
 entity{ id = "charge", description = "charge" }
+entity{ id = "directionaltrap", description = "directionaltrap" }
 entity{ id = "earthquake", description = "earthquake" }
 entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }

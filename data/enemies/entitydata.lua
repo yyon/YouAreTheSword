@@ -563,7 +563,14 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.knockback ~= 0 then
 		target:log("knockback")
 --		if target:getfrozen() == nil then
-			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, aspects.knockbackrandomangle)
+			angle = nil
+			if aspects.knockbackrandomangle then
+				angle = math.random() * 2 * math.pi
+			end
+			if aspects.directionalknockback then
+				angle = aspects.fromentity:get_direction() * math.pi / 2
+			end
+			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, angle)
 --[[
 			if target.entity.ishero then
 				target:freeze()
