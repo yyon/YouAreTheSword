@@ -100,15 +100,15 @@ enemy{
   x = 784,
   y = 173,
   direction = 0,
-  breed = "yellow_test",
+  breed = "green_test",
 }
 
 enemy{
   layer = 0,
-  x = 408,
-  y = 613,
+  x = 168,
+  y = 629,
   direction = 0,
-  breed = "green_test",
+  breed = "knight",
 }
 
 teletransporter{
@@ -161,9 +161,33 @@ teletransporter{
 
 enemy{
   layer = 0,
-  x = 112,
-  y = 341,
+  x = 104,
+  y = 661,
   direction = 0,
   breed = "mage",
+}
+
+enemy{
+  layer = 0,
+  x = 232,
+  y = 653,
+  direction = 0,
+  breed = "cleric",
+}
+
+enemy{
+  layer = 0,
+  x = 888,
+  y = 629,
+  direction = 0,
+  breed = "orc",
+}
+
+enemy{
+  layer = 0,
+  x = 808,
+  y = 629,
+  direction = 0,
+  breed = "evilmage",
 }
 

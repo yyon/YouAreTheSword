@@ -27,7 +27,7 @@ function HealExplosionAbility:doability(tox, toy)
 end
 
 function HealExplosionAbility:dotick()
-	for i = 1,5 do
+	for i = 1,2 do
 		entity = self.entitydata.entity
 		map = entity:get_map()
 		x,y,layer = entity:get_position()

@@ -177,9 +177,13 @@ sound{ id = "walk_on_water", description = "walk_on_water" }
 sound{ id = "wrong", description = "wrong" }
 
 
+enemy{ id = "cleric", description = "cleric" }
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
+enemy{ id = "evilmage", description = "evil mage" }
 enemy{ id = "green_test", description = "Test green" }
+enemy{ id = "knight", description = "knight" }
 enemy{ id = "mage", description = "mage" }
+enemy{ id = "orc", description = "orc" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
 enemy{ id = "skeleton", description = "skeleton" }
 enemy{ id = "yellow_test", description = "Test yellow" }

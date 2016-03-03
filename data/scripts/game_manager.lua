@@ -31,6 +31,10 @@ function game_manager:start_game()
 	game:set_command_keyboard_binding("up", dvorak and "," or "w")
 	game:set_command_keyboard_binding("down", dvorak and "o" or "s")
 	game:set_command_keyboard_binding("pause", "escape")
+	game:set_command_keyboard_binding("action", "")
+	game:set_command_keyboard_binding("attack", "")
+	game:set_command_keyboard_binding("item_1", "")
+	game:set_command_keyboard_binding("item_2", "")
 
 	width, height = sol.video.get_quest_size()
 --	sol.video.set_window_size(width*2, height*2)
@@ -48,7 +52,7 @@ function game_manager:start_game()
 		hero.souls = 1
 		hero.swordhealth = 100
 		hero.maxswordhealth = 100
-		hero.entitydata = entitydatas.knightclass:new(hero)--sol.main.load_file("enemies/entitydata")()
+		hero.entitydata = entitydatas.yellowclass:new(hero)--sol.main.load_file("enemies/entitydata")()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
@@ -64,7 +68,16 @@ end
 function sol.main:on_key_pressed(key, modifiers)
 	hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
-		print("PAUSED!")
+		if key == "space" then
+			if game.doingdialog then
+				game:simulate_command_pressed("action")
+				if not game:is_suspended() then
+					-- dialog ended
+					print("DIALOGEND!")
+					game.doingdialog = false
+				end
+			end
+		end
 		return
 	end
 
@@ -78,7 +91,25 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	if hero:get_state() ~= "freezed" then
 		if key == "space" then
-			hero.entitydata:startability("normal")
+			didsomething = false
+			
+			local map = hero:get_map()
+			for entity in map:get_entities("") do
+				if entity:get_type() == "npc" then
+					if hero:get_distance(entity) < 80 then
+						if hero:get_direction4_to(entity) == hero:get_direction() then
+							didsomething = true
+							
+							game.doingdialog = true
+							game:start_dialog(entity:get_name())
+						end
+					end
+				end
+			end
+			
+			if not didsomething then
+				hero.entitydata:startability("normal")
+			end
 		elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
 			hero.entitydata:startability("swordtransform")
 		elseif key == "left shift" then

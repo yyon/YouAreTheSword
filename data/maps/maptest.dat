@@ -1133,3 +1133,14 @@ enemy{
   breed = "green_test",
 }
 
+npc{
+  name = "test",
+  layer = 0,
+  x = 344,
+  y = 469,
+  direction = 3,
+  subtype = 0,
+  sprite = "adventurers/guy2",
+  behavior = "dialog#test",
+}
+
