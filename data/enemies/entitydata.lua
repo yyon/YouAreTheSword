@@ -733,9 +733,18 @@ function EntityData:throwsword(entitydata2)
 			EntityData:drop(hero)
 		end
 --]]
+		local hero = hero
 
 		function movement:on_finished()
 			entitydata2:bepossessedbyhero()
+		end
+		
+		function movement:on_position_changed()
+			d = hero:get_distance(entitydata2.entity)
+			if d < 30 then
+				self:stop()
+				entitydata2:bepossessedbyhero()
+			end
 		end
 	end
 end
