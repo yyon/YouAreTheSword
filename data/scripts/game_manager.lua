@@ -98,6 +98,11 @@ function sol.main:on_key_pressed(key, modifiers)
 			hero:set_walking_speed(500)
 		end
 	end
+
+	if key == "f4" and modifiers.alt then
+            -- Alt + F4: stop the program.
+            sol.main.exit()
+          end
 end
 
 function  sol.main:on_key_released(key, modifiers)
@@ -156,6 +161,7 @@ function sol.main:on_mouse_pressed(button, ...)
 end
 
 function tick()
+	
 	hero = game:get_hero()
 	
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
