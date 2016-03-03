@@ -7,7 +7,7 @@ AngelSummonAbility = Ability:subclass("AngelSummonAbility")
 RANGE = 20000
 
 function AngelSummonAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "AngelSummonAbility", RANGE, 500, 0, true)
+	Ability.initialize(self, entitydata, "AngelSummonAbility", RANGE, 500, 10000, true)
 end
 
 function AngelSummonAbility:doability(tox, toy)

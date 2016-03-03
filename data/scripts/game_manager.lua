@@ -48,7 +48,7 @@ function game_manager:start_game()
 		hero.souls = 1
 		hero.swordhealth = 100
 		hero.maxswordhealth = 100
-		hero.entitydata = entitydatas.purpleclass:new(hero)--sol.main.load_file("enemies/entitydata")()
+		hero.entitydata = entitydatas.knightclass:new(hero)--sol.main.load_file("enemies/entitydata")()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")

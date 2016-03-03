@@ -16,6 +16,12 @@ http://www.niffylux.com/components/com_virtuemart/shop_image/product/niffylux_00
 	earthquake texture
 http://opengameart.org/content/hearts-set-01
 	healing ability heart
+http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator
+	angel (base) -
+		
+http://opengameart.org/content/jastivs-artwork
+	angel (wings)
+
 
 http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator/#?body=skeleton
 http://opengameart.org/content/lpc-spider

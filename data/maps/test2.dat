@@ -159,3 +159,11 @@ teletransporter{
   destination_map = "traps",
 }
 
+enemy{
+  layer = 0,
+  x = 112,
+  y = 341,
+  direction = 0,
+  breed = "mage",
+}
+

@@ -869,13 +869,13 @@ end
 
 -- Actual classes
 
-purpleclass = EntityData:subclass("purpleclass")
+knightclass = EntityData:subclass("knightclass")
 
-function purpleclass:initialize(entity)
-	class = "purple"
+function knightclass:initialize(entity)
+	class = "knight"
 	main_sprite = "adventurers/knight"
 	life = 10
-	team = "purple" -- should be either "adventurer" or "monster" in the final version
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy")}
 	blockabilities = {ShieldAbility:new(self)}
@@ -885,7 +885,7 @@ function purpleclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function purpleclass:getlogcolor()
+function knightclass:getlogcolor()
 	return "95"
 end
 
@@ -970,4 +970,24 @@ function angelclass:getlogcolor()
 	return "35"
 end
 
-return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass}
+mageclass = EntityData:subclass("mageclass")
+
+function mageclass:initialize(entity)
+	class = "mage"
+	main_sprite = "adventurers/mage"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {HealAbility:new(self), FireballAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), HealExplosionAbility:new(self)}
+	basestats = {}
+	
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function mageclass:getlogcolor()
+	return "92"
+end
+
+return {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass}
