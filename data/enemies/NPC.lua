@@ -136,7 +136,7 @@ function GoTowardsState:tick()
 	target = self.npc.entitytoattack
 
 	attackability = math.random(2) == 1 and "special" or "normal"
-	if not self.npc.entitydata:canuseability("special") then
+	if not self.npc.entitydata:canuseability("special") or self.npc.entitydata:getability("special").heals then
 		attackability = "normal"
 	end
 	if not self.npc.entitydata:canuseability("normal") or self.npc.entitydata:getability("normal").heals then

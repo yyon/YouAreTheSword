@@ -16,6 +16,7 @@ EarthquakeAbility = require "abilities/earthquake"
 BlackholeAbility = require "abilities/blackhole"
 HealAbility = require "abilities/heal"
 HealExplosionAbility = require "abilities/healexplosion"
+AngelSummonAbility = require "abilities/angelsummon"
 
 Effects = require "enemies/effect"
 
@@ -878,7 +879,7 @@ function purpleclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy")}
 	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {HealExplosionAbility:new(self)}
+	specialabilities = {AngelSummonAbility:new(self)}
 	basestats = {}
 	
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
@@ -949,4 +950,24 @@ function skeletonclass :getlogcolor()
 	return "35"
 end
 
-return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass}
+angelclass = EntityData:subclass("angelclass")
+
+function angelclass:initialize(entity)
+	class = "angel"
+	main_sprite = "adventurers/angel"
+	life = 5
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {HealAbility:new(self), SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "holy")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {HealExplosionAbility:new(self)}
+	basestats = {}
+	
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function angelclass:getlogcolor()
+	return "35"
+end
+
+return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass}
