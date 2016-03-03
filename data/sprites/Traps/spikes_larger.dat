@@ -1,0 +1,7 @@
+animation{
+  name = "spikes",
+  src_image = "Traps/spikes_larger.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 256, frame_height = 256, origin_x = 0, origin_y = 0, num_frames = 3 },
+  },
+}
