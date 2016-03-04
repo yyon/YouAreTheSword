@@ -2,13 +2,11 @@ local class = require "middleclass"
 Ability = require "abilities/ability"
 require "scripts/movementaccuracy"
 
+TeleportAbility = Ability:subclass("TeleportAbility")
 
-function Teleport:initialize(entitydata)
-	Ability.initialize(self, entitydata, "NormalAbility", 300, 0, 50, true)
+function TeleportAbility:initialize(entitydata)
+	Ability.initialize(self, entitydata, "Teleporter", 300, 0, 50, true)
 end
-
-
-
 
 
 
@@ -28,8 +26,17 @@ function TeleportAbility:doability()
 --	self.movement:set_max_distance(dist)
 --	self.movement:start(self.entitydata.entity)
 
-	self.setposition(tox, toy)
+	self.entitydata.entity:set_position(tox, toy)
 	
 	
 --	movementaccuracy(self.movement, angle, self.entitydata.entity)
 end
+
+function TeleportAbility:oncancel()
+	self.movement:stop()
+end
+
+function TeleportAbility:onfinish()
+end
+
+return TeleportAbility
