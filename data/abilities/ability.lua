@@ -23,7 +23,7 @@ function Ability:start(...)
 	self.args = {...}
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 	
-	if self.warmupanimation ~= nil then
+	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation(self.warmupanimation)
 	end
 	
@@ -35,7 +35,7 @@ end
 
 function Ability:finishwarmup()
 	-- once the warmup timer is finished, actually uses the ability
-	if self.warmupanimation ~= nil then
+	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation("stopped")
 	end
 	
@@ -65,9 +65,6 @@ function Ability:finishability(skipcooldown)
 		if self.entitydata.entity.ishero then
 			-- Add HUD call here
 			-- Hud:StartCooldown(self)
-	
-			self.cooldowntimetracker = 0
-			self.cooldownticker = Effects.Ticker(self.entitydata, COOLDOWNTICKTIME, function() self:cooldowntick() end)
 		end
 	
 		self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
@@ -78,26 +75,22 @@ function Ability:finishcooldown()
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
 	
-	if self.cooldownticker ~= nil then
-		self.cooldownticker:remove()
-	end
-	
 	if self.entitydata.entity.is_hero then
 		-- Add HUD call here
 		-- Hud:EndCooldown(self)
 	end
 end
 
-function Ability:cooldowntick()
-	-- updates the HUD cooldown timer
+function Ability:getremainingcooldown()
+	if self.cooldowntimer == nil then
+		return nil
+	end
 	
-	self.cooldowntimetracker = self.cooldowntimetracker + COOLDOWNTICKTIME
-	fraction = self.cooldowntimetracker / self.cooldown
-	timeremaining = math.floor((self.cooldown - self.cooldowntimetracker) / 1000)
-	print(fraction, timeremaining)
-	
-	-- Add HUD call here
-	-- Hud:UpdateCooldown(self, fraction, timeremaining)
+	timeremaining = self.cooldowntimer:getremainingtime()
+	fraction = 1 - timeremaining / self.cooldown
+--	timeremaining = math.floor((self.cooldown - self.cooldowntimetracker) / 1000)
+--	print(fraction, timeremaining)
+	return fraction, timeremaining
 end
 function Ability:tick(...)
 	-- You should probably use Effects:Ticker instead of this

@@ -28,7 +28,7 @@ function entity:start(tox, toy)
 	movement:set_speed(600)
 	movement:set_angle(angle)
 	movement:set_max_distance(dist)
-	movement:set_smooth(true)
+--	movement:set_smooth(true)
 	movement:start(self)
 end
 

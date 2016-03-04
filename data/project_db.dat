@@ -213,6 +213,7 @@ entity{ id = "bomb", description = "bomb" }
 entity{ id = "charge", description = "charge" }
 entity{ id = "directionaltrap", description = "directionaltrap" }
 entity{ id = "earthquake", description = "earthquake" }
+entity{ id = "fireball", description = "fireball" }
 entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }
 entity{ id = "heart", description = "heart" }

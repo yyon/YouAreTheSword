@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 EarthquakeAbility= Ability:subclass("EarthquakeAbility")
 
 function EarthquakeAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "EarthquakeAbility", 20000, 500, 10000, true, "casting")
+	Ability.initialize(self, entitydata, "EarthquakeAbility", 20000, 2000, 10000, true, "casting")
 end
 
 function EarthquakeAbility:doability()

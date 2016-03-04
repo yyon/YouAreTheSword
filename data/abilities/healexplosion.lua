@@ -38,7 +38,9 @@ function HealExplosionAbility:onfinish()
 end
 
 function HealExplosionAbility:heal(target)
-	target.life = target.maxlife
+	if target.team == self.entitydata.team then
+		target.life = target.maxlife
+	end
 end
 
 return HealExplosionAbility

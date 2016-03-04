@@ -79,8 +79,11 @@ function Effect:removeeffectafter(time)
 --	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 --	else
-	sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
+	self.removetimer = sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
 --	end
+end
+function Effect:getremainingtime()
+	return self.removetimer:get_remaining_time()
 end
 function Effect:endtimer()
 	self:remove()

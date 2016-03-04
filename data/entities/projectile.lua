@@ -1,5 +1,8 @@
 local entity = ...
 
+--local math = require "math"
+local movements = require "scripts/movements"
+
 function entity:on_created()
   self:set_optimization_distance(0)
 end
@@ -18,11 +21,12 @@ function entity:start(ability, tox, toy)
 		angle = self:get_angle(tox, toy)-- + math.pi
 	end
 	self.angle = angle
+	
 	local movement = sol.movement.create("straight")
 	movement:set_speed(self:getspeed())
 	movement:set_angle(angle)
 	movement:set_max_distance(self:getmaxdist())
-	movement:set_smooth(true)
+--	movement:set_target(tox, toy)
 	movement:start(self)
 
 	function movement.on_position_changed(movement)

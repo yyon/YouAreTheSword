@@ -867,7 +867,7 @@ function EntityData:gettargetpos()
 		return x, y
 --		return self.entity.targetx, self.entity.targety
 	else
-		target = self.entity.entitytoattack
+		target = self.entity.lasttarget
 		if target ~= nil then
 			if self.usingability.abilitytype == "block" then
 				x, y = self.entity:getblockposition(target)
@@ -890,7 +890,7 @@ function yellowclass:initialize(entity)
 	main_sprite = "adventurers/guy2"
 	life = 10
 	team = "yellow" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
+	normalabilities = {FireballAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy")}
 	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {EarthquakeAbility:new(self)}

@@ -64,7 +64,6 @@ function GrapplingHookAbility:startpull()
 	self.movement = sol.movement.create("target")
 	self.movement:set_speed(600)
 	self.movement:set_target(self.entitydata.entity)
-	self.movement:set_smooth(true)
 	self.movement:start(self.hookentity.target)
 end
 

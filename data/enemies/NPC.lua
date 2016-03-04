@@ -284,7 +284,7 @@ end
 
 function enemy:cantarget(entitydata)
 	if not self.entitydata:cantarget(entitydata) then return false end
-	if self:get_distance(entitydata.entity) > 200 and self.target == nil then
+	if self:get_distance(entitydata.entity) > 200 and self.entitytoattack == nil then
 		return false
 	end
 	if self:get_distance(entitydata.entity) > 800 then
@@ -341,6 +341,7 @@ function enemy:tick(newstate)
 			self.entitytoattack = nil
 		else
 			target = self.entitytoattack.entity
+			self.lasttarget = self.entitytoattack
 		end
 	else
 		target = nil

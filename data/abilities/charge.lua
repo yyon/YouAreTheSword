@@ -38,7 +38,6 @@ function ChargeAbility:doability(tox, toy)
 	movement:set_speed(600)
 	movement:set_angle(angle)
 	movement:set_max_distance(dist)
-	movement:set_smooth(true)
 	movement:start(self.entitydata.entity)
 	local ca = self
 	function movement:on_position_changed()
