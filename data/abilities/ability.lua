@@ -21,6 +21,7 @@ function Ability:start(...)
 	end
 	self.canuse = false
 	self.args = {...}
+	self.usingwarmup=true
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 	
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
@@ -34,6 +35,7 @@ function Ability:start(...)
 end
 
 function Ability:finishwarmup()
+	self.usingwarmup=false
 	-- once the warmup timer is finished, actually uses the ability
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation("stopped")
@@ -112,6 +114,10 @@ function Ability:cancel()
 		self:oncancel()
 		self:finishability()
 --		self.cooldowntimer:remove()
+	elseif self.usingwarmup then
+		self.usingwarmup = false
+		self.warmuptimer:stop()
+		self.canuse = true
 	end
 end
 
