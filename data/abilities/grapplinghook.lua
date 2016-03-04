@@ -77,14 +77,20 @@ function GrapplingHookAbility:stoppulling(canceled)
 		self.hookentity:remove()
 	end
 
-	if self.target ~= nil and not canceled then
-		self.movement:stop()
-		self.freeze:remove()
+	if self.target ~= nil then
+		if self.movement ~= nil then
+			self.movement:stop()
+		end
+		if self.freeze ~= nil then
+			self.freeze:remove()
+		end
+		
+		if not canceled then
+			damage = 0
+			aspects = {stun=500, knockback=0}
 
-		damage = 0
-		aspects = {stun=500, knockback=0}
-
-		self:dodamage(self.target, damage, aspects)
+			self:dodamage(self.target, damage, aspects)
+		end
 	end
 end
 

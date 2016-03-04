@@ -1079,7 +1079,7 @@ function angelclass:initialize(entity)
 	main_sprite = "adventurers/angel"
 	life = 5
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {HealAbility:new(self), SwordAbility:new(self)}
+	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy")}
 	blockabilities = {ShieldAbility:new(self)}
 	specialabilities = {HealExplosionAbility:new(self)}
