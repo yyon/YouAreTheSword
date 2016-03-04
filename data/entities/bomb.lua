@@ -1,6 +1,7 @@
 local entity = ...
 
 Effects = require "enemies/effect"
+require "scripts/movementaccuracy"
 
 function entity:on_created()
 end
@@ -30,6 +31,7 @@ function entity:start(tox, toy)
 	movement:set_max_distance(dist)
 --	movement:set_smooth(true)
 	movement:start(self)
+	movementaccuracy(movement, angle, self)
 end
 
 function entity:startwarning()

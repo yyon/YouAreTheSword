@@ -2,6 +2,7 @@ local entity = ...
 
 local math = require "math"
 Effects = require "enemies/effect"
+require "scripts/movementaccuracy"
 
 function entity:on_created()
   self:set_optimization_distance(0)
@@ -31,10 +32,7 @@ function entity:start(ability, tox, toy)
 	
 	self.movement = movement
 	
-	self.startx, self.starty = self:get_position()
-	
 	function movement.on_position_changed(movement)
-
 		self:onposchanged()
 	end
 	function movement.on_obstacle_reached(movement)
@@ -44,17 +42,10 @@ function entity:start(ability, tox, toy)
 		self:finish()
 	end
 	
-	Effects.Ticker:new(self.ability.entitydata, 50, function() self:tick() end)
+	movementaccuracy(movement, angle, self)
 	
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
-end
-
-function entity:tick()
-	d = self:get_distance(self.startx, self.starty)
-	newx, newy = self.startx + math.cos(-self.angle)*d, self.starty + math.sin(-self.angle)*d
---	self:set_position(newx, newy)
-	self.movement:set_xy(newx, newy)
 end
 
 function entity:finish()

@@ -1,5 +1,6 @@
 local class = require "middleclass"
 Ability = require "abilities/ability"
+require "scripts/movementaccuracy"
 
 SwordAbility = require "abilities/sword"
 
@@ -49,6 +50,7 @@ function ChargeAbility:doability(tox, toy)
 	function movement.on_finished(movement)
 		ca:finish()
 	end
+	movementaccuracy(movement, angle, self.entitydata.entity)
 
 	self.entitydata.positionlisteners[self] = function(x, y, layer) self:updatepos(x, y, layer) end
 end
