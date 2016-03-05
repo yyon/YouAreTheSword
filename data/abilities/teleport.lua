@@ -5,7 +5,7 @@ require "scripts/movementaccuracy"
 TeleportAbility = Ability:subclass("TeleportAbility")
 
 function TeleportAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Teleporter", 300, 0, 50, true)
+	Ability.initialize(self, entitydata, "Teleporter", 300, 0, 500, true)
 end
 
 
@@ -28,12 +28,12 @@ function TeleportAbility:doability()
 
 	self.entitydata.entity:set_position(tox, toy)
 	
+	self:finish()
 	
 --	movementaccuracy(self.movement, angle, self.entitydata.entity)
 end
 
 function TeleportAbility:oncancel()
-	self.movement:stop()
 end
 
 function TeleportAbility:onfinish()

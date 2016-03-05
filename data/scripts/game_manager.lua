@@ -177,6 +177,27 @@ function sol.main:on_key_pressed(key, modifiers)
 			hero.entitydata:kill()
 		elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
 			hero:set_walking_speed(500)
+		elseif key == "1" or key == "2" or key == "3" or key == "4" then
+			if hero.entitydata.cheatyabilityswitcher == nil then
+				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
+			end
+			cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.transformabilities, ["3"]=hero.entitydata.blockabilities, ["4"]=hero.entitydata.specialabilities}
+			cheatyabilities = cheatyabilities[key]
+			hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
+			if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
+				hero.entitydata.cheatyabilityswitcher[key] = 1
+			end
+			cheatyability = cheatyabilities[hero.entitydata.cheatyabilityswitcher[key]]
+			if key == "1" then
+				hero.entitydata.swordability = cheatyability
+			elseif key == "2" then
+				hero.entitydata.transformability = cheatyability
+			elseif key == "3" then
+				hero.entitydata.blockability = cheatyability
+			elseif key == "4" then
+				hero.entitydata.specialability = cheatyability
+			end
+			print("CHEAT: ability changed to", cheatyability.name)
 		end
 	end
 

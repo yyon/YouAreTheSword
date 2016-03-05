@@ -898,6 +898,7 @@ function yellowclass:initialize(entity)
 	specialabilities = {EarthquakeAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -918,6 +919,7 @@ function greenclass:initialize(entity)
 	specialabilities = {BombThrowAbility:new(self), GrapplingHookAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -940,6 +942,7 @@ function knightclass:initialize(entity)
 	specialabilities = {ChargeAbility:new(self), ShieldBashAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -960,6 +963,7 @@ function mageclass:initialize(entity)
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -980,6 +984,7 @@ function clericclass:initialize(entity)
 	specialabilities = {AngelSummonAbility:new(self), HealExplosionAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -1003,6 +1008,7 @@ function skeletonclass:initialize(entity)
 	basestats = {}
 	self.undead = true
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -1024,6 +1030,7 @@ function orcclass:initialize(entity)
 	basestats = {}
 	self.cantdraweyes = true
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -1044,6 +1051,7 @@ function evilmageclass:initialize(entity)
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -1065,6 +1073,7 @@ function spiderclass:initialize(entity)
 	basestats = {}
 	self.cantdraweyes = true
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -1087,6 +1096,7 @@ function angelclass:initialize(entity)
 	specialabilities = {HealExplosionAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
