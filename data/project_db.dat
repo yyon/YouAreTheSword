@@ -43,6 +43,7 @@ sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
+sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
 sprite{ id = "adventurers/angel", description = "angel" }
 sprite{ id = "adventurers/cleric", description = "cleric" }
@@ -223,6 +224,7 @@ entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
 entity{ id = "spiketrap", description = "spiketrap" }
 entity{ id = "sword", description = "sword" }
+entity{ id = "teleportanim", description = "teleportanim" }
 
 language{ id = "en", description = "English" }
 

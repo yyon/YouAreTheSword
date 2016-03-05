@@ -74,6 +74,8 @@ function Ability:finishability(skipcooldown)
 end
 
 function Ability:finishcooldown()
+	self.entitydata:log("Ability", self.name, "finished cooldown")
+	
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
 	

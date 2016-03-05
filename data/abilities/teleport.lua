@@ -15,6 +15,15 @@ function TeleportAbility:doability()
 	self.entitydata.entity:set_position(tox, toy)
 
 	self:finish()
+	
+	-- animation
+	entity = self.entitydata.entity
+	map = entity:get_map()
+	x,y,layer = entity:get_position()
+	w,h = entity:get_size()
+	entitydata = self.entitydata
+
+	self.teleportentity = map:create_custom_entity({model="teleportanim", x=x, y=y, layer=2, direction=0, width=w, height=h})
 end
 
 return TeleportAbility
