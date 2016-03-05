@@ -5,10 +5,8 @@ Effects = require "enemies/effect"
 
 GrapplingHookAbility = Ability:subclass("GrapplingHookAbility")
 
-RANGE = 800
-
 function GrapplingHookAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "grappling hook", RANGE, 500, 2000, true)
+	Ability.initialize(self, entitydata, "grappling hook", 800, 500, 2000, true)
 end
 
 function GrapplingHookAbility:doability(tox, toy)
@@ -66,7 +64,6 @@ function GrapplingHookAbility:startpull()
 	self.movement = sol.movement.create("target")
 	self.movement:set_speed(600)
 	self.movement:set_target(self.entitydata.entity)
-	self.movement:set_smooth(true)
 	self.movement:start(self.hookentity.target)
 end
 
@@ -80,14 +77,20 @@ function GrapplingHookAbility:stoppulling(canceled)
 		self.hookentity:remove()
 	end
 
-	if self.target ~= nil and not canceled then
-		self.movement:stop()
-		self.freeze:remove()
+	if self.target ~= nil then
+		if self.movement ~= nil then
+			self.movement:stop()
+		end
+		if self.freeze ~= nil then
+			self.freeze:remove()
+		end
+		
+		if not canceled then
+			damage = 0
+			aspects = {stun=500, knockback=0}
 
-		damage = 0
-		aspects = {stun=500, knockback=0}
-
-		self:dodamage(self.target, damage, aspects)
+			self:dodamage(self.target, damage, aspects)
+		end
 	end
 end
 

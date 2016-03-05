@@ -7,7 +7,7 @@ local math = require "math"
 
 function Ability:initialize(...)
 	-- called when entitydata is first created
-	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze = ...
+	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze, self.warmupanimation = ...
 	self.canuse = true
 end
 
@@ -21,7 +21,12 @@ function Ability:start(...)
 	end
 	self.canuse = false
 	self.args = {...}
+	self.usingwarmup=true
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
+	
+	if self.warmupanimation ~= nil and self.warmup ~= 0 then
+		self.entitydata:setanimation(self.warmupanimation)
+	end
 	
 	if self.entitydata.entity.ishero then
 		-- Add HUD call here
@@ -30,14 +35,19 @@ function Ability:start(...)
 end
 
 function Ability:finishwarmup()
+	self.usingwarmup=false
 	-- once the warmup timer is finished, actually uses the ability
+	if self.warmupanimation ~= nil and self.warmup ~= 0 then
+		self.entitydata:setanimation("stopped")
+	end
+	
 	self.usingability = true
 	self:doability(unpack(self.args))
 end
 
 COOLDOWNTICKTIME = 50
 
-function Ability:finishability()
+function Ability:finishability(skipcooldown)
 	-- cleans up the ability to be able to use it again
 	self.entitydata:log("ability finish")
 	self.entitydata.usingability = nil
@@ -51,24 +61,23 @@ function Ability:finishability()
 	end
 	self.usingability = false
 	
-	if self.entitydata.entity.ishero then
-		-- Add HUD call here
-		-- Hud:StartCooldown(self)
+	if skipcooldown then
+		self:finishcooldown()
+	else
+		if self.entitydata.entity.ishero then
+			-- Add HUD call here
+			-- Hud:StartCooldown(self)
+		end
 	
-		self.cooldowntimetracker = 0
-		self.cooldownticker = Effects.Ticker(self.entitydata, COOLDOWNTICKTIME, function() self:cooldowntick() end)
+		self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 	end
-	
-	self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 end
 
 function Ability:finishcooldown()
+	self.entitydata:log("Ability", self.name, "finished cooldown")
+	
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
-	
-	if self.cooldownticker ~= nil then
-		self.cooldownticker:remove()
-	end
 	
 	if self.entitydata.entity.is_hero then
 		-- Add HUD call here
@@ -76,27 +85,27 @@ function Ability:finishcooldown()
 	end
 end
 
-function Ability:cooldowntick()
-	-- updates the HUD cooldown timer
+function Ability:getremainingcooldown()
+	if self.cooldowntimer == nil then
+		return nil
+	end
 	
-	self.cooldowntimetracker = self.cooldowntimetracker + COOLDOWNTICKTIME
-	fraction = self.cooldowntimetracker / self.cooldown
-	timeremaining = math.floor((self.cooldown - self.cooldowntimetracker) / 1000)
-	print(fraction, timeremaining)
-	
-	-- Add HUD call here
-	-- Hud:UpdateCooldown(self, fraction, timeremaining)
+	timeremaining = self.cooldowntimer:getremainingtime()
+	fraction = 1 - timeremaining / self.cooldown
+--	timeremaining = math.floor((self.cooldown - self.cooldowntimetracker) / 1000)
+--	print(fraction, timeremaining)
+	return fraction, timeremaining
 end
 function Ability:tick(...)
 	-- You should probably use Effects:Ticker instead of this
 end
 
 -- functions you can call
-function Ability:finish()
+function Ability:finish(skipcooldown)
 	-- call to finish using ability. You must do this at some point.
 	if self.usingability then
 		self:onfinish()
-		self:finishability()
+		self:finishability(skipcooldown)
 	end
 end
 
@@ -107,6 +116,10 @@ function Ability:cancel()
 		self:oncancel()
 		self:finishability()
 --		self.cooldowntimer:remove()
+	elseif self.usingwarmup then
+		self.usingwarmup = false
+		self.warmuptimer:stop()
+		self.canuse = true
 	end
 end
 
@@ -134,6 +147,17 @@ function Ability:dodamage(entitydata, damage, aspects)
 	end
 end
 
+function Ability:withinrange(tox, toy)
+	if self.entitydata.entity:get_distance(tox, toy) > self.range then
+		x, y = self.entitydata.entity:get_position()
+		d = self.entitydata.entity:get_distance(tox, toy)
+		vx, vy = tox - x, toy - y
+		vx, vy = vx / d * self.range, vy / d * self.range
+		tox, toy = x + vx, y + vy
+	end
+	
+	return tox, toy
+end
 
 -- functions you can overwrite
 

@@ -1,8 +1,8 @@
 properties{
   x = 0,
   y = 0,
-  width = 1280,
-  height = 720,
+  width = 2560,
+  height = 1440,
   tileset = "magecity",
 }
 
@@ -10,15 +10,15 @@ tile{
   layer = 0,
   x = 0,
   y = 0,
-  width = 1280,
-  height = 736,
+  width = 2560,
+  height = 1440,
   pattern = "1",
 }
 
 tile{
   layer = 0,
-  x = 960,
-  y = 320,
+  x = 2232,
+  y = 208,
   width = 320,
   height = 96,
   pattern = "3",
@@ -26,8 +26,8 @@ tile{
 
 tile{
   layer = 0,
-  x = 928,
-  y = 384,
+  x = 2200,
+  y = 272,
   width = 32,
   height = 32,
   pattern = "148",
@@ -35,8 +35,8 @@ tile{
 
 tile{
   layer = 0,
-  x = 928,
-  y = 320,
+  x = 2200,
+  y = 208,
   width = 32,
   height = 32,
   pattern = "150",
@@ -44,8 +44,8 @@ tile{
 
 tile{
   layer = 0,
-  x = 928,
-  y = 352,
+  x = 2200,
+  y = 240,
   width = 32,
   height = 32,
   pattern = "3",
@@ -53,8 +53,8 @@ tile{
 
 tile{
   layer = 0,
-  x = 896,
-  y = 352,
+  x = 2168,
+  y = 240,
   width = 32,
   height = 32,
   pattern = "132",
@@ -62,8 +62,8 @@ tile{
 
 tile{
   layer = 0,
-  x = 960,
-  y = 416,
+  x = 2232,
+  y = 304,
   width = 320,
   height = 32,
   pattern = "142",
@@ -71,11 +71,20 @@ tile{
 
 tile{
   layer = 0,
-  x = 960,
-  y = 288,
+  x = 2232,
+  y = 176,
   width = 320,
   height = 32,
   pattern = "147",
+}
+
+tile{
+  layer = 0,
+  x = 520,
+  y = 0,
+  width = 64,
+  height = 96,
+  pattern = "3",
 }
 
 destination{
@@ -88,25 +97,25 @@ destination{
 
 enemy{
   layer = 0,
-  x = 784,
-  y = 173,
+  x = 1096,
+  y = 61,
   direction = 0,
-  breed = "yellow_test",
+  breed = "green_test",
 }
 
 enemy{
   layer = 0,
-  x = 408,
-  y = 613,
+  x = 328,
+  y = 997,
   direction = 0,
-  breed = "green_test",
+  breed = "knight",
 }
 
 teletransporter{
   name = "tele1",
   layer = 0,
-  x = 1248,
-  y = 320,
+  x = 2520,
+  y = 208,
   width = 32,
   height = 96,
   destination_map = "maptest",
@@ -116,16 +125,77 @@ teletransporter{
 destination{
   name = "right",
   layer = 0,
-  x = 1208,
-  y = 373,
+  x = 2496,
+  y = 261,
   direction = 2,
 }
 
 enemy{
   layer = 0,
-  x = 976,
-  y = 597,
+  x = 2016,
+  y = 1229,
   direction = 0,
   breed = "skeleton",
+}
+
+custom_entity{
+  name = "spikeTrap",
+  layer = 0,
+  x = 368,
+  y = 77,
+  width = 32,
+  height = 32,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+teletransporter{
+  layer = 0,
+  x = 520,
+  y = 0,
+  width = 64,
+  height = 32,
+  destination_map = "traps",
+}
+
+enemy{
+  layer = 0,
+  x = 208,
+  y = 1221,
+  direction = 0,
+  breed = "mage",
+}
+
+enemy{
+  layer = 0,
+  x = 424,
+  y = 1221,
+  direction = 0,
+  breed = "cleric",
+}
+
+enemy{
+  layer = 0,
+  x = 1920,
+  y = 1285,
+  direction = 0,
+  breed = "orc",
+}
+
+enemy{
+  layer = 0,
+  x = 1800,
+  y = 1213,
+  direction = 0,
+  breed = "evilmage",
+}
+
+enemy{
+  layer = 0,
+  x = 2128,
+  y = 1317,
+  direction = 0,
+  breed = "spider",
 }
 

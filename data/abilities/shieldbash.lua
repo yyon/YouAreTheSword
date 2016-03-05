@@ -16,8 +16,6 @@ function ShieldBashAbility:doability()
 	entitydata = self.entitydata
 	self.collided = {}
 
-	print(layer)
-
 	d = entitydata:getdirection()
 
 	self.shieldentity = map:create_custom_entity({model="shieldbash", x=x, y=y, layer=layer, direction=d, width=w, height=h})

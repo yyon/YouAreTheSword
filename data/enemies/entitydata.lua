@@ -16,6 +16,11 @@ EarthquakeAbility = require "abilities/earthquake"
 BlackholeAbility = require "abilities/blackhole"
 HealAbility = require "abilities/heal"
 HealExplosionAbility = require "abilities/healexplosion"
+AngelSummonAbility = require "abilities/angelsummon"
+NormalAbility = require "abilities/normalattack"
+SidestepAbility = require "abilities/sidestep"
+TeleportAbility = require "abilities/teleport"
+
 
 Effects = require "enemies/effect"
 
@@ -105,14 +110,12 @@ function EntityData:applytoentity()
 	end
 
 	self:updatemovementspeed()
+end
 
-	function self.entity:on_position_changed(x, y, layer)
-		if self.entitydata ~= nil then
-			for index, value in pairs(self.entitydata.positionlisteners) do
-				if value ~= nil then
-					value(x, y, layer)
-				end
-			end
+function EntityData:updatechangepos(x, y, layer)
+	for index, value in pairs(self.positionlisteners) do
+		if value ~= nil then
+			value(x, y, layer)
 		end
 	end
 end
@@ -563,7 +566,14 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.knockback ~= 0 then
 		target:log("knockback")
 --		if target:getfrozen() == nil then
-			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, aspects.knockbackrandomangle)
+			angle = nil
+			if aspects.knockbackrandomangle then
+				angle = math.random() * 2 * math.pi
+			end
+			if aspects.directionalknockback then
+				angle = aspects.fromentity:get_direction() * math.pi / 2
+			end
+			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, angle)
 --[[
 			if target.entity.ishero then
 				target:freeze()
@@ -587,7 +597,7 @@ function EntityData:dodamage(target, damage, aspects)
 --		end
 	end
 
-	if target.life <= 0 then
+	if target.life <= 0 or aspects.instantdeath then
 		target:kill()
 	end
 end
@@ -661,6 +671,7 @@ function EntityData:drop(hero)
 	
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
+		hero.entitydata = nil
 		hero:set_animation("stopped")
 		hero:set_tunic_sprite_id("abilities/droppedsword")
 		hero:freeze()
@@ -724,9 +735,18 @@ function EntityData:throwsword(entitydata2)
 			EntityData:drop(hero)
 		end
 --]]
+		local hero = hero
 
 		function movement:on_finished()
 			entitydata2:bepossessedbyhero()
+		end
+		
+		function movement:on_position_changed()
+			d = hero:get_distance(entitydata2.entity)
+			if d < 30 then
+				self:stop()
+				entitydata2:bepossessedbyhero()
+			end
 		end
 	end
 end
@@ -842,14 +862,17 @@ function EntityData:gettargetpos()
 	-- returns AI aiming position if AI
 	
 	if self.entity.ishero then
+		map = self.entity:get_map()
 		mousex, mousey = sol.input.get_mouse_position()
-		return mousex, mousey
+		cx, cy, cw, ch = map:get_camera_position()
+		x, y = mousex + cx, mousey + cy
+		return x, y
 --		return self.entity.targetx, self.entity.targety
 	else
-		target = self.entity.entitytoattack
+		target = self.entity.lasttarget
 		if target ~= nil then
 			if self.usingability.abilitytype == "block" then
-				x, y = target:getblockposition(target)
+				x, y = self.entity:getblockposition(target)
 			else
 				x, y = target.entity:get_position()
 			end
@@ -860,25 +883,7 @@ end
 
 -- Actual classes
 
-purpleclass = EntityData:subclass("purpleclass")
-
-function purpleclass:initialize(entity)
-	class = "purple"
-	main_sprite = "adventurers/knight"
-	life = 10
-	team = "purple" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "holy")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {HealExplosionAbility:new(self)}
-	basestats = {}
-	
-	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function purpleclass:getlogcolor()
-	return "95"
-end
+-- Test classes:
 
 yellowclass = EntityData:subclass("yellowclass")
 
@@ -887,12 +892,13 @@ function yellowclass:initialize(entity)
 	main_sprite = "adventurers/guy2"
 	life = 10
 	team = "yellow" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "holy"), TransformAbility:new(self, "lifesteal")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {BombThrowAbility:new(self), GrapplingHookAbility:new(self)}
+	normalabilities = {FireballAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "holy")}
+	blockabilities = {TeleportAbility:new(self)}
+	specialabilities = {EarthquakeAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -908,17 +914,85 @@ function greenclass:initialize(entity)
 	life = 10
 	team = "green" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {HealAbility:new(self), FireballAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
+	transformabilities = {TransformAbility:new(self, "poison")}
 	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), HealExplosionAbility:new(self)}
+	specialabilities = {BombThrowAbility:new(self), GrapplingHookAbility:new(self)}
 	basestats = {}
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 function greenclass:getlogcolor()
 	return "92"
 end
+
+-- Adventurers:
+
+knightclass = EntityData:subclass("knightclass")
+
+function knightclass:initialize(entity)
+	class = "knight"
+	main_sprite = "adventurers/knight"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "ap")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {ChargeAbility:new(self), ShieldBashAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function knightclass:getlogcolor()
+	return "95"
+end
+
+mageclass = EntityData:subclass("mageclass")
+
+function mageclass:initialize(entity)
+	class = "mage"
+	main_sprite = "adventurers/mage"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self), FireballAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function mageclass:getlogcolor()
+	return "92"
+end
+
+clericclass = EntityData:subclass("clericclass")
+
+function clericclass:initialize(entity)
+	class = "cleric"
+	main_sprite = "adventurers/cleric"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self), HealAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "holy"), TransformAbility:new(self, "lifesteal")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {AngelSummonAbility:new(self), HealExplosionAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function clericclass:getlogcolor()
+	return "92"
+end
+
+-- Monsters:
 
 skeletonclass = EntityData:subclass("skeletonclass")
 
@@ -934,6 +1008,7 @@ function skeletonclass:initialize(entity)
 	basestats = {}
 	self.undead = true
 	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
@@ -941,4 +1016,92 @@ function skeletonclass :getlogcolor()
 	return "35"
 end
 
-return {EntityData=EntityData, purpleclass=purpleclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass}
+orcclass = EntityData:subclass("orcclass")
+
+function orcclass:initialize(entity)
+	class = "orc"
+	main_sprite = "monsters/orc"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {ShieldBashAbility:new(self)}
+	basestats = {}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function orcclass:getlogcolor()
+	return "35"
+end
+
+evilmageclass = EntityData:subclass("evilmageclass")
+
+function evilmageclass:initialize(entity)
+	class = "evil mage"
+	main_sprite = "monsters/evilmage"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {FireballAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function evilmageclass:getlogcolor()
+	return "35"
+end
+
+spiderclass = EntityData:subclass("spiderclass")
+
+function spiderclass:initialize(entity)
+	class = "spider"
+	main_sprite = "monsters/spiders/spider" .. string.format("%02d", math.random(1,11))
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "poison")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {BombThrowAbility:new(self)}
+	basestats = {}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function spiderclass:getlogcolor()
+	return "35"
+end
+
+-- Summoned:
+
+angelclass = EntityData:subclass("angelclass")
+
+function angelclass:initialize(entity)
+	class = "angel"
+	main_sprite = "adventurers/angel"
+	life = 5
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "holy")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {HealExplosionAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function angelclass:getlogcolor()
+	return "35"
+end
+
+return {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass}

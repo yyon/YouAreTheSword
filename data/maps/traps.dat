@@ -1,0 +1,113 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 720,
+  tileset = "magecity",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 736,
+  pattern = "61",
+}
+
+tile{
+  layer = 0,
+  x = 224,
+  y = 144,
+  width = 448,
+  height = 32,
+  pattern = "110",
+}
+
+tile{
+  layer = 0,
+  x = 224,
+  y = 232,
+  width = 448,
+  height = 32,
+  pattern = "110",
+}
+
+destination{
+  layer = 0,
+  x = 80,
+  y = 93,
+  direction = 1,
+}
+
+custom_entity{
+  layer = 0,
+  x = 280,
+  y = 101,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 320,
+  y = 189,
+  direction = 2,
+  sprite = "Traps/spiketrap",
+  model = "directionaltrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 320,
+  y = 221,
+  direction = 2,
+  sprite = "Traps/spiketrap",
+  model = "directionaltrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 456,
+  y = 189,
+  width = 144,
+  height = 24,
+  direction = 2,
+  sprite = "Traps/spiketrap",
+  model = "directionaltrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 456,
+  y = 221,
+  width = 144,
+  height = 24,
+  direction = 2,
+  sprite = "Traps/spiketrap",
+  model = "directionaltrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 488,
+  y = 189,
+  width = 144,
+  height = 24,
+  direction = 2,
+  sprite = "Traps/spiketrap",
+  model = "directionaltrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 488,
+  y = 221,
+  width = 144,
+  height = 24,
+  direction = 2,
+  sprite = "Traps/spiketrap",
+  model = "directionaltrap",
+}
+

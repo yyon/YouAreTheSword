@@ -1,6 +1,7 @@
 local entity = ...
 
 Effects = require "enemies/effect"
+require "scripts/movementaccuracy"
 
 function entity:on_created()
 end
@@ -18,8 +19,8 @@ function entity:start(tox, toy)
 	self.timer = Effects.SimpleTimer:new(self.ability.entitydata, 1000, function() self:startwarning() end)
 
 	dist = self:get_distance(tox, toy)
-	if dist > RANGE then
-		dist = RANGE
+	if dist > self.ability.range then
+		dist = self.ability.range
 	end
 
 	local x, y = self:get_position()
@@ -28,8 +29,9 @@ function entity:start(tox, toy)
 	movement:set_speed(600)
 	movement:set_angle(angle)
 	movement:set_max_distance(dist)
-	movement:set_smooth(true)
+--	movement:set_smooth(true)
 	movement:start(self)
+	movementaccuracy(movement, angle, self)
 end
 
 function entity:startwarning()

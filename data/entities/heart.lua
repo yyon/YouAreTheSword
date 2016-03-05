@@ -17,8 +17,8 @@ function entity:start(ability, target)
 	self.timer = Effects.SimpleTimer:new(self.ability.entitydata, 2000, function() self:remove() end)
 
 	dist = self:get_distance(tox, toy)
-	if dist > RANGE then
-		dist = RANGE
+	if dist > self.ability.range then
+		dist = self.ability.range
 	end
 
 	local movement = sol.movement.create("target")

@@ -136,11 +136,17 @@ function GoTowardsState:tick()
 	target = self.npc.entitytoattack
 
 	attackability = math.random(2) == 1 and "special" or "normal"
-	if not self.npc.entitydata:canuseability("special") then
+	cantusespecial = false
+	if not self.npc.entitydata:canuseability("special") or self.npc.entitydata:getability("special").heals then
+		cantusespecial = true
 		attackability = "normal"
 	end
 	if not self.npc.entitydata:canuseability("normal") or self.npc.entitydata:getability("normal").heals then
-		attackability = "special"
+		if cantusespecial then
+			attackability = nil
+		else
+			attackability = "special"
+		end
 	end
 
 	x, y = target.entity:get_position()
@@ -156,13 +162,13 @@ function GoTowardsState:tick()
 			end
 		end
 
-		if self.npc.entitydata:withinrange(attackability, target) then
-			targetability = target.usingability
-			if targetability ~= nil and targetability.abilitytype ~= "block" then
-				-- block if being attacked
-				ability = self.npc.entitydata:startability("block")
-			else
-				-- attack if close enough
+		targetability = target.usingability
+		if targetability ~= nil and targetability.abilitytype ~= "block" and self.npc:get_distance(target.entity) < targetability.range then
+			-- block if being attacked
+			ability = self.npc.entitydata:startability("block")
+		elseif attackability ~= nil then
+			-- attack if close enough
+			if self.npc.entitydata:withinrange(attackability, target) then
 				self.npc.entitydata:startability(attackability, x, y)
 			end
 		end
@@ -250,7 +256,7 @@ function enemy:targetenemy()
 --		entitieslist[#entitieslist+1] = hero.entitydata
 --	end
 
-	if hero.isdropped then
+	if hero.isdropped and self.entitydata.team == "adventurer" then
 		return hero
 	end
 
@@ -278,7 +284,7 @@ end
 
 function enemy:cantarget(entitydata)
 	if not self.entitydata:cantarget(entitydata) then return false end
-	if self:get_distance(entitydata.entity) > 200 and self.target == nil then
+	if self:get_distance(entitydata.entity) > 200 and self.entitytoattack == nil then
 		return false
 	end
 	if self:get_distance(entitydata.entity) > 800 then
@@ -335,6 +341,7 @@ function enemy:tick(newstate)
 			self.entitytoattack = nil
 		else
 			target = self.entitytoattack.entity
+			self.lasttarget = self.entitytoattack
 		end
 	else
 		target = nil
@@ -548,4 +555,10 @@ function enemy:getblockposition(target)
 	x, y = x + math.cos(angle)*BLOCKJUMP, y + math.sin(angle)*BLOCKJUMP
 	
 	return x,y
+end
+
+function enemy:on_position_changed(x, y, layer)
+	if self.entitydata ~= nil then
+		self.entitydata:updatechangepos(x,y,layer)
+	end
 end

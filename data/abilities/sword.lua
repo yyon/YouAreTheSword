@@ -112,9 +112,16 @@ end
 
 function SwordAbility:get_appearance(entity)
 	transform = self:gettransform(entity)
+	
+	ishero = false
+	if self.entitydata ~= nil then
+		if self.entitydata.entity.ishero then
+			ishero = true
+		end
+	end
 
 	if transform == "normal" then
-		if self.entitydata.entity.ishero then
+		if ishero then
 			return "swords/swordanim"
 		else
 			return "swords/normalsword"

@@ -79,8 +79,11 @@ function Effect:removeeffectafter(time)
 --	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 --	else
-	sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
+	self.removetimer = sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
 --	end
+end
+function Effect:getremainingtime()
+	return self.removetimer:get_remaining_time()
 end
 function Effect:endtimer()
 	self:remove()
@@ -345,14 +348,11 @@ function KnockBackEffect:alreadyexists(currenteffect, fromentitydata, knockbackd
 end
 --]]
 
-function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, randomangle)
+function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, angle)
 	self:removeeffectafter(knockbackdist)
 
 	local x, y = self.entitydata.entity:get_position()
-	local angle
-	if randomangle then
-		angle = math.random() * 2 * math.pi
-	else
+	if angle == nil then
 		angle = self.entitydata.entity:get_angle(fromentity) + math.pi
 	end
 	local movement = sol.movement.create("straight")

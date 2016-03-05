@@ -31,6 +31,10 @@ function game_manager:start_game()
 	game:set_command_keyboard_binding("up", dvorak and "," or "w")
 	game:set_command_keyboard_binding("down", dvorak and "o" or "s")
 	game:set_command_keyboard_binding("pause", "escape")
+	game:set_command_keyboard_binding("action", "")
+	game:set_command_keyboard_binding("attack", "")
+	game:set_command_keyboard_binding("item_1", "")
+	game:set_command_keyboard_binding("item_2", "")
 
 	width, height = sol.video.get_quest_size()
 --	sol.video.set_window_size(width*2, height*2)
@@ -48,11 +52,61 @@ function game_manager:start_game()
 		hero.souls = 1
 		hero.swordhealth = 100
 		hero.maxswordhealth = 100
-		hero.entitydata = entitydatas.purpleclass:new(hero)--sol.main.load_file("enemies/entitydata")()
+		hero.entitydata = entitydatas.yellowclass:new(hero)--sol.main.load_file("enemies/entitydata")()
 --		hero.entitydata:createfromclass(hero, "purple")
 		hero.entitydata:applytoentity()
 		hero:set_sword_sprite_id("")
 		hero:set_walking_speed(128)
+	
+		hero.eyessprite = sol.sprite.create("adventurers/eyes")
+		
+		function hero:on_position_changed(x, y, layer)
+			if self.entitydata ~= nil then
+				self.entitydata:updatechangepos(x,y,layer)
+			end
+		end
+		
+	end
+	
+	game.lifebarsprite = sol.sprite.create("hud/lifebar")
+	
+	function game:on_map_changed(map)
+		function map:on_draw(dst_surface)
+			hero = map:get_hero()
+			if hero.entitydata ~= nil then
+				if not hero.entitydata.cantdraweyes then
+					anim = hero:get_animation()
+					if hero.eyessprite:has_animation(anim) then
+						if anim ~= hero.eyessprite:get_animation() then
+							hero.eyessprite:set_animation(anim)
+						end
+						d = hero:get_direction()
+						if hero.eyessprite:get_num_directions() < d then
+							d = 0
+						end
+						hero.eyessprite:set_direction(d)
+					
+						x, y = hero:get_position()
+						map:draw_sprite(hero.eyessprite, x, y)
+					end
+				end
+			end
+			
+			for entity in self:get_entities("") do
+				if entity.entitydata ~= nil then
+					x, y = entity:get_position()
+					y = y - 65
+					
+					if entity.entitydata.life > 0 then
+						frame = math.floor((1 - entity.entitydata.life / entity.entitydata.maxlife) * 49)
+					else
+						frame = 49
+					end
+					game.lifebarsprite:set_frame(frame)
+					map:draw_sprite(game.lifebarsprite, x, y)
+				end
+			end
+		end
 	end
 
 	game.isgame = true
@@ -64,7 +118,16 @@ end
 function sol.main:on_key_pressed(key, modifiers)
 	hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
-		print("PAUSED!")
+		if key == "space" then
+			if game.doingdialog then
+				game:simulate_command_pressed("action")
+				if not game:is_suspended() then
+					-- dialog ended
+					print("DIALOGEND!")
+					game.doingdialog = false
+				end
+			end
+		end
 		return
 	end
 
@@ -78,7 +141,25 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	if hero:get_state() ~= "freezed" then
 		if key == "space" then
-			hero.entitydata:startability("normal")
+			didsomething = false
+			
+			local map = hero:get_map()
+			for entity in map:get_entities("") do
+				if entity:get_type() == "npc" then
+					if hero:get_distance(entity) < 80 then
+						if hero:get_direction4_to(entity) == hero:get_direction() then
+							didsomething = true
+							
+							game.doingdialog = true
+							game:start_dialog(entity:get_name())
+						end
+					end
+				end
+			end
+			
+			if not didsomething then
+				hero.entitydata:startability("normal")
+			end
 		elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
 			hero.entitydata:startability("swordtransform")
 		elseif key == "left shift" then
@@ -96,8 +177,34 @@ function sol.main:on_key_pressed(key, modifiers)
 			hero.entitydata:kill()
 		elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
 			hero:set_walking_speed(500)
+		elseif key == "1" or key == "2" or key == "3" or key == "4" then
+			if hero.entitydata.cheatyabilityswitcher == nil then
+				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
+			end
+			cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.transformabilities, ["3"]=hero.entitydata.blockabilities, ["4"]=hero.entitydata.specialabilities}
+			cheatyabilities = cheatyabilities[key]
+			hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
+			if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
+				hero.entitydata.cheatyabilityswitcher[key] = 1
+			end
+			cheatyability = cheatyabilities[hero.entitydata.cheatyabilityswitcher[key]]
+			if key == "1" then
+				hero.entitydata.swordability = cheatyability
+			elseif key == "2" then
+				hero.entitydata.transformability = cheatyability
+			elseif key == "3" then
+				hero.entitydata.blockability = cheatyability
+			elseif key == "4" then
+				hero.entitydata.specialability = cheatyability
+			end
+			print("CHEAT: ability changed to", cheatyability.name)
 		end
 	end
+
+	if key == "f4" and modifiers.alt then
+            -- Alt + F4: stop the program.
+            sol.main.exit()
+          end
 end
 
 function  sol.main:on_key_released(key, modifiers)
@@ -156,6 +263,7 @@ function sol.main:on_mouse_pressed(button, ...)
 end
 
 function tick()
+	
 	hero = game:get_hero()
 	
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
