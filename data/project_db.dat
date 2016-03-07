@@ -218,9 +218,12 @@ entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }
 entity{ id = "heart", description = "heart" }
 entity{ id = "heartexplosion", description = "heartexplosion" }
+entity{ id = "lightning", description = "lightning" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
+entity{ id = "projectile", description = "projectile" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
+entity{ id = "smoke", description = "smoke" }
 entity{ id = "spiketrap", description = "spiketrap" }
 entity{ id = "sword", description = "sword" }
 entity{ id = "teleportanim", description = "teleportanim" }

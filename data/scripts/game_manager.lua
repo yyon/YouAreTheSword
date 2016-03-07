@@ -76,19 +76,21 @@ function game_manager:start_game()
 			hero = map:get_hero()
 			if hero.entitydata ~= nil then
 				if not hero.entitydata.cantdraweyes then
-					anim = hero:get_animation()
-					if hero.eyessprite:has_animation(anim) then
-						if anim ~= hero.eyessprite:get_animation() then
-							hero.eyessprite:set_animation(anim)
-						end
-						d = hero:get_direction()
-						if hero.eyessprite:get_num_directions() < d then
-							d = 0
-						end
-						hero.eyessprite:set_direction(d)
+					if hero:is_visible() then
+						anim = hero:get_animation()
+						if hero.eyessprite:has_animation(anim) then
+							if anim ~= hero.eyessprite:get_animation() then
+								hero.eyessprite:set_animation(anim)
+							end
+							d = hero:get_direction()
+							if hero.eyessprite:get_num_directions() < d then
+								d = 0
+							end
+							hero.eyessprite:set_direction(d)
 					
-						x, y = hero:get_position()
-						map:draw_sprite(hero.eyessprite, x, y)
+							x, y = hero:get_position()
+							map:draw_sprite(hero.eyessprite, x, y)
+						end
 					end
 				end
 			end

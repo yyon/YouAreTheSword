@@ -4,7 +4,7 @@ Effects = require "enemies/effect"
 local math = require "math"
 
 function entity:on_created()
-	self:set_optimization_distance(0)
+--	self:set_optimization_distance(0)
 end
 
 function entity:start(blackhole)
