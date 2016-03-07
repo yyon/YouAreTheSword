@@ -102,6 +102,7 @@ end
 function EntityData:applytoentity()
 	-- changes entities appearance to reflect self
 	self.entity.entitydata = self
+	self.entity.team = self.team
 
 	if self.entity.ishero then
 		self.entity:set_tunic_sprite_id(self.main_sprite)
@@ -152,7 +153,7 @@ function EntityData:bepossessedbyhero()
 	self:applytoentity()
 
 	self.entity.is_possessing = true
-
+	
 	--TODO: re-freeze hero
 --	if self:getfrozen() ~= nil then
 --		self:getfrozen():freeze()

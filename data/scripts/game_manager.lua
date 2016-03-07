@@ -105,7 +105,7 @@ function game_manager:start_game()
 					end
 					
 					lifebarsprite = game.lifebarsprite
-					if entity.entitydata.team == hero.entitydata.team then
+					if entity.entitydata.team == hero.team then
 						lifebarsprite = game.allieslifebarsprite
 					end
 					lifebarsprite:set_frame(frame)
