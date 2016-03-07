@@ -69,6 +69,7 @@ function game_manager:start_game()
 	end
 	
 	game.lifebarsprite = sol.sprite.create("hud/lifebar")
+	game.allieslifebarsprite = sol.sprite.create("hud/allieslifebar")
 	
 	function game:on_map_changed(map)
 		function map:on_draw(dst_surface)
@@ -102,8 +103,13 @@ function game_manager:start_game()
 					else
 						frame = 49
 					end
-					game.lifebarsprite:set_frame(frame)
-					map:draw_sprite(game.lifebarsprite, x, y)
+					
+					lifebarsprite = game.lifebarsprite
+					if entity.entitydata.team == hero.entitydata.team then
+						lifebarsprite = game.allieslifebarsprite
+					end
+					lifebarsprite:set_frame(frame)
+					map:draw_sprite(lifebarsprite, x, y)
 				end
 			end
 		end
