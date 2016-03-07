@@ -20,6 +20,7 @@ AngelSummonAbility = require "abilities/angelsummon"
 NormalAbility = require "abilities/normalattack"
 SidestepAbility = require "abilities/sidestep"
 TeleportAbility = require "abilities/teleport"
+BodyDoubleAbility = require "abilities/bodydouble"
 
 
 Effects = require "enemies/effect"
@@ -896,7 +897,7 @@ function yellowclass:initialize(entity)
 	normalabilities = {FireballAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy")}
 	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {EarthquakeAbility:new(self)}
+	specialabilities = {BodyDoubleAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1105,31 +1106,9 @@ function angelclass:getlogcolor()
 	return "35"
 end
 
-gooddummyclass = EntityData:subclass("gooddummyclass")
+dummyclass = EntityData:subclass("dummyclass")
 
-function gooddummyclass:initialize(entity)
-	class = "goodcombatdummy"
-	main_sprite = "adventurers/dummy"
-	life = 5
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {Ability:new(self)}
-	transformabilities = {Ability:new(self)}
-	blockabilities = {Ability:new(self)}
-	specialabilities = {Ability:new(self)}
-	basestats = {movementspeed=0}
-	self.dontmove = true
-	
-	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
-	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function gooddummyclass:getlogcolor()
-	return "35"
-end
-
-baddummyclass = EntityData:subclass("baddummyclass")
-
-function baddummyclass:initialize(entity)
+function dummyclass:initialize(entity)
 	class = "baddummyclass"
 	main_sprite = "adventurers/dummy"
 	life = 5
@@ -1145,8 +1124,8 @@ function baddummyclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function baddummyclass:getlogcolor()
+function dummyclass:getlogcolor()
 	return "35"
 end
 
-return {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, gooddummyclass=gooddummyclass, baddummyclass=baddummyclass}
+return {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass}
