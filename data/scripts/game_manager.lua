@@ -296,7 +296,11 @@ function tick()
 			end
 		end
 	
-		hero.souls = hero.souls - 0.001
+		soulsdrop = 0.001
+		if hero.entitydata.team == "monster" then
+			soulsdrop = 0.01
+		end
+		hero.souls = hero.souls - soulsdrop
 		if hero.souls < 0 then hero.souls = 0 end
 
 --		mousex, mousey = sol.input.get_mouse_position()
