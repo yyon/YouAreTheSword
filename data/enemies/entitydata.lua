@@ -1116,7 +1116,7 @@ function gooddummyclass:initialize(entity)
 	transformabilities = {Ability:new(self)}
 	blockabilities = {Ability:new(self)}
 	specialabilities = {Ability:new(self)}
-	basestats = {}
+	basestats = {movementspeed=0}
 	self.dontmove = true
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1138,7 +1138,7 @@ function baddummyclass:initialize(entity)
 	transformabilities = {Ability:new(self)}
 	blockabilities = {Ability:new(self)}
 	specialabilities = {Ability:new(self)}
-	basestats = {}
+	basestats = {movementspeed=0}
 	self.dontmove = true
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
