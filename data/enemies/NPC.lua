@@ -117,6 +117,14 @@ end
 function FrozenState:tick()
 end
 
+DoNothingState = State:subclass("DoNothingState")
+
+function DoNothingState:start()
+end
+
+function DoNothingState:tick()
+end
+
 GoTowardsState = State:subclass("GoTowardsState")
 
 function GoTowardsState:start()
@@ -225,6 +233,7 @@ function enemy:on_created()
 	self.pushedstate = PushedState:new(self)
 	self.frozenstate = FrozenState:new(self)
 	self.pickupstate = PickupState:new(self)
+	self.donothingstate = DoNothingState:new(self)
 end
 
 function enemy:load_entitydata()
@@ -302,6 +311,10 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 
 	if currentstate == self.frozenstate then
 		return currentstate
+	end
+	
+	if self.entitydata.dontmove then
+		return self.donothingstate
 	end
 
 	if entitytoattack == nil then

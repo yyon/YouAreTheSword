@@ -199,3 +199,11 @@ enemy{
   breed = "spider",
 }
 
+enemy{
+  layer = 0,
+  x = 1200,
+  y = 285,
+  direction = 0,
+  breed = "combat_dummy",
+}
+
