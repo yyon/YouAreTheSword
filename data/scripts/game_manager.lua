@@ -174,6 +174,10 @@ function sol.main:on_key_pressed(key, modifiers)
 			hero.entitydata:startability("block")
 		elseif key == "escape" then
 			print("TODO: pause menu")
+		elseif (key == "q" and not dvorak) or (key == "'" and dvorak) then
+			hero.entitydata:startability("special", x, y)
+		elseif (key == "tab") then
+			hero.entitydata:throwclosest(x, y)
 		--debug keys
 --		elseif key == "r" then
 --			hero.entitydata:throwrandom()
