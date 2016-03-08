@@ -37,7 +37,7 @@ function EntityData:log(...)
 		colend = string.char(27) .. '[' .. "0" .. 'm'
 	end
 
-	print(colstart .. self.class, ...)
+	print(colstart .. self.theclass, ...)
 	io.write(colend)
 end
 
@@ -52,7 +52,7 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	-- called when entitydata is created
 	
 	self.entity = entity
-	self.class = class
+	self.theclass = class
 	self.main_sprite = main_sprite
 	self.life = life
 	self.maxlife = self.life
@@ -684,7 +684,7 @@ end
 function EntityData:throwsword(entitydata2)
 	-- throws the demon sword to another person
 	
-	self:log("going to throw to", entitydata2.class)
+--	self:log("going to throw to", entitydata2.class)
 	if self.entity.ishero then
 		if self.usingability ~= nil then
 			return
@@ -880,6 +880,28 @@ function EntityData:gettargetpos()
 			end
 			return x, y
 		end
+	end
+end
+
+
+function EntityData:totable()
+	return {
+		classname = self.class.name
+	}
+end
+
+function EntityData.static:fromtable(table, entity)
+	for _, class in pairs(allclasses) do
+		if class.name == table.classname then
+			theclass = class
+			break
+		end
+	end
+	if theclass ~= nil then
+		entitydata = theclass:new(entity)
+		entitydata.entity = entity
+		entitydata:applytoentity()
+		return entitydata
 	end
 end
 
@@ -1128,4 +1150,6 @@ function dummyclass:getlogcolor()
 	return "35"
 end
 
-return {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass}
+allclasses = {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass}
+
+return allclasses
