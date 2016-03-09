@@ -549,6 +549,7 @@ function EntityData:dodamage(target, damage, aspects)
 		target.entity.swordhealth = target.entity.swordhealth - damage
 		if target.entity.swordhealth <= 0 then
 			target:swordkill()
+			return
 		end
 	end
 	
@@ -628,8 +629,10 @@ function EntityData:kill()
 	if game.nodeaths then
 		return
 	end
+	
+	ishero = self.entity.ishero
 
-	if self.entity.ishero then
+	if ishero then
 		-- drop sword
 		self:drop()
 
@@ -664,8 +667,9 @@ function EntityData:swordkill()
 	
 	hero.swordhealth = hero.maxswordhealth
 	
-	-- TODO: make this work
-	self.entity:teleport(self.entity:get_map():get_id())
+--	-- TODO: make this work
+--	self.entity:teleport(self.entity:get_map():get_id())
+	load()
 end
 
 function EntityData:drop(hero)

@@ -330,6 +330,8 @@ function load()
 	game.allieslifebarsprite = sol.sprite.create("hud/allieslifebar")
 	
 	function game:on_map_changed(map)
+		save()
+		
 		function map:on_draw(dst_surface)
 			hero = map:get_hero()
 			if hero.entitydata ~= nil then

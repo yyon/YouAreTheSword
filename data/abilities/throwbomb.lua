@@ -37,7 +37,7 @@ function BombAbility:attack(entity, bombentity)
 
 	entitydata = entity.entitydata
 
-	damage = 3
+	damage = 20
 	aspects = {}
 	aspects.fire = {damage=0.1, time=5000, timestep=500}
 	aspects.fromentity = bombentity

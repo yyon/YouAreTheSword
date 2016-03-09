@@ -50,9 +50,9 @@ function entity:start(target)
 		self:tick()
 	end
 	
-	targetstopper(movement, self, self.target.entity)
-
 	self:add_collision_test("sprite", self.oncollision)
+
+	targetstopper(movement, self, self.target.entity)
 
 --	self.ticker = Effects.Ticker(self.ability.entitydata, 50, function() self:tick() end)
 end
