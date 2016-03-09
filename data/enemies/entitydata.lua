@@ -534,9 +534,19 @@ function EntityData:dodamage(target, damage, aspects)
 			damage = damage + 5
 		end
 	end
+	
 
 	-- do damage
 	damage = damage * self.stats.damage
+	
+	if self.entity.ishero then
+		if not aspects.natural then
+			print "multiply"
+			souls = self.entity.souls
+			damagemultiplier = souls + 0.5
+			damage = damage * damagemultiplier
+		end
+	end
 	if aspects.ap == nil then
 		negateddamage = damage * target.stats.defense
 		damage = damage - negateddamage
