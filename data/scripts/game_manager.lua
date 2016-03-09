@@ -289,6 +289,11 @@ function loadfrom(name)
 	load()
 end
 
+function saveexists(name)
+	savename = "save" .. name .. ".dat"
+	return sol.file.exists(savename)
+end
+
 function load()
 	savefile = "save.dat"
 
