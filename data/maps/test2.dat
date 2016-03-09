@@ -201,8 +201,8 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 1200,
-  y = 285,
+  x = 1704,
+  y = 333,
   direction = 0,
   breed = "combat_dummy",
 }

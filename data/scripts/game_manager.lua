@@ -256,10 +256,8 @@ function save()
 	game:save()
 end
 
-function load(savefile)
-	if savefile == nil then
-		savefile = "save1.dat"
-	end
+function load()
+	savefile = "save.dat"
 
 	local exists = sol.game.exists(savefile)
 	game = sol.game.load(savefile)

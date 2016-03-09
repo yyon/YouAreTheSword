@@ -41,3 +41,33 @@ function movementaccuracy(movement, angle, entity)
 			
 	end
 end
+
+function targetstopper(movement, entity, target)
+	movement.actualposchange = movement.on_position_changed
+	movement.actualobstacle = movement.on_obstacle_reached
+	movement.entity = entity
+	movement.thetarget = target
+	movement.hitobstacle = false
+	
+	function movement:on_position_changed()
+		angle = self.entity:get_angle(self.thetarget)
+		x, y = self.entity:get_position()
+		d = 10
+		dx, dy = math.cos(-angle)*d, math.sin(-angle)*d
+		if self.entity:test_obstacles(dx, dy) then
+			if self.hitobstacle then
+				if self.actualobstacle ~= nil then
+					print("hit obstacle")
+					self:actualobstacle()
+				end
+			end
+			self.hitobstacle = true
+		else
+			self.hitobstacle = false
+		end
+		
+		if self.actualposchange ~= nil then
+			self:actualposchange()
+		end
+	end
+end

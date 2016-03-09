@@ -886,7 +886,14 @@ end
 
 function EntityData:totable()
 	return {
-		classname = self.class.name
+		classname = self.class.name,
+		life=self.life,
+		maxlife=self.maxlife,
+		team=self.team,
+		swordability=self.swordability.name,
+		transformability=self.transformability.name,
+		blockability=self.blockability.name,
+		specialability = self.specialability.name
 	}
 end
 
@@ -901,6 +908,32 @@ function EntityData.static:fromtable(table, entity)
 		entitydata = theclass:new(entity)
 		entitydata.entity = entity
 		entitydata:applytoentity()
+		
+		for index, ability in pairs(entitydata.normalabilities) do
+			if ability.name == table.swordability then
+				entitydata.swordability = ability
+			end
+		end
+		for index, ability in pairs(entitydata.transformabilities) do
+			if ability.name == table.transformability then
+				entitydata.transformability = ability
+			end
+		end
+		for index, ability in pairs(entitydata.blockabilities) do
+			if ability.name == table.blockability then
+				entitydata.blockability = ability
+			end
+		end
+		for index, ability in pairs(entitydata.specialabilities) do
+			if ability.name == table.specialability then
+				entitydata.specialability = ability
+			end
+		end
+		
+		entitydata.life = table.life
+		entitydata.maxlife = table.maxlife
+		entitydata.team = table.team
+		
 		return entitydata
 	end
 end

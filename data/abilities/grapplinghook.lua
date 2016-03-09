@@ -3,6 +3,8 @@ Ability = require "abilities/ability"
 
 Effects = require "enemies/effect"
 
+require "scripts/movementaccuracy"
+
 GrapplingHookAbility = Ability:subclass("GrapplingHookAbility")
 
 function GrapplingHookAbility:initialize(entitydata)
@@ -65,6 +67,8 @@ function GrapplingHookAbility:startpull()
 	self.movement:set_speed(600)
 	self.movement:set_target(self.entitydata.entity)
 	self.movement:start(self.hookentity.target)
+	
+	targetstopper(self.movement, self.hookentity.target, self.entitydata.entity)
 end
 
 function GrapplingHookAbility:timeend()
