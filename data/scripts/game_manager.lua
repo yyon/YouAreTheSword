@@ -79,9 +79,9 @@ function sol.main:on_key_pressed(key, modifiers)
 --		elseif key == "r" then
 --			hero.entitydata:throwrandom()
 		elseif key == "5" then
-			save()
+			saveto(1)
 		elseif key == "6" then
-			load()
+			loadfrom(1)
 		elseif key == "p" then
 			game.dontattack = true
 		elseif key == "i" then
@@ -254,6 +254,39 @@ function save()
 	game:set_value("usersave", pickleduserdata)
 	
 	game:save()
+end
+
+function copy(from, to)
+	if sol.file.exists(to) then
+		sol.file.remove(to)
+	end
+	
+	fromfile = sol.file.open(from, "r")
+	
+	if fromfile ~= nil then
+		savetext = fromfile:read("*all")
+		
+		tofile = sol.file.open(to, "w")
+		if tofile ~= nil then
+			tofile:write(savetext)
+			tofile:close()
+		end
+		fromfile:close()
+	end
+end
+
+function saveto(name)
+	save()
+	
+	savename = "save" .. name .. ".dat"
+	copy("save.dat", savename)
+end
+
+function loadfrom(name)
+	savename = "save" .. name .. ".dat"
+	copy(savename, "save.dat")
+	
+	load()
 end
 
 function load()
