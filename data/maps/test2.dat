@@ -207,3 +207,11 @@ enemy{
   breed = "combat_dummy",
 }
 
+enemy{
+  layer = 0,
+  x = 592,
+  y = 1061,
+  direction = 0,
+  breed = "rogue",
+}
+

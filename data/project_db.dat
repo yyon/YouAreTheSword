@@ -206,6 +206,7 @@ enemy{ id = "knight", description = "knight" }
 enemy{ id = "mage", description = "mage" }
 enemy{ id = "orc", description = "orc" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
+enemy{ id = "rogue", description = "rogue" }
 enemy{ id = "skeleton", description = "skeleton" }
 enemy{ id = "spider", description = "spider" }
 enemy{ id = "yellow_test", description = "Test yellow" }

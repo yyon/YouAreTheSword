@@ -1063,6 +1063,26 @@ function clericclass:getlogcolor()
 	return "92"
 end
 
+rogueclass = EntityData:subclass("rogueclass")
+
+function rogueclass:initialize(entity)
+	class = "rogue"
+	main_sprite = "adventurers/rogue"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "poison")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {BodyDoubleAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function clericclass:getlogcolor()
+	return "92"
+end
 -- Monsters:
 
 skeletonclass = EntityData:subclass("skeletonclass")
@@ -1197,6 +1217,6 @@ function dummyclass:getlogcolor()
 	return "35"
 end
 
-allclasses = {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass}
+allclasses = {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass, rogueclass=rogueclass}
 
 return allclasses
