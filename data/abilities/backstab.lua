@@ -36,7 +36,7 @@ function BackstabAbility:dotick()
 	self.angle = self.angle + math.pi / self.step
 	self.d = self.d - self.dd
 	x, y = self.target.entity:get_position()
-	x, y = x + math.cos(self.angle)*self.d, y + math.sin(self.angle)*self.d
+	x, y = x + math.cos(self.angle)*self.d, y - math.sin(self.angle)*self.d
 	self.entitydata.entity:set_position(x, y)
 end
 
