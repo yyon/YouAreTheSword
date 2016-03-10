@@ -61,7 +61,6 @@ function SwordAbility:onfinish()
 	self.swordentity = nil
 	self.topsword:remove()
 	self.topswowrd = nil
-	self.entitydata:log("sword finish 2")
 	self:finishability()
 end
 

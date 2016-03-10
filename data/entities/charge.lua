@@ -12,7 +12,7 @@ function entity:start(appearance)
 
 	self.sword_sprite:set_direction(self:get_direction())
 
-	self.ability.entitydata:log("charge sword created")
+--	self.ability.entitydata:log("charge sword created")
 end
 
 function entity:updatepos()

@@ -82,8 +82,6 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 
 	self.originalstats = stats
 	self.stats = stats
-
-	self:log("initialized")
 end
 
 --[[
@@ -160,7 +158,6 @@ function EntityData:bepossessedbyhero()
 --		self:getfrozen():freeze()
 --	end
 
-	self:log("sword has possessed")
 end
 
 function EntityData:unpossess()
@@ -190,8 +187,6 @@ function EntityData:unpossess()
 	self:applytoentity()
 
 	self.entity:setdirection(d)
-
-	self:log("sword has left")
 
 	return self.entity
 end
@@ -302,8 +297,8 @@ function EntityData:startability(ability, ...)
 		actualability = self:getability(ability)
 		if actualability.canuse then
 			actualability.abilitytype = ability
-			self:log("ABILITY", ability, actualability)
 			actualability:start(...)
+--			self:log("Ability:", actualability.name)
 			return actualability
 		end
 	end
@@ -459,7 +454,6 @@ function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
 	
 	if not self:cantarget(target) and aspects.natural == nil then
-		self:log("Can't target!")
 		return
 	end
 
@@ -494,7 +488,6 @@ function EntityData:dodamage(target, damage, aspects)
 
 	if aspects == nil then
 		aspects = {}
-		self:log("reset aspects")
 	end
 
 	if aspects.electric ~= nil then
@@ -516,14 +509,12 @@ function EntityData:dodamage(target, damage, aspects)
 --		end
 	end
 	if aspects.fire ~= nil then
-		self:log("catch on fire", knockback)
 		fireeffect = Effects.FireEffect(target, aspects.fire)
 	end
 	if aspects.poison ~= nil then
 		poisoneffect = Effects.PoisonWeaknessEffect(target, aspects.poison.weakness, aspects.poison.time)
 	end
 	if aspects.flame ~= nil then
-		self:log("fire damage")
 		aspects.knockback = 0
 	end
 	if aspects.method ~= nil then
@@ -541,7 +532,6 @@ function EntityData:dodamage(target, damage, aspects)
 	
 	if self.entity.ishero then
 		if not aspects.natural then
-			print "multiply"
 			souls = self.entity.souls
 			damagemultiplier = souls + 0.5
 			damage = damage * damagemultiplier
@@ -553,7 +543,6 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 
 	target.life = target.life - damage
-	target:log("damaged", damage, "life", target.life)
 	
 	if target.entity.ishero then
 		target.entity.swordhealth = target.entity.swordhealth - damage
@@ -577,7 +566,6 @@ function EntityData:dodamage(target, damage, aspects)
 
 	--knockback
 	if aspects.knockback ~= 0 then
-		target:log("knockback")
 --		if target:getfrozen() == nil then
 			angle = nil
 			if aspects.knockbackrandomangle then
@@ -709,17 +697,14 @@ function EntityData:throwsword(entitydata2)
 		end
 
 		if entitydata2 == nil then
-			self:log("no entity!")
 			return
 		end
 
 		if not entitydata2.entity:exists() then
-			self:log("doesn't exist!")
 			return
 		end
 
 		if not entitydata2.entity.hasbeeninitialized then
-			self:log("Not init!")
 			return
 		end
 
@@ -729,15 +714,12 @@ function EntityData:throwsword(entitydata2)
 		hero.isthrown = true
 		hero:freeze()
 
-		self:log("throwing to", entitydata2.team)
-
 		newentity = self:unpossess()
 
 		hero:set_tunic_sprite_id("abilities/thrownsword")
 		hero:set_animation("stopped")
 
 		hero:stop_movement()
-		self:log(entitydata2.entity:get_position())
 
 		local movement = sol.movement.create("target")
 		movement:set_speed(1000)
@@ -862,14 +844,11 @@ function EntityData:throwclosest(mousex, mousey)
 	print("closest", mousex, mousey, selelse
 
 --]]
-	self:log("throwing to closest")
 	entity = self:getclosestentity(x, y)
 	if entity ~= nil then
 		if hero.entitydata ~= nil then
 			hero.entitydata:throwsword(entity)
 		end
-	else
-		self:log("couldn't find person to throw to", x, y)
 	end
 end
 

@@ -49,13 +49,12 @@ COOLDOWNTICKTIME = 50
 
 function Ability:finishability(skipcooldown)
 	-- cleans up the ability to be able to use it again
-	self.entitydata:log("ability finish")
 	self.entitydata.usingability = nil
 	if self.warmuptimer ~= nil then
 		self.warmuptimer:stop()
 	end
 	if self.dofreeze then
-		self.entitydata:log("unfreeze", self.name)
+--		self.entitydata:log("unfreeze", self.name)
 		self.freezeeffect:remove()
 --		self.entitydata:unfreeze(self.name, false)
 	end
@@ -74,7 +73,7 @@ function Ability:finishability(skipcooldown)
 end
 
 function Ability:finishcooldown()
-	self.entitydata:log("Ability", self.name, "finished cooldown")
+--	self.entitydata:log("Ability", self.name, "finished cooldown")
 	
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
@@ -112,7 +111,7 @@ end
 function Ability:cancel()
 	-- call this to cancel the ability. Rarely used.
 	if self.usingability then
-		self.entitydata:log("Ability canceled:", self.name)
+--		self.entitydata:log("Ability canceled:", self.name)
 		self:oncancel()
 		self:finishability()
 --		self.cooldowntimer:remove()

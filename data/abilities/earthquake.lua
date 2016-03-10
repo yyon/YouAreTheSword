@@ -36,7 +36,6 @@ function EarthquakeAbility:doability()
 end
 
 function EarthquakeAbility:oncollision(entitydata)
-	print("collision", entitydata.name)
 	entity2 = entitydata.entity
 	
 	self.collided[entitydata] = true

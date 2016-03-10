@@ -237,7 +237,7 @@ function luastrsanitize(str)
 end
 
 function save()
-	print("save")
+--	print("save")
 	
 	hero = game:get_hero()
 	entitydata = hero.entitydata
@@ -333,7 +333,7 @@ function load()
 	hero.is_possessing = true
 	
 	usersave = game:get_value("usersave")
-	print("unpickle", pickledheroentitydata)
+--	print("unpickle", pickledheroentitydata)
 	if usersave ~= nil then
 		usersave = unpickle(usersave)
 		entitydatas.EntityData.static:fromtable(usersave.hero, hero)

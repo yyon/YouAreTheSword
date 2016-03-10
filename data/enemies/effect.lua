@@ -38,7 +38,7 @@ end
 function Effect:alreadyexists(currenteffect)
 	-- called if entitydata already has the effect with the same key
 	
-	print("WARNING! tried to add a new effect when one already exists", self:getkey())
+--	print("WARNING! tried to add a new effect when one already exists", self:getkey())
 end
 
 function Effect:remove()
@@ -75,7 +75,6 @@ end
 
 function Effect:removeeffectafter(time)
 	-- call this to automatically remove the effect after a wait
-	print("going to remove", self, time)
 --	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 --	else
@@ -246,7 +245,7 @@ function FreezeEffect:start(...)
 	end
 	self.entitydata.freezeeffects[self] = true
 	self.entitydata.freezesize = self.entitydata.freezesize + 1
-	self.entitydata:log("Freeze level start", self.entitydata.freezesize, self)
+--	self.entitydata:log("Freeze level start", self.entitydata.freezesize, self)
 	if self.entitydata.freezesize == 1 then
 		self:freeze()
 	end
@@ -257,7 +256,7 @@ function FreezeEffect:startfreezeeffects()
 end
 
 function FreezeEffect:freeze()
-	self.entitydata:log("STARTED FREEZE")
+--	self.entitydata:log("STARTED FREEZE")
 	if self.entitydata.entity.ishero then
 		self.entitydata.entity:freeze()
 	else
@@ -280,14 +279,14 @@ function FreezeEffect:endeffect()
 --		currenteffect.count = currenteffect.count - 1
 	self.entitydata.freezeeffects[self] = nil
 	self.entitydata.freezesize = self.entitydata.freezesize - 1
-	self.entitydata:log("Freeze level minus", self.entitydata.freezesize, self)
+--	self.entitydata:log("Freeze level minus", self.entitydata.freezesize, self)
 	if self.entitydata.freezesize == 0 then
 		self:endfreeze()
 	end
 end
 
 function FreezeEffect:endfreeze()
-	self.entitydata:log("ENDED FREEZE")
+--	self.entitydata:log("ENDED FREEZE")
 	if self.entitydata.entity.ishero then
 		self.entitydata.entity:unfreeze()
 	else
@@ -365,14 +364,13 @@ function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, angle)
 	local kbe = self
 	self.finished = false
 	function movement:on_finished()
-		kbe.entitydata:log("finished knockback")
+--		kbe.entitydata:log("finished knockback")
 		kbe.finished = true
 		kbe:remove()
 	end
 end
 
 function KnockBackEffect:endeffect()
-	print("KNOCKBACKEND")
 	FreezeEffect.endeffect(self)
 	self.movement:stop()
 end

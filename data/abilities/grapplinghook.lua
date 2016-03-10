@@ -21,7 +21,7 @@ function GrapplingHookAbility:doability(tox, toy)
 	d = 0
 
 	target = self.entitydata:getclosestentity(tox, toy)
-	self.entitydata:log("recieved target,", tox, toy, target.team)
+--	self.entitydata:log("recieved target,", tox, toy, target.team)
 	if target == nil then
 		self:finish()
 		return

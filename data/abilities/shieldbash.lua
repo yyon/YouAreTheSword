@@ -35,13 +35,13 @@ function ShieldBashAbility:onfinish()
 
 		self.shieldentity:remove()
 		self.shieldentity = nil
-		self.entitydata:log("sword finish 2")
+--		self.entitydata:log("sword finish 2")
 	end
 end
 function ShieldBashAbility:blockdamage(fromentity, damage, aspects)
 	if self.entitydata.entity:get_direction4_to(fromentity.entity) == self.entitydata:getdirection() then
 		-- shield can block
-		self.entitydata:log("Blocked Damage using shield!")
+--		self.entitydata:log("Blocked Damage using shield!")
 		aspects.reversecancel = 500
 		return 0, aspects
 	end

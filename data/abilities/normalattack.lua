@@ -15,7 +15,6 @@ function NormalAbility:doability(tox, toy)
 		d = self.entitydata.entity:get_distance(entitydata.entity)
 		if d < 100 then
 			if self.entitydata.entity:get_direction4_to(entitydata.entity) == self.entitydata:getdirection() or d<10 then
-				print("HIT")
 				self:dodamage(entitydata, 1, {})
 			end
 		end

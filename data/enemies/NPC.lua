@@ -84,7 +84,6 @@ end
 RandomState = State:subclass("RandomState")
 
 function RandomState:start()
-	self.npc.entitydata:log("random", changedstates)
 	local movement = sol.movement.create("random_path")
 	movement:set_speed(normal_speed)
 	movement:start(self.npc)
@@ -330,7 +329,6 @@ end
 
 function enemy:resetstate()
 	if self.entitydata ~= nil then
-		self.entitydata:log("reset state")
 		self.prevstate = nil
 		self.state = nil
 		self:tick(self.nilstate)
@@ -372,7 +370,7 @@ function enemy:tick(newstate)
 
 	if changedstates then
 		prevstate:cleanup()
-		self.entitydata:log("changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
+--		self.entitydata:log("changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
 	end
 	self.state:ontick(changedstates)
 --[[
@@ -547,7 +545,6 @@ end
 function enemy:actually_attack(hero)
 	-- TODO: pixel collision
 	if self:close_to(hero) then
-		self.entitydata:log("hit")
 	end
 end
 

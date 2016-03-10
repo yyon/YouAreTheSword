@@ -57,7 +57,7 @@ function targetstopper(movement, entity, target)
 		if self.entity:test_obstacles(dx, dy) then
 			if self.hitobstacle then
 				if self.actualobstacle ~= nil then
-					print("hit obstacle")
+--					print("hit obstacle")
 					self:actualobstacle()
 				end
 			end
