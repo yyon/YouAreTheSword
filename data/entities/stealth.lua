@@ -4,16 +4,19 @@ function entity:on_created()
   self:set_optimization_distance(0)
 end
 
-function entity:start(fireball, angle)
-  self.fireball = fireball
+function entity:start(ability)
+  self.ability = ability
 
-  self.sprite = self:create_sprite("abilities/fireball_smoke")
-  self.sprite:set_paused(false)
+  self.sprite = self:create_sprite("abilities/smokebomb")
+  self.sprite:set_paused(true)
+  self.sprite:set_frame(math.random(0,3))
 
   local movement = sol.movement.create("straight")
-  movement:set_speed(200)
+  movement:set_speed(100)
+  angle = math.random() * 2 * math.pi
   movement:set_angle(angle)
   movement:set_max_distance(100)
+  movement:set_smooth(true)
   movement:start(self)
 
   function movement.on_obstacle_reached(movement)

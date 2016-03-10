@@ -43,6 +43,7 @@ sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
+sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
 sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
 sprite{ id = "adventurers/angel", description = "angel" }
@@ -228,6 +229,7 @@ entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
 entity{ id = "smoke", description = "smoke" }
 entity{ id = "spiketrap", description = "spiketrap" }
+entity{ id = "stealth", description = "stealth smoke" }
 entity{ id = "sword", description = "sword" }
 entity{ id = "teleportanim", description = "teleportanim" }
 

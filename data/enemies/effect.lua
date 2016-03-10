@@ -410,4 +410,17 @@ function PoisonWeaknessEffect:remove(...)
 	StatEffect.remove(self, ...)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect}
+StealthEffect = Effect:subclass("StealthEffect")
+
+function StealthEffect:start(time)
+	self:removeeffectafter(time)
+	self.entitydata.stealth = true
+end
+function StealthEffect:endeffect()
+	self.entitydata.stealth = false
+end
+function StealthEffect:getkey()
+	return "Stealth"
+end
+
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect}

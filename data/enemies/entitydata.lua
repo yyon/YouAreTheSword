@@ -21,7 +21,7 @@ NormalAbility = require "abilities/normalattack"
 SidestepAbility = require "abilities/sidestep"
 TeleportAbility = require "abilities/teleport"
 BodyDoubleAbility = require "abilities/bodydouble"
-
+StealthAbility = require "abilities/stealth"
 
 Effects = require "enemies/effect"
 
@@ -236,6 +236,11 @@ function EntityData:isvisible()
 	if self.entity.ishero and not self.entity.is_possessing then
 		return false
 	end
+	
+	if self.stealth then
+		return false
+	end
+	
 	return true
 end
 
@@ -947,7 +952,7 @@ function yellowclass:initialize(entity)
 	normalabilities = {FireballAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "holy")}
 	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {BodyDoubleAbility:new(self)}
+	specialabilities = {StealthAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1054,7 +1059,7 @@ function rogueclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "dagger"), TransformAbility:new(self, "poison")}
 	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {BodyDoubleAbility:new(self)}
+	specialabilities = {StealthAbility:new(self), BodyDoubleAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
