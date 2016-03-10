@@ -22,6 +22,7 @@ SidestepAbility = require "abilities/sidestep"
 TeleportAbility = require "abilities/teleport"
 BodyDoubleAbility = require "abilities/bodydouble"
 StealthAbility = require "abilities/stealth"
+BackstabAbility = require "abilities/backstab"
 
 Effects = require "enemies/effect"
 
@@ -1059,7 +1060,7 @@ function rogueclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "dagger"), TransformAbility:new(self, "poison")}
 	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {StealthAbility:new(self), BodyDoubleAbility:new(self)}
+	specialabilities = {BackstabAbility:new(self), StealthAbility:new(self), BodyDoubleAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

@@ -7,7 +7,7 @@ SwordAbility = require "abilities/sword"
 ChargeAbility = Ability:subclass("ChangeAbility")
 
 function ChargeAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "charge", 800, 500, 2000, true)
+	Ability.initialize(self, entitydata, "charge", 800, 0, 2000, true)
 end
 
 function ChargeAbility:doability(tox, toy)
