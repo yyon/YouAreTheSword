@@ -1071,7 +1071,7 @@ function rogueclass:initialize(entity)
 	life = 10
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "poison")}
+	transformabilities = {TransformAbility:new(self, "dagger"), TransformAbility:new(self, "poison")}
 	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {BodyDoubleAbility:new(self)}
 	basestats = {}

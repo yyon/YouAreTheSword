@@ -91,6 +91,7 @@ function SwordAbility:attack(entity)
 		aspects.lifesteal = 1
 	elseif transform == "holy" then
 		aspects.holy = true
+	elseif transform == "dagger" then
 	end
 
 	self:dodamage(entitydata, damage, aspects)
@@ -140,6 +141,8 @@ function SwordAbility:get_appearance(entity)
 		return "swords/lifesteal"
 	elseif transform == "holy" then
 		return "swords/holy"
+	elseif transform == "dagger" then
+		return "swords/dagger"
 	end
 end
 

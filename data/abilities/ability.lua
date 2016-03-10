@@ -120,6 +120,7 @@ function Ability:cancel()
 		self.usingwarmup = false
 		self.warmuptimer:stop()
 		self.canuse = true
+		self:finishability(true)
 	end
 end
 

@@ -33,6 +33,18 @@ animation{
   },
 }
 animation{
+  name = "dagger",
+  src_image = "adventurers/mage.png",
+  frame_delay = 30,
+  frame_to_loop_on = 0,
+  directions = {
+    { x =0, y =960,frame_width =64,frame_height =64,origin_x =32,origin_y =60, num_frames = 6 },
+    { x =0, y =768,frame_width =64,frame_height =64,origin_x =32,origin_y =60, num_frames = 6 },
+    { x =0, y =832,frame_width =64,frame_height =64,origin_x =32,origin_y =60, num_frames = 6 },
+    { x =0, y =896,frame_width =64,frame_height =64,origin_x =32,origin_y =60, num_frames = 6 },
+  },
+}
+animation{
   name = "walking",
   src_image = "adventurers/mage.png",
   frame_delay = 100,

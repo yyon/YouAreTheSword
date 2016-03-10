@@ -26,3 +26,11 @@ function entity:start(fireball, angle)
 
   self:set_enabled()
 end
+
+function entity:on_suspended()
+	self:remove()
+end
+
+function entity:on_disabled()
+	self:remove()
+end
