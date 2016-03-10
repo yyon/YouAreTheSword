@@ -21,3 +21,6 @@ function sol.main:on_started()
 --	end
 
 end
+
+function sol.main:on_finished()
+end

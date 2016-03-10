@@ -15,6 +15,8 @@ require "pickle"
 local os = require "os"
 dvorak = os.getenv("USER") == "yyon" -- TODO: keyboard config
 
+require "profiler"
+
 function game_manager:start_game()
 	load()
 	
@@ -111,6 +113,20 @@ function sol.main:on_key_pressed(key, modifiers)
 				hero.entitydata.specialability = cheatyability
 			end
 			print("CHEAT: ability changed to", cheatyability.name)
+		elseif key == "m" then
+			if not startedprofiler then
+				print("started profiler")
+				startedprofiler = true
+				profiler = newProfiler()
+				profiler:start()
+			else
+				print("stopped profiler")
+				profiler:stop()
+				local outfile = io.open( "profile.txt", "w+" )
+				profiler:report( outfile, true )
+				outfile:close()
+				startedprofiler = false
+			end
 		end
 	end
 

@@ -267,6 +267,12 @@ function enemy:targetenemy()
 	if hero.isdropped and self.entitydata.team == "adventurer" then
 		return hero
 	end
+	
+	if self.entitytoattack ~= nil then
+		if self:cantarget(self.entitytoattack) then
+			return self.entitytoattack
+		end
+	end
 
 	for entitydata in self.entitydata:getotherentities() do
 		if self:cantarget(entitydata) then
@@ -283,21 +289,21 @@ function enemy:targetenemy()
 	  return false
 	end
 
-	if entitieslist:contains(self.entitytoattack) then
-		return self.entitytoattack
-	end
+--	if entitieslist:contains(self.entitytoattack) then
+--		return self.entitytoattack
+--	end
 
 	return entitieslist[math.random(#entitieslist)]
 end
 
 function enemy:cantarget(entitydata)
-	if not self.entitydata:cantarget(entitydata) then return false end
 	if self:get_distance(entitydata.entity) > 200 and self.entitytoattack == nil then
 		return false
 	end
 	if self:get_distance(entitydata.entity) > 800 then
 		return false
 	end
+	if not self.entitydata:cantarget(entitydata) then return false end
 
 	return true
 end
@@ -400,7 +406,7 @@ function enemy:tick(newstate)
 	end
 
 	if self:exists() then
-		sol.timer.start(self, 100, function() self:tick() end)
+		sol.timer.start(self, 500, function() self:tick() end)
 	end
 end
 

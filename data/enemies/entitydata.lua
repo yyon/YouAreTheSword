@@ -192,6 +192,8 @@ function EntityData:unpossess()
 end
 
 function EntityData:cantarget(entitydata)
+--	print(debug.traceback())
+
 	-- is this entitydata a person which can be attacked?
 	
 	if entitydata == nil then
@@ -204,13 +206,13 @@ function EntityData:cantarget(entitydata)
 		return false
 	end
 
-	if not entitydata:isvisible() then
---		self:log("can't target", entitydata, "because invisible")
+	if entitydata.team == self.team then
+--		self:log("can't target", entitydata, "because same team")
 		return false
 	end
 
-	if entitydata.team == self.team then
---		self:log("can't target", entitydata, "because same team")
+	if not entitydata:isvisible() then
+--		self:log("can't target", entitydata, "because invisible")
 		return false
 	end
 

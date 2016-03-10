@@ -51,3 +51,11 @@ end
 function entity:finishafter()
 	self.endtimer = Effects.SimpleTimer(self.blackhole.ability.entitydata, math.random(1,1000), function() self:remove() end)
 end
+
+function entity:on_suspended()
+	self:remove()
+end
+
+function entity:on_disabled()
+	self:remove()
+end
