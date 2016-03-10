@@ -43,7 +43,7 @@ end
 function BackstabAbility:dofinish()
 	self:finish()
 	
-	self.entitydata.entity:set_direction(self.entitydata.entity:get_direction4_to(self.target.entity))
+	self.entitydata:setdirection(self.entitydata.entity:get_direction4_to(self.target.entity))
 	self.entitydata:startability("normal")
 end
 

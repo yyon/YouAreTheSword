@@ -369,6 +369,15 @@ function EntityData:getdirection()
 	end
 end
 
+function EntityData:setdirection(d)
+	if self.entity.ishero then
+		return self.entity:set_direction(d)
+	else
+		return self.entity:setdirection(d)
+	end
+end
+	
+
 function EntityData:setanimation(anim)
 	-- set current sprite animation
 	
@@ -1059,8 +1068,8 @@ function rogueclass:initialize(entity)
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "dagger"), TransformAbility:new(self, "poison")}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {BackstabAbility:new(self), StealthAbility:new(self), BodyDoubleAbility:new(self)}
+	blockabilities = {SidestepAbility:new(self), BodyDoubleAbility:new(self)}
+	specialabilities = {BackstabAbility:new(self), StealthAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

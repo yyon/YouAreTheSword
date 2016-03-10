@@ -219,7 +219,7 @@ function tick()
 			end
 		end
 	
-		soulsdrop = 0.001
+		soulsdrop = 0.0005
 		if hero.entitydata.team == "monster" then
 			soulsdrop = 0.01
 		end
