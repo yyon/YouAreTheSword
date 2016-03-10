@@ -1030,7 +1030,7 @@ function mageclass:initialize(entity)
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self), FireballAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
-	blockabilities = {SidestepAbility:new(self)}
+	blockabilities = {TeleportAbility:new(self)}
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}
 	
@@ -1118,7 +1118,7 @@ function evilmageclass:initialize(entity)
 	team = "monster" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {FireballAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
-	blockabilities = {SidestepAbility:new(self)}
+	blockabilities = {TeleportAbility:new(self)}
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}
 	
