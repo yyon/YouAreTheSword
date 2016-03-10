@@ -144,11 +144,11 @@ function GoTowardsState:tick()
 
 	attackability = math.random(2) == 1 and "special" or "normal"
 	cantusespecial = false
-	if not self.npc.entitydata:canuseability("special") or self.npc.entitydata:getability("special").heals then
+	if not self.npc.entitydata:canuseability("special") or self.npc.entitydata:getability("special").heals or self.npc.entitydata:getability("special").nonpc then
 		cantusespecial = true
 		attackability = "normal"
 	end
-	if not self.npc.entitydata:canuseability("normal") or self.npc.entitydata:getability("normal").heals then
+	if not self.npc.entitydata:canuseability("normal") or self.npc.entitydata:getability("normal").heals or self.npc.entitydata:getability("normal").nonpc then
 		if cantusespecial then
 			attackability = nil
 		else
@@ -266,6 +266,13 @@ function enemy:targetenemy()
 
 	if hero.isdropped and self.entitydata.team == "adventurer" then
 		return hero
+	end
+	
+	taunt = self:get_map().taunt
+	if taunt ~= nil then
+		if self:cantarget(taunt) then
+			return taunt
+		end
 	end
 	
 	if self.entitytoattack ~= nil then

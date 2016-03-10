@@ -56,12 +56,15 @@ end
 
 function SwordAbility:onfinish()
 	self.entitydata:setanimation("walking")
-
-	self.swordentity:remove()
-	self.swordentity = nil
-	self.topsword:remove()
-	self.topswowrd = nil
-	self:finishability()
+	
+	if self.swordentity ~= nil then
+		self.swordentity:remove()
+		self.swordentity = nil
+	end
+	if self.topsword ~= nil then
+		self.topsword:remove()
+		self.topsword = nil
+	end
 end
 
 function SwordAbility:attack(entity)

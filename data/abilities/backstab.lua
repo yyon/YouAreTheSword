@@ -41,6 +41,9 @@ function BackstabAbility:dotick()
 end
 
 function BackstabAbility:dofinish()
+	self.ticker:remove()
+	self.timer:stop()
+	
 	self:finish()
 	
 	self.entitydata:setdirection(self.entitydata.entity:get_direction4_to(self.target.entity))
@@ -49,6 +52,7 @@ end
 
 function BackstabAbility:onfinish()
 	self.entitydata.entity:stop_movement()
+	
 	self.ticker:remove()
 	self.timer:stop()
 end

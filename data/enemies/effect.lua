@@ -78,7 +78,9 @@ function Effect:removeeffectafter(time)
 --	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 --	else
-	self.removetimer = sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
+	if time ~= nil then
+		self.removetimer = sol.timer.start(self:getgame():get_hero(), time, function() self:endtimer() end)
+	end
 --	end
 end
 function Effect:getremainingtime()
@@ -423,4 +425,37 @@ function StealthEffect:getkey()
 	return "Stealth"
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect}
+MapTauntEffect = Effect:subclass("MapTauntEffect")
+
+function MapTauntEffect:start(time)
+	self:removeeffectafter(time)
+	self.entitydata.entity:get_map().taunt = self.entitydata
+end
+function MapTauntEffect:endeffect()
+	self.entitydata.entity:get_map().taunt = nil
+end
+function MapTauntEffect:getkey()
+	return "MapTaunt"
+end
+
+TauntPhysicalEffect = PhysicalEffect:subclass("TauntPhysicalEffect")
+
+function TauntPhysicalEffect:getspritename()
+	return "taunt"
+end
+function TauntPhysicalEffect:getkey()
+	return "TauntPhysicalEffect"
+end
+
+TauntEffect = MapTauntEffect:subclass("TauntEffect")
+
+function TauntEffect:start(time)
+	MapTauntEffect.start(self, time)
+	self.physicaleffect = TauntPhysicalEffect:new(self.entitydata)
+end
+function TauntEffect:remove(...)
+	self.physicaleffect:remove(...)
+	MapTauntEffect.remove(self, ...)
+end
+
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect}

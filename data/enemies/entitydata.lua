@@ -23,6 +23,7 @@ TeleportAbility = require "abilities/teleport"
 BodyDoubleAbility = require "abilities/bodydouble"
 StealthAbility = require "abilities/stealth"
 BackstabAbility = require "abilities/backstab"
+TauntAbility = require "abilities/tauntability"
 
 Effects = require "enemies/effect"
 
@@ -132,7 +133,7 @@ function EntityData:bepossessedbyhero()
 
 	local hero = self.entity:get_game():get_hero()
 
-	hero.souls = hero.souls + 0.4
+	hero.souls = hero.souls + 1
 	if hero.souls > 1 then hero.souls = 1 end
 
 	hero:unfreeze()
@@ -1079,6 +1080,28 @@ end
 function clericclass:getlogcolor()
 	return "92"
 end
+
+bardclass = EntityData:subclass("bardclass")
+
+function bardclass:initialize(entity)
+	class = "bard"
+	main_sprite = "adventurers/bard"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "dagger")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {TauntAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function bardclass:getlogcolor()
+	return "92"
+end
+
 -- Monsters:
 
 skeletonclass = EntityData:subclass("skeletonclass")
@@ -1213,6 +1236,6 @@ function dummyclass:getlogcolor()
 	return "35"
 end
 
-allclasses = {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass, rogueclass=rogueclass}
+allclasses = {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass, rogueclass=rogueclass, bardclass=bardclass}
 
 return allclasses

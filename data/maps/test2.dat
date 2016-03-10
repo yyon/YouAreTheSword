@@ -215,3 +215,11 @@ enemy{
   breed = "rogue",
 }
 
+enemy{
+  layer = 0,
+  x = 544,
+  y = 909,
+  direction = 0,
+  breed = "bard",
+}
+
