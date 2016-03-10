@@ -4,11 +4,11 @@ require "scripts/movementaccuracy"
 
 BodyDoubleAbility = Ability:subclass("BodyDoubleAbility")
 
-function TeleportAbility:initialize(entitydata)
+function BodyDoubleAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Body Double", 600, 0, 10000, true)
 end
 
-function TeleportAbility:doability()
+function BodyDoubleAbility:doability()
 	-- create dummy
 	entity = self.entitydata.entity
 	map = entity:get_map()
@@ -48,4 +48,4 @@ function TeleportAbility:doability()
 	self:finish()
 end
 
-return TeleportAbility
+return BodyDoubleAbility
