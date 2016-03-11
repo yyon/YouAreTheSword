@@ -5,13 +5,13 @@ NormalAbility = Ability:subclass("NormalAbility")
 -- a replacement for sword ability for classes that don't have that animation
 
 function NormalAbility:initialize(entitydata, anim)
-	if anim == nil then anim = "sword" end
+	if anim == nil then
+		anim = "sword"
+	end
 	Ability.initialize(self, entitydata, "NormalAbility", 50, 500, 0, true, anim)
 end
 
 function NormalAbility:doability(tox, toy)
-	self.entitydata:setanimation("sword")
-	
 	for entitydata in self.entitydata:getotherentities() do
 		d = self.entitydata.entity:get_distance(entitydata.entity)
 		if d < 100 then

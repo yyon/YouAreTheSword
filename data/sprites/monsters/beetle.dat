@@ -2,10 +2,21 @@ animation{
   name = "stopped",
   src_image = "monsters/beetle.png",
   directions = {
-    { x = 0, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30 },
-    { x = 0, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30 },
-    { x = 0, y = 144, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30 },
-    { x = 0, y = 0, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30 },
+    { x = 0, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60 },
+    { x = 0, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60 },
+    { x = 0, y = 144, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60 },
+    { x = 0, y = 0, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60 },
+  },
+}
+animation{
+  name = "casting",
+  src_image = "monsters/beetle.png",
+  frame_delay = 100,
+  directions = {
+    { x = 147, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
+    { x = 147, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
+    { x = 147, y = 144, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
+    { x = 147, y = 0, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
   },
 }
 animation{
@@ -13,21 +24,21 @@ animation{
   src_image = "monsters/beetle.png",
   frame_delay = 100,
   directions = {
-    { x = 147, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 2 },
-    { x = 147, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 2 },
-    { x = 147, y = 144, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 2 },
-    { x = 147, y = 0, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 2 },
+    { x = 147, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
+    { x = 147, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
+    { x = 147, y = 144, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
+    { x = 147, y = 0, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
   },
 }
 animation{
   name = "walking",
   src_image = "monsters/beetle.png",
-  frame_delay = 30,
+  frame_delay = 60,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 144, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 0, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 30, num_frames = 4 },
+    { x = 0, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 144, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 4 },
   },
 }

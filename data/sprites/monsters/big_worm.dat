@@ -2,10 +2,10 @@ animation{
   name = "stopped",
   src_image = "monsters/big_worm.png",
   directions = {
-    { x = 0, y = 150, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30 },
-    { x = 0, y = 0, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30 },
-    { x = 0, y = 50, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30 },
-    { x = 0, y = 100, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30 },
+    { x = 0, y = 150, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50 },
+    { x = 0, y = 0, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50 },
+    { x = 0, y = 50, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50 },
+    { x = 0, y = 100, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50 },
   },
 }
 animation{
@@ -14,10 +14,10 @@ animation{
   frame_delay = 70,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 150, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 0, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 50, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 100, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
+    { x = 0, y = 150, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 50, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 100, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
   },
 }
 animation{
@@ -26,9 +26,9 @@ animation{
   frame_delay = 175,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 150, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 0, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 50, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
-    { x = 0, y = 100, frame_width = 35, frame_height = 50, origin_x = 20, origin_y = 30, num_frames = 4 },
+    { x = 0, y = 150, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 50, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 100, frame_width = 35, frame_height = 50, origin_x = 17, origin_y = 50, num_frames = 4 },
   },
 }
