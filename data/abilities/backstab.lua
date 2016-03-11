@@ -16,6 +16,8 @@ function BackstabAbility:doability(tox, toy)
 	tox, toy = self.entitydata:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy)
 	
+	self.target.entity.cantrotate = true
+	
 	self.d = self.entitydata.entity:get_distance(self.target.entity)
 	targetd = 40
 	
@@ -23,7 +25,7 @@ function BackstabAbility:doability(tox, toy)
 	tickstep = 10
 	self.step = time/tickstep
 	
-	self:dodamage(self.target, 0, {knockback=0, stun=time+100})
+--	self:dodamage(self.target, 0, {knockback=0, stun=time+100})
 	
 	self.dd = (self.d - targetd) / self.step
 	self.angle = self.target.entity:get_angle(self.entitydata.entity)
@@ -52,6 +54,8 @@ end
 
 function BackstabAbility:onfinish()
 	self.entitydata.entity:stop_movement()
+	
+	self.target.entity.cantrotate = nil
 	
 	self.ticker:remove()
 	self.timer:stop()

@@ -12,6 +12,7 @@ animation{
   name = "casting",
   src_image = "monsters/beetle.png",
   frame_delay = 100,
+  frame_to_loop_on = 0,
   directions = {
     { x = 147, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
     { x = 147, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
@@ -23,6 +24,7 @@ animation{
   name = "sword",
   src_image = "monsters/beetle.png",
   frame_delay = 100,
+  frame_to_loop_on = 0,
   directions = {
     { x = 147, y = 96, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },
     { x = 147, y = 48, frame_width = 49, frame_height = 49, origin_x = 24, origin_y = 60, num_frames = 2 },

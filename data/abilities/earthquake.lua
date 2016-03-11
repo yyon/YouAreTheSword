@@ -26,6 +26,7 @@ function EarthquakeAbility:doability()
 --]]
 	self.collided = {}
 	self.origpos = {}
+	
 	for entitydata in self.entitydata:getotherentities() do
 		self:oncollision(entitydata)
 	end
@@ -59,10 +60,6 @@ function EarthquakeAbility:attack(entitydata)
 	
 
 	self:dodamage(entitydata, damage, aspects)
-end
-
-function EarthquakeAbility:tick()
-	self:shake()
 end
 
 function EarthquakeAbility:onfinish()

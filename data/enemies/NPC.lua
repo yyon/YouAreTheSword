@@ -424,8 +424,10 @@ function enemy:on_movement_changed(movement)
 end
 
 function enemy:setdirection(d)
-	self.direction = d
-	self.main_sprite:set_direction(d)
+	if not self.cantrotate then
+		self.direction = d
+		self.main_sprite:set_direction(d)
+	end
 --	self.sword_sprite:set_direction(d)
 end
 
