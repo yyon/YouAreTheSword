@@ -33,9 +33,12 @@ sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
 sprite{ id = "abilities/blackhole", description = "blackhole" }
 sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
+sprite{ id = "abilities/bomb", description = "bomb" }
+sprite{ id = "abilities/charge", description = "charge" }
 sprite{ id = "abilities/charge_sword", description = "charge_sword" }
 sprite{ id = "abilities/droppedsword", description = "droppedsword" }
 sprite{ id = "abilities/earthquake", description = "earthquake" }
+sprite{ id = "abilities/explosion", description = "explosion" }
 sprite{ id = "abilities/explosionheart", description = "explosionheart" }
 sprite{ id = "abilities/fireball", description = "fireball" }
 sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }

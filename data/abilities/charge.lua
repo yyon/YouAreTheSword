@@ -74,6 +74,7 @@ function ChargeAbility:updatepos(x, y, layer)
 	entity = self.entitydata.entity
 	map = entity:get_map()
 
+--[[
 	for entitydata2 in self.entitydata:getotherentities() do
 		entity2 = entitydata2.entity
 		if self.entitydata.entity:overlaps(entity2) then
@@ -86,9 +87,16 @@ function ChargeAbility:updatepos(x, y, layer)
 			end
 		end
 	end
+--]]
 end
 
-function ChargeAbility:attack(entitydata)
+function ChargeAbility:attack(entity)
+	if not self.entitydata:cantargetentity(entity) then
+		return
+	end
+	
+	entitydata = entity.entitydata
+	
 	damage = 2
 	aspects = {stun=500, knockback=0}
 
