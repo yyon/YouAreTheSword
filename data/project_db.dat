@@ -221,6 +221,7 @@ enemy{ id = "beetle", description = "beetle" }
 enemy{ id = "berserker", description = "berserker" }
 enemy{ id = "cleric", description = "cleric" }
 enemy{ id = "combat_dummy", description = "combat dummy" }
+enemy{ id = "dunsmur", description = "dunsmur" }
 enemy{ id = "evilmage", description = "evil mage" }
 enemy{ id = "eyeball", description = "eyeball" }
 enemy{ id = "flower", description = "flower" }

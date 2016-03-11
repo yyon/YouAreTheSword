@@ -236,6 +236,8 @@ function tick()
 		soulsdrop = 0.0005
 		if hero.entitydata.team == "monster" then
 			soulsdrop = 0.01
+		elseif hero.entitydata.team == "dunsmur" then
+			soulsdrop = 0
 		end
 		hero.souls = hero.souls - soulsdrop
 		if hero.souls < 0 then hero.souls = 0 end

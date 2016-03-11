@@ -1388,6 +1388,26 @@ function maskmanclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
+-- Bosses
+
+dunsmurclass = EntityData:subclass("dunsmurclass")
+allclasses.dunsmurclass = dunsmurclass
+
+function dunsmurclass:initialize(entity)
+	class = "Duns Mur"
+	main_sprite = "monsters/dunsmur"
+	life = 50
+	team = "dunsmur" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "lifesteal")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {BlackHoleAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
 -- Summoned:
 
 angelclass = EntityData:subclass("angelclass")

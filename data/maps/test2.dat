@@ -294,3 +294,11 @@ enemy{
   breed = "maskman",
 }
 
+enemy{
+  layer = 0,
+  x = 1920,
+  y = 373,
+  direction = 0,
+  breed = "dunsmur",
+}
+
