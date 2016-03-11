@@ -115,6 +115,7 @@ sprite{ id = "monsters/evilmage", description = "evilmage" }
 sprite{ id = "monsters/eyeball", description = "eyeball" }
 sprite{ id = "monsters/flower", description = "flower" }
 sprite{ id = "monsters/ghost", description = "ghost" }
+sprite{ id = "monsters/maskman", description = "maskman" }
 sprite{ id = "monsters/orc", description = "orc" }
 sprite{ id = "monsters/skeleton", description = "skeleton" }
 sprite{ id = "monsters/slime", description = "slime" }
@@ -226,6 +227,7 @@ enemy{ id = "flower", description = "flower" }
 enemy{ id = "ghost", description = "ghost" }
 enemy{ id = "knight", description = "knight" }
 enemy{ id = "mage", description = "mage" }
+enemy{ id = "maskman", description = "maskman" }
 enemy{ id = "orc", description = "orc" }
 enemy{ id = "rogue", description = "rogue" }
 enemy{ id = "skeleton", description = "skeleton" }

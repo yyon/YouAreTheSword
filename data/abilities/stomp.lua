@@ -6,7 +6,7 @@ StompAbility = Ability:subclass("StompAbility")
 local Effects = require "enemies/effect"
 
 function StompAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Stomp", 20000, 500, 0, true, "stomp")
+	Ability.initialize(self, entitydata, "Stomp", 20000, 500, 10000, true, "stomp")
 end
 
 function StompAbility:doability()

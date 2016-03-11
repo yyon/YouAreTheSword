@@ -95,21 +95,10 @@ destination{
   default = true,
 }
 
-teletransporter{
-  name = "tele1",
-  layer = 0,
-  x = 2520,
-  y = 208,
-  width = 32,
-  height = 96,
-  destination_map = "maptest",
-  destination = "left_entry",
-}
-
 destination{
   name = "right",
   layer = 0,
-  x = 2496,
+  x = 2432,
   y = 261,
   direction = 2,
 }
@@ -285,5 +274,23 @@ enemy{
   y = 1093,
   direction = 0,
   breed = "worm",
+}
+
+teletransporter{
+  layer = 0,
+  x = 2496,
+  y = 208,
+  width = 64,
+  height = 96,
+  destination_map = "maptest",
+  destination = "left_entry",
+}
+
+enemy{
+  layer = 0,
+  x = 2048,
+  y = 789,
+  direction = 0,
+  breed = "maskman",
 }
 

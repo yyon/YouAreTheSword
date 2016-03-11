@@ -81,19 +81,29 @@ function sol.main:on_key_pressed(key, modifiers)
 --		elseif key == "r" then
 --			hero.entitydata:throwrandom()
 		elseif key == "5" then
+			print("cheat: saved game")
 			saveto(1)
 		elseif key == "6" then
+			print("cheat: loaded game")
 			loadfrom(1)
 		elseif key == "7" then
+			print("cheat: restarted game")
 			deletesave(1)
 			loadfrom(1)
 		elseif key == "p" then
+			print("cheat: AIs don't attack")
 			game.dontattack = true
 		elseif key == "i" then
+			print("cheat: invincibility")
 			game.nodeaths = true
+		elseif key == "z" then
+			print("cheat: bypass teleport (allows you to go between maps without defeating all the enemies)")
+			game.bypassteleport = true
 		elseif key == "k" then
+			print("cheat: dropped sword")
 			hero.entitydata:kill()
 		elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
+			print("cheat: fast walk")
 			hero:set_walking_speed(500)
 		elseif key == "1" or key == "2" or key == "3" or key == "4" then
 			if hero.entitydata.cheatyabilityswitcher == nil then
@@ -203,25 +213,26 @@ function tick()
 			for entity in hero:get_map():get_entities("") do
 				if entity.get_destination_map ~= nil then
 					if hero:overlaps(entity) then
-						print("TELEPORT!")
-						if hero:get_map().effects ~= nil then
-							while true do
-								foundeffect = false
-								for effect, b in pairs(hero:get_map().effects) do
-									foundeffect = true
-									effect:remove()
-								end
-								if not foundeffect then
-									break
+						if game.bypassteleport or hero.entitydata:getremainingmonsters() == 0 then
+							if hero:get_map().effects ~= nil then
+								while true do
+									foundeffect = false
+									for effect, b in pairs(hero:get_map().effects) do
+										foundeffect = true
+										effect:remove()
+									end
+									if not foundeffect then
+										break
+									end
 								end
 							end
+							hero:teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
 						end
-						hero:teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
 					end
 				end
 			end
 		end
-	
+		
 		soulsdrop = 0.0005
 		if hero.entitydata.team == "monster" then
 			soulsdrop = 0.01
@@ -397,6 +408,13 @@ function load()
 	
 	function game:on_map_changed(map)
 		save()
+		
+		for entity in map:get_entities("") do
+			if entity.get_destination_map ~= nil then
+				x, y, layer = entity:get_position()
+				entity:set_position(x, y, 2)
+			end
+		end
 		
 		function map:on_draw(dst_surface)
 			hero = map:get_hero()

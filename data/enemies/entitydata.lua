@@ -1369,6 +1369,25 @@ function eyeclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
+maskmanclass = EntityData:subclass("maskmanclass")
+allclasses.maskmanclass = maskmanclass
+
+function maskmanclass:initialize(entity)
+	class = "mask man"
+	main_sprite = "monsters/maskman"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self, "casting")}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {TeleportAbility:new(self)}
+	specialabilities = {StompAbility:new(self)}
+	basestats = {}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
 -- Summoned:
 
 angelclass = EntityData:subclass("angelclass")
