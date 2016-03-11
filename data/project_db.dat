@@ -47,6 +47,9 @@ sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
 sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
 sprite{ id = "adventurers/angel", description = "angel" }
+sprite{ id = "adventurers/archer", description = "archer" }
+sprite{ id = "adventurers/bard", description = "bard" }
+sprite{ id = "adventurers/berserker", description = "berserker" }
 sprite{ id = "adventurers/cleric", description = "cleric" }
 sprite{ id = "adventurers/dummy", description = "combat dummy" }
 sprite{ id = "adventurers/eyes", description = "eyes" }
@@ -54,6 +57,7 @@ sprite{ id = "adventurers/guy2", description = "guy2" }
 sprite{ id = "adventurers/guy3", description = "guy3" }
 sprite{ id = "adventurers/knight", description = "knight" }
 sprite{ id = "adventurers/mage", description = "mage" }
+sprite{ id = "adventurers/rogue", description = "rogue" }
 sprite{ id = "adventurers/shield", description = "shield" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
@@ -199,7 +203,9 @@ sound{ id = "walk_on_water", description = "walk_on_water" }
 sound{ id = "wrong", description = "wrong" }
 
 
+enemy{ id = "archer", description = "archer" }
 enemy{ id = "bard", description = "bard" }
+enemy{ id = "berserker", description = "berserker" }
 enemy{ id = "cleric", description = "cleric" }
 enemy{ id = "combat_dummy", description = "combat dummy" }
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
@@ -232,6 +238,7 @@ entity{ id = "shieldbash", description = "shieldbash" }
 entity{ id = "smoke", description = "smoke" }
 entity{ id = "spiketrap", description = "spiketrap" }
 entity{ id = "stealth", description = "stealth smoke" }
+entity{ id = "stomp", description = "stomp" }
 entity{ id = "sword", description = "sword" }
 entity{ id = "teleportanim", description = "teleportanim" }
 

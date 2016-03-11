@@ -223,3 +223,19 @@ enemy{
   breed = "bard",
 }
 
+enemy{
+  layer = 0,
+  x = 152,
+  y = 981,
+  direction = 0,
+  breed = "berserker",
+}
+
+enemy{
+  layer = 0,
+  x = 304,
+  y = 853,
+  direction = 0,
+  breed = "archer",
+}
+

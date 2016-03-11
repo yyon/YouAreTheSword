@@ -24,6 +24,7 @@ BodyDoubleAbility = require "abilities/bodydouble"
 StealthAbility = require "abilities/stealth"
 BackstabAbility = require "abilities/backstab"
 TauntAbility = require "abilities/tauntability"
+StompAbility = require "abilities/stomp"
 
 Effects = require "enemies/effect"
 
@@ -1102,6 +1103,48 @@ function bardclass:getlogcolor()
 	return "92"
 end
 
+berserkerclass = EntityData:subclass("berserkerclass")
+
+function berserkerclass:initialize(entity)
+	class = "berserker"
+	main_sprite = "adventurers/berserker"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "damage")}
+	blockabilities = {ShieldAbility:new(self)}
+	specialabilities = {StompAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function berserkerclass:getlogcolor()
+	return "92"
+end
+
+archerclass = EntityData:subclass("archerclass")
+
+function archerclass:initialize(entity)
+	class = "archer"
+	main_sprite = "adventurers/archer"
+	life = 10
+	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {SwordAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "dagger")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {TauntAbility:new(self)}
+	basestats = {}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function archerclass:getlogcolor()
+	return "92"
+end
+
 -- Monsters:
 
 skeletonclass = EntityData:subclass("skeletonclass")
@@ -1236,6 +1279,6 @@ function dummyclass:getlogcolor()
 	return "35"
 end
 
-allclasses = {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass, rogueclass=rogueclass, bardclass=bardclass}
+allclasses = {EntityData=EntityData, knightclass=knightclass, yellowclass=yellowclass, greenclass=greenclass, skeletonclass=skeletonclass, angelclass=angelclass, mageclass=mageclass, clericclass=clericclass, orcclass=orcclass, evilmageclass = evilmageclass, spiderclass=spiderclass, dummyclass=dummyclass, rogueclass=rogueclass, bardclass=bardclass, berserkerclass=berserkerclass, archerclass=archerclass}
 
 return allclasses

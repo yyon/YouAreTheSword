@@ -56,3 +56,23 @@ animation{
     { x = 0, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 7 },
   },
 }
+animation{
+  name = "stomp",
+  src_image = "adventurers/eyes.png",
+  directions = {
+    { x = 256, y = 704, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 192, y = 512, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 256, y = 576, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 128, y = 640, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
+  name = "stomp2",
+  src_image = "adventurers/eyes.png",
+  directions = {
+    { x = 320, y = 704, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 320, y = 512, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 384, y = 576, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 256, y = 640, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
