@@ -26,6 +26,7 @@ BackstabAbility = require "abilities/backstab"
 TauntAbility = require "abilities/tauntability"
 StompAbility = require "abilities/stomp"
 NothingAbility = require "abilities/nothing"
+BoulderAbility = require "abilities/boulder"
 
 Effects = require "enemies/effect"
 
@@ -1401,7 +1402,7 @@ function dunsmurclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "lifesteal")}
 	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {BlackHoleAbility:new(self)}
+	specialabilities = {BoulderAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

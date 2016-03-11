@@ -1,0 +1,9 @@
+animation{
+  name = "boulder",
+  src_image = "abilities/boulder.png",
+  frame_delay = 50,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 496, frame_height = 496, origin_x = 248, origin_y = 248, num_frames = 24 },
+  },
+}
