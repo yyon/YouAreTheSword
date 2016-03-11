@@ -255,3 +255,51 @@ enemy{
   breed = "beetle",
 }
 
+enemy{
+  layer = 0,
+  x = 1848,
+  y = 1021,
+  direction = 0,
+  breed = "bat",
+}
+
+enemy{
+  layer = 0,
+  x = 1888,
+  y = 845,
+  direction = 0,
+  breed = "bee",
+}
+
+enemy{
+  layer = 0,
+  x = 2040,
+  y = 1101,
+  direction = 0,
+  breed = "worm",
+}
+
+enemy{
+  layer = 0,
+  x = 2136,
+  y = 933,
+  direction = 0,
+  breed = "flower",
+}
+
+enemy{
+  layer = 0,
+  x = 2312,
+  y = 933,
+  direction = 0,
+  breed = "slime",
+}
+
+enemy{
+  layer = 0,
+  x = 2360,
+  y = 1181,
+  direction = 0,
+  breed = "eyeball",
+}
+

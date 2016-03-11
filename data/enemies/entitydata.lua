@@ -44,6 +44,9 @@ function EntityData:log(...)
 	print(colstart .. self.theclass, ...)
 	io.write(colend)
 end
+function EntityData:getlogcolor()
+	return "92"
+end
 
 --local maxhealth
 
@@ -975,10 +978,6 @@ function yellowclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function yellowclass:getlogcolor()
-	return "93"
-end
-
 greenclass = EntityData:subclass("greenclass")
 allclasses.greenclass = greenclass
 
@@ -995,10 +994,6 @@ function greenclass:initialize(entity)
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function greenclass:getlogcolor()
-	return "92"
 end
 
 -- Adventurers:
@@ -1021,10 +1016,6 @@ function knightclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function knightclass:getlogcolor()
-	return "95"
-end
-
 mageclass = EntityData:subclass("mageclass")
 allclasses.mageclass = mageclass
 
@@ -1041,10 +1032,6 @@ function mageclass:initialize(entity)
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function mageclass:getlogcolor()
-	return "92"
 end
 
 clericclass = EntityData:subclass("clericclass")
@@ -1065,10 +1052,6 @@ function clericclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function clericclass:getlogcolor()
-	return "92"
-end
-
 rogueclass = EntityData:subclass("rogueclass")
 allclasses.rogueclass = rogueclass
 
@@ -1085,10 +1068,6 @@ function rogueclass:initialize(entity)
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function clericclass:getlogcolor()
-	return "92"
 end
 
 bardclass = EntityData:subclass("bardclass")
@@ -1109,10 +1088,6 @@ function bardclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function bardclass:getlogcolor()
-	return "92"
-end
-
 berserkerclass = EntityData:subclass("berserkerclass")
 allclasses.berserkerclass = berserkerclass
 
@@ -1129,10 +1104,6 @@ function berserkerclass:initialize(entity)
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function berserkerclass:getlogcolor()
-	return "92"
 end
 
 archerclass = EntityData:subclass("archerclass")
@@ -1153,10 +1124,6 @@ function archerclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function archerclass:getlogcolor()
-	return "92"
-end
-
 -- Monsters:
 
 skeletonclass = EntityData:subclass("skeletonclass")
@@ -1170,16 +1137,12 @@ function skeletonclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
 	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {ShieldBashAbility:new(self)}
+	specialabilities = {ShieldBashAbility:new(self), GrapplingHookAbility:new(self)}
 	basestats = {}
 	self.undead = true
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function skeletonclass :getlogcolor()
-	return "35"
 end
 
 orcclass = EntityData:subclass("orcclass")
@@ -1193,16 +1156,12 @@ function orcclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
 	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {ShieldBashAbility:new(self)}
-	basestats = {}
+	specialabilities = {ShieldBashAbility:new(self), BombThrowAbility:new(self)}
+	basestats = {damage=2, warmup=1.5}
 	self.cantdraweyes = true
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function orcclass:getlogcolor()
-	return "35"
 end
 
 evilmageclass = EntityData:subclass("evilmageclass")
@@ -1221,10 +1180,6 @@ function evilmageclass:initialize(entity)
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function evilmageclass:getlogcolor()
-	return "35"
 end
 
 spiderclass = EntityData:subclass("spiderclass")
@@ -1246,10 +1201,6 @@ function spiderclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function spiderclass:getlogcolor()
-	return "35"
-end
-
 beetleclass = EntityData:subclass("beetleclass")
 allclasses.beetleclass = beetleclass
 
@@ -1261,16 +1212,12 @@ function beetleclass:initialize(entity)
 	normalabilities = {NormalAbility:new(self)}
 	transformabilities = {NothingAbility:new(self)}
 	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
+	specialabilities = {EarthquakeAbility:new(self)}
 	basestats = {}
 	self.cantdraweyes = true
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function beetleclass:getlogcolor()
-	return "35"
 end
 
 ghostclass = EntityData:subclass("ghostclass")
@@ -1284,16 +1231,126 @@ function ghostclass:initialize(entity)
 	normalabilities = {FireballAbility:new(self)}
 	transformabilities = {SwordAbility:new(self, "fire")}
 	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {BlackholeAbility:new(self), LightningAbility:new(self)}
-	basestats = {}
+	specialabilities = {StealthAbility:new(self), BlackholeAbility:new(self)}
+	basestats = {movementspeed=100}
 	self.cantdraweyes = true
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function ghostclass:getlogcolor()
-	return "35"
+flowerclass = EntityData:subclass("flowerclass")
+allclasses.flowerclass = flowerclass
+
+function flowerclass:initialize(entity)
+	class = "flower"
+	main_sprite = "monsters/flower"
+	life = 20
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {FireballAbility:new(self)}
+	transformabilities = {SwordAbility:new(self, "fire")}
+	blockabilities = {NothingAbility:new(self)}
+	specialabilities = {GrapplingHookAbility:new(self)}
+	basestats = {movementspeed=0, cooldown=2}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+batclass = EntityData:subclass("batclass")
+allclasses.batclass = batclass
+
+function batclass:initialize(entity)
+	class = "bat"
+	main_sprite = "monsters/bat"
+	life = 5
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self, "casting"), HealAbility:new(self)}
+	transformabilities = {TransformAbility:new(self, "lifesteal")}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {HealExplosionAbility:new(self)}
+	basestats = {movementspeed=200, damage=0.8}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+beeclass = EntityData:subclass("beeclass")
+allclasses.beeclass = beeclass
+
+function beeclass:initialize(entity)
+	class = "bee"
+	main_sprite = "monsters/bee"
+	life = 5
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self, "casting")}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {SidestepAbility:new(self)}
+	specialabilities = {BackstabAbility:new(self)}
+	basestats = {movementspeed=200, damage=0.8}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+wormclass = EntityData:subclass("wormclass")
+allclasses.wormclass = wormclass
+
+function wormclass:initialize(entity)
+	class = "worm"
+	main_sprite = "monsters/big_worm"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self, "casting")}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {NothingAbility:new(self)}
+	specialabilities = {NothingAbility:new(self)}
+	basestats = {damage=2}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+slimeclass = EntityData:subclass("slimeclass")
+allclasses.slimeclass = slimeclass
+
+function slimeclass:initialize(entity)
+	class = "slime"
+	main_sprite = "monsters/slime"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self, "casting")}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {NothingAbility:new(self)}
+	specialabilities = {NothingAbility:new(self)}
+	basestats = {damage=0.5}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+eyeclass = EntityData:subclass("eyeclass")
+allclasses.eyeclass = eyeclass
+
+function eyeclass:initialize(entity)
+	class = "floating eyeball"
+	main_sprite = "monsters/eyeball"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {FireballAbility:new(self, "casting")}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {TeleportAbility:new(self)}
+	specialabilities = {BlackholeAbility:new(self)}
+	basestats = {warmup=0.5, cooldown=0.5}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 -- Summoned:
@@ -1316,10 +1373,6 @@ function angelclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-function angelclass:getlogcolor()
-	return "35"
-end
-
 dummyclass = EntityData:subclass("dummyclass")
 allclasses.dummyclass = dummyclass
 
@@ -1337,10 +1390,6 @@ function dummyclass:initialize(entity)
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
-end
-
-function dummyclass:getlogcolor()
-	return "35"
 end
 
 return allclasses

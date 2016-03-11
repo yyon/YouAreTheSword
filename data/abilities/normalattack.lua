@@ -4,8 +4,9 @@ Ability = require "abilities/ability"
 NormalAbility = Ability:subclass("NormalAbility")
 -- a replacement for sword ability for classes that don't have that animation
 
-function NormalAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "NormalAbility", 50, 500, 0, true, "sword")
+function NormalAbility:initialize(entitydata, anim)
+	if anim == nil then anim = "sword" end
+	Ability.initialize(self, entitydata, "NormalAbility", 50, 500, 0, true, anim)
 end
 
 function NormalAbility:doability(tox, toy)

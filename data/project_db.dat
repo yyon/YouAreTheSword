@@ -109,12 +109,17 @@ sprite{ id = "hud/lifebar", description = "lifebar" }
 sprite{ id = "hud/soul_meter", description = "sword possess meter" }
 sprite{ id = "hud/sword_health", description = "sword's health" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
+sprite{ id = "monsters/bat", description = "bat" }
+sprite{ id = "monsters/bee", description = "bee" }
 sprite{ id = "monsters/beetle", description = "beetle" }
+sprite{ id = "monsters/big_worm", description = "big_worm" }
 sprite{ id = "monsters/evilmage", description = "evilmage" }
 sprite{ id = "monsters/eyeball", description = "eyeball" }
+sprite{ id = "monsters/flower", description = "flower" }
 sprite{ id = "monsters/ghost", description = "ghost" }
 sprite{ id = "monsters/orc", description = "orc" }
 sprite{ id = "monsters/skeleton", description = "skeleton" }
+sprite{ id = "monsters/slime", description = "slime" }
 sprite{ id = "monsters/spiders/spider01", description = "spider01" }
 sprite{ id = "monsters/spiders/spider02", description = "spider02" }
 sprite{ id = "monsters/spiders/spider03", description = "spider03" }
@@ -211,12 +216,16 @@ sound{ id = "wrong", description = "wrong" }
 
 enemy{ id = "archer", description = "archer" }
 enemy{ id = "bard", description = "bard" }
+enemy{ id = "bat", description = "bat" }
+enemy{ id = "bee", description = "bee" }
 enemy{ id = "beetle", description = "beetle" }
 enemy{ id = "berserker", description = "berserker" }
 enemy{ id = "cleric", description = "cleric" }
 enemy{ id = "combat_dummy", description = "combat dummy" }
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
 enemy{ id = "evilmage", description = "evil mage" }
+enemy{ id = "eyeball", description = "eyeball" }
+enemy{ id = "flower", description = "flower" }
 enemy{ id = "ghost", description = "ghost" }
 enemy{ id = "green_test", description = "Test green" }
 enemy{ id = "knight", description = "knight" }
@@ -225,7 +234,9 @@ enemy{ id = "orc", description = "orc" }
 enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
 enemy{ id = "rogue", description = "rogue" }
 enemy{ id = "skeleton", description = "skeleton" }
+enemy{ id = "slime", description = "slime" }
 enemy{ id = "spider", description = "spider" }
+enemy{ id = "worm", description = "worm" }
 enemy{ id = "yellow_test", description = "Test yellow" }
 
 entity{ id = "blackhole", description = "blackhole" }
