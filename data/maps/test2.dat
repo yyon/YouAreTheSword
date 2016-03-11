@@ -132,8 +132,8 @@ destination{
 
 enemy{
   layer = 0,
-  x = 2016,
-  y = 1229,
+  x = 2048,
+  y = 1253,
   direction = 0,
   breed = "skeleton",
 }
@@ -273,14 +273,6 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 2040,
-  y = 1101,
-  direction = 0,
-  breed = "worm",
-}
-
-enemy{
-  layer = 0,
   x = 2136,
   y = 933,
   direction = 0,
@@ -301,5 +293,13 @@ enemy{
   y = 1181,
   direction = 0,
   breed = "eyeball",
+}
+
+enemy{
+  layer = 0,
+  x = 2064,
+  y = 1093,
+  direction = 0,
+  breed = "worm",
 }
 
