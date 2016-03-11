@@ -22,6 +22,10 @@ http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator
 http://opengameart.org/content/jastivs-artwork
 	angel (wings)
 
+http://opengameart.org/content/lpc-beetle
+	beetle
+http://lpc.opengameart.org/static/lpc-style-guide/assets.html
+	bat, bee, eyeball, ghost, pumpkin, slime, worm, snake, flower
 
 http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator/#?body=skeleton
 http://opengameart.org/content/lpc-spider

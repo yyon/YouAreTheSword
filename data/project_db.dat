@@ -109,7 +109,10 @@ sprite{ id = "hud/lifebar", description = "lifebar" }
 sprite{ id = "hud/soul_meter", description = "sword possess meter" }
 sprite{ id = "hud/sword_health", description = "sword's health" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
+sprite{ id = "monsters/beetle", description = "beetle" }
 sprite{ id = "monsters/evilmage", description = "evilmage" }
+sprite{ id = "monsters/eyeball", description = "eyeball" }
+sprite{ id = "monsters/ghost", description = "ghost" }
 sprite{ id = "monsters/orc", description = "orc" }
 sprite{ id = "monsters/skeleton", description = "skeleton" }
 sprite{ id = "monsters/spiders/spider01", description = "spider01" }
@@ -208,11 +211,13 @@ sound{ id = "wrong", description = "wrong" }
 
 enemy{ id = "archer", description = "archer" }
 enemy{ id = "bard", description = "bard" }
+enemy{ id = "beetle", description = "beetle" }
 enemy{ id = "berserker", description = "berserker" }
 enemy{ id = "cleric", description = "cleric" }
 enemy{ id = "combat_dummy", description = "combat dummy" }
 enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
 enemy{ id = "evilmage", description = "evil mage" }
+enemy{ id = "ghost", description = "ghost" }
 enemy{ id = "green_test", description = "Test green" }
 enemy{ id = "knight", description = "knight" }
 enemy{ id = "mage", description = "mage" }

@@ -22,6 +22,14 @@ function entity:start(appearance, isontop)
 	if not isontop then
 		self:add_collision_test("sprite", self.oncollision)
 	end
+	
+	self.ability.entitydata.positionlisteners[self]=function(x,y,layer) self:updatepos(x,y,layer) end
+end
+function entity:updatepos(x,y,layer)
+	self:set_position(x,y)
+end
+function entity:on_removed()
+	self.ability.entitydata.positionlisteners[self]=nil
 end
 
 function entity:oncollision(entity2, sprite1, sprite2)
