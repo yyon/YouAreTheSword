@@ -899,6 +899,22 @@ function EntityData:gettargetpos()
 	end
 end
 
+function EntityData:getremainingmonsters()
+	enemiesremaining = 0
+	
+	if self.team == "monster" then
+		enemiesremaining = 1
+	end
+	
+	for entitydata in self:getotherentities() do
+		if entitydata.team == "monster" then
+			enemiesremaining = enemiesremaining + 1
+		end
+	end
+	
+	return enemiesremaining
+end
+
 
 function EntityData:totable()
 	return {
