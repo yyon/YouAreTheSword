@@ -84,6 +84,9 @@ function sol.main:on_key_pressed(key, modifiers)
 			saveto(1)
 		elseif key == "6" then
 			loadfrom(1)
+		elseif key == "7" then
+			deletesave(1)
+			loadfrom(1)
 		elseif key == "p" then
 			game.dontattack = true
 		elseif key == "i" then
@@ -298,9 +301,18 @@ function saveto(name)
 	copy("save.dat", savename)
 end
 
+function deletesave(name)
+	savename = "save" .. name .. ".dat"
+	sol.file.remove(savename)
+end
+
 function loadfrom(name)
 	savename = "save" .. name .. ".dat"
-	copy(savename, "save.dat")
+	if sol.file.exists(savename) then
+		copy(savename, "save.dat")
+	else
+		sol.file.remove("save.dat")
+	end
 	
 	load()
 end
