@@ -363,7 +363,7 @@ function load()
 		hero.souls = 1
 		hero.swordhealth = 100
 		hero.maxswordhealth = 100
-		hero.entitydata = entitydatas.yellowclass:new(hero)--sol.main.load_file("enemies/entitydata")()
+		hero.entitydata = entitydatas.knightclass:new(hero)--sol.main.load_file("enemies/entitydata")()
 --		hero.entitydata:createfromclass(hero, "purple")
 	end
 	

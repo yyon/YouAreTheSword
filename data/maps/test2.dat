@@ -95,22 +95,6 @@ destination{
   default = true,
 }
 
-enemy{
-  layer = 0,
-  x = 1096,
-  y = 61,
-  direction = 0,
-  breed = "green_test",
-}
-
-enemy{
-  layer = 0,
-  x = 328,
-  y = 997,
-  direction = 0,
-  breed = "knight",
-}
-
 teletransporter{
   name = "tele1",
   layer = 0,
@@ -141,8 +125,8 @@ enemy{
 custom_entity{
   name = "spikeTrap",
   layer = 0,
-  x = 368,
-  y = 77,
+  x = 480,
+  y = 37,
   width = 32,
   height = 32,
   direction = 0,
@@ -201,8 +185,8 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 1704,
-  y = 333,
+  x = 1672,
+  y = 149,
   direction = 0,
   breed = "combat_dummy",
 }

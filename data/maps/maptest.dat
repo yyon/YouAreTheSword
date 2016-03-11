@@ -1130,7 +1130,7 @@ enemy{
   x = 1032,
   y = 125,
   direction = 0,
-  breed = "green_test",
+  breed = "slime",
 }
 
 npc{
