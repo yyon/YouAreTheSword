@@ -87,7 +87,6 @@ function EntityData:initialize(entity, class, main_sprite, life, team, swordabil
 	if stats.cooldown == nil then
 		stats.cooldown = 1
 	end
-
 	self.originalstats = stats
 	self.stats = stats
 end
@@ -548,6 +547,12 @@ function EntityData:dodamage(target, damage, aspects)
 		if target.undead then
 			damage = damage + 5
 		end
+	end
+	if aspects.buffattack ~= nil then
+		aspects.buffattack()
+	end
+	if aspects.debuffattack ~= nil then
+		aspects.debuffattack()
 	end
 	
 
