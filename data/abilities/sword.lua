@@ -56,13 +56,15 @@ end
 
 function SwordAbility:onfinish()
 	self.entitydata:setanimation("walking")
-
-	self.swordentity:remove()
-	self.swordentity = nil
-	self.topsword:remove()
-	self.topswowrd = nil
-	self.entitydata:log("sword finish 2")
-	self:finishability()
+	
+	if self.swordentity ~= nil then
+		self.swordentity:remove()
+		self.swordentity = nil
+	end
+	if self.topsword ~= nil then
+		self.topsword:remove()
+		self.topsword = nil
+	end
 end
 
 function SwordAbility:attack(entity)
@@ -91,6 +93,7 @@ function SwordAbility:attack(entity)
 		aspects.lifesteal = 1
 	elseif transform == "holy" then
 		aspects.holy = true
+	elseif transform == "dagger" then
 	end
 
 	self:dodamage(entitydata, damage, aspects)
@@ -112,9 +115,16 @@ end
 
 function SwordAbility:get_appearance(entity)
 	transform = self:gettransform(entity)
+	
+	ishero = false
+	if self.entitydata ~= nil then
+		if self.entitydata.entity.ishero then
+			ishero = true
+		end
+	end
 
 	if transform == "normal" then
-		if self.entitydata.entity.ishero then
+		if ishero then
 			return "swords/swordanim"
 		else
 			return "swords/normalsword"
@@ -133,6 +143,8 @@ function SwordAbility:get_appearance(entity)
 		return "swords/lifesteal"
 	elseif transform == "holy" then
 		return "swords/holy"
+	elseif transform == "dagger" then
+		return "swords/dagger"
 	end
 end
 

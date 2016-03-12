@@ -1,7 +1,6 @@
-map{ id = "combat_test_map", description = "For Testing Combat" }
-map{ id = "first_map", description = "First map" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "test2", description = "test2" }
+map{ id = "traps", description = "traps" }
 
 tileset{ id = "0", description = "House" }
 tileset{ id = "1", description = "Light World" }
@@ -32,9 +31,13 @@ sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
 sprite{ id = "abilities/blackhole", description = "blackhole" }
 sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
+sprite{ id = "abilities/bomb", description = "bomb" }
+sprite{ id = "abilities/boulder", description = "boulder" }
+sprite{ id = "abilities/charge", description = "charge" }
 sprite{ id = "abilities/charge_sword", description = "charge_sword" }
 sprite{ id = "abilities/droppedsword", description = "droppedsword" }
 sprite{ id = "abilities/earthquake", description = "earthquake" }
+sprite{ id = "abilities/explosion", description = "explosion" }
 sprite{ id = "abilities/explosionheart", description = "explosionheart" }
 sprite{ id = "abilities/fireball", description = "fireball" }
 sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
@@ -42,10 +45,21 @@ sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
+sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
+sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
+sprite{ id = "adventurers/angel", description = "angel" }
+sprite{ id = "adventurers/archer", description = "archer" }
+sprite{ id = "adventurers/bard", description = "bard" }
+sprite{ id = "adventurers/berserker", description = "berserker" }
+sprite{ id = "adventurers/cleric", description = "cleric" }
+sprite{ id = "adventurers/dummy", description = "combat dummy" }
+sprite{ id = "adventurers/eyes", description = "eyes" }
 sprite{ id = "adventurers/guy2", description = "guy2" }
 sprite{ id = "adventurers/guy3", description = "guy3" }
 sprite{ id = "adventurers/knight", description = "knight" }
+sprite{ id = "adventurers/mage", description = "mage" }
+sprite{ id = "adventurers/rogue", description = "rogue" }
 sprite{ id = "adventurers/shield", description = "shield" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
@@ -90,13 +104,37 @@ sprite{ id = "hero/tunic1", description = "Hero tunic 1" }
 sprite{ id = "hero/tunic2", description = "Hero tunic 2" }
 sprite{ id = "hero/tunic3", description = "Hero tunic 3" }
 sprite{ id = "hud/empty_heart", description = "empty hearts" }
+sprite{ id = "hud/lifebar", description = "lifebar" }
 sprite{ id = "hud/soul_meter", description = "sword possess meter" }
 sprite{ id = "hud/sword_health", description = "sword's health" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
+sprite{ id = "monsters/bat", description = "bat" }
+sprite{ id = "monsters/bee", description = "bee" }
+sprite{ id = "monsters/beetle", description = "beetle" }
+sprite{ id = "monsters/big_worm", description = "big_worm" }
+sprite{ id = "monsters/evilmage", description = "evilmage" }
+sprite{ id = "monsters/eyeball", description = "eyeball" }
+sprite{ id = "monsters/flower", description = "flower" }
+sprite{ id = "monsters/ghost", description = "ghost" }
+sprite{ id = "monsters/maskman", description = "maskman" }
+sprite{ id = "monsters/orc", description = "orc" }
 sprite{ id = "monsters/skeleton", description = "skeleton" }
+sprite{ id = "monsters/slime", description = "slime" }
+sprite{ id = "monsters/spiders/spider01", description = "spider01" }
+sprite{ id = "monsters/spiders/spider02", description = "spider02" }
+sprite{ id = "monsters/spiders/spider03", description = "spider03" }
+sprite{ id = "monsters/spiders/spider04", description = "spider04" }
+sprite{ id = "monsters/spiders/spider05", description = "spider05" }
+sprite{ id = "monsters/spiders/spider06", description = "spider06" }
+sprite{ id = "monsters/spiders/spider07", description = "spider07" }
+sprite{ id = "monsters/spiders/spider08", description = "spider08" }
+sprite{ id = "monsters/spiders/spider09", description = "spider09" }
+sprite{ id = "monsters/spiders/spider10", description = "spider10" }
+sprite{ id = "monsters/spiders/spider11", description = "spider11" }
 sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
+sprite{ id = "physicaleffects/taunt", description = "taunt" }
 sprite{ id = "swords/electric", description = "electric" }
 sprite{ id = "swords/swordanim", description = "swordanim" }
 
@@ -176,26 +214,51 @@ sound{ id = "walk_on_water", description = "walk_on_water" }
 sound{ id = "wrong", description = "wrong" }
 
 
-enemy{ id = "enemy_constructor", description = "Used when unpossessing" }
-enemy{ id = "green_test", description = "Test green" }
-enemy{ id = "purple_test", description = "Test Red Knight Soldier" }
+enemy{ id = "archer", description = "archer" }
+enemy{ id = "bard", description = "bard" }
+enemy{ id = "bat", description = "bat" }
+enemy{ id = "bee", description = "bee" }
+enemy{ id = "beetle", description = "beetle" }
+enemy{ id = "berserker", description = "berserker" }
+enemy{ id = "cleric", description = "cleric" }
+enemy{ id = "combat_dummy", description = "combat dummy" }
+enemy{ id = "dunsmur", description = "dunsmur" }
+enemy{ id = "evilmage", description = "evil mage" }
+enemy{ id = "eyeball", description = "eyeball" }
+enemy{ id = "flower", description = "flower" }
+enemy{ id = "ghost", description = "ghost" }
+enemy{ id = "knight", description = "knight" }
+enemy{ id = "mage", description = "mage" }
+enemy{ id = "maskman", description = "maskman" }
+enemy{ id = "orc", description = "orc" }
+enemy{ id = "rogue", description = "rogue" }
 enemy{ id = "skeleton", description = "skeleton" }
-enemy{ id = "yellow_test", description = "Test yellow" }
+enemy{ id = "slime", description = "slime" }
+enemy{ id = "spider", description = "spider" }
+enemy{ id = "worm", description = "worm" }
 
 entity{ id = "blackhole", description = "blackhole" }
 entity{ id = "blackholeparticle", description = "blackholeparticle" }
 entity{ id = "bomb", description = "bomb" }
+entity{ id = "boulder", description = "boulder" }
 entity{ id = "charge", description = "charge" }
-entity{ id = "earthquake", description = "earthquake" }
+entity{ id = "directionaltrap", description = "directionaltrap" }
+entity{ id = "fireball", description = "fireball" }
 entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }
 entity{ id = "heart", description = "heart" }
 entity{ id = "heartexplosion", description = "heartexplosion" }
+entity{ id = "lightning", description = "lightning" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
+entity{ id = "projectile", description = "projectile" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
+entity{ id = "smoke", description = "smoke" }
 entity{ id = "spiketrap", description = "spiketrap" }
+entity{ id = "stealth", description = "stealth smoke" }
+entity{ id = "stomp", description = "stomp" }
 entity{ id = "sword", description = "sword" }
+entity{ id = "teleportanim", description = "teleportanim" }
 
 language{ id = "en", description = "English" }
 

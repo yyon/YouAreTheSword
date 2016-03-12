@@ -13,10 +13,7 @@ function entity:start(appearance, isontop)
 --	self.sword_sprite:set_direction(self:get_direction())
 	self:updatedirection()
 
-	self.ability.entitydata:log("sword created")
-
 	function self.sword_sprite.on_animation_finished (sword_sprite, sprite, animation)
-		self.ability.entitydata:log("sword finish")
 		self.ability:finish()
 	end
 
@@ -25,6 +22,14 @@ function entity:start(appearance, isontop)
 	if not isontop then
 		self:add_collision_test("sprite", self.oncollision)
 	end
+	
+	self.ability.entitydata.positionlisteners[self]=function(x,y,layer) self:updatepos(x,y,layer) end
+end
+function entity:updatepos(x,y,layer)
+	self:set_position(x,y)
+end
+function entity:on_removed()
+	self.ability.entitydata.positionlisteners[self]=nil
 end
 
 function entity:oncollision(entity2, sprite1, sprite2)

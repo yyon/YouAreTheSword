@@ -10,7 +10,7 @@ function entity:start(appearance)
 
 	self:updatedirection()
 
-	self.ability.entitydata:log("shield created")
+--	self.ability.entitydata:log("shield created")
 end
 
 function entity:updatedirection()

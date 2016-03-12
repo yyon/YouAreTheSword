@@ -1,0 +1,54 @@
+animation{
+  name = "stopped",
+  src_image = "monsters/maskman.png",
+  directions = {
+    { x = 0, y = 192, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
+  name = "casting",
+  src_image = "monsters/maskman.png",
+  frame_delay = 50,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4, num_columns = 1 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4, num_columns = 1 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4, num_columns = 1 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4, num_columns = 1 },
+  },
+}
+animation{
+  name = "stomp",
+  src_image = "monsters/maskman.png",
+  directions = {
+    { x = 256, y = 192, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 192, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 256, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 384, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
+  name = "stomp2",
+  src_image = "monsters/maskman.png",
+  directions = {
+    { x = 320, y = 192, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 320, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 320, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 448, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
+  name = "walking",
+  src_image = "monsters/maskman.png",
+  frame_delay = 30,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 192, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+  },
+}

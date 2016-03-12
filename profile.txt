@@ -1,0 +1,920 @@
+Lua Profile output created by profiler.lua. Copyright Pepperfish 2002+
+
+------------------- L:<function: 0x4188a798>@scripts/game_manager.lua:389 -------------------
+Sample count:           11
+Time spend total:       1.374s
+Time spent in children: 0.000s
+Time spent in self:     1.374s
+Time spent per sample:  0.12491s/sample
+Time spent in self per sample: 0.12491s/sample
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            7
+Time spend total:       0.731s
+Time spent in children: 0.480s
+Time spent in self:     0.251s
+Time spent per sample:  0.10446s/sample
+Time spent in self per sample: 0.03583s/sample
+
+Child L:__index@middleclass.lua:35              sampled      1 times. Took 0.09s
+Child L:targetenemy@enemies/NPC.lua:259         sampled      2 times. Took 0.25s
+Child L:determinenewstate@enemies/NPC.lua:312   sampled      1 times. Took 0.14s
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            5
+Time spend total:       0.610s
+Time spent in children: 0.519s
+Time spent in self:     0.091s
+Time spent per sample:  0.12199s/sample
+Time spent in self per sample: 0.01811s/sample
+
+Child L:targetenemy@enemies/NPC.lua:259         sampled      2 times. Took 0.22s
+Child L:ontick@enemies/NPC.lua:53               sampled      2 times. Took 0.30s
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            4
+Time spend total:       0.446s
+Time spent in children: 0.145s
+Time spent in self:     0.301s
+Time spent per sample:  0.11162s/sample
+Time spent in self per sample: 0.07530s/sample
+
+Child L:requiresupdate@enemies/NPC.lua:71       sampled      1 times. Took 0.15s
+
+------------------- L:updatechangepos@enemies/entitydata.lua:115 -------------------
+Sample count:            3
+Time spend total:       0.413s
+Time spent in children: 0.000s
+Time spent in self:     0.413s
+Time spent per sample:  0.13768s/sample
+Time spent in self per sample: 0.13768s/sample
+
+------------------- L:<function: 0x413f1228>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            2
+Time spend total:       0.303s
+Time spent in children: 0.000s
+Time spent in self:     0.303s
+Time spent per sample:  0.15169s/sample
+Time spent in self per sample: 0.15169s/sample
+
+-------------------------- L:tick@enemies/NPC.lua:139 --------------------------
+Sample count:            2
+Time spend total:       0.297s
+Time spent in children: 0.139s
+Time spent in self:     0.158s
+Time spent per sample:  0.14842s/sample
+Time spent in self per sample: 0.07883s/sample
+
+Child L:canuseability@enemies/entitydata.lua:337 sampled      1 times. Took 0.14s
+
+------------------------- L:ontick@enemies/NPC.lua:53 --------------------------
+Sample count:            2
+Time spend total:       0.297s
+Time spent in children: 0.297s
+Time spent in self:     0.000s
+Time spent per sample:  0.14842s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:139                sampled      2 times. Took 0.30s
+
+------------------- L:<function: 0x41a6ee58>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            2
+Time spend total:       0.274s
+Time spent in children: 0.174s
+Time spent in self:     0.100s
+Time spent per sample:  0.13715s/sample
+Time spent in self per sample: 0.05003s/sample
+
+Child L:actualposchange@entities/projectile.lua:35 sampled      1 times. Took 0.17s
+
+------------------- L:<function: 0x41c8cea0>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            2
+Time spend total:       0.262s
+Time spent in children: 0.000s
+Time spent in self:     0.262s
+Time spent per sample:  0.13080s/sample
+Time spent in self per sample: 0.13080s/sample
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            3
+Time spend total:       0.254s
+Time spent in children: 0.254s
+Time spent in self:     0.000s
+Time spent per sample:  0.08455s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:__index@middleclass.lua:35              sampled      1 times. Took 0.06s
+Child L:ontick@enemies/NPC.lua:53               sampled      2 times. Took 0.19s
+
+---------------------- L:targetenemy@enemies/NPC.lua:259 -----------------------
+Sample count:            2
+Time spend total:       0.245s
+Time spent in children: 0.109s
+Time spent in self:     0.137s
+Time spent per sample:  0.12271s/sample
+Time spent in self per sample: 0.06836s/sample
+
+Child L:cantarget@enemies/NPC.lua:299           sampled      1 times. Took 0.11s
+
+------------------- L:<function: 0x41776f88>@enemies/NPC.lua:576 -------------------
+Sample count:            2
+Time spend total:       0.245s
+Time spent in children: 0.113s
+Time spent in self:     0.132s
+Time spent per sample:  0.12267s/sample
+Time spent in self per sample: 0.06612s/sample
+
+Child L:__index@middleclass.lua:35              sampled      1 times. Took 0.11s
+
+------------------- L:<function: 0x40752a18>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            2
+Time spend total:       0.245s
+Time spent in children: 0.000s
+Time spent in self:     0.245s
+Time spent per sample:  0.12251s/sample
+Time spent in self per sample: 0.12251s/sample
+
+------------------- L:<function: 0x404e0c90>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            2
+Time spend total:       0.226s
+Time spent in children: 0.000s
+Time spent in self:     0.226s
+Time spent per sample:  0.11321s/sample
+Time spent in self per sample: 0.11321s/sample
+
+--------------------- L:tick@scripts/game_manager.lua:194 ----------------------
+Sample count:            2
+Time spend total:       0.224s
+Time spent in children: 0.000s
+Time spent in self:     0.224s
+Time spent per sample:  0.11202s/sample
+Time spent in self per sample: 0.11202s/sample
+
+---------------------- L:targetenemy@enemies/NPC.lua:259 -----------------------
+Sample count:            2
+Time spend total:       0.223s
+Time spent in children: 0.105s
+Time spent in self:     0.118s
+Time spent per sample:  0.11127s/sample
+Time spent in self per sample: 0.05879s/sample
+
+Child L:cantarget@enemies/NPC.lua:299           sampled      1 times. Took 0.10s
+
+------------------- L:<function: 0x401d7e70>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            2
+Time spend total:       0.223s
+Time spent in children: 0.223s
+Time spent in self:     0.000s
+Time spent per sample:  0.11126s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child C:set_xy@=[C]:?                           sampled      1 times. Took 0.12s
+Child L:actualposchange@entities/projectile.lua:35 sampled      1 times. Took 0.11s
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            2
+Time spend total:       0.222s
+Time spent in children: 0.222s
+Time spent in self:     0.000s
+Time spent per sample:  0.11080s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:requiresupdate@enemies/NPC.lua:71       sampled      1 times. Took 0.10s
+Child L:targetenemy@enemies/NPC.lua:259         sampled      1 times. Took 0.13s
+
+-------------------- L:cantarget@enemies/entitydata.lua:194 --------------------
+Sample count:            2
+Time spend total:       0.214s
+Time spent in children: 0.105s
+Time spent in self:     0.109s
+Time spent per sample:  0.10683s/sample
+Time spent in self per sample: 0.05435s/sample
+
+Child L:isvisible@enemies/entitydata.lua:233    sampled      1 times. Took 0.10s
+
+------------------- L:<function: 0x40973e20>@entities/projectile.lua:56 -------------------
+Sample count:            1
+Time spend total:       0.209s
+Time spent in children: 0.000s
+Time spent in self:     0.209s
+Time spent per sample:  0.20855s/sample
+Time spent in self per sample: 0.20855s/sample
+
+------------------------- L:ontick@enemies/NPC.lua:53 --------------------------
+Sample count:            2
+Time spend total:       0.193s
+Time spent in children: 0.193s
+Time spent in self:     0.000s
+Time spent per sample:  0.09671s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:139                sampled      1 times. Took 0.08s
+Child L:start@enemies/NPC.lua:129               sampled      1 times. Took 0.12s
+
+------------------- L:<function: 0x401d7ac8>@entities/projectile.lua:56 -------------------
+Sample count:            2
+Time spend total:       0.182s
+Time spent in children: 0.000s
+Time spent in self:     0.182s
+Time spent per sample:  0.09096s/sample
+Time spent in self per sample: 0.09096s/sample
+
+------------------- L:actualposchange@entities/projectile.lua:35 -------------------
+Sample count:            1
+Time spend total:       0.174s
+Time spent in children: 0.000s
+Time spent in self:     0.174s
+Time spent per sample:  0.17424s/sample
+Time spent in self per sample: 0.17424s/sample
+
+------------------- L:<function: 0x4095f268>@enemies/NPC.lua:576 -------------------
+Sample count:            1
+Time spend total:       0.169s
+Time spent in children: 0.169s
+Time spent in self:     0.000s
+Time spent per sample:  0.16868s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:updatechangepos@enemies/entitydata.lua:115 sampled      1 times. Took 0.17s
+
+------------------- L:<function: 0x40077e50>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.158s
+Time spent in children: 0.000s
+Time spent in self:     0.158s
+Time spent per sample:  0.15842s/sample
+Time spent in self per sample: 0.15842s/sample
+
+------------------- L:<function: 0x41b71238>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.158s
+Time spent in children: 0.158s
+Time spent in self:     0.000s
+Time spent per sample:  0.15766s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.16s
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            2
+Time spend total:       0.156s
+Time spent in children: 0.000s
+Time spent in self:     0.156s
+Time spent per sample:  0.07784s/sample
+Time spent in self per sample: 0.07784s/sample
+
+------------------- L:<function: 0x41805518>@scripts/game_manager.lua:245 -------------------
+Sample count:            1
+Time spend total:       0.155s
+Time spent in children: 0.155s
+Time spent in self:     0.000s
+Time spent per sample:  0.15493s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@scripts/game_manager.lua:194       sampled      1 times. Took 0.15s
+
+------------------- L:<function: 0x4099eea8>@scripts/hud/sword_health.lua:64 -------------------
+Sample count:            1
+Time spend total:       0.152s
+Time spent in children: 0.152s
+Time spent in self:     0.000s
+Time spent per sample:  0.15155s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:check@scripts/hud/sword_health.lua:36   sampled      1 times. Took 0.15s
+
+------------------- L:check@scripts/hud/sword_health.lua:36 --------------------
+Sample count:            1
+Time spend total:       0.152s
+Time spent in children: 0.000s
+Time spent in self:     0.152s
+Time spent per sample:  0.15155s/sample
+Time spent in self per sample: 0.15155s/sample
+
+------------------- L:<function: 0x41bebae8>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.145s
+Time spent in children: 0.145s
+Time spent in self:     0.000s
+Time spent per sample:  0.14525s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.15s
+
+--------------------- L:requiresupdate@enemies/NPC.lua:71 ----------------------
+Sample count:            1
+Time spend total:       0.145s
+Time spent in children: 0.000s
+Time spent in self:     0.145s
+Time spent per sample:  0.14525s/sample
+Time spent in self per sample: 0.14525s/sample
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            1
+Time spend total:       0.145s
+Time spent in children: 0.000s
+Time spent in self:     0.145s
+Time spent per sample:  0.14471s/sample
+Time spent in self per sample: 0.14471s/sample
+
+------------------- L:<function: 0x40aab358>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.145s
+Time spent in children: 0.145s
+Time spent in self:     0.000s
+Time spent per sample:  0.14471s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.14s
+
+------------------- L:<function: 0x411dca00>@enemies/NPC.lua:576 -------------------
+Sample count:            1
+Time spend total:       0.144s
+Time spent in children: 0.144s
+Time spent in self:     0.000s
+Time spent per sample:  0.14377s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:updatechangepos@enemies/entitydata.lua:115 sampled      1 times. Took 0.14s
+
+------------------- L:determinenewstate@enemies/NPC.lua:312 --------------------
+Sample count:            1
+Time spend total:       0.143s
+Time spent in children: 0.000s
+Time spent in self:     0.143s
+Time spent per sample:  0.14299s/sample
+Time spent in self per sample: 0.14299s/sample
+
+------------------- L:<function: 0x4071be68>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.143s
+Time spent in children: 0.143s
+Time spent in self:     0.000s
+Time spent per sample:  0.14299s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.14s
+
+------------------- L:<function: 0x41554668>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.139s
+Time spent in children: 0.000s
+Time spent in self:     0.139s
+Time spent per sample:  0.13942s/sample
+Time spent in self per sample: 0.13942s/sample
+
+------------------- L:<function: 0x411cc1f0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.139s
+Time spent in children: 0.139s
+Time spent in self:     0.000s
+Time spent per sample:  0.13918s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.14s
+
+------------------- L:getability@enemies/entitydata.lua:281 --------------------
+Sample count:            1
+Time spend total:       0.139s
+Time spent in children: 0.000s
+Time spent in self:     0.139s
+Time spent per sample:  0.13918s/sample
+Time spent in self per sample: 0.13918s/sample
+
+------------------- L:canuseability@enemies/entitydata.lua:337 -------------------
+Sample count:            1
+Time spend total:       0.139s
+Time spent in children: 0.139s
+Time spent in self:     0.000s
+Time spent per sample:  0.13918s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:getability@enemies/entitydata.lua:281   sampled      1 times. Took 0.14s
+
+----------------------- L:check@scripts/hud/panel.lua:35 -----------------------
+Sample count:            1
+Time spend total:       0.138s
+Time spent in children: 0.000s
+Time spent in self:     0.138s
+Time spent per sample:  0.13756s/sample
+Time spent in self per sample: 0.13756s/sample
+
+------------------- L:<function: 0x40abc4e8>@scripts/hud/panel.lua:38 -------------------
+Sample count:            1
+Time spend total:       0.138s
+Time spent in children: 0.138s
+Time spent in self:     0.000s
+Time spent per sample:  0.13756s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:check@scripts/hud/panel.lua:35          sampled      1 times. Took 0.14s
+
+------------------- L:<function: 0x41f59e68>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.137s
+Time spent in children: 0.137s
+Time spent in self:     0.000s
+Time spent per sample:  0.13671s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.14s
+
+------------------- L:<function: 0x414dd5d8>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.130s
+Time spent in children: 0.000s
+Time spent in self:     0.130s
+Time spent per sample:  0.13040s/sample
+Time spent in self per sample: 0.13040s/sample
+
+------------------- L:<function: 0x41eefb50>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.129s
+Time spent in children: 0.129s
+Time spent in self:     0.000s
+Time spent per sample:  0.12901s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.13s
+
+------------------- L:<function: 0x411f71d0>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.129s
+Time spent in children: 0.000s
+Time spent in self:     0.129s
+Time spent per sample:  0.12880s/sample
+Time spent in self per sample: 0.12880s/sample
+
+------------------- L:<function: 0x4093f0b0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.126s
+Time spent in children: 0.126s
+Time spent in self:     0.000s
+Time spent per sample:  0.12570s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.13s
+
+---------------------- L:targetenemy@enemies/NPC.lua:259 -----------------------
+Sample count:            1
+Time spend total:       0.126s
+Time spent in children: 0.126s
+Time spent in self:     0.000s
+Time spent per sample:  0.12570s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:cantarget@enemies/NPC.lua:299           sampled      1 times. Took 0.13s
+
+----------------------- L:cantarget@enemies/NPC.lua:299 ------------------------
+Sample count:            1
+Time spend total:       0.126s
+Time spent in children: 0.000s
+Time spent in self:     0.126s
+Time spent per sample:  0.12570s/sample
+Time spent in self per sample: 0.12570s/sample
+
+------------------- L:<function: 0x406041b0>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.121s
+Time spent in children: 0.000s
+Time spent in self:     0.121s
+Time spent per sample:  0.12138s/sample
+Time spent in self per sample: 0.12138s/sample
+
+------------------- L:<function: 0x411bfc78>@entities/bomb.lua:58 -------------------
+Sample count:            1
+Time spend total:       0.121s
+Time spent in children: 0.000s
+Time spent in self:     0.121s
+Time spent per sample:  0.12097s/sample
+Time spent in self per sample: 0.12097s/sample
+
+------------------- L:<function: 0x416c1bf0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.120s
+Time spent in children: 0.120s
+Time spent in self:     0.000s
+Time spent per sample:  0.11962s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.12s
+
+------------------- L:<function: 0x417ba680>@enemies/NPC.lua:576 -------------------
+Sample count:            1
+Time spend total:       0.119s
+Time spent in children: 0.000s
+Time spent in self:     0.119s
+Time spent per sample:  0.11875s/sample
+Time spent in self per sample: 0.11875s/sample
+
+------------------- L:<function: 0x41817410>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.118s
+Time spent in children: 0.118s
+Time spent in self:     0.000s
+Time spent per sample:  0.11759s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.12s
+
+------------------- L:<function: 0x41ec8df0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.116s
+Time spent in children: 0.116s
+Time spent in self:     0.000s
+Time spent per sample:  0.11615s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.12s
+
+-------------------------------- C:start@=[C]:? --------------------------------
+Sample count:            1
+Time spend total:       0.116s
+Time spent in children: 0.116s
+Time spent in self:     0.000s
+Time spent per sample:  0.11615s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:<function: 0x4096c230>@enemies/NPC.lua:413 sampled      1 times. Took 0.12s
+
+------------------------- L:start@enemies/NPC.lua:129 --------------------------
+Sample count:            1
+Time spend total:       0.116s
+Time spent in children: 0.116s
+Time spent in self:     0.000s
+Time spent per sample:  0.11615s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child C:start@=[C]:?                            sampled      1 times. Took 0.12s
+
+------------------- L:<function: 0x4096c230>@enemies/NPC.lua:413 -------------------
+Sample count:            1
+Time spend total:       0.116s
+Time spent in children: 0.000s
+Time spent in self:     0.116s
+Time spent per sample:  0.11615s/sample
+Time spent in self per sample: 0.11615s/sample
+
+------------------------------- C:set_xy@=[C]:? --------------------------------
+Sample count:            1
+Time spend total:       0.115s
+Time spent in children: 0.115s
+Time spent in self:     0.000s
+Time spent per sample:  0.11513s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:<function: 0x401d7ac8>@entities/projectile.lua:56 sampled      1 times. Took 0.12s
+
+------------------------- L:__index@middleclass.lua:35 -------------------------
+Sample count:            1
+Time spend total:       0.113s
+Time spent in children: 0.000s
+Time spent in self:     0.113s
+Time spent per sample:  0.11309s/sample
+Time spent in self per sample: 0.11309s/sample
+
+------------------- L:<function: 0x407069c0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.109s
+Time spent in children: 0.109s
+Time spent in self:     0.000s
+Time spent per sample:  0.10871s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.11s
+
+----------------------- L:cantarget@enemies/NPC.lua:299 ------------------------
+Sample count:            1
+Time spend total:       0.109s
+Time spent in children: 0.109s
+Time spent in self:     0.000s
+Time spent per sample:  0.10871s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:cantarget@enemies/entitydata.lua:194    sampled      1 times. Took 0.11s
+
+------------------- L:actualposchange@entities/projectile.lua:35 -------------------
+Sample count:            1
+Time spend total:       0.107s
+Time spent in children: 0.000s
+Time spent in self:     0.107s
+Time spent per sample:  0.10739s/sample
+Time spent in self per sample: 0.10739s/sample
+
+----------------------- L:cantarget@enemies/NPC.lua:299 ------------------------
+Sample count:            1
+Time spend total:       0.105s
+Time spent in children: 0.105s
+Time spent in self:     0.000s
+Time spent per sample:  0.10496s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:cantarget@enemies/entitydata.lua:194    sampled      1 times. Took 0.10s
+
+------------------- L:<function: 0x407a0fa0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.105s
+Time spent in children: 0.105s
+Time spent in self:     0.000s
+Time spent per sample:  0.10496s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.10s
+
+-------------------- L:isvisible@enemies/entitydata.lua:233 --------------------
+Sample count:            1
+Time spend total:       0.105s
+Time spent in children: 0.000s
+Time spent in self:     0.105s
+Time spent per sample:  0.10496s/sample
+Time spent in self per sample: 0.10496s/sample
+
+------------------- L:<function: 0x411df478>@enemies/NPC.lua:576 -------------------
+Sample count:            1
+Time spend total:       0.101s
+Time spent in children: 0.000s
+Time spent in self:     0.101s
+Time spent per sample:  0.10126s/sample
+Time spent in self per sample: 0.10126s/sample
+
+------------------- L:<function: 0x40e436a8>@scripts/game_manager.lua:377 -------------------
+Sample count:            1
+Time spend total:       0.101s
+Time spent in children: 0.101s
+Time spent in self:     0.000s
+Time spent per sample:  0.10060s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:updatechangepos@enemies/entitydata.lua:115 sampled      1 times. Took 0.10s
+
+------------------- L:<function: 0x41703188>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.096s
+Time spent in children: 0.096s
+Time spent in self:     0.000s
+Time spent per sample:  0.09590s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.10s
+
+--------------------- L:requiresupdate@enemies/NPC.lua:71 ----------------------
+Sample count:            1
+Time spend total:       0.096s
+Time spent in children: 0.000s
+Time spent in self:     0.096s
+Time spent per sample:  0.09590s/sample
+Time spent in self per sample: 0.09590s/sample
+
+------------------- L:<function: 0x411c8bc8>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.096s
+Time spent in children: 0.000s
+Time spent in self:     0.096s
+Time spent per sample:  0.09571s/sample
+Time spent in self per sample: 0.09571s/sample
+
+------------------- L:<function: 0x40d06a58>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.095s
+Time spent in children: 0.000s
+Time spent in self:     0.095s
+Time spent per sample:  0.09522s/sample
+Time spent in self per sample: 0.09522s/sample
+
+------------------- L:<function: 0x408287c8>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.094s
+Time spent in children: 0.094s
+Time spent in self:     0.000s
+Time spent per sample:  0.09439s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.09s
+
+------------------- L:<function: 0x41d06720>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.094s
+Time spent in children: 0.094s
+Time spent in self:     0.000s
+Time spent per sample:  0.09396s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.09s
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            1
+Time spend total:       0.094s
+Time spent in children: 0.000s
+Time spent in self:     0.094s
+Time spent per sample:  0.09396s/sample
+Time spent in self per sample: 0.09396s/sample
+
+------------------- L:<function: 0x40988250>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.094s
+Time spent in children: 0.094s
+Time spent in self:     0.000s
+Time spent per sample:  0.09390s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.09s
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            1
+Time spend total:       0.094s
+Time spent in children: 0.000s
+Time spent in self:     0.094s
+Time spent per sample:  0.09390s/sample
+Time spent in self per sample: 0.09390s/sample
+
+------------------- L:<function: 0x40bea7b8>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.093s
+Time spent in children: 0.093s
+Time spent in self:     0.000s
+Time spent per sample:  0.09319s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.09s
+
+------------------------- L:__index@middleclass.lua:35 -------------------------
+Sample count:            1
+Time spend total:       0.092s
+Time spent in children: 0.000s
+Time spent in self:     0.092s
+Time spent per sample:  0.09198s/sample
+Time spent in self per sample: 0.09198s/sample
+
+------------------- L:<function: 0x41584248>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.092s
+Time spent in children: 0.092s
+Time spent in self:     0.000s
+Time spent per sample:  0.09198s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.09s
+
+------------------- L:<function: 0x41e3d800>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.091s
+Time spent in children: 0.091s
+Time spent in self:     0.000s
+Time spent per sample:  0.09057s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.09s
+
+------------------- L:<function: 0x417fc900>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.085s
+Time spent in children: 0.000s
+Time spent in self:     0.085s
+Time spent per sample:  0.08484s/sample
+Time spent in self per sample: 0.08484s/sample
+
+------------------- L:<function: 0x41805cb0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.081s
+Time spent in children: 0.081s
+Time spent in self:     0.000s
+Time spent per sample:  0.08094s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.08s
+
+-------------------------- L:tick@enemies/NPC.lua:139 --------------------------
+Sample count:            1
+Time spend total:       0.077s
+Time spent in children: 0.000s
+Time spent in self:     0.077s
+Time spent per sample:  0.07728s/sample
+Time spent in self per sample: 0.07728s/sample
+
+------------------- L:<function: 0x413deda0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.077s
+Time spent in children: 0.077s
+Time spent in self:     0.000s
+Time spent per sample:  0.07728s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.08s
+
+------------------- L:<function: 0x40cc5dd8>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.077s
+Time spent in children: 0.077s
+Time spent in self:     0.000s
+Time spent per sample:  0.07671s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.08s
+
+------------------- L:(for generator)@enemies/entitydata.lua:258 -------------------
+Sample count:            1
+Time spend total:       0.074s
+Time spent in children: 0.000s
+Time spent in self:     0.074s
+Time spent per sample:  0.07379s/sample
+Time spent in self per sample: 0.07379s/sample
+
+-------------------------- L:tick@enemies/NPC.lua:344 --------------------------
+Sample count:            1
+Time spend total:       0.074s
+Time spent in children: 0.074s
+Time spent in self:     0.000s
+Time spent per sample:  0.07379s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:targetenemy@enemies/NPC.lua:259         sampled      1 times. Took 0.07s
+
+------------------- L:<function: 0x41206f90>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.074s
+Time spent in children: 0.074s
+Time spent in self:     0.000s
+Time spent per sample:  0.07379s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.07s
+
+---------------------- L:targetenemy@enemies/NPC.lua:259 -----------------------
+Sample count:            1
+Time spend total:       0.074s
+Time spent in children: 0.074s
+Time spent in self:     0.000s
+Time spent per sample:  0.07379s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:(for generator)@enemies/entitydata.lua:258 sampled      1 times. Took 0.07s
+
+------------------- L:<function: 0x41be66f8>@scripts/game_manager.lua:245 -------------------
+Sample count:            1
+Time spend total:       0.069s
+Time spent in children: 0.069s
+Time spent in self:     0.000s
+Time spent per sample:  0.06911s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@scripts/game_manager.lua:194       sampled      1 times. Took 0.07s
+
+------------------- L:<function: 0x41707860>@scripts/movementaccuracy.lua:12 -------------------
+Sample count:            1
+Time spend total:       0.069s
+Time spent in children: 0.000s
+Time spent in self:     0.069s
+Time spent per sample:  0.06888s/sample
+Time spent in self per sample: 0.06888s/sample
+
+------------------- L:<function: 0x40e3c530>@scripts/hud/possess_o_meter.lua:84 -------------------
+Sample count:            1
+Time spend total:       0.068s
+Time spent in children: 0.000s
+Time spent in self:     0.068s
+Time spent per sample:  0.06823s/sample
+Time spent in self per sample: 0.06823s/sample
+
+------------------- L:<function: 0x410a3088>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.061s
+Time spent in children: 0.061s
+Time spent in self:     0.000s
+Time spent per sample:  0.06130s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.06s
+
+------------------------- L:__index@middleclass.lua:35 -------------------------
+Sample count:            1
+Time spend total:       0.060s
+Time spent in children: 0.000s
+Time spent in self:     0.060s
+Time spent per sample:  0.06022s/sample
+Time spent in self per sample: 0.06022s/sample
+
+------------------- L:<function: 0x41281328>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.060s
+Time spent in children: 0.060s
+Time spent in self:     0.000s
+Time spent per sample:  0.06022s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.06s
+
+------------------- L:<function: 0x409067b0>@enemies/NPC.lua:409 -------------------
+Sample count:            1
+Time spend total:       0.053s
+Time spent in children: 0.053s
+Time spent in self:     0.000s
+Time spent per sample:  0.05258s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/NPC.lua:344                sampled      1 times. Took 0.05s
+
+
+
+Total time spent in profiled functions:  8.61s
+
+END

@@ -1,0 +1,7 @@
+animation{
+  name = "smoke",
+  src_image = "abilities/smokebomb.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 100, frame_height = 100, origin_x = 50, origin_y = 50, num_frames = 4 },
+  },
+}

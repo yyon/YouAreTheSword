@@ -11,10 +11,9 @@ function entity:start(fireball, angle)
   self.sprite:set_paused(false)
 
   local movement = sol.movement.create("straight")
-  movement:set_speed(100)
+  movement:set_speed(200)
   movement:set_angle(angle)
   movement:set_max_distance(100)
-  movement:set_smooth(true)
   movement:start(self)
 
   function movement.on_obstacle_reached(movement)
@@ -25,4 +24,12 @@ function entity:start(fireball, angle)
 	end
 
   self:set_enabled()
+end
+
+function entity:on_suspended()
+	self:remove()
+end
+
+function entity:on_disabled()
+	self:remove()
 end

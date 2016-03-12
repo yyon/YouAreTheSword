@@ -1130,6 +1130,17 @@ enemy{
   x = 1032,
   y = 125,
   direction = 0,
-  breed = "green_test",
+  breed = "slime",
+}
+
+npc{
+  name = "test",
+  layer = 0,
+  x = 344,
+  y = 469,
+  direction = 3,
+  subtype = 0,
+  sprite = "adventurers/guy2",
+  behavior = "dialog#test",
 }
 

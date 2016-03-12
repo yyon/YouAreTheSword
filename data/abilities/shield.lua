@@ -14,8 +14,6 @@ function ShieldAbility:doability(playerrelease)
 	w,h = entity:get_size()
 	entitydata = self.entitydata
 
-	print(layer)
-
 	d = entitydata:getdirection()
 
 	self.shieldentity = map:create_custom_entity({model="shield", x=x, y=y, layer=layer, direction=d, width=w, height=h})
@@ -40,13 +38,12 @@ function ShieldAbility:onfinish()
 
 	self.shieldentity:remove()
 	self.shieldentity = nil
-	self.entitydata:log("sword finish 2")
 end
 
 function ShieldAbility:blockdamage(fromentity, damage, aspects)
 	if self.entitydata.entity:get_direction4_to(fromentity.entity) == self.entitydata:getdirection() then
 		-- shield can block
-		self.entitydata:log("Blocked Damage using shield!")
+--		self.entitydata:log("Blocked Damage using shield!")
 		aspects.reversecancel = 500
 		return 0, aspects
 	end

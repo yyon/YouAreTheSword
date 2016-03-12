@@ -35,6 +35,7 @@ function entity:start()
 			entitydata.blackholemovement:start(entitydata.entity)
 			function entitydata.blackholemovement.on_finished()
 				entitydata.entity:set_visible(false)
+				entitydata.stealth = true
 			end
 		end
 	end
@@ -61,6 +62,7 @@ function entity:finish()
 		entitydata.blackholemovement:stop()
 		entitydata.blackholefreeze:remove()
 		entitydata.entity:set_visible(true)
+		entitydata.stealth = false
 	end
 	
 	for entity, _ in pairs(self.collided) do

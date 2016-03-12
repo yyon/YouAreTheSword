@@ -2,6 +2,8 @@ local entity = ...
 
 Effects = require "enemies/effect"
 
+require "scripts/movementaccuracy"
+
 function entity:on_created()
 	self:set_optimization_distance(0)
 end
@@ -34,19 +36,23 @@ function entity:start(target)
 	movement:set_speed(600)
 	movement:set_target(self.target.entity)
 --	movement:set_max_distance(dist)
-	movement:set_smooth(true)
 	movement:start(self)
 	function movement.on_finished(movement)
-		self.ability:cancel()
+--		print("FINISH")
+		self.ability:attack(self.target.entity, self)
+--		self.ability:cancel()
 	end
 	function movement.on_obstacle_reached(movement)
+--		print("OBSTACLE")
 		self.ability:cancel()
 	end
 	function movement.on_position_changed(movement)
 		self:tick()
 	end
-
+	
 	self:add_collision_test("sprite", self.oncollision)
+
+	targetstopper(movement, self, self.target.entity)
 
 --	self.ticker = Effects.Ticker(self.ability.entitydata, 50, function() self:tick() end)
 end
@@ -59,11 +65,12 @@ function entity:pull(target)
 	movement = sol.movement.create("target")
 	movement:set_speed(600)
 	movement:set_target(self.ability.entitydata.entity)
-	movement:set_smooth(true)
 	movement:start(self)
 	function movement.on_position_changed(movement)
 		self:tick()
 	end
+	
+	targetstopper(movement, self, self.ability.entitydata.entity)
 end
 
 SPACING = 36--18

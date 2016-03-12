@@ -4,7 +4,7 @@ Effects = require "enemies/effect"
 local math = require "math"
 
 function entity:on_created()
-	self:set_optimization_distance(0)
+--	self:set_optimization_distance(0)
 end
 
 function entity:start(blackhole)
@@ -50,4 +50,12 @@ end
 
 function entity:finishafter()
 	self.endtimer = Effects.SimpleTimer(self.blackhole.ability.entitydata, math.random(1,1000), function() self:remove() end)
+end
+
+function entity:on_suspended()
+	self:remove()
+end
+
+function entity:on_disabled()
+	self:remove()
 end

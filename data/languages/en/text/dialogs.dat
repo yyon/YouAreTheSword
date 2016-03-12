@@ -8,6 +8,20 @@ and blow everything up!
 }
 
 dialog{
+  id = "test",
+  text = [[
+Hello, this is a test dialog!
+
+Hello player!
+Welcome to the Solarus
+sample quest.
+There is not much to
+play yet, but any help
+is very appreciated!
+]]
+}
+
+dialog{
   id = "welcome_sign",
   text = [[
 Hello player!

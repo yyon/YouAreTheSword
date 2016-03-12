@@ -4,30 +4,22 @@ local math = require "math"
 
 HealExplosionAbility = Ability:subclass("HealExplosionAbility")
 
-RANGE = 20000
-
 function HealExplosionAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "HealExplosionAbility", RANGE, 500, 10000, true)
+	Ability.initialize(self, entitydata, "HealExplosionAbility", 20000, 500, 10000, true, "casting")
 	self.heals = true
 end
 
 function HealExplosionAbility:doability(tox, toy)
 	tox, toy = self.entitydata:gettargetpos()
+	tox, toy = self:withinrange(tox, toy)
 	self.tox, self.toy = tox, toy
-	print(tox, toy)
-
-	dist = self.entitydata.entity:get_distance(tox, toy)
-	if dist > RANGE then
-		self:finish()
-		return
-	end
 	
 	self.ticker = Effects.Ticker(self.entitydata, 10, function() self:dotick() end)
 	self.timer = Effects.SimpleTimer(self.entitydata, 100, function() self:finish() end)
 end
 
 function HealExplosionAbility:dotick()
-	for i = 1,5 do
+	for i = 1,2 do
 		entity = self.entitydata.entity
 		map = entity:get_map()
 		x,y,layer = entity:get_position()
@@ -46,7 +38,9 @@ function HealExplosionAbility:onfinish()
 end
 
 function HealExplosionAbility:heal(target)
-	target.life = target.maxlife
+	if target.team == self.entitydata.team then
+		target.life = target.maxlife
+	end
 end
 
 return HealExplosionAbility
