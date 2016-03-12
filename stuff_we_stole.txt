@@ -19,6 +19,7 @@ http://opengameart.org/content/hearts-set-01
 http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator
 	angel (base) -
 		
+
 http://opengameart.org/content/jastivs-artwork
 	angel (wings)
 
@@ -36,6 +37,3 @@ http://opengameart.org/lpc-art-entries
 
 http://opengameart.org/content/maskman-xcf
 	maskman
-
-https://upload.wikimedia.org/wikipedia/commons/b/be/Round_boulder_on_granite-slab_shoulder_Welsh_Mtn_NH.jpg
-	boulder

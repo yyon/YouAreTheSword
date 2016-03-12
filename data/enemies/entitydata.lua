@@ -1134,7 +1134,7 @@ function archerclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "dagger")}
 	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {TauntAbility:new(self)}
+	specialabilities = {GrapplingHookAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
