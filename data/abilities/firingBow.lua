@@ -18,10 +18,11 @@ function FiringBowAbility:doability()
 	entitydata = self.entitydata
 	d = entitydata:getdirection()
 
-	self.arrowentity = map:create_custom_entity({model="arrow", x=x, y=y, layer=layer, direction=d, width=w, height=h})
+	self.arrowentity = map:create_custom_entity({model="arrow", x=x, y=y-35, layer=layer, direction=d, width=w, height=h})
 	self.arrowentity:start(self, tox, toy)
-
-	self:finish()
+	
+	self.entitydata:setanimation("finishedbow")
+	self.timer = Effects.SimpleTimer(self.entitydata, 300, function() self:finish() end)
 end
 
 function FiringBowAbility:onfinish()

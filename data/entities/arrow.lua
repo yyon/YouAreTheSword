@@ -16,3 +16,7 @@ end
 function entity:getspritename()
   return "abilities/arrow"
 end
+
+function entity:getspeed()
+	return 1000
+end

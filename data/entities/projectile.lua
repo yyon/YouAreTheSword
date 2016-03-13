@@ -13,7 +13,8 @@ function entity:start(ability, tox, toy)
 
 	self.sprite = self:create_sprite(self:getspritename())
 	self.sprite:set_paused(false)
-
+	self.sprite:set_direction(self:get_direction())
+	
 	local x, y = self:get_position()
 	local angle
 	if self:isangle() then
