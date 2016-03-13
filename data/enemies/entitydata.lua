@@ -208,7 +208,11 @@ function EntityData:cantarget(entitydata)
 --		self:log("can't target", entitydata, "because entitydata nil")
 		return false
 	end
-
+	
+	if entitydata.entity == nil then
+		return false
+	end
+	
 	if entitydata == self then
 --		self:log("can't target", entitydata, "because self-targeting")
 		return false
@@ -677,6 +681,7 @@ function EntityData:kill()
 	end
 
 	self.entity.entitydata = nil
+	self.entity = nil
 end
 
 function EntityData:swordkill()
