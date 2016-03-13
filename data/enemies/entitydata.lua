@@ -27,6 +27,7 @@ TauntAbility = require "abilities/tauntability"
 StompAbility = require "abilities/stomp"
 NothingAbility = require "abilities/nothing"
 BoulderAbility = require "abilities/boulder"
+FiringBowAbility = require "abilities/firingBow"
 
 Effects = require "enemies/effect"
 
@@ -1136,7 +1137,7 @@ function archerclass:initialize(entity)
 	main_sprite = "adventurers/archer"
 	life = 10
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
+	normalabilities = {FiringBowAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "dagger")}
 	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {TauntAbility:new(self)}
