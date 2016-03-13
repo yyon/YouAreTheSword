@@ -29,6 +29,7 @@ tileset{ id = "silveriv", description = "silveriv" }
 
 sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
+sprite{ id = "abilities/arrow", description = "arrow" }
 sprite{ id = "abilities/blackhole", description = "blackhole" }
 sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
 sprite{ id = "abilities/bomb", description = "bomb" }
@@ -237,6 +238,7 @@ enemy{ id = "slime", description = "slime" }
 enemy{ id = "spider", description = "spider" }
 enemy{ id = "worm", description = "worm" }
 
+entity{ id = "arrow", description = "arrow" }
 entity{ id = "blackhole", description = "blackhole" }
 entity{ id = "blackholeparticle", description = "blackholeparticle" }
 entity{ id = "bomb", description = "bomb" }
