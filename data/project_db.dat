@@ -1,3 +1,5 @@
+map{ id = "dunsmurmap", description = "dunsmurmap" }
+map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
@@ -62,7 +64,10 @@ sprite{ id = "adventurers/knight", description = "knight" }
 sprite{ id = "adventurers/mage", description = "mage" }
 sprite{ id = "adventurers/rogue", description = "rogue" }
 sprite{ id = "adventurers/shield", description = "shield" }
+sprite{ id = "bosses/abilities/tentacles", description = "tentacles" }
 sprite{ id = "bosses/mage-1", description = "mage-1" }
+sprite{ id = "bosses/mage-2", description = "mage-2" }
+sprite{ id = "bosses/mage-3", description = "mage-3" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
 sprite{ id = "enemies/red_knight_soldier_sword", description = "red_knight_soldier_sword" }
@@ -268,6 +273,7 @@ entity{ id = "stealth", description = "stealth smoke" }
 entity{ id = "stomp", description = "stomp" }
 entity{ id = "sword", description = "sword" }
 entity{ id = "teleportanim", description = "teleportanim" }
+entity{ id = "tentacle", description = "tentacle" }
 
 language{ id = "en", description = "English" }
 

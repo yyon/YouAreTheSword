@@ -84,9 +84,11 @@ end
 RandomState = State:subclass("RandomState")
 
 function RandomState:start()
-	local movement = sol.movement.create("random_path")
-	movement:set_speed(normal_speed)
-	movement:start(self.npc)
+	if self.npc.entitydata.stats.movementspeed ~= 0 then
+		local movement = sol.movement.create("random_path")
+		movement:set_speed(normal_speed)
+		movement:start(self.npc)
+	end
 end
 
 function RandomState:tick()
@@ -236,6 +238,9 @@ function enemy:on_created()
 end
 
 function enemy:load_entitydata()
+	if self.main_sprite ~= nil then
+		self:remove_sprite(self.main_sprite)
+	end
 	self.main_sprite = self:create_sprite(self.entitydata.main_sprite)
 end
 

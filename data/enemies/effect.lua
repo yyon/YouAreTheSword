@@ -352,6 +352,8 @@ end
 
 function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, angle)
 	self:removeeffectafter(knockbackdist)
+	
+	self.entitydata.isbeingknockedback = true
 
 	local x, y = self.entitydata.entity:get_position()
 	if angle == nil then
@@ -374,6 +376,8 @@ function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, angle)
 end
 
 function KnockBackEffect:endeffect()
+	self.entitydata.isbeingknockedback = false
+	
 	FreezeEffect.endeffect(self)
 	self.movement:stop()
 end

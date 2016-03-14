@@ -1,0 +1,66 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 720,
+  tileset = "magecity",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 736,
+  pattern = "1",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 680,
+  width = 1280,
+  height = 48,
+  pattern = "185",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 8,
+  width = 1280,
+  height = 48,
+  pattern = "185",
+}
+
+enemy{
+  layer = 0,
+  x = 552,
+  y = 117,
+  direction = 0,
+  breed = "mageboss",
+}
+
+destination{
+  layer = 0,
+  x = 344,
+  y = 605,
+  direction = 1,
+}
+
+enemy{
+  layer = 0,
+  x = 600,
+  y = 541,
+  direction = 0,
+  breed = "knight",
+}
+
+enemy{
+  layer = 0,
+  x = 752,
+  y = 541,
+  direction = 0,
+  breed = "archer",
+}
+

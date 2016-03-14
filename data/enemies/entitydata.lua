@@ -28,6 +28,7 @@ StompAbility = require "abilities/stomp"
 NothingAbility = require "abilities/nothing"
 BoulderAbility = require "abilities/boulder"
 FiringBowAbility = require "abilities/firingBow"
+TentacleAbility = require "abilities/tentacles"
 
 Effects = require "enemies/effect"
 
@@ -483,7 +484,13 @@ end
 function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
 	
+	if self.entity == nil then return end
+	
 	if not self:cantarget(target) and aspects.natural == nil then
+		return
+	end
+	
+	if target.isbeingknockedback then
 		return
 	end
 
@@ -636,6 +643,18 @@ function EntityData:dodamage(target, damage, aspects)
 
 	if target.life <= 0 or aspects.instantdeath then
 		target:kill()
+	else
+		if target.stages ~= nil then
+			for stagelife, stagefunct in pairs(target.stages) do
+				if target.life/target.maxlife < stagelife then
+					print("target", target.theclass, "entered new stage", stagelife)
+					stagefunct()
+					target:applytoentity()
+					target.stages[stagelife] = nil
+					break
+				end
+			end
+		end
 	end
 end
 
@@ -1463,14 +1482,29 @@ function mageboss:initialize(entity)
 	team = "boss" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {NothingAbility:new(self)}
 	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
-	basestats = {}
-	self.dontmove = true
+	blockabilities = {NothingAbility:new(self)}
+	specialabilities = {TentacleAbility:new(self)}
+	basestats = {movementspeed=0}
+	
+	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
+
+function mageboss:stage2()
+	self.main_sprite = "bosses/mage-2"
+	self.stats.movementspeed = 50
+	self.swordability = FireballAbility:new(self)
+	self.specialability = NothingAbility:new(self)
+end
+
+function mageboss:stage3()
+	self.main_sprite = "bosses/mage-3"
+	self.blockability = TeleportAbility:new(self)
+	self.specialability = TentacleAbility:new(self)
+end
+
 
 dunsmurclass = EntityData:subclass("dunsmurclass")
 allclasses.dunsmurclass = dunsmurclass

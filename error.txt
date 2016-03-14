@@ -1,3 +1,4 @@
 Warning: Cannot use quest size 320x240: this quest only supports 1280x720 to 1280x720. Using 1280x720 instead.
-Error: In timer callback: [string "abilities/backstab.lua"]:40: attempt to index field 'entity' (a nil value)
 Error: In timer callback: [string "enemies/effect.lua"]:73: attempt to index field 'entity' (a nil value)
+Error: In on_position_changed: [string "abilities/charge.lua"]:45: attempt to index field 'swordentity' (a nil value)
+Error: In on_position_changed: [string "abilities/charge.lua"]:45: attempt to index field 'swordentity' (a nil value)

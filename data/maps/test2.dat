@@ -87,6 +87,24 @@ tile{
   pattern = "3",
 }
 
+tile{
+  layer = 0,
+  x = 704,
+  y = 0,
+  width = 64,
+  height = 96,
+  pattern = "3",
+}
+
+tile{
+  layer = 0,
+  x = 888,
+  y = 0,
+  width = 64,
+  height = 96,
+  pattern = "3",
+}
+
 destination{
   layer = 0,
   x = 168,
@@ -170,14 +188,6 @@ enemy{
   y = 1317,
   direction = 0,
   breed = "spider",
-}
-
-enemy{
-  layer = 0,
-  x = 1672,
-  y = 149,
-  direction = 0,
-  breed = "combat_dummy",
 }
 
 enemy{
@@ -304,17 +314,27 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 1328,
-  y = 101,
-  direction = 0,
-  breed = "mageboss",
-}
-
-enemy{
-  layer = 0,
   x = 2224,
   y = 789,
   direction = 0,
   breed = "wolf",
+}
+
+teletransporter{
+  layer = 0,
+  x = 704,
+  y = 0,
+  width = 64,
+  height = 32,
+  destination_map = "magebossmap",
+}
+
+teletransporter{
+  layer = 0,
+  x = 888,
+  y = 0,
+  width = 64,
+  height = 32,
+  destination_map = "dunsmurmap",
 }
 

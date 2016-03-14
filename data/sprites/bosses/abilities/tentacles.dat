@@ -1,0 +1,9 @@
+animation{
+  name = "tentacles",
+  src_image = "bosses/abilities/tentacles.png",
+  frame_delay = 100,
+  frame_to_loop_on = 14,
+  directions = {
+    { x = 0, y = 0, frame_width = 25, frame_height = 90, origin_x = 12, origin_y = 44, num_frames = 21 },
+  },
+}
