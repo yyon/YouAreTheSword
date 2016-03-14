@@ -349,7 +349,9 @@ function enemy:resetstate()
 end
 
 function enemy:tick(newstate)
-	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
+	if self.entitydata == nil or not self:exists() then return end
+	
+	if not game:is_paused() and not game:is_suspended() then
 
 	self.hasbeeninitialized = true
 
@@ -412,9 +414,7 @@ function enemy:tick(newstate)
 
 	end
 
-	if self:exists() then
-		sol.timer.start(self, 500, function() self:tick() end)
-	end
+	sol.timer.start(self, 500, function() self:tick() end)
 end
 
 function enemy:on_movement_changed(movement)

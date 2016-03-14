@@ -5,7 +5,7 @@ require "scripts/movementaccuracy"
 TeleportAbility = Ability:subclass("TeleportAbility")
 
 function TeleportAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Teleporter", 600, 0, 2550, true)
+	Ability.initialize(self, entitydata, "Teleporter", 600, "teleport", 0, 2550, true)
 end
 
 function TeleportAbility:doability()

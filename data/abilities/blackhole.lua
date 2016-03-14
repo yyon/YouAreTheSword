@@ -40,5 +40,11 @@ function BlackHoleAbility:attack(entity, blackhole)
 	self:dodamage(entitydata, damage, aspects)
 end
 
+function BlackHoleAbility:oncancel()
+	if self.blackholeability ~= nil then
+		self.blackholeability:finish()
+	end
+end
+
 
 return BlackHoleAbility

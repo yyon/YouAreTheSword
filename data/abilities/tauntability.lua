@@ -6,7 +6,7 @@ TauntAbility = Ability:subclass("TauntAbility")
 local Effects = require "enemies/effect"
 
 function TauntAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Taunt", 20000, 0, 0, true, "casting")
+	Ability.initialize(self, entitydata, "Taunt", 20000, "taunt", 0, 0, true, "casting")
 	self.nonpc = true
 end
 

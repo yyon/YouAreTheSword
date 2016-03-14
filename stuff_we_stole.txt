@@ -1,3 +1,5 @@
+https://www.reddit.com/r/gameideas/comments/2kohuo/its_called_you_are_the_sword/
+	basic game idea
 http://opengameart.org/content/lpc-medieval-fantasy-character-sprites 
 	knight, shield
 http://opengameart.org/content/lpc-items-and-game-effects
@@ -39,7 +41,10 @@ http://opengameart.org/content/maskman-xcf
 	maskman
 
 http://opengameart.org/content/bosses-and-monsters-spritesheets-ars-notoria
+http://opengameart.org/content/3-form-rpg-boss-harlequin-epicycle
 	mage boss
 
 http://opengameart.org/content/700-rpg-icons
 	icons
+http://opengameart.org/content/large-spaceship
+	spaceship

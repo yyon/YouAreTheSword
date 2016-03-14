@@ -261,6 +261,8 @@ function EntityData:getotherentities()
 	-- does not include self
 	-- usage: for otherentitydata in entitydata:getotherentities()
 	
+	if self.entity == nil then print(debug.traceback()) end
+	
 	local map = self.entity:get_map()
 	local heroentity = map:get_hero()
 	local saidhero = false
@@ -657,6 +659,8 @@ end
 
 function EntityData:kill()
 	-- adventurer/monster is killed
+	if self.entity == nil then return end
+	
 	game = self.entity:get_game()
 	if game.nodeaths then
 		return
@@ -667,7 +671,7 @@ function EntityData:kill()
 	if ishero then
 		-- drop sword
 		self:drop()
-
+		
 		newentity = self:unpossess()
 		newentity.entitydata:kill()
 	else
@@ -679,8 +683,15 @@ function EntityData:kill()
 	for key, effect in pairs(self.effects) do
 		effect:forceremove()
 	end
-
-	self.entity.entitydata = nil
+	
+	if self.entity ~= nil then
+		self.entity.entitydata = nil
+		
+		if self:getremainingadventurers(true) <= 0 then
+			self:swordkill()
+		end
+	end
+	
 	self.entity = nil
 end
 
@@ -691,6 +702,7 @@ function EntityData:swordkill()
 	if game.nodeaths then
 		return
 	end
+	hero = game:get_hero()
 	
 	print("HERO DEATH!")
 	
@@ -702,7 +714,7 @@ function EntityData:swordkill()
 	
 --	-- TODO: make this work
 --	self.entity:teleport(self.entity:get_map():get_id())
-	load()
+	game.hasended = true
 end
 
 function EntityData:drop(hero)
@@ -900,6 +912,7 @@ function EntityData:gettargetpos()
 --		return self.entity.targetx, self.entity.targety
 	else
 		target = self.entity.lasttarget
+		if target.entity == nil then target = self.entity:targetenemy() end
 		if target ~= nil then
 			if self.usingability.abilitytype == "block" then
 				x, y = self.entity:getblockposition(target)
@@ -920,6 +933,24 @@ function EntityData:getremainingmonsters()
 	
 	for entitydata in self:getotherentities() do
 		if entitydata.team == "monster" then
+			enemiesremaining = enemiesremaining + 1
+		end
+	end
+	
+	return enemiesremaining
+end
+
+function EntityData:getremainingadventurers(dontcountself)
+	enemiesremaining = 0
+	
+	if not dontcountself then
+		if self.team == "adventurer" and self.entity ~= nil then
+			enemiesremaining = 1
+		end
+	end
+	
+	for entitydata in self:getotherentities() do
+		if entitydata.team == "adventurer" then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
@@ -1218,7 +1249,8 @@ function spiderclass:initialize(entity)
 	main_sprite = "monsters/spiders/spider" .. string.format("%02d", math.random(1,11))
 	life = 10
 	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self)}
+	aspects = {poison = {weakness=0.4, time=5000}}
+	normalabilities = {NormalAbility:new(self, "sword", aspects)}
 	transformabilities = {TransformAbility:new(self, "poison")}
 	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {BackstabAbility:new(self)}

@@ -72,7 +72,9 @@ end
 function EarthquakeAbility:resetenemypos()
 	for entitydata, pos in pairs(self.origpos) do
 		entity = entitydata.entity
-		entity:set_position(pos.x, pos.y)
+		if entity ~= nil then
+			entity:set_position(pos.x, pos.y)
+		end
 	end
 end
 
@@ -83,9 +85,11 @@ function EarthquakeAbility:shake()
 	self:resetenemypos()
 	for entitydata, iscollided in pairs(self.collided) do
 		entity = entitydata.entity
-		x, y = entity:get_position()
-		x, y = x + dx, y + dx
-		entity:set_position(x, y)
+		if entity ~= nil then
+			x, y = entity:get_position()
+			x, y = x + dx, y + dx
+			entity:set_position(x, y)
+		end
 	end
 end
 

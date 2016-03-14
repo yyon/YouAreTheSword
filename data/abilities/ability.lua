@@ -35,6 +35,8 @@ function Ability:start(...)
 end
 
 function Ability:finishwarmup()
+	if self.entitydata.entity == nil then return end
+	
 	self.usingwarmup=false
 	-- once the warmup timer is finished, actually uses the ability
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
@@ -74,6 +76,7 @@ end
 
 function Ability:finishcooldown()
 --	self.entitydata:log("Ability", self.name, "finished cooldown")
+	if self.entitydata.entity == nil then return end
 	
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true

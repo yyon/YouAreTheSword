@@ -48,8 +48,10 @@ function BackstabAbility:dofinish()
 	
 	self:finish()
 	
-	self.entitydata:setdirection(self.entitydata.entity:get_direction4_to(self.target.entity))
-	self.entitydata:startability("normal")
+	if self.target.entity ~= nil then
+		self.entitydata:setdirection(self.entitydata.entity:get_direction4_to(self.target.entity))
+		self.entitydata:startability("normal")
+	end
 end
 
 function BackstabAbility:onfinish()

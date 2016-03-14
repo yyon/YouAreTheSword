@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 BombAbility = Ability:subclass("BombAbility")
 
 function BombAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "bomb", 800, 500, 4000, true)
+	Ability.initialize(self, entitydata, "Bomb", 800, "bomb", 500, 4000, true)
 end
 
 function BombAbility:doability()

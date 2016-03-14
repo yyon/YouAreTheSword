@@ -59,14 +59,18 @@ end
 
 function entity:finish()
 	for entitydata, _ in pairs(self.pulling) do
-		entitydata.blackholemovement:stop()
-		entitydata.blackholefreeze:remove()
-		entitydata.entity:set_visible(true)
-		entitydata.stealth = false
+		if entitydata.entity ~= nil then
+			entitydata.blackholemovement:stop()
+			entitydata.blackholefreeze:remove()
+			entitydata.entity:set_visible(true)
+			entitydata.stealth = false
+		end
 	end
 	
 	for entity, _ in pairs(self.collided) do
-		self.ability:attack(entity, self)
+		if entity.entitydata ~= nil then
+			self.ability:attack(entity, self)
+		end
 	end
 	
 	for particle, _ in pairs(self.particles) do
@@ -74,6 +78,7 @@ function entity:finish()
 	end
 	
 	self.ticker:remove()
+	self.timer:stop()
 	
 	self:remove()
 end

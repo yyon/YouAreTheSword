@@ -205,6 +205,12 @@ function sol.main:on_mouse_pressed(button, ...)
 end
 
 function tick()
+	if game.hasended then
+		game.hasended = false
+		load()
+		return
+	end
+	
 	
 	hero = game:get_hero()
 	
