@@ -20,7 +20,7 @@ function GrapplingHookAbility:doability(tox, toy)
 
 	d = 0
 
-	target = self.entitydata:getclosestentity(tox, toy)
+	target = self.entitydata:getclosestentity(tox, toy, true)
 --	self.entitydata:log("recieved target,", tox, toy, target.team)
 	if target == nil then
 		self:finish()
@@ -52,6 +52,7 @@ function GrapplingHookAbility:attack(entity, bombentity)
 	end
 
 	self.target = entity.entitydata
+	
 
 	self:dodamage(entity.entitydata, 0, {knockback=0, method=function() self:startpull() end})
 end

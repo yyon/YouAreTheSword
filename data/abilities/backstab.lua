@@ -14,7 +14,7 @@ end
 
 function BackstabAbility:doability(tox, toy)
 	tox, toy = self.entitydata:gettargetpos()
-	self.target = self.entitydata:getclosestentity(tox, toy)
+	self.target = self.entitydata:getclosestentity(tox, toy, true)
 	
 	self.target.entity.cantrotate = true
 	

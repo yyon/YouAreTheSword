@@ -17,7 +17,7 @@ function LightningAbility:doability()
 	w,h = entity:get_size()
 	entitydata = self.entitydata
 
-	self.lightningentity = map:create_custom_entity({model="lightning", x=tox, y=toy, layer=layer, direction=0, width=w, height=h})
+	self.lightningentity = map:create_custom_entity({model="lightning", x=tox, y=toy, layer=2, direction=0, width=w, height=h})
 	self.lightningentity.ability = self
 	self.lightningentity:start(tox, toy)
 
