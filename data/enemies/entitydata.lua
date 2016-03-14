@@ -191,12 +191,14 @@ function EntityData:unpossess()
 		y=y,
 		direction=d
 	})
-
+	
 	self.entity = newentity
 	self:applytoentity()
-
+	
 	self.entity:setdirection(d)
-
+	
+	self.entity:on_restarted()
+	
 	return self.entity
 end
 

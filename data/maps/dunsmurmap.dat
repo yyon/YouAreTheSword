@@ -15,6 +15,24 @@ tile{
   pattern = "1",
 }
 
+tile{
+  layer = 0,
+  x = 0,
+  y = 16,
+  width = 1280,
+  height = 48,
+  pattern = "185",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 688,
+  width = 1280,
+  height = 48,
+  pattern = "185",
+}
+
 destination{
   layer = 0,
   x = 256,
@@ -24,8 +42,8 @@ destination{
 
 enemy{
   layer = 0,
-  x = 496,
-  y = 93,
+  x = 512,
+  y = 181,
   direction = 0,
   breed = "dunsmur",
 }
