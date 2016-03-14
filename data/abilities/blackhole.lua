@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 BlackHoleAbility= Ability:subclass("BlackHoleAbility")
 
 function BlackHoleAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "BlackHoleAbility", 20000, 2000, 20000, true, "casting")
+	Ability.initialize(self, entitydata, "Black Hole", 20000, "blackhole", 2000, 20000, true, "casting")
 end
 
 function BlackHoleAbility:doability()

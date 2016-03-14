@@ -302,3 +302,19 @@ enemy{
   breed = "dunsmur",
 }
 
+enemy{
+  layer = 0,
+  x = 1328,
+  y = 101,
+  direction = 0,
+  breed = "mageboss",
+}
+
+enemy{
+  layer = 0,
+  x = 2224,
+  y = 789,
+  direction = 0,
+  breed = "wolf",
+}
+

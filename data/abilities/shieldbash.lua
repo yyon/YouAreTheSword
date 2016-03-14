@@ -6,7 +6,7 @@ Effects = require "enemies/effect"
 ShieldBashAbility = Ability:subclass("ShieldBashAbility")
 
 function ShieldBashAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "shieldbash", 100, 500, 3000, true)
+	Ability.initialize(self, entitydata, "Shield Bash", 100, "shieldbash", 500, 3000, true)
 end
 function ShieldBashAbility:doability()
 	entity = self.entitydata.entity

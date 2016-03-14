@@ -31,7 +31,7 @@ end
 SwordAbility = Ability:subclass("SwordAbility")
 
 function SwordAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "sword", 50, 0, 0, true)
+	Ability.initialize(self, entitydata, "Sword", 50, "sword", 0, 0, true)
 end
 
 function SwordAbility:doability()

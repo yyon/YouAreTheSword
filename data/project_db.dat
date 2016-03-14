@@ -62,6 +62,7 @@ sprite{ id = "adventurers/knight", description = "knight" }
 sprite{ id = "adventurers/mage", description = "mage" }
 sprite{ id = "adventurers/rogue", description = "rogue" }
 sprite{ id = "adventurers/shield", description = "shield" }
+sprite{ id = "bosses/mage-1", description = "mage-1" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
 sprite{ id = "enemies/red_knight_soldier_sword", description = "red_knight_soldier_sword" }
@@ -113,6 +114,7 @@ sprite{ id = "monsters/bat", description = "bat" }
 sprite{ id = "monsters/bee", description = "bee" }
 sprite{ id = "monsters/beetle", description = "beetle" }
 sprite{ id = "monsters/big_worm", description = "big_worm" }
+sprite{ id = "monsters/dunsmur", description = "duns mur" }
 sprite{ id = "monsters/evilmage", description = "evilmage" }
 sprite{ id = "monsters/eyeball", description = "eyeball" }
 sprite{ id = "monsters/flower", description = "flower" }
@@ -132,11 +134,14 @@ sprite{ id = "monsters/spiders/spider08", description = "spider08" }
 sprite{ id = "monsters/spiders/spider09", description = "spider09" }
 sprite{ id = "monsters/spiders/spider10", description = "spider10" }
 sprite{ id = "monsters/spiders/spider11", description = "spider11" }
+sprite{ id = "monsters/wolf", description = "wolf" }
 sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 sprite{ id = "physicaleffects/taunt", description = "taunt" }
 sprite{ id = "swords/electric", description = "electric" }
+sprite{ id = "swords/largesword", description = "largesword" }
+sprite{ id = "swords/mace", description = "mace" }
 sprite{ id = "swords/swordanim", description = "swordanim" }
 
 music{ id = "8-bit/01 - Opening", description = "01 - Opening" }
@@ -230,12 +235,14 @@ enemy{ id = "flower", description = "flower" }
 enemy{ id = "ghost", description = "ghost" }
 enemy{ id = "knight", description = "knight" }
 enemy{ id = "mage", description = "mage" }
+enemy{ id = "mageboss", description = "mageboss" }
 enemy{ id = "maskman", description = "maskman" }
 enemy{ id = "orc", description = "orc" }
 enemy{ id = "rogue", description = "rogue" }
 enemy{ id = "skeleton", description = "skeleton" }
 enemy{ id = "slime", description = "slime" }
 enemy{ id = "spider", description = "spider" }
+enemy{ id = "wolf", description = "wolf" }
 enemy{ id = "worm", description = "worm" }
 
 entity{ id = "arrow", description = "arrow" }

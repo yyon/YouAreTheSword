@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 LightningAbility = Ability:subclass("LightningAbility")
 
 function LightningAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "LightningAbility", 20000, 2000, 20000, true, "casting")
+	Ability.initialize(self, entitydata, "Lightning", 20000, "lightning", 2000, 20000, true, "casting")
 end
 
 function LightningAbility:doability()

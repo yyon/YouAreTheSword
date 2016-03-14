@@ -9,7 +9,7 @@ function NormalAbility:initialize(entitydata, anim)
 		anim = "sword"
 	end
 	
-	Ability.initialize(self, entitydata, "NormalAbility", 50, 300, 0, true, anim)
+	Ability.initialize(self, entitydata, "Attack", 50, "normal", 300, 0, true, anim)
 end
 
 function NormalAbility:doability(tox, toy)

@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 HealAbility = Ability:subclass("HealAbility")
 
 function HealAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "HealAbility", 800, 0, 500, false, "casting")
+	Ability.initialize(self, entitydata, "Heal", 800, "heal", 0, 500, false, "casting")
 	self.heals = true
 end
 

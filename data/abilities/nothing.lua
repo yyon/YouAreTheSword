@@ -6,7 +6,7 @@ NothingAbility = Ability:subclass("NothingAbility")
 local Effects = require "enemies/effect"
 
 function NothingAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Nothing", 0, 0, 0, true, "casting")
+	Ability.initialize(self, entitydata, "Nothing", 0, "nothing", 0, 0, true, "casting")
 	self.nonpc = true
 end
 

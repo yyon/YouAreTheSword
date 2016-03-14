@@ -7,7 +7,7 @@ local math = require "math"
 
 function Ability:initialize(...)
 	-- called when entitydata is first created
-	self.entitydata, self.name, self.range, self.warmup, self.cooldown, self.dofreeze, self.warmupanimation = ...
+	self.entitydata, self.name, self.range, self.icon, self.warmup, self.cooldown, self.dofreeze, self.warmupanimation = ...
 	self.canuse = true
 end
 

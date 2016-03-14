@@ -6,7 +6,7 @@ SidestepAbility = Ability:subclass("SidestepAbility")
 -- a replacement for sword ability for classes that don't have that animation
 
 function SidestepAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "NormalAbility", 300, 0, 50, true)
+	Ability.initialize(self, entitydata, "Sidestep", 300, "sidestep", 0, 50, true)
 end
 
 function SidestepAbility:doability()

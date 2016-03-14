@@ -5,7 +5,7 @@ require "scripts/movementaccuracy"
 BodyDoubleAbility = Ability:subclass("BodyDoubleAbility")
 
 function BodyDoubleAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Body Double", 600, 0, 10000, true)
+	Ability.initialize(self, entitydata, "Body Double", 600, "bodydouble", 0, 10000, true)
 end
 
 function BodyDoubleAbility:doability()

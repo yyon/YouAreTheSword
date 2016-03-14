@@ -5,7 +5,7 @@ Ability = require "abilities/ability"
 AngelSummonAbility = Ability:subclass("AngelSummonAbility")
 
 function AngelSummonAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "AngelSummonAbility", 20000, 2000, 10000, true, "casting")
+	Ability.initialize(self, entitydata, "Summon Angel", 20000, "angel", 2000, 10000, true, "casting")
 end
 
 function AngelSummonAbility:doability()

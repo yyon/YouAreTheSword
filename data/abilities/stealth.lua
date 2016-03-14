@@ -8,7 +8,7 @@ StealthAbility = Ability:subclass("StealthAbility")
 math = require "math"
 
 function StealthAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Stealth", 500, 500, 10000, true)
+	Ability.initialize(self, entitydata, "Stealth", 500, "stealth", 500, 10000, true)
 end
 
 function StealthAbility:doability()

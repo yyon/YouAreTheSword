@@ -1400,7 +1400,45 @@ function maskmanclass:initialize(entity)
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
+wolfclass = EntityData:subclass("wolfclass")
+allclasses.wolfclass = wolfclass
+
+function wolfclass:initialize(entity)
+	class = "wolf"
+	main_sprite = "monsters/wolf"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NormalAbility:new(self, "sword")}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {NothingAbility:new(self)}
+	specialabilities = {NothingAbility:new(self)}
+	basestats = {}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
 -- Bosses
+
+mageboss = EntityData:subclass("mageboss")
+allclasses.mageboss = mageboss
+
+function mageboss:initialize(entity)
+	class = "Mage (Boss)"
+	main_sprite = "bosses/mage-1"
+	life = 50
+	team = "boss" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NothingAbility:new(self)}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {TeleportAbility:new(self)}
+	specialabilities = {NothingAbility:new(self)}
+	basestats = {}
+	self.dontmove = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
 
 dunsmurclass = EntityData:subclass("dunsmurclass")
 allclasses.dunsmurclass = dunsmurclass
