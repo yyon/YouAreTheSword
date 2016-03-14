@@ -22,6 +22,8 @@ function Ability:start(...)
 	self.canuse = false
 	self.args = {...}
 	self.usingwarmup=true
+	self.caughttargets = {}
+	self.caughtduringabilityuse = true
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 	
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
@@ -61,6 +63,10 @@ function Ability:finishability(skipcooldown)
 --		self.entitydata:unfreeze(self.name, false)
 	end
 	self.usingability = false
+	
+	if self.caughtduringabilityuse then
+		self:uncatch()
+	end
 	
 	if skipcooldown then
 		self:finishcooldown()
@@ -160,6 +166,28 @@ function Ability:withinrange(tox, toy)
 	end
 	
 	return tox, toy
+end
+
+function Ability:catch(target, dontend)
+	if target.caught then
+		if not dontend then
+			return false
+		else
+			self:cancel()
+			return false
+		end
+	else
+		self.caughttargets[target] = true
+		target.caught = true
+		return true
+	end
+end
+
+function Ability:uncatch()
+	for entitydata, b in pairs(self.caughttargets) do
+		entitydata.caught = false
+	end
+	self.caughttargets = {}
 end
 
 -- functions you can overwrite

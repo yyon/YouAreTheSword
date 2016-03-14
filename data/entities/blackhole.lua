@@ -24,18 +24,20 @@ function entity:start()
 	
 	for entitydata in self.ability.entitydata:getotherentities() do
 		if entitydata.entity:get_distance(self) < 400 then
-			self.pulling[entitydata] = true
+			if self.ability:catch(entitydata) then 
+				self.pulling[entitydata] = true
 			
-			entitydata.blackholefreeze = Effects.FreezeEffect(entitydata)
+				entitydata.blackholefreeze = Effects.FreezeEffect(entitydata)
 			
-			entitydata.blackholemovement = sol.movement.create("target")
-			entitydata.blackholemovement:set_speed(600)
-			entitydata.blackholemovement:set_target(self)
-			entitydata.blackholemovement:set_smooth(true)
-			entitydata.blackholemovement:start(entitydata.entity)
-			function entitydata.blackholemovement.on_finished()
-				entitydata.entity:set_visible(false)
-				entitydata.stealth = true
+				entitydata.blackholemovement = sol.movement.create("target")
+				entitydata.blackholemovement:set_speed(600)
+				entitydata.blackholemovement:set_target(self)
+				entitydata.blackholemovement:set_smooth(true)
+				entitydata.blackholemovement:start(entitydata.entity)
+				function entitydata.blackholemovement.on_finished()
+					entitydata.entity:set_visible(false)
+					entitydata.stealth = true
+				end
 			end
 		end
 	end
@@ -66,6 +68,8 @@ function entity:finish()
 			entitydata.stealth = false
 		end
 	end
+	
+	self.ability:uncatch()
 	
 	for entity, _ in pairs(self.collided) do
 		if entity.entitydata ~= nil then

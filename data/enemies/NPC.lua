@@ -354,9 +354,9 @@ function enemy:resetstate()
 end
 
 function enemy:tick(newstate)
-	if self.entitydata == nil or not self:exists() then return end
+	if not self:exists() then return end
 	
-	if not game:is_paused() and not game:is_suspended() then
+	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
 
 	self.hasbeeninitialized = true
 

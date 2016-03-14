@@ -57,6 +57,8 @@ function GrapplingHookAbility:attack(entity, bombentity)
 end
 
 function GrapplingHookAbility:startpull()
+	if not self:catch(self.target) then return end
+	
 	self.timer:stop()
 	self.timer = Effects.SimpleTimer(self.entitydata, 5000, function() self:timeend() end)
 

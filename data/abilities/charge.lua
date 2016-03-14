@@ -11,6 +11,8 @@ function ChargeAbility:initialize(entitydata)
 end
 
 function ChargeAbility:doability(tox, toy)
+	if not self:catch(self.entitydata) then return end
+	
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()
@@ -42,6 +44,7 @@ function ChargeAbility:doability(tox, toy)
 	movement:start(self.entitydata.entity)
 	local ca = self
 	function movement:on_position_changed()
+		if ca.swordentity == nil then ca:finish() return end
 		ca.swordentity:updatepos()
 	end
 	function movement.on_obstacle_reached(movement)

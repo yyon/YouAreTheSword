@@ -183,7 +183,7 @@ function EntityData:unpossess()
 	x, y, layer = self.entity:get_position()
 
 	d = self.entity:get_direction()
-
+	
 	newentity = map:create_enemy({
 		breed="enemy_constructor",
 		layer=layer,
@@ -193,11 +193,10 @@ function EntityData:unpossess()
 	})
 	
 	self.entity = newentity
+	
 	self:applytoentity()
 	
 	self.entity:setdirection(d)
-	
-	self.entity:on_restarted()
 	
 	return self.entity
 end
@@ -223,6 +222,10 @@ function EntityData:cantarget(entitydata)
 
 	if entitydata.team == self.team then
 --		self:log("can't target", entitydata, "because same team")
+		return false
+	end
+	
+	if entitydata.caught then
 		return false
 	end
 
@@ -687,9 +690,9 @@ function EntityData:kill()
 		return
 	end
 	
-	ishero = self.entity.ishero
+	theishero = self.entity.ishero
 
-	if ishero then
+	if theishero then
 		-- drop sword
 		self:drop()
 		

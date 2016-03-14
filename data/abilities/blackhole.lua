@@ -5,6 +5,7 @@ BlackHoleAbility= Ability:subclass("BlackHoleAbility")
 
 function BlackHoleAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Black Hole", 20000, "blackhole", 2000, 20000, true, "casting")
+	self.caughtduringabilityuse = false
 end
 
 function BlackHoleAbility:doability()
