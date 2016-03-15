@@ -33,6 +33,15 @@ tile{
   pattern = "185",
 }
 
+tile{
+  layer = 0,
+  x = 0,
+  y = 392,
+  width = 32,
+  height = 32,
+  pattern = "3",
+}
+
 enemy{
   layer = 0,
   x = 552,
@@ -62,5 +71,14 @@ enemy{
   y = 541,
   direction = 0,
   breed = "archer",
+}
+
+teletransporter{
+  layer = 0,
+  x = 0,
+  y = 392,
+  width = 32,
+  height = 32,
+  destination_map = "test2",
 }
 

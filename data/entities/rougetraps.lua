@@ -35,9 +35,7 @@ end
 function entity:oncollision(entity2, sprite1, sprite2)
 	if self.collided[entity2] == nil then
 		self.collided[entity2] = true
-
 		self.ability:attack(entity2, self)
+		self:remove()
 	end
-	
-	self:remove()
 end
