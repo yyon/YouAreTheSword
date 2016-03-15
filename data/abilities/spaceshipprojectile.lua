@@ -16,6 +16,7 @@ function SpaceShipProjectile:doability()
 end
 
 function SpaceShipProjectile:firevolley(dx, dy)
+	sol.audio.play_sound("laser")
 	self:fireproj(0, 0)
 	self:fireproj(-78, -59)
 	self:fireproj(78, -59)

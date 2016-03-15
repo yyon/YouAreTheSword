@@ -24,6 +24,8 @@ function TeleportAbility:doability()
 	entitydata = self.entitydata
 
 	self.teleportentity = map:create_custom_entity({model="teleportanim", x=x, y=y, layer=2, direction=0, width=w, height=h})
+	
+	sol.audio.play_sound("teleport")
 end
 
 return TeleportAbility

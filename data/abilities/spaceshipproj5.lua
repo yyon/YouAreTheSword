@@ -18,6 +18,7 @@ function SpaceShipProjectile:doability()
 end
 
 function SpaceShipProjectile:firevolley(dx, dy)
+	sol.audio.play_sound("laser")
 	self.angle = self.angle + self.dangle
 	if self.angle > math.pi/4 or self.angle < 0 then
 		self.dangle = -self.dangle

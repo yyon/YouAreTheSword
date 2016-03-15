@@ -29,11 +29,6 @@ function Ability:start(...)
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation(self.warmupanimation)
 	end
-	
-	if self.entitydata.entity.ishero then
-		-- Add HUD call here
-		-- Hud:StartAbilityUsed(self)
-	end
 end
 
 function Ability:finishwarmup()
@@ -73,11 +68,6 @@ function Ability:finishability(skipcooldown)
 	if skipcooldown then
 		self:finishcooldown()
 	else
-		if self.entitydata.entity.ishero then
-			-- Add HUD call here
-			-- Hud:StartCooldown(self)
-		end
-	
 		self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 	end
 end
@@ -90,11 +80,6 @@ function Ability:finishcooldown()
 	
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
-	
-	if self.entitydata.entity.is_hero then
-		-- Add HUD call here
-		-- Hud:EndCooldown(self)
-	end
 	
 	if not self.entitydata.entity.ishero then
 		self.entitydata.entity:tick()

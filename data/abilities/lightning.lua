@@ -21,7 +21,9 @@ function LightningAbility:doability()
 	self.lightningentity.ability = self
 	self.lightningentity:start(tox, toy)
 
-	  self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
+	self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
+	
+	sol.audio.play_sound("thunder")
 
 	self:finish()
 end

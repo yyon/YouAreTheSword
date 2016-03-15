@@ -20,6 +20,8 @@ function FireballAbility:doability()
 	self.fireballentity = map:create_custom_entity({model="fireball", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	self.fireballentity:start(self, tox, toy)
 
+	sol.audio.play_sound("fireball")
+	
 	self:finish()
 end
 

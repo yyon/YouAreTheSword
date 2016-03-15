@@ -16,17 +16,18 @@ function SpaceShipProjectile:doability()
 end
 
 function SpaceShipProjectile:firevolley(dx, dy)
+	sol.audio.play_sound("laser")
 	for i = -3,3 do
-		angle = i * 0.3
-		self:fireproj(0, 0, 3 * math.pi / 2 + angle)
-		self:fireproj(-78, -59, 3 * math.pi / 2 + angle)
-		self:fireproj(78, -59, 3 * math.pi / 2 + angle)
-		self:fireproj(-160, -202, 3 * math.pi / 2 - angle)
-		self:fireproj(160, -202, 3 * math.pi / 2 + angle)
+		angle = i * 0.3 + 3 * math.pi / 2
+		self:fireproj(0, 0, angle)
+		self:fireproj(-78, -59, angle)
+		self:fireproj(78, -59, angle)
+		self:fireproj(-160, -202, angle)
+		self:fireproj(160, -202, angle)
 	end
 end
 
-function SpaceShipProjectile:fireproj(dx, dy, angle)
+function SpaceShipProjectile:fireproj(dx, dy, theangle)
 	entity = self.entitydata.entity
 	map = entity:get_map()
 	x,y,layer = entity:get_position()
@@ -43,7 +44,7 @@ function SpaceShipProjectile:fireproj(dx, dy, angle)
 	self.fireballentity.damage = 0.5
 	self.fireballentity.speed = 400
 	self.fireballentity.rotationframes = 50
-	self.fireballentity:start(self, angle)
+	self.fireballentity:start(self, theangle)
 end
 
 function SpaceShipProjectile:onfinish()

@@ -52,3 +52,9 @@ http://opengameart.org/content/meteor-glitch
 	meteor
 http://opengameart.org/content/lasers-and-beams
 	spaceship lasers and beams
+
+sound effects:
+http://opengameart.org/content/rockbreaking
+	thunder
+http://opengameart.org/content/wind
+	wind (music)
