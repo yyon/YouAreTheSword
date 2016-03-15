@@ -5,30 +5,8 @@ map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
 
-tileset{ id = "0", description = "House" }
-tileset{ id = "1", description = "Light World" }
-tileset{ id = "10", description = "Orange Dungeon (DW)" }
-tileset{ id = "11", description = "Pink Dungeon (LW)" }
-tileset{ id = "12", description = "Castle" }
-tileset{ id = "13", description = "Dark World" }
-tileset{ id = "14", description = "Forest Dungeon" }
-tileset{ id = "15", description = "Final Dungeon" }
-tileset{ id = "16", description = "Old School Dungeon" }
-tileset{ id = "17", description = "Gray Dungeon (DW)" }
-tileset{ id = "18", description = "Gray-Brown Dungeon (DW)" }
-tileset{ id = "19", description = "Gray-Blue Dungeon (DW)" }
-tileset{ id = "2", description = "Ice Dungeon" }
-tileset{ id = "3", description = "Cave" }
-tileset{ id = "4", description = "Blue Dungeon (LW)" }
-tileset{ id = "5", description = "Green Dungeon (LW)" }
-tileset{ id = "6", description = "Intro" }
-tileset{ id = "7", description = "Brown Dungeon (LW)" }
-tileset{ id = "8", description = "Blue Dungeon (DW)" }
-tileset{ id = "9", description = "Green Dungeon (DW)" }
-tileset{ id = "castle", description = "Castle" }
 tileset{ id = "magecity", description = "magecity" }
-tileset{ id = "magecity2", description = "magecity2" }
-tileset{ id = "silveriv", description = "silveriv" }
+tileset{ id = "tileset", description = "tileset" }
 
 sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
@@ -186,6 +164,32 @@ music{ id = "8-bit/22 - A New Comrade", description = "22 - A New Comrade" }
 music{ id = "8-bit/23 - Inn", description = "23 - Inn" }
 music{ id = "8-bit/24 - RV 610 - Fecit potentiam", description = "24 - RV 610 - Fecit potentiam" }
 music{ id = "8-bit/25 - Finale", description = "25 - Finale" }
+music{ id = "FullScores/Orchestral Scores/Ambient Style/Ove Melaa - Psycho Behind The Keys", description = "Ambient Style/Ove Melaa - Psycho Behind The Keys" }
+music{ id = "FullScores/Orchestral Scores/Ove Melaa - Heaven Sings", description = "Ove Melaa - Heaven Sings" }
+music{ id = "FullScores/Orchestral Scores/Ove Melaa - Theme Crystalized", description = "Ove Melaa - Theme Crystalized" }
+music{ id = "FullScores/Orchestral Scores/Ove Melaa - Times", description = "Ove Melaa - Times" }
+music{ id = "FullScores/Retro Scores/Ove Melaa - Dark", description = "Ove Melaa - Dark" }
+music{ id = "FullScores/Retro Scores/Ove Melaa - High Stakes,Low Chances", description = "Ove Melaa - High Stakes,Low Chances" }
+music{ id = "FullScores/Retro Scores/Ove Melaa - Italo Unlimited", description = "Ove Melaa - Italo Unlimited" }
+music{ id = "FullScores/Retro Scores/Ove Melaa - Power Of Thy YES", description = "Ove Melaa - Power Of Thy YES" }
+music{ id = "FullScores/Retro Scores/Ove Melaa - Super Ninja Assasin", description = "Ove Melaa - Super Ninja Assasin" }
+music{ id = "Loops/Drum Only Loops/Ove Melaa - DrumLoop 1", description = "Ove Melaa - DrumLoop 1" }
+music{ id = "Loops/Drum Only Loops/Ove Melaa - DrumLoop 1 64BPM", description = "Ove Melaa - DrumLoop 1 64BPM" }
+music{ id = "Loops/Ove Melaa - Dark Loop", description = "Ove Melaa - Dark Loop" }
+music{ id = "Loops/Ove Melaa - General Snus Loop A", description = "Ove Melaa - General Snus Loop A" }
+music{ id = "Loops/Ove Melaa - General Snus Loop B", description = "Ove Melaa - General Snus Loop B" }
+music{ id = "Loops/Ove Melaa - Supa Powa Loop A", description = "Ove Melaa - Supa Powa Loop A" }
+music{ id = "Loops/Ove Melaa - They Ate My Family", description = "Ove Melaa - They Ate My Family" }
+music{ id = "Loops/Ove Melaa - Tube Ambient Loop", description = "Ove Melaa - Tube Ambient Loop" }
+music{ id = "Loops/Ove Melaa - Whoozer", description = "Ove Melaa - Whoozer" }
+music{ id = "Loops/Ove Melaa -Supa Powa C", description = "Ove Melaa -Supa Powa C" }
+music{ id = "Loops/Ove Melaa Supa Powa Loop B", description = "Ove Melaa Supa Powa Loop B" }
+music{ id = "Loops/OveMelaa - Trance Bit Bit Loop", description = "OveMelaa - Trance Bit Bit Loop" }
+music{ id = "singles/Heroic Demise (New)", description = "heroic demise" }
+music{ id = "singles/Put yourself in my place PSG", description = "put yourself in my place" }
+music{ id = "singles/battleThemeA", description = "battle theme A" }
+music{ id = "singles/cannontube", description = "cannon tube" }
+music{ id = "singles/crystal_cave", description = "crystal cave" }
 music{ id = "village", description = "Village" }
 
 sound{ id = "arrow_hit", description = "arrow_hit" }

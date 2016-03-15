@@ -86,3 +86,27 @@ http://opengameart.org/content/steam-release-sounds
 	stealth
 http://opengameart.org/content/metal-interactions
 	trap
+
+music:
+http://opengameart.org/content/generic-8-bit-jrpg-soundtrack
+	8-bit
+http://opengameart.org/content/put-yourself-in-my-place-psg-version
+	put yourself in my place
+http://opengameart.org/content/cannon-tube
+	cannon tube
+http://opengameart.org/content/crystal-cave-song18
+	crystal cave
+http://opengameart.org/content/oves-essential-game-audio-pack-collection-160-files-updated
+	Ove's
+http://opengameart.org/content/free-music-pack
+	Alexander Ehlers
+http://opengameart.org/content/battle-theme-a
+	battle theme A
+http://opengameart.org/content/heroic-demise-updated-version
+	heroic demise
+
+tilesets:
+http://opengameart.org/content/lpc-tile-atlas
+	lpc tileset
+http://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
+	hyptosis tileset
