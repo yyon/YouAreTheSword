@@ -245,7 +245,17 @@ function enemy:load_entitydata()
 end
 
 function enemy:on_restarted()
-	self:tick()
+--	self:tick()
+	if self.ticker == nil then
+		self.ticker = Effects.Ticker:new(self:get_game(), 500, function() self:tick() end)
+	end
+end
+
+function enemy:on_removed()
+	if self.ticker ~= nil then
+		self.ticker:remove()
+		self.ticker = nil
+	end
 end
 
 function enemy:close_to(entity)
@@ -419,7 +429,7 @@ function enemy:tick(newstate)
 
 	end
 
-	sol.timer.start(self, 500, function() self:tick() end)
+--	sol.timer.start(self, 500, function() self:tick() end)
 end
 
 function enemy:on_movement_changed(movement)

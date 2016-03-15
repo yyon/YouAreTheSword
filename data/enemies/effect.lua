@@ -47,7 +47,7 @@ function Effect:remove()
 	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 	else
-		if self.entitydata.entity == nil then return end
+		if self.entitydata ~= nil and self.entitydata.entity == nil then return end
 		self:endeffect()
 --		self.entitydata:log("ending effect", self)
 		self.affected.effects[self:getkey()] = nil

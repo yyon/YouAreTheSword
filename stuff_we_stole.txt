@@ -50,3 +50,5 @@ http://opengameart.org/content/large-spaceship
 	spaceship
 http://opengameart.org/content/meteor-glitch
 	meteor
+http://opengameart.org/content/lasers-and-beams
+	spaceship lasers and beams
