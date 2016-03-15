@@ -10,6 +10,8 @@ function SidestepAbility:initialize(entitydata)
 end
 
 function SidestepAbility:doability()
+	if not self:catch(self.entitydata) then return end
+	
 	tox, toy = self.entitydata:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 	
