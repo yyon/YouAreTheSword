@@ -1,33 +1,37 @@
-local panel = {}
+local class = require("middleclass")
+
+local panel = class("panel")
 
 local entitydata = require "enemies/entitydata"
 
 local math = require "math"
 
-function panel:new(game, type)
-  	local object = {}
-  	setmetatable(object, self)
-  	self.__index = self
-	
-	object.type = type
-	object.icon = icon
+--function panel:new(game, type)
+--  	local object = {}
+--  	setmetatable(object, self)
+--  	self.__index = self
+--	
+--	object.type = type
+--	object.icon = icon
+--
+--  	object:initialize(game)
+--	
+--  	return object
+--end
 
-  	object:initialize(game)
-	
-  	return object
-end
-
-function panel:initialize(game)
+function panel:initialize(game, type)
   	self.game = game
   	self.surface = sol.surface.create(75, 75)
   	self.dst_x = 0
   	self.dst_y = 0
 	self.stage = 0
+	self.type = type
   	self.brown_panel_img = sol.surface.create("hud/panel_brown.png")
   	self.cooldownoverlay = sol.surface.create("hud/cooldown.png")
 	self.texts = {}
+end
 
-function self:on_started()
+function panel:on_started()
 	self.danger_sound_timer = nil
   	self:check(nil)
   	self:rebuild_surface()
@@ -35,7 +39,7 @@ function self:on_started()
 end
 
 --  check heart data and fix periodically
-function self:check()
+function panel:check()
 	self:rebuild_surface()
   	-- check again in 50ms
   	sol.timer.start(self, 50, function()
@@ -44,7 +48,7 @@ function self:check()
 end
 
 
-function self:rebuild_surface()
+function panel:rebuild_surface()
 	if self.game:is_paused() or self.game:is_suspended() then return end
 	
   	self.surface:clear()
@@ -81,12 +85,12 @@ function self:rebuild_surface()
 	end
 end
 
-function self:set_dst_position(x, y)
+function panel:set_dst_position(x, y)
   	self.dst_x = x
   	self.dst_y = y
 end
 
-function self:on_draw(dst_surface)
+function panel:on_draw(dst_surface)
 
   	local x, y = self.dst_x, self.dst_y
   	local width, height = dst_surface:get_size()
@@ -97,7 +101,6 @@ function self:on_draw(dst_surface)
     		y = height + y
   	end
 	self.surface:draw(dst_surface, x, y)
-end
 end
 
 return panel
