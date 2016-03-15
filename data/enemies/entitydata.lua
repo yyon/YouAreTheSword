@@ -30,6 +30,7 @@ BoulderAbility = require "abilities/boulder"
 FiringBowAbility = require "abilities/firingBow"
 TentacleAbility = require "abilities/tentacles"
 PossessAbility = require "abilities/possess"
+FireballConeAbility = require "abilities/fireballcone"
 
 Effects = require "enemies/effect"
 
@@ -1544,11 +1545,14 @@ end
 
 function dunsmurclass:stage2()
 	self.main_sprite = "bosses/dunsmur-2"
-	self.specialability = BoulderAbility:new(self)
+	self.swordability = PossessAbility:new(self)
+	self.specialability = FireballConeAbility:new(self)
 end
 
 function dunsmurclass:stage3()
 	self.main_sprite = "bosses/dunsmur-3"
+	self.swordability = PossessAbility:new(self)
+	self.specialability = BoulderAbility:new(self)
 end
 
 -- Summoned:

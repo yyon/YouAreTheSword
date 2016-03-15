@@ -29,6 +29,9 @@ function entity:start(ability, tox, toy)
 	movement:set_angle(angle)
 	movement:set_max_distance(self:getmaxdist())
 --	movement:set_target(tox, toy)
+	if self:noobstacles() then
+		 movement:set_ignore_obstacles(true)
+	end
 	movement:start(self)
 	
 	self.movement = movement
@@ -43,7 +46,9 @@ function entity:start(ability, tox, toy)
 		self:finish()
 	end
 	
-	movementaccuracy(movement, angle, self)
+	if not self:noobstacles() then
+		movementaccuracy(movement, angle, self)
+	end
 	
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
@@ -86,6 +91,10 @@ end
 
 function entity:getmaxdist()
 	return 1200
+end
+
+function entity:noobstacles()
+	return false
 end
 
 function entity:onposchanged()

@@ -1,0 +1,9 @@
+animation{
+  name = "meteor",
+  src_image = "abilities/meteor.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 233, frame_height = 400, origin_x = 116, origin_y = 400, num_frames = 11, num_columns = 4 },
+  },
+}

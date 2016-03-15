@@ -48,3 +48,5 @@ http://opengameart.org/content/700-rpg-icons
 	icons
 http://opengameart.org/content/large-spaceship
 	spaceship
+http://opengameart.org/content/meteor-glitch
+	meteor
