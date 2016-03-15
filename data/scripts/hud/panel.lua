@@ -66,6 +66,8 @@ function self:rebuild_surface()
 			fraction, timeremaining = ability:getremainingcooldown()
 			frame = math.floor(fraction*100)
 			self.cooldownoverlay:draw_region(69*frame, 0, 69, 69, self.surface, 3, 3)
+		elseif (not ability.canuse) then
+			self.cooldownoverlay:draw_region(0, 0, 69, 69, self.surface, 3, 3)
 		end
 	end
 end

@@ -21,7 +21,7 @@ function TransformAbility:initialize(entitydata, transform)
 		icon = "largesword"
 	elseif transform == "lifesteal" then
 		name = "Lifesteal"
-		icon = "lifesteal"
+		icon = "lifestealsword"
 	elseif transform == "holy" then
 		name = "Holy Sword"
 		icon = "holysword"
