@@ -95,6 +95,10 @@ function Ability:finishcooldown()
 		-- Add HUD call here
 		-- Hud:EndCooldown(self)
 	end
+	
+	if not self.entitydata.entity.ishero then
+		self.entitydata.entity:tick()
+	end
 end
 
 function Ability:getremainingcooldown()
