@@ -15,7 +15,7 @@ function entity:oncollision(entity2, sprite1, sprite2)
 		if not self.collided[entity2] then
 			if self:get_sprite():get_frame() == 2 then
 				self.collided[entity2] = true
-				entity2.entitydata:dodamage(entity2.entitydata, 0.5, {natural = true, fromentity = self, directionalknockback=true})
+				entity2.entitydata:dodamage(entity2.entitydata, 0.5, {sameteam = true, fromentity = self, directionalknockback=true})
 			end
 		end
 	end

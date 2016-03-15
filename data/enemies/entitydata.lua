@@ -201,7 +201,7 @@ function EntityData:unpossess()
 	return self.entity
 end
 
-function EntityData:cantarget(entitydata)
+function EntityData:cantarget(entitydata, canbeonsameteam)
 --	print(debug.traceback())
 
 	-- is this entitydata a person which can be attacked?
@@ -215,12 +215,12 @@ function EntityData:cantarget(entitydata)
 		return false
 	end
 	
-	if entitydata == self then
+	if entitydata == self and not canbeonsameteam then
 --		self:log("can't target", entitydata, "because self-targeting")
 		return false
 	end
 
-	if entitydata.team == self.team then
+	if entitydata.team == self.team and not canbeonsameteam then
 --		self:log("can't target", entitydata, "because same team")
 		return false
 	end
@@ -491,7 +491,11 @@ function EntityData:dodamage(target, damage, aspects)
 	
 	if self.entity == nil then return end
 	
-	if not self:cantarget(target) and aspects.natural == nil then
+	if aspects.natural then
+		aspects.sameteam = true
+	end
+	
+	if not self:cantarget(target, aspects.sameteam) then
 		return
 	end
 	
@@ -512,13 +516,6 @@ function EntityData:dodamage(target, damage, aspects)
 		return
 	end
 
-
-	--cancel enemy's ability
-	if aspects.natural == nil and aspects.dontcancel == nil then
-		if target.usingability ~= nil then
-			target.usingability:cancel()
-		end
-	end
 
 	-- aspects
 	if aspects.knockback == nil then
@@ -574,6 +571,13 @@ function EntityData:dodamage(target, damage, aspects)
 		aspects.debuffattack()
 	end
 	
+
+	--cancel enemy's ability
+	if aspects.natural == nil and aspects.dontcancel == nil then
+		if target.usingability ~= nil then
+			target.usingability:cancel()
+		end
+	end
 
 	-- do damage
 	damage = damage * self.stats.damage
