@@ -29,6 +29,7 @@ NothingAbility = require "abilities/nothing"
 BoulderAbility = require "abilities/boulder"
 FiringBowAbility = require "abilities/firingBow"
 TentacleAbility = require "abilities/tentacles"
+PossessAbility = require "abilities/possess"
 
 Effects = require "enemies/effect"
 
@@ -782,6 +783,10 @@ function EntityData:throwsword(entitydata2)
 		if not entitydata2.entity.hasbeeninitialized then
 			return
 		end
+		
+		if entitydata2.effects["possess"] then
+			entitydata2.effects["possess"]:remove()
+		end
 
 		hero.isthrown = true
 
@@ -1528,7 +1533,7 @@ function dunsmurclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "lifesteal")}
 	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {BoulderAbility:new(self)}
+	specialabilities = {PossessAbility:new(self)}
 	basestats = {}
 	
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
@@ -1539,6 +1544,7 @@ end
 
 function dunsmurclass:stage2()
 	self.main_sprite = "bosses/dunsmur-2"
+	self.specialability = BoulderAbility:new(self)
 end
 
 function dunsmurclass:stage3()

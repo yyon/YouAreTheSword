@@ -443,6 +443,20 @@ function MapTauntEffect:getkey()
 	return "MapTaunt"
 end
 
+PossessEffect = Effect:subclass("PossessEffect")
+
+function PossessEffect:start(newteam, time)
+	self:removeeffectafter(time)
+	self.oldteam = self.entitydata.team
+	self.entitydata.team = newteam
+end
+function PossessEffect:endeffect()
+	self.entitydata.team = self.oldteam
+end
+function PossessEffect:getkey()
+	return "possess"
+end
+
 TauntPhysicalEffect = PhysicalEffect:subclass("TauntPhysicalEffect")
 
 function TauntPhysicalEffect:getspritename()
@@ -463,4 +477,4 @@ function TauntEffect:remove(...)
 	MapTauntEffect.remove(self, ...)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect}

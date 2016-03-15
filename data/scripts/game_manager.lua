@@ -450,6 +450,27 @@ function load()
 			for entity in self:get_entities("") do
 				if entity.entitydata ~= nil then
 					x, y = entity:get_position()
+					
+					if entity.entitydata.effects["possess"] ~= nil then
+						if entity.eyessprite == nil then
+							entity.eyessprite = sol.sprite.create("adventurers/eyes")
+						end
+							
+						anim = entity.main_sprite:get_animation()
+						if entity.eyessprite:has_animation(anim) then
+							if anim ~= entity.eyessprite:get_animation() then
+								entity.eyessprite:set_animation(anim)
+							end
+							d = entity.main_sprite:get_direction()
+							if entity.eyessprite:get_num_directions() < d then
+								d = 0
+							end
+							entity.eyessprite:set_direction(d)
+							
+							map:draw_sprite(entity.eyessprite, x, y)
+						end
+					end
+					
 					y = y - 65
 					
 					if entity.entitydata.life > 0 then
