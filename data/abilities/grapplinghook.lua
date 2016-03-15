@@ -71,6 +71,10 @@ function GrapplingHookAbility:startpull()
 	self.movement:set_target(self.entitydata.entity)
 	self.movement:start(self.hookentity.target)
 	
+	function self.movement.on_obstacle_reached(movement, stuff)
+		self:cancel()
+	end
+	
 	targetstopper(self.movement, self.hookentity.target, self.entitydata.entity)
 end
 
