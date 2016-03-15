@@ -32,6 +32,12 @@ function entity:start(tox, toy)
 --	movement:set_smooth(true)
 	movement:start(self)
 	movementaccuracy(movement, angle, self)
+	
+	sol.audio.play_sound("explode5")
+
+	self.timer = Effects.SimpleTimer:new(self.ability.entitydata, 500, function() sol.audio.play_sound("explode5") end)
+	self.timer = Effects.SimpleTimer:new(self.ability.entitydata, 1000, function() sol.audio.play_sound("explode5") end)
+	self.timer = Effects.SimpleTimer:new(self.ability.entitydata, 1500, function() sol.audio.play_sound("explode5") end)
 end
 
 function entity:startwarning()
@@ -41,6 +47,8 @@ function entity:startwarning()
 end
 
 function entity:explode()
+	sol.audio.play_sound("explode")
+	
 	self.exploded = true
 
 	self:remove_sprite(self.bomb_sprite)

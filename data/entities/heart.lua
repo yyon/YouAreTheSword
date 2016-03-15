@@ -5,7 +5,7 @@ Effects = require "enemies/effect"
 function entity:on_created()
 end
 
-function entity:start(ability, target)
+function entity:start(ability, target, playsound)
 	self.ability = ability
 	self:set_optimization_distance(0)
 	
@@ -33,13 +33,27 @@ function entity:start(ability, target)
 	function movement.on_obstacle_reached(movement)
 		self:finish()
 	end
+	self.movement = movement
+	
+	self.playsound = playsound
+	
+	self:add_collision_test("sprite", self.oncollision)
+end
+
+function entity:oncollision(entity2, sprite1, sprite2)
+	if entity2.entitydata == self.target then
+		self:heal()
+		self:finish()
+	end
 end
 
 function entity:heal()
+	if self.playsound then sol.audio.play_sound("replenish") end
 	self.ability:heal(self.target)
 end
 
 function entity:finish()
 	self.timer:stop()
 	self:remove()
+	self.movement:stop()
 end

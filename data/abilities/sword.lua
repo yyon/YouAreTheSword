@@ -52,6 +52,8 @@ function SwordAbility:doability()
 	self.topsword = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.topsword.ability = self
 	self.topsword:start(self:get_appearance(), true)
+	
+	sol.audio.play_sound("sword" .. math.random(1,3))
 end
 
 function SwordAbility:onfinish()

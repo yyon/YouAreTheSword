@@ -36,6 +36,9 @@ function EarthquakeAbility:doability()
 	
 	self.ticker = Effects.Ticker(self.entitydata, 50, function() self:shake() end)
 	self.timer = Effects.SimpleTimer(self.entitydata, 1000, function() self:finish() end)
+	
+	sol.audio.play_sound("earthquake")
+	self.soundticker = Effects.Ticker(self.entitydata, 100, function() sol.audio.play_sound("earthquake") end)
 end
 
 function EarthquakeAbility:oncollision(entitydata)
@@ -66,6 +69,7 @@ end
 
 function EarthquakeAbility:onfinish()
 	self.ticker:remove()
+	self.soundticker:remove()
 	self.timer:stop()
 	
 	self:resetenemypos()

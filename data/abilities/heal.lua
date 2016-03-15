@@ -10,6 +10,7 @@ end
 
 function HealAbility:doability()
 	self.ticker = Effects.Ticker(self.entitydata, 100, function() self:sendheart() end)
+	self.i = 0
 end
 
 function HealAbility:sendheart()
@@ -24,7 +25,8 @@ function HealAbility:sendheart()
 	
 	self.healentity = map:create_custom_entity({model="heart", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	self.healentity.ability = self
-	self.healentity:start(self, targetentity)
+	self.i = self.i + 1
+	self.healentity:start(self, targetentity, (self.i % 5 == 1))
 end
 
 function HealAbility:keyrelease()

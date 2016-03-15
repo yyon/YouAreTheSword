@@ -34,6 +34,8 @@ function AngelSummonAbility:doability()
 	angelentitydata.entity = newentity
 	angelentitydata:applytoentity()
 
+	sol.audio.play_sound("blessing")
+	
 	self:finish()
 end
 

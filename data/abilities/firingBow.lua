@@ -23,6 +23,8 @@ function FiringBowAbility:doability()
 	
 	self.entitydata:setanimation("finishedbow")
 	self.timer = Effects.SimpleTimer(self.entitydata, 300, function() self:finish() end)
+	
+	sol.audio.play_sound("shoot")
 end
 
 function FiringBowAbility:onfinish()

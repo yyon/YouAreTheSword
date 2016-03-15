@@ -20,3 +20,7 @@ end
 function entity:getspeed()
 	return 1000
 end
+
+function entity:onhit()
+	sol.audio.play_sound("arrow")
+end

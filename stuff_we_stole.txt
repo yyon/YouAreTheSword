@@ -58,3 +58,25 @@ http://opengameart.org/content/rockbreaking
 	thunder
 http://opengameart.org/content/wind
 	wind (music)
+http://opengameart.org/content/horror-ambient
+	horror-ambient (music)
+http://opengameart.org/content/replenish-life-force-sound
+	replenish
+http://opengameart.org/content/fireball-1
+	fireball
+http://opengameart.org/content/laser-shot
+	laser
+http://opengameart.org/content/punches-hits-swords-and-squishes
+	sword
+http://opengameart.org/content/spell-sounds-starter-pack
+	angel summon, explode, teleport, heal
+http://opengameart.org/content/rpg-sound-pack
+	swing
+http://opengameart.org/content/rock-walk-step-sound-yo-frankie
+	sidestep
+http://opengameart.org/content/whoosh-2
+	blackhole
+http://opengameart.org/content/explosion-0
+	earthquake
+http://opengameart.org/content/energy-drain
+	possess

@@ -29,3 +29,11 @@ function entity:noobstacles()
 	return true
 end
 
+function entity:onstart()
+	sol.audio.play_sound("fireball")
+	self.ticker = Effects.Ticker(self.ability.entitydata, 300, function() sol.audio.play_sound("fireball") end)
+end
+
+function entity:on_removed()
+	self.ticker:remove()
+end

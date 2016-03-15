@@ -37,6 +37,8 @@ function BackstabAbility:doability(tox, toy)
 
 	self.timer = Effects.SimpleTimer(self.entitydata, time, function() self:dofinish() end)
 	self.ticker = Effects.Ticker(self.entitydata, tickstep, function() self:dotick() end)
+	
+	sol.audio.play_sound("swing" .. math.random(1,3))
 end
 
 function BackstabAbility:dotick()

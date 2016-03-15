@@ -796,6 +796,8 @@ function EntityData:throwsword(entitydata2)
 			entitydata2.effects["possess"]:remove()
 		end
 
+		sol.audio.play_sound("swing" .. math.random(1,3))
+		
 		hero.isthrown = true
 
 		hero = self.entity
@@ -1221,7 +1223,7 @@ function archerclass:initialize(entity)
 	normalabilities = {FiringBowAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "dagger")}
 	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {GrapplingHookAbility:new(self)}
+	specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

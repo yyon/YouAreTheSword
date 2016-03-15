@@ -33,6 +33,8 @@ function GrapplingHookAbility:doability(tox, toy)
 	self.hookentity:start(target)
 
 	self.timer = Effects.SimpleTimer(self.entitydata, 5000, function() self:timeend() end)
+	
+	sol.audio.play_sound("swing" .. math.random(1,3))
 end
 
 function GrapplingHookAbility:oncancel()

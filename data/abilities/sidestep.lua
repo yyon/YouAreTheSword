@@ -35,6 +35,10 @@ function SidestepAbility:doability()
 	end
 	
 	movementaccuracy(self.movement, angle, self.entitydata.entity)
+	
+	sol.audio.play_sound("sidestep2")
+	self.timer = Effects.SimpleTimer:new(self.entitydata, 100, function() sol.audio.play_sound("sidestep") end)
+	self.timer = Effects.SimpleTimer:new(self.entitydata, 200, function() sol.audio.play_sound("sidestep2") end)
 end
 
 function SidestepAbility:oncancel()

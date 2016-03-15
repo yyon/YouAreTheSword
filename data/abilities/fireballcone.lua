@@ -15,6 +15,8 @@ function FireballConeAbility:doability()
 	
 	self.ticker = Effects.Ticker(self.entitydata, 50, function() self:dotick() end)
 	self.timer = Effects.SimpleTimer(self.entitydata, 300, function() self:finish() end)
+	
+	sol.audio.play_sound("fireball")
 end
 	
 function FireballConeAbility:dotick()

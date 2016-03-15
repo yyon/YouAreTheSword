@@ -16,6 +16,8 @@ function HealExplosionAbility:doability(tox, toy)
 	
 	self.ticker = Effects.Ticker(self.entitydata, 10, function() self:dotick() end)
 	self.timer = Effects.SimpleTimer(self.entitydata, 100, function() self:finish() end)
+	
+	sol.audio.play_sound("heal")
 end
 
 function HealExplosionAbility:dotick()

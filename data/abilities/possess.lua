@@ -15,9 +15,11 @@ function PossessAbility:doability()
 	
 	if not self.target.entity.ishero then
 		Effects.PossessEffect:new(self.target, self.entitydata.team, 20000)
+		sol.audio.play_sound("possess")
+		self:finish(true)
+	else
+		self:finish()
 	end
-	
-	self:finish()
 end
 
 return PossessAbility

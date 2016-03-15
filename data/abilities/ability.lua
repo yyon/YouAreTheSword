@@ -66,13 +66,13 @@ function Ability:finishability(skipcooldown)
 	self.usingcooldown = true
 	
 	if skipcooldown then
-		self:finishcooldown()
+		self:finishcooldown(skipcooldown)
 	else
 		self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)
 	end
 end
 
-function Ability:finishcooldown()
+function Ability:finishcooldown(skipcooldown)
 --	self.entitydata:log("Ability", self.name, "finished cooldown")
 	if self.entitydata.entity == nil then return end
 	
@@ -81,7 +81,7 @@ function Ability:finishcooldown()
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
 	
-	if not self.entitydata.entity.ishero then
+	if not self.entitydata.entity.ishero and not skipcooldown then
 		self.entitydata.entity:tick()
 	end
 end

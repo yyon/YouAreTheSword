@@ -50,6 +50,7 @@ end
 PARTICLEDIST = 400
 
 function entity:tick()
+	sol.audio.play_sound("blackhole")
 	x, y = self:get_position()
 	for i = 1,math.random(1,3) do
 		newx, newy = x + math.random(-PARTICLEDIST, PARTICLEDIST), y + math.random(-PARTICLEDIST, PARTICLEDIST)

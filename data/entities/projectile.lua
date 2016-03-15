@@ -67,6 +67,8 @@ function entity:start(ability, tox, toy)
 	
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
+	
+	self:onstart()
 end
 
 function entity:finish()
@@ -88,12 +90,15 @@ function entity:doattack(entitydata)
 	damage, aspects = self:getdamage()
 	if self.ability.entitydata:cantarget(entitydata) then
 		self.ability:dodamage(entitydata, damage, aspects)
+		self:onhit()
 	end
 end
 
 -- methods to overwrite:
 
 function entity:onfinished()
+end
+function entity:onhit()
 end
 
 function entity:isangle()
@@ -121,4 +126,7 @@ end
 
 function entity:getspritename()
 	return self.sprite_name
+end
+
+function entity:onstart()
 end
