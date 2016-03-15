@@ -31,6 +31,7 @@ FiringBowAbility = require "abilities/firingBow"
 TentacleAbility = require "abilities/tentacles"
 PossessAbility = require "abilities/possess"
 FireballConeAbility = require "abilities/fireballcone"
+TrapsAbility = require "abilities/throwtraps"
 
 Effects = require "enemies/effect"
 
@@ -1158,7 +1159,7 @@ function rogueclass:initialize(entity)
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "dagger"), TransformAbility:new(self, "poison")}
 	blockabilities = {SidestepAbility:new(self), BodyDoubleAbility:new(self)}
-	specialabilities = {BackstabAbility:new(self), StealthAbility:new(self)}
+	specialabilities = {TrapsAbility:new(self), BackstabAbility:new(self), StealthAbility:new(self)}
 	basestats = {}
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
