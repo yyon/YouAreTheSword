@@ -157,7 +157,7 @@ function GoTowardsState:tick()
 			attackability = "special"
 		end
 	end
-
+	
 	x, y = target.entity:get_position()
 	if target ~= nil then
 		if self.npc.entitydata.entity:get_distance(target.entity) < 20 then
@@ -367,7 +367,7 @@ function enemy:tick(newstate)
 	if not self:exists() then return end
 	
 	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
-
+	
 	self.hasbeeninitialized = true
 
 	prevstate = self.state
