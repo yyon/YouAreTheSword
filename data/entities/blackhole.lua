@@ -53,7 +53,7 @@ function entity:tick()
 	x, y = self:get_position()
 	for i = 1,math.random(1,3) do
 		newx, newy = x + math.random(-PARTICLEDIST, PARTICLEDIST), y + math.random(-PARTICLEDIST, PARTICLEDIST)
-		particle = map:create_custom_entity({model="blackholeparticle", x=newx, y=newy, layer=layer, direction=0, width=w, height=h})
+		particle = map:create_custom_entity({model="blackholeparticle", x=newx, y=newy, layer=layer, direction=0, width=8, height=8})
 		particle:start(self)
 		self.particles[particle] = true
 	end

@@ -18,7 +18,7 @@ function BlackHoleAbility:doability()
 	tox, toy = self.entitydata:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 	
-	self.blackholeentity = map:create_custom_entity({model="blackhole", x=tox, y=toy, layer=layer, direction=0, width=w, height=h})
+	self.blackholeentity = map:create_custom_entity({model="blackhole", x=tox, y=toy, layer=layer, direction=0, width=8, height=8})
 	self.blackholeentity.ability = self
 	self.blackholeentity:start(tox, toy)
 
