@@ -896,7 +896,7 @@ function EntityData:getstraightestentity(x, y)
 	return minentity
 end
 
-function EntityData:getclosestentity(x, y, isenemy)
+function EntityData:getclosestentity(x, y, isenemy, funct)
 	-- find person closest to a point
 	-- does not include self
 	-- can be used to find person closest to mouse pointer (used with gettargetpos)
@@ -909,11 +909,13 @@ function EntityData:getclosestentity(x, y, isenemy)
 
 	for entitydata in self:getotherentities() do
 		if not isenemy or self:cantarget(entitydata) then
-			entity = entitydata.entity
-			d = entity:get_distance(x, y)
-			if d < mindist then
-				mindist = d
-				minentity = entity.entitydata
+			if (funct == nil) or (funct(entitydata) == true) then
+				entity = entitydata.entity
+				d = entity:get_distance(x, y)
+				if d < mindist then
+					mindist = d
+					minentity = entity.entitydata
+				end
 			end
 		end
 	end
@@ -934,7 +936,7 @@ function EntityData:throwclosest(mousex, mousey)
 	print("closest", mousex, mousey, selelse
 
 --]]
-	entity = self:getclosestentity(x, y)
+	entity = self:getclosestentity(x, y, false, function(entitydata) return not entitydata.cantpossess end)
 	if entity ~= nil then
 		if hero.entitydata ~= nil then
 			hero.entitydata:throwsword(entity)
@@ -1510,6 +1512,7 @@ function spaceshipboss:initialize(entity)
 	specialabilities = {SpaceShipProjectile2Ability:new(self)}
 	basestats = {}
 	self.cantcancel = true
+	self.cantpossess=true
 	
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 	
@@ -1542,6 +1545,7 @@ function mageboss:initialize(entity)
 	blockabilities = {NothingAbility:new(self)}
 	specialabilities = {TentacleAbility:new(self)}
 	basestats = {movementspeed=0}
+	self.cantpossess=true
 	
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 	
