@@ -1,0 +1,72 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 1000,
+  tileset = "magecity",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 1024,
+  pattern = "1",
+}
+
+destination{
+  layer = 0,
+  x = 608,
+  y = 917,
+  direction = 1,
+}
+
+enemy{
+  layer = 0,
+  x = 608,
+  y = 309,
+  direction = 0,
+  breed = "spaceship",
+}
+
+wall{
+  layer = 0,
+  x = 0,
+  y = 312,
+  width = 1280,
+  height = 24,
+  stops_hero = true,
+  stops_npcs = true,
+  stops_enemies = true,
+  stops_blocks = true,
+}
+
+enemy{
+  layer = 0,
+  x = 408,
+  y = 733,
+  direction = 0,
+  breed = "archer",
+}
+
+enemy{
+  layer = 0,
+  x = 824,
+  y = 741,
+  direction = 0,
+  breed = "mage",
+}
+
+wall{
+  layer = 0,
+  x = 0,
+  y = 280,
+  width = 1288,
+  height = 16,
+  stops_hero = true,
+  stops_npcs = true,
+  stops_enemies = true,
+  stops_blocks = true,
+}
+

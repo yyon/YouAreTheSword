@@ -1,6 +1,7 @@
 map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
+map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
 
@@ -66,10 +67,15 @@ sprite{ id = "adventurers/knight", description = "knight" }
 sprite{ id = "adventurers/mage", description = "mage" }
 sprite{ id = "adventurers/rogue", description = "rogue" }
 sprite{ id = "adventurers/shield", description = "shield" }
+sprite{ id = "bosses/abilities/beams", description = "beams" }
 sprite{ id = "bosses/abilities/tentacles", description = "tentacles" }
+sprite{ id = "bosses/dunsmur-1", description = "dunsmur-1" }
+sprite{ id = "bosses/dunsmur-2", description = "dunsmur-2" }
+sprite{ id = "bosses/dunsmur-3", description = "dunsmur-3" }
 sprite{ id = "bosses/mage-1", description = "mage-1" }
 sprite{ id = "bosses/mage-2", description = "mage-2" }
 sprite{ id = "bosses/mage-3", description = "mage-3" }
+sprite{ id = "bosses/spaceship-1", description = "spaceship-1" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
 sprite{ id = "enemies/red_knight_soldier_sword", description = "red_knight_soldier_sword" }
@@ -248,6 +254,7 @@ enemy{ id = "orc", description = "orc" }
 enemy{ id = "rogue", description = "rogue" }
 enemy{ id = "skeleton", description = "skeleton" }
 enemy{ id = "slime", description = "slime" }
+enemy{ id = "spaceship", description = "spaceship" }
 enemy{ id = "spider", description = "spider" }
 enemy{ id = "wolf", description = "wolf" }
 enemy{ id = "worm", description = "worm" }
@@ -271,6 +278,7 @@ entity{ id = "rougetraps", description = "rougetraps" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
 entity{ id = "smoke", description = "smoke" }
+entity{ id = "spaceshipproj", description = "spaceshipproj" }
 entity{ id = "spiketrap", description = "spiketrap" }
 entity{ id = "stealth", description = "stealth smoke" }
 entity{ id = "stomp", description = "stomp" }

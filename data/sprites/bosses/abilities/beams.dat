@@ -1,0 +1,7 @@
+animation{
+  name = "beam1",
+  src_image = "bosses/abilities/beams.png",
+  directions = {
+    { x = 130, y = 312, frame_width = 64, frame_height = 88, origin_x = 32, origin_y = 0 },
+  },
+}

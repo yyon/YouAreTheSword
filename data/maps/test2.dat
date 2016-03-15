@@ -105,6 +105,15 @@ tile{
   pattern = "3",
 }
 
+tile{
+  layer = 0,
+  x = 1032,
+  y = 0,
+  width = 64,
+  height = 96,
+  pattern = "3",
+}
+
 destination{
   layer = 0,
   x = 168,
@@ -336,5 +345,14 @@ teletransporter{
   width = 64,
   height = 32,
   destination_map = "dunsmurmap",
+}
+
+teletransporter{
+  layer = 0,
+  x = 1032,
+  y = 0,
+  width = 64,
+  height = 32,
+  destination_map = "spaceshipmap",
 }
 

@@ -32,6 +32,7 @@ TentacleAbility = require "abilities/tentacles"
 PossessAbility = require "abilities/possess"
 FireballConeAbility = require "abilities/fireballcone"
 TrapsAbility = require "abilities/throwtraps"
+SpaceShipProjectileAbility = require "abilities/spaceshipprojectile"
 
 Effects = require "enemies/effect"
 
@@ -1489,6 +1490,34 @@ function wolfclass:initialize(entity)
 end
 
 -- Bosses
+
+spaceshipboss = EntityData:subclass("spaceshipboss")
+allclasses.spaceshipboss = spaceshipboss
+
+function spaceshipboss:initialize(entity)
+	class = "Space Ship (Boss)"
+	main_sprite = "bosses/spaceship-1"
+	life = 50
+	team = "boss" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {NothingAbility:new(self)}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {NothingAbility:new(self)}
+	specialabilities = {SpaceShipProjectileAbility:new(self)}
+	basestats = {}
+	
+	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function spaceshipboss:stage2()
+	self.main_sprite = "bosses/spaceship-2"
+end
+
+function spaceshipboss:stage3()
+	self.main_sprite = "bosses/spaceship-3"
+end
 
 mageboss = EntityData:subclass("mageboss")
 allclasses.mageboss = mageboss
