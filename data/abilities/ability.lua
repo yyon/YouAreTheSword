@@ -68,6 +68,8 @@ function Ability:finishability(skipcooldown)
 		self:uncatch()
 	end
 	
+	self.usingcooldown = true
+	
 	if skipcooldown then
 		self:finishcooldown()
 	else
@@ -83,6 +85,8 @@ end
 function Ability:finishcooldown()
 --	self.entitydata:log("Ability", self.name, "finished cooldown")
 	if self.entitydata.entity == nil then return end
+	
+	self.usingcooldown = false
 	
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
@@ -104,6 +108,7 @@ function Ability:getremainingcooldown()
 --	print(fraction, timeremaining)
 	return fraction, timeremaining
 end
+
 function Ability:tick(...)
 	-- You should probably use Effects:Ticker instead of this
 end

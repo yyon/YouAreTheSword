@@ -9,12 +9,17 @@ local math = require "math"
 BackstabAbility = Ability:subclass("BackstabAbility")
 
 function BackstabAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Backstab", 800, "backstab", 0, 1000, true)
+	Ability.initialize(self, entitydata, "Backstab", 800, "backstab", 0, 3000, true)
 end
 
 function BackstabAbility:doability(tox, toy)
 	tox, toy = self.entitydata:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy, true)
+	if self.target == nil then
+		self:finish()
+		return
+	end
+	
 	
 	self.target.entity.cantrotate = true
 	

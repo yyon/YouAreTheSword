@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 BoulderAbility = Ability:subclass("FireballAbility")
 
 function BoulderAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Meteor", 2000, "meteor", 0, 500, true, "casting")
+	Ability.initialize(self, entitydata, "Meteor", 2000, "meteor", 0, 3000, true, "casting")
 end
 
 function BoulderAbility:doability()
