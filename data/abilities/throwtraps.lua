@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 TrapsAbility = Ability:subclass("TrapsAbility")
 
 function TrapsAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Trap", 800, "Trap", 500, 4000, true)
+	Ability.initialize(self, entitydata, "Trap", 800, "trap", 500, 4000, true)
 end
 
 function TrapsAbility:doability()

@@ -44,6 +44,7 @@ end
 
 
 function self:rebuild_surface()
+	if self.game:is_paused() or self.game:is_suspended() then return end
 	
   	self.surface:clear()
 	self.brown_panel_img:draw_region(0, 0, 75, 75, self.surface, 0, 0)
@@ -55,7 +56,6 @@ function self:rebuild_surface()
 		if self.icon ~= icon then
 			self.icon = icon
 			self.actualicon = sol.surface.create("icons_smaller/" .. self.icon .. ".png")
-			print(self.actualicon, self.icon, self.type)
 		end
 		
 		if self.actualicon ~= nil then

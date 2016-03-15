@@ -109,7 +109,7 @@ function sol.main:on_key_pressed(key, modifiers)
 			if hero.entitydata.cheatyabilityswitcher == nil then
 				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
 			end
-			cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.transformabilities, ["3"]=hero.entitydata.blockabilities, ["4"]=hero.entitydata.specialabilities}
+			cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.blockabilities, ["3"]=hero.entitydata.transformabilities, ["4"]=hero.entitydata.specialabilities}
 			cheatyabilities = cheatyabilities[key]
 			hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
 			if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
@@ -119,9 +119,9 @@ function sol.main:on_key_pressed(key, modifiers)
 			if key == "1" then
 				hero.entitydata.swordability = cheatyability
 			elseif key == "2" then
-				hero.entitydata.transformability = cheatyability
-			elseif key == "3" then
 				hero.entitydata.blockability = cheatyability
+			elseif key == "3" then
+				hero.entitydata.transformability = cheatyability
 			elseif key == "4" then
 				hero.entitydata.specialability = cheatyability
 			end
