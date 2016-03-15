@@ -281,5 +281,6 @@ entity{ id = "tentacle", description = "tentacle" }
 language{ id = "en", description = "English" }
 
 font{ id = "8_bit", description = "8_bit" }
+font{ id = "8_bit_2", description = "8_bit_2" }
 font{ id = "minecraftia", description = "minecraftia" }
 
