@@ -68,7 +68,7 @@ function self:rebuild_surface()
 			frame = math.floor(fraction*100)
 			self.cooldownoverlay:draw_region(69*frame, 0, 69, 69, self.surface, 3, 3)
 			
-			timeremaining = math.floor(timeremaining / 1000)
+			timeremaining = math.ceil(timeremaining / 1000)
 			if self.texts[timeremaining] == nil then
 				self.texts[timeremaining] = sol.text_surface.create({horizontal_alignement="center", vertical_alignement="middle", text=tostring(timeremaining), font="8_bit_2"})
 			end
