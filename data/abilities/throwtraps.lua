@@ -23,6 +23,8 @@ function TrapsAbility:doability()
 	self.shieldentity.ability = self
 
 	self.shieldentity:start(tox, toy)
+	
+	sol.audio.play_sound("trap")
 
 	self:finish()
 end

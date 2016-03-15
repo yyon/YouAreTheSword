@@ -26,6 +26,8 @@ function NormalAbility:doability(tox, toy)
 		end
 	end
 	
+	sol.audio.play_sound("punch")
+	
 	self:finish()
 end
 

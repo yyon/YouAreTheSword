@@ -28,6 +28,8 @@ function ShieldBashAbility:doability()
 	Effects.SimpleTimer:new(self.entitydata, 400, function() self:finish() end)
 
 	self:attackall()
+	
+	sol.audio.play_sound("punch")
 end
 function ShieldBashAbility:onfinish()
 	if self.shieldentity ~= nil then

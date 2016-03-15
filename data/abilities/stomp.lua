@@ -21,6 +21,8 @@ function StompAbility:doability()
 	self.stompentity = map:create_custom_entity({model="stomp", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	self.stompentity.ability = self
 	self.stompentity:start()
+	
+	sol.audio.play_sound("stomp")
 end
 
 function StompAbility:onfinish()

@@ -27,6 +27,8 @@ function TentacleAbility:doability()
 	self.entity.ability = self
 	self.entity:start(tox, toy)
 	
+	if math.random(1,2) == 1 then sol.audio.play_sound("slime" .. math.random(1,10)) end
+	
 	self:finish()
 end
 

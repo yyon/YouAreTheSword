@@ -67,11 +67,11 @@ http://opengameart.org/content/fireball-1
 http://opengameart.org/content/laser-shot
 	laser
 http://opengameart.org/content/punches-hits-swords-and-squishes
-	sword
+	sword, punch
 http://opengameart.org/content/spell-sounds-starter-pack
-	angel summon, explode, teleport, heal
+	angel summon, explode, teleport, heal, stomp, swordtransform, taunt
 http://opengameart.org/content/rpg-sound-pack
-	swing
+	swing, tentacles
 http://opengameart.org/content/rock-walk-step-sound-yo-frankie
 	sidestep
 http://opengameart.org/content/whoosh-2
@@ -80,3 +80,9 @@ http://opengameart.org/content/explosion-0
 	earthquake
 http://opengameart.org/content/energy-drain
 	possess
+http://opengameart.org/content/osare-10-sound-pack
+	shield
+http://opengameart.org/content/steam-release-sounds
+	stealth
+http://opengameart.org/content/metal-interactions
+	trap

@@ -45,6 +45,7 @@ function ShieldAbility:blockdamage(fromentity, damage, aspects)
 		-- shield can block
 --		self.entitydata:log("Blocked Damage using shield!")
 		aspects.reversecancel = 500
+		sol.audio.play_sound("shield")
 		return 0, aspects
 	end
 

@@ -16,6 +16,8 @@ function StealthAbility:doability()
 	self.ticker = Effects.Ticker(self.entitydata, 50, function() self:dotick() end)
 	self.ticker:removeeffectafter(10000)
 	
+	sol.audio.play_sound("stealth")
+	
 	self:finish()
 end
 
