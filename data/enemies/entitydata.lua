@@ -33,6 +33,11 @@ PossessAbility = require "abilities/possess"
 FireballConeAbility = require "abilities/fireballcone"
 TrapsAbility = require "abilities/throwtraps"
 SpaceShipProjectileAbility = require "abilities/spaceshipprojectile"
+SpaceShipProjectile2Ability = require "abilities/spaceshipproj2"
+SpaceShipProjectile3Ability = require "abilities/spaceshipproj3"
+SpaceShipProjectile4Ability = require "abilities/spaceshipproj4"
+SpaceShipProjectile5Ability = require "abilities/spaceshipproj5"
+SpaceShipProjectile6Ability = require "abilities/spaceshipproj6"
 
 Effects = require "enemies/effect"
 
@@ -514,12 +519,12 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.donothing then
 		return
 	end
+	
 	--reverse cancel
-	if aspects.reversecancel ~= nil then
+	if aspects.reversecancel ~= nil and not aspects.fromentity then
 		target:dodamage(self, 0, {knockback=0, stun=aspects.reversecancel, dontblock=true})
 		return
 	end
-
 
 	-- aspects
 	if aspects.knockback == nil then
@@ -577,7 +582,7 @@ function EntityData:dodamage(target, damage, aspects)
 	
 
 	--cancel enemy's ability
-	if aspects.natural == nil and aspects.dontcancel == nil then
+	if aspects.natural == nil and aspects.dontcancel == nil and target.cantcancel == nil then
 		if target.usingability ~= nil then
 			target.usingability:cancel()
 		end
@@ -621,7 +626,7 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 
 	--knockback
-	if aspects.knockback ~= 0 then
+	if aspects.knockback ~= 0 and target.cantcancel == nil then
 --		if target:getfrozen() == nil then
 			angle = nil
 			if aspects.knockbackrandomangle then
@@ -952,7 +957,7 @@ function EntityData:gettargetpos()
 		target = self.entity.lasttarget
 		if target.entity == nil then target = self.entity:targetenemy() end
 		if target ~= nil then
-			if self.usingability.abilitytype == "block" then
+			if self.usingability ~= nil and self.usingability.abilitytype == "block" then
 				x, y = self.entity:getblockposition(target)
 			else
 				x, y = target.entity:get_position()
@@ -1499,11 +1504,12 @@ function spaceshipboss:initialize(entity)
 	main_sprite = "bosses/spaceship-1"
 	life = 50
 	team = "boss" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NothingAbility:new(self)}
+	normalabilities = {SpaceShipProjectileAbility:new(self)}
 	transformabilities = {NothingAbility:new(self)}
 	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {SpaceShipProjectileAbility:new(self)}
+	specialabilities = {SpaceShipProjectile2Ability:new(self)}
 	basestats = {}
+	self.cantcancel = true
 	
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 	
@@ -1513,10 +1519,14 @@ end
 
 function spaceshipboss:stage2()
 	self.main_sprite = "bosses/spaceship-2"
+	self.swordability = SpaceShipProjectile6Ability:new(self)
+	self.specialability = SpaceShipProjectile4Ability:new(self)
 end
 
 function spaceshipboss:stage3()
 	self.main_sprite = "bosses/spaceship-3"
+	self.swordability = SpaceShipProjectile3Ability:new(self)
+	self.specialability = SpaceShipProjectile5Ability:new(self)
 end
 
 mageboss = EntityData:subclass("mageboss")

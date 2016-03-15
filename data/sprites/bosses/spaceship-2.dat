@@ -1,0 +1,44 @@
+animation{
+  name = "stopped",
+  src_image = "bosses/spaceship-2.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+  },
+}
+animation{
+  name = "blue",
+  src_image = "bosses/spaceship-2.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 366, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578, num_frames = 4 },
+    { x = 366, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578, num_frames = 4 },
+    { x = 366, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578, num_frames = 4 },
+    { x = 366, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578, num_frames = 4 },
+  },
+}
+animation{
+  name = "green",
+  src_image = "bosses/spaceship-2.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 1830, y = 0, frame_width = 366, frame_height = 578, origin_x = 184, origin_y = 578, num_frames = 4 },
+    { x = 1830, y = 0, frame_width = 366, frame_height = 578, origin_x = 184, origin_y = 578, num_frames = 4 },
+    { x = 1830, y = 0, frame_width = 366, frame_height = 578, origin_x = 184, origin_y = 578, num_frames = 4 },
+    { x = 1830, y = 0, frame_width = 366, frame_height = 578, origin_x = 184, origin_y = 578, num_frames = 4 },
+  },
+}
+animation{
+  name = "walking",
+  src_image = "bosses/spaceship-2.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+    { x = 0, y = 0, frame_width = 366, frame_height = 578, origin_x = 183, origin_y = 578 },
+  },
+}

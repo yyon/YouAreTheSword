@@ -13,7 +13,7 @@ function TeleportAbility:doability()
 	tox, toy = self:withinrange(tox, toy)
 	
 	self.entitydata.entity:set_position(tox, toy)
-
+	
 	self:finish()
 	
 	-- animation

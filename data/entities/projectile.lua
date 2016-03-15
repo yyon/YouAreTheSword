@@ -5,7 +5,13 @@ Effects = require "enemies/effect"
 require "scripts/movementaccuracy"
 
 function entity:on_created()
-  self:set_optimization_distance(0)
+	self:set_optimization_distance(0)
+	self.speed = 600
+end
+
+function round(num, idp)
+	local mult = 10^(idp or 0)
+	return math.floor(num * mult + 0.5) / mult
 end
 
 function entity:start(ability, tox, toy)
@@ -15,6 +21,10 @@ function entity:start(ability, tox, toy)
 	self.sprite:set_paused(false)
 	self.sprite:set_direction(self:get_direction())
 	
+	if self.anim ~= nil then
+		self.sprite:set_animation(self.anim)
+	end
+	
 	local x, y = self:get_position()
 	local angle
 	if self:isangle() then
@@ -23,6 +33,11 @@ function entity:start(ability, tox, toy)
 		angle = self:get_angle(tox, toy)-- + math.pi
 	end
 	self.angle = angle
+	
+	if self.rotationframes ~= nil then
+		self.sprite:set_frame(round((-angle + math.pi / 2) * self.rotationframes / math.pi / 2) % self.rotationframes)
+		self.sprite:set_paused(true)
+	end
 	
 	local movement = sol.movement.create("straight")
 	movement:set_speed(self:getspeed())
@@ -82,11 +97,11 @@ function entity:onfinished()
 end
 
 function entity:isangle()
-	return false
+	return self.is_angle
 end
 
 function entity:getspeed()
-	return 600
+	return self.speed
 end
 
 function entity:getmaxdist()
@@ -94,7 +109,7 @@ function entity:getmaxdist()
 end
 
 function entity:noobstacles()
-	return false
+	return self.no_obstacles
 end
 
 function entity:onposchanged()
@@ -105,4 +120,5 @@ function entity:getdamage()
 end
 
 function entity:getspritename()
+	return self.sprite_name
 end

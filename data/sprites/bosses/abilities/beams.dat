@@ -2,6 +2,13 @@ animation{
   name = "beam1",
   src_image = "bosses/abilities/beams.png",
   directions = {
-    { x = 130, y = 312, frame_width = 64, frame_height = 88, origin_x = 32, origin_y = 0 },
+    { x = 130, y = 312, frame_width = 64, frame_height = 88, origin_x = 32, origin_y = 44 },
+  },
+}
+animation{
+  name = "beam2",
+  src_image = "bosses/abilities/beams.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 27, frame_height = 100, origin_x = 12, origin_y = 16 },
   },
 }

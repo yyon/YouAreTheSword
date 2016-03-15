@@ -68,6 +68,8 @@ sprite{ id = "adventurers/mage", description = "mage" }
 sprite{ id = "adventurers/rogue", description = "rogue" }
 sprite{ id = "adventurers/shield", description = "shield" }
 sprite{ id = "bosses/abilities/beams", description = "beams" }
+sprite{ id = "bosses/abilities/bluebeam", description = "bluebeam" }
+sprite{ id = "bosses/abilities/greenbeam", description = "greenbeam" }
 sprite{ id = "bosses/abilities/tentacles", description = "tentacles" }
 sprite{ id = "bosses/dunsmur-1", description = "dunsmur-1" }
 sprite{ id = "bosses/dunsmur-2", description = "dunsmur-2" }
@@ -76,6 +78,8 @@ sprite{ id = "bosses/mage-1", description = "mage-1" }
 sprite{ id = "bosses/mage-2", description = "mage-2" }
 sprite{ id = "bosses/mage-3", description = "mage-3" }
 sprite{ id = "bosses/spaceship-1", description = "spaceship-1" }
+sprite{ id = "bosses/spaceship-2", description = "spaceship-2" }
+sprite{ id = "bosses/spaceship-3", description = "spaceship-3" }
 sprite{ id = "enemies/enemy_killed", description = "Enemy killed" }
 sprite{ id = "enemies/red_knight_soldier", description = "red_knight_soldier" }
 sprite{ id = "enemies/red_knight_soldier_sword", description = "red_knight_soldier_sword" }
