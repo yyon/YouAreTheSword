@@ -306,10 +306,10 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 1920,
-  y = 373,
+  x = 1576,
+  y = 421,
   direction = 0,
-  breed = "dunsmur",
+  breed = "combat_dummy",
 }
 
 enemy{

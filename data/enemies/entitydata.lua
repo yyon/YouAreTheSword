@@ -1522,7 +1522,7 @@ allclasses.dunsmurclass = dunsmurclass
 
 function dunsmurclass:initialize(entity)
 	class = "Duns Mur"
-	main_sprite = "monsters/dunsmur"
+	main_sprite = "bosses/dunsmur-1"
 	life = 50
 	team = "dunsmur" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self)}
@@ -1531,8 +1531,18 @@ function dunsmurclass:initialize(entity)
 	specialabilities = {BoulderAbility:new(self)}
 	basestats = {}
 	
+	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
+	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function dunsmurclass:stage2()
+	self.main_sprite = "bosses/dunsmur-2"
+end
+
+function dunsmurclass:stage3()
+	self.main_sprite = "bosses/dunsmur-3"
 end
 
 -- Summoned:
