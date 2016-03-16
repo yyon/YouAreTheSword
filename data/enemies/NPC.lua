@@ -131,19 +131,12 @@ GoTowardsState = State:subclass("GoTowardsState")
 function GoTowardsState:start()
 	if self.npc.entitytoattack ~= nil then
 		x, y = self.npc.entitytoattack.entity:get_position()
-		if self.npc.entitydata:canmoveto(x, y) then
-			local movement = sol.movement.create("target") -- "path_finding")
-			movement:set_speed(self.npc.entitydata.stats.movementspeed)
-			movement:set_target(self.npc.entitytoattack.entity)
-			movement:start(self.npc)
-			self.movement = movement
-		else
-			local movement = sol.movement.create("path_finding") -- "path_finding")
-			movement:set_speed(self.npc.entitydata.stats.movementspeed)
-			movement:set_target(self.npc.entitytoattack.entity)
-			movement:start(self.npc)
-			self.movement = movement
-		end
+		
+		local movement = sol.movement.create("target") -- "path_finding")
+		movement:set_speed(self.npc.entitydata.stats.movementspeed)
+		movement:set_target(self.npc.entitytoattack.entity)
+		movement:start(self.npc)
+		self.movement = movement
 	end
 end
 
