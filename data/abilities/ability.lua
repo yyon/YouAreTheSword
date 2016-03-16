@@ -163,7 +163,7 @@ function Ability:withinrange(tox, toy)
 end
 
 function Ability:catch(target, dontend)
-	if target.caught then
+	if target.caught or target.isbeingknockedback then
 		if not dontend then
 			return false
 		else

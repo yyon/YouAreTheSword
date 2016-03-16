@@ -30,7 +30,7 @@ function TransformAbility:initialize(entitydata, transform)
 		icon = "dagger"
 	end
 	
-	Ability.initialize(self, entitydata, name, 0, icon, 1000, 10000, true, "casting")
+	Ability.initialize(self, entitydata, name, 0, icon, 500, 10000, true, "casting")
 
 	self.transform = transform
 end
@@ -38,6 +38,9 @@ end
 function TransformAbility:doability()
 	self.entitydata.entity.swordtransform = self.transform
 
+	sol.audio.play_sound("enchant2")
+	sol.audio.play_sound("enchant2")
+	sol.audio.play_sound("enchant2")
 	sol.audio.play_sound("enchant2")
 	
 	self:finish()

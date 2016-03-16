@@ -57,7 +57,7 @@ function EarthquakeAbility:attack(entitydata)
 		return
 	end
 	
-	damage = 4
+	damage = 3
 	aspects = {}
 	aspects.knockback = 1000
 	aspects.dontblock = true

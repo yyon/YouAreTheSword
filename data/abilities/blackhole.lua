@@ -32,7 +32,7 @@ function BlackHoleAbility:attack(entity, blackhole)
 	
 	entitydata = entity.entitydata
 
-	damage = 4
+	damage = 2
 	aspects = {}
 	aspects.dontblock = true
 	aspects.knockbackrandomangle = true

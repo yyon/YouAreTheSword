@@ -9,6 +9,16 @@ animation{
   },
 }
 animation{
+  name = "pushing",
+  src_image = "adventurers/dummy.png",
+  directions = {
+    { x = 384, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 256, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 128, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
   name = "walking",
   src_image = "adventurers/dummy.png",
   directions = {

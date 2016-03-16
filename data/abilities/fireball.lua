@@ -4,7 +4,7 @@ Ability = require "abilities/ability"
 FireballAbility = Ability:subclass("FireballAbility")
 
 function FireballAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Fireball", 800, "fireball", 0, 500, true, "casting")
+	Ability.initialize(self, entitydata, "Fireball", 800, "fireball", 500, 2000, true, "casting")
 end
 
 function FireballAbility:doability()

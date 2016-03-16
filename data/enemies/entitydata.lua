@@ -238,7 +238,7 @@ function EntityData:cantarget(entitydata, canbeonsameteam)
 		return false
 	end
 
-	if not entitydata:isvisible() then
+	if not entitydata:isvisible() and not self.entity.ishero then
 --		self:log("can't target", entitydata, "because invisible")
 		return false
 	end

@@ -118,7 +118,6 @@ sprite{ id = "monsters/bat", description = "bat" }
 sprite{ id = "monsters/bee", description = "bee" }
 sprite{ id = "monsters/beetle", description = "beetle" }
 sprite{ id = "monsters/big_worm", description = "big_worm" }
-sprite{ id = "monsters/dunsmur", description = "duns mur" }
 sprite{ id = "monsters/evilmage", description = "evilmage" }
 sprite{ id = "monsters/eyeball", description = "eyeball" }
 sprite{ id = "monsters/flower", description = "flower" }

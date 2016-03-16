@@ -164,13 +164,13 @@ function sol.main:on_key_pressed(key, modifiers)
 			if game.muted then
 				print("unmuted")
 				game.muted = nil
-				sol.audio.set_sound_volume(0)
-				sol.audio.set_music_volume(0)
+				sol.audio.set_sound_volume(100)
+				sol.audio.set_music_volume(100)
 			else
 				print("muted")
 				game.muted = true
-				sol.audio.set_sound_volume(100)
-				sol.audio.set_music_volume(100)
+				sol.audio.set_sound_volume(0)
+				sol.audio.set_music_volume(0)
 			end
 		end
 	end
@@ -391,6 +391,12 @@ function load()
 	end
 	game:start()
 	
+	game:set_ability("sword", 0)
+	game:set_ability("sword_knowledge", 0)
+	game:set_ability("shield", 0)
+	game:set_ability("lift", 0)
+	game:set_ability("swim", 0)
+	game:set_ability("detect_weak_walls", 0)
 	
 	game:set_command_keyboard_binding("left", "a")
 	game:set_command_keyboard_binding("right", dvorak and "e" or "d")
