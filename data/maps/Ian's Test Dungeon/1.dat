@@ -4,7 +4,7 @@ properties{
   width = 1280,
   height = 720,
   tileset = "tileset2",
-  music = "8-bit/05 - Reunion",
+  music = "8-bit/03 - HWV 56 - Why do the nations so furiously rage together",
 }
 
 tile{

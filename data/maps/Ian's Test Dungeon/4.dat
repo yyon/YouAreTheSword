@@ -4,6 +4,7 @@ properties{
   width = 3200,
   height = 1600,
   tileset = "tileset2",
+  music = "8-bit/04 - Sanctuary",
 }
 
 tile{

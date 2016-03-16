@@ -8,6 +8,7 @@ map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "hub", description = "hub" }
 map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
+map{ id = "misc_testing", description = "misc_testing" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
@@ -32,6 +33,7 @@ sprite{ id = "abilities/fireball", description = "fireball" }
 sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
+sprite{ id = "abilities/guntest", description = "guntest" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
 sprite{ id = "abilities/meteor", description = "meteor" }
@@ -121,6 +123,7 @@ sprite{ id = "monsters/eyeball", description = "eyeball" }
 sprite{ id = "monsters/flower", description = "flower" }
 sprite{ id = "monsters/ghost", description = "ghost" }
 sprite{ id = "monsters/maskman", description = "maskman" }
+sprite{ id = "monsters/mech", description = "mech" }
 sprite{ id = "monsters/orc", description = "orc" }
 sprite{ id = "monsters/skeleton", description = "skeleton" }
 sprite{ id = "monsters/slime", description = "slime" }
@@ -263,6 +266,7 @@ enemy{ id = "e_flower", description = "e_Flower" }
 enemy{ id = "e_ghost", description = "e_Ghost" }
 enemy{ id = "e_mage_evil", description = "e_Mage_Evil" }
 enemy{ id = "e_maskman", description = "e_Maskman" }
+enemy{ id = "e_mech", description = "e_Mech" }
 enemy{ id = "e_orc", description = "e_Orc" }
 enemy{ id = "e_skeleton", description = "e_Skeleton" }
 enemy{ id = "e_slime", description = "e_Slime" }
@@ -286,6 +290,7 @@ entity{ id = "directionaltrap", description = "directionaltrap" }
 entity{ id = "fireball", description = "fireball" }
 entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }
+entity{ id = "guntest", description = "guntest" }
 entity{ id = "heart", description = "heart" }
 entity{ id = "heartexplosion", description = "heartexplosion" }
 entity{ id = "lightning", description = "lightning" }

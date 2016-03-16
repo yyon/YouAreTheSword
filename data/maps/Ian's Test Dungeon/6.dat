@@ -4,6 +4,7 @@ properties{
   width = 1280,
   height = 720,
   tileset = "tileset2",
+  music = "8-bit/22 - A New Comrade",
 }
 
 tile{

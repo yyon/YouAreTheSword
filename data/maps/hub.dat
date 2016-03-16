@@ -240,6 +240,33 @@ tile{
   pattern = "2634",
 }
 
+tile{
+  layer = 0,
+  x = 512,
+  y = 584,
+  width = 32,
+  height = 32,
+  pattern = "106",
+}
+
+tile{
+  layer = 0,
+  x = 512,
+  y = 520,
+  width = 32,
+  height = 32,
+  pattern = "82",
+}
+
+tile{
+  layer = 0,
+  x = 512,
+  y = 552,
+  width = 32,
+  height = 32,
+  pattern = "94",
+}
+
 npc{
   layer = 0,
   x = 400,
@@ -343,7 +370,7 @@ teletransporter{
   y = 480,
   width = 32,
   height = 32,
-  destination_map = "hub",
+  destination_map = "misc_testing",
 }
 
 teletransporter{

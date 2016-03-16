@@ -86,6 +86,8 @@ http://opengameart.org/content/steam-release-sounds
 	stealth
 http://opengameart.org/content/metal-interactions
 	trap
+http://opengameart.org/content/futuristic-weapons-assault-rifle
+	gun
 
 music:
 http://opengameart.org/content/generic-8-bit-jrpg-soundtrack

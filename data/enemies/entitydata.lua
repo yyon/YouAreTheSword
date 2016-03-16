@@ -38,6 +38,7 @@ SpaceShipProjectile3Ability = require "abilities/spaceshipproj3"
 SpaceShipProjectile4Ability = require "abilities/spaceshipproj4"
 SpaceShipProjectile5Ability = require "abilities/spaceshipproj5"
 SpaceShipProjectile6Ability = require "abilities/spaceshipproj6"
+GunAbility = require "abilities/gun"
 
 Effects = require "enemies/effect"
 
@@ -500,6 +501,10 @@ function EntityData:dodamage(target, damage, aspects)
 	
 	if self.entity == nil then return end
 	
+	if aspects == nil then
+		aspects = {}
+	end
+
 	if aspects.natural then
 		aspects.sameteam = true
 	end
@@ -532,10 +537,6 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 	if aspects.fromentity == nil then
 		aspects.fromentity = self.entity
-	end
-
-	if aspects == nil then
-		aspects = {}
 	end
 
 	if aspects.electric ~= nil then
@@ -1007,15 +1008,18 @@ function EntityData:getremainingadventurers(dontcountself)
 end
 
 function EntityData:canmoveto(tox, toy)
-	local d = self.entity:get_distance(tox, toy)
-	local x, y = self.entity:get_position()
+	entity = self.entity
+	
+	local d = entity:get_distance(tox, toy)
+	local x, y = entity:get_position()
 	local dx, dy = tox-x, toy-y
 	canmove = true
 	for i=0,d,20 do
 		local p = i/d
 		newdx, newdy = dx*p, dy*p
-		if self.entity:test_obstacles(newdx, newdy) then
+		if entity:test_obstacles(newdx, newdy) then
 			canmove = false
+			
 			break
 		end
 	end
@@ -1320,6 +1324,25 @@ function spiderclass:initialize(entity)
 	transformabilities = {TransformAbility:new(self, "poison")}
 	blockabilities = {SidestepAbility:new(self)}
 	specialabilities = {BackstabAbility:new(self)}
+	basestats = {}
+	self.cantdraweyes = true
+	
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+mechclass = EntityData:subclass("mechclass")
+allclasses.mechclass = mechclass
+
+function mechclass:initialize(entity)
+	class = "mech"
+	main_sprite = "monsters/mech"
+	life = 10
+	team = "monster" -- should be either "adventurer" or "monster" in the final version
+	normalabilities = {GunAbility:new(self)}
+	transformabilities = {NothingAbility:new(self)}
+	blockabilities = {NothingAbility:new(self)}
+	specialabilities = {NothingAbility:new(self)}
 	basestats = {}
 	self.cantdraweyes = true
 	

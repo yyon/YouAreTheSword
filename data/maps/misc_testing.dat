@@ -1,0 +1,32 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 720,
+  tileset = "tileset2",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 736,
+  pattern = "293",
+}
+
+destination{
+  layer = 0,
+  x = 160,
+  y = 293,
+  direction = 1,
+}
+
+enemy{
+  layer = 0,
+  x = 488,
+  y = 301,
+  direction = 0,
+  breed = "e_mech",
+}
+
