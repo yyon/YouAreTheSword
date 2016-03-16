@@ -29,7 +29,7 @@ enemy{
   x = 1840,
   y = 261,
   direction = 0,
-  breed = "skeleton",
+  breed = "e_bee",
 }
 
 enemy{
@@ -37,7 +37,7 @@ enemy{
   x = 432,
   y = 1093,
   direction = 0,
-  breed = "mage",
+  breed = "a_knight",
 }
 
 enemy{
@@ -45,23 +45,23 @@ enemy{
   x = 504,
   y = 1237,
   direction = 0,
-  breed = "cleric",
+  breed = "a_mage",
 }
 
 enemy{
   layer = 0,
-  x = 1920,
-  y = 1285,
+  x = 1720,
+  y = 1237,
   direction = 0,
-  breed = "orc",
+  breed = "e_wolf",
 }
 
 enemy{
   layer = 0,
-  x = 2280,
-  y = 1061,
+  x = 2112,
+  y = 1029,
   direction = 0,
-  breed = "evilmage",
+  breed = "e_slime",
 }
 
 enemy{
@@ -69,7 +69,7 @@ enemy{
   x = 2312,
   y = 581,
   direction = 0,
-  breed = "spider",
+  breed = "e_ghost",
 }
 
 enemy{
@@ -77,7 +77,7 @@ enemy{
   x = 344,
   y = 941,
   direction = 0,
-  breed = "adventurers/cleric",
+  breed = "a_cleric",
 }
 
 enemy{
@@ -85,7 +85,7 @@ enemy{
   x = 544,
   y = 781,
   direction = 0,
-  breed = "adventurers/berserker",
+  breed = "a_berserker",
 }
 
 enemy{
@@ -93,7 +93,7 @@ enemy{
   x = 344,
   y = 549,
   direction = 0,
-  breed = "bard",
+  breed = "a_bard",
 }
 
 enemy{
@@ -106,10 +106,10 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 1936,
-  y = 1029,
+  x = 1912,
+  y = 1149,
   direction = 0,
-  breed = "ghost",
+  breed = "e_spider",
 }
 
 enemy{
@@ -117,7 +117,7 @@ enemy{
   x = 1928,
   y = 821,
   direction = 0,
-  breed = "beetle",
+  breed = "e_maskman",
 }
 
 enemy{
@@ -125,7 +125,7 @@ enemy{
   x = 1720,
   y = 949,
   direction = 0,
-  breed = "bat",
+  breed = "e_orc",
 }
 
 enemy{
@@ -133,7 +133,7 @@ enemy{
   x = 1760,
   y = 637,
   direction = 0,
-  breed = "bee",
+  breed = "e_ghost",
 }
 
 enemy{
@@ -141,15 +141,15 @@ enemy{
   x = 2184,
   y = 725,
   direction = 0,
-  breed = "flower",
+  breed = "e_mage_evil",
 }
 
 enemy{
   layer = 0,
-  x = 2312,
-  y = 781,
+  x = 2256,
+  y = 909,
   direction = 0,
-  breed = "slime",
+  breed = "e_skeleton",
 }
 
 enemy{
@@ -157,15 +157,15 @@ enemy{
   x = 2160,
   y = 141,
   direction = 0,
-  breed = "eyeball",
+  breed = "e_bat",
 }
 
 enemy{
   layer = 0,
-  x = 1576,
-  y = 1285,
+  x = 2128,
+  y = 1317,
   direction = 0,
-  breed = "worm",
+  breed = "e_worm",
 }
 
 enemy{
@@ -173,7 +173,7 @@ enemy{
   x = 1936,
   y = 541,
   direction = 0,
-  breed = "maskman",
+  breed = "e_flower",
 }
 
 enemy{
@@ -181,7 +181,7 @@ enemy{
   x = 1576,
   y = 421,
   direction = 0,
-  breed = "combat_dummy",
+  breed = "e_beetle",
 }
 
 enemy{
@@ -189,6 +189,14 @@ enemy{
   x = 2176,
   y = 445,
   direction = 0,
-  breed = "wolf",
+  breed = "e_eyeball",
+}
+
+enemy{
+  layer = 0,
+  x = 304,
+  y = 1309,
+  direction = 0,
+  breed = "a_rogue",
 }
 

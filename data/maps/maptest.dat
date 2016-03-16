@@ -1130,6 +1130,6 @@ enemy{
   x = 864,
   y = 421,
   direction = 0,
-  breed = "cleric",
+  breed = "a_cleric",
 }
 

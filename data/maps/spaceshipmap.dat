@@ -54,7 +54,7 @@ enemy{
   x = 608,
   y = 317,
   direction = 0,
-  breed = "spaceship",
+  breed = "f_spaceship",
 }
 
 wall{
