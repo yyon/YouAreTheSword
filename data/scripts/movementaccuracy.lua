@@ -17,14 +17,21 @@ function movementaccuracy(movement, angle, entity)
 			d = self.entity:get_distance(self.startx, self.starty)
 			newx, newy = self.startx + math.cos(-self.angle)*d, self.starty + math.sin(-self.angle)*d
 			x, y = self.entity:get_position()
+			
+			hitobstacle = false
+			
 			if (math.floor(x) == math.floor(self.lastx) and math.floor(y) == math.floor(self.lasty)) or self.entity:test_obstacles(newx-x, newy-y) then
+				hitobstacle = true
 				if self.actualobstacle ~= nil then
 					self:actualobstacle()
 					self.on_obstacle_reached = nil
 				end
 			end
-			self.lastx, self.lasty = x, y
-			self:set_xy(newx, newy)
+			
+			if not hitobstacle then
+				self.lastx, self.lasty = x, y
+				self:set_xy(newx, newy)
+			end
 		else
 			if self.actualposchange ~= nil then
 				self:actualposchange()

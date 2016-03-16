@@ -9,43 +9,49 @@ function BodyDoubleAbility:initialize(entitydata)
 end
 
 function BodyDoubleAbility:doability()
-	-- create dummy
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
-
-	newentity = map:create_enemy({
-		breed="enemy_constructor",
-		layer=layer,
-		x=x,
-		y=y,
-		direction=0
-	})
+	canteleport = self.entitydata:canmoveto(tox, toy)
 	
-	dummyentitydata = entitydatas.dummyclass:new()
-	dummyentitydata.team = self.entitydata.team
-	dummyentitydata.entity = newentity
-	dummyentitydata:applytoentity()
+	if canteleport then
+		-- create dummy
+		entity = self.entitydata.entity
+		map = entity:get_map()
+		x,y,layer = entity:get_position()
+		w,h = entity:get_size()
+		entitydata = self.entitydata
 	
-	-- teleport away
-	tox, toy = self.entitydata:gettargetpos()
-	tox, toy = self:withinrange(tox, toy)
+		newentity = map:create_enemy({
+			breed="enemy_constructor",
+			layer=layer,
+			x=x,
+			y=y,
+			direction=0
+		})
 	
-	self.entitydata.entity:set_position(tox, toy)
+		dummyentitydata = entitydatas.dummyclass:new()
+		dummyentitydata.team = self.entitydata.team
+		dummyentitydata.entity = newentity
+		dummyentitydata:applytoentity()
 	
-	-- Change targets
-	for entitydata in self.entitydata:getotherentities() do
-		if not entitydata.entity.ishero then
-			if entitydata.entity.entitytoattack == self.entitydata then
---				entitydata.entity.entitytoattack = dummyentitydata
-				dummyentitydata:dodamage(entitydata, 0, {knockback=0})
+		-- teleport away
+		tox, toy = self.entitydata:gettargetpos()
+		tox, toy = self:withinrange(tox, toy)
+	
+		self.entitydata.entity:set_position(tox, toy)
+	
+		-- Change targets
+		for entitydata in self.entitydata:getotherentities() do
+			if not entitydata.entity.ishero then
+				if entitydata.entity.entitytoattack == self.entitydata then
+--					entitydata.entity.entitytoattack = dummyentitydata
+					dummyentitydata:dodamage(entitydata, 0, {knockback=0})
+				end
 			end
 		end
-	end
 	
-	self:finish()
+		self:finish()
+	else
+		self:finish(true)
+	end
 end
 
 return BodyDoubleAbility

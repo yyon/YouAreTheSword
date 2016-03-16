@@ -144,7 +144,7 @@ function GoTowardsState:tick()
 	end
 	target = self.npc.entitytoattack
 
-	attackability = math.random(2) == 1 and "special" or "normal"
+	attackability = math.random(10) == 1 and "special" or "normal"
 	cantusespecial = false
 	if not self.npc.entitydata:canuseability("special") or self.npc.entitydata:getability("special").nonpc then
 		cantusespecial = true
