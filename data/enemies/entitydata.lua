@@ -1259,7 +1259,7 @@ function skeletonclass:initialize(entity)
 	main_sprite = "monsters/skeleton"
 	life = 10
 	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
+	normalabilities = {FiringBowAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
 	blockabilities = {ShieldAbility:new(self)}
 	specialabilities = {ShieldBashAbility:new(self), GrapplingHookAbility:new(self)}
@@ -1525,7 +1525,7 @@ allclasses.spaceshipboss = spaceshipboss
 function spaceshipboss:initialize(entity)
 	class = "Space Ship (Boss)"
 	main_sprite = "bosses/spaceship-1"
-	life = 50
+	life = 200
 	team = "boss" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SpaceShipProjectileAbility:new(self)}
 	transformabilities = {NothingAbility:new(self)}
@@ -1559,7 +1559,7 @@ allclasses.mageboss = mageboss
 function mageboss:initialize(entity)
 	class = "Mage (Boss)"
 	main_sprite = "bosses/mage-1"
-	life = 50
+	life = 200
 	team = "boss" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {NothingAbility:new(self)}
 	transformabilities = {NothingAbility:new(self)}
@@ -1567,6 +1567,7 @@ function mageboss:initialize(entity)
 	specialabilities = {TentacleAbility:new(self)}
 	basestats = {movementspeed=0}
 	self.cantpossess=true
+	self.cantcancel = true
 	
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 	
@@ -1594,13 +1595,14 @@ allclasses.dunsmurclass = dunsmurclass
 function dunsmurclass:initialize(entity)
 	class = "Duns Mur"
 	main_sprite = "bosses/dunsmur-1"
-	life = 50
+	life = 300
 	team = "dunsmur" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self)}
 	transformabilities = {TransformAbility:new(self, "lifesteal")}
 	blockabilities = {ShieldAbility:new(self)}
 	specialabilities = {PossessAbility:new(self)}
 	basestats = {}
+	self.cantcancel = true
 	
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 	

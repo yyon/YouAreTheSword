@@ -7,7 +7,7 @@ local Effects = require "enemies/effect"
 local math = require "math"
 
 function TentacleAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Tentacles", 2000, "tentacles", 0, 500, true)
+	Ability.initialize(self, entitydata, "Tentacles", 2000, "tentacles", 0, 200, true)
 end
 
 function TentacleAbility:doability()

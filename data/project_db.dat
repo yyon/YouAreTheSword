@@ -4,8 +4,6 @@ map{ id = "Ian's Test Dungeon/3", description = "3" }
 map{ id = "Ian's Test Dungeon/4", description = "4" }
 map{ id = "Ian's Test Dungeon/5", description = "5" }
 map{ id = "Ian's Test Dungeon/6", description = "6" }
-map{ id = "Ian's Test Dungeon/7", description = "7" }
-map{ id = "Ian's Test Dungeon/8", description = "8" }
 map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "hub", description = "hub" }
 map{ id = "magebossmap", description = "magebossmap" }
