@@ -15,9 +15,9 @@ function hud_manager:create(game)
 	local soul_builder = require("scripts/hud/possess_o_meter")
 	local sword_health_builder = require("scripts/hud/sword_health")
 
-	menu = health_builder:new(game)
-  	menu:set_dst_position(0, 10)
-  	hud.elements[#hud.elements + 1] = menu
+--	menu = health_builder:new(game)
+--  	menu:set_dst_position(0, 10)
+--  	hud.elements[#hud.elements + 1] = menu
 
 	menu = soul_builder:new(game)
   	menu:set_dst_position(10, 65)
