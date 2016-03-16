@@ -726,6 +726,24 @@ function EntityData:kill()
 	self.entity = nil
 end
 
+function EntityData:dropsword()
+	hero = self.entity
+	
+	if not hero.ishero then return end	
+	if hero.isthrown then return end
+	if hero.isdropped then return end
+	
+	self:dodamage(self, 0, {sameteam=true}) -- cancel ability
+	
+	self:drop()
+	
+	newentity = self:unpossess()
+	
+	for key, effect in pairs(self.effects) do
+		effect:forceremove()
+	end
+end
+
 function EntityData:swordkill()
 	-- sword health runs out
 	

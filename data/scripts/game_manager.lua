@@ -279,20 +279,24 @@ function tick()
 			soulsdrop = 0
 		end
 		hero.souls = hero.souls - soulsdrop
-		if hero.souls < 0 then hero.souls = 0 end
+		if hero.souls < 0 then
+			hero.souls = 0
+			if hero.entitydata.team == "monster" then
+				hero.entitydata:dropsword()
+			end
+		end
+		
+		if hero.entitydata ~= nil then
+			x, y = hero.entitydata:gettargetpos()
 
---		mousex, mousey = sol.input.get_mouse_position()
---		x, y = convert_to_map(mousex, mousey)
-		x, y = hero.entitydata:gettargetpos()
+			hero.entitydata:tickability(x, y)
 
-		hero.entitydata:tickability(x, y)
-
-		if sol.input.is_key_pressed("left shift") then
-			if x ~= nil then
-				if hero.entitydata.usingability == nil then
-					hero.entitydata:startability("block", true)
+			if sol.input.is_key_pressed("left shift") then
+				if x ~= nil then
+					if hero.entitydata.usingability == nil then
+						hero.entitydata:startability("block", true)
+					end
 				end
---				hero:set_direction(hero:get_direction4_to(x, y))
 			end
 		end
 	end
