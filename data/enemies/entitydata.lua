@@ -1016,6 +1016,10 @@ function EntityData:canmoveto(tox, toy)
 		end
 	end
 	
+	if entity:test_obstacles(dx, dy) then
+		canmove = false
+	end
+	
 	return canmove
 end
 
