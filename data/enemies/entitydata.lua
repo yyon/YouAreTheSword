@@ -1178,6 +1178,8 @@ function mageclass:initialize(entity)
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}
 	
+	self.alwaysrandom = true
+	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
@@ -1421,6 +1423,7 @@ function flowerclass:initialize(entity)
 	specialabilities = {GrapplingHookAbility:new(self)}
 	basestats = {movementspeed=0, cooldown=2}
 	self.cantdraweyes = true
+	self.cantcancel = true
 	
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)

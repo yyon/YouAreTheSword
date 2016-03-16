@@ -132,10 +132,17 @@ function GoTowardsState:start()
 	if self.npc.entitytoattack ~= nil then
 		x, y = self.npc.entitytoattack.entity:get_position()
 		
-		local movement = sol.movement.create("target") -- "path_finding")
-		movement:set_speed(self.npc.entitydata.stats.movementspeed)
-		movement:set_target(self.npc.entitytoattack.entity)
-		movement:start(self.npc)
+		if self.npc.entitydata.alwaysrandom then
+			local movement = sol.movement.create("random_path")
+			movement:set_speed(normal_speed)
+			movement:start(self.npc)
+		else
+			local movement = sol.movement.create("target") -- "path_finding")
+			movement:set_speed(self.npc.entitydata.stats.movementspeed)
+			movement:set_target(self.npc.entitytoattack.entity)
+			movement:set_smooth(true)
+			movement:start(self.npc)
+		end
 		self.movement = movement
 	end
 end
