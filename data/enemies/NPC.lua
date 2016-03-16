@@ -320,12 +320,12 @@ end
 
 function enemy:cantarget(entitydata)
 	if not self.entitydata:cantarget(entitydata) then return false end
-	if self:get_distance(entitydata.entity) > 200 and self.entitytoattack == nil then
-		return false
-	end
-	if self:get_distance(entitydata.entity) > 800 then
-		return false
-	end
+--	if self:get_distance(entitydata.entity) > 200 and self.entitytoattack == nil then
+--		return false
+--	end
+--	if self:get_distance(entitydata.entity) > 800 then
+--		return false
+--	end
 
 	return true
 end

@@ -3,7 +3,7 @@ properties{
   y = 0,
   width = 1280,
   height = 720,
-  tileset = "magecity",
+  tileset = "zmagecity",
   music = "8-bit/01 - Opening",
 }
 
@@ -1112,17 +1112,6 @@ destination{
   y = 325,
   direction = 0,
   default = true,
-}
-
-teletransporter{
-  name = "a",
-  layer = 0,
-  x = 0,
-  y = 280,
-  width = 48,
-  height = 80,
-  destination_map = "test2",
-  destination = "right",
 }
 
 enemy{

@@ -1,12 +1,14 @@
+map{ id = "a", description = "a" }
 map{ id = "dunsmurmap", description = "dunsmurmap" }
+map{ id = "hub", description = "hub" }
 map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
 
-tileset{ id = "magecity", description = "magecity" }
-tileset{ id = "tileset", description = "tileset" }
+tileset{ id = "tileset2", description = "tileset2" }
+tileset{ id = "zmagecity", description = "zmagecity" }
 
 sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }

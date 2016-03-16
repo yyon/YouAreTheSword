@@ -3,34 +3,43 @@ properties{
   y = 0,
   width = 1280,
   height = 1000,
-  tileset = "magecity",
+  tileset = "tileset2",
 }
 
 tile{
   layer = 0,
   x = 0,
-  y = 336,
-  width = 1280,
-  height = 1024,
-  pattern = "1",
+  y = 352,
+  width = 1376,
+  height = 704,
+  pattern = "1916",
 }
 
 tile{
   layer = 0,
   x = 0,
-  y = 272,
-  width = 1280,
-  height = 64,
-  pattern = "191",
+  y = 320,
+  width = 32,
+  height = 32,
+  pattern = "1912",
 }
 
 tile{
   layer = 0,
-  x = 0,
-  y = 0,
-  width = 1280,
-  height = 288,
-  pattern = "2",
+  x = 32,
+  y = 320,
+  width = 1216,
+  height = 32,
+  pattern = "1904",
+}
+
+tile{
+  layer = 0,
+  x = 1248,
+  y = 320,
+  width = 32,
+  height = 32,
+  pattern = "1905",
 }
 
 destination{
@@ -43,7 +52,7 @@ destination{
 enemy{
   layer = 0,
   x = 608,
-  y = 309,
+  y = 317,
   direction = 0,
   breed = "spaceship",
 }
@@ -51,7 +60,7 @@ enemy{
 wall{
   layer = 0,
   x = 0,
-  y = 312,
+  y = 320,
   width = 1280,
   height = 24,
   stops_hero = true,
@@ -79,7 +88,7 @@ enemy{
 wall{
   layer = 0,
   x = 0,
-  y = -8,
+  y = 0,
   width = 1280,
   height = 304,
   stops_hero = true,

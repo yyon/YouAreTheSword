@@ -33,15 +33,6 @@ tile{
   pattern = "110",
 }
 
-tile{
-  layer = 0,
-  x = 0,
-  y = 40,
-  width = 96,
-  height = 32,
-  pattern = "4",
-}
-
 destination{
   layer = 0,
   x = 80,
@@ -118,14 +109,5 @@ custom_entity{
   direction = 2,
   sprite = "Traps/spiketrap",
   model = "directionaltrap",
-}
-
-teletransporter{
-  layer = 0,
-  x = 0,
-  y = 16,
-  width = 48,
-  height = 80,
-  destination_map = "test2",
 }
 

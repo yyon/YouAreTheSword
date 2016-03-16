@@ -3,7 +3,7 @@ properties{
   y = 0,
   width = 1280,
   height = 720,
-  tileset = "magecity",
+  tileset = "tileset2",
 }
 
 tile{
@@ -12,34 +12,79 @@ tile{
   y = 0,
   width = 1280,
   height = 736,
-  pattern = "1",
+  pattern = "606",
 }
 
 tile{
   layer = 0,
-  x = 0,
-  y = 16,
-  width = 1280,
-  height = 48,
-  pattern = "185",
-}
-
-tile{
-  layer = 0,
-  x = 0,
-  y = 688,
-  width = 1280,
-  height = 48,
-  pattern = "185",
-}
-
-tile{
-  layer = 0,
-  x = 0,
-  y = 512,
-  width = 32,
+  x = 32,
+  y = 664,
+  width = 1248,
   height = 32,
-  pattern = "3",
+  pattern = "1089",
+}
+
+tile{
+  layer = 0,
+  x = 32,
+  y = 632,
+  width = 1248,
+  height = 32,
+  pattern = "1077",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 632,
+  width = 1248,
+  height = 32,
+  pattern = "1076",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 664,
+  width = 1248,
+  height = 32,
+  pattern = "1088",
+}
+
+tile{
+  layer = 0,
+  x = 32,
+  y = 40,
+  width = 1248,
+  height = 32,
+  pattern = "1089",
+}
+
+tile{
+  layer = 0,
+  x = 32,
+  y = 8,
+  width = 1248,
+  height = 32,
+  pattern = "1077",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 8,
+  width = 1248,
+  height = 32,
+  pattern = "1076",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 40,
+  width = 1248,
+  height = 32,
+  pattern = "1088",
 }
 
 destination{
@@ -71,14 +116,5 @@ enemy{
   y = 549,
   direction = 0,
   breed = "rogue",
-}
-
-teletransporter{
-  layer = 0,
-  x = 0,
-  y = 512,
-  width = 32,
-  height = 32,
-  destination_map = "test2",
 }
 
