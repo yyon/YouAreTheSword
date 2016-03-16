@@ -778,6 +778,23 @@ function EntityData:drop(hero)
 		hero:set_tunic_sprite_id("abilities/droppedsword")
 		hero:freeze()
 		hero.isdropped = true
+		
+		Effects.SimpleTimer(hero:get_game(), 10000, function() self:emergencyrescuehero(hero) end)
+	end
+end
+
+function EntityData:emergencyrescuehero(hero)
+	if hero.isdropped then
+		for entity in hero:get_map():get_entities("") do
+			if entity.entitydata ~= nil then
+				entitydata = entity.entitydata
+				if entitydata.team == "adventurer" then
+					x, y = hero:get_position()
+					entity:set_position(x,y)
+					return
+				end
+			end
+		end
 	end
 end
 
