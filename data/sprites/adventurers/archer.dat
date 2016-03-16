@@ -56,6 +56,18 @@ animation{
   },
 }
 animation{
+  name = "pushing",
+  src_image = "adventurers/archer.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 704, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 512, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 576, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+    { x = 0, y = 640, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 9 },
+  },
+}
+animation{
   name = "sword",
   src_image = "adventurers/archer.png",
   frame_delay = 60,

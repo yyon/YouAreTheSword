@@ -21,6 +21,18 @@ animation{
   },
 }
 animation{
+  name = "pushing",
+  src_image = "monsters/man_eater_flower.png",
+  frame_delay = 456,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 152, frame_width = 60, frame_height = 76, origin_x = 30, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 60, frame_height = 76, origin_x = 30, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 76, frame_width = 60, frame_height = 76, origin_x = 30, origin_y = 50, num_frames = 4 },
+    { x = 0, y = 228, frame_width = 60, frame_height = 76, origin_x = 30, origin_y = 50, num_frames = 4 },
+  },
+}
+animation{
   name = "walking",
   src_image = "monsters/man_eater_flower.png",
   frame_delay = 456,

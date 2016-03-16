@@ -10,7 +10,7 @@ function entity:getdamage()
   aspects = {}
   aspects.fire = {damage=0.1, time=2000, timestep=500}
   aspects.knockback = 100
-  damage = 1
+  damage = 0
   return damage, aspects
 end
 

@@ -23,6 +23,18 @@ animation{
   },
 }
 animation{
+  name = "pushing",
+  src_image = "bosses/mage-2.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 122, frame_height = 110, origin_x = 61, origin_y = 60, num_frames = 8, num_columns = 4 },
+    { x = 0, y = 0, frame_width = 122, frame_height = 110, origin_x = 61, origin_y = 60, num_frames = 8, num_columns = 4 },
+    { x = 0, y = 0, frame_width = 122, frame_height = 110, origin_x = 61, origin_y = 60, num_frames = 8, num_columns = 4 },
+    { x = 0, y = 0, frame_width = 122, frame_height = 110, origin_x = 61, origin_y = 60, num_frames = 8, num_columns = 4 },
+  },
+}
+animation{
   name = "walking",
   src_image = "bosses/mage-2.png",
   frame_delay = 100,

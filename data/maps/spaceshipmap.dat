@@ -58,6 +58,7 @@ enemy{
 }
 
 wall{
+  name = "proj",
   layer = 0,
   x = 0,
   y = 320,

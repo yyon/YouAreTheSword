@@ -65,8 +65,18 @@ function entity:start(ability, tox, toy)
 	
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
+	self:add_collision_test("overlapping", self.overlap)
 	
 	self:onstart()
+end
+
+function entity:overlap(entity2)
+	if entity2:get_type() == "wall" then
+		name = entity2:get_name()
+		if name == nil or not string.find(name, "proj") then
+			self:finish()
+		end
+	end
 end
 
 function entity:finish()
