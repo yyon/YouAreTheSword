@@ -27,6 +27,10 @@ function HealAbility:sendheart()
 	self.healentity.ability = self
 	self.i = self.i + 1
 	self.healentity:start(self, targetentity, (self.i % 5 == 1))
+	
+	if not self.entitydata.entity.ishero then
+		self.timer = Effects.SimpleTimer(self.entitydata, 1000, function() self:finish() end)
+	end
 end
 
 function HealAbility:keyrelease()

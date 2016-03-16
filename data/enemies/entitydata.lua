@@ -975,6 +975,10 @@ function EntityData:gettargetpos()
 		if target ~= nil then
 			if self.usingability ~= nil and self.usingability.abilitytype == "block" then
 				x, y = self.entity:getblockposition(target)
+			elseif self.usingability ~= nil and self.usingability.heals then
+				x, y = self.entity:get_position()
+				target = self:getclosestentity(x,y,nil,function(entitydata) return entitydata.team == self.team end)
+				x, y = target.entity:get_position()
 			else
 				x, y = target.entity:get_position()
 			end
