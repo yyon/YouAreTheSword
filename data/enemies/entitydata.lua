@@ -42,6 +42,8 @@ GunAbility = require "abilities/gun"
 
 Effects = require "enemies/effect"
 
+local movementaccuracy = require "scripts/movementaccuracy"
+
 local math = require "math"
 
 function EntityData:log(...)
@@ -1023,26 +1025,8 @@ end
 
 function EntityData:canmoveto(tox, toy)
 	entity = self.entity
-	
-	local d = entity:get_distance(tox, toy)
-	local x, y = entity:get_position()
-	local dx, dy = tox-x, toy-y
-	canmove = true
-	for i=0,d,20 do
-		local p = i/d
-		newdx, newdy = dx*p, dy*p
-		if entity:test_obstacles(newdx, newdy) then
-			canmove = false
-			
-			break
-		end
-	end
-	
-	if entity:test_obstacles(dx, dy) then
-		canmove = false
-	end
-	
-	return canmove
+		
+	return movementaccuracy.canmoveto(entity, tox, toy)
 end
 
 
@@ -1172,7 +1156,7 @@ function mageclass:initialize(entity)
 	life = 10
 	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	normalabilities = {SwordAbility:new(self), FireballAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
+	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire")}
 	blockabilities = {TeleportAbility:new(self)}
 	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
 	basestats = {}

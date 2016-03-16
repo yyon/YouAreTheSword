@@ -1,5 +1,29 @@
 local math = require "math"
 
+function canmoveto(entity, tox, toy)
+	local d = entity:get_distance(tox, toy)
+	local x, y = entity:get_position()
+	local dx, dy = tox-x, toy-y
+	canmove = true
+	for i=8,d,8 do
+		local p = i/d
+		newdx, newdy = dx*p, dy*p
+		if entity:test_obstacles(newdx, newdy) then
+			canmove = false
+			
+			break
+		end
+	end
+	
+	if entity:test_obstacles(dx, dy) then
+		canmove = false
+	end
+	
+	return canmove
+end
+
+local canmoveto = canmoveto
+
 function movementaccuracy(movement, angle, entity)
 	movement.i = 0
 	movement.angle = angle
@@ -20,7 +44,7 @@ function movementaccuracy(movement, angle, entity)
 			
 			hitobstacle = false
 			
-			if (math.floor(x) == math.floor(self.lastx) and math.floor(y) == math.floor(self.lasty)) or self.entity:test_obstacles(newx-x, newy-y) then
+			if (math.floor(x) == math.floor(self.lastx) and math.floor(y) == math.floor(self.lasty)) or not canmoveto(self.entity, newx, newy) then --self.entity:test_obstacles(newx-x, newy-y) then
 				hitobstacle = true
 				if self.actualobstacle ~= nil then
 					self:actualobstacle()
@@ -81,3 +105,5 @@ function targetstopper(movement, entity, target)
 		end
 	end
 end
+
+return {canmoveto=canmoveto, movementaccuracy=movementaccuracy, targetstopper=targetstopper}
