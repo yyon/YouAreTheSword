@@ -9,6 +9,9 @@ function BodyDoubleAbility:initialize(entitydata)
 end
 
 function BodyDoubleAbility:doability()
+	tox, toy = self.entitydata:gettargetpos()
+	tox, toy = self:withinrange(tox, toy)
+	
 	canteleport = self.entitydata:canmoveto(tox, toy)
 	
 	if canteleport then
@@ -33,8 +36,6 @@ function BodyDoubleAbility:doability()
 		dummyentitydata:applytoentity()
 	
 		-- teleport away
-		tox, toy = self.entitydata:gettargetpos()
-		tox, toy = self:withinrange(tox, toy)
 	
 		self.entitydata.entity:set_position(tox, toy)
 	
