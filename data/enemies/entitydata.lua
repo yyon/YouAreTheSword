@@ -305,7 +305,7 @@ function EntityData:getotherentities()
 				end
 				if newentity.entitydata ~= nil then
 					newentitydata = newentity.entitydata
-					if newentitydata ~= self and newentitydata ~= heroentity.entitydata then
+					if newentitydata ~= self and newentitydata ~= heroentity.entitydata and newentitydata.entity ~= nil then
 						return newentitydata
 					end
 				end

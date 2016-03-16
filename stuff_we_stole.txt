@@ -20,6 +20,8 @@ http://opengameart.org/content/hearts-set-01
 	healing ability heart
 http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator
 	angel (base) -
+http://opengameart.org/content/lpc-skorpios-scifi-sprite-pack-0
+	mech
 		
 
 http://opengameart.org/content/jastivs-artwork

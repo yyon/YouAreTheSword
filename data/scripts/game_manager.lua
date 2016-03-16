@@ -462,6 +462,7 @@ function load()
 	
 	game.lifebarsprite = sol.sprite.create("hud/lifebar")
 	game.allieslifebarsprite = sol.sprite.create("hud/allieslifebar")
+	game.herolifebarsprite = sol.sprite.create("hud/herolifebar")
 	
 	function game:on_map_changed(map)
 		save()
@@ -473,30 +474,7 @@ function load()
 			end
 		end
 		
-		function map:on_draw(dst_surface)
-			hero = map:get_hero()
-			if hero.entitydata ~= nil then
-				if not hero.entitydata.cantdraweyes then
-					if hero:is_visible() then
-						anim = hero:get_animation()
-						if hero.eyessprite:has_animation(anim) then
-							if anim ~= hero.eyessprite:get_animation() then
-								hero.eyessprite:set_animation(anim)
-							end
-							d = hero:get_direction()
-							if hero.eyessprite:get_num_directions() < d then
-								d = 0
-							end
-							hero.eyessprite:set_direction(d)
-					
-							x, y = hero:get_position()
-							map:draw_sprite(hero.eyessprite, x, y)
-						end
-					end
-				end
-			end
-			
-			for entity in self:get_entities("") do
+		function map:drawlifebar(entity)
 				if entity.entitydata ~= nil then
 					x, y = entity:get_position()
 					
@@ -532,9 +510,40 @@ function load()
 					if entity.entitydata.team == "adventurer" then
 						lifebarsprite = game.allieslifebarsprite
 					end
+					if entity.ishero then
+						lifebarsprite = game.herolifebarsprite
+					end
 					lifebarsprite:set_frame(frame)
 					map:draw_sprite(lifebarsprite, x, y)
 				end
+		end
+		
+		function map:on_draw(dst_surface)
+			hero = map:get_hero()
+			if hero.entitydata ~= nil then
+				if not hero.entitydata.cantdraweyes then
+					if hero:is_visible() then
+						anim = hero:get_animation()
+						if hero.eyessprite:has_animation(anim) then
+							if anim ~= hero.eyessprite:get_animation() then
+								hero.eyessprite:set_animation(anim)
+							end
+							d = hero:get_direction()
+							if hero.eyessprite:get_num_directions() < d then
+								d = 0
+							end
+							hero.eyessprite:set_direction(d)
+					
+							x, y = hero:get_position()
+							map:draw_sprite(hero.eyessprite, x, y)
+						end
+					end
+				end
+			end
+			
+			self:drawlifebar(hero)
+			for entity in self:get_entities("") do
+				self:drawlifebar(entity)
 			end
 		end
 	end
