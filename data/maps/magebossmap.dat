@@ -92,7 +92,7 @@ enemy{
   x = 552,
   y = 117,
   direction = 0,
-  breed = "mageboss",
+  breed = "f_mage_boss",
 }
 
 destination{
@@ -107,7 +107,7 @@ enemy{
   x = 600,
   y = 541,
   direction = 0,
-  breed = "knight",
+  breed = "a_mage",
 }
 
 enemy{
@@ -115,6 +115,6 @@ enemy{
   x = 752,
   y = 541,
   direction = 0,
-  breed = "archer",
+  breed = "a_berserker",
 }
 

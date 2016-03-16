@@ -77,7 +77,7 @@ enemy{
   x = 344,
   y = 941,
   direction = 0,
-  breed = "rogue",
+  breed = "adventurers/cleric",
 }
 
 enemy{
@@ -85,7 +85,7 @@ enemy{
   x = 544,
   y = 781,
   direction = 0,
-  breed = "bard",
+  breed = "adventurers/berserker",
 }
 
 enemy{
@@ -93,7 +93,7 @@ enemy{
   x = 344,
   y = 549,
   direction = 0,
-  breed = "berserker",
+  breed = "bard",
 }
 
 enemy{
@@ -101,7 +101,7 @@ enemy{
   x = 536,
   y = 437,
   direction = 0,
-  breed = "archer",
+  breed = "a_archer",
 }
 
 enemy{

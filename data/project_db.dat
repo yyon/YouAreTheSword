@@ -1,4 +1,4 @@
-map{ id = "a", description = "a" }
+map{ id = "Ian's Test Dungeon/map1", description = "map1" }
 map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "hub", description = "hub" }
 map{ id = "magebossmap", description = "magebossmap" }
@@ -243,31 +243,34 @@ sound{ id = "walk_on_water", description = "walk_on_water" }
 sound{ id = "wrong", description = "wrong" }
 
 
-enemy{ id = "archer", description = "archer" }
-enemy{ id = "bard", description = "bard" }
-enemy{ id = "bat", description = "bat" }
-enemy{ id = "bee", description = "bee" }
-enemy{ id = "beetle", description = "beetle" }
-enemy{ id = "berserker", description = "berserker" }
-enemy{ id = "cleric", description = "cleric" }
-enemy{ id = "combat_dummy", description = "combat dummy" }
-enemy{ id = "dunsmur", description = "dunsmur" }
-enemy{ id = "evilmage", description = "evil mage" }
-enemy{ id = "eyeball", description = "eyeball" }
-enemy{ id = "flower", description = "flower" }
-enemy{ id = "ghost", description = "ghost" }
-enemy{ id = "knight", description = "knight" }
-enemy{ id = "mage", description = "mage" }
-enemy{ id = "mageboss", description = "mageboss" }
-enemy{ id = "maskman", description = "maskman" }
-enemy{ id = "orc", description = "orc" }
-enemy{ id = "rogue", description = "rogue" }
-enemy{ id = "skeleton", description = "skeleton" }
-enemy{ id = "slime", description = "slime" }
-enemy{ id = "spaceship", description = "spaceship" }
-enemy{ id = "spider", description = "spider" }
-enemy{ id = "wolf", description = "wolf" }
-enemy{ id = "worm", description = "worm" }
+enemy{ id = "a_archer", description = "a_Archer" }
+enemy{ id = "a_bard", description = "a_Bard" }
+enemy{ id = "a_berserker", description = "a_Berserker" }
+enemy{ id = "a_cleric", description = "a_Cleric" }
+enemy{ id = "a_knight", description = "a_Knight" }
+enemy{ id = "a_mage", description = "a_Mage" }
+enemy{ id = "a_rogue", description = "a_Rogue" }
+enemy{ id = "az_MONSTERS/monsters", description = "MONSTERS" }
+enemy{ id = "e_bat", description = "e_Bat" }
+enemy{ id = "e_bee", description = "e_Bee" }
+enemy{ id = "e_beetle", description = "e_Beetle" }
+enemy{ id = "e_eyeball", description = "e_Eyeball" }
+enemy{ id = "e_flower", description = "e_Flower" }
+enemy{ id = "e_ghost", description = "e_Ghost" }
+enemy{ id = "e_mage_evil", description = "e_Mage_Evil" }
+enemy{ id = "e_maskman", description = "e_Maskman" }
+enemy{ id = "e_orc", description = "e_Orc" }
+enemy{ id = "e_skeleton", description = "e_Skeleton" }
+enemy{ id = "e_slime", description = "e_Slime" }
+enemy{ id = "e_spider", description = "e_Spider" }
+enemy{ id = "e_wolf", description = "e_Wolf" }
+enemy{ id = "e_worm", description = "e_Worm" }
+enemy{ id = "ez_BOSSES/bosses", description = "BOSSES" }
+enemy{ id = "f_dunsmur", description = "f_Duns_Mur" }
+enemy{ id = "f_mage_boss", description = "f_Mage_Boss" }
+enemy{ id = "f_spaceship", description = "f_Spaceship" }
+enemy{ id = "fz_MISC/misc", description = "MISC" }
+enemy{ id = "m_combat_dummy", description = "m_Combat_Dummy" }
 
 entity{ id = "arrow", description = "arrow" }
 entity{ id = "blackhole", description = "blackhole" }

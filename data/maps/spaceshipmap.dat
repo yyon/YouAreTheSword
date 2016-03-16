@@ -74,7 +74,7 @@ enemy{
   x = 408,
   y = 733,
   direction = 0,
-  breed = "archer",
+  breed = "a_mage",
 }
 
 enemy{
@@ -82,7 +82,7 @@ enemy{
   x = 824,
   y = 741,
   direction = 0,
-  breed = "mage",
+  breed = "a_archer",
 }
 
 wall{

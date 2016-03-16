@@ -1114,14 +1114,6 @@ destination{
   default = true,
 }
 
-enemy{
-  layer = 0,
-  x = 1032,
-  y = 125,
-  direction = 0,
-  breed = "slime",
-}
-
 npc{
   name = "test",
   layer = 0,
@@ -1131,5 +1123,13 @@ npc{
   subtype = 0,
   sprite = "adventurers/guy2",
   behavior = "dialog#test",
+}
+
+enemy{
+  layer = 0,
+  x = 864,
+  y = 421,
+  direction = 0,
+  breed = "cleric",
 }
 

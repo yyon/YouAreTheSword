@@ -3,7 +3,7 @@ properties{
   y = 0,
   width = 1280,
   height = 720,
-  tileset = "magecity",
+  tileset = "zmagecity",
 }
 
 tile{

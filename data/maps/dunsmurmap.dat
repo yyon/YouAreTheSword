@@ -99,15 +99,15 @@ enemy{
   x = 512,
   y = 181,
   direction = 0,
-  breed = "dunsmur",
+  breed = "f_dunsmur",
 }
 
 enemy{
   layer = 0,
-  x = 576,
-  y = 589,
+  x = 520,
+  y = 581,
   direction = 0,
-  breed = "mage",
+  breed = "a_knight",
 }
 
 enemy{
@@ -115,6 +115,6 @@ enemy{
   x = 712,
   y = 549,
   direction = 0,
-  breed = "rogue",
+  breed = "a_rogue",
 }
 
