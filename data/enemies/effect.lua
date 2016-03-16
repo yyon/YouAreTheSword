@@ -16,6 +16,9 @@ function Effect:initialize(affected, ...)
 		self.game = affected
 	else
 		self.entitydata = affected
+		if self.entitydata.entity == nil then
+			return
+		end
 		self.map = self.entitydata.entity:get_map()
 	end
 	self.affected = affected
@@ -44,13 +47,14 @@ end
 function Effect:remove()
 	-- call to remove the effect
 	
+	self.affected.effects[self:getkey()] = nil
+	
 	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 	else
 		if self.entitydata ~= nil and self.entitydata.entity == nil then return end
 		self:endeffect()
 --		self.entitydata:log("ending effect", self)
-		self.affected.effects[self:getkey()] = nil
 		if self.map ~= nil then
 			self.map.effects[self] = nil
 		end
@@ -70,7 +74,11 @@ function Effect:getgame()
 	if self.game ~= nil then
 		return self.game
 	else
-		return self.entitydata.entity:get_game()
+		if self.entitydata.entity ~= nil then
+			return self.entitydata.entity:get_game()
+		else
+			print(debug.traceback())
+		end
 	end
 end
 

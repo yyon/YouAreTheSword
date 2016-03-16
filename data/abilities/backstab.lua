@@ -16,7 +16,7 @@ function BackstabAbility:doability(tox, toy)
 	tox, toy = self.entitydata:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy, true)
 	if self.target == nil then
-		self:finish()
+		self:finish(true)
 		return
 	end
 	
@@ -46,7 +46,13 @@ function BackstabAbility:dotick()
 	self.d = self.d - self.dd
 	x, y = self.target.entity:get_position()
 	x, y = x + math.cos(self.angle)*self.d, y - math.sin(self.angle)*self.d
-	self.entitydata.entity:set_position(x, y)
+	
+	canmoveto = self.entitydata:canmoveto(x, y)
+	if not canmoveto then
+		self:finish(true)
+	else
+		self.entitydata.entity:set_position(x, y)
+	end
 end
 
 function BackstabAbility:dofinish()

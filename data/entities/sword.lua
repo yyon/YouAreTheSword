@@ -11,6 +11,9 @@ function entity:start(appearance, isontop)
 	self.sword_sprite:set_paused(false)
 
 --	self.sword_sprite:set_direction(self:get_direction())
+	if self:get_direction() > 4 then
+		print("ERROR")
+	end
 	self:updatedirection()
 
 	function self.sword_sprite.on_animation_finished (sword_sprite, sprite, animation)
@@ -55,6 +58,10 @@ function entity:updatedirection()
 		x,y,layer = self:get_position()
 		self:set_position(x,y,layer)
 	end
-
+	if self:get_direction() > 4 then
+		print("ERROR2")
+		print(debug.traceback())
+	end
+	
 	self.sword_sprite:set_direction(self:get_direction())
 end

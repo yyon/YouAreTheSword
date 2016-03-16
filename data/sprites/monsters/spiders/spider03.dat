@@ -9,6 +9,18 @@ animation{
   },
 }
 animation{
+  name = "pushing",
+  src_image = "monsters/spiders/spider03.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 192, y = 192, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 7 },
+    { x = 192, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 7 },
+    { x = 192, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 7 },
+    { x = 192, y = 128, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 7 },
+  },
+}
+animation{
   name = "sword",
   src_image = "monsters/spiders/spider03.png",
   frame_delay = 100,

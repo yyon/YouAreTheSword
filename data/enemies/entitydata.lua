@@ -1006,6 +1006,24 @@ function EntityData:getremainingadventurers(dontcountself)
 	return enemiesremaining
 end
 
+function EntityData:canmoveto(tox, toy)
+	local d = self.entity:get_distance(tox, toy)
+	local x, y = self.entity:get_position()
+	local dx, dy = tox-x, toy-y
+	canmove = true
+	for i=0,d,20 do
+		local p = i/d
+		newdx, newdy = dx*p, dy*p
+		if self.entity:test_obstacles(newdx, newdy) then
+			canmove = false
+			break
+		end
+	end
+	
+	return canmove
+end
+
+
 
 function EntityData:totable()
 	return {
@@ -1320,7 +1338,7 @@ function beetleclass:initialize(entity)
 	normalabilities = {NormalAbility:new(self)}
 	transformabilities = {NothingAbility:new(self)}
 	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {EarthquakeAbility:new(self)}
+	specialabilities = {NothingAbility:new(self)}
 	basestats = {}
 	self.cantdraweyes = true
 	

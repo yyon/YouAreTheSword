@@ -12,18 +12,7 @@ function TeleportAbility:doability()
 	tox, toy = self.entitydata:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 	
-	d = self.entitydata.entity:get_distance(tox, toy)
-	x, y = self.entitydata.entity:get_position()
-	dx, dy = tox-x, toy-y
-	canteleport = true
-	for i=0,d,20 do
-		p = i/d
-		newdx, newdy = dx*p, dy*p
-		if self.entitydata.entity:test_obstacles(newdx, newdy) then
-			canteleport = false
-			break
-		end
-	end
+	canteleport = self.entitydata:canmoveto(tox, toy)
 	
 	if canteleport then
 		self.entitydata.entity:set_position(tox, toy)

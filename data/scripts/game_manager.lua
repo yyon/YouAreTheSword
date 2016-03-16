@@ -258,6 +258,7 @@ function tick()
 									for effect, b in pairs(hero:get_map().effects) do
 										foundeffect = true
 										effect:remove()
+										hero:get_map().effects[effect] = nil -- just to make sure
 									end
 									if not foundeffect then
 										break
