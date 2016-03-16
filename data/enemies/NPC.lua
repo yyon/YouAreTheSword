@@ -332,6 +332,12 @@ end
 
 
 function enemy:determinenewstate(entitytoattack, currentstate)
+	hero = self:get_game():get_hero()
+	
+	if self:get_distance(hero) > 1000 and not self.hasbeenhit then
+		return self.donothingstate
+	end
+	
 	if currentstate == self.pushedstate then
 		return currentstate
 	end

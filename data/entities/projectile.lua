@@ -61,9 +61,7 @@ function entity:start(ability, tox, toy)
 		self:finish()
 	end
 	
-	if not self:noobstacles() then
-		movementaccuracy(movement, angle, self)
-	end
+	movementaccuracy(movement, angle, self)
 	
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
@@ -72,6 +70,8 @@ function entity:start(ability, tox, toy)
 end
 
 function entity:finish()
+	self.movement:stop()
+	
 	self:onfinished()
 	self:remove()
 end

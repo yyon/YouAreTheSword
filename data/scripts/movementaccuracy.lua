@@ -20,6 +20,7 @@ function movementaccuracy(movement, angle, entity)
 			if (math.floor(x) == math.floor(self.lastx) and math.floor(y) == math.floor(self.lasty)) or self.entity:test_obstacles(newx-x, newy-y) then
 				if self.actualobstacle ~= nil then
 					self:actualobstacle()
+					self.on_obstacle_reached = nil
 				end
 			end
 			self.lastx, self.lasty = x, y
@@ -36,6 +37,7 @@ function movementaccuracy(movement, angle, entity)
 		else
 			if self.actualobstacle ~= nil then
 				self:actualobstacle()
+				self.on_obstacle_reached = nil
 			end
 		end
 			
@@ -59,6 +61,7 @@ function targetstopper(movement, entity, target)
 				if self.actualobstacle ~= nil then
 --					print("hit obstacle")
 					self:actualobstacle()
+					self.on_obstacle_reached = nil
 				end
 			end
 			self.hitobstacle = true

@@ -91,20 +91,40 @@ function sol.main:on_key_pressed(key, modifiers)
 			deletesave(1)
 			loadfrom(1)
 		elseif key == "p" then
-			print("cheat: AIs don't attack")
-			game.dontattack = true
+			if game.dontattack then
+				print("ended cheat: AIs don't attack")
+				game.dontattack = nil
+			else
+				print("cheat: AIs don't attack")
+				game.dontattack = true
+			end
 		elseif key == "i" then
-			print("cheat: invincibility")
-			game.nodeaths = true
+			if game.nodeaths then
+				print("ended cheat: invincibility")
+				game.nodeaths = nil
+			else
+				print("cheat: invincibility")
+				game.nodeaths = true
+			end
 		elseif key == "z" then
-			print("cheat: bypass teleport (allows you to go between maps without defeating all the enemies)")
-			game.bypassteleport = true
+			if game.bypassteleport then
+				print("ended cheat: bypass teleport")
+				game.bypassteleport = nil
+			else
+				print("cheat: bypass teleport (allows you to go between maps without defeating all the enemies)")
+				game.bypassteleport = true
+			end
 		elseif key == "k" then
 			print("cheat: dropped sword")
 			hero.entitydata:kill()
 		elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
-			print("cheat: fast walk")
-			hero:set_walking_speed(500)
+			if hero:get_walking_speed() == 500 then
+				print("ended cheat: fast walk")
+				hero:set_walking_speed(128)
+			else
+				print("cheat: fast walk")
+				hero:set_walking_speed(500)
+			end
 		elseif key == "1" or key == "2" or key == "3" or key == "4" then
 			if hero.entitydata.cheatyabilityswitcher == nil then
 				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
@@ -126,7 +146,7 @@ function sol.main:on_key_pressed(key, modifiers)
 				hero.entitydata.specialability = cheatyability
 			end
 			print("CHEAT: ability changed to", cheatyability.name)
-		elseif key == "m" then
+		elseif key == "/" then
 			if not startedprofiler then
 				print("started profiler")
 				startedprofiler = true
@@ -139,6 +159,18 @@ function sol.main:on_key_pressed(key, modifiers)
 				profiler:report( outfile, true )
 				outfile:close()
 				startedprofiler = false
+			end
+		elseif key == "m" then
+			if game.muted then
+				print("unmuted")
+				game.muted = nil
+				sol.audio.set_sound_volume(0)
+				sol.audio.set_music_volume(0)
+			else
+				print("muted")
+				game.muted = true
+				sol.audio.set_sound_volume(100)
+				sol.audio.set_music_volume(100)
 			end
 		end
 	end
@@ -291,6 +323,9 @@ function save()
 	pickleduserdata = luastrsanitize(pickleduserdata)
 	game:set_value("usersave", pickleduserdata)
 	
+	game:set_value("music", sol.audio.get_music_volume())
+	game:set_value("sound", sol.audio.get_sound_volume())
+	
 	game:save()
 end
 
@@ -378,6 +413,9 @@ function load()
 	hero = game:get_hero()
 	hero.ishero = true
 	hero.is_possessing = true
+	
+	sol.audio.set_music_volume(game:get_value("music") or 100)
+	sol.audio.set_sound_volume(game:get_value("sound") or 100)
 	
 	usersave = game:get_value("usersave")
 --	print("unpickle", pickledheroentitydata)

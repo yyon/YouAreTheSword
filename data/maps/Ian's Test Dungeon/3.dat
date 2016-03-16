@@ -1,0 +1,247 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 3200,
+  height = 1600,
+  tileset = "tileset2",
+}
+
+tile{
+  layer = 0,
+  x = 280,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1264",
+}
+
+tile{
+  layer = 0,
+  x = 280,
+  y = 168,
+  width = 32,
+  height = 32,
+  pattern = "1288",
+}
+
+tile{
+  layer = 0,
+  x = 280,
+  y = 136,
+  width = 32,
+  height = 32,
+  pattern = "1276",
+}
+
+tile{
+  layer = 0,
+  x = 312,
+  y = 136,
+  width = 608,
+  height = 32,
+  pattern = "1145",
+}
+
+tile{
+  layer = 0,
+  x = 312,
+  y = 168,
+  width = 608,
+  height = 32,
+  pattern = "1058",
+}
+
+tile{
+  layer = 0,
+  x = 312,
+  y = 104,
+  width = 160,
+  height = 32,
+  pattern = "939",
+}
+
+tile{
+  layer = 0,
+  x = 280,
+  y = 200,
+  width = 640,
+  height = 224,
+  pattern = "1203",
+}
+
+tile{
+  layer = 0,
+  x = 472,
+  y = 136,
+  width = 32,
+  height = 32,
+  pattern = "1275",
+}
+
+tile{
+  layer = 0,
+  x = 472,
+  y = 168,
+  width = 32,
+  height = 32,
+  pattern = "1287",
+}
+
+tile{
+  layer = 0,
+  x = 472,
+  y = 200,
+  width = 32,
+  height = 32,
+  pattern = "1299",
+}
+
+tile{
+  layer = 0,
+  x = 472,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1263",
+}
+
+tile{
+  layer = 0,
+  x = 696,
+  y = 136,
+  width = 32,
+  height = 32,
+  pattern = "1275",
+}
+
+tile{
+  layer = 0,
+  x = 696,
+  y = 168,
+  width = 32,
+  height = 32,
+  pattern = "1287",
+}
+
+tile{
+  layer = 0,
+  x = 696,
+  y = 200,
+  width = 32,
+  height = 32,
+  pattern = "1299",
+}
+
+tile{
+  layer = 0,
+  x = 696,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1263",
+}
+
+tile{
+  layer = 0,
+  x = 504,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1070",
+}
+
+tile{
+  layer = 0,
+  x = 536,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1072",
+}
+
+tile{
+  layer = 0,
+  x = 328,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1070",
+}
+
+tile{
+  layer = 0,
+  x = 408,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1072",
+}
+
+tile{
+  layer = 0,
+  x = 568,
+  y = 104,
+  width = 128,
+  height = 32,
+  pattern = "939",
+}
+
+tile{
+  layer = 0,
+  x = 888,
+  y = 104,
+  width = 32,
+  height = 32,
+  pattern = "1277",
+}
+
+tile{
+  layer = 0,
+  x = 888,
+  y = 136,
+  width = 32,
+  height = 32,
+  pattern = "1289",
+}
+
+tile{
+  layer = 0,
+  x = 888,
+  y = 168,
+  width = 32,
+  height = 32,
+  pattern = "1301",
+}
+
+tile{
+  layer = 0,
+  x = 728,
+  y = 104,
+  width = 160,
+  height = 32,
+  pattern = "939",
+}
+
+destination{
+  layer = 0,
+  x = 344,
+  y = 341,
+  direction = 1,
+}
+
+enemy{
+  layer = 0,
+  x = 2584,
+  y = 797,
+  direction = 0,
+  breed = "e_bat",
+}
+
+enemy{
+  layer = 0,
+  x = 2456,
+  y = 813,
+  direction = 0,
+  breed = "a_archer",
+}
+

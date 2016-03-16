@@ -623,6 +623,7 @@ function EntityData:dodamage(target, damage, aspects)
 	--aggro
 	if not target.entity.ishero and target ~= self then
 		target.entity.entitytoattack = self
+		target.entity.hasbeenhit = true
 	end
 
 	--knockback
