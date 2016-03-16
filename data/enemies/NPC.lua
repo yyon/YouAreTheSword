@@ -296,12 +296,13 @@ function enemy:targetenemy()
 		end
 	end
 
-	for entitydata in self.entitydata:getotherentities() do
-		if self:cantarget(entitydata) then
-			entitieslist[#entitieslist+1] = entitydata
-		end
-	end
+--	for entitydata in self.entitydata:getotherentities() do
+--		if self:cantarget(entitydata) then
+--			entitieslist[#entitieslist+1] = entitydata
+--		end
+--	end
 
+--[[
 	function entitieslist.contains(table, element)
 	  for _, value in pairs(table) do
 	    if value == element then
@@ -310,12 +311,17 @@ function enemy:targetenemy()
 	  end
 	  return false
 	end
+--]]
 
 --	if entitieslist:contains(self.entitytoattack) then
 --		return self.entitytoattack
 --	end
-
-	return entitieslist[math.random(#entitieslist)]
+	
+	
+	
+--	return entitieslist[math.random(#entitieslist)]
+	x, y = self:get_position()
+	return self.entitydata:getclosestentity(x, y, nil, function(entitydata) return self:cantarget(entitydata) end)
 end
 
 function enemy:cantarget(entitydata)
