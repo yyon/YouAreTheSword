@@ -606,14 +606,6 @@ function EntityData:dodamage(target, damage, aspects)
 
 	target.life = target.life - damage
 	
-	if target.entity.ishero then
-		target.entity.swordhealth = target.entity.swordhealth - damage
-		if target.entity.swordhealth <= 0 then
-			target:swordkill()
-			return
-		end
-	end
-	
 	if aspects.lifesteal then
 		self.life = self.life + damage
 		if self.life > self.maxlife then

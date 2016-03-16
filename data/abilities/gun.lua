@@ -41,7 +41,7 @@ function GunAbility:attack(entitydata)
 	end
 	
 	damage = 0.1
-	aspects = {knockback=20}
+	aspects = {knockback=50}
 	
 	self:dodamage(entitydata, damage, aspects)
 end
