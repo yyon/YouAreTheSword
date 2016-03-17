@@ -25,8 +25,8 @@ function ShieldAbility:doability(playerrelease)
 
 	self.shieldentity:start("adventurers/shield")
 
-	self.playerrelease = playerrelease
-	if not self.playerrelease then
+--	self.playerrelease = playerrelease
+	if not self.entitydata.entity.ishero then
 		self.timer = Effects.SimpleTimer(self.entitydata, 1000, function() self:finish() end)
 	end
 end

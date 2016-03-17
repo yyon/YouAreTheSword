@@ -36,7 +36,7 @@ function movementaccuracy(movement, angle, entity)
 	function movement:on_position_changed()
 		self.didpos = true
 		self.i = self.i + 1
-		if self.i > 10 then
+		if self.i > 50 then
 			self.i = 0
 			local d = self.entity:get_distance(self.startx, self.starty)
 			local newx, newy = self.startx + math.cos(-self.angle)*d, self.starty + math.sin(-self.angle)*d

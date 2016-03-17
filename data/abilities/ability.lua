@@ -26,10 +26,10 @@ function Ability:start(...)
 	self.args = {...}
 	self.usingwarmup=true
 	self.caughttargets = {}
-	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
-
 	self.uncatched = false
 	self.inability = false
+
+	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation(self.warmupanimation)
