@@ -1,10 +1,12 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 require "scripts/movementaccuracy"
 
-SwordAbility = require "abilities/sword"
+local Effects = require "enemies/effect"
 
-ChargeAbility = Ability:subclass("ChangeAbility")
+local SwordAbility = require "abilities/sword"
+
+local ChargeAbility = Ability:subclass("ChangeAbility")
 
 function ChargeAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Charge", 800, "charge", 0, 2000, true)
@@ -12,16 +14,16 @@ end
 
 function ChargeAbility:doability(tox, toy)
 	if not self:catch(self.entitydata) then return end
-	
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 
 	self.collided = {}
 
-	d = entitydata:getdirection()
+	local d = entitydata:getdirection()
 
 	self.swordentity = map:create_custom_entity({model="charge", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.swordentity.ability = self
@@ -30,7 +32,7 @@ function ChargeAbility:doability(tox, toy)
 
 	self.swordentity:start(SwordAbility:get_appearance(self.entitydata.entity))
 
-	dist = self.entitydata.entity:get_distance(tox, toy)
+	local dist = self.entitydata.entity:get_distance(tox, toy)
 	if dist > self.range then
 		dist = self.range
 	end
@@ -74,8 +76,8 @@ function ChargeAbility:blockdamage(fromentity, damage, aspects)
 end
 
 function ChargeAbility:updatepos(x, y, layer)
-	entity = self.entitydata.entity
-	map = entity:get_map()
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
 
 --[[
 	for entitydata2 in self.entitydata:getotherentities() do
@@ -97,11 +99,11 @@ function ChargeAbility:attack(entity)
 	if not self.entitydata:cantargetentity(entity) then
 		return
 	end
-	
-	entitydata = entity.entitydata
-	
-	damage = 2
-	aspects = {stun=500, knockback=0}
+
+	local entitydata = entity.entitydata
+
+	local damage = 2
+	local aspects = {stun=500, knockback=0}
 
 	self:dodamage(entitydata, damage, aspects)
 

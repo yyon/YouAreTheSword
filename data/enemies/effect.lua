@@ -2,7 +2,7 @@ local class = require "middleclass"
 
 local math = require "math"
 
-Effect = class("Effect")
+local Effect = class("Effect")
 -- Generic effects - temporary modifications. actual Effects extend the Effect class
 
 function Effect:initialize(affected, ...)
@@ -11,7 +11,7 @@ function Effect:initialize(affected, ...)
 	-- affected is a handle to an actual game object
 	-- affected usually points to the entitydata it affects. But it can also point to the game object.
 	-- No 2 abilities with the same key can exist at the same time for the same entitydata
-	
+
 	if affected.isgame then
 		self.game = affected
 	else
@@ -40,15 +40,15 @@ end
 
 function Effect:alreadyexists(currenteffect)
 	-- called if entitydata already has the effect with the same key
-	
+
 --	print("WARNING! tried to add a new effect when one already exists", self:getkey())
 end
 
 function Effect:remove()
 	-- call to remove the effect
-	
+
 	self.affected.effects[self:getkey()] = nil
-	
+
 	if not self.active then
 --		self.entitydata:log("timer tried to remove", self, "but already removed!")
 	else
@@ -64,13 +64,13 @@ end
 
 function Effect:forceremove()
 	-- remove the effect even if the effect doesn't exist
-	
+
 	Effect.remove(self)
 end
 
 function Effect:getgame()
 	-- get game object
-	
+
 	if self.game ~= nil then
 		return self.game
 	else
@@ -132,7 +132,7 @@ end
 
 -- Different effects
 
-SimpleTimer = Effect:subclass("SimpleTimer")
+local SimpleTimer = Effect:subclass("SimpleTimer")
 -- Simple timer: pass in a time and a function to be called when the timer ends
 -- Example: Effects.SimpleTimer(entitydata, 500, function() dosomething() end)
 
@@ -153,7 +153,7 @@ function SimpleTimer:stop()
 	self:remove()
 end
 
-Ticker = Effect:subclass("Ticker")
+local Ticker = Effect:subclass("Ticker")
 function Ticker:start(timestep, tickfunction)
 	self.tickfunction = tickfunction
 	self:starttick(timestep)
@@ -165,15 +165,16 @@ function Ticker:getkey()
 	return self
 end
 
-PhysicalEffect = Effect:subclass("PhysicalEffect")
+local PhysicalEffect = Effect:subclass("PhysicalEffect")
 -- Displays some animated sprite over the entity
 -- Use classes that extend this instead of this class directly
 
 function PhysicalEffect:start(time)
-	w,h = self.entitydata.entity:get_size()
-	x, y = self.entitydata.entity:get_position()
+	local w,h = self.entitydata.entity:get_size()
+	local x, y, layer = self.entitydata.entity:get_position()
+	local map = self.map
 
-	paentity = map:create_custom_entity({model="physicaleffect", x=x, y=y, layer=layer, direction=0, width=w, height=h})
+	local paentity = map:create_custom_entity({model="physicaleffect", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	paentity:start(self, self:getspritename())
 	self.paentity = paentity
 
@@ -190,7 +191,7 @@ function PhysicalEffect:getkey()
 	return "physicaleffect" .. self:getspritename()
 end
 
-FireEffect = PhysicalEffect:subclass("FireEffect")
+local FireEffect = PhysicalEffect:subclass("FireEffect")
 -- catches person on fire (draws flames + damages entitydata)
 -- Effects.FireEffect:new(entitydata, aspect)
 -- aspect.time = time that they will be on fire
@@ -202,9 +203,9 @@ function FireEffect:getspritename()
 end
 
 function FireEffect:start(aspect)
-	time = aspect.time
+	local time = aspect.time
 	self.firedamage = aspect.damage
-	timestep = aspect.timestep
+	local timestep = aspect.timestep
 
 	self:starttick(timestep)
 
@@ -219,7 +220,7 @@ function FireEffect:getkey()
 	return "FireEffect"
 end
 
-ElectricalEffect = PhysicalEffect:subclass("ElectricalEffect")
+local ElectricalEffect = PhysicalEffect:subclass("ElectricalEffect")
 -- draws electricity over them
 -- Use electricalstuneffect instead
 
@@ -231,7 +232,7 @@ function ElectricalEffect:getkey()
 	return "ElectricalEffect"
 end
 
-PoisonEffect = PhysicalEffect:subclass("PoisonEffect")
+local PoisonEffect = PhysicalEffect:subclass("PoisonEffect")
 -- draws poison over them
 -- use PoisonWeaknessEffect instead
 
@@ -243,7 +244,7 @@ function PoisonEffect:getkey()
 	return "PoisonEffect"
 end
 
-FreezeEffect = Effect:subclass("FreezeEffect")
+local FreezeEffect = Effect:subclass("FreezeEffect")
 -- Prevents the player/AI from moving the person
 -- This will stun the person (if for a certain amount of time, use StunEffect instead)
 -- or allow the person to be moved from other code
@@ -310,7 +311,7 @@ function FreezeEffect:getkey()
 	return self
 end
 
-StunEffect = FreezeEffect:subclass("StunEffect")
+local StunEffect = FreezeEffect:subclass("StunEffect")
 -- Stuns entity for a certain amount of time
 -- Usage: Effects.StunEffect:new(entitydata, time)
 
@@ -324,7 +325,7 @@ function StunEffect:start(time)
 	self:removeeffectafter(time)
 end
 
-ElectricalStunEffect = StunEffect:subclass("ElectricalStunEffect")
+local ElectricalStunEffect = StunEffect:subclass("ElectricalStunEffect")
 -- Stuns entity for a certain amount of time and draws electricity over them
 -- Usage: Effects.ElectricalStunEffect(entitydata, time)
 
@@ -338,7 +339,7 @@ function ElectricalStunEffect:remove(...)
 	StunEffect.remove(self, ...)
 end
 
-KnockBackEffect = FreezeEffect:subclass("KnockBackEffect")
+local KnockBackEffect = FreezeEffect:subclass("KnockBackEffect")
 -- Pushes the person back from an effect
 -- use <attacker's entitydata>:dodamage(<target's entitydata>, damage, aspects)
 -- with aspect.knockback = time
@@ -361,10 +362,10 @@ end
 
 function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, angle)
 	self:removeeffectafter(knockbackdist)
-	
+
 	self.entitydata.isbeingknockedback = true
 
-	local x, y = self.entitydata.entity:get_position()
+--	local x, y = self.entitydata.entity:get_position()
 	if angle == nil then
 		angle = self.entitydata.entity:get_angle(fromentity) + math.pi
 	end
@@ -386,7 +387,7 @@ end
 
 function KnockBackEffect:endeffect()
 	self.entitydata.isbeingknockedback = false
-	
+
 	FreezeEffect.endeffect(self)
 	self.movement:stop()
 end
@@ -397,7 +398,7 @@ function KnockBackEffect:endtimer()
 	end
 end
 
-StatEffect = Effect:subclass("StatEffect")
+local StatEffect = Effect:subclass("StatEffect")
 -- modifies the entitydata's stats for a certain amount of time
 -- example: Effects.StatEffect:new(entitydata, "defense", 0, 1000)
 
@@ -413,7 +414,7 @@ function StatEffect:getkey()
 	return self
 end
 
-PoisonWeaknessEffect = StatEffect:subclass("PoisonWeaknessEffect")
+local PoisonWeaknessEffect = StatEffect:subclass("PoisonWeaknessEffect")
 -- poisons person for a certain amount of time
 -- Usage: Effects.PoisonWeaknessEffect:new(entitydata, <damage multiplier - poisoned people do less damage>, time)
 
@@ -426,7 +427,7 @@ function PoisonWeaknessEffect:remove(...)
 	StatEffect.remove(self, ...)
 end
 
-StealthEffect = Effect:subclass("StealthEffect")
+local StealthEffect = Effect:subclass("StealthEffect")
 
 function StealthEffect:start(time)
 	self:removeeffectafter(time)
@@ -439,7 +440,7 @@ function StealthEffect:getkey()
 	return "Stealth"
 end
 
-MapTauntEffect = Effect:subclass("MapTauntEffect")
+local MapTauntEffect = Effect:subclass("MapTauntEffect")
 
 function MapTauntEffect:start(time)
 	self:removeeffectafter(time)
@@ -452,7 +453,7 @@ function MapTauntEffect:getkey()
 	return "MapTaunt"
 end
 
-PossessEffect = Effect:subclass("PossessEffect")
+local PossessEffect = Effect:subclass("PossessEffect")
 
 function PossessEffect:start(newteam, time)
 	self:removeeffectafter(time)
@@ -466,7 +467,7 @@ function PossessEffect:getkey()
 	return "possess"
 end
 
-TauntPhysicalEffect = PhysicalEffect:subclass("TauntPhysicalEffect")
+local TauntPhysicalEffect = PhysicalEffect:subclass("TauntPhysicalEffect")
 
 function TauntPhysicalEffect:getspritename()
 	return "taunt"
@@ -475,7 +476,7 @@ function TauntPhysicalEffect:getkey()
 	return "TauntPhysicalEffect"
 end
 
-TauntEffect = MapTauntEffect:subclass("TauntEffect")
+local TauntEffect = MapTauntEffect:subclass("TauntEffect")
 
 function TauntEffect:start(time)
 	MapTauntEffect.start(self, time)

@@ -28,7 +28,8 @@ local enemy = ...
 -- local main_sprite = nil
 
 local class = require "middleclass"
-require "math"
+local math = require "math"
+local Effects = require "enemies/effect"
 
 -- constants:
 --[[
@@ -39,12 +40,12 @@ PUSHED = "being_pushed"
 FROZEN = "frozen"
 GOPICKUP = "pickup"
 --]]
-play_hero_seen_sound = false
-normal_speed = 64
+--local play_hero_seen_sound = false
+local normal_speed = 64
 
 enemy.hasbeeninitialized = false
 
-State = class("State")
+local State = class("State")
 
 function State:initialize(npc)
 	self.npc = npc
@@ -75,13 +76,14 @@ function State:requiresupdate()
 	return false
 end
 
-NilState = State:subclass("NilState")
+local NilState = State:subclass("NilState")
+
 function NilState:start()
 end
 function NilState:tick()
 end
 
-RandomState = State:subclass("RandomState")
+local RandomState = State:subclass("RandomState")
 
 function RandomState:start()
 	if self.npc.entitydata.stats.movementspeed ~= 0 then
@@ -94,7 +96,7 @@ end
 function RandomState:tick()
 end
 
-PushedState = State:subclass("PushedState")
+local PushedState = State:subclass("PushedState")
 
 function PushedState:start()
 	local x, y = self.npc:get_position()
@@ -110,7 +112,7 @@ end
 function PushedState:tick()
 end
 
-FrozenState = State:subclass("FrozenState")
+local FrozenState = State:subclass("FrozenState")
 
 function FrozenState:start()
 end
@@ -118,7 +120,7 @@ end
 function FrozenState:tick()
 end
 
-DoNothingState = State:subclass("DoNothingState")
+local DoNothingState = State:subclass("DoNothingState")
 
 function DoNothingState:start()
 end
@@ -126,18 +128,19 @@ end
 function DoNothingState:tick()
 end
 
-GoTowardsState = State:subclass("GoTowardsState")
+local GoTowardsState = State:subclass("GoTowardsState")
 
 function GoTowardsState:start()
 	if self.npc.entitytoattack ~= nil then
-		x, y = self.npc.entitytoattack.entity:get_position()
-		
+		local x, y = self.npc.entitytoattack.entity:get_position()
+
+		local movement
 		if self.npc.entitydata.alwaysrandom then
-			local movement = sol.movement.create("random_path")
+			movement = sol.movement.create("random_path")
 			movement:set_speed(normal_speed)
 			movement:start(self.npc)
 		else
-			local movement = sol.movement.create("target") -- "path_finding")
+			movement = sol.movement.create("target") -- "path_finding")
 			movement:set_speed(self.npc.entitydata.stats.movementspeed)
 			movement:set_target(self.npc.entitytoattack.entity)
 			movement:set_smooth(true)
@@ -151,10 +154,10 @@ function GoTowardsState:tick()
 	if self.npc.entitydata.entity:get_game().dontattack then
 		return
 	end
-	target = self.npc.entitytoattack
+	local target = self.npc.entitytoattack
 
-	attackability = math.random(10) == 1 and "special" or "normal"
-	cantusespecial = false
+	local attackability = math.random(10) == 1 and "special" or "normal"
+	local cantusespecial = false
 	if not self.npc.entitydata:canuseability("special") or self.npc.entitydata:getability("special").nonpc then
 		cantusespecial = true
 		attackability = "normal"
@@ -166,8 +169,8 @@ function GoTowardsState:tick()
 			attackability = "special"
 		end
 	end
-	
-	x, y = target.entity:get_position()
+
+	local x, y = target.entity:get_position()
 	if target ~= nil then
 		if self.npc.entitydata.entity:get_distance(target.entity) < 20 then
 			if self.movement ~= nil then
@@ -180,10 +183,10 @@ function GoTowardsState:tick()
 			end
 		end
 
-		targetability = target.usingability
+		local targetability = target.usingability
 		if targetability ~= nil and targetability.abilitytype ~= "block" and self.npc:get_distance(target.entity) < targetability.range then
 			-- block if being attacked
-			ability = self.npc.entitydata:startability("block")
+			local ability = self.npc.entitydata:startability("block")
 		elseif attackability ~= nil then
 			-- attack if close enough
 			if self.npc.entitydata:withinrange(attackability, target) then
@@ -197,30 +200,30 @@ function GoTowardsState:vartorecord()
 	return self.npc.entitytoattack
 end
 
-GoAwayState = GoTowardsState:subclass("GoAwayState")
+local GoAwayState = GoTowardsState:subclass("GoAwayState")
 
 function GoAwayState:start()
 	if self.npc.entitytoattack ~= nil then
-		x, y = self.npc:getblockposition(self.npc.entitytoattack, true)
-		
+		local x, y = self.npc:getblockposition(self.npc.entitytoattack, true)
+
 		local movement = sol.movement.create("target")
 		movement:set_speed(self.npc.entitydata.stats.movementspeed)
 		movement:set_target(x,y)
 		movement:set_smooth(true)
 		movement:start(self.npc)
-		
+
 		if self.npc.entitydata ~= nil then
 			Effects.SimpleTimer(self.npc.entitydata, 200, function() self.npc:tick() end)
 		end
 	end
 end
 
-StandAndAttackState = GoTowardsState:subclass("StandAndAttackState")
+local StandAndAttackState = GoTowardsState:subclass("StandAndAttackState")
 
 function StandAndAttackState:start()
 end
 
-PickupState = State:subclass("PickupState")
+local PickupState = State:subclass("PickupState")
 
 function PickupState:start()
 	local movement = sol.movement.create("target")
@@ -295,7 +298,7 @@ end
 function enemy:close_to(entity)
 	local _, _, layer = self:get_position()
 	local _, _, hero_layer = entity:get_position()
-	dist = self:get_distance(entity)
+	local dist = self:get_distance(entity)
 	if layer ~= hero_layer then
 		return false
 	end
@@ -306,7 +309,7 @@ function enemy:close_to(entity)
 end
 
 function enemy:targetenemy()
-	entitieslist = {}
+--	local entitieslist = {}
 
 	local hero = self:get_map():get_entity("hero")
 --	if self:cantargetentity(hero) then
@@ -316,14 +319,14 @@ function enemy:targetenemy()
 	if hero.isdropped and self.entitydata.team == "adventurer" then
 		return hero
 	end
-	
-	taunt = self:get_map().taunt
+
+	local taunt = self:get_map().taunt
 	if taunt ~= nil then
 		if self:cantarget(taunt) then
 			return taunt
 		end
 	end
-	
+
 	if self.entitytoattack ~= nil then
 		if self:cantarget(self.entitytoattack) then
 			return self.entitytoattack
@@ -350,12 +353,14 @@ function enemy:targetenemy()
 --	if entitieslist:contains(self.entitytoattack) then
 --		return self.entitytoattack
 --	end
-	
-	
-	
+
 --	return entitieslist[math.random(#entitieslist)]
-	x, y = self:get_position()
-	return self.entitydata:getclosestentity(x, y, nil, function(entitydata) return self:cantarget(entitydata) end)
+	local x, y = self:get_position()
+	local function cantargetfunction (entitydata)
+		return self:cantarget(entitydata)
+	end
+	local closestentity = self.entitydata:getclosestentity(x, y, nil, cantargetfunction)
+	return closestentity
 end
 
 function enemy:cantarget(entitydata)
@@ -372,12 +377,12 @@ end
 
 
 function enemy:determinenewstate(entitytoattack, currentstate)
-	hero = self:get_game():get_hero()
-	
+	local hero = self:get_game():get_hero()
+
 	if self:get_distance(hero) > 700 and not self.hasbeenhit then
 		return self.donothingstate
 	end
-	
+
 	if currentstate == self.pushedstate then
 		return currentstate
 	end
@@ -385,7 +390,7 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	if currentstate == self.frozenstate then
 		return currentstate
 	end
-	
+
 	if self.entitydata.dontmove then
 		return self.donothingstate
 	end
@@ -397,16 +402,16 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	if entitytoattack.isdropped then
 		return self.pickupstate
 	end
-	
+
 	if entitytoattack ~= nil then
-		d = self:get_distance(entitytoattack)
+		local d = self:get_distance(entitytoattack)
 		if d < 20 then
 			return self.goawaystate
 		elseif d < 40 then
 			return self.standandattackstate
 		end
 	end
-	
+
 	return self.gotowardsstate
 end
 
@@ -421,17 +426,18 @@ end
 function enemy:tick(newstate)
 	if not self:exists() then return end
 	if self.removed then return end
-	
+
 	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
-	
+
 	self.hasbeeninitialized = true
 
-	prevstate = self.state
+	local prevstate = self.state
 	if prevstate == nil then prevstate = self.nilstate end
 --	preventitytoattack = self.entitytoattack
 	prevstate:prevvar()
 
 	self.entitytoattack = self:targetenemy()
+	local target
 	if (self.entitytoattack ~= nil) then
 		if self.entitytoattack.isdropped then
 			target = self.entitytoattack
@@ -443,6 +449,7 @@ function enemy:tick(newstate)
 	else
 		target = nil
 	end
+
 	self.target = target
 
 	if (newstate == nil) then
@@ -452,7 +459,7 @@ function enemy:tick(newstate)
 	end
 	if self.state == nil then self.state = self.NilState end
 
-	changedstates = (prevstate ~= self.state or self.state:requiresupdate())
+	local changedstates = (prevstate ~= self.state or self.state:requiresupdate())
 
 	if changedstates then
 		prevstate:cleanup()
@@ -637,14 +644,14 @@ end
 function enemy:on_attacking_hero(hero, enemy_sprite)
 end
 
-BLOCKJUMP = 100
+local BLOCKJUMP = 100
 
 function enemy:getblockposition(target, backwards)
-	angle = self:get_angle(target.entity)
+	local angle = self:get_angle(target.entity)
 	if backwards then
 		angle = angle + math.pi
 	else
-		r = math.random(1,3)
+		local r = math.random(1,3)
 		if r == 1 then
 			angle = angle + math.pi/2
 		elseif r == 2 then
@@ -653,11 +660,11 @@ function enemy:getblockposition(target, backwards)
 			angle = angle - math.pi/2
 		end
 	end
-	
-	
-	x, y = self:get_position()
+
+
+	local x, y = self:get_position()
 	x, y = x + math.cos(angle)*BLOCKJUMP, y + math.sin(angle)*BLOCKJUMP
-	
+
 	return x,y
 end
 

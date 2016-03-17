@@ -1,7 +1,8 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
+local Effects = require "enemies/effect"
 
-SpaceShipProjectile = Ability:subclass("SpaceShipProjectile")
+local SpaceShipProjectile = Ability:subclass("SpaceShipProjectile")
 
 function SpaceShipProjectile:initialize(entitydata)
 	Ability.initialize(self, entitydata, "SpaceShipProjectile", 800, "fireball", 1200, 10000, true, "green")
@@ -25,11 +26,11 @@ function SpaceShipProjectile:firevolley(dx, dy)
 end
 
 function SpaceShipProjectile:fireproj(dx, dy)
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 	x = x + dx
 	y = y + dy
 

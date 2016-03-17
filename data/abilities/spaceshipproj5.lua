@@ -1,7 +1,8 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
+local Effects = require "enemies/effect"
 
-SpaceShipProjectile = Ability:subclass("SpaceShipProjectile")
+local SpaceShipProjectile = Ability:subclass("SpaceShipProjectile")
 
 function SpaceShipProjectile:initialize(entitydata)
 	Ability.initialize(self, entitydata, "SpaceShipProjectile", 800, "fireball", 1200, 10000, true, "blue")
@@ -23,7 +24,7 @@ function SpaceShipProjectile:firevolley(dx, dy)
 	if self.angle > math.pi/4 or self.angle < 0 then
 		self.dangle = -self.dangle
 	end
-	
+
 	self:fireproj(0, 0, 3 * math.pi / 2)
 	self:fireproj(-78, -59, 3 * math.pi / 2 - self.angle)
 	self:fireproj(78, -59, 3 * math.pi / 2 + self.angle)
@@ -32,14 +33,14 @@ function SpaceShipProjectile:firevolley(dx, dy)
 end
 
 function SpaceShipProjectile:fireproj(dx, dy, angle)
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 	x = x + dx
 	y = y + dy
-	
+
 	self.fireballentity = map:create_custom_entity({model="spaceshipproj", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 --	function self.fireballentity:isangle() return true end
 	self.fireballentity.is_angle = true

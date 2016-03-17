@@ -1,7 +1,7 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 
-PossessAbility = Ability:subclass("PossessAbility")
+local PossessAbility = Ability:subclass("PossessAbility")
 
 local Effects = require "enemies/effect"
 
@@ -10,9 +10,9 @@ function PossessAbility:initialize(entitydata)
 end
 
 function PossessAbility:doability()
-	tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self.entitydata:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy, true)
-	
+
 	if not self.target.entity.ishero then
 		Effects.PossessEffect:new(self.target, self.entitydata.team, 20000)
 		sol.audio.play_sound("possess")

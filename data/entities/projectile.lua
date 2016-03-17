@@ -1,7 +1,7 @@
 local entity = ...
 
 local math = require "math"
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 require "scripts/movementaccuracy"
 
 function entity:on_created()
@@ -9,7 +9,7 @@ function entity:on_created()
 	self.speed = 600
 end
 
-function round(num, idp)
+local function round(num, idp)
 	local mult = 10^(idp or 0)
 	return math.floor(num * mult + 0.5) / mult
 end
@@ -20,12 +20,12 @@ function entity:start(ability, tox, toy)
 	self.sprite = self:create_sprite(self:getspritename())
 	self.sprite:set_paused(false)
 	self.sprite:set_direction(self:get_direction())
-	
+
 	if self.anim ~= nil then
 		self.sprite:set_animation(self.anim)
 	end
-	
-	local x, y = self:get_position()
+
+--	local x, y = self:get_position()
 	local angle
 	if self:isangle() then
 		angle = tox
@@ -33,12 +33,12 @@ function entity:start(ability, tox, toy)
 		angle = self:get_angle(tox, toy)-- + math.pi
 	end
 	self.angle = angle
-	
+
 	if self.rotationframes ~= nil then
 		self.sprite:set_frame(round((-angle + math.pi / 2) * self.rotationframes / math.pi / 2) % self.rotationframes)
 		self.sprite:set_paused(true)
 	end
-	
+
 	local movement = sol.movement.create("straight")
 	movement:set_speed(self:getspeed())
 	movement:set_angle(angle)
@@ -48,9 +48,9 @@ function entity:start(ability, tox, toy)
 		 movement:set_ignore_obstacles(true)
 	end
 	movement:start(self)
-	
+
 	self.movement = movement
-	
+
 	function movement.on_position_changed(movement)
 		self:onposchanged()
 	end
@@ -60,19 +60,19 @@ function entity:start(ability, tox, toy)
 	function movement.on_finished(movement)
 		self:finish()
 	end
-	
+
 	movementaccuracy(movement, angle, self)
-	
+
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
 	self:add_collision_test("overlapping", self.overlap)
-	
+
 	self:onstart()
 end
 
 function entity:overlap(entity2)
 	if entity2:get_type() == "wall" then
-		name = entity2:get_name()
+		local name = entity2:get_name()
 		if name == nil or not string.find(name, "proj") then
 			self:finish()
 		end
@@ -81,7 +81,7 @@ end
 
 function entity:finish()
 	self.movement:stop()
-	
+
 	self:onfinished()
 	self:remove()
 end
@@ -97,7 +97,7 @@ function entity:oncollision(entity2, sprite1, sprite2)
 end
 
 function entity:doattack(entitydata)
-	damage, aspects = self:getdamage()
+	local damage, aspects = self:getdamage()
 	if self.ability.entitydata:cantarget(entitydata) then
 		self.ability:dodamage(entitydata, damage, aspects)
 		self:onhit()

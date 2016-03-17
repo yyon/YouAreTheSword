@@ -1,6 +1,8 @@
 local entity = ...
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
+
+local math = require "math"
 
 require "scripts/movementaccuracy"
 
@@ -8,7 +10,7 @@ function entity:on_created()
 	self:set_optimization_distance(0)
 end
 
-function round(num, idp)
+local function round(num, idp)
 	local mult = 10^(idp or 0)
 	return math.floor(num * mult + 0.5) / mult
 end
@@ -18,7 +20,7 @@ function entity:start(target)
 
 	self.d4 = self.ability.entitydata.entity:get_direction4_to(self.target.entity)
 	self.d8 = self.ability.entitydata.entity:get_direction8_to(self.target.entity)
-	angle = self.ability.entitydata.entity:get_angle(self.target.entity)
+	local angle = self.ability.entitydata.entity:get_angle(self.target.entity)
 
 	self.d16 = round(-angle * 24 / math.pi / 2) % 24
 
@@ -49,7 +51,7 @@ function entity:start(target)
 	function movement.on_position_changed(movement)
 		self:tick()
 	end
-	
+
 	self:add_collision_test("sprite", self.oncollision)
 
 	targetstopper(movement, self, self.target.entity)
@@ -62,28 +64,30 @@ function entity:pull(target)
 	self.target = target
 	self:clear_collision_tests()
 
-	movement = sol.movement.create("target")
+	local movement = sol.movement.create("target")
 	movement:set_speed(600)
 	movement:set_target(self.ability.entitydata.entity)
 	movement:start(self)
 	function movement.on_position_changed(movement)
 		self:tick()
 	end
-	
+
 	targetstopper(movement, self, self.ability.entitydata.entity)
 end
 
-SPACING = 36--18
+local SPACING = 36--18
 
 function entity:tick()
-	d = self:get_distance(self.ability.entitydata.entity)
+	local d = self:get_distance(self.ability.entitydata.entity)
 
-	selfx, selfy, layer = self:get_position()
-	entityx, entityy = self.ability.entitydata.entity:get_position()
+	local selfx, selfy, layer = self:get_position()
+	local entityx, entityy = self.ability.entitydata.entity:get_position()
 	entityy = entityy - 10
 
+	local map = self:get_map()
+
 	for i = SPACING,d-SPACING,SPACING do
-		posx, posy = selfx * (d - i)/d + entityx * i/d,  selfy * (d - i)/d + entityy * i/d
+		local posx, posy = selfx * (d - i)/d + entityx * i/d,  selfy * (d - i)/d + entityy * i/d
 		if self.ropesprites[i] == nil then
 			self.ropesprites[i] = map:create_custom_entity({model="grapplinghookrope", x=posx, y=posy, layer=layer, direction=self.d8, width=8, height=8})
 			self.ropesprites[i]:setdirection(self.d16)

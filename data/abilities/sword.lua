@@ -1,5 +1,7 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
+
+local Effects = require "enemies/effect"
 
 --[[
 Effects = require "enemies/effect"
@@ -28,20 +30,20 @@ function FireEffect:getkey()
 end
 --]]
 
-SwordAbility = Ability:subclass("SwordAbility")
+local SwordAbility = Ability:subclass("SwordAbility")
 
 function SwordAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Sword", 50, "sword", 0, 0, true)
 end
 
 function SwordAbility:doability()
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 
-	d = entitydata:getdirection()
+	local d = entitydata:getdirection()
 
 	self.entitydata:setanimation("sword")
 
@@ -52,13 +54,13 @@ function SwordAbility:doability()
 	self.topsword = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.topsword.ability = self
 	self.topsword:start(self:get_appearance(), true)
-	
+
 	sol.audio.play_sound("sword" .. math.random(1,3))
 end
 
 function SwordAbility:onfinish()
 	self.entitydata:setanimation("walking")
-	
+
 	if self.swordentity ~= nil then
 		self.swordentity:remove()
 		self.swordentity = nil
@@ -74,12 +76,12 @@ function SwordAbility:attack(entity)
 		return
 	end
 
-	entitydata = entity.entitydata
+	local entitydata = entity.entitydata
 
-	damage = 1
-	aspects = {}
+	local damage = 1
+	local aspects = {}
 
-	transform = self:gettransform()
+	local transform = self:gettransform()
 	if transform == "ap" then
 		aspects.ap = true
 		aspects.dontblock = true
@@ -116,9 +118,9 @@ function SwordAbility:gettransform(entity)
 end
 
 function SwordAbility:get_appearance(entity)
-	transform = self:gettransform(entity)
-	
-	ishero = false
+	local transform = self:gettransform(entity)
+
+	local ishero = false
 	if self.entitydata ~= nil then
 		if self.entitydata.entity.ishero then
 			ishero = true

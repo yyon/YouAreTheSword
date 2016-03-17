@@ -1,36 +1,38 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 
-FiringBowAbility = Ability:subclass("FiringBowAbility")
+local Effects = require "enemies/effect"
+
+local FiringBowAbility = Ability:subclass("FiringBowAbility")
 
 function FiringBowAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Bow and Arrow", 500, "bowandarrow", 270, 540, true, "firingbow")
 end
 
 function FiringBowAbility:doability()
-	tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self.entitydata:gettargetpos()
 	self.tox, self.toy = tox, toy
-	
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
-	d = entitydata:getdirection()
+
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
+	local d = entitydata:getdirection()
 
 	self.arrowentity = map:create_custom_entity({model="arrow", x=x, y=y-35, layer=layer, direction=d, width=w, height=h})
 	self.arrowentity:start(self, tox, toy)
-	
+
 	self.entitydata:setanimation("finishedbow")
 	self.timer = Effects.SimpleTimer(self.entitydata, 300, function() self:finish() end)
-	
+
 	sol.audio.play_sound("shoot")
 end
 
 function FiringBowAbility:onfinish()
 --	print("shit")
 --	self.entitydata:setanimation("walking")
-	
+
 end
 
 return FiringBowAbility

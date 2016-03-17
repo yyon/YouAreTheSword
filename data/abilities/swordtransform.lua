@@ -1,9 +1,13 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 
-TransformAbility = Ability:subclass("TransformAbility")
+local Effects = require "enemies/effect"
+
+local TransformAbility = Ability:subclass("TransformAbility")
 
 function TransformAbility:initialize(entitydata, transform)
+	local name
+	local icon
 	if transform == "ap" then
 		name = "Axe"
 		icon = "axe"
@@ -29,7 +33,7 @@ function TransformAbility:initialize(entitydata, transform)
 		name = "Dagger"
 		icon = "dagger"
 	end
-	
+
 	Ability.initialize(self, entitydata, name, 0, icon, 500, 10000, true, "casting")
 
 	self.transform = transform
@@ -39,7 +43,7 @@ function TransformAbility:doability()
 	self.entitydata.entity.swordtransform = self.transform
 
 	sol.audio.play_sound("enchant2")
-	
+
 	self:finish()
 end
 

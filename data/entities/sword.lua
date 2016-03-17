@@ -6,7 +6,7 @@ end
 
 function entity:start(appearance, isontop)
 	self.isontop = isontop
-	
+
 	self.sword_sprite = self:create_sprite(appearance)
 	self.sword_sprite:set_paused(false)
 
@@ -21,11 +21,11 @@ function entity:start(appearance, isontop)
 	end
 
 	self.collided = {}
-	
+
 	if not isontop then
 		self:add_collision_test("sprite", self.oncollision)
 	end
-	
+
 	self.ability.entitydata.positionlisteners[self]=function(x,y,layer) self:updatepos(x,y,layer) end
 end
 function entity:updatepos(x,y,layer)
@@ -48,20 +48,20 @@ end
 function entity:updatedirection()
 	if self:get_direction() == 3 then
 		self:bring_to_front()
-		x,y,layer = self:get_position()
+		local x,y,layer = self:get_position()
 		if self.isontop then
 			layer = 2
 		end
 		self:set_position(x,y,layer)
 	else
 		self:bring_to_back()
-		x,y,layer = self:get_position()
+		local x,y,layer = self:get_position()
 		self:set_position(x,y,layer)
 	end
 	if self:get_direction() > 4 then
 		print("ERROR2")
 		print(debug.traceback())
 	end
-	
+
 	self.sword_sprite:set_direction(self:get_direction())
 end

@@ -1,15 +1,15 @@
 local entity = ...
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 
 local math = require "math"
 
 sol.main.load_file("entities/projectile")(entity)
 
 function entity:getdamage()
-	aspects = {}
+	local aspects = {}
 	aspects.knockback = 1000
-	damage = 4
+	local damage = 4
 	aspects.fire = {damage=0.1, time=2000, timestep=500}
 	return damage, aspects
 end

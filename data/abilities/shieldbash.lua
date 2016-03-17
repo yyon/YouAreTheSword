@@ -1,22 +1,22 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 
-ShieldBashAbility = Ability:subclass("ShieldBashAbility")
+local ShieldBashAbility = Ability:subclass("ShieldBashAbility")
 
 function ShieldBashAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Shield Bash", 100, "shieldbash", 500, 3000, true)
+	Ability.initialize(self, entitydata, "Shield Bash", 100, "shieldbash", 0, 3000, true)
 end
 function ShieldBashAbility:doability()
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 	self.collided = {}
 
-	d = entitydata:getdirection()
+	local d = entitydata:getdirection()
 
 	self.shieldentity = map:create_custom_entity({model="shieldbash", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.shieldentity.ability = self
@@ -28,7 +28,7 @@ function ShieldBashAbility:doability()
 	Effects.SimpleTimer:new(self.entitydata, 400, function() self:finish() end)
 
 	self:attackall()
-	
+
 	sol.audio.play_sound("punch")
 end
 function ShieldBashAbility:onfinish()
@@ -51,11 +51,11 @@ function ShieldBashAbility:blockdamage(fromentity, damage, aspects)
 	return damage, aspects
 end
 function ShieldBashAbility:attackall()
-	entity = self.entitydata.entity
-	map = entity:get_map()
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
 
 	for entity2 in self.entitydata:getotherentities() do
-		dist = entity:get_distance(entity2.entity)
+		local dist = entity:get_distance(entity2.entity)
 		if dist <= self.range then
 			if entity:get_direction4_to(entity2.entity) == self.entitydata:getdirection() then
 				if self.entitydata:cantarget(entity2) then

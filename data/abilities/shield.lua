@@ -1,20 +1,22 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 
-ShieldAbility = Ability:subclass("ShieldAbility")
+local Effects = require "enemies/effect"
+
+local ShieldAbility = Ability:subclass("ShieldAbility")
 
 function ShieldAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Shield", 50, "shield", 0, 500, true)
 end
 
 function ShieldAbility:doability(playerrelease)
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 
-	d = entitydata:getdirection()
+	local d = entitydata:getdirection()
 
 	self.shieldentity = map:create_custom_entity({model="shield", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.shieldentity.ability = self
@@ -53,8 +55,8 @@ function ShieldAbility:blockdamage(fromentity, damage, aspects)
 end
 
 function ShieldAbility:tick(x, y)
-	hero = self.entitydata.entity
-	direct = hero:get_direction4_to(x, y)
+	local hero = self.entitydata.entity
+	local direct = hero:get_direction4_to(x, y)
 	hero:set_direction(direct)
 	self.shieldentity:set_direction(direct)
 	self.shieldentity:updatedirection()

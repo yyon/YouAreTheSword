@@ -1,6 +1,6 @@
 local entity = ...
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 
 function entity:on_created()
   self:set_optimization_distance(0)

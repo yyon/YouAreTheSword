@@ -19,28 +19,28 @@ function hud_manager:create(game)
 --  	menu:set_dst_position(0, 10)
 --  	hud.elements[#hud.elements + 1] = menu
 
-	menu = soul_builder:new(game)
+	local menu = soul_builder:new(game)
   	menu:set_dst_position(10, 65)
   	hud.elements[#hud.elements + 1] = menu
 
-	menu = sword_health_builder:new(game)
+	local menu = sword_health_builder:new(game)
   	menu:set_dst_position(10, 10)
   	hud.elements[#hud.elements + 1] = menu
-	
+
 	local panel_builder = require("scripts/hud/panel")
 	menu = panel_builder:new(game, "normal")
 	menu:set_dst_position(490,645)
 	hud.elements[#hud.elements + 1] = menu
 
-	menu = panel_builder:new(game, "block")
+	local menu = panel_builder:new(game, "block")
 	menu:set_dst_position(565,645)
 	hud.elements[#hud.elements + 1] = menu
 
-	menu = panel_builder:new(game, "swordtransform")
+	local menu = panel_builder:new(game, "swordtransform")
 	menu:set_dst_position(640,645)
 	hud.elements[#hud.elements + 1] = menu
 
-	menu = panel_builder:new(game, "special")
+	local menu = panel_builder:new(game, "special")
 	menu:set_dst_position(715,645)
 	hud.elements[#hud.elements + 1] = menu
 

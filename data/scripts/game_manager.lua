@@ -1,3 +1,9 @@
+local builtinglobals = {Pickle=true, game=true, _profiler_hook_wrapper_by_time=true, _profiler=true, luastrsanitize=true, pickle=true, save=true, load=true, deletesave=true, loadfrom=true, saveexists=true, unpickle=true, canmoveto=true, targetstopper=true, movementaccuracy=true, _profiler_hook_wrapper_by_call=true}
+for k,v in pairs( _G ) do
+--	print( k .. " =&gt; ", v )
+	builtinglobals[k]=true
+end
+
 local game_manager = {}
 
 local math = require "math"
@@ -5,25 +11,105 @@ local os = require "os"
 math.randomseed(os.time())
 math.random()
 
+local EntityDatas = require "enemies/entitydata"
+
 game = nil
 
-entitydatas = require "enemies/entitydata"
+local entitydatas = require "enemies/entitydata"
 local hud_manager = require "scripts/hud/hud"
 
 require "pickle"
 
 local os = require "os"
-dvorak = os.getenv("USER") == "yyon" -- TODO: keyboard config
+local dvorak = os.getenv("USER") == "yyon" -- TODO: keyboard config
 
 require "profiler"
 
 function game_manager:start_game()
 	load()
-	
+
 end
 
 function sol.main:on_key_pressed(key, modifiers)
-	hero = game:get_hero()
+	local hero = game:get_hero()
+
+	if key == "p" then
+		if game.dontattack then
+			print("ended cheat: AIs don't attack")
+			game.dontattack = nil
+		else
+			print("cheat: AIs don't attack")
+			game.dontattack = true
+		end
+	elseif key == "i" then
+		if game.nodeaths then
+			print("ended cheat: invincibility")
+			game.nodeaths = nil
+		else
+			print("cheat: invincibility")
+			game.nodeaths = true
+		end
+	elseif key == "z" then
+		if game.bypassteleport then
+			print("ended cheat: bypass teleport")
+			game.bypassteleport = nil
+		else
+			print("cheat: bypass teleport (allows you to go between maps without defeating all the enemies)")
+			game.bypassteleport = true
+		end
+	elseif key == "k" then
+		print("cheat: dropped sword")
+		hero.entitydata:kill()
+	elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
+		if hero:get_walking_speed() == 500 then
+			print("ended cheat: fast walk")
+			hero:set_walking_speed(128)
+		else
+			print("cheat: fast walk")
+			hero:set_walking_speed(500)
+		end
+	elseif key == "/" then
+		if not startedprofiler then
+			print("started profiler")
+			startedprofiler = true
+			profiler = newProfiler()
+			profiler:start()
+		else
+			print("stopped profiler")
+			profiler:stop()
+			local outfile = io.open( "profile.txt", "w+" )
+			profiler:report( outfile, true )
+			outfile:close()
+			startedprofiler = false
+		end
+	elseif key == "n" then
+		print("started lines")
+		function trace (event, line)
+			local s = debug.getinfo(2).short_src
+			print(s .. ":" .. line)
+		end
+
+		debug.sethook(trace, "l")
+	elseif key == "m" then
+		if game.muted then
+			print("unmuted")
+			game.muted = nil
+			sol.audio.set_sound_volume(100)
+			sol.audio.set_music_volume(100)
+		else
+			print("muted")
+			game.muted = true
+			sol.audio.set_sound_volume(0)
+			sol.audio.set_music_volume(0)
+		end
+	elseif key == "g" then
+		for k,v in pairs( _G ) do
+			if not builtinglobals[k] then
+				print( k .. " =&gt; ", v )
+			end
+		end
+	end
+
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		if key == "space" then
 			if game.doingdialog then
@@ -38,8 +124,8 @@ function sol.main:on_key_pressed(key, modifiers)
 		return
 	end
 
-	x, y = hero.entitydata:gettargetpos()
-	
+	local x, y = hero.entitydata:gettargetpos()
+
 	if x ~= nil then
 		hero:set_direction(hero:get_direction4_to(x, y))
 --		hero.targetx = x
@@ -48,22 +134,22 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	if hero:get_state() ~= "freezed" then
 		if key == "space" then
-			didsomething = false
-			
+			local didsomething = false
+
 			local map = hero:get_map()
 			for entity in map:get_entities("") do
 				if entity:get_type() == "npc" then
 					if hero:get_distance(entity) < 80 then
 						if hero:get_direction4_to(entity) == hero:get_direction() then
 							didsomething = true
-							
+
 							game.doingdialog = true
 							game:start_dialog(entity:get_name())
 						end
 					end
 				end
 			end
-			
+
 			if not didsomething then
 				hero.entitydata:startability("normal")
 			end
@@ -90,47 +176,12 @@ function sol.main:on_key_pressed(key, modifiers)
 			print("cheat: restarted game")
 			deletesave(1)
 			loadfrom(1)
-		elseif key == "p" then
-			if game.dontattack then
-				print("ended cheat: AIs don't attack")
-				game.dontattack = nil
-			else
-				print("cheat: AIs don't attack")
-				game.dontattack = true
-			end
-		elseif key == "i" then
-			if game.nodeaths then
-				print("ended cheat: invincibility")
-				game.nodeaths = nil
-			else
-				print("cheat: invincibility")
-				game.nodeaths = true
-			end
-		elseif key == "z" then
-			if game.bypassteleport then
-				print("ended cheat: bypass teleport")
-				game.bypassteleport = nil
-			else
-				print("cheat: bypass teleport (allows you to go between maps without defeating all the enemies)")
-				game.bypassteleport = true
-			end
-		elseif key == "k" then
-			print("cheat: dropped sword")
-			hero.entitydata:kill()
-		elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
-			if hero:get_walking_speed() == 500 then
-				print("ended cheat: fast walk")
-				hero:set_walking_speed(128)
-			else
-				print("cheat: fast walk")
-				hero:set_walking_speed(500)
-			end
 		elseif key == "1" or key == "2" or key == "3" or key == "4" then
 			if hero.entitydata.cheatyabilityswitcher == nil then
 				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
 			end
-			cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.blockabilities, ["3"]=hero.entitydata.transformabilities, ["4"]=hero.entitydata.specialabilities}
-			cheatyabilities = cheatyabilities[key]
+			local cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.blockabilities, ["3"]=hero.entitydata.transformabilities, ["4"]=hero.entitydata.specialabilities}
+			local cheatyabilities = cheatyabilities[key]
 			hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
 			if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
 				hero.entitydata.cheatyabilityswitcher[key] = 1
@@ -146,32 +197,6 @@ function sol.main:on_key_pressed(key, modifiers)
 				hero.entitydata.specialability = cheatyability
 			end
 			print("CHEAT: ability changed to", cheatyability.name)
-		elseif key == "/" then
-			if not startedprofiler then
-				print("started profiler")
-				startedprofiler = true
-				profiler = newProfiler()
-				profiler:start()
-			else
-				print("stopped profiler")
-				profiler:stop()
-				local outfile = io.open( "profile.txt", "w+" )
-				profiler:report( outfile, true )
-				outfile:close()
-				startedprofiler = false
-			end
-		elseif key == "m" then
-			if game.muted then
-				print("unmuted")
-				game.muted = nil
-				sol.audio.set_sound_volume(100)
-				sol.audio.set_music_volume(100)
-			else
-				print("muted")
-				game.muted = true
-				sol.audio.set_sound_volume(0)
-				sol.audio.set_music_volume(0)
-			end
 		end
 	end
 
@@ -182,7 +207,7 @@ function sol.main:on_key_pressed(key, modifiers)
 end
 
 function  sol.main:on_key_released(key, modifiers)
-	hero = game:get_hero()
+	local hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return
@@ -190,13 +215,12 @@ function  sol.main:on_key_released(key, modifiers)
 
 --	mousex, mousey = sol.input.get_mouse_position()
 --	x, y = convert_to_map(mousex, mousey)
-	x, y = hero.entitydata:gettargetpos()
+	local x, y = hero.entitydata:gettargetpos()
 
 	if x ~= nil then
 		hero:set_direction(hero:get_direction4_to(x, y))
 	end
 
-	hero = game:get_hero()
 	if key == "space" then
 		hero.entitydata:keyrelease("normal")
 	elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
@@ -207,7 +231,7 @@ function  sol.main:on_key_released(key, modifiers)
 end
 
 function sol.main:on_mouse_pressed(button, ...)
-	hero = game:get_hero()
+	local hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
 		return
@@ -242,10 +266,10 @@ function tick()
 		load()
 		return
 	end
-	
-	
-	hero = game:get_hero()
-	
+
+
+	local hero = game:get_hero()
+
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
 		if hero.entitydata ~= nil then
 			for entity in hero:get_map():get_entities("") do
@@ -255,14 +279,13 @@ function tick()
 							for entity in hero:get_map():get_entities("") do
 								entity.removed = true
 							end
-							
+
 							if hero:get_map().effects ~= nil then
 								while true do
-									foundeffect = false
+									local foundeffect = false
 									for effect, b in pairs(hero:get_map().effects) do
-										print("Removing effect", effect:getkey())
 										foundeffect = true
-										effect:forceremove()
+										pcall(function() effect:forceremove() end)
 										hero:get_map().effects[effect:getkey()] = nil -- just to make sure
 									end
 									if not foundeffect then
@@ -276,8 +299,8 @@ function tick()
 				end
 			end
 		end
-		
-		soulsdrop = 0.0005
+
+		local soulsdrop = 0.0005
 		if hero.entitydata.team == "monster" then
 			soulsdrop = 0.01
 		elseif hero.entitydata.team == "dunsmur" then
@@ -290,9 +313,9 @@ function tick()
 				hero.entitydata:dropsword()
 			end
 		end
-		
+
 		if hero.entitydata ~= nil then
-			x, y = hero.entitydata:gettargetpos()
+			local x, y = hero.entitydata:gettargetpos()
 
 			hero.entitydata:tickability(x, y)
 
@@ -310,7 +333,7 @@ function tick()
 end
 
 function luastrsanitize(str)
-	str=str:gsub("\\","\\\\")  --replace  with 
+	str=str:gsub("\\","\\\\")  --replace  with
 	str=str:gsub("\"","\\\"")    --replace " with "
 	str=str:gsub("\n","\\n")    --replace " with "
 	return str
@@ -318,38 +341,38 @@ end
 
 function save()
 --	print("save")
-	
-	hero = game:get_hero()
-	entitydata = hero.entitydata
-	entitydatatable = entitydata:totable()
-	
-	usersave = {}
+
+	local hero = game:get_hero()
+	local entitydata = hero.entitydata
+	local entitydatatable = entitydata:totable()
+
+	local usersave = {}
 	usersave.hero = entitydatatable
 	usersave.souls = hero.souls
 	usersave.swordhealth = hero.swordhealth
 	usersave.maxswordhealth = hero.maxswordhealth
-	
-	pickleduserdata = pickle(usersave)
+
+	local pickleduserdata = pickle(usersave)
 	pickleduserdata = luastrsanitize(pickleduserdata)
 	game:set_value("usersave", pickleduserdata)
-	
+
 	game:set_value("music", sol.audio.get_music_volume())
 	game:set_value("sound", sol.audio.get_sound_volume())
-	
+
 	game:save()
 end
 
-function copy(from, to)
+local function copy(from, to)
 	if sol.file.exists(to) then
 		sol.file.remove(to)
 	end
-	
-	fromfile = sol.file.open(from, "r")
-	
+
+	local fromfile = sol.file.open(from, "r")
+
 	if fromfile ~= nil then
 		savetext = fromfile:read("*all")
-		
-		tofile = sol.file.open(to, "w")
+
+		local tofile = sol.file.open(to, "w")
 		if tofile ~= nil then
 			tofile:write(savetext)
 			tofile:close()
@@ -360,34 +383,34 @@ end
 
 function saveto(name)
 	save()
-	
-	savename = "save" .. name .. ".dat"
+
+	local savename = "save" .. name .. ".dat"
 	copy("save.dat", savename)
 end
 
 function deletesave(name)
-	savename = "save" .. name .. ".dat"
+	local savename = "save" .. name .. ".dat"
 	sol.file.remove(savename)
 end
 
 function loadfrom(name)
-	savename = "save" .. name .. ".dat"
+	local savename = "save" .. name .. ".dat"
 	if sol.file.exists(savename) then
 		copy(savename, "save.dat")
 	else
 		sol.file.remove("save.dat")
 	end
-	
+
 	load()
 end
 
 function saveexists(name)
-	savename = "save" .. name .. ".dat"
+	local savename = "save" .. name .. ".dat"
 	return sol.file.exists(savename)
 end
 
 function load()
-	savefile = "save.dat"
+	local savefile = "save.dat"
 
 	local exists = sol.game.exists(savefile)
 	game = sol.game.load(savefile)
@@ -400,14 +423,14 @@ function load()
 		game:set_starting_location("hub")
 	end
 	game:start()
-	
+
 	game:set_ability("sword", 0)
 	game:set_ability("sword_knowledge", 0)
 	game:set_ability("shield", 0)
 	game:set_ability("lift", 0)
 	game:set_ability("swim", 0)
 	game:set_ability("detect_weak_walls", 0)
-	
+
 	game:set_command_keyboard_binding("left", "a")
 	game:set_command_keyboard_binding("right", dvorak and "e" or "d")
 	game:set_command_keyboard_binding("up", dvorak and "," or "w")
@@ -418,7 +441,7 @@ function load()
 	game:set_command_keyboard_binding("item_1", "")
 	game:set_command_keyboard_binding("item_2", "")
 
-	width, height = sol.video.get_quest_size()
+	local width, height = sol.video.get_quest_size()
 --	sol.video.set_window_size(width*2, height*2)
 	sol.video.set_mode("normal") -- for some reason this has to be set for the mouse position to work
 	sol.video.set_window_size(width, height)
@@ -426,14 +449,14 @@ function load()
 	game:set_pause_allowed(true)
 	local hud = hud_manager:create(game)
 
-	hero = game:get_hero()
+	local hero = game:get_hero()
 	hero.ishero = true
 	hero.is_possessing = true
-	
+
 	sol.audio.set_music_volume(game:get_value("music") or 100)
 	sol.audio.set_sound_volume(game:get_value("sound") or 100)
-	
-	usersave = game:get_value("usersave")
+
+	local usersave = game:get_value("usersave")
 --	print("unpickle", pickledheroentitydata)
 	if usersave ~= nil then
 		usersave = unpickle(usersave)
@@ -442,7 +465,7 @@ function load()
 		hero.swordhealth = usersave.swordhealth
 		hero.maxswordhealth = usersave.maxswordhealth
 	end
-	
+
 	if hero.entitydata == nil then
 		print("START")
 		hero.souls = 1
@@ -451,67 +474,68 @@ function load()
 		hero.entitydata = entitydatas.knightclass:new(hero)--sol.main.load_file("enemies/entitydata")()
 --		hero.entitydata:createfromclass(hero, "purple")
 	end
-	
+
 	hero.entitydata.entity = hero
 	hero.entitydata:applytoentity()
-	
+
 	hero:set_sword_sprite_id("")
 	hero:set_walking_speed(128)
-	
+
 	hero.eyessprite = sol.sprite.create("adventurers/eyes")
 	function hero:on_position_changed(x, y, layer)
 		if self.entitydata ~= nil then
 			self.entitydata:updatechangepos(x,y,layer)
 		end
 	end
-	
+
 	game.lifebarsprite = sol.sprite.create("hud/lifebar")
 	game.allieslifebarsprite = sol.sprite.create("hud/allieslifebar")
 	game.herolifebarsprite = sol.sprite.create("hud/herolifebar")
-	
+
 	function game:on_map_changed(map)
 		save()
-		
+
 		for entity in map:get_entities("") do
 			if entity.get_destination_map ~= nil then
-				x, y, layer = entity:get_position()
+				local x, y, layer = entity:get_position()
 				entity:set_position(x, y, 2)
 			end
 		end
-		
+
 		function map:drawlifebar(entity)
 				if entity.entitydata ~= nil then
-					x, y = entity:get_position()
-					
+					local x, y = entity:get_position()
+
 					if entity.entitydata.effects["possess"] ~= nil then
 						if entity.eyessprite == nil then
 							entity.eyessprite = sol.sprite.create("adventurers/eyes")
 						end
-							
-						anim = entity.main_sprite:get_animation()
+
+						local anim = entity.main_sprite:get_animation()
 						if entity.eyessprite:has_animation(anim) then
 							if anim ~= entity.eyessprite:get_animation() then
 								entity.eyessprite:set_animation(anim)
 							end
-							d = entity.main_sprite:get_direction()
+							local d = entity.main_sprite:get_direction()
 							if entity.eyessprite:get_num_directions() < d then
 								d = 0
 							end
 							entity.eyessprite:set_direction(d)
-							
+
 							map:draw_sprite(entity.eyessprite, x, y)
 						end
 					end
-					
+
 					y = y - 65
-					
+
+					local frame
 					if entity.entitydata.life > 0 then
 						frame = math.floor((1 - entity.entitydata.life / entity.entitydata.maxlife) * 49)
 					else
 						frame = 49
 					end
-					
-					lifebarsprite = game.lifebarsprite
+
+					local lifebarsprite = game.lifebarsprite
 					if entity.entitydata.team == "adventurer" then
 						lifebarsprite = game.allieslifebarsprite
 					end
@@ -522,30 +546,30 @@ function load()
 					map:draw_sprite(lifebarsprite, x, y)
 				end
 		end
-		
+
 		function map:on_draw(dst_surface)
-			hero = map:get_hero()
+			local hero = map:get_hero()
 			if hero.entitydata ~= nil then
 				if not hero.entitydata.cantdraweyes then
 					if hero:is_visible() then
-						anim = hero:get_animation()
+						local anim = hero:get_animation()
 						if hero.eyessprite:has_animation(anim) then
 							if anim ~= hero.eyessprite:get_animation() then
 								hero.eyessprite:set_animation(anim)
 							end
-							d = hero:get_direction()
+							local d = hero:get_direction()
 							if hero.eyessprite:get_num_directions() < d then
 								d = 0
 							end
 							hero.eyessprite:set_direction(d)
-					
-							x, y = hero:get_position()
+
+							local x, y = hero:get_position()
 							map:draw_sprite(hero.eyessprite, x, y)
 						end
 					end
 				end
 			end
-			
+
 			self:drawlifebar(hero)
 			for entity in self:get_entities("") do
 				self:drawlifebar(entity)

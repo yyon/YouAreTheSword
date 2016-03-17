@@ -16,11 +16,11 @@ end
 function entity:updatedirection()
 	if self.get_direction == 1 then
 		self:bring_to_back()
-		x,y,layer = self:get_position()
+		local x,y,layer = self:get_position()
 		self:set_position(x,y,0)
 	else
 		self:bring_to_front()
-		x,y,layer = self:get_position()
+		local x,y,layer = self:get_position()
 		self:set_position(x,y,2)
 	end
 

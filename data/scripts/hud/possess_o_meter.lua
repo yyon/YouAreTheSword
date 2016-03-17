@@ -34,11 +34,11 @@ end
 
 --  check heart data and fix periodically
 function possess_o_meter:check()
-	
+
 	local stage = 16
-	
-	hero = game:get_hero()
-    	if hero.entitydata ~= nil then
+
+	local hero = game:get_hero()
+    if hero.entitydata ~= nil then
 		self.stage = hero.souls
 	end
 
@@ -55,9 +55,9 @@ function possess_o_meter:check()
     		end
   	end
 
-	
 
-  	
+
+
     	self:rebuild_surface()
 
   	-- check again in 50ms
@@ -73,7 +73,7 @@ function possess_o_meter:rebuild_surface()
 	self.sword_anim_setup:draw(self.surface,0,0)
 	self.all_sword_img:draw_region(0,0,112,50,self.surface,0,0)
 	self.all_sword_img:draw_region(112, 0, math.floor(self.stage*112), 50, self.surface, 0, 0)
-	
+
 end
 
 function possess_o_meter:set_dst_position(x, y)

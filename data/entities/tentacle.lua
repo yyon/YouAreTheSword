@@ -7,9 +7,9 @@ end
 function entity:start()
 	self.sprite = self:create_sprite("bosses/abilities/tentacles")
 	self.sprite:set_paused(false)
-	
+
 	self:add_collision_test("sprite", self.oncollision)
-	
+
 --	self.timer = Effects.SimpleTimer(self.ability.entitydata, 50000, function() self:remove() end)
 end
 

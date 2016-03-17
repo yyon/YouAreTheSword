@@ -1,6 +1,6 @@
 local entity = ...
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 
 function entity:on_created()
 end
@@ -8,18 +8,20 @@ end
 function entity:start(ability, target, playsound)
 	self.ability = ability
 	self:set_optimization_distance(0)
-	
+
 	self.target = target
-	
+
 	self.heart_sprite = self:create_sprite("abilities/heart")
 	self.heart_sprite:set_paused(false)
 
 	self.timer = Effects.SimpleTimer:new(self.ability.entitydata, 2000, function() self:remove() end)
 
-	dist = self:get_distance(tox, toy)
-	if dist > self.ability.range then
-		dist = self.ability.range
-	end
+--	local tox, toy = self.ability.entitydata:gettargetpos()
+
+--	local dist = self:get_distance(tox, toy)
+--	if dist > self.ability.range then
+--		dist = self.ability.range
+--	end
 
 	local movement = sol.movement.create("target")
 	movement:set_speed(600)
@@ -34,9 +36,9 @@ function entity:start(ability, target, playsound)
 		self:finish()
 	end
 	self.movement = movement
-	
+
 	self.playsound = playsound
-	
+
 	self:add_collision_test("sprite", self.oncollision)
 end
 

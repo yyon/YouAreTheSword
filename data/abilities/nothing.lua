@@ -1,7 +1,7 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 
-NothingAbility = Ability:subclass("NothingAbility")
+local NothingAbility = Ability:subclass("NothingAbility")
 
 local Effects = require "enemies/effect"
 

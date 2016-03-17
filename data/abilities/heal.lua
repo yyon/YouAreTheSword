@@ -1,7 +1,8 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
+local Effects = require "enemies/effect"
 
-HealAbility = Ability:subclass("HealAbility")
+local HealAbility = Ability:subclass("HealAbility")
 
 function HealAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Heal", 800, "heal", 0, 500, false, "casting")
@@ -14,20 +15,20 @@ function HealAbility:doability()
 end
 
 function HealAbility:sendheart()
-	tox, toy = self.entitydata:gettargetpos()
-	targetentity = self.entitydata:getclosestentity(tox, toy)
-	
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
-	
+	local tox, toy = self.entitydata:gettargetpos()
+	local targetentity = self.entitydata:getclosestentity(tox, toy)
+
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
+
 	self.healentity = map:create_custom_entity({model="heart", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	self.healentity.ability = self
 	self.i = self.i + 1
 	self.healentity:start(self, targetentity, (self.i % 5 == 1))
-	
+
 	if not self.entitydata.entity.ishero then
 		self.timer = Effects.SimpleTimer(self.entitydata, 1000, function() self:finish() end)
 	end

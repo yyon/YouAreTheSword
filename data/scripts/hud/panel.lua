@@ -10,12 +10,12 @@ local math = require "math"
 --  	local object = {}
 --  	setmetatable(object, self)
 --  	self.__index = self
---	
+--
 --	object.type = type
 --	object.icon = icon
 --
 --  	object:initialize(game)
---	
+--
 --  	return object
 --end
 
@@ -50,34 +50,34 @@ end
 
 function panel:rebuild_surface()
 	if self.game:is_paused() or self.game:is_suspended() then return end
-	
+
   	self.surface:clear()
 	self.brown_panel_img:draw_region(0, 0, 75, 75, self.surface, 0, 0)
-	
-	hero = self.game:get_hero().entitydata
+
+	local hero = self.game:get_hero().entitydata
 	if hero ~= nil then
-		ability = hero:getability(self.type)
-		icon = ability.icon
+		local ability = hero:getability(self.type)
+		local icon = ability.icon
 		if self.icon ~= icon then
 			self.icon = icon
 			self.actualicon = sol.surface.create("icons_smaller/" .. self.icon .. ".png")
 		end
-		
+
 		if self.actualicon ~= nil then
 			self.actualicon:draw_region(0, 0, 69, 69, self.surface, 3, 3)
 		end
-		
+
 		if ability.usingcooldown then
-			fraction, timeremaining = ability:getremainingcooldown()
-			frame = math.floor(fraction*100)
+			local fraction, timeremaining = ability:getremainingcooldown()
+			local frame = math.floor(fraction*100)
 			self.cooldownoverlay:draw_region(69*frame, 0, 69, 69, self.surface, 3, 3)
-			
-			timeremaining = math.ceil(timeremaining / 1000)
+
+			local timeremaining = math.ceil(timeremaining / 1000)
 			if self.texts[timeremaining] == nil then
 				self.texts[timeremaining] = sol.text_surface.create({horizontal_alignement="center", vertical_alignement="middle", text=tostring(timeremaining), font="8_bit_2"})
 			end
-			text = self.texts[timeremaining]
-			w, h = text:get_size()
+			local text = self.texts[timeremaining]
+			local w, h = text:get_size()
 			text:draw_region(0, 0, w, h, self.surface, math.floor((75 - w)/2), math.floor((75)/2))
 		elseif (not ability.canuse) then
 			self.cooldownoverlay:draw_region(0, 0, 69, 69, self.surface, 3, 3)

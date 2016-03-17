@@ -1,5 +1,7 @@
 local entity = ...
 
+local math = require "math"
+
 function entity:on_created()
   self:set_optimization_distance(0)
 end
@@ -13,7 +15,7 @@ function entity:start(ability)
 
   local movement = sol.movement.create("straight")
   movement:set_speed(100)
-  angle = math.random() * 2 * math.pi
+  local angle = math.random() * 2 * math.pi
   movement:set_angle(angle)
   movement:set_max_distance(100)
   movement:set_smooth(true)

@@ -1,6 +1,6 @@
 local entity = ...
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 require "scripts/movementaccuracy"
 
 function entity:on_created()
@@ -13,12 +13,12 @@ function entity:start(tox, toy)
 	self.bomb_sprite:set_animation("stopped")
 	self.bomb_sprite:set_paused(false)
 
-	dist = self:get_distance(tox, toy)
+	local dist = self:get_distance(tox, toy)
 	if dist > self.ability.range then
 		dist = self.ability.range
 	end
 
-	local x, y = self:get_position()
+--	local x, y = self:get_position()
 	local angle = self:get_angle(tox, toy)-- + math.pi
 	local movement = sol.movement.create("straight")
 	movement:set_speed(600)

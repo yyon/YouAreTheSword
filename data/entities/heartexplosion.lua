@@ -1,6 +1,6 @@
 local entity = ...
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 
 local math = require "math"
 

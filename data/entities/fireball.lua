@@ -1,16 +1,16 @@
 local entity = ...
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 
 local math = require "math"
 
 sol.main.load_file("entities/projectile")(entity)
 
 function entity:getdamage()
-  aspects = {}
+  local aspects = {}
   aspects.fire = {damage=0.1, time=2000, timestep=500}
   aspects.knockback = 100
-  damage = 0
+  local damage = 0
   return damage, aspects
 end
 
@@ -20,9 +20,9 @@ end
 
 function entity:onposchanged()
   if math.random() < 0.02 then
-    map = self:get_map()
-    x, y, layer = self:get_position()
-    w, h = self:get_size()
+    local map = self:get_map()
+    local x, y, layer = self:get_position()
+    local w, h = self:get_size()
 
     self.smokeentity = map:create_custom_entity({model="smoke", x=x, y=y, layer=layer, direction=0, width=w, height=h})
     self.smokeentity:start(self, self.angle)

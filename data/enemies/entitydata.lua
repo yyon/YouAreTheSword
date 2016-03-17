@@ -1,46 +1,46 @@
 local class = require "middleclass"
 
-EntityData = class("EntityData")
+local EntityData = class("EntityData")
 
 -- import all of the abilities
-SwordAbility = require "abilities/sword"
-TransformAbility = require "abilities/swordtransform"
-ShieldAbility = require "abilities/shield"
-ChargeAbility = require "abilities/charge"
-ShieldBashAbility = require "abilities/shieldbash"
-BombThrowAbility = require "abilities/throwbomb"
-GrapplingHookAbility = require "abilities/grapplinghook"
-LightningAbility = require "abilities/lightning"
-FireballAbility = require "abilities/fireball"
-EarthquakeAbility = require "abilities/earthquake"
-BlackholeAbility = require "abilities/blackhole"
-HealAbility = require "abilities/heal"
-HealExplosionAbility = require "abilities/healexplosion"
-AngelSummonAbility = require "abilities/angelsummon"
-NormalAbility = require "abilities/normalattack"
-SidestepAbility = require "abilities/sidestep"
-TeleportAbility = require "abilities/teleport"
-BodyDoubleAbility = require "abilities/bodydouble"
-StealthAbility = require "abilities/stealth"
-BackstabAbility = require "abilities/backstab"
-TauntAbility = require "abilities/tauntability"
-StompAbility = require "abilities/stomp"
-NothingAbility = require "abilities/nothing"
-BoulderAbility = require "abilities/boulder"
-FiringBowAbility = require "abilities/firingBow"
-TentacleAbility = require "abilities/tentacles"
-PossessAbility = require "abilities/possess"
-FireballConeAbility = require "abilities/fireballcone"
-TrapsAbility = require "abilities/throwtraps"
-SpaceShipProjectileAbility = require "abilities/spaceshipprojectile"
-SpaceShipProjectile2Ability = require "abilities/spaceshipproj2"
-SpaceShipProjectile3Ability = require "abilities/spaceshipproj3"
-SpaceShipProjectile4Ability = require "abilities/spaceshipproj4"
-SpaceShipProjectile5Ability = require "abilities/spaceshipproj5"
-SpaceShipProjectile6Ability = require "abilities/spaceshipproj6"
-GunAbility = require "abilities/gun"
+local SwordAbility = require "abilities/sword"
+local TransformAbility = require "abilities/swordtransform"
+local ShieldAbility = require "abilities/shield"
+local ChargeAbility = require "abilities/charge"
+local ShieldBashAbility = require "abilities/shieldbash"
+local BombThrowAbility = require "abilities/throwbomb"
+local GrapplingHookAbility = require "abilities/grapplinghook"
+local LightningAbility = require "abilities/lightning"
+local FireballAbility = require "abilities/fireball"
+local EarthquakeAbility = require "abilities/earthquake"
+local BlackholeAbility = require "abilities/blackhole"
+local HealAbility = require "abilities/heal"
+local HealExplosionAbility = require "abilities/healexplosion"
+local AngelSummonAbility = require "abilities/angelsummon"
+local NormalAbility = require "abilities/normalattack"
+local SidestepAbility = require "abilities/sidestep"
+local TeleportAbility = require "abilities/teleport"
+local BodyDoubleAbility = require "abilities/bodydouble"
+local StealthAbility = require "abilities/stealth"
+local BackstabAbility = require "abilities/backstab"
+local TauntAbility = require "abilities/tauntability"
+local StompAbility = require "abilities/stomp"
+local NothingAbility = require "abilities/nothing"
+local BoulderAbility = require "abilities/boulder"
+local FiringBowAbility = require "abilities/firingBow"
+local TentacleAbility = require "abilities/tentacles"
+local PossessAbility = require "abilities/possess"
+local FireballConeAbility = require "abilities/fireballcone"
+local TrapsAbility = require "abilities/throwtraps"
+local SpaceShipProjectileAbility = require "abilities/spaceshipprojectile"
+local SpaceShipProjectile2Ability = require "abilities/spaceshipproj2"
+local SpaceShipProjectile3Ability = require "abilities/spaceshipproj3"
+local SpaceShipProjectile4Ability = require "abilities/spaceshipproj4"
+local SpaceShipProjectile5Ability = require "abilities/spaceshipproj5"
+local SpaceShipProjectile6Ability = require "abilities/spaceshipproj6"
+local GunAbility = require "abilities/gun"
 
-Effects = require "enemies/effect"
+local Effects = require "enemies/effect"
 
 local movementaccuracy = require "scripts/movementaccuracy"
 
@@ -48,9 +48,9 @@ local math = require "math"
 
 function EntityData:log(...)
 	-- print something in chat using a different color for each person
-	
-	colstart = ""
-	colend = ""
+
+	local colstart = ""
+	local colend = ""
 	if self.getlogcolor ~= nil then
 		colstart = string.char(27) .. '[' .. self:getlogcolor() .. 'm'
 		colend = string.char(27) .. '[' .. "0" .. 'm'
@@ -65,16 +65,16 @@ end
 
 --local maxhealth
 
-function getrandomfromlist(l)
-	index = math.random(1,#l)
+local function getrandomfromlist(l)
+	local index = math.random(1,#l)
 	return l[index]
 end
 
-function EntityData:initialize(entity, class, main_sprite, life, team, swordabilities, transformabilities, blockabilities, specialabilities, stats)
+function EntityData:initialize(entity, theclass, main_sprite, life, team, swordabilities, transformabilities, blockabilities, specialabilities, stats)
 	-- called when entitydata is created
-	
+
 	self.entity = entity
-	self.theclass = class
+	self.theclass = theclass
 	self.main_sprite = main_sprite
 	self.life = life
 	self.maxlife = self.life
@@ -159,8 +159,8 @@ function EntityData:bepossessedbyhero()
 	hero.isdropped = false
 	hero.isthrown = false
 
-	map = self.entity:get_map()
-	hero = map:get_hero()
+--	local map = self.entity:get_map()
+--	local hero = map:get_hero()
 
 	hero.entitydata = self
 
@@ -173,7 +173,7 @@ function EntityData:bepossessedbyhero()
 	self:applytoentity()
 
 	self.entity.is_possessing = true
-	
+
 	--TODO: re-freeze hero
 --	if self:getfrozen() ~= nil then
 --		self:getfrozen():freeze()
@@ -190,26 +190,26 @@ function EntityData:unpossess()
 
 	hero.entitydata = nil
 
-	map = self.entity:get_map()
+	local map = self.entity:get_map()
 
-	x, y, layer = self.entity:get_position()
+	local x, y, layer = self.entity:get_position()
 
-	d = self.entity:get_direction()
-	
-	newentity = map:create_enemy({
+	local d = self.entity:get_direction()
+
+	local newentity = map:create_enemy({
 		breed="enemy_constructor",
 		layer=layer,
 		x=x,
 		y=y,
 		direction=d
 	})
-	
+
 	self.entity = newentity
-	
+
 	self:applytoentity()
-	
+
 	self.entity:setdirection(d)
-	
+
 	return self.entity
 end
 
@@ -217,16 +217,16 @@ function EntityData:cantarget(entitydata, canbeonsameteam)
 --	print(debug.traceback())
 
 	-- is this entitydata a person which can be attacked?
-	
+
 	if entitydata == nil then
 --		self:log("can't target", entitydata, "because entitydata nil")
 		return false
 	end
-	
+
 	if entitydata.entity == nil then
 		return false
 	end
-	
+
 	if entitydata == self and not canbeonsameteam then
 --		self:log("can't target", entitydata, "because self-targeting")
 		return false
@@ -236,7 +236,7 @@ function EntityData:cantarget(entitydata, canbeonsameteam)
 --		self:log("can't target", entitydata, "because same team")
 		return false
 	end
-	
+
 	if entitydata.caught then
 		return false
 	end
@@ -251,7 +251,7 @@ end
 
 function EntityData:cantargetentity(entity)
 	-- is this entity a person which can be attacked?
-	
+
 	if entity == nil then
 --		self:log("can't target", entitydata, "because entity nil")
 		return false
@@ -266,11 +266,11 @@ function EntityData:isvisible()
 	if self.entity.ishero and not self.entity.is_possessing then
 		return false
 	end
-	
+
 	if self.stealth then
 		return false
 	end
-	
+
 	return true
 end
 
@@ -278,9 +278,9 @@ function EntityData:getotherentities()
 	-- return an iterator of all other people on the map
 	-- does not include self
 	-- usage: for otherentitydata in entitydata:getotherentities()
-	
+
 	if self.entity == nil then print(debug.traceback()) end
-	
+
 	local map = self.entity:get_map()
 	local heroentity = map:get_hero()
 	local saidhero = false
@@ -292,19 +292,19 @@ function EntityData:getotherentities()
 	end
 	local entityiter, iterstate, lastentity = map:get_entities("")
 
-	iterfunction = function()
+	local iterfunction = function()
 		if saidhero == false then
 			saidhero = true
 			return heroentity.entitydata
 		else
 			while true do
-				newentity, somethingboolean = entityiter(iterstate, lastentity)
+				local newentity = entityiter(iterstate, lastentity)
 				lastentity = newentity
 				if newentity == nil then
 					return nil
 				end
 				if newentity.entitydata ~= nil then
-					newentitydata = newentity.entitydata
+					local newentitydata = newentity.entitydata
 					if newentitydata ~= self and newentitydata ~= heroentity.entitydata and newentitydata.entity ~= nil then
 						return newentitydata
 					end
@@ -331,9 +331,9 @@ end
 function EntityData:startability(ability, ...)
 	-- call this to use an ability
 	-- example: entitydata:startability("special")
-	
+
 	if self.usingability == nil then
-		actualability = self:getability(ability)
+		local actualability = self:getability(ability)
 		if actualability.canuse then
 			actualability.abilitytype = ability
 			actualability:start(...)
@@ -345,7 +345,7 @@ end
 
 function EntityData:endability(ability, ...)
 	-- stop using a certain ability
-	
+
 	if self.usingability ~= nil then
 		if self.usingability == self:getability(ability) then
 			self.usingability:finish(...)
@@ -355,7 +355,7 @@ end
 
 function EntityData:keyrelease(ability)
 	-- keyboardrelease -> this method -> calls ability's keyrelease method
-	
+
 	if self.usingability ~= nil then
 		if self.usingability == self:getability(ability) then
 			self.usingability:keyrelease()
@@ -365,7 +365,7 @@ end
 
 function EntityData:tickability(...)
 	-- not really used
-	
+
 	if self.usingability ~= nil then
 		self.usingability:tick(...)
 	end
@@ -374,25 +374,25 @@ end
 function EntityData:canuseability(ability)
 	-- can you use this ability?
 	-- for example, is cooldown finished? is another ability currently being used?
-	
-	actualability = self:getability(ability)
+
+	local actualability = self:getability(ability)
 	return actualability.canuse
 end
 
 function EntityData:withinrange(ability, entitydata)
 	-- if an entity can be attacked using the ability
 	-- this is to help the AI decide when to attack
-	
+
 	ability = self:getability(ability)
-	range = ability.range
-	d = self.entity:get_distance(entitydata.entity)
-	withinrange = (d <= range)
+	local range = ability.range
+	local d = self.entity:get_distance(entitydata.entity)
+	local withinrange = (d <= range)
 	return withinrange
 end
 
 function EntityData:getdirection()
 	-- facing direction
-	
+
 	if self.entity.ishero then
 		return self.entity:get_direction()
 	else
@@ -407,11 +407,11 @@ function EntityData:setdirection(d)
 		return self.entity:setdirection(d)
 	end
 end
-	
+
 
 function EntityData:setanimation(anim)
 	-- set current sprite animation
-	
+
 	if self.entity.ishero then
 		self.entity:set_animation(anim)
 	else
@@ -500,9 +500,9 @@ end
 
 function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
-	
+
 	if self.entity == nil then return end
-	
+
 	if aspects == nil then
 		aspects = {}
 	end
@@ -510,11 +510,11 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.natural then
 		aspects.sameteam = true
 	end
-	
+
 	if not self:cantarget(target, aspects.sameteam) then
 		return
 	end
-	
+
 	if target.isbeingknockedback then
 		return
 	end
@@ -526,7 +526,7 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.donothing then
 		return
 	end
-	
+
 	--reverse cancel
 	if aspects.reversecancel ~= nil and not aspects.fromentity then
 		target:dodamage(self, 0, {knockback=0, stun=aspects.reversecancel, dontblock=true})
@@ -547,7 +547,7 @@ function EntityData:dodamage(target, damage, aspects)
 --		stuneffect = Effects.StunEffect(target, aspects.stun)
 --		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
 --		if target:getfrozen() == nil then
-			electricstuneffect = Effects.ElectricalStunEffect(target, aspects.electric)
+			local electricstuneffect = Effects.ElectricalStunEffect(target, aspects.electric)
 --		end
 	end
 	if aspects.stun ~= nil then
@@ -556,14 +556,14 @@ function EntityData:dodamage(target, damage, aspects)
 --		stuneffect = Effects.StunEffect(target, aspects.stun)
 --		electriceffect = Effects.ElectricalEffect(target, aspects.stun)
 --		if target:getfrozen() == nil then
-			stun = Effects.StunEffect(target, aspects.stun)
+			local stun = Effects.StunEffect(target, aspects.stun)
 --		end
 	end
 	if aspects.fire ~= nil then
-		fireeffect = Effects.FireEffect(target, aspects.fire)
+		local fireeffect = Effects.FireEffect(target, aspects.fire)
 	end
 	if aspects.poison ~= nil then
-		poisoneffect = Effects.PoisonWeaknessEffect(target, aspects.poison.weakness, aspects.poison.time)
+		local poisoneffect = Effects.PoisonWeaknessEffect(target, aspects.poison.weakness, aspects.poison.time)
 	end
 	if aspects.flame ~= nil then
 		aspects.knockback = 0
@@ -582,7 +582,7 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.debuffattack ~= nil then
 		aspects.debuffattack()
 	end
-	
+
 
 	--cancel enemy's ability
 	if aspects.natural == nil and aspects.dontcancel == nil and target.cantcancel == nil then
@@ -593,21 +593,21 @@ function EntityData:dodamage(target, damage, aspects)
 
 	-- do damage
 	damage = damage * self.stats.damage
-	
+
 	if self.entity.ishero then
 		if not aspects.natural then
-			souls = self.entity.souls
-			damagemultiplier = souls + 0.5
+			local souls = self.entity.souls
+			local damagemultiplier = souls + 0.5
 			damage = damage * damagemultiplier
 		end
 	end
 	if aspects.ap == nil then
-		negateddamage = damage * target.stats.defense
+		local negateddamage = damage * target.stats.defense
 		damage = damage - negateddamage
 	end
 
 	target.life = target.life - damage
-	
+
 	if aspects.lifesteal then
 		self.life = self.life + damage
 		if self.life > self.maxlife then
@@ -624,14 +624,14 @@ function EntityData:dodamage(target, damage, aspects)
 	--knockback
 	if aspects.knockback ~= 0 and target.cantcancel == nil then
 --		if target:getfrozen() == nil then
-			angle = nil
+			local angle = nil
 			if aspects.knockbackrandomangle then
 				angle = math.random() * 2 * math.pi
 			end
 			if aspects.directionalknockback then
 				angle = aspects.fromentity:get_direction() * math.pi / 2
 			end
-			kbe = KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, angle)
+			local kbe = Effects.KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, angle)
 --[[
 			if target.entity.ishero then
 				target:freeze()
@@ -693,54 +693,54 @@ end
 function EntityData:kill()
 	-- adventurer/monster is killed
 	if self.entity == nil then return end
-	
-	game = self.entity:get_game()
+
+	local game = self.entity:get_game()
 	if game.nodeaths then
 		return
 	end
-	
-	theishero = self.entity.ishero
+
+	local theishero = self.entity.ishero
 
 	if theishero then
 		-- drop sword
 		self:drop()
-		
-		newentity = self:unpossess()
+
+		local newentity = self:unpossess()
 		newentity.entitydata:kill()
 	else
 --		self:freeze()
-		freezeeffect = Effects.FreezeEffect:new(self)
+		local freezeeffect = Effects.FreezeEffect:new(self)
 		self.entity:set_life(0)
 	end
 
 	for key, effect in pairs(self.effects) do
 		effect:forceremove()
 	end
-	
+
 	if self.entity ~= nil then
 		self.entity.entitydata = nil
-		
+
 		if self:getremainingadventurers(true) <= 0 then
 			self:swordkill()
 		end
 	end
-	
+
 	self.entity = nil
 end
 
 function EntityData:dropsword()
-	hero = self.entity
-	
-	if not hero.ishero then return end	
+	local hero = self.entity
+
+	if not hero.ishero then return end
 	if hero.isthrown then return end
 	if hero.isdropped then return end
-	
+
 	self:dodamage(self, 0, {sameteam=true}) -- cancel ability
-	
+
 	self:drop()
-	
-	newentity = self:unpossess()
-	
+
+	local newentity = self:unpossess()
+
 	for key, effect in pairs(self.effects) do
 		effect:forceremove()
 	end
@@ -748,21 +748,21 @@ end
 
 function EntityData:swordkill()
 	-- sword health runs out
-	
-	game = self.entity:get_game()
+
+	local game = self.entity:get_game()
 	if game.nodeaths then
 		return
 	end
-	hero = game:get_hero()
-	
+	local hero = game:get_hero()
+
 	print("HERO DEATH!")
-	
+
 	for key, effect in pairs(self.effects) do
 		effect:forceremove()
 	end
-	
+
 	hero.swordhealth = hero.maxswordhealth
-	
+
 --	-- TODO: make this work
 --	self.entity:teleport(self.entity:get_map():get_id())
 	game.hasended = true
@@ -770,7 +770,7 @@ end
 
 function EntityData:drop(hero)
 	-- sword is dropped on the ground if person holding demon sword is killed
-	
+
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
 		hero.entitydata = nil
@@ -778,7 +778,7 @@ function EntityData:drop(hero)
 		hero:set_tunic_sprite_id("abilities/droppedsword")
 		hero:freeze()
 		hero.isdropped = true
-		
+
 		Effects.SimpleTimer(hero:get_game(), 10000, function() self:emergencyrescuehero(hero) end)
 	end
 end
@@ -787,9 +787,9 @@ function EntityData:emergencyrescuehero(hero)
 	if hero.isdropped then
 		for entity in hero:get_map():get_entities("") do
 			if entity.entitydata ~= nil then
-				entitydata = entity.entitydata
+				local entitydata = entity.entitydata
 				if entitydata.team == "adventurer" then
-					x, y = hero:get_position()
+					local x, y = hero:get_position()
 					entity:set_position(x,y)
 					return
 				end
@@ -800,8 +800,10 @@ end
 
 function EntityData:throwsword(entitydata2)
 	-- throws the demon sword to another person
-	
+
 --	self:log("going to throw to", entitydata2.class)
+	local hero = self.entity
+
 	if self.entity.ishero then
 		if self.usingability ~= nil then
 			return
@@ -822,20 +824,19 @@ function EntityData:throwsword(entitydata2)
 		if not entitydata2.entity.hasbeeninitialized then
 			return
 		end
-		
+
 		if entitydata2.effects["possess"] then
 			entitydata2.effects["possess"]:remove()
 		end
 
 		sol.audio.play_sound("swing" .. math.random(1,3))
-		
+
 		hero.isthrown = true
 
-		hero = self.entity
 		hero.isthrown = true
 		hero:freeze()
 
-		newentity = self:unpossess()
+		local newentity = self:unpossess()
 
 		hero:set_tunic_sprite_id("abilities/thrownsword")
 		hero:set_animation("stopped")
@@ -854,14 +855,12 @@ function EntityData:throwsword(entitydata2)
 			EntityData:drop(hero)
 		end
 --]]
-		local hero = hero
-
 		function movement:on_finished()
 			entitydata2:bepossessedbyhero()
 		end
-		
+
 		function movement:on_position_changed()
-			d = hero:get_distance(entitydata2.entity)
+			local d = hero:get_distance(entitydata2.entity)
 			if d < 30 then
 				self:stop()
 				entitydata2:bepossessedbyhero()
@@ -873,25 +872,25 @@ end
 function EntityData:getrandom()
 	-- get random person on map
 	-- does not include self
-	
-	require "math"
 
-	map = game:get_map()
-	hero = game:get_hero()
+--	local map = game:get_map()
+--	local hero = game:get_hero()
 
-	entitieslist = {}
+	local entitieslist = {}
 	for entitydata in self:getotherentities() do
-		entity = entitydata.entity
+		local entity = entitydata.entity
 		entitieslist[#entitieslist+1] = entity
 	end
 
-	entity = entitieslist[math.random(#entitieslist)]
+	local entity = entitieslist[math.random(#entitieslist)]
 	return entity
 end
 
 function EntityData:throwrandom()
 	-- throw sword to random person
-	entity = self:getrandom()
+	local entity = self:getrandom()
+
+	local hero = self.entity
 
 	if entity ~= nil then
 		if hero.entitydata ~= nil then
@@ -905,21 +904,19 @@ end
 function EntityData:getstraightestentity(x, y)
 	-- If you want to aim at an entity using the angle between the entity and the mouse, this will find the entity with the closest angle
 	-- getclosestentity is used instead (returns slightly different result)
-	
-	local math = require "math"
 
-	angle = self.entity:get_angle(x, y)
+	local angle = self.entity:get_angle(x, y)
 
-	minangle = 999
-	minentity = nil
+	local minangle = 999
+	local minentity = nil
 
-	map = game:get_map()
-	hero = self.entity
+--	local map = game:get_map()
+--	local hero = self.entity
 
 	for entitydata in self:getotherentities() do
-		entity = entitydata.entity
-		angle2 = self.entity:get_angle(entity)
-		d = math.abs(angle - angle2)
+		local entity = entitydata.entity
+		local angle2 = self.entity:get_angle(entity)
+		local d = math.abs(angle - angle2)
 		if d < minangle then
 			minangle = d
 			minentity = entity.entitydata
@@ -933,18 +930,18 @@ function EntityData:getclosestentity(x, y, isenemy, funct)
 	-- find person closest to a point
 	-- does not include self
 	-- can be used to find person closest to mouse pointer (used with gettargetpos)
-	
-	mindist = 99999
-	minentity = nil
 
-	map = game:get_map()
-	hero = self.entity
+	local mindist = 99999
+	local minentity = nil
+
+--	local map = game:get_map()
+--	local hero = self.entity
 
 	for entitydata in self:getotherentities() do
 		if not isenemy or self:cantarget(entitydata) then
 			if (funct == nil) or (funct(entitydata) == true) then
-				entity = entitydata.entity
-				d = entity:get_distance(x, y)
+				local entity = entitydata.entity
+				local d = entity:get_distance(x, y)
 				if d < mindist then
 					mindist = d
 					minentity = entity.entitydata
@@ -958,7 +955,7 @@ end
 
 function EntityData:throwclosest(mousex, mousey)
 	-- throw the sword to the person closest to the mouse
-	
+
 --[[
 	for entity in self.entity:get_map():get_entities("") do
 		if entity.entitydata ~= nil then
@@ -969,7 +966,10 @@ function EntityData:throwclosest(mousex, mousey)
 	print("closest", mousex, mousey, selelse
 
 --]]
-	entity = self:getclosestentity(x, y, false, function(entitydata) return not entitydata.cantpossess end)
+
+	local x, y = self:gettargetpos()
+	local entity = self:getclosestentity(x, y, false, function(entitydata) return not entitydata.cantpossess end)
+	local hero = self.entity
 	if entity ~= nil then
 		if hero.entitydata ~= nil then
 			hero.entitydata:throwsword(entity)
@@ -980,18 +980,19 @@ end
 function EntityData:gettargetpos()
 	-- returns the mouse pointer position if hero
 	-- returns AI aiming position if AI
-	
+
 	if self.entity.ishero then
-		map = self.entity:get_map()
-		mousex, mousey = sol.input.get_mouse_position()
-		cx, cy, cw, ch = map:get_camera_position()
-		x, y = mousex + cx, mousey + cy
+		local map = self.entity:get_map()
+		local mousex, mousey = sol.input.get_mouse_position()
+		local cx, cy, cw, ch = map:get_camera_position()
+		local x, y = mousex + cx, mousey + cy
 		return x, y
 --		return self.entity.targetx, self.entity.targety
 	else
-		target = self.entity.lasttarget
+		local target = self.entity.lasttarget
 		if target.entity == nil then target = self.entity:targetenemy() end
 		if target ~= nil then
+			local x, y
 			if self.usingability ~= nil and self.usingability.abilitytype == "block" then
 				x, y = self.entity:getblockposition(target)
 			elseif self.usingability ~= nil and self.usingability.heals then
@@ -1007,42 +1008,42 @@ function EntityData:gettargetpos()
 end
 
 function EntityData:getremainingmonsters()
-	enemiesremaining = 0
-	
+	local enemiesremaining = 0
+
 	if self.team == "monster" then
 		enemiesremaining = 1
 	end
-	
+
 	for entitydata in self:getotherentities() do
 		if entitydata.team == "monster" then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
-	
+
 	return enemiesremaining
 end
 
 function EntityData:getremainingadventurers(dontcountself)
-	enemiesremaining = 0
-	
+	local enemiesremaining = 0
+
 	if not dontcountself then
 		if self.team == "adventurer" and self.entity ~= nil then
 			enemiesremaining = 1
 		end
 	end
-	
+
 	for entitydata in self:getotherentities() do
 		if entitydata.team == "adventurer" then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
-	
+
 	return enemiesremaining
 end
 
 function EntityData:canmoveto(tox, toy)
-	entity = self.entity
-		
+	local entity = self.entity
+
 	return movementaccuracy.canmoveto(entity, tox, toy)
 end
 
@@ -1061,7 +1062,12 @@ function EntityData:totable()
 	}
 end
 
+-- Actual classes
+
+local allclasses = {EntityData=EntityData}
+
 function EntityData.static:fromtable(table, entity)
+	local theclass
 	for _, class in pairs(allclasses) do
 		if class.name == table.classname then
 			theclass = class
@@ -1069,10 +1075,10 @@ function EntityData.static:fromtable(table, entity)
 		end
 	end
 	if theclass ~= nil then
-		entitydata = theclass:new(entity)
+		local entitydata = theclass:new(entity)
 		entitydata.entity = entity
 		entitydata:applytoentity()
-		
+
 		for index, ability in pairs(entitydata.normalabilities) do
 			if ability.name == table.swordability then
 				entitydata.swordability = ability
@@ -1093,495 +1099,492 @@ function EntityData.static:fromtable(table, entity)
 				entitydata.specialability = ability
 			end
 		end
-		
+
 		entitydata.life = table.life
 		entitydata.maxlife = table.maxlife
 		entitydata.team = table.team
-		
+
 		return entitydata
 	end
 end
 
--- Actual classes
-
-allclasses = {EntityData=EntityData}
 
 -- Test classes:
 
-yellowclass = EntityData:subclass("yellowclass")
+local yellowclass = EntityData:subclass("yellowclass")
 allclasses.yellowclass = yellowclass
 
 function yellowclass:initialize(entity)
-	class = "yellow"
-	main_sprite = "adventurers/guy2"
-	life = 10
-	team = "yellow" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {FireballAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "holy")}
-	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {StealthAbility:new(self)}
-	basestats = {}
-	
+	local class = "yellow"
+	local main_sprite = "adventurers/guy2"
+	local life = 10
+	local team = "yellow" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {FireballAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "holy")}
+	local blockabilities = {TeleportAbility:new(self)}
+	local specialabilities = {StealthAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-greenclass = EntityData:subclass("greenclass")
+local greenclass = EntityData:subclass("greenclass")
 allclasses.greenclass = greenclass
 
 function greenclass:initialize(entity)
-	class = "green"
-	main_sprite = "adventurers/guy3"
-	life = 10
-	team = "green" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {HealAbility:new(self), FireballAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "poison")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {BombThrowAbility:new(self), GrapplingHookAbility:new(self)}
-	basestats = {}
-	
+	local class = "green"
+	local main_sprite = "adventurers/guy3"
+	local life = 10
+	local team = "green" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {HealAbility:new(self), FireballAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "poison")}
+	local blockabilities = {ShieldAbility:new(self)}
+	local specialabilities = {BombThrowAbility:new(self), GrapplingHookAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 -- Adventurers:
 
-knightclass = EntityData:subclass("knightclass")
+local knightclass = EntityData:subclass("knightclass")
 allclasses.knightclass = knightclass
 
 function knightclass:initialize(entity)
-	class = "knight"
-	main_sprite = "adventurers/knight"
-	life = 10
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "ap")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {ChargeAbility:new(self), ShieldBashAbility:new(self)}
-	basestats = {}
-	
+	local class = "knight"
+	local main_sprite = "adventurers/knight"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "ap")}
+	local blockabilities = {ShieldAbility:new(self)}
+	local specialabilities = {ChargeAbility:new(self), ShieldBashAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-mageclass = EntityData:subclass("mageclass")
+local mageclass = EntityData:subclass("mageclass")
 allclasses.mageclass = mageclass
 
 function mageclass:initialize(entity)
-	class = "mage"
-	main_sprite = "adventurers/mage"
-	life = 10
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self), FireballAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire")}
-	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
-	basestats = {}
-	
+	local class = "mage"
+	local main_sprite = "adventurers/mage"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self), FireballAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire")}
+	local blockabilities = {TeleportAbility:new(self)}
+	local specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackholeAbility:new(self)}
+	local basestats = {}
+
 	self.alwaysrandom = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-clericclass = EntityData:subclass("clericclass")
+local clericclass = EntityData:subclass("clericclass")
 allclasses.clericclass = clericclass
 
 function clericclass:initialize(entity)
-	class = "cleric"
-	main_sprite = "adventurers/cleric"
-	life = 10
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self), HealAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "holy"), TransformAbility:new(self, "lifesteal")}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {AngelSummonAbility:new(self), HealExplosionAbility:new(self)}
-	basestats = {}
-	
+	local class = "cleric"
+	local main_sprite = "adventurers/cleric"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self), HealAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "holy"), TransformAbility:new(self, "lifesteal")}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {AngelSummonAbility:new(self), HealExplosionAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-rogueclass = EntityData:subclass("rogueclass")
+local rogueclass = EntityData:subclass("rogueclass")
 allclasses.rogueclass = rogueclass
 
 function rogueclass:initialize(entity)
-	class = "rogue"
-	main_sprite = "adventurers/rogue"
-	life = 10
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "dagger"), TransformAbility:new(self, "poison")}
-	blockabilities = {SidestepAbility:new(self), BodyDoubleAbility:new(self)}
-	specialabilities = {TrapsAbility:new(self), BackstabAbility:new(self), StealthAbility:new(self)}
-	basestats = {}
-	
+	local class = "rogue"
+	local main_sprite = "adventurers/rogue"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "dagger"), TransformAbility:new(self, "poison")}
+	local blockabilities = {SidestepAbility:new(self), BodyDoubleAbility:new(self)}
+	local specialabilities = {TrapsAbility:new(self), BackstabAbility:new(self), StealthAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-bardclass = EntityData:subclass("bardclass")
+local bardclass = EntityData:subclass("bardclass")
 allclasses.bardclass = bardclass
 
 function bardclass:initialize(entity)
-	class = "bard"
-	main_sprite = "adventurers/bard"
-	life = 10
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "dagger")}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {TauntAbility:new(self)}
-	basestats = {}
-	
+	local class = "bard"
+	local main_sprite = "adventurers/bard"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "dagger")}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {TauntAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-berserkerclass = EntityData:subclass("berserkerclass")
+local berserkerclass = EntityData:subclass("berserkerclass")
 allclasses.berserkerclass = berserkerclass
 
 function berserkerclass:initialize(entity)
-	class = "berserker"
-	main_sprite = "adventurers/berserker"
-	life = 10
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "damage")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {StompAbility:new(self)}
-	basestats = {}
-	
+	local class = "berserker"
+	local main_sprite = "adventurers/berserker"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "damage")}
+	local blockabilities = {ShieldAbility:new(self)}
+	local specialabilities = {StompAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-archerclass = EntityData:subclass("archerclass")
+local archerclass = EntityData:subclass("archerclass")
 allclasses.archerclass = archerclass
 
 function archerclass:initialize(entity)
-	class = "archer"
-	main_sprite = "adventurers/archer"
-	life = 10
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {FiringBowAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "dagger")}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self)}
-	basestats = {}
-	
+	local class = "archer"
+	local main_sprite = "adventurers/archer"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {FiringBowAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "dagger")}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 -- Monsters:
 
-skeletonclass = EntityData:subclass("skeletonclass")
+local skeletonclass = EntityData:subclass("skeletonclass")
 allclasses.skeletonclass = skeletonclass
 
 function skeletonclass:initialize(entity)
-	class = "skeleton"
-	main_sprite = "monsters/skeleton"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {FiringBowAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {ShieldBashAbility:new(self), GrapplingHookAbility:new(self)}
-	basestats = {}
+	local class = "skeleton"
+	local main_sprite = "monsters/skeleton"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {FiringBowAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
+	local blockabilities = {ShieldAbility:new(self)}
+	local specialabilities = {ShieldBashAbility:new(self), GrapplingHookAbility:new(self)}
+	local basestats = {}
 	self.undead = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-orcclass = EntityData:subclass("orcclass")
+local orcclass = EntityData:subclass("orcclass")
 allclasses.orcclass = orcclass
 
 function orcclass:initialize(entity)
-	class = "orc"
-	main_sprite = "monsters/orc"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {ShieldBashAbility:new(self), BombThrowAbility:new(self)}
-	basestats = {damage=2, warmup=1.5}
+	local class = "orc"
+	local main_sprite = "monsters/orc"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
+	local blockabilities = {ShieldAbility:new(self)}
+	local specialabilities = {ShieldBashAbility:new(self), BombThrowAbility:new(self)}
+	local basestats = {damage=2, warmup=1.5}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-evilmageclass = EntityData:subclass("evilmageclass")
+local evilmageclass = EntityData:subclass("evilmageclass")
 allclasses.evilmageclass = evilmageclass
 
 function evilmageclass:initialize(entity)
-	class = "evil mage"
-	main_sprite = "monsters/evilmage"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {FireballAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
-	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackHoleAbility:new(self)}
-	basestats = {}
-	
+	local class = "evil mage"
+	local main_sprite = "monsters/evilmage"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {FireballAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
+	local blockabilities = {TeleportAbility:new(self)}
+	local specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackholeAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-spiderclass = EntityData:subclass("spiderclass")
+local spiderclass = EntityData:subclass("spiderclass")
 allclasses.spiderclass = spiderclass
 
 function spiderclass:initialize(entity)
-	class = "spider"
-	main_sprite = "monsters/spiders/spider" .. string.format("%02d", math.random(1,11))
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	aspects = {poison = {weakness=0.4, time=5000}}
-	normalabilities = {NormalAbility:new(self, "sword", aspects)}
-	transformabilities = {TransformAbility:new(self, "poison")}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {BackstabAbility:new(self)}
-	basestats = {}
+	local class = "spider"
+	local main_sprite = "monsters/spiders/spider" .. string.format("%02d", math.random(1,11))
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local aspects = {poison = {weakness=0.4, time=5000}}
+	local normalabilities = {NormalAbility:new(self, "sword", aspects)}
+	local transformabilities = {TransformAbility:new(self, "poison")}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {BackstabAbility:new(self)}
+	local basestats = {}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-mechclass = EntityData:subclass("mechclass")
+local mechclass = EntityData:subclass("mechclass")
 allclasses.mechclass = mechclass
 
 function mechclass:initialize(entity)
-	class = "mech"
-	main_sprite = "monsters/mech"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {GunAbility:new(self)}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
-	basestats = {}
+	local class = "mech"
+	local main_sprite = "monsters/mech"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {GunAbility:new(self)}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-beetleclass = EntityData:subclass("beetleclass")
+local beetleclass = EntityData:subclass("beetleclass")
 allclasses.beetleclass = beetleclass
 
 function beetleclass:initialize(entity)
-	class = "beetle"
-	main_sprite = "monsters/beetle"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self)}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
-	basestats = {}
+	local class = "beetle"
+	local main_sprite = "monsters/beetle"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NormalAbility:new(self)}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-ghostclass = EntityData:subclass("ghostclass")
+local ghostclass = EntityData:subclass("ghostclass")
 allclasses.ghostclass = ghostclass
 
 function ghostclass:initialize(entity)
-	class = "ghost"
-	main_sprite = "monsters/ghost"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {FireballAbility:new(self)}
-	transformabilities = {SwordAbility:new(self, "fire")}
-	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {StealthAbility:new(self), BlackholeAbility:new(self)}
-	basestats = {movementspeed=100}
+	local class = "ghost"
+	local main_sprite = "monsters/ghost"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {FireballAbility:new(self)}
+	local transformabilities = {SwordAbility:new(self, "fire")}
+	local blockabilities = {TeleportAbility:new(self)}
+	local specialabilities = {StealthAbility:new(self), BlackholeAbility:new(self)}
+	local basestats = {movementspeed=100}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-flowerclass = EntityData:subclass("flowerclass")
+local flowerclass = EntityData:subclass("flowerclass")
 allclasses.flowerclass = flowerclass
 
 function flowerclass:initialize(entity)
-	class = "flower"
-	main_sprite = "monsters/flower"
-	life = 20
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {FireballAbility:new(self)}
-	transformabilities = {SwordAbility:new(self, "fire")}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {GrapplingHookAbility:new(self)}
-	basestats = {movementspeed=0, cooldown=2}
+	local class = "flower"
+	local main_sprite = "monsters/flower"
+	local life = 20
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {FireballAbility:new(self)}
+	local transformabilities = {SwordAbility:new(self, "fire")}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {GrapplingHookAbility:new(self)}
+	local basestats = {movementspeed=0, cooldown=2}
 	self.cantdraweyes = true
 	self.cantcancel = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-batclass = EntityData:subclass("batclass")
+local batclass = EntityData:subclass("batclass")
 allclasses.batclass = batclass
 
 function batclass:initialize(entity)
-	class = "bat"
-	main_sprite = "monsters/bat"
-	life = 5
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self, "casting"), HealAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "lifesteal")}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {HealExplosionAbility:new(self)}
-	basestats = {movementspeed=200, damage=0.8}
+	local class = "bat"
+	local main_sprite = "monsters/bat"
+	local life = 5
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NormalAbility:new(self, "casting"), HealAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "lifesteal")}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {HealExplosionAbility:new(self)}
+	local basestats = {movementspeed=200, damage=0.8}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-beeclass = EntityData:subclass("beeclass")
+local beeclass = EntityData:subclass("beeclass")
 allclasses.beeclass = beeclass
 
 function beeclass:initialize(entity)
-	class = "bee"
-	main_sprite = "monsters/bee"
-	life = 5
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self, "casting")}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {SidestepAbility:new(self)}
-	specialabilities = {BackstabAbility:new(self)}
-	basestats = {movementspeed=200, damage=0.8}
+	local class = "bee"
+	local main_sprite = "monsters/bee"
+	local life = 5
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NormalAbility:new(self, "casting")}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {BackstabAbility:new(self)}
+	local basestats = {movementspeed=200, damage=0.8}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-wormclass = EntityData:subclass("wormclass")
+local wormclass = EntityData:subclass("wormclass")
 allclasses.wormclass = wormclass
 
 function wormclass:initialize(entity)
-	class = "worm"
-	main_sprite = "monsters/big_worm"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self, "casting")}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
-	basestats = {damage=2}
+	local class = "worm"
+	local main_sprite = "monsters/big_worm"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NormalAbility:new(self, "casting")}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {damage=2}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-slimeclass = EntityData:subclass("slimeclass")
+local slimeclass = EntityData:subclass("slimeclass")
 allclasses.slimeclass = slimeclass
 
 function slimeclass:initialize(entity)
-	class = "slime"
-	main_sprite = "monsters/slime"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self, "casting")}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
-	basestats = {damage=0.5}
+	local class = "slime"
+	local main_sprite = "monsters/slime"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NormalAbility:new(self, "casting")}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {damage=0.5}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-eyeclass = EntityData:subclass("eyeclass")
+local eyeclass = EntityData:subclass("eyeclass")
 allclasses.eyeclass = eyeclass
 
 function eyeclass:initialize(entity)
-	class = "floating eyeball"
-	main_sprite = "monsters/eyeball"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {FireballAbility:new(self, "casting")}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {BlackholeAbility:new(self)}
-	basestats = {warmup=0.5, cooldown=0.5}
+	local class = "floating eyeball"
+	local main_sprite = "monsters/eyeball"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {FireballAbility:new(self, "casting")}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {TeleportAbility:new(self)}
+	local specialabilities = {BlackholeAbility:new(self)}
+	local basestats = {warmup=0.5, cooldown=0.5}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-maskmanclass = EntityData:subclass("maskmanclass")
+local maskmanclass = EntityData:subclass("maskmanclass")
 allclasses.maskmanclass = maskmanclass
 
 function maskmanclass:initialize(entity)
-	class = "mask man"
-	main_sprite = "monsters/maskman"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self, "casting")}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {TeleportAbility:new(self)}
-	specialabilities = {StompAbility:new(self)}
-	basestats = {}
+	local class = "mask man"
+	local main_sprite = "monsters/maskman"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NormalAbility:new(self, "casting")}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {TeleportAbility:new(self)}
+	local specialabilities = {StompAbility:new(self)}
+	local basestats = {}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-wolfclass = EntityData:subclass("wolfclass")
+local wolfclass = EntityData:subclass("wolfclass")
 allclasses.wolfclass = wolfclass
 
 function wolfclass:initialize(entity)
-	class = "wolf"
-	main_sprite = "monsters/wolf"
-	life = 10
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NormalAbility:new(self, "sword")}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
-	basestats = {}
+	local class = "wolf"
+	local main_sprite = "monsters/wolf"
+	local life = 10
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NormalAbility:new(self, "sword")}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {}
 	self.cantdraweyes = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
 -- Bosses
 
-spaceshipboss = EntityData:subclass("spaceshipboss")
+local spaceshipboss = EntityData:subclass("spaceshipboss")
 allclasses.spaceshipboss = spaceshipboss
 
 function spaceshipboss:initialize(entity)
-	class = "Space Ship (Boss)"
-	main_sprite = "bosses/spaceship-1"
-	life = 200
-	team = "boss" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SpaceShipProjectileAbility:new(self)}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {SpaceShipProjectile2Ability:new(self)}
-	basestats = {}
+	local class = "Space Ship (Boss)"
+	local main_sprite = "bosses/spaceship-1"
+	local life = 200
+	local team = "boss" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SpaceShipProjectileAbility:new(self)}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {SpaceShipProjectile2Ability:new(self)}
+	local basestats = {}
 	self.cantcancel = true
 	self.cantpossess=true
-	
+
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
@@ -1598,24 +1601,24 @@ function spaceshipboss:stage3()
 	self.specialability = SpaceShipProjectile5Ability:new(self)
 end
 
-mageboss = EntityData:subclass("mageboss")
+local mageboss = EntityData:subclass("mageboss")
 allclasses.mageboss = mageboss
 
 function mageboss:initialize(entity)
-	class = "Mage (Boss)"
-	main_sprite = "bosses/mage-1"
-	life = 200
-	team = "boss" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NothingAbility:new(self)}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {TentacleAbility:new(self)}
-	basestats = {movementspeed=0}
+	local class = "Mage (Boss)"
+	local main_sprite = "bosses/mage-1"
+	local life = 200
+	local team = "boss" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NothingAbility:new(self)}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {TentacleAbility:new(self)}
+	local basestats = {movementspeed=0}
 	self.cantpossess=true
 	self.cantcancel = true
-	
+
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
@@ -1634,23 +1637,23 @@ function mageboss:stage3()
 end
 
 
-dunsmurclass = EntityData:subclass("dunsmurclass")
+local dunsmurclass = EntityData:subclass("dunsmurclass")
 allclasses.dunsmurclass = dunsmurclass
 
 function dunsmurclass:initialize(entity)
-	class = "Duns Mur"
-	main_sprite = "bosses/dunsmur-1"
-	life = 300
-	team = "dunsmur" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "lifesteal")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {PossessAbility:new(self)}
-	basestats = {}
+	local class = "Duns Mur"
+	local main_sprite = "bosses/dunsmur-1"
+	local life = 300
+	local team = "dunsmur" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "lifesteal")}
+	local blockabilities = {ShieldAbility:new(self)}
+	local specialabilities = {PossessAbility:new(self)}
+	local basestats = {}
 	self.cantcancel = true
-	
+
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
@@ -1669,41 +1672,43 @@ end
 
 -- Summoned:
 
-angelclass = EntityData:subclass("angelclass")
+local angelclass = EntityData:subclass("angelclass")
 allclasses.angelclass = angelclass
 
 function angelclass:initialize(entity)
-	class = "angel"
-	main_sprite = "adventurers/angel"
-	life = 5
-	team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {SwordAbility:new(self)}
-	transformabilities = {TransformAbility:new(self, "holy")}
-	blockabilities = {ShieldAbility:new(self)}
-	specialabilities = {HealExplosionAbility:new(self)}
-	basestats = {}
-	
+	local class = "angel"
+	local main_sprite = "adventurers/angel"
+	local life = 5
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {SwordAbility:new(self)}
+	local transformabilities = {TransformAbility:new(self, "holy")}
+	local blockabilities = {ShieldAbility:new(self)}
+	local specialabilities = {HealExplosionAbility:new(self)}
+	local basestats = {}
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
 
-dummyclass = EntityData:subclass("dummyclass")
+local dummyclass = EntityData:subclass("dummyclass")
 allclasses.dummyclass = dummyclass
 
 function dummyclass:initialize(entity)
-	class = "baddummyclass"
-	main_sprite = "adventurers/dummy"
-	life = 5
-	team = "monster" -- should be either "adventurer" or "monster" in the final version
-	normalabilities = {NothingAbility:new(self)}
-	transformabilities = {NothingAbility:new(self)}
-	blockabilities = {NothingAbility:new(self)}
-	specialabilities = {NothingAbility:new(self)}
-	basestats = {movementspeed=0}
+	local class = "baddummyclass"
+	local main_sprite = "adventurers/dummy"
+	local life = 5
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NothingAbility:new(self)}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {movementspeed=0}
 	self.dontmove = true
-	
+
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
+
+_EntityDatas = allclasses
 
 return allclasses

@@ -1,7 +1,8 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
+local Effects = require "enemies/effect"
 
-GunAbility = Ability:subclass("GunAbility")
+local GunAbility = Ability:subclass("GunAbility")
 
 function GunAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Gun", 2000, "gun", 0, 2000, true, "gun")
@@ -9,25 +10,25 @@ end
 
 function GunAbility:doability()
 	self.entitydata:setanimation("gun")
-	
+
 	self.ticker = Effects.Ticker(self.entitydata, 100, function() self:shoot() end)
 	self.timer = Effects.SimpleTimer(self.entitydata, 850, function() self:finish() end)
-end	
+end
 
 function GunAbility:shoot()
-	tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self.entitydata:gettargetpos()
 	self.tox, self.toy = tox, toy
 
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 
-	testerentity = map:create_custom_entity({model="guntest", x=x, y=y-40, layer=layer, direction=0, width=8, height=8})
+	local testerentity = map:create_custom_entity({model="guntest", x=x, y=y-40, layer=layer, direction=0, width=8, height=8})
 	testerentity.ability = self
-	hitentitydata = testerentity:test(tox, toy)
-	
+	local hitentitydata = testerentity:test(tox, toy)
+
 	if hitentitydata ~= nil then
 		self:attack(hitentitydata)
 	end
@@ -39,10 +40,10 @@ function GunAbility:attack(entitydata)
 	if not self.entitydata:cantarget(entitydata) then
 		return
 	end
-	
-	damage = 0.1
-	aspects = {knockback=50}
-	
+
+	local damage = 0.1
+	local aspects = {knockback=50}
+
 	self:dodamage(entitydata, damage, aspects)
 end
 

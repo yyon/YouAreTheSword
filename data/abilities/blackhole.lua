@@ -1,7 +1,9 @@
 local class = require "middleclass"
-Ability = require "abilities/ability"
+local Ability = require "abilities/ability"
 
-BlackHoleAbility= Ability:subclass("BlackHoleAbility")
+local Effects = require "enemies/effect"
+
+local BlackHoleAbility= Ability:subclass("BlackHoleAbility")
 
 function BlackHoleAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Black Hole", 20000, "blackhole", 2000, 30000, true, "casting")
@@ -9,15 +11,15 @@ function BlackHoleAbility:initialize(entitydata)
 end
 
 function BlackHoleAbility:doability()
-	entity = self.entitydata.entity
-	map = entity:get_map()
-	x,y,layer = entity:get_position()
-	w,h = entity:get_size()
-	entitydata = self.entitydata
+	local entity = self.entitydata.entity
+	local map = entity:get_map()
+	local x,y,layer = entity:get_position()
+	local w,h = entity:get_size()
+	local entitydata = self.entitydata
 
-	tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self.entitydata:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
-	
+
 	self.blackholeentity = map:create_custom_entity({model="blackhole", x=tox, y=toy, layer=layer, direction=0, width=8, height=8})
 	self.blackholeentity.ability = self
 	self.blackholeentity:start(tox, toy)
@@ -29,11 +31,11 @@ function BlackHoleAbility:attack(entity, blackhole)
 	if not self.entitydata:cantargetentity(entity) then
 		return
 	end
-	
-	entitydata = entity.entitydata
 
-	damage = 2
-	aspects = {}
+	local entitydata = entity.entitydata
+
+	local damage = 2
+	local aspects = {}
 	aspects.dontblock = true
 	aspects.knockbackrandomangle = true
 	aspects.fromentity = blackhole

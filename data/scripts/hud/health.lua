@@ -38,16 +38,14 @@ function health:check()
   	local need_rebuild = false
 	local nb_current_hearts = 0
 	local nb_max_hearts = 0
-	
-	hero = game:get_hero().entitydata
-    	if hero ~= nil then
-     		nb_current_hearts = hero.life * 4
+
+	local hero = game:get_hero().entitydata
+	if hero ~= nil then
+        nb_current_hearts = hero.life * 4
 		nb_max_hearts = hero.maxlife
-		
-    	end
+    end
 
 	self:set_dst_position(1270-18*nb_max_hearts, 10)
-    
 
   	--  max life
   	if nb_max_hearts ~= self.nb_max_hearts_displayed then
