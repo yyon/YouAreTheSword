@@ -24,7 +24,7 @@ function entity:start()
 	
 	for entitydata in self.ability.entitydata:getotherentities() do
 		if entitydata.entity:get_distance(self) < 400 then
-			if self.ability:catch(entitydata) then 
+			if self.ability:catch(entitydata, true) then 
 				self.pulling[entitydata] = true
 			
 				entitydata.blackholefreeze = Effects.FreezeEffect(entitydata)

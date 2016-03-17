@@ -28,7 +28,7 @@ function EarthquakeAbility:doability()
 	self.origpos = {}
 	
 	for entitydata in self.entitydata:getotherentities() do
-		if self:catch(entitydata) then
+		if self:catch(entitydata, true) then
 			self:oncollision(entitydata)
 		end
 	end

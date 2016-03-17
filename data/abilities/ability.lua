@@ -6,6 +6,9 @@ Effects = require "enemies/effect"
 local math = require "math"
 
 function Ability:initialize(...)
+	if self.caughtduringabilityuse == nil then
+		self.caughtduringabilityuse = true
+	end
 	-- called when entitydata is first created
 	self.entitydata, self.name, self.range, self.icon, self.warmup, self.cooldown, self.dofreeze, self.warmupanimation = ...
 	self.canuse = true
@@ -23,7 +26,6 @@ function Ability:start(...)
 	self.args = {...}
 	self.usingwarmup=true
 	self.caughttargets = {}
-	self.caughtduringabilityuse = true
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 	
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
