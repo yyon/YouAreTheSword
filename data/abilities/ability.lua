@@ -60,8 +60,14 @@ end
 
 local COOLDOWNTICKTIME = 50
 
-function Ability:finishability(skipcooldown)
+function Ability:finishability(skipcooldown, canceledduringwarmup)
 	-- cleans up the ability to be able to use it again
+	if not canceledduringwarmup then
+		if self.caughtduringabilityuse then
+			self:uncatch()
+		end
+	end
+
 	self.inability = false
 	self.entitydata.usingability = nil
 	if self.warmuptimer ~= nil then
@@ -73,10 +79,6 @@ function Ability:finishability(skipcooldown)
 --		self.entitydata:unfreeze(self.name, false)
 	end
 	self.usingability = false
-
-	if self.caughtduringabilityuse then
-		self:uncatch()
-	end
 
 	self.usingcooldown = true
 
@@ -136,7 +138,7 @@ function Ability:cancel()
 	elseif self.inability then
 --		self.entitydata:log("Ability canceled:", self.name)
 		self:oncancel()
-		self:finishability()
+		self:finishability(false, true)
 --		self.cooldowntimer:remove()
 	end
 end
@@ -166,12 +168,14 @@ function Ability:dodamage(entitydata, damage, aspects)
 end
 
 function Ability:withinrange(tox, toy)
-	if self.entitydata.entity:get_distance(tox, toy) > self.range then
-		local x, y = self.entitydata.entity:get_position()
-		local d = self.entitydata.entity:get_distance(tox, toy)
-		local vx, vy = tox - x, toy - y
-		local vx, vy = vx / d * self.range, vy / d * self.range
-		local tox, toy = x + vx, y + vy
+	if self.entitydata.entity ~= nil then
+		if self.entitydata.entity:get_distance(tox, toy) > self.range then
+			local x, y = self.entitydata.entity:get_position()
+			local d = self.entitydata.entity:get_distance(tox, toy)
+			local vx, vy = tox - x, toy - y
+			vx, vy = vx / d * self.range, vy / d * self.range
+			tox, toy = x + vx, y + vy
+		end
 	end
 
 	return tox, toy
@@ -193,7 +197,10 @@ function Ability:catch(target, dontend)
 end
 
 function Ability:uncatch()
-	if self.uncatched then print("ERROR! double uncatch!", self.name) end
+	if self.uncatched then
+		print("ERROR! double uncatch!", self.name)
+		print(debug.traceback())
+	end
 	self.uncatched = true
 	for entitydata, b in pairs(self.caughttargets) do
 		entitydata.caught = false

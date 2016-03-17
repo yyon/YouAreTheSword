@@ -66,14 +66,6 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 2312,
-  y = 581,
-  direction = 0,
-  breed = "e_ghost",
-}
-
-enemy{
-  layer = 0,
   x = 344,
   y = 941,
   direction = 0,
@@ -198,5 +190,13 @@ enemy{
   y = 1309,
   direction = 0,
   breed = "a_rogue",
+}
+
+enemy{
+  layer = 0,
+  x = 2312,
+  y = 1125,
+  direction = 0,
+  breed = "e_mech",
 }
 

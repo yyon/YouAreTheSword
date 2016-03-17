@@ -197,6 +197,12 @@ function sol.main:on_key_pressed(key, modifiers)
 				hero.entitydata.specialability = cheatyability
 			end
 			print("CHEAT: ability changed to", cheatyability.name)
+		elseif key == "c" then
+			for num, ability in pairs({hero.entitydata.swordability, hero.entitydata.blockability, hero.entitydata.transformability, hero.entitydata.specialability}) do
+				if ability.usingcooldown then
+					ability.cooldowntimer:remove()
+				end
+			end
 		end
 	end
 

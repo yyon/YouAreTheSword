@@ -54,8 +54,7 @@ function GrapplingHookAbility:attack(entity, bombentity)
 	end
 
 	self.target = entity.entitydata
-
-
+	
 	self:dodamage(entity.entitydata, 0, {knockback=0, method=function() self:startpull() end})
 end
 

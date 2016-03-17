@@ -28,7 +28,6 @@ function EarthquakeAbility:doability()
 
 	self:finish()
 --]]
-	print("STARTED EARTHQUAKE")
 
 	self.collided = {}
 	self.origpos = {}

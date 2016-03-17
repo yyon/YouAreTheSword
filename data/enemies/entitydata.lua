@@ -412,11 +412,13 @@ end
 function EntityData:setanimation(anim)
 	-- set current sprite animation
 
-	if self.entity.ishero then
-		self.entity:set_animation(anim)
-	else
-		self.entity.main_sprite:set_animation(anim)
-		self.entity.main_sprite:set_paused(false)
+	if self.entity ~= nil then
+		if self.entity.ishero then
+			self.entity:set_animation(anim)
+		else
+			self.entity.main_sprite:set_animation(anim)
+			self.entity.main_sprite:set_paused(false)
+		end
 	end
 end
 
@@ -986,6 +988,10 @@ function EntityData:gettargetpos()
 		local mousex, mousey = sol.input.get_mouse_position()
 		local cx, cy, cw, ch = map:get_camera_position()
 		local x, y = mousex + cx, mousey + cy
+		if x == nil then
+			print("Unable to get mouse position!")
+			x, y = 0, 0
+		end
 		return x, y
 --		return self.entity.targetx, self.entity.targety
 	else
@@ -1001,6 +1007,9 @@ function EntityData:gettargetpos()
 				x, y = target.entity:get_position()
 			else
 				x, y = target.entity:get_position()
+			end
+			if x == nil then
+				x, y = 0, 0
 			end
 			return x, y
 		end

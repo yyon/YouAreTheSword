@@ -43,16 +43,20 @@ function BackstabAbility:doability()
 end
 
 function BackstabAbility:dotick()
-	self.angle = self.angle + math.pi / self.step
-	self.d = self.d - self.dd
-	local x, y = self.target.entity:get_position()
-	x, y = x + math.cos(self.angle)*self.d, y - math.sin(self.angle)*self.d
-
-	local canmoveto = self.entitydata:canmoveto(x, y)
-	if not canmoveto then
-		self:finish(true)
+	if self.target.entity == nil then
+		self:cancel()
 	else
-		self.entitydata.entity:set_position(x, y)
+		self.angle = self.angle + math.pi / self.step
+		self.d = self.d - self.dd
+		local x, y = self.target.entity:get_position()
+		x, y = x + math.cos(self.angle)*self.d, y - math.sin(self.angle)*self.d
+
+		local canmoveto = self.entitydata:canmoveto(x, y)
+		if not canmoveto then
+			self:finish(true)
+		else
+			self.entitydata.entity:set_position(x, y)
+		end
 	end
 end
 

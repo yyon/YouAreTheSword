@@ -26,10 +26,12 @@ end
 
 function entity:oncollision(entity2, sprite1, sprite2)
 	if entity2.entitydata ~= nil then
-		if self.collided[entity2] == nil then
-			self.collided[entity2] = true
+		if self:get_distance(entity2) < 80 then
+			if self.collided[entity2] == nil then
+				self.collided[entity2] = true
 
-			self.ability:attack(entity2)
+				self.ability:attack(entity2)
+			end
 		end
 	end
 end

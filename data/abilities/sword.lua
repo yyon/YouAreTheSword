@@ -3,6 +3,8 @@ local Ability = require "abilities/ability"
 
 local Effects = require "enemies/effect"
 
+local math = require "math"
+
 --[[
 Effects = require "enemies/effect"
 FireEffect = Effects.PhysicalEffect:subclass("SwordSwinging")
@@ -108,9 +110,11 @@ function SwordAbility:gettransform(entity)
 		entity = self.entitydata.entity
 	end
 
-	if entity.ishero then
-		if entity.swordtransform ~= nil then
-			return entity.swordtransform
+	if entity ~= nil then
+		if entity.ishero then
+			if entity.swordtransform ~= nil then
+				return entity.swordtransform
+			end
 		end
 	end
 
