@@ -45,12 +45,13 @@ function entity:start()
 	self:add_collision_test("sprite", self.oncollision)
 	self.ticker = Effects.Ticker(self.ability.entitydata, 100, function() self:tick() end)
 	self.timer = Effects.SimpleTimer(self.ability.entitydata, 3000, function() self:finish() end)
+	
+	sol.audio.play_sound("blackhole")
 end
 
 PARTICLEDIST = 400
 
 function entity:tick()
-	sol.audio.play_sound("blackhole")
 	x, y = self:get_position()
 	for i = 1,math.random(1,3) do
 		newx, newy = x + math.random(-PARTICLEDIST, PARTICLEDIST), y + math.random(-PARTICLEDIST, PARTICLEDIST)
