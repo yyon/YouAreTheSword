@@ -723,6 +723,22 @@ function EntityData:kill()
 		direction=0
 	})
 
+	if self.usingability then
+		self.usingability:cancel()
+	end
+
+	if self.entity ~= nil then
+		self.entity.entitydata = nil
+
+		if self:getremainingadventurers(true) <= 0 then
+			self:swordkill()
+		end
+	end
+
+	for key, effect in pairs(self.effects) do
+		effect:forceremove()
+	end
+	
 	if theishero then
 		-- drop sword
 		self:drop()
@@ -734,22 +750,6 @@ function EntityData:kill()
 		local freezeeffect = Effects.FreezeEffect:new(self)
 --		self.entity:set_life(0)
 		self.entity:remove()
-	end
-
-	for key, effect in pairs(self.effects) do
-		effect:forceremove()
-	end
-
-	if self.usingability then
-		self.usingability:cancel()
-	end
-
-	if self.entity ~= nil then
-		self.entity.entitydata = nil
-
-		if self:getremainingadventurers(true) <= 0 then
-			self:swordkill()
-		end
 	end
 
 	self.entity = nil

@@ -140,11 +140,12 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	local x, y = hero.entitydata:gettargetpos()
 
-	if x ~= nil then
-		hero:set_direction(hero:get_direction4_to(x, y))
---		hero.targetx = x
---		hero.targety = y
+	if x == nil then
+		print("COULDN'T FIND MOUSE")
+		return
 	end
+
+	hero:set_direction(hero:get_direction4_to(x, y))
 
 	if hero:get_state() ~= "freezed" then
 		if key == "space" then
