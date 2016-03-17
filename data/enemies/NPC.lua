@@ -170,8 +170,11 @@ function GoTowardsState:tick()
 		end
 	end
 
-	local x, y = target.entity:get_position()
-	if target ~= nil then
+	if target ~= nil and target.entity ~= nil then
+		local x, y = target.entity:get_position()
+		local d = self.npc:get_direction4_to(target.entity)
+		self.npc:setdirection(d)
+
 		if self.npc.entitydata.entity:get_distance(target.entity) < 20 then
 			if self.movement ~= nil then
 				self.movement:stop()
