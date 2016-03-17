@@ -887,10 +887,15 @@ function EntityData:throwsword(entitydata2)
 		end
 
 		function movement:on_position_changed()
-			local d = hero:get_distance(entitydata2.entity)
-			if d < 30 then
+			if entitydata2.entity == nil then
 				self:stop()
-				entitydata2:bepossessedbyhero()
+				EntityData:drop(hero)
+			else
+				local d = hero:get_distance(entitydata2.entity)
+				if d < 30 then
+					self:stop()
+					entitydata2:bepossessedbyhero()
+				end
 			end
 		end
 	end
