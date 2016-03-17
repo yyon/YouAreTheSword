@@ -197,6 +197,29 @@ function GoTowardsState:vartorecord()
 	return self.npc.entitytoattack
 end
 
+GoAwayState = GoTowardsState:subclass("GoAwayState")
+
+function GoAwayState:start()
+	if self.npc.entitytoattack ~= nil then
+		x, y = self.npc:getblockposition(self.npc.entitytoattack, true)
+		
+		local movement = sol.movement.create("target")
+		movement:set_speed(self.npc.entitydata.stats.movementspeed)
+		movement:set_target(x,y)
+		movement:set_smooth(true)
+		movement:start(self.npc)
+		
+		if self.npc.entitydata ~= nil then
+			Effects.SimpleTimer(self.npc.entitydata, 200, function() self.npc:tick() end)
+		end
+	end
+end
+
+StandAndAttackState = GoTowardsState:subclass("StandAndAttackState")
+
+function StandAndAttackState:start()
+end
+
 PickupState = State:subclass("PickupState")
 
 function PickupState:start()
@@ -244,6 +267,8 @@ function enemy:on_created()
 	self.frozenstate = FrozenState:new(self)
 	self.pickupstate = PickupState:new(self)
 	self.donothingstate = DoNothingState:new(self)
+	self.goawaystate = GoAwayState:new(self)
+	self.standandattackstate = StandAndAttackState:new(self)
 end
 
 function enemy:load_entitydata()
@@ -372,7 +397,16 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	if entitytoattack.isdropped then
 		return self.pickupstate
 	end
-
+	
+	if entitytoattack ~= nil then
+		d = self:get_distance(entitytoattack)
+		if d < 20 then
+			return self.goawaystate
+		elseif d < 40 then
+			return self.standandattackstate
+		end
+	end
+	
 	return self.gotowardsstate
 end
 
@@ -604,13 +638,21 @@ end
 
 BLOCKJUMP = 100
 
-function enemy:getblockposition(target)
+function enemy:getblockposition(target, backwards)
 	angle = self:get_angle(target.entity)
-	if math.random(1,2) == 1 then
-		angle = angle + math.pi/2
+	if backwards then
+		angle = angle + math.pi
 	else
-		angle = angle - math.pi/2
+		r = math.random(1,3)
+		if r == 1 then
+			angle = angle + math.pi/2
+		elseif r == 2 then
+			angle = angle + math.pi
+		else
+			angle = angle - math.pi/2
+		end
 	end
+	
 	
 	x, y = self:get_position()
 	x, y = x + math.cos(angle)*BLOCKJUMP, y + math.sin(angle)*BLOCKJUMP

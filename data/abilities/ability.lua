@@ -28,6 +28,8 @@ function Ability:start(...)
 	self.caughttargets = {}
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 	
+	self.uncatched = false
+	
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation(self.warmupanimation)
 	end
@@ -173,6 +175,8 @@ function Ability:withinrange(tox, toy)
 end
 
 function Ability:catch(target, dontend)
+	if self.uncatched then print("ERROR! double uncatch!", self.name) end
+	self.uncatched = true
 	if target.caught or target.isbeingknockedback then
 		if not dontend then
 			return false
