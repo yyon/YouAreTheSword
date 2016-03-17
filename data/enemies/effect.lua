@@ -77,7 +77,8 @@ function Effect:getgame()
 		if self.entitydata.entity ~= nil then
 			return self.entitydata.entity:get_game()
 		else
-			print(debug.traceback())
+			print("effect called without entity", debug.traceback())
+			return game
 		end
 	end
 end

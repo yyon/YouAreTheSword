@@ -258,10 +258,12 @@ function sol.main:on_mouse_pressed(button, ...)
 
 	hero = game:get_hero()
 	if hero:get_state() ~= "freezed" then
-		if button == "right" then
-			hero.entitydata:throwclosest(x, y)
-		elseif button == "left" then
+		if button == "left" then
 			hero.entitydata:startability("special", x, y)
+		elseif button == "right" then
+			hero.entitydata:throwclosest(true)
+		elseif button == "middle" then
+			hero.entitydata:throwclosest(false)
 		end
 	end
 end

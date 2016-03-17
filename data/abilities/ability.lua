@@ -52,7 +52,7 @@ function Ability:finishwarmup()
 		-- no errors
 	else
 		print("ERROR in calling ability!", self.name)
-		print(debug.traceback())
+		print(debug.traceback(err))
 		print(err)
 		self:remove()
 	end

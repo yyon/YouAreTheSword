@@ -955,7 +955,7 @@ function EntityData:getclosestentity(x, y, isenemy, funct)
 	return minentity
 end
 
-function EntityData:throwclosest(mousex, mousey)
+function EntityData:throwclosest(isally)
 	-- throw the sword to the person closest to the mouse
 
 --[[
@@ -970,7 +970,19 @@ function EntityData:throwclosest(mousex, mousey)
 --]]
 
 	local x, y = self:gettargetpos()
-	local entity = self:getclosestentity(x, y, false, function(entitydata) return not entitydata.cantpossess end)
+	local entity = self:getclosestentity(x, y, false,
+		function(entitydata)
+			if entitydata.cantpossess then
+				return false
+			end
+			if isally == true and entitydata.team ~= "adventurer" then
+				return false
+			end
+			if isally == false and entitydata.team == "adventurer" then
+				return false
+			end
+			return true
+		end)
 	local hero = self.entity
 	if entity ~= nil then
 		if hero.entitydata ~= nil then
