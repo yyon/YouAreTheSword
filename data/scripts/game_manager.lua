@@ -252,13 +252,18 @@ function tick()
 				if entity.get_destination_map ~= nil then
 					if hero:overlaps(entity) then
 						if game.bypassteleport or hero.entitydata:getremainingmonsters() == 0 then
+							for entity in hero:get_map():get_entities("") do
+								entity.removed = true
+							end
+							
 							if hero:get_map().effects ~= nil then
 								while true do
 									foundeffect = false
 									for effect, b in pairs(hero:get_map().effects) do
+										print("Removing effect", effect:getkey())
 										foundeffect = true
-										effect:remove()
-										hero:get_map().effects[effect] = nil -- just to make sure
+										effect:forceremove()
+										hero:get_map().effects[effect:getkey()] = nil -- just to make sure
 									end
 									if not foundeffect then
 										break

@@ -420,6 +420,7 @@ end
 
 function enemy:tick(newstate)
 	if not self:exists() then return end
+	if self.removed then return end
 	
 	if self.entitydata ~= nil and not game:is_paused() and not game:is_suspended() then
 	
