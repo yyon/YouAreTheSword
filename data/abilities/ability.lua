@@ -48,7 +48,7 @@ function Ability:finishwarmup()
 	end
 
 	self.usingability = true
-	local status, err = xpcall(function() self:doability(unpack(self.args)) end, function() print(debug.traceback()); print(debug.getinfo(2).source); print(debug.getinfo(2).currentline); debug.debug() end)
+	local status, err = xpcall(function() self:doability(unpack(self.args)) end, function() print(debug.traceback()) end)
 	if status then
 		-- no errors
 		self.finisheddoability = true
