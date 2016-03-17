@@ -121,8 +121,6 @@ end
 
 function EntityData:applytoentity()
 	-- changes entities appearance to reflect self
-	print("APPLYING TO ENTITY", self.entity.ishero, debug.traceback())
-
 	self.entity.entitydata = self
 	self.entity.team = self.team
 
@@ -738,7 +736,7 @@ function EntityData:kill()
 	for key, effect in pairs(self.effects) do
 		effect:forceremove()
 	end
-	
+
 	if theishero then
 		-- drop sword
 		self:drop()
@@ -800,7 +798,6 @@ function EntityData:drop(hero)
 
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
-		print("DROPPING SWORD")
 		hero.entitydata = nil
 		hero:set_animation("stopped")
 		hero:set_tunic_sprite_id("abilities/droppedsword")

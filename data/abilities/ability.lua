@@ -28,6 +28,7 @@ function Ability:start(...)
 	self.caughttargets = {}
 	self.uncatched = false
 	self.inability = false
+	self.finisheddoability = false
 
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 
@@ -47,9 +48,10 @@ function Ability:finishwarmup()
 	end
 
 	self.usingability = true
-	local status, err = xpcall(function() self:doability(unpack(self.args)) end, function() print(debug.traceback()) end)
+	local status, err = xpcall(function() self:doability(unpack(self.args)) end, function() print(debug.traceback()); print(debug.getinfo(2).source); print(debug.getinfo(2).currentline); debug.debug() end)
 	if status then
 		-- no errors
+		self.finisheddoability = true
 	else
 		print("ERROR in calling ability!", self.name)
 		print(err)
@@ -59,12 +61,10 @@ end
 
 local COOLDOWNTICKTIME = 50
 
-function Ability:finishability(skipcooldown, canceledduringwarmup)
+function Ability:finishability(skipcooldown)
 	-- cleans up the ability to be able to use it again
-	if not canceledduringwarmup then
-		if self.caughtduringabilityuse then
-			self:uncatch()
-		end
+	if self.caughtduringabilityuse then
+		self:uncatch()
 	end
 
 	self.inability = false
@@ -129,15 +129,17 @@ end
 
 function Ability:cancel()
 	-- call this to cancel the ability. Rarely used.
-	if self.usingwarmup then
-		self.usingwarmup = false
-		self.warmuptimer:stop()
+	if not self.finisheddoability then
+		if self.usingwarmup then
+			self.usingwarmup = false
+			self.warmuptimer:stop()
+		end
 		self.canuse = true
 		self:finishability(true)
 	elseif self.inability then
 --		self.entitydata:log("Ability canceled:", self.name)
 		self:oncancel()
-		self:finishability(false, true)
+		self:finishability(false)
 --		self.cooldowntimer:remove()
 	end
 end
@@ -181,7 +183,7 @@ function Ability:withinrange(tox, toy)
 end
 
 function Ability:catch(target, dontend)
-	if target.caught or target.isbeingknockedback then
+	if target == nil or target.caught or target.isbeingknockedback then
 		if dontend then
 			return false
 		else

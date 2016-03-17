@@ -6,6 +6,8 @@ function entity:on_created()
 end
 
 function entity:start(ability, target, playsound)
+	if target == nil or target.entity == nil then self:remove(); return end
+
 	self.ability = ability
 	self:set_optimization_distance(0)
 
@@ -50,6 +52,8 @@ function entity:oncollision(entity2, sprite1, sprite2)
 end
 
 function entity:heal()
+	if self.target.entity == nil then return end
+
 	if self.playsound then sol.audio.play_sound("replenish") end
 	self.ability:heal(self.target)
 end

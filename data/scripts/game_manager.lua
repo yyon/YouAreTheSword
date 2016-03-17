@@ -49,6 +49,17 @@ function sol.main:on_key_pressed(key, modifiers)
 			print("cheat: invincibility")
 			game.nodeaths = true
 		end
+	elseif key == "b" then
+		print("cheat: catch everyone")
+		for entity in game:get_map():get_entities("") do
+			if entity.entitydata ~= nil then
+				print("caught", entity.entitydata.theclass)
+				entity.entitydata.caught = true
+			end
+		end
+		if hero.entitydata ~= nil then
+			hero.entitydata.caught = true
+		end
 	elseif key == "j" then
 		if game.nocooldown then
 			print("ended cheat: no cooldown")
@@ -56,6 +67,32 @@ function sol.main:on_key_pressed(key, modifiers)
 		else
 			print("cheat: cooldown")
 			game.nocooldown = true
+		end
+	elseif key == "[" then
+		massacre = {}
+		for entity in game:get_map():get_entities("") do
+			if entity.entitydata ~= nil then
+				local theclassname = entity.entitydata.class.name
+				local x, y = entity:get_position()
+				massacre[theclassname] = {x=x,y=y}
+				entity.entitydata:kill()
+			end
+		end
+	elseif key == "]" then
+		for theclassname, pos in pairs(massacre) do
+			local map = hero:get_map()
+
+			local newentity = map:create_enemy({
+				breed="enemy_constructor",
+				layer=0,
+				x=pos.x,
+				y=pos.y,
+				direction=0
+			})
+
+			local angelentitydata = _EntityDatas[theclassname]:new()
+			angelentitydata.entity = newentity
+			angelentitydata:applytoentity()
 		end
 	elseif key == "z" then
 		if game.bypassteleport then

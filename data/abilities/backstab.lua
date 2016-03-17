@@ -16,11 +16,12 @@ end
 function BackstabAbility:doability()
 	local tox, toy = self.entitydata:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy, true)
-	if self.target == nil then
-		self:finish(true)
-		return
-	end
+--	if self.target == nil then
+--		self:finish(true)
+--		return
+--	end
 
+	if not self:catch(self.target) then return end
 
 	self.target.entity.cantrotate = true
 
@@ -75,7 +76,9 @@ end
 function BackstabAbility:onfinish()
 	self.entitydata.entity:stop_movement()
 
-	self.target.entity.cantrotate = nil
+	if self.target.entity ~= nil then
+		self.target.entity.cantrotate = nil
+	end
 
 	self.ticker:remove()
 	self.timer:stop()
