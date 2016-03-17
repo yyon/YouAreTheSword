@@ -175,8 +175,6 @@ function Ability:withinrange(tox, toy)
 end
 
 function Ability:catch(target, dontend)
-	if self.uncatched then print("ERROR! double uncatch!", self.name) end
-	self.uncatched = true
 	if target.caught or target.isbeingknockedback then
 		if not dontend then
 			return false
@@ -192,6 +190,8 @@ function Ability:catch(target, dontend)
 end
 
 function Ability:uncatch()
+	if self.uncatched then print("ERROR! double uncatch!", self.name) end
+	self.uncatched = true
 	for entitydata, b in pairs(self.caughttargets) do
 		entitydata.caught = false
 	end

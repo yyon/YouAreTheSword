@@ -39,9 +39,6 @@ function TransformAbility:doability()
 	self.entitydata.entity.swordtransform = self.transform
 
 	sol.audio.play_sound("enchant2")
-	sol.audio.play_sound("enchant2")
-	sol.audio.play_sound("enchant2")
-	sol.audio.play_sound("enchant2")
 	
 	self:finish()
 end
