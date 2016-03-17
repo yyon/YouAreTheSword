@@ -81,7 +81,7 @@ function Ability:finishability(skipcooldown, canceledduringwarmup)
 
 	self.usingcooldown = true
 
-	if skipcooldown then
+	if skipcooldown or game.nocooldown then
 		self:finishcooldown(skipcooldown)
 	else
 		self.cooldowntimer = Effects.SimpleTimer(self.entitydata, self.cooldown * self.entitydata.stats.cooldown, function() self:finishcooldown() end)

@@ -121,6 +121,8 @@ end
 
 function EntityData:applytoentity()
 	-- changes entities appearance to reflect self
+	print("APPLYING TO ENTITY", self.entity.ishero, debug.traceback())
+
 	self.entity.entitydata = self
 	self.entity.team = self.team
 
@@ -207,6 +209,10 @@ function EntityData:unpossess()
 	})
 
 	self.entity = newentity
+
+	if self.entity.ishero then
+		print("ERROR: new entity is hero")
+	end
 
 	self:applytoentity()
 
@@ -705,16 +711,29 @@ function EntityData:kill()
 
 	local theishero = self.entity.ishero
 
+	local x,y,layer = self.entity:get_position()
+	sol.audio.play_sound("enemy_killed")
+
+	local map = self.entity:get_map()
+	map:create_custom_entity({
+		model="death",
+		layer=2,
+		x=x,
+		y=y,
+		direction=0
+	})
+
 	if theishero then
 		-- drop sword
 		self:drop()
 
-		local newentity = self:unpossess()
-		newentity.entitydata:kill()
+--		local newentity = self:unpossess()
+--		newentity.entitydata:kill()
 	else
 --		self:freeze()
 		local freezeeffect = Effects.FreezeEffect:new(self)
-		self.entity:set_life(0)
+--		self.entity:set_life(0)
+		self.entity:remove()
 	end
 
 	for key, effect in pairs(self.effects) do
@@ -781,6 +800,7 @@ function EntityData:drop(hero)
 
 	if hero == nil then hero = self.entity end
 	if hero.ishero then
+		print("DROPPING SWORD")
 		hero.entitydata = nil
 		hero:set_animation("stopped")
 		hero:set_tunic_sprite_id("abilities/droppedsword")
@@ -788,6 +808,8 @@ function EntityData:drop(hero)
 		hero.isdropped = true
 
 		Effects.SimpleTimer(hero:get_game(), 10000, function() self:emergencyrescuehero(hero) end)
+	else
+		print("ERROR: drop called not on hero")
 	end
 end
 

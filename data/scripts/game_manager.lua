@@ -49,6 +49,14 @@ function sol.main:on_key_pressed(key, modifiers)
 			print("cheat: invincibility")
 			game.nodeaths = true
 		end
+	elseif key == "j" then
+		if game.nocooldown then
+			print("ended cheat: no cooldown")
+			game.nocooldown = nil
+		else
+			print("cheat: cooldown")
+			game.nocooldown = true
+		end
 	elseif key == "z" then
 		if game.bypassteleport then
 			print("ended cheat: bypass teleport")
@@ -63,7 +71,9 @@ function sol.main:on_key_pressed(key, modifiers)
 		hero.entitydata:kill()
 	elseif key == ":" then
 		print("cheat: resurrected")
-		lastentitydata:bepossessedbyhero()
+		if lastentitydata ~= nil then
+			lastentitydata:bepossessedbyhero()
+		end
 	elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
 		if hero:get_walking_speed() == 500 then
 			print("ended cheat: fast walk")
