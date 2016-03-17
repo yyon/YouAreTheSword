@@ -59,7 +59,11 @@ function sol.main:on_key_pressed(key, modifiers)
 		end
 	elseif key == "k" then
 		print("cheat: dropped sword")
+		lastentitydata = hero.entitydata
 		hero.entitydata:kill()
+	elseif key == ":" then
+		print("cheat: resurrected")
+		lastentitydata:bepossessedbyhero()
 	elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
 		if hero:get_walking_speed() == 500 then
 			print("ended cheat: fast walk")

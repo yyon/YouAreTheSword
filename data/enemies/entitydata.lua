@@ -150,7 +150,7 @@ end
 function EntityData:bepossessedbyhero()
 	-- control this entitydata
 
-	local hero = self.entity:get_game():get_hero()
+	local hero = game:get_hero()
 
 	hero.souls = hero.souls + 1
 	if hero.souls > 1 then hero.souls = 1 end
@@ -164,10 +164,12 @@ function EntityData:bepossessedbyhero()
 
 	hero.entitydata = self
 
-	hero:set_position(self.entity:get_position())
-	hero:set_direction(self.entity.direction)
+	if self.entity ~= nil then
+		hero:set_position(self.entity:get_position())
+		hero:set_direction(self.entity.direction)
 
-	self.entity:remove()
+		self.entity:remove()
+	end
 
 	self.entity = hero
 	self:applytoentity()
@@ -717,6 +719,10 @@ function EntityData:kill()
 
 	for key, effect in pairs(self.effects) do
 		effect:forceremove()
+	end
+
+	if self.usingability then
+		self.usingability:cancel()
 	end
 
 	if self.entity ~= nil then
