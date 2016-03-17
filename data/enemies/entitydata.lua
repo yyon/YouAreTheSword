@@ -1016,6 +1016,17 @@ function EntityData:gettargetpos()
 	end
 end
 
+function EntityData:isonscreen(border)
+	if border == nil then border = 0 end
+
+	local x, y = self.entity:get_position()
+	local map = self.entity:get_map()
+	local cx, cy, cw, ch = map:get_camera_position()
+	local cl, cb = cx+cw, cy+ch
+
+	return (x >= cx-border and y >= cy-border and x <= cl+border and y <= cb+border)
+end
+
 function EntityData:getremainingmonsters()
 	local enemiesremaining = 0
 

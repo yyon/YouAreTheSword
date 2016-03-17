@@ -3,6 +3,7 @@ properties{
   y = 0,
   width = 1280,
   height = 720,
+  floor = 0,
   tileset = "tileset2",
 }
 

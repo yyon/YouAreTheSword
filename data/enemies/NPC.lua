@@ -379,7 +379,8 @@ end
 function enemy:determinenewstate(entitytoattack, currentstate)
 	local hero = self:get_game():get_hero()
 
-	if self:get_distance(hero) > 700 and not self.hasbeenhit then
+--	if self:get_distance(hero) > 700 and not self.hasbeenhit then
+	if self:get_map():get_floor() ~= 0 and not self.entitydata:isonscreen(200) then
 		return self.donothingstate
 	end
 
