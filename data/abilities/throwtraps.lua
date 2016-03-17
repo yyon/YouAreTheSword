@@ -39,9 +39,11 @@ function TrapsAbility:attack(entity, trapentity)
 		return
 	end
 
+	self.shieldentity:remove()
+
 	local entitydata = entity.entitydata
 
-	local damage = 2
+	local damage = 20
 	local aspects = {}
 	aspects.stun = 2000
 	aspects.knockback = 0

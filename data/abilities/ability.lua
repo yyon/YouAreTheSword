@@ -47,12 +47,11 @@ function Ability:finishwarmup()
 	end
 
 	self.usingability = true
-	local status, err = pcall(function() self:doability(unpack(self.args)) end)
+	local status, err = xpcall(function() self:doability(unpack(self.args)) end, function() print(debug.traceback()) end)
 	if status then
 		-- no errors
 	else
 		print("ERROR in calling ability!", self.name)
-		print(debug.traceback(err))
 		print(err)
 		self:remove()
 	end

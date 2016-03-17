@@ -22,6 +22,8 @@ http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator
 	angel (base) -
 http://opengameart.org/content/lpc-skorpios-scifi-sprite-pack-0
 	mech
+https://pixabay.com/static/uploads/photo/2012/04/14/12/52/trap-33819_960_720.png
+	trap
 		
 
 http://opengameart.org/content/jastivs-artwork

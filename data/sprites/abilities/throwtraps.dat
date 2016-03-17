@@ -2,6 +2,6 @@ animation{
   name = "stopped",
   src_image = "abilities/throwtraps.png",
   directions = {
-    { x = 0, y = 0, frame_width = 32, frame_height = 32, origin_x = 8, origin_y = 8 },
+    { x = 0, y = 0, frame_width = 50, frame_height = 32, origin_x = 25, origin_y = 16 },
   },
 }
