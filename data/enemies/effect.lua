@@ -171,6 +171,7 @@ PhysicalEffect = Effect:subclass("PhysicalEffect")
 
 function PhysicalEffect:start(time)
 	w,h = self.entitydata.entity:get_size()
+	x, y = self.entitydata.entity:get_position()
 
 	paentity = map:create_custom_entity({model="physicaleffect", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	paentity:start(self, self:getspritename())
