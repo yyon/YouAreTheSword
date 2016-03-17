@@ -41,7 +41,15 @@ function Ability:finishwarmup()
 	end
 	
 	self.usingability = true
-	self:doability(unpack(self.args))
+	local status, err = pcall(function() self:doability(unpack(self.args)) end)
+	if status then
+		-- no errors
+	else
+		self:remove()
+		print("ERROR in calling ability!")
+		print(debug.traceback())
+		print(err)
+	end
 end
 
 COOLDOWNTICKTIME = 50
