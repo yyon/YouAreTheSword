@@ -4,6 +4,7 @@ map{ id = "Ian's Test Dungeon/3", description = "3" }
 map{ id = "Ian's Test Dungeon/4", description = "4" }
 map{ id = "Ian's Test Dungeon/5", description = "5" }
 map{ id = "Ian's Test Dungeon/6", description = "6" }
+map{ id = "catmap", description = "catmap" }
 map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "hub", description = "hub" }
 map{ id = "magebossmap", description = "magebossmap" }
@@ -59,6 +60,9 @@ sprite{ id = "bosses/abilities/beams", description = "beams" }
 sprite{ id = "bosses/abilities/bluebeam", description = "bluebeam" }
 sprite{ id = "bosses/abilities/greenbeam", description = "greenbeam" }
 sprite{ id = "bosses/abilities/tentacles", description = "tentacles" }
+sprite{ id = "bosses/cat-1", description = "cat" }
+sprite{ id = "bosses/cat-2", description = "cat2" }
+sprite{ id = "bosses/cat-3", description = "cat-3" }
 sprite{ id = "bosses/dunsmur-1", description = "dunsmur-1" }
 sprite{ id = "bosses/dunsmur-2", description = "dunsmur-2" }
 sprite{ id = "bosses/dunsmur-3", description = "dunsmur-3" }
@@ -276,6 +280,7 @@ enemy{ id = "e_spider", description = "e_Spider" }
 enemy{ id = "e_wolf", description = "e_Wolf" }
 enemy{ id = "e_worm", description = "e_Worm" }
 enemy{ id = "ez_BOSSES/bosses", description = "BOSSES" }
+enemy{ id = "f_cat", description = "f_Cat" }
 enemy{ id = "f_dunsmur", description = "f_Duns_Mur" }
 enemy{ id = "f_mage_boss", description = "f_Mage_Boss" }
 enemy{ id = "f_spaceship", description = "f_Spaceship" }
@@ -287,6 +292,7 @@ entity{ id = "blackhole", description = "blackhole" }
 entity{ id = "blackholeparticle", description = "blackholeparticle" }
 entity{ id = "bomb", description = "bomb" }
 entity{ id = "boulder", description = "boulder" }
+entity{ id = "catattack", description = "catattack" }
 entity{ id = "charge", description = "charge" }
 entity{ id = "directionaltrap", description = "directionaltrap" }
 entity{ id = "fireball", description = "fireball" }

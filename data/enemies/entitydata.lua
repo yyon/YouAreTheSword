@@ -39,6 +39,7 @@ local SpaceShipProjectile4Ability = require "abilities/spaceshipproj4"
 local SpaceShipProjectile5Ability = require "abilities/spaceshipproj5"
 local SpaceShipProjectile6Ability = require "abilities/spaceshipproj6"
 local GunAbility = require "abilities/gun"
+local CatKickAbility = require "abilities/catkick"
 
 local Effects = require "enemies/effect"
 
@@ -1710,6 +1711,44 @@ function mageboss:stage3()
 	self.main_sprite = "bosses/mage-3"
 	self.blockability = TeleportAbility:new(self)
 	self.specialability = TentacleAbility:new(self)
+end
+
+
+local catboss = EntityData:subclass("catboss")
+allclasses.catboss = catboss
+
+function catboss:initialize(entity)
+	local class = "Cat (Boss)"
+	local main_sprite = "bosses/cat-1"
+	local life = 200
+	local team = "boss" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {CatKickAbility:new(self)}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {SidestepAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {movementspeed=150}
+--	self.cantpossess=true
+	self.cantdraweyes = true
+
+	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
+
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function catboss:getdirection()
+	local d = EntityData.getdirection(self)
+	if d == 1 then d = 0 end
+	if d == 3 then d = 2 end
+	return d
+end
+
+function catboss:stage2()
+	self.main_sprite = "bosses/cat-2"
+end
+
+function catboss:stage3()
+	self.main_sprite = "bosses/cat-3"
 end
 
 

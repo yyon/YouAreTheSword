@@ -1,0 +1,82 @@
+animation{
+  name = "stopped",
+  src_image = "bosses/cat.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 1088, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 1088, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+  },
+}
+animation{
+  name = "invisible",
+  src_image = "bosses/cat.png",
+  directions = {
+    { x = 0, y = 1024, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 1024, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 1024, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 0, y = 1024, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
+  name = "kick",
+  src_image = "bosses/cat.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 320, y = 448, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
+    { x = 320, y = 448, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
+    { x = 320, y = 1536, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
+    { x = 320, y = 1536, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
+  },
+}
+animation{
+  name = "kick-end",
+  src_image = "bosses/cat.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 448, y = 448, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 448, y = 448, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 448, y = 1536, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+    { x = 448, y = 1536, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60 },
+  },
+}
+animation{
+  name = "kick-ready",
+  src_image = "bosses/cat.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 448, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 5 },
+    { x = 0, y = 448, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 5 },
+    { x = 0, y = 1536, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 5 },
+    { x = 0, y = 1536, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 5 },
+  },
+}
+animation{
+  name = "pushing",
+  src_image = "bosses/cat.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+    { x = 0, y = 1152, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+    { x = 0, y = 1152, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+  },
+}
+animation{
+  name = "walking",
+  src_image = "bosses/cat.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+    { x = 0, y = 64, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+    { x = 0, y = 1152, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+    { x = 0, y = 1152, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 8 },
+  },
+}

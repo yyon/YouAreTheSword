@@ -26,7 +26,7 @@ tile{
 
 tile{
   layer = 0,
-  x = 544,
+  x = 568,
   y = 128,
   width = 32,
   height = 64,
@@ -276,6 +276,15 @@ tile{
   pattern = "1282",
 }
 
+tile{
+  layer = 0,
+  x = 480,
+  y = 128,
+  width = 32,
+  height = 64,
+  pattern = "607",
+}
+
 npc{
   layer = 0,
   x = 400,
@@ -296,7 +305,7 @@ teletransporter{
 
 npc{
   layer = 0,
-  x = 560,
+  x = 584,
   y = 85,
   direction = 3,
   subtype = 1,
@@ -305,7 +314,7 @@ npc{
 
 teletransporter{
   layer = 0,
-  x = 544,
+  x = 568,
   y = 128,
   width = 32,
   height = 32,
@@ -470,5 +479,23 @@ wall{
   stops_enemies = true,
   stops_blocks = true,
   stops_projectiles = true,
+}
+
+npc{
+  layer = 0,
+  x = 496,
+  y = 117,
+  direction = 3,
+  subtype = 1,
+  sprite = "bosses/cat",
+}
+
+teletransporter{
+  layer = 0,
+  x = 480,
+  y = 128,
+  width = 32,
+  height = 32,
+  destination_map = "catmap",
 }
 

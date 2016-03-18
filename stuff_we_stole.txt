@@ -24,6 +24,7 @@ http://opengameart.org/content/lpc-skorpios-scifi-sprite-pack-0
 	mech
 https://pixabay.com/static/uploads/photo/2012/04/14/12/52/trap-33819_960_720.png
 	trap
+
 		
 
 http://opengameart.org/content/jastivs-artwork
@@ -93,6 +94,9 @@ http://opengameart.org/content/metal-interactions
 http://opengameart.org/content/futuristic-weapons-assault-rifle
 	gun
 
+http://opengameart.org/content/cat-fighter-sprite-sheet
+	cat boss
+
 music:
 http://opengameart.org/content/generic-8-bit-jrpg-soundtrack
 	8-bit
@@ -110,6 +114,12 @@ http://opengameart.org/content/battle-theme-a
 	battle theme A
 http://opengameart.org/content/heroic-demise-updated-version
 	heroic demise
+http://opengameart.org/content/techno-minutes-nes-version
+	techno minutes
+http://opengameart.org/content/sky-portal
+	sky portal
+http://opengameart.org/content/peaceful-place
+	peaceful place
 
 tilesets:
 http://opengameart.org/content/lpc-tile-atlas
