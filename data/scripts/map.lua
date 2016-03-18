@@ -2,11 +2,20 @@ local map = ...
 
 local Effects = require "enemies/effect"
 
+local foundmonster = false
 for entity in map:get_entities("") do
     if entity.get_destination_map ~= nil then
         local x, y, layer = entity:get_position()
         entity:set_position(x, y, 2)
     end
+    if entity.entitydata ~= nil then
+        if entity.entitydata.team ~= "adventurer" then
+            foundmonster = true
+        end
+    end
+end
+if not foundmonster then
+    map.nomonstersleft = true
 end
 
 function map:drawlifebar(entity)
