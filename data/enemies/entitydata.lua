@@ -511,6 +511,8 @@ function EntityData:dodamage(target, damage, aspects)
 
 	if self.entity == nil then return end
 
+	local map = self.entity:get_map()
+
 	if aspects == nil then
 		aspects = {}
 	end
@@ -665,6 +667,10 @@ function EntityData:dodamage(target, damage, aspects)
 
 	if target.life <= 0 or aspects.instantdeath or (game.instantdeath and damage ~= 0) then
 		target:kill()
+		
+		if self:getremainingmonsters() == 0 then
+			map.nomonstersleft = true
+		end
 	else
 		if target.stages ~= nil then
 			for stagelife, stagefunct in pairs(target.stages) do

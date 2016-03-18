@@ -20,7 +20,7 @@ We have no choice but to call upon the power of the sword."
 NEWSCREEN
 Cleric:
 "This isn't just your sacrifice!
-According to the legends, over 5000 soldiers lost their soul during the previous war.
+According to the legends, over 500 soldiers lost their souls during the previous war.
 If you take this sword, you will sacrifice our entire army!"
 NEWSCREEN
 Knight:
@@ -52,6 +52,14 @@ Cleric:
 NEWSCREEN
 Knight:
 "..."
+]]
+}
+
+dialog{
+  id = "sequencetest.cleric_afterwards",
+  text = [[
+Cleric:
+"Hello Mr. Sword, please don't kill me."
 ]]
 }
 

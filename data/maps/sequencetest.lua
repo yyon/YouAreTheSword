@@ -103,4 +103,5 @@ function map:testend()
 	
 	self:freezeentity(cleric)
 	self:setanim("cleric", "stopped")
+	cleric.dialog = "cleric_afterwards"
 end

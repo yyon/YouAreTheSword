@@ -195,12 +195,28 @@ function sol.main:on_key_pressed(key, modifiers)
 
 			local map = hero:get_map()
 			for entity in map:get_entities("") do
-				if entity:get_type() == "npc" then
+				if entity.dialog ~= nil then
 					if hero:get_distance(entity) < 80 then
 						if hero:get_direction4_to(entity) == hero:get_direction() then
 							didsomething = true
+							if entity.entitydata ~= nil then
+								local d = entity:get_direction4_to(hero)
+								entity.entitydata:setdirection(d)
+							end
 
-							game:start_dialog(entity:get_name())
+							game:start_dialog(entity.dialog)
+						end
+					end
+				end
+				if entity:get_type() == "npc" then
+					if hero:get_distance(entity) < 80 then
+						if hero:get_direction4_to(entity) == hero:get_direction() then
+							local name = entity:get_name()
+							if name ~= nil then
+								didsomething = true
+
+								game:start_dialog(name)
+							end
 						end
 					end
 				end
@@ -333,6 +349,7 @@ function tick()
 
 
 	local hero = game:get_hero()
+	local map = game:get_map()
 
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
 		if hero.entitydata ~= nil then
@@ -368,6 +385,9 @@ function tick()
 		if hero.entitydata.team == "monster" then
 			soulsdrop = 0.01
 		elseif hero.entitydata.team == "dunsmur" then
+			soulsdrop = 0
+		end
+		if map.nomonstersleft then
 			soulsdrop = 0
 		end
 		hero.souls = hero.souls - soulsdrop
