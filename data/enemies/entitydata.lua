@@ -793,7 +793,7 @@ function EntityData:swordkill()
 	game.hasended = true
 end
 
-function EntityData:drop(hero)
+function EntityData:drop(hero, notimer)
 	-- sword is dropped on the ground if person holding demon sword is killed
 
 	if hero == nil then hero = self.entity end
@@ -804,7 +804,9 @@ function EntityData:drop(hero)
 		hero:freeze()
 		hero.isdropped = true
 
-		Effects.SimpleTimer(hero:get_game(), 10000, function() self:emergencyrescuehero(hero) end)
+		if not notimer then
+			Effects.SimpleTimer(hero:get_game(), 10000, function() self:emergencyrescuehero(hero) end)
+		end
 	else
 		print("ERROR: drop called not on hero")
 	end
@@ -1024,6 +1026,11 @@ end
 function EntityData:gettargetpos()
 	-- returns the mouse pointer position if hero
 	-- returns AI aiming position if AI
+
+	if self.manualtarget ~= nil then
+		local x, y = self.manualtarget.entity:get_position()
+		return x, y
+	end
 
 	if self.entity.ishero then
 		local map = self.entity:get_map()

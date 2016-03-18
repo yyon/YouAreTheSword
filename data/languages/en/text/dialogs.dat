@@ -8,6 +8,16 @@ and blow everything up!
 }
 
 dialog{
+  id = "opening",
+  text = [[
+knight
+"This war has gone on for far too long. 
+There has been too many casualties. 
+We have no choice but to call upon the power of the sword."
+]]
+}
+
+dialog{
   id = "test",
   text = [[
 Hello, this is a test dialog!

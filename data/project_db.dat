@@ -9,6 +9,7 @@ map{ id = "hub", description = "hub" }
 map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "misc_testing", description = "misc_testing" }
+map{ id = "sequencetest", description = "sequencetest" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
@@ -310,7 +311,7 @@ entity{ id = "tentacle", description = "tentacle" }
 
 language{ id = "en", description = "English" }
 
-font{ id = "8_bit", description = "8_bit" }
 font{ id = "8_bit_2", description = "8_bit_2" }
+font{ id = "8_bit", description = "8_bit" }
 font{ id = "minecraftia", description = "minecraftia" }
 

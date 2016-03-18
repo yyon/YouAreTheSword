@@ -23,6 +23,8 @@ require "pickle"
 local os = require "os"
 local dvorak = os.getenv("USER") == "yyon" -- TODO: keyboard config
 
+local Effects = require "enemies/effect"
+
 require "profiler"
 
 function game_manager:start_game()
@@ -195,7 +197,6 @@ function sol.main:on_key_pressed(key, modifiers)
 						if hero:get_direction4_to(entity) == hero:get_direction() then
 							didsomething = true
 
-							game.doingdialog = true
 							game:start_dialog(entity:get_name())
 						end
 					end
@@ -264,7 +265,7 @@ function sol.main:on_key_pressed(key, modifiers)
           end
 end
 
-function  sol.main:on_key_released(key, modifiers)
+function sol.main:on_key_released(key, modifiers)
 	local hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
@@ -474,6 +475,14 @@ function load()
 
 	local exists = sol.game.exists(savefile)
 	game = sol.game.load(savefile)
+
+	game.actually_start_dialog = game.start_dialog
+	function game:start_dialog(...)
+		game.doingdialog = true
+		game:actually_start_dialog(...)
+	end
+	game.startdialog = game.start_dialog
+
 	if not exists then
 		-- Initialize a new savegame.
 		game:set_max_life(12)
@@ -555,86 +564,7 @@ function load()
 	function game:on_map_changed(map)
 		save()
 
-		for entity in map:get_entities("") do
-			if entity.get_destination_map ~= nil then
-				local x, y, layer = entity:get_position()
-				entity:set_position(x, y, 2)
-			end
-		end
-
-		function map:drawlifebar(entity)
-				if entity.entitydata ~= nil then
-					local x, y = entity:get_position()
-
-					if entity.entitydata.effects["possess"] ~= nil then
-						if entity.eyessprite == nil then
-							entity.eyessprite = sol.sprite.create("adventurers/eyes")
-						end
-
-						local anim = entity.main_sprite:get_animation()
-						if entity.eyessprite:has_animation(anim) then
-							if anim ~= entity.eyessprite:get_animation() then
-								entity.eyessprite:set_animation(anim)
-							end
-							local d = entity.main_sprite:get_direction()
-							if entity.eyessprite:get_num_directions() < d then
-								d = 0
-							end
-							entity.eyessprite:set_direction(d)
-
-							map:draw_sprite(entity.eyessprite, x, y)
-						end
-					end
-
-					y = y - 65
-
-					local frame
-					if entity.entitydata.life > 0 then
-						frame = math.floor((1 - entity.entitydata.life / entity.entitydata.maxlife) * 49)
-					else
-						frame = 49
-					end
-
-					local lifebarsprite = game.lifebarsprite
-					if entity.entitydata.team == "adventurer" then
-						lifebarsprite = game.allieslifebarsprite
-					end
-					if entity.ishero then
-						lifebarsprite = game.herolifebarsprite
-					end
-					lifebarsprite:set_frame(frame)
-					map:draw_sprite(lifebarsprite, x, y)
-				end
-		end
-
-		function map:on_draw(dst_surface)
-			local hero = map:get_hero()
-			if hero.entitydata ~= nil then
-				if not hero.entitydata.cantdraweyes then
-					if hero:is_visible() then
-						local anim = hero:get_animation()
-						if hero.eyessprite:has_animation(anim) then
-							if anim ~= hero.eyessprite:get_animation() then
-								hero.eyessprite:set_animation(anim)
-							end
-							local d = hero:get_direction()
-							if hero.eyessprite:get_num_directions() < d then
-								d = 0
-							end
-							hero.eyessprite:set_direction(d)
-
-							local x, y = hero:get_position()
-							map:draw_sprite(hero.eyessprite, x, y)
-						end
-					end
-				end
-			end
-
-			self:drawlifebar(hero)
-			for entity in self:get_entities("") do
-				self:drawlifebar(entity)
-			end
-		end
+		sol.main.load_file("scripts/map")(map)
 	end
 
 	game.isgame = true
