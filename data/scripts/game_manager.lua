@@ -435,6 +435,7 @@ function save()
 	usersave.souls = hero.souls
 	usersave.swordhealth = hero.swordhealth
 	usersave.maxswordhealth = hero.maxswordhealth
+	usersave.swordtransform = hero.swordtransform
 
 	local pickleduserdata = pickle(usersave)
 	pickleduserdata = luastrsanitize(pickleduserdata)
@@ -549,6 +550,7 @@ function load()
 		hero.souls = usersave.souls
 		hero.swordhealth = usersave.swordhealth
 		hero.maxswordhealth = usersave.maxswordhealth
+		hero.swordtransform = usersave.swordtransform
 	end
 
 	if hero.entitydata == nil then

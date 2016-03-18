@@ -64,7 +64,7 @@ Cleric:
 }
 
 dialog{
-  id = "welcome_sign",
+  id = "test",
   text = [[
 Hello player!
 Welcome to the Solarus

@@ -46,8 +46,7 @@ function SwordAbility:doability()
 	local entitydata = self.entitydata
 
 	local d = entitydata:getdirection()
-
-	print("SWORD!")
+	
 	self.entitydata:setanimation("sword")
 
 	self.swordentity = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
