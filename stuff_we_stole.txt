@@ -58,6 +58,9 @@ http://opengameart.org/content/meteor-glitch
 http://opengameart.org/content/lasers-and-beams
 	spaceship lasers and beams
 
+http://opengameart.org/content/cat-fighter-sprite-sheet
+	cat boss
+
 sound effects:
 http://opengameart.org/content/rockbreaking
 	thunder
@@ -93,9 +96,8 @@ http://opengameart.org/content/metal-interactions
 	trap
 http://opengameart.org/content/futuristic-weapons-assault-rifle
 	gun
-
-http://opengameart.org/content/cat-fighter-sprite-sheet
-	cat boss
+http://opengameart.org/content/4-projectile-launches
+	cat projectile
 
 music:
 http://opengameart.org/content/generic-8-bit-jrpg-soundtrack

@@ -58,6 +58,7 @@ sprite{ id = "adventurers/rogue", description = "rogue" }
 sprite{ id = "adventurers/shield", description = "shield" }
 sprite{ id = "bosses/abilities/beams", description = "beams" }
 sprite{ id = "bosses/abilities/bluebeam", description = "bluebeam" }
+sprite{ id = "bosses/abilities/catproj", description = "catproj" }
 sprite{ id = "bosses/abilities/greenbeam", description = "greenbeam" }
 sprite{ id = "bosses/abilities/tentacles", description = "tentacles" }
 sprite{ id = "bosses/cat-1", description = "cat" }
@@ -293,6 +294,7 @@ entity{ id = "blackholeparticle", description = "blackholeparticle" }
 entity{ id = "bomb", description = "bomb" }
 entity{ id = "boulder", description = "boulder" }
 entity{ id = "catattack", description = "catattack" }
+entity{ id = "catproj", description = "catproj" }
 entity{ id = "charge", description = "charge" }
 entity{ id = "directionaltrap", description = "directionaltrap" }
 entity{ id = "fireball", description = "fireball" }

@@ -54,7 +54,7 @@ function Ability:finishwarmup()
 		self.finisheddoability = true
 	else
 		print("ERROR in calling ability!", self.name)
-		print(err)
+		print(status, err)
 		self:remove()
 	end
 end

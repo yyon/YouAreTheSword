@@ -6,8 +6,13 @@ local Effects = require "enemies/effect"
 
 local CatKickAbility = Ability:subclass("CatKickAbility")
 
-function CatKickAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Cat Kick", 800, "", 500, 2000, true, "kick-ready")
+function CatKickAbility:initialize(entitydata, type)
+	self.type = type
+	local warmup
+	if type == "kick" then
+		warmup = "kick-ready"
+	end
+	Ability.initialize(self, entitydata, "Cat Attack", 800, "", 500, 2000, true, warmup)
 end
 
 function CatKickAbility:doability()
@@ -30,8 +35,13 @@ function CatKickAbility:doability()
 	self.swordentity.ability = self
 
 	self.entitydata:setanimation("invisible")
-
-	self.swordentity:start(self.entitydata.main_sprite, "kick")
+	
+	local anim
+	if self.type == "kick" then
+		anim = "kick"
+	end
+	
+	self.swordentity:start(self.entitydata.main_sprite, anim)
 
 	local dist = self.entitydata.entity:get_distance(tox, toy)
 	if dist > self.range then
@@ -87,8 +97,14 @@ function CatKickAbility:attack(entity)
 
 	local entitydata = entity.entitydata
 
-	local damage = 2
-	local aspects = {stun=500, knockback=1000, knockbackangle=self.angle}
+	local damage
+	local aspects = {stun=500, knockback=1000}
+	local anim
+	if self.type == "kick" then
+		anim = "kick-end"
+		damage = 1
+		aspects.knockbackangle=self.angle
+	end
 	
 	self:dodamage(entitydata, damage, aspects)
 	
@@ -97,7 +113,7 @@ function CatKickAbility:attack(entity)
 		self.swordentity = nil
 	end
 	
-	self.entitydata:setanimation("kick-end")
+	self.entitydata:setanimation(anim)
 	
 	self.entitydata.entity:stop_movement()
 	

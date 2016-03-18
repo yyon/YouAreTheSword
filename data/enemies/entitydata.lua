@@ -40,6 +40,7 @@ local SpaceShipProjectile5Ability = require "abilities/spaceshipproj5"
 local SpaceShipProjectile6Ability = require "abilities/spaceshipproj6"
 local GunAbility = require "abilities/gun"
 local CatKickAbility = require "abilities/catkick"
+local CatShootAbility = require "abilities/catshoot"
 
 local Effects = require "enemies/effect"
 
@@ -1722,10 +1723,10 @@ function catboss:initialize(entity)
 	local main_sprite = "bosses/cat-1"
 	local life = 200
 	local team = "boss" -- should be either "adventurer" or "monster" in the final version
-	local normalabilities = {CatKickAbility:new(self)}
+	local normalabilities = {CatKickAbility:new(self, "kick")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {NothingAbility:new(self)}
+	local specialabilities = {CatShootAbility:new(self, "fast")}
 	local basestats = {movementspeed=150}
 --	self.cantpossess=true
 	self.cantdraweyes = true
