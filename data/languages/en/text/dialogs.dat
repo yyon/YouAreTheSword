@@ -8,26 +8,50 @@ and blow everything up!
 }
 
 dialog{
-  id = "opening",
+  id = "sequencetest.1",
   text = [[
-knight
+Cleric:
+"Don't do it!"
+NEWSCREEN
+Knight:
 "This war has gone on for far too long. 
 There has been too many casualties. 
 We have no choice but to call upon the power of the sword."
+NEWSCREEN
+Cleric:
+"This isn't just your sacrifice!
+According to the legends, over 5000 soldiers lost their soul during the previous war.
+If you take this sword, you will sacrifice our entire army!"
+NEWSCREEN
+Knight:
+"That's a sacrifice I'm willing to make"
 ]]
 }
 
 dialog{
-  id = "test",
+  id = "sequencetest.5",
   text = [[
-Hello, this is a test dialog!
+Knight:
+"I'm going to pick it up."
+]]
+}
 
-Hello player!
-Welcome to the Solarus
-sample quest.
-There is not much to
-play yet, but any help
-is very appreciated!
+dialog{
+  id = "sequencetest.6",
+  text = [[
+Knight:
+"Aaaaarggghhhh!"
+]]
+}
+
+dialog{
+  id = "sequencetest.7",
+  text = [[
+Cleric:
+"What have you done!?"
+NEWSCREEN
+Knight:
+"..."
 ]]
 }
 

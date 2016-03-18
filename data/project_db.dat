@@ -110,6 +110,7 @@ sprite{ id = "hero/trail", description = "Hero trail" }
 sprite{ id = "hero/tunic1", description = "Hero tunic 1" }
 sprite{ id = "hero/tunic2", description = "Hero tunic 2" }
 sprite{ id = "hero/tunic3", description = "Hero tunic 3" }
+sprite{ id = "hud/dialog", description = "dialog" }
 sprite{ id = "hud/empty_heart", description = "empty hearts" }
 sprite{ id = "hud/lifebar", description = "lifebar" }
 sprite{ id = "hud/soul_meter", description = "sword possess meter" }
@@ -311,7 +312,8 @@ entity{ id = "tentacle", description = "tentacle" }
 
 language{ id = "en", description = "English" }
 
-font{ id = "8_bit_2", description = "8_bit_2" }
 font{ id = "8_bit", description = "8_bit" }
+font{ id = "8_bit_2", description = "8_bit_2" }
+font{ id = "8_bit_3", description = "8_bit_3" }
 font{ id = "minecraftia", description = "minecraftia" }
 

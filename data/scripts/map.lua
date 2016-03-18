@@ -93,7 +93,6 @@ end
 function map:freezeentity(entity)
     if entity.entitydata ~= nil then
         if entity.entitydata.mapfrozeneffect == nil then
-            print("FREEZIN", entity.entitydata.theclass)
             local newfreezeeffect = Effects.FreezeEffect:new(entity.entitydata)
             entity.entitydata.mapfrozeneffect = newfreezeeffect
         end
@@ -111,6 +110,7 @@ function map:unfreezeentity(entity)
     if entity.entitydata ~= nil then
         if entity.entitydata.mapfrozeneffect ~= nil then
             entity.entitydata.mapfrozeneffect:remove()
+            entity.entitydata.mapfrozeneffect = nil
             entity.entitydata.manualtarget = nil
         end
     end
@@ -128,6 +128,8 @@ function map:move(name, target, endfunction, type, speed, stopdist)
     if type == nil then type = "straight" end
     if speed == nil then speed = 128 end
 
+    self:setanim(name, "walking")
+
     local entity = map:get_entity(name)
     entity:stop_movement()
     local targetentity = map:get_entity(target)
@@ -138,14 +140,17 @@ function map:move(name, target, endfunction, type, speed, stopdist)
 
     if endfunction ~= nil then
         if stopdist == nil then
-            function movement:on_finished()
+            function movement.on_finished(movement)
+                self:setanim(name, "stopped")
+                entity:stop_movement()
                 endfunction()
             end
         else
-            function movement:on_position_changed()
+            function movement.on_position_changed(movement)
                 local d = entity:get_distance(targetentity)
                 if d < stopdist then
-                    self:stop()
+                    self:setanim(name, "stopped")
+                    entity:stop_movement()
                     endfunction()
                 end
             end
@@ -164,24 +169,19 @@ function map:startdialog(...)
     game:start_dialog(...)
 end
 
-function map:look(name, target, dontsetanim)
-    print("LOOK")
+function map:look(name, target)
     local entity = map:get_entity(name)
     entity:stop_movement()
     local targetentity = map:get_entity(target)
     local d = entity:get_direction4_to(targetentity)
-    print(d)
     entity.entitydata:setdirection(d)
-
-    if not dontsetanim then
-        self:setanim(name, "stopped")
-    end
+    self:setanim(name, "stopped")
 end
 
-function map:attack(name, target, attackname)
+function map:attack(name, target, attackname, skiptimer)
     local entitydata = map:get_entity(name).entitydata
-    local targetentitydata = map:get_entity(target)
-    entitydata.manualtarget = targetentitydata
+    local targetentity = map:get_entity(target)
+    entitydata.manualtarget = targetentity
 
     local allattacks = {}
     for _, abil in pairs(entitydata.normalabilities) do allattacks[abil]=true end
@@ -200,6 +200,21 @@ function map:attack(name, target, attackname)
     if ability == nil then
         print("Couldn't find ability!")
     else
+        local oldwarmup, oldcooldown
+        if skiptimer then
+            oldwarmup, oldcooldown = ability.warmup, ability.cooldown
+            ability.warmup, ability.cooldown = 0, 0
+        end
         ability:start()
+        if skiptimer then
+            ability.warmup, ability.cooldown = oldwarmup, oldcooldown
+        end
     end
+end
+
+function map:camera(target, callback, speed)
+    if speed == nil then speed = 128 end
+    local entity = map:get_entity(target)
+    local x, y = entity:get_position()
+    self:move_camera(x, y, speed, callback, 0, 999999)
 end

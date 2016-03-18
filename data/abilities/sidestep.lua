@@ -50,6 +50,7 @@ function SidestepAbility:oncancel()
 end
 
 function SidestepAbility:onfinish()
+	self.entitydata:setanimation("stopped")
 end
 
 return SidestepAbility

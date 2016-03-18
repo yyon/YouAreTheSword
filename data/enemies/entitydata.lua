@@ -663,7 +663,7 @@ function EntityData:dodamage(target, damage, aspects)
 --		end
 	end
 
-	if target.life <= 0 or aspects.instantdeath then
+	if target.life <= 0 or aspects.instantdeath or (game.instantdeath and damage ~= 0) then
 		target:kill()
 	else
 		if target.stages ~= nil then
@@ -1028,7 +1028,7 @@ function EntityData:gettargetpos()
 	-- returns AI aiming position if AI
 
 	if self.manualtarget ~= nil then
-		local x, y = self.manualtarget.entity:get_position()
+		local x, y = self.manualtarget:get_position()
 		return x, y
 	end
 

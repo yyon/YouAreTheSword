@@ -47,6 +47,7 @@ function SwordAbility:doability()
 
 	local d = entitydata:getdirection()
 
+	print("SWORD!")
 	self.entitydata:setanimation("sword")
 
 	self.swordentity = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
@@ -61,7 +62,7 @@ function SwordAbility:doability()
 end
 
 function SwordAbility:onfinish()
-	self.entitydata:setanimation("walking")
+	self.entitydata:setanimation("stopped")
 
 	if self.swordentity ~= nil then
 		self.swordentity:remove()

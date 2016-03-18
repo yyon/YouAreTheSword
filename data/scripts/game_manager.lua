@@ -165,14 +165,17 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		if key == "space" then
-			if game.doingdialog then
-				game:simulate_command_pressed("action")
-				if not game:is_suspended() then
-					-- dialog ended
-					print("DIALOGEND!")
-					game.doingdialog = false
-				end
+			if game.dialog.isshowingdialog then
+				game.dialog:showscreen()
 			end
+--			if game.doingdialog then
+--				game:simulate_command_pressed("action")
+--				if not game:is_suspended() then
+--					-- dialog ended
+--					print("DIALOGEND!")
+--					game.doingdialog = false
+--				end
+--			end
 		end
 		return
 	end
@@ -476,13 +479,6 @@ function load()
 	local exists = sol.game.exists(savefile)
 	game = sol.game.load(savefile)
 
-	game.actually_start_dialog = game.start_dialog
-	function game:start_dialog(...)
-		game.doingdialog = true
-		game:actually_start_dialog(...)
-	end
-	game.startdialog = game.start_dialog
-
 	if not exists then
 		-- Initialize a new savegame.
 		game:set_max_life(12)
@@ -566,6 +562,19 @@ function load()
 
 		sol.main.load_file("scripts/map")(map)
 	end
+
+	game.actually_start_dialog = game.start_dialog
+	function game:start_dialog(dialog, ...)
+		game.doingdialog = true
+		if self:get_map().dialogprefix ~= nil then
+			dialog = self:get_map().dialogprefix .. dialog
+		end
+		game:actually_start_dialog(dialog, ...)
+	end
+	function game:on_dialog_started(...)
+		hud_manager.dialog:ondialog(...)
+	end
+	game.startdialog = game.start_dialog
 
 	game.isgame = true
 	game.effects = {}

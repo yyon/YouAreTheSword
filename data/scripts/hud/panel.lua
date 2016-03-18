@@ -91,7 +91,6 @@ function panel:set_dst_position(x, y)
 end
 
 function panel:on_draw(dst_surface)
-
   	local x, y = self.dst_x, self.dst_y
   	local width, height = dst_surface:get_size()
   	if x < 0 then
