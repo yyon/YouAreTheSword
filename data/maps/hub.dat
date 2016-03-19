@@ -487,7 +487,7 @@ npc{
   y = 117,
   direction = 3,
   subtype = 1,
-  sprite = "bosses/cat",
+  sprite = "bosses/cat-1",
 }
 
 teletransporter{
