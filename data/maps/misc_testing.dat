@@ -24,9 +24,17 @@ destination{
 
 enemy{
   layer = 0,
-  x = 488,
-  y = 301,
+  x = 328,
+  y = 373,
   direction = 0,
-  breed = "e_mech",
+  breed = "m_debugger",
+}
+
+enemy{
+  layer = 0,
+  x = 752,
+  y = 373,
+  direction = 0,
+  breed = "m_combat_dummy",
 }
 

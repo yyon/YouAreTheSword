@@ -161,6 +161,13 @@ function sol.main:on_key_pressed(key, modifiers)
 				print( k .. " =&gt; ", v )
 			end
 		end
+	elseif key == "t" then
+		local entitydata = hero.entitydata:getclosestentity(hero.entitydata:gettargetpos())
+		entitydata:kill()
+	elseif key == "u" then
+		if hero.entitydata.usingability ~= nil then
+			hero.entitydata.usingability:cancel()
+		end
 	end
 
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
@@ -269,6 +276,9 @@ function sol.main:on_key_pressed(key, modifiers)
 				hero.entitydata.specialability = cheatyability
 			end
 			print("CHEAT: ability changed to", cheatyability.name)
+			if hero.entitydata.theclass == "debugger" then
+				hero.entitydata:onabilitychanged()
+			end
 		elseif key == "c" then
 			for num, ability in pairs({hero.entitydata.swordability, hero.entitydata.blockability, hero.entitydata.transformability, hero.entitydata.specialability}) do
 				if ability.usingcooldown then

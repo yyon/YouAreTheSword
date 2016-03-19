@@ -672,7 +672,7 @@ function EntityData:dodamage(target, damage, aspects)
 
 	if target.life <= 0 or aspects.instantdeath or (game.instantdeath and damage ~= 0) then
 		target:kill()
-		
+
 		if self:getremainingmonsters() == 0 then
 			map.nomonstersleft = true
 		end
@@ -1226,6 +1226,95 @@ function greenclass:initialize(entity)
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+local debuggerclass = EntityData:subclass("debuggerclass")
+allclasses.debuggerclass = debuggerclass
+
+function debuggerclass:initialize(entity)
+	local class = "debugger"
+	local main_sprite = "adventurers/knight"
+	local life = 10
+	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
+	local allabilities = {
+		[AngelSummonAbility(self)]="adventurers/cleric",
+		[BackstabAbility(self)]="adventurers/rogue",
+		[BlackholeAbility(self)]="adventurers/mage",
+		[BodyDoubleAbility(self)]="adventurers/rogue",
+		[BoulderAbility(self)]="bosses/dunsmur-1",
+		[CatKickAbility(self, "kick")]="bosses/cat-1",
+		[CatShootAbility(self, "fast")]="bosses/cat-1",
+		[CatKickAbility(self, "downkick")]="bosses/cat-2",
+		[CatShootAbility(self, "power")]="bosses/cat-2",
+		[CatKickAbility(self, "spin")]="bosses/cat-3",
+		[CatKickAbility(self, "uppercut")]="bosses/cat-3",
+		[ChargeAbility(self)]="adventurers/knight",
+		[EarthquakeAbility(self)]="adventurers/mage",
+		[FireballAbility(self)]="adventurers/mage",
+		[FireballConeAbility(self)]="bosses/dunsmur-1",
+		[FiringBowAbility(self)]="adventurers/archer",
+		[GrapplingHookAbility(self)]="adventurers/archer",
+		[GunAbility(self)]="monsters/mech",
+		[HealAbility(self)]="adventurers/cleric",
+		[HealExplosionAbility(self)]="adventurers/cleric",
+		[LightningAbility(self)]="adventurers/mage",
+		[NormalAbility(self)]="monsters/spiders/spider01",
+		[PossessAbility(self)]="bosses/dunsmur-1",
+		[ShieldAbility(self)]="adventurers/knight",
+		[ShieldBashAbility(self)]="adventurers/knight",
+		[SidestepAbility(self)]="adventurers/rogue",
+		[SpaceShipProjectileAbility(self)]="bosses/spaceship-1",
+		[SpaceShipProjectile2Ability(self)]="bosses/spaceship-1",
+		[SpaceShipProjectile3Ability(self)]="bosses/spaceship-1",
+		[SpaceShipProjectile4Ability(self)]="bosses/spaceship-1",
+		[SpaceShipProjectile5Ability(self)]="bosses/spaceship-1",
+		[SpaceShipProjectile6Ability(self)]="bosses/spaceship-1",
+		[StealthAbility(self)]="adventurers/rogue",
+		[StompAbility(self)]="adventurers/berserker",
+		[SwordAbility(self)]="adventurers/knight",
+		[TauntAbility(self)]="adventurers/bard",
+		[TeleportAbility(self)]="adventurers/mage",
+		[TentacleAbility(self)]="bosses/mage-1",
+		[BombThrowAbility(self)]="adventurers/archer",
+		[TrapsAbility(self)]="adventurers/rogue"
+	}
+	local normalabilities = {}
+	for ability, sprite in pairs(allabilities) do
+		normalabilities[#normalabilities+1] = ability
+	end
+	table.sort(normalabilities, function(a,b) return a.name < b.name end)
+	self.allabilities = allabilities
+	local transformabilities = {TransformAbility(self, "ap"),
+		TransformAbility(self, "electric"),
+		TransformAbility(self, "fire"),
+		TransformAbility(self, "poison"),
+		TransformAbility(self, "damage"),
+		TransformAbility(self, "lifesteal"),
+		TransformAbility(self, "holy"),
+		TransformAbility(self, "dagger")
+	}
+	local blockabilities = {NothingAbility(self)}
+	local specialabilities = {NothingAbility(self)}
+	local basestats = {}
+
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+	self:onabilitychanged()
+end
+
+function debuggerclass:onabilitychanged()
+	local ability = self.swordability
+	local num
+	for index, normalability in pairs(self.normalabilities) do
+		if normalability == ability then
+			num = index
+			break
+		end
+	end
+	print("Number:", num)
+	local sprite = self.allabilities[ability]
+	self.main_sprite = sprite
+	self:applytoentity()
 end
 
 -- Adventurers:

@@ -18,6 +18,19 @@ if not foundmonster then
     map.nomonstersleft = true
 end
 
+local hero = map:get_hero()
+if hero.entitydata ~= nil then
+    if hero.entitydata.theclass == "debugger" then
+        for entity in map:get_entities("") do
+            if entity.entitydata ~= nil then
+                if entity.entitydata.theclass == "debugger" then
+                    entity.entitydata:kill()
+                end
+            end
+        end
+    end
+end
+
 function map:drawlifebar(entity)
         if entity.entitydata ~= nil then
             local x, y = entity:get_position()

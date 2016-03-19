@@ -288,6 +288,7 @@ enemy{ id = "f_mage_boss", description = "f_Mage_Boss" }
 enemy{ id = "f_spaceship", description = "f_Spaceship" }
 enemy{ id = "fz_MISC/misc", description = "MISC" }
 enemy{ id = "m_combat_dummy", description = "m_Combat_Dummy" }
+enemy{ id = "m_debugger", description = "m_Debugger" }
 
 entity{ id = "arrow", description = "arrow" }
 entity{ id = "blackhole", description = "blackhole" }
