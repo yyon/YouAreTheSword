@@ -1723,17 +1723,13 @@ allclasses.catboss = catboss
 
 function catboss:initialize(entity)
 	local class = "Cat (Boss)"
---	local main_sprite = "bosses/cat-1"
-	local main_sprite = "bosses/cat-2"
+	local main_sprite = "bosses/cat-1"
 	local life = 200
 	local team = "boss" -- should be either "adventurer" or "monster" in the final version
---	local normalabilities = {CatKickAbility:new(self, "kick")}
-	local normalabilities = {CatKickAbility:new(self, "downkick")}
+	local normalabilities = {CatKickAbility:new(self, "kick")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {SidestepAbility:new(self)}
---	local specialabilities = {CatShootAbility:new(self, "fast")}
-	local specialabilities = {CatShootAbility:new(self, "power")}
---	local specialabilities = {NothingAbility:new(self)}
+	local specialabilities = {CatShootAbility:new(self, "fast")}
 	local basestats = {movementspeed=150}
 	self.cantdraweyes = true
 
@@ -1752,10 +1748,14 @@ end
 
 function catboss:stage2()
 	self.main_sprite = "bosses/cat-2"
+	self.swordability = CatKickAbility:new(self, "downkick")
+	self.specialability = CatShootAbility:new(self, "power")
 end
 
 function catboss:stage3()
 	self.main_sprite = "bosses/cat-3"
+	self.swordability = CatKickAbility:new(self, "spin")
+	self.specialability = CatKickAbility:new(self, "uppercut")
 end
 
 

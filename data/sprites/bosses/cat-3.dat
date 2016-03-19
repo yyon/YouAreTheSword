@@ -4,10 +4,20 @@ animation{
   frame_delay = 100,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 0, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 96, num_frames = 4 },
-    { x = 0, y = 0, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 96, num_frames = 4 },
-    { x = 0, y = 3264, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 96, num_frames = 4 },
-    { x = 0, y = 3264, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 96, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125, num_frames = 4 },
+    { x = 0, y = 3264, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125, num_frames = 4 },
+    { x = 0, y = 3264, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125, num_frames = 4 },
+  },
+}
+animation{
+  name = "invisible",
+  src_image = "bosses/cat-3.png",
+  directions = {
+    { x = 0, y = 3072, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125 },
+    { x = 0, y = 3072, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125 },
+    { x = 0, y = 3072, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125 },
+    { x = 0, y = 3072, frame_width = 192, frame_height = 192, origin_x = 96, origin_y = 125 },
   },
 }
 animation{
@@ -16,10 +26,82 @@ animation{
   frame_delay = 100,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
+    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
+    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
+    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
+    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
+  },
+}
+animation{
+  name = "spin",
+  src_image = "bosses/cat-3.png",
+  frame_delay = 50,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 576, y = 576, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 4 },
+    { x = 576, y = 576, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 4 },
+    { x = 576, y = 3840, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 4 },
+    { x = 576, y = 3840, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 4 },
+  },
+}
+animation{
+  name = "spin-end",
+  src_image = "bosses/cat-3.png",
+  frame_delay = 50,
+  frame_to_loop_on = 1,
+  directions = {
+    { x = 1344, y = 576, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 2 },
+    { x = 1344, y = 576, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 2 },
+    { x = 1344, y = 3840, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 2 },
+    { x = 1344, y = 3840, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 2 },
+  },
+}
+animation{
+  name = "spin-ready",
+  src_image = "bosses/cat-3.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 576, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
+    { x = 0, y = 576, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
+    { x = 0, y = 3840, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
+    { x = 0, y = 3840, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
+  },
+}
+animation{
+  name = "uppercut",
+  src_image = "bosses/cat-3.png",
+  frame_delay = 100,
+  frame_to_loop_on = 3,
+  directions = {
+    { x = 576, y = 1536, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+    { x = 576, y = 1536, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+    { x = 576, y = 4800, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+    { x = 576, y = 4800, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+  },
+}
+animation{
+  name = "uppercut-end",
+  src_image = "bosses/cat-3.png",
+  frame_delay = 100,
+  frame_to_loop_on = 4,
+  directions = {
+    { x = 1536, y = 1536, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+    { x = 1536, y = 1536, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+    { x = 1536, y = 4800, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+    { x = 1536, y = 4800, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 5 },
+  },
+}
+animation{
+  name = "uppercut-ready",
+  src_image = "bosses/cat-3.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 1536, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
+    { x = 0, y = 1536, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
+    { x = 0, y = 4800, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
+    { x = 0, y = 4800, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 3 },
   },
 }
 animation{
@@ -28,9 +110,9 @@ animation{
   frame_delay = 100,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 100, num_frames = 8 },
+    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
+    { x = 0, y = 192, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
+    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
+    { x = 0, y = 3456, frame_width = 192, frame_height = 192, origin_x = 100, origin_y = 125, num_frames = 8 },
   },
 }

@@ -11,12 +11,21 @@ local CatKickAbility = Ability:subclass("CatKickAbility")
 function CatKickAbility:initialize(entitydata, type)
 	self.type = type
 	local warmup
+	local warmuptime
 	if type == "kick" then
 		warmup = "kick-ready"
+		warmuptime = 500
 	elseif type == "downkick" then
 		warmup = "downkick-ready"
+		warmuptime = 500
+	elseif type == "spin" then
+		warmup = "spin-ready"
+		warmuptime = 300
+	elseif type == "uppercut" then
+		warmup = "uppercut-ready"
+		warmuptime = 300
 	end
-	Ability.initialize(self, entitydata, "Cat Attack", 800, "", 500, 2000, true, warmup)
+	Ability.initialize(self, entitydata, "Cat Attack", 800, "", warmuptime, 2000, true, warmup)
 end
 
 function CatKickAbility:doability()
@@ -45,6 +54,10 @@ function CatKickAbility:doability()
 		anim = "kick"
 	elseif self.type == "downkick" then
 		anim = "downkick"
+	elseif self.type == "spin" then
+		anim = "spin"
+	elseif self.type == "uppercut" then
+		anim = "uppercut"
 	end
 	
 	self.swordentity:start(self.entitydata.main_sprite, anim)
@@ -114,9 +127,19 @@ function CatKickAbility:attack(entity)
 		anim = "downkick-end"
 		damage = 2
 		aspects.knockbackangle=math.pi * 3 / 2
+	elseif self.type == "spin" then
+		anim = "spin-end"
+		damage = 2
+		aspects.knockbackangle=math.pi * 3 / 2
+	elseif self.type == "uppercut" then
+		anim = "uppercut-end"
+		damage = 2
+		aspects.knockbackangle=math.pi * 1 / 2
 	end
 	
 	self:dodamage(entitydata, damage, aspects)
+	
+	sol.audio.play_sound("punch")
 	
 	if self.swordentity ~= nil then
 		self.swordentity:remove()
