@@ -11,6 +11,76 @@ animation{
   },
 }
 animation{
+  name = "downkick",
+  src_image = "bosses/cat2.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 640, y = 1536, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100 },
+    { x = 640, y = 1536, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100 },
+    { x = 640, y = 3712, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100 },
+    { x = 640, y = 3712, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100 },
+  },
+}
+animation{
+  name = "downkick-end",
+  src_image = "bosses/cat2.png",
+  frame_delay = 50,
+  frame_to_loop_on = 1,
+  directions = {
+    { x = 768, y = 1536, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+    { x = 768, y = 1536, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+    { x = 768, y = 3712, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+    { x = 768, y = 3712, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+  },
+}
+animation{
+  name = "downkick-ready",
+  src_image = "bosses/cat2.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 1536, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+    { x = 0, y = 1536, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+    { x = 0, y = 3712, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+    { x = 0, y = 3712, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+  },
+}
+animation{
+  name = "invisible",
+  src_image = "bosses/cat2.png",
+  directions = {
+    { x = 0, y = 2048, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 64 },
+    { x = 0, y = 2048, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 64 },
+    { x = 0, y = 2048, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 64 },
+    { x = 0, y = 2048, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 64 },
+  },
+}
+animation{
+  name = "powershot",
+  src_image = "bosses/cat2.png",
+  frame_delay = 100,
+  frame_to_loop_on = 1,
+  directions = {
+    { x = 0, y = 640, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+    { x = 0, y = 640, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+    { x = 0, y = 2816, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+    { x = 0, y = 2816, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 5 },
+  },
+}
+animation{
+  name = "powershot-end",
+  src_image = "bosses/cat2.png",
+  frame_delay = 100,
+  frame_to_loop_on = 1,
+  directions = {
+    { x = 640, y = 640, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+    { x = 640, y = 640, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+    { x = 640, y = 2816, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+    { x = 640, y = 2816, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 2 },
+  },
+}
+animation{
   name = "pushing",
   src_image = "bosses/cat2.png",
   frame_delay = 100,

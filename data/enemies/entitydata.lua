@@ -643,6 +643,9 @@ function EntityData:dodamage(target, damage, aspects)
 			if aspects.directionalknockback then
 				angle = aspects.fromentity:get_direction() * math.pi / 2
 			end
+			if aspects.knockbackangle ~= nil then
+				angle = aspects.knockbackangle
+			end
 			local kbe = Effects.KnockBackEffect:new(target, aspects.fromentity, aspects.knockback, angle)
 --[[
 			if target.entity.ishero then
@@ -1720,15 +1723,18 @@ allclasses.catboss = catboss
 
 function catboss:initialize(entity)
 	local class = "Cat (Boss)"
-	local main_sprite = "bosses/cat-1"
+--	local main_sprite = "bosses/cat-1"
+	local main_sprite = "bosses/cat-2"
 	local life = 200
 	local team = "boss" -- should be either "adventurer" or "monster" in the final version
-	local normalabilities = {CatKickAbility:new(self, "kick")}
+--	local normalabilities = {CatKickAbility:new(self, "kick")}
+	local normalabilities = {CatKickAbility:new(self, "downkick")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {CatShootAbility:new(self, "fast")}
+--	local specialabilities = {CatShootAbility:new(self, "fast")}
+	local specialabilities = {CatShootAbility:new(self, "power")}
+--	local specialabilities = {NothingAbility:new(self)}
 	local basestats = {movementspeed=150}
---	self.cantpossess=true
 	self.cantdraweyes = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}

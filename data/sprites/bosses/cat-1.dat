@@ -16,10 +16,22 @@ animation{
   frame_delay = 100,
   frame_to_loop_on = 0,
   directions = {
-    { x = 0, y = 384, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
-    { x = 0, y = 384, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
-    { x = 0, y = 1472, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
-    { x = 0, y = 1472, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 6 },
+    { x = 0, y = 384, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 384, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 1472, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+    { x = 0, y = 1472, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 4 },
+  },
+}
+animation{
+  name = "fastshot-end",
+  src_image = "bosses/cat.png",
+  frame_delay = 100,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 256, y = 384, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
+    { x = 256, y = 384, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
+    { x = 256, y = 1472, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
+    { x = 256, y = 1472, frame_width = 64, frame_height = 64, origin_x = 32, origin_y = 60, num_frames = 2 },
   },
 }
 animation{

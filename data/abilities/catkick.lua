@@ -4,6 +4,8 @@ require "scripts/movementaccuracy"
 
 local Effects = require "enemies/effect"
 
+local math = require "math"
+
 local CatKickAbility = Ability:subclass("CatKickAbility")
 
 function CatKickAbility:initialize(entitydata, type)
@@ -11,6 +13,8 @@ function CatKickAbility:initialize(entitydata, type)
 	local warmup
 	if type == "kick" then
 		warmup = "kick-ready"
+	elseif type == "downkick" then
+		warmup = "downkick-ready"
 	end
 	Ability.initialize(self, entitydata, "Cat Attack", 800, "", 500, 2000, true, warmup)
 end
@@ -39,6 +43,8 @@ function CatKickAbility:doability()
 	local anim
 	if self.type == "kick" then
 		anim = "kick"
+	elseif self.type == "downkick" then
+		anim = "downkick"
 	end
 	
 	self.swordentity:start(self.entitydata.main_sprite, anim)
@@ -104,6 +110,10 @@ function CatKickAbility:attack(entity)
 		anim = "kick-end"
 		damage = 1
 		aspects.knockbackangle=self.angle
+	elseif self.type == "downkick" then
+		anim = "downkick-end"
+		damage = 2
+		aspects.knockbackangle=math.pi * 3 / 2
 	end
 	
 	self:dodamage(entitydata, damage, aspects)

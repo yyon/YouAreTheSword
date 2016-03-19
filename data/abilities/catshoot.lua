@@ -8,10 +8,15 @@ local CatShootAbility = Ability:subclass("CatShootAbility")
 function CatShootAbility:initialize(entitydata, type)
 	self.type = type
 	local warmupanim
+	local warmuptime
 	if type == "fast" then
 		warmupanim = "fastshot"
+		warmuptime = 400
+	elseif type == "power" then
+		warmupanim = "powershot"
+		warmuptime = 500
 	end
-	Ability.initialize(self, entitydata, "Cat Shoot", 800, "fireball", 500, 2000, true, warmupanim)
+	Ability.initialize(self, entitydata, "Cat Shoot", 800, "fireball", warmuptime, 2000, true, warmupanim)
 end
 
 function CatShootAbility:doability()
@@ -29,8 +34,24 @@ function CatShootAbility:doability()
 	self.fireballentity:start(self, tox, toy)
 
 	sol.audio.play_sound("catproj")
+	
+	local shoottime
+	local anim
+	if self.type == "fast" then
+		shoottime = 200
+		anim = "fastshot-end"
+	elseif self.type == "power" then
+		shoottime = 200
+		anim = "powershot-end"
+	end
+	
+	self.entitydata:setanimation(anim)
+	
+	self.shoottimer = Effects.SimpleTimer(self.entitydata, shoottime, function() self:finish() end)
+end
 
-	self:finish()
+function CatShootAbility:onfinish()
+	self.shoottimer:stop()
 end
 
 return CatShootAbility

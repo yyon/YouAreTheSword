@@ -59,6 +59,7 @@ sprite{ id = "adventurers/shield", description = "shield" }
 sprite{ id = "bosses/abilities/beams", description = "beams" }
 sprite{ id = "bosses/abilities/bluebeam", description = "bluebeam" }
 sprite{ id = "bosses/abilities/catproj", description = "catproj" }
+sprite{ id = "bosses/abilities/catproj2", description = "catproj2" }
 sprite{ id = "bosses/abilities/greenbeam", description = "greenbeam" }
 sprite{ id = "bosses/abilities/tentacles", description = "tentacles" }
 sprite{ id = "bosses/cat-1", description = "cat" }
