@@ -376,7 +376,9 @@ function KnockBackEffect:startfreezeeffects(fromentity, knockbackdist, angle)
 	movement:set_angle(angle)
 --	movement:set_max_distance(knockbackdist)
 	movement:set_smooth(true)
+	local d = self.entitydata:getdirection()
 	movement:start(self.entitydata.entity)
+	self.entitydata:setdirection(d)
 	local kbe = self
 	self.finished = false
 	function movement:on_finished()
