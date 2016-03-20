@@ -42,7 +42,7 @@ end
 function panel:check()
 	self:rebuild_surface()
   	-- check again in 50ms
-  	sol.timer.start(self, 50, function()
+  	sol.timer.start(self, 100, function()
     		self:check()
   	end)
 end

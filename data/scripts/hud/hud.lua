@@ -29,6 +29,7 @@ function hud_manager:create(game)
   	hud.elements[#hud.elements + 1] = menu
 
 	local panel_builder = require("scripts/hud/panel")
+	
 	menu = panel_builder:new(game, "normal")
 	menu:set_dst_position(490,645)
 	hud.elements[#hud.elements + 1] = menu

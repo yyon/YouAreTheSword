@@ -34,7 +34,6 @@ end
 
 --  check heart data and fix periodically
 function sword_health:check()
-
 	local stage = 16
 
 	local hero = game:get_hero()
@@ -61,7 +60,7 @@ function sword_health:check()
     	self:rebuild_surface()
 
   	-- check again in 50ms
-  	sol.timer.start(self, 50, function()
+  	sol.timer.start(self, 100, function()
     		self:check()
   	end)
 end

@@ -31,7 +31,44 @@ if hero.entitydata ~= nil then
     end
 end
 
-function map:drawlifebar(entity)
+function map:actuallydrawlifebars()
+    local hero = self:get_hero()
+    self:actuallydrawlifebar(hero)
+    for entity in self:get_entities("") do
+        self:actuallydrawlifebar(entity)
+    end
+end
+
+function map:actuallydrawlifebar(entity)
+    if entity.entitydata ~= nil then
+        entity.lifebarsurface = sol.surface.create(70, 4)
+
+        local frame
+        if entity.entitydata.life > 0 then
+            frame = math.floor((1 - entity.entitydata.life / entity.entitydata.maxlife) * 49)
+        else
+            frame = 49
+        end
+
+        local lifebarsprite = game.lifebarsprite
+        if entity.entitydata.team == "adventurer" then
+            lifebarsprite = game.allieslifebarsprite
+        end
+        if entity.ishero then
+            lifebarsprite = game.herolifebarsprite
+        end
+        lifebarsprite:set_frame(frame)
+        lifebarsprite:draw(entity.lifebarsurface, 35, 1)
+    end
+end
+
+map.ticker = Effects.Ticker(game, 100, function() map:actuallydrawlifebars() end)
+
+function map:on_removed()
+    self.ticker:stop()
+end
+
+function map:drawlifebar(dst_surface, entity, cx, cy)
         if entity.entitydata ~= nil then
             local x, y = entity:get_position()
 
@@ -57,22 +94,10 @@ function map:drawlifebar(entity)
 
             y = y - 65
 
-            local frame
-            if entity.entitydata.life > 0 then
-                frame = math.floor((1 - entity.entitydata.life / entity.entitydata.maxlife) * 49)
-            else
-                frame = 49
+--            map:draw_sprite(lifebarsprite, x, y)
+            if entity.lifebarsurface ~= nil then
+                entity.lifebarsurface:draw(dst_surface, x-cx-35, y-cy-1)
             end
-
-            local lifebarsprite = game.lifebarsprite
-            if entity.entitydata.team == "adventurer" then
-                lifebarsprite = game.allieslifebarsprite
-            end
-            if entity.ishero then
-                lifebarsprite = game.herolifebarsprite
-            end
-            lifebarsprite:set_frame(frame)
-            map:draw_sprite(lifebarsprite, x, y)
         end
 end
 
@@ -99,9 +124,11 @@ function map:on_draw(dst_surface)
         end
     end
 
-    self:drawlifebar(hero)
+    local cx, cy = self:get_camera_position()
+
+    self:drawlifebar(dst_surface, hero, cx, cy)
     for entity in self:get_entities("") do
-        self:drawlifebar(entity)
+        self:drawlifebar(dst_surface, entity, cx, cy)
     end
 end
 
