@@ -9,7 +9,7 @@ function ShieldAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Shield", 50, "shield", 0, 500, true)
 end
 
-function ShieldAbility:doability(playerrelease)
+function ShieldAbility:doability()
 	local entity = self.entitydata.entity
 	local map = entity:get_map()
 	local x,y,layer = entity:get_position()

@@ -11,7 +11,10 @@ function GrapplingHookAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Grappling Hook", 800, "grapplinghook", 500, 2000, true)
 end
 
-function GrapplingHookAbility:doability(tox, toy)
+function GrapplingHookAbility:doability()
+	local tox, toy = self.entitydata:gettargetpos()
+	tox, toy = self:withinrange(tox, toy)
+
 	local entity = self.entitydata.entity
 	local map = entity:get_map()
 	local x,y,layer = entity:get_position()
@@ -54,7 +57,7 @@ function GrapplingHookAbility:attack(entity, bombentity)
 	end
 
 	self.target = entity.entitydata
-	
+
 	self:dodamage(entity.entitydata, 0, {knockback=0, method=function() self:startpull() end})
 end
 

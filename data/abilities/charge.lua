@@ -12,7 +12,7 @@ function ChargeAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Charge", 800, "charge", 0, 2000, true)
 end
 
-function ChargeAbility:doability(tox, toy)
+function ChargeAbility:doability()
 	if not self:catch(self.entitydata) then return end
 
 	local entity = self.entitydata.entity
@@ -24,6 +24,9 @@ function ChargeAbility:doability(tox, toy)
 	self.collided = {}
 
 	local d = entitydata:getdirection()
+
+	local tox, toy = self.entitydata:gettargetpos()
+	tox, toy = self:withinrange(tox, toy)
 
 	self.swordentity = map:create_custom_entity({model="charge", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.swordentity.ability = self

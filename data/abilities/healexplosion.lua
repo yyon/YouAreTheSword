@@ -10,7 +10,7 @@ function HealExplosionAbility:initialize(entitydata)
 	self.heals = true
 end
 
-function HealExplosionAbility:doability(tox, toy)
+function HealExplosionAbility:doability()
 	local tox, toy = self.entitydata:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 	self.tox, self.toy = tox, toy
