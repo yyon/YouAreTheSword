@@ -370,6 +370,10 @@ function tick()
 							for entity in hero:get_map():get_entities("") do
 								entity.removed = true
 							end
+							
+							if hero.entitydata.usingability ~= nil then
+								hero.entitydata.usingability:cancel()
+							end
 
 							if hero:get_map().effects ~= nil then
 								while true do
