@@ -64,8 +64,10 @@ end
 
 map.ticker = Effects.Ticker(game, 100, function() map:actuallydrawlifebars() end)
 
-function map:on_removed()
-    self.ticker:stop()
+function map:on_finished()
+    self.ticker:remove()
+    local hero = self:get_hero()
+    hero.lifebarsurface = nil
 end
 
 function map:drawlifebar(dst_surface, entity, cx, cy)
