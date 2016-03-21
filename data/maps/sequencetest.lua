@@ -2,22 +2,29 @@ local map = ...
 
 map.dialogprefix = "sequencetest."
 
+local Effects = require "enemies/effect"
+
 function map:on_started()
 	local hero = self:get_hero()
 	
 	game.instantdeath = true
 	
-	self.herosentitydata = hero.entitydata
-	hero.entitydata:drop(hero, true)
-	hero.entitydata = self.herosentitydata
+--	self.herosentitydata = hero.entitydata
+--	hero.entitydata:drop(hero, true)
+--	hero.entitydata = self.herosentitydata
 end
 
 function map:on_opening_transition_finished()
-	hero.entitydata = nil
+--	hero.entitydata = nil
 	
-	hero:freeze()
+--	hero:freeze()
+--	self:freezeeveryone()
 	
-	self:freezeeveryone()
+	hero.entitydata.main_sprite = "abilities/droppedsword"
+	
+	self:startcutscene()
+	self.newentitypossesseffect:remove()
+	
 	self:move("knight", "knightdest", function() self:look("knight", "cleric") end)
 	self:move("cleric", "clericdest", function() self:advwalked() end)
 end
@@ -25,8 +32,14 @@ end
 function map:advwalked()
 	self:look("cleric", "knight")
 	
-	self:startdialog("1", function()
-		self:dialog1end()
+	self:say("cleric", "1", function()
+		self:say("knight", "2", function()
+			self:say("cleric", "3", function()
+				self:say("knight", "4", function()
+					self:dialog1end()
+				end)
+			end)
+		end)
 	end)
 end
 
@@ -76,18 +89,23 @@ end
 function map:endfight()
 	self:move("knight", "knightpickupdest", function()
 		self:look("cleric", "knight")
-		self:startdialog("5", function()
+		self:say("knight", "5", function()
 			self:wait(500, function()
-				local entitydata = knight.entitydata
-				entitydata:bepossessedbyhero()
-				self:freezeentity(entitydata.entity)
+--				local entitydata = knight.entitydata
+--				entitydata:bepossessedbyhero()
+--				self:freezeentity(entitydata.entity)
+				self.newentitypossesseffect = Effects.PossessEffect(knight.entitydata)
+				self.heroentitydata.entity:remove()
+				self.heroentitydata = knight.entitydata
 				self:attack("mage", "hero", "EarthquakeAbility", true)
 				self:wait(2000, function()
-					self:startdialog("6", function()
-						self:look("hero", "knightattackdest2")
+					self:say("knight", "6", function()
+						self:look("knight", "knightattackdest2")
 						self:wait(500, function()
-							self:startdialog("7", function()
-								self:testend()
+							self:say("cleric", "7", function()
+								self:say("knight", "8", function()
+									self:testend()
+								end)
 							end)
 						end)
 					end)
@@ -99,7 +117,6 @@ end
 
 function map:testend()
 	game.instantdeath = false
-	hero:unfreeze()
 	
 	self:finish()
 	

@@ -12,17 +12,32 @@ dialog{
   text = [[
 Cleric:
 "Don't do it!"
-NEWSCREEN
+]]
+}
+
+dialog{
+  id = "sequencetest.2",
+  text = [[
 Knight:
 "This war has gone on for far too long. 
 There has been too many casualties. 
 We have no choice but to call upon the power of the sword."
-NEWSCREEN
+]]
+}
+
+dialog{
+  id = "sequencetest.3",
+  text = [[
 Cleric:
 "This isn't just your sacrifice!
 According to the legends, over 500 soldiers lost their souls during the previous war.
 If you take this sword, you will sacrifice our entire army!"
-NEWSCREEN
+]]
+}
+
+dialog{
+  id = "sequencetest.4",
+  text = [[
 Knight:
 "That's a sacrifice I'm willing to make"
 ]]
@@ -49,7 +64,12 @@ dialog{
   text = [[
 Cleric:
 "What have you done!?"
-NEWSCREEN
+]]
+}
+
+dialog{
+  id = "sequencetest.8",
+  text = [[
 Knight:
 "..."
 ]]

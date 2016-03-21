@@ -185,7 +185,7 @@ function EntityData:bepossessedbyhero()
 
 end
 
-function EntityData:unpossess()
+function EntityData:unpossess(name)
 	-- create NPC entity for entitydata
 
 	self.entity.is_possessing = false
@@ -205,7 +205,8 @@ function EntityData:unpossess()
 		layer=layer,
 		x=x,
 		y=y,
-		direction=d
+		direction=d,
+		name=name
 	})
 
 	self.entity = newentity

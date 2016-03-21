@@ -70,6 +70,11 @@ function map:on_finished()
     hero.lifebarsurface = nil
 end
 
+function map:say(name, ...)
+    self:camera(name)
+    self:startdialog(...)
+end
+
 function map:drawlifebar(dst_surface, entity, cx, cy)
         if entity.entitydata ~= nil then
             local x, y = entity:get_position()
@@ -97,7 +102,7 @@ function map:drawlifebar(dst_surface, entity, cx, cy)
             y = y - 65
 
 --            map:draw_sprite(lifebarsprite, x, y)
-            if entity.lifebarsurface ~= nil then
+            if entity.lifebarsurface ~= nil and not self.dontdrawlifebars then
                 entity.lifebarsurface:draw(dst_surface, x-cx-35, y-cy-1)
             end
         end
@@ -165,10 +170,6 @@ function map:unfreezeentity(entity)
             entity.entitydata.manualtarget = nil
         end
     end
-end
-
-function map:finish()
-    self:unfreezeeveryone()
 end
 
 function map:wait(time, endfunction)
@@ -263,9 +264,50 @@ function map:attack(name, target, attackname, skiptimer)
     end
 end
 
-function map:camera(target, callback, speed)
+--[[function map:camera(target, callback, speed)
     if speed == nil then speed = 128 end
     local entity = map:get_entity(target)
     local x, y = entity:get_position()
     self:move_camera(x, y, speed, callback, 0, 999999)
+end
+--]]
+
+function map:camera(name)
+    local entity = self:get_entity(name)
+    local hero = self:get_hero()
+    hero:set_position(entity:get_position())
+end
+
+function map:startcutscene()
+    self:deattachcamera()
+
+    local hero = self:get_hero()
+    self:freezeeveryone()
+    hero:freeze()
+
+    self.dontdrawlifebars = true
+end
+
+function map:finish()
+    self:unfreezeeveryone()
+    local hero = self:get_hero()
+    hero:unfreeze()
+
+    self.dontdrawlifebars = false
+
+    self:reattachcamera()
+end
+
+function map:deattachcamera()
+    local hero = self:get_hero()
+    local newentity = hero.entitydata:unpossess("player")
+--    newentity:set_name("player")
+    self.heroentitydata = newentity.entitydata
+    self.newentitypossesseffect = Effects.PossessEffect:new(newentity.entitydata)
+    hero:set_tunic_sprite_id("adventurers/transparent")
+end
+
+function map:reattachcamera()
+    self.newentitypossesseffect:remove()
+    self.heroentitydata:bepossessedbyhero()
 end
