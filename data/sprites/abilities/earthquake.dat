@@ -3,6 +3,6 @@ animation{
   src_image = "abilities/earthquake.png",
   frame_delay = 100,
   directions = {
-    { x = 0, y = 0, frame_width = 1000, frame_height = 1000, origin_x = 500, origin_y = 500, num_frames = 4 },
+    { x = 0, y = 0, frame_width = 1000, frame_height = 1000, origin_x = 500, origin_y = 500, num_frames = 4, num_columns = 3 },
   },
 }
