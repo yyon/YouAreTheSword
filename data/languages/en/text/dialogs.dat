@@ -10,7 +10,6 @@ and blow everything up!
 dialog{
   id = "sequencetest.1",
   text = [[
-Cleric:
 "Don't do it!"
 ]]
 }
@@ -18,7 +17,6 @@ Cleric:
 dialog{
   id = "sequencetest.2",
   text = [[
-Knight:
 "This war has gone on for far too long. 
 There has been too many casualties. 
 We have no choice but to call upon the power of the sword."
@@ -28,7 +26,6 @@ We have no choice but to call upon the power of the sword."
 dialog{
   id = "sequencetest.3",
   text = [[
-Cleric:
 "This isn't just your sacrifice!
 According to the legends, over 500 soldiers lost their souls during the previous war.
 If you take this sword, you will sacrifice our entire army!"
@@ -38,7 +35,6 @@ If you take this sword, you will sacrifice our entire army!"
 dialog{
   id = "sequencetest.4",
   text = [[
-Knight:
 "That's a sacrifice I'm willing to make"
 ]]
 }
@@ -46,7 +42,6 @@ Knight:
 dialog{
   id = "sequencetest.5",
   text = [[
-Knight:
 "I'm going to pick it up."
 ]]
 }
@@ -54,7 +49,6 @@ Knight:
 dialog{
   id = "sequencetest.6",
   text = [[
-Knight:
 "Aaaaarggghhhh!"
 ]]
 }
@@ -62,7 +56,6 @@ Knight:
 dialog{
   id = "sequencetest.7",
   text = [[
-Cleric:
 "What have you done!?"
 ]]
 }
@@ -70,7 +63,6 @@ Cleric:
 dialog{
   id = "sequencetest.8",
   text = [[
-Knight:
 "..."
 ]]
 }
