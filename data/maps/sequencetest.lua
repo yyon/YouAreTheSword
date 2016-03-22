@@ -12,6 +12,8 @@ function map:on_started()
 --	self.herosentitydata = hero.entitydata
 --	hero.entitydata:drop(hero, true)
 --	hero.entitydata = self.herosentitydata
+	hero.entitydata.main_sprite = "abilities/droppedsword"
+	hero.entitydata:applytoentity()
 end
 
 function map:on_opening_transition_finished()
@@ -20,7 +22,6 @@ function map:on_opening_transition_finished()
 --	hero:freeze()
 --	self:freezeeveryone()
 	
-	hero.entitydata.main_sprite = "abilities/droppedsword"
 	
 	self:startcutscene()
 	self.newentitypossesseffect:remove()
@@ -98,7 +99,16 @@ function map:endfight()
 				self.heroentitydata.entity:remove()
 				self.heroentitydata = knight.entitydata
 				self:attack("mage", "hero", "EarthquakeAbility", true)
+				local hero = self:get_hero()
+				local x, y = hero:get_position()
+				knight.entitydata.positionlisteners[self] = function(x, y, layer)
+					local dx = math.random(-50, 50)
+					local dy = math.random(-50, 50)
+					hero:set_position(x+dx, y+dy)
+				end
 				self:wait(2000, function()
+					hero:set_position(x, y)
+					knight.entitydata.positionlisteners[self] = nil
 					self:say("knight", "6", function()
 						self:look("knight", "knightattackdest2")
 						self:wait(500, function()
