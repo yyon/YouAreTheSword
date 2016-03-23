@@ -30,9 +30,9 @@ function Ability:start(...)
 	self.inability = false
 	self.finisheddoability = false
 
-	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
-
 	self:starttarget()
+
+	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation(self.warmupanimation)
@@ -67,7 +67,7 @@ function Ability:starttarget()
 	self.targetx, self.targety = self.entitydata:gettargetpos()
 	self.origentity = self.entitydata.entity
 	self.targetlocked = false
-
+	
 	if self.entitydata.entity.ishero and self.warmup ~= 0 then
 		local entity = self.entitydata.entity
 		local map = entity:get_map()
