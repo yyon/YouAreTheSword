@@ -67,7 +67,7 @@ function Ability:starttarget()
 	self.targetx, self.targety = self.entitydata:gettargetpos()
 	self.origentity = self.entitydata.entity
 	self.targetlocked = false
-	
+
 	if self.entitydata.entity.ishero and self.warmup ~= 0 then
 		local entity = self.entitydata.entity
 		local map = entity:get_map()
@@ -173,6 +173,7 @@ function Ability:cancel()
 		if self.usingwarmup then
 			self.usingwarmup = false
 			self.warmuptimer:stop()
+			self:finishtarget()
 		end
 		self.canuse = true
 		self:finishability(true)
