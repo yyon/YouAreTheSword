@@ -740,6 +740,9 @@ function EntityData:dodamage(target, damage, aspects)
 				if target.life/target.maxlife < stagelife then
 					print("target", target.theclass, "entered new stage", stagelife)
 					stagefunct()
+					if self.usingability ~= nil then
+						self.usingability:cancel()
+					end
 					target:applytoentity()
 					target.stages[stagelife] = nil
 					break

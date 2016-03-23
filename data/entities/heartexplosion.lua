@@ -22,3 +22,7 @@ end
 function entity:getmaxdist()
 	return 300
 end
+
+function entity:isfast()
+	return true
+end

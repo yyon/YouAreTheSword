@@ -20,7 +20,10 @@ function FiringBowAbility:doability()
 	local entitydata = self.entitydata
 	local d = entitydata:getdirection()
 
-	self.arrowentity = map:create_custom_entity({model="arrow", x=x, y=y-35, layer=layer, direction=d, width=w, height=h})
+	self.arrowentity = map:create_custom_entity({model="arrow", x=x, y=y-35, layer=layer, direction=0, width=w, height=h})
+	self.arrowentity.rotationframes = 8
+	self.arrowentity.rotationframesoffset = 2
+	self.arrowentity.framenegative = true
 	self.arrowentity:start(self, tox, toy)
 
 	self.entitydata:setanimation("finishedbow")

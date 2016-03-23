@@ -63,3 +63,7 @@ function entity:finish()
 	self:remove()
 	self.movement:stop()
 end
+
+function entity:isfast()
+	return true
+end
