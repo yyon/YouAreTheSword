@@ -35,7 +35,15 @@ function entity:start(ability, tox, toy)
 	self.angle = angle
 
 	if self.rotationframes ~= nil then
-		self.sprite:set_frame(round((-angle + math.pi / 2) * self.rotationframes / math.pi / 2) % self.rotationframes)
+		local frame = round((-angle + math.pi / 2) * self.rotationframes / math.pi / 2)
+		if self.framenegative then
+			frame = -frame
+		end
+		if self.rotationframesoffset ~= nil then
+			frame = frame + self.rotationframesoffset
+		end
+		frame = frame % self.rotationframes
+		self.sprite:set_frame(frame)
 		self.sprite:set_paused(true)
 	end
 
@@ -51,21 +59,23 @@ function entity:start(ability, tox, toy)
 
 	self.movement = movement
 
-	function movement.on_position_changed(movement)
-		self:onposchanged()
-	end
 	function movement.on_obstacle_reached(movement)
 		self:finish()
 	end
 	function movement.on_finished(movement)
 		self:finish()
 	end
-
-	movementaccuracy(movement, angle, self)
+	
+	if not self:isfast() then
+		function movement.on_position_changed(movement)
+			self:onposchanged()
+		end
+		movementaccuracy(movement, angle, self)
+		self:add_collision_test("overlapping", self.overlap)
+	end
 
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
-	self:add_collision_test("overlapping", self.overlap)
 
 	self:onstart()
 end
@@ -139,4 +149,8 @@ function entity:getspritename()
 end
 
 function entity:onstart()
+end
+
+function entity:isfast()
+	return false
 end

@@ -38,7 +38,11 @@ function FireballConeAbility:dofireball(angle)
 
 	self.fireballentity = map:create_custom_entity({model="fireball", x=x, y=y, layer=layer, direction=0, width=w, height=h})
 	function self.fireballentity:isangle() return true end
+	function self.fireballentity:isfast() return true end
 	self.fireballentity:start(self, angle)
+	function self.fireballentity.movement.on_position_changed(movement)
+		self.fireballentity:onposchanged()
+	end
 end
 
 function FireballConeAbility:onfinish()

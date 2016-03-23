@@ -13,3 +13,7 @@ function entity:getdamage()
 	local damage = self.damage
 	return damage, aspects
 end
+
+function entity:isfast()
+	return true
+end
