@@ -13,7 +13,7 @@ function TauntAbility:initialize(entitydata)
 end
 
 function TauntAbility:doability()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy)
 
 	Effects.TauntEffect:new(self.target, 20000)

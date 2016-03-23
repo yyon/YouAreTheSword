@@ -124,6 +124,7 @@ sprite{ id = "hud/herolifebar", description = "herolifebar" }
 sprite{ id = "hud/lifebar", description = "lifebar" }
 sprite{ id = "hud/soul_meter", description = "sword possess meter" }
 sprite{ id = "hud/sword_health", description = "sword's health" }
+sprite{ id = "hud/target", description = "target" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
 sprite{ id = "monsters/bat", description = "bat" }
 sprite{ id = "monsters/bee", description = "bee" }
@@ -320,6 +321,7 @@ entity{ id = "spiketrap", description = "spiketrap" }
 entity{ id = "stealth", description = "stealth smoke" }
 entity{ id = "stomp", description = "stomp" }
 entity{ id = "sword", description = "sword" }
+entity{ id = "target", description = "target" }
 entity{ id = "teleportanim", description = "teleportanim" }
 entity{ id = "tentacle", description = "tentacle" }
 

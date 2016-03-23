@@ -196,94 +196,92 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	hero:set_direction(hero:get_direction4_to(x, y))
 
-	if hero:get_state() ~= "freezed" then
-		if key == "space" then
-			local didsomething = false
+	if key == "space" then
+		local didsomething = false
 
-			local map = hero:get_map()
-			for entity in map:get_entities("") do
-				if entity.dialog ~= nil then
-					if hero:get_distance(entity) < 80 then
-						if hero:get_direction4_to(entity) == hero:get_direction() then
+		local map = hero:get_map()
+		for entity in map:get_entities("") do
+			if entity.dialog ~= nil then
+				if hero:get_distance(entity) < 80 then
+					if hero:get_direction4_to(entity) == hero:get_direction() then
+						didsomething = true
+						if entity.entitydata ~= nil then
+							local d = entity:get_direction4_to(hero)
+							entity.entitydata:setdirection(d)
+						end
+
+						game:start_dialog(entity.dialog)
+					end
+				end
+			end
+			if entity:get_type() == "npc" then
+				if hero:get_distance(entity) < 80 then
+					if hero:get_direction4_to(entity) == hero:get_direction() then
+						local name = entity:get_name()
+						if name ~= nil then
 							didsomething = true
-							if entity.entitydata ~= nil then
-								local d = entity:get_direction4_to(hero)
-								entity.entitydata:setdirection(d)
-							end
 
-							game:start_dialog(entity.dialog)
-						end
-					end
-				end
-				if entity:get_type() == "npc" then
-					if hero:get_distance(entity) < 80 then
-						if hero:get_direction4_to(entity) == hero:get_direction() then
-							local name = entity:get_name()
-							if name ~= nil then
-								didsomething = true
-
-								game:start_dialog(name)
-							end
+							game:start_dialog(name)
 						end
 					end
 				end
 			end
+		end
 
-			if not didsomething then
-				hero.entitydata:startability("normal")
-			end
-		elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
-			hero.entitydata:startability("swordtransform")
-		elseif key == "left shift" then
-			hero.entitydata:startability("block")
-		elseif key == "escape" then
-			print("TODO: pause menu")
-		elseif (key == "q" and not dvorak) or (key == "'" and dvorak) then
-			hero.entitydata:startability("special", x, y)
-		elseif (key == "tab") then
-			hero.entitydata:throwclosest(x, y)
-		--debug keys
+		if not didsomething then
+			hero.entitydata:startability("normal")
+		end
+	elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
+		hero.entitydata:startability("swordtransform")
+	elseif key == "left shift" then
+		hero.entitydata:startability("block")
+	elseif key == "escape" then
+		print("TODO: pause menu")
+	elseif (key == "q" and not dvorak) or (key == "'" and dvorak) then
+		hero.entitydata:startability("special", x, y)
+	elseif (key == "tab") then
+		hero.entitydata:throwclosest(x, y)
+	--debug keys
 --		elseif key == "r" then
 --			hero.entitydata:throwrandom()
-		elseif key == "5" then
-			print("cheat: saved game")
-			saveto(1)
-		elseif key == "6" then
-			print("cheat: loaded game")
-			loadfrom(1)
-		elseif key == "7" then
-			print("cheat: restarted game")
-			deletesave(1)
-			loadfrom(1)
-		elseif key == "1" or key == "2" or key == "3" or key == "4" then
-			if hero.entitydata.cheatyabilityswitcher == nil then
-				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
-			end
-			local cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.blockabilities, ["3"]=hero.entitydata.transformabilities, ["4"]=hero.entitydata.specialabilities}
-			local cheatyabilities = cheatyabilities[key]
-			hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
-			if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
-				hero.entitydata.cheatyabilityswitcher[key] = 1
-			end
-			cheatyability = cheatyabilities[hero.entitydata.cheatyabilityswitcher[key]]
-			if key == "1" then
-				hero.entitydata.swordability = cheatyability
-			elseif key == "2" then
-				hero.entitydata.blockability = cheatyability
-			elseif key == "3" then
-				hero.entitydata.transformability = cheatyability
-			elseif key == "4" then
-				hero.entitydata.specialability = cheatyability
-			end
-			print("CHEAT: ability changed to", cheatyability.name)
-			if hero.entitydata.theclass == "debugger" then
-				hero.entitydata:onabilitychanged()
-			end
-		elseif key == "c" then
-			for num, ability in pairs({hero.entitydata.swordability, hero.entitydata.blockability, hero.entitydata.transformability, hero.entitydata.specialability}) do
-				if ability.usingcooldown then
-					ability.cooldowntimer:remove()
-				end
+	elseif key == "5" then
+		print("cheat: saved game")
+		saveto(1)
+	elseif key == "6" then
+		print("cheat: loaded game")
+		loadfrom(1)
+	elseif key == "7" then
+		print("cheat: restarted game")
+		deletesave(1)
+		loadfrom(1)
+	elseif key == "1" or key == "2" or key == "3" or key == "4" then
+		if hero.entitydata.cheatyabilityswitcher == nil then
+			hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
+		end
+		local cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.blockabilities, ["3"]=hero.entitydata.transformabilities, ["4"]=hero.entitydata.specialabilities}
+		local cheatyabilities = cheatyabilities[key]
+		hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
+		if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
+			hero.entitydata.cheatyabilityswitcher[key] = 1
+		end
+		cheatyability = cheatyabilities[hero.entitydata.cheatyabilityswitcher[key]]
+		if key == "1" then
+			hero.entitydata.swordability = cheatyability
+		elseif key == "2" then
+			hero.entitydata.blockability = cheatyability
+		elseif key == "3" then
+			hero.entitydata.transformability = cheatyability
+		elseif key == "4" then
+			hero.entitydata.specialability = cheatyability
+		end
+		print("CHEAT: ability changed to", cheatyability.name)
+		if hero.entitydata.theclass == "debugger" then
+			hero.entitydata:onabilitychanged()
+		end
+	elseif key == "c" then
+		for num, ability in pairs({hero.entitydata.swordability, hero.entitydata.blockability, hero.entitydata.transformability, hero.entitydata.specialability}) do
+			if ability.usingcooldown then
+				ability.cooldowntimer:remove()
 			end
 		end
 	end
@@ -339,14 +337,12 @@ function sol.main:on_mouse_pressed(button, ...)
 	end
 
 	hero = game:get_hero()
-	if hero:get_state() ~= "freezed" then
-		if button == "left" then
-			hero.entitydata:startability("special", x, y)
-		elseif button == "right" then
-			hero.entitydata:throwclosest(true)
-		elseif button == "middle" then
-			hero.entitydata:throwclosest(false)
-		end
+	if button == "left" then
+		hero.entitydata:startability("special", x, y)
+	elseif button == "right" then
+		hero.entitydata:throwclosest(true)
+	elseif button == "middle" then
+		hero.entitydata:throwclosest(false)
 	end
 end
 
@@ -370,7 +366,7 @@ function tick()
 							for entity in hero:get_map():get_entities("") do
 								entity.removed = true
 							end
-							
+
 							if hero.entitydata.usingability ~= nil then
 								hero.entitydata.usingability:cancel()
 							end

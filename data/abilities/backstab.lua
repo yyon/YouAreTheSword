@@ -14,7 +14,7 @@ function BackstabAbility:initialize(entitydata)
 end
 
 function BackstabAbility:doability()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy, true)
 --	if self.target == nil then
 --		self:finish(true)

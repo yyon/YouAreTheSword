@@ -11,7 +11,7 @@ function TeleportAbility:initialize(entitydata)
 end
 
 function TeleportAbility:doability()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 
 	local canteleport = self.entitydata:canmoveto(tox, toy)

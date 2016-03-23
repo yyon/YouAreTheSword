@@ -10,7 +10,7 @@ function FireballConeAbility:initialize(entitydata)
 end
 
 function FireballConeAbility:doability()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	self.tox, self.toy = tox, toy
 	self.angle = self.entitydata.entity:get_angle(tox, toy)
 	self.anglediff = 0

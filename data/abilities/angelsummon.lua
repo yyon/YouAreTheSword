@@ -17,7 +17,7 @@ function AngelSummonAbility:doability()
 	local w,h = entity:get_size()
 	local entitydata = self.entitydata
 
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 
 --	self.blackholeentity = map:create_custom_entity({model="blackhole", x=tox, y=toy, layer=layer, direction=0, width=w, height=h})

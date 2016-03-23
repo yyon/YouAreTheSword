@@ -10,7 +10,7 @@ function PossessAbility:initialize(entitydata)
 end
 
 function PossessAbility:doability()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	self.target = self.entitydata:getclosestentity(tox, toy, true)
 
 	if not self.target.entity.ishero then

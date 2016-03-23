@@ -25,7 +25,7 @@ function ChargeAbility:doability()
 
 	local d = entitydata:getdirection()
 
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 
 	self.swordentity = map:create_custom_entity({model="charge", x=x, y=y, layer=layer, direction=d, width=w, height=h})

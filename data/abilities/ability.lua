@@ -32,6 +32,8 @@ function Ability:start(...)
 
 	self.warmuptimer = Effects.SimpleTimer(self.entitydata, self.warmup * self.entitydata.stats.warmup, function() self:finishwarmup() end)
 
+	self:starttarget()
+
 	if self.warmupanimation ~= nil and self.warmup ~= 0 then
 		self.entitydata:setanimation(self.warmupanimation)
 	end
@@ -39,6 +41,8 @@ end
 
 function Ability:finishwarmup()
 	if self.entitydata.entity == nil then return end
+
+	self:finishtarget()
 
 	self.usingwarmup=false
 	self.inability = true
@@ -56,6 +60,42 @@ function Ability:finishwarmup()
 		print("ERROR in calling ability!", self.name)
 		print(status, err)
 		self:remove()
+	end
+end
+
+function Ability:starttarget()
+	self.targetx, self.targety = self.entitydata:gettargetpos()
+	self.origentity = self.entitydata.entity
+	self.targetlocked = false
+
+	if self.entitydata.entity.ishero and self.warmup ~= 0 then
+		local entity = self.entitydata.entity
+		local map = entity:get_map()
+
+		self.targetentity = map:create_custom_entity({model="target", x=self.targetx, y=self.targety, direction=0, layer=2, width=24, height=24})
+		self.targetentity.ability = self
+		self.targetentity:start()
+	end
+end
+function Ability:finishtarget()
+	if self.targetentity ~= nil then
+		self.targetentity:remove()
+		self.targetentity = nil
+	end
+end
+function Ability:gettargetpos()
+	if not self.targetlocked and (self.origentity == self.entitydata.entity or self.entitydata.entity.ishero) then
+		self.targetx, self.targety = self.entitydata:gettargetpos()
+	end
+	return self.targetx, self.targety
+end
+function Ability:locktarget()
+	if not self.targetlocked then
+		self.targetx, self.targety = self:gettargetpos()
+		self.targetlocked = true
+		if self.targetentity ~= nil then
+			self.targetentity:lock()
+		end
 	end
 end
 

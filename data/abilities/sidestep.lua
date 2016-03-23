@@ -14,7 +14,7 @@ end
 function SidestepAbility:doability()
 	if not self:catch(self.entitydata) then return end
 
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 
 	self.entitydata:setanimation("walking")

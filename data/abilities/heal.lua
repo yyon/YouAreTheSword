@@ -15,7 +15,7 @@ function HealAbility:doability()
 end
 
 function HealAbility:sendheart()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	local targetentity = self.entitydata:getclosestentity(tox, toy)
 
 	local entity = self.entitydata.entity

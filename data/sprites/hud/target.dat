@@ -1,0 +1,18 @@
+animation{
+  name = "hud",
+  src_image = "hud/target.png",
+  frame_delay = 50,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 20, frame_height = 20, origin_x = 9, origin_y = 9, num_frames = 13 },
+  },
+}
+animation{
+  name = "locked",
+  src_image = "hud/target.png",
+  frame_delay = 50,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 20, frame_width = 20, frame_height = 20, origin_x = 9, origin_y = 9, num_frames = 13 },
+  },
+}

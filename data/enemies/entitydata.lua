@@ -166,9 +166,18 @@ function EntityData:bepossessedbyhero()
 
 	hero.entitydata = self
 
+	local isfreezed = false
+	local anim
+	local movement
+	local visible
 	if self.entity ~= nil then
 		hero:set_position(self.entity:get_position())
 		hero:set_direction(self.entity.direction)
+
+		isfreezed = self:isfrozen(self.entity)
+		anim = self:getanimation()
+		movement = self.entity:get_movement()
+		visible = self.entity:is_visible()
 
 		self.entity:remove()
 	end
@@ -176,21 +185,36 @@ function EntityData:bepossessedbyhero()
 	self.entity = hero
 	self:applytoentity()
 
+	if isfreezed then
+		hero:freeze()
+		if movement ~= nil then
+			movement:start(hero)
+		end
+	end
+	if anim ~= nil then
+		self:setanimation(anim)
+	end
+	if visible ~= nil then
+		hero:set_visible(visible)
+	end
+
 	self.entity.is_possessing = true
-
-	--TODO: re-freeze hero
---	if self:getfrozen() ~= nil then
---		self:getfrozen():freeze()
---	end
-
 end
 
 function EntityData:unpossess(name)
 	-- create NPC entity for entitydata
 
+	if self.usingability ~= nil then
+		self.usingability:locktarget()
+	end
+
 	self.entity.is_possessing = false
 
 	local hero = self.entity:get_game():get_hero()
+
+	local anim = self:getanimation()
+	local movement = self.entity:get_movement()
+	local visible = self.entity:is_visible()
 
 	hero.entitydata = nil
 
@@ -209,6 +233,7 @@ function EntityData:unpossess(name)
 		name=name
 	})
 
+
 	self.entity = newentity
 
 	if self.entity.ishero then
@@ -218,6 +243,18 @@ function EntityData:unpossess(name)
 	self:applytoentity()
 
 	self.entity:setdirection(d)
+
+	if self:isfrozen(hero) then
+		hero:unfreeze()
+		self.entity:tick(self.entity.frozenstate)
+
+		if movement ~= nil then
+			movement:start(self.entity)
+		end
+	end
+
+	self:setanimation(anim)
+	self.entity:set_visible(visible)
 
 	return self.entity
 end
@@ -341,7 +378,7 @@ function EntityData:startability(ability, ...)
 	-- call this to use an ability
 	-- example: entitydata:startability("special")
 
-	if self.usingability == nil then
+	if self.usingability == nil and not self:isfrozen() then
 		local actualability = self:getability(ability)
 		if actualability.canuse then
 			actualability.abilitytype = ability
@@ -349,6 +386,17 @@ function EntityData:startability(ability, ...)
 --			self:log("Ability:", actualability.name)
 			return actualability
 		end
+	elseif self.usingability ~= nil and self.usingability.usingwarmup and self.entity.ishero then
+		self.usingability:locktarget()
+	end
+end
+
+function EntityData:isfrozen(entity)
+	if entity == nil then entity = self.entity end
+	if entity.ishero then
+		return (entity:get_state() == "freezed")
+	else
+		return (entity.state == entity.frozenstate)
 	end
 end
 
@@ -428,6 +476,15 @@ function EntityData:setanimation(anim)
 			self.entity.main_sprite:set_animation(anim)
 			self.entity.main_sprite:set_paused(false)
 		end
+	end
+end
+
+function EntityData:getanimation(entity)
+	if entity == nil then entity = self.entity end
+	if entity.ishero then
+		return entity:get_animation()
+	else
+		return entity.main_sprite:get_animation()
 	end
 end
 
@@ -846,7 +903,7 @@ function EntityData:throwsword(entitydata2)
 	local hero = self.entity
 
 	if self.entity.ishero then
-		if self.usingability ~= nil then
+		if self.usingability ~= nil and not self.usingability.usingwarmup then
 			return
 		end
 
@@ -875,9 +932,10 @@ function EntityData:throwsword(entitydata2)
 		hero.isthrown = true
 
 		hero.isthrown = true
-		hero:freeze()
 
 		local newentity = self:unpossess()
+
+		hero:freeze()
 
 		hero:set_tunic_sprite_id("abilities/thrownsword")
 		hero:set_animation("stopped")

@@ -4,11 +4,10 @@ local Effects = require "enemies/effect"
 require "scripts/movementaccuracy"
 
 function entity:on_created()
+	self:set_optimization_distance(0)
 end
 
 function entity:start(tox, toy)
-	self:set_optimization_distance(0)
-
 	self.bomb_sprite = self:create_sprite("abilities/bomb")
 	self.bomb_sprite:set_animation("stopped")
 	self.bomb_sprite:set_paused(false)

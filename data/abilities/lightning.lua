@@ -10,7 +10,7 @@ function LightningAbility:initialize(entitydata)
 end
 
 function LightningAbility:doability()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 
 	local entity = self.entitydata.entity

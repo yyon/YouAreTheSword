@@ -16,7 +16,7 @@ function GunAbility:doability()
 end
 
 function GunAbility:shoot()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	self.tox, self.toy = tox, toy
 
 	local entity = self.entitydata.entity

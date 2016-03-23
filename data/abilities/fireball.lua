@@ -10,7 +10,7 @@ function FireballAbility:initialize(entitydata)
 end
 
 function FireballAbility:doability()
-	local tox, toy = self.entitydata:gettargetpos()
+	local tox, toy = self:gettargetpos()
 	self.tox, self.toy = tox, toy
 
 	local entity = self.entitydata.entity
