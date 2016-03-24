@@ -35,7 +35,21 @@ If you take this sword, you will sacrifice our entire army!"
 dialog{
   id = "sequencetest.4",
   text = [[
-"That's a sacrifice I'm willing to make"
+"That's a sacrifice I'm willing to make."
+]]
+}
+
+dialog{
+  id = "sequencetest.4.1",
+  text = [[
+"Skeletons - how did they manage to get this far into town?"
+]]
+}
+
+dialog{
+  id = "sequencetest.4.2",
+  text = [[
+"No matter - once we have awoken the sword, we won't have to worry about our defenses."
 ]]
 }
 

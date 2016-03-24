@@ -1191,7 +1191,7 @@ function EntityData:getremainingadventurers(dontcountself)
 	end
 
 	for entitydata in self:getotherentities() do
-		if entitydata.team == "adventurer" then
+		if entitydata.team == "adventurer" and not entitydata.doesntcountsasadventurer then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
@@ -2000,6 +2000,7 @@ function dummyclass:initialize(entity)
 	local specialabilities = {NothingAbility:new(self)}
 	local basestats = {movementspeed=0}
 	self.dontmove = true
+	self.doesntcountsasadventurer = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)

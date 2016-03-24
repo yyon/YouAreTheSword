@@ -231,6 +231,8 @@ function map:look(name, target)
 end
 
 function map:attack(name, target, attackname, skiptimer)
+    self:look(name, target)
+    
     local entitydata = map:get_entity(name).entitydata
     local targetentity = map:get_entity(target)
     entitydata.manualtarget = targetentity
