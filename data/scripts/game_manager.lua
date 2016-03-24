@@ -198,6 +198,12 @@ function sol.main:on_key_pressed(key, modifiers)
 			print("cheat: fast throw")
 			game.fastthrow = true
 		end
+	elseif key == "r" then
+		if hero.entitydata ~= nil then
+			local x, y = hero:get_position()
+			hero.entitydata:throwclosest(true)
+			hero.entitydata:throwclosest(true)
+		end
 	end
 
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
