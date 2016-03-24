@@ -190,6 +190,14 @@ function sol.main:on_key_pressed(key, modifiers)
 		if hero.entitydata.usingability ~= nil then
 			hero.entitydata.usingability:cancel()
 		end
+	elseif key == "f" then
+		if game.fastthrow then
+			print("ended cheat: fast throw")
+			game.fastthrow = false
+		else
+			print("cheat: fast throw")
+			game.fastthrow = true
+		end
 	end
 
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then

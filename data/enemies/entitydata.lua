@@ -265,6 +265,8 @@ function EntityData:unpossess(name)
 		self.usingability:keyrelease()
 	end
 
+	self.entity:tick()
+
 	return self.entity
 end
 
@@ -954,31 +956,35 @@ function EntityData:throwsword(entitydata2)
 
 		hero:stop_movement()
 
-		local movement = sol.movement.create("target")
-		movement:set_speed(1000)
-		movement:set_target(entitydata2.entity)
-		movement:start(hero)
-
-		movement:set_ignore_obstacles()
---[[
-		function movement:on_obstacle_reached()
-			movement:stop()
-			EntityData:drop(hero)
-		end
---]]
-		function movement:on_finished()
+		if game.fastthrow then
 			entitydata2:bepossessedbyhero()
-		end
+		else
+			local movement = sol.movement.create("target")
+			movement:set_speed(1000)
+			movement:set_target(entitydata2.entity)
+			movement:start(hero)
 
-		function movement:on_position_changed()
-			if entitydata2.entity == nil then
-				self:stop()
+			movement:set_ignore_obstacles()
+	--[[
+			function movement:on_obstacle_reached()
+				movement:stop()
 				EntityData:drop(hero)
-			else
-				local d = hero:get_distance(entitydata2.entity)
-				if d < 30 then
+			end
+	--]]
+			function movement:on_finished()
+				entitydata2:bepossessedbyhero()
+			end
+
+			function movement:on_position_changed()
+				if entitydata2.entity == nil then
 					self:stop()
-					entitydata2:bepossessedbyhero()
+					EntityData:drop(hero)
+				else
+					local d = hero:get_distance(entitydata2.entity)
+					if d < 30 then
+						self:stop()
+						entitydata2:bepossessedbyhero()
+					end
 				end
 			end
 		end
