@@ -170,6 +170,9 @@ function EntityData:bepossessedbyhero()
 	local anim
 	local movement
 	local visible
+
+	self:changemovements(self.entity, hero)
+
 	if self.entity ~= nil then
 		hero:set_position(self.entity:get_position())
 		hero:set_direction(self.entity.direction)
@@ -255,6 +258,12 @@ function EntityData:unpossess(name)
 
 	self:setanimation(anim)
 	self.entity:set_visible(visible)
+
+	self:changemovements(hero, newentity)
+
+	if self.usingability ~= nil then
+		self.usingability:keyrelease()
+	end
 
 	return self.entity
 end
@@ -906,9 +915,9 @@ function EntityData:throwsword(entitydata2)
 	local hero = self.entity
 
 	if self.entity.ishero then
-		if self.usingability ~= nil and not self.usingability.usingwarmup then
-			return
-		end
+--		if self.usingability ~= nil and not self.usingability.usingwarmup then
+--			return
+--		end
 
 		if hero.isthrown then
 			return
@@ -1203,6 +1212,14 @@ function EntityData:totable()
 		blockability=self.blockability.name,
 		specialability = self.specialability.name
 	}
+end
+
+function EntityData:changemovements(oldentity, newentity)
+	for entity, movement in pairs(_movements) do
+		if movement.target == oldentity then
+			movement:set_target(newentity)
+		end
+	end
 end
 
 -- Actual classes

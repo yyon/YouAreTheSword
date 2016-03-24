@@ -272,5 +272,4 @@ function Ability:blockdamage(fromentity, damage, aspects)
 	return damage, aspects
 end
 
-
 return Ability

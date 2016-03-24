@@ -27,6 +27,28 @@ local Effects = require "enemies/effect"
 
 require "profiler"
 
+_movements = {}
+local actualcreatemovement = sol.movement.create
+function sol.movement.create(movementtype, ...)
+	local movement = actualcreatemovement(movementtype, ...)
+
+	movement.actualsettarget = movement.set_target
+	function movement:set_target(entity, ...)
+		if entity ~= nil and type(entity) ~= "number" and entity.exists ~= nil then
+			self.target = entity
+		end
+		self:actualsettarget(entity, ...)
+	end
+
+	movement.actualstart = movement.start
+	function movement:start(entity, ...)
+		_movements[entity] = self
+		self:actualstart(entity, ...)
+	end
+
+	return movement
+end
+
 function game_manager:start_game()
 	load()
 

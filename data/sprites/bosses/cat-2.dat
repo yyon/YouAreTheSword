@@ -100,7 +100,7 @@ animation{
   directions = {
     { x = 0, y = 128, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 8 },
     { x = 0, y = 128, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 640, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 8 },
-    { x = 0, y = 640, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 8 },
+    { x = 0, y = 768, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 8 },
+    { x = 0, y = 768, frame_width = 128, frame_height = 128, origin_x = 64, origin_y = 100, num_frames = 8 },
   },
 }
