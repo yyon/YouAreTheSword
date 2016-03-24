@@ -270,7 +270,7 @@ function EntityData:unpossess(name)
 	return self.entity
 end
 
-function EntityData:cantarget(entitydata, canbeonsameteam)
+function EntityData:cantarget(entitydata, canbeonsameteam, isattack)
 --	print(debug.traceback())
 
 	-- is this entitydata a person which can be attacked?
@@ -298,10 +298,10 @@ function EntityData:cantarget(entitydata, canbeonsameteam)
 		return false
 	end
 
-	if not entitydata:isvisible() and not self.entity.ishero then
---		self:log("can't target", entitydata, "because invisible")
-		return false
-	end
+--	if not entitydata:isvisible() and not isattack then
+--		print("can't target", entitydata, "because invisible")
+--		return false
+--	end
 
 	return true
 end
@@ -397,7 +397,7 @@ function EntityData:startability(ability, ...)
 --			self:log("Ability:", actualability.name)
 			return actualability
 		end
-	elseif self.usingability ~= nil and self.usingability.usingwarmup and self.entity.ishero then
+	elseif self.usingability ~= nil and self.usingability.usingwarmup and self.usingability.abilitytype == ability and self.entity.ishero then
 		self.usingability:locktarget()
 	end
 end
@@ -581,6 +581,13 @@ function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
 
 	if self.entity == nil then return end
+
+	if target.receivedamage ~= nil then
+		local returnvalue = target:receivedamage(self, damage, aspects)
+		if returnvalue then
+			return
+		end
+	end
 
 	local map = self.entity:get_map()
 
@@ -941,9 +948,13 @@ function EntityData:throwsword(entitydata2)
 			entitydata2.effects["possess"]:remove()
 		end
 
-		sol.audio.play_sound("swing" .. math.random(1,3))
+		if self.usingability and self.usingability.usingwarmup then
+			local x, y = self.usingability:gettargetpos()
+			local direction = self.entity:get_direction4_to(x, y)
+			self:setdirection(direction)
+		end
 
-		hero.isthrown = true
+		sol.audio.play_sound("swing" .. math.random(1,3))
 
 		hero.isthrown = true
 
@@ -964,7 +975,8 @@ function EntityData:throwsword(entitydata2)
 			movement:set_target(entitydata2.entity)
 			movement:start(hero)
 
-			movement:set_ignore_obstacles()
+			local floor = hero:get_map():get_floor()
+
 	--[[
 			function movement:on_obstacle_reached()
 				movement:stop()
@@ -986,6 +998,31 @@ function EntityData:throwsword(entitydata2)
 						entitydata2:bepossessedbyhero()
 					end
 				end
+			end
+
+			if floor == 1 then
+				function movement.on_obstacle_reached(movement, dx, dy)
+					local x, y = hero:get_position()
+					hero:set_position(x+dx, y+dy)
+					for entity in hero:get_map():get_entities("") do
+						if entity:get_type() == "wall" then
+							local name = entity:get_name()
+							if name == nil or not string.find(name, "sword") then
+								if hero:overlaps(entity) then
+									-- drop sword
+									movement:stop()
+									hero.isthrown = false
+									self:drop(hero)
+								end
+							end
+						end
+					end
+					hero:set_position(x, y)
+				end
+				movement:set_ignore_obstacles()
+				movementaccuracy.targetstopper(movement, hero, entitydata2.entity)
+			else
+				movement:set_ignore_obstacles()
 			end
 		end
 	end
@@ -1173,7 +1210,7 @@ function EntityData:getremainingmonsters()
 	end
 
 	for entitydata in self:getotherentities() do
-		if entitydata.team == "monster" then
+		if entitydata.team == "monster" and not entitydata.doesntcountsasmonster then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
@@ -1906,6 +1943,7 @@ function catboss:initialize(entity)
 	local specialabilities = {CatShootAbility:new(self, "fast")}
 	local basestats = {movementspeed=150}
 	self.cantdraweyes = true
+	self.cantpossess = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
@@ -2001,9 +2039,60 @@ function dummyclass:initialize(entity)
 	local basestats = {movementspeed=0}
 	self.dontmove = true
 	self.doesntcountsasadventurer = true
+	self.cantposses = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+local lever = EntityData:subclass("lever")
+
+allclasses.lever = lever
+function lever:initialize(entity)
+	local class = "lever"
+	local main_sprite = "Traps/lever"
+	local life = 5
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
+	local normalabilities = {NothingAbility:new(self)}
+	local transformabilities = {NothingAbility:new(self)}
+	local blockabilities = {NothingAbility:new(self)}
+	local specialabilities = {NothingAbility:new(self)}
+	local basestats = {movementspeed=0}
+	self.dontmove = true
+	self.doesntcountsasmonster = true
+	self.cantposses = true
+	self.time = 5000
+	self.dontdrawlifebar = true
+
+	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
+	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
+end
+
+function lever:isvisible()
+	return false
+end
+
+function lever:receivedamage(fromentitydata, damage, aspects)
+	if damage > 0 then
+		self:setanimation("pulled")
+		local door = self:getdoor()
+		sol.audio.play_sound("dooropen")
+		door:open()
+		sol.audio.play_sound("clock")
+		self.timer = Effects.SimpleTimer(self, self.time, function()
+			self:setanimation("stopped")
+			sol.audio.play_sound("doorclose")
+			door:close()
+		end)
+	end
+	return true
+end
+
+function lever:getdoor()
+	local myname = self.entity:get_name()
+	local startname, endname = myname:match("([^_]+)_([^_]+)") -- split by _
+	local doorentity = self.entity:get_map():get_entity(startname)
+	return doorentity
 end
 
 _EntityDatas = allclasses

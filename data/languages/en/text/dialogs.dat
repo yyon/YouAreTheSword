@@ -8,6 +8,22 @@ and blow everything up!
 }
 
 dialog{
+  id = "puzzletest.3sign",
+  text = [[
+Press the key you used to activate the ability again in order to "lock" the targeting system which allows you to freely move your mouse without changing where you are targeting.
+]]
+}
+
+dialog{
+  id = "puzzletest.4sign",
+  text = [[
+In puzzle levels, you can't throw the sword over walls. However, you can throw the sword over, for example, a pit of lava.
+NEWSCREEN
+Archers will wait before firing arrows as a special ability. The normal ability won't wait.
+]]
+}
+
+dialog{
   id = "sequencetest.1",
   text = [[
 "Don't do it!"

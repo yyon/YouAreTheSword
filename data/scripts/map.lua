@@ -40,7 +40,7 @@ function map:actuallydrawlifebars()
 end
 
 function map:actuallydrawlifebar(entity)
-    if entity.entitydata ~= nil then
+    if entity.entitydata ~= nil and not entity.entitydata.dontdrawlifebar then
         entity.lifebarsurface = sol.surface.create(70, 4)
 
         local frame
@@ -232,7 +232,7 @@ end
 
 function map:attack(name, target, attackname, skiptimer)
     self:look(name, target)
-    
+
     local entitydata = map:get_entity(name).entitydata
     local targetentity = map:get_entity(target)
     entitydata.manualtarget = targetentity

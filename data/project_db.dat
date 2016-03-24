@@ -10,6 +10,10 @@ map{ id = "hub", description = "hub" }
 map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "misc_testing", description = "misc_testing" }
+map{ id = "puzzletest/1", description = "1" }
+map{ id = "puzzletest/2", description = "2" }
+map{ id = "puzzletest/3", description = "3" }
+map{ id = "puzzletest/4", description = "4" }
 map{ id = "sequencetest", description = "sequencetest" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
@@ -18,6 +22,8 @@ map{ id = "traps", description = "traps" }
 tileset{ id = "tileset2", description = "tileset2" }
 tileset{ id = "zmagecity", description = "zmagecity" }
 
+sprite{ id = "Traps/door", description = "door" }
+sprite{ id = "Traps/lever", description = "lever" }
 sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
 sprite{ id = "abilities/arrow", description = "arrow" }
@@ -155,6 +161,7 @@ sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 sprite{ id = "physicaleffects/taunt", description = "taunt" }
+sprite{ id = "sign", description = "sign" }
 sprite{ id = "swords/electric", description = "electric" }
 sprite{ id = "swords/largesword", description = "largesword" }
 sprite{ id = "swords/mace", description = "mace" }
@@ -293,6 +300,7 @@ enemy{ id = "f_spaceship", description = "f_Spaceship" }
 enemy{ id = "fz_MISC/misc", description = "MISC" }
 enemy{ id = "m_combat_dummy", description = "m_Combat_Dummy" }
 enemy{ id = "m_debugger", description = "m_Debugger" }
+enemy{ id = "m_lever", description = "m_Lever" }
 
 entity{ id = "arrow", description = "arrow" }
 entity{ id = "blackhole", description = "blackhole" }
@@ -303,6 +311,7 @@ entity{ id = "catattack", description = "catattack" }
 entity{ id = "catproj", description = "catproj" }
 entity{ id = "charge", description = "charge" }
 entity{ id = "directionaltrap", description = "directionaltrap" }
+entity{ id = "door", description = "door" }
 entity{ id = "fireball", description = "fireball" }
 entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }

@@ -123,6 +123,9 @@ end
 local DoNothingState = State:subclass("DoNothingState")
 
 function DoNothingState:start()
+	if self.npc.entitydata ~= nil then
+		self.npc.entitydata:setanimation("stopped")
+	end
 end
 
 function DoNothingState:tick()
@@ -368,6 +371,7 @@ end
 
 function enemy:cantarget(entitydata)
 	if not self.entitydata:cantarget(entitydata) then return false end
+	if not entitydata:isvisible() then return false end
 --	if self:get_distance(entitydata.entity) > 200 and self.entitytoattack == nil then
 --		return false
 --	end
@@ -383,7 +387,9 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	local hero = self:get_game():get_hero()
 
 --	if self:get_distance(hero) > 700 and not self.hasbeenhit then
-	if self:get_map():get_floor() ~= 0 and not self.entitydata:isonscreen(200) then
+	local floor = self:get_map():get_floor()
+
+	if floor ~= 0 and not self.entitydata:isonscreen(200) then
 		return self.donothingstate
 	end
 
@@ -399,12 +405,16 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 		return self.donothingstate
 	end
 
-	if entitytoattack == nil then
-		return self.randomstate
+	if entitytoattack ~= nil and entitytoattack.isdropped then
+		return self.pickupstate
 	end
 
-	if entitytoattack.isdropped then
-		return self.pickupstate
+	if floor == 1 then
+		return self.donothingstate
+	end
+
+	if entitytoattack == nil then
+		return self.randomstate
 	end
 
 	if entitytoattack ~= nil then

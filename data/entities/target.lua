@@ -3,6 +3,7 @@ local entity = ...
 local Effects = require "enemies/effect"
 
 function entity:on_created()
+	self:set_optimization_distance(0)
 end
 
 function entity:start()
@@ -13,7 +14,8 @@ function entity:start()
 end
 
 function entity:tick()
-	self:set_position(self.ability:gettargetpos())
+	local x, y = self.ability:gettargetpos()
+	self:set_position(x, y)
 end
 
 function entity:on_removed()

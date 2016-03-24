@@ -1,0 +1,10 @@
+animation{
+  name = "stopped",
+  src_image = "sign.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 30, frame_height = 32, origin_x = 15, origin_y = 16 },
+    { x = 0, y = 0, frame_width = 30, frame_height = 32, origin_x = 15, origin_y = 16 },
+    { x = 0, y = 0, frame_width = 30, frame_height = 32, origin_x = 15, origin_y = 16 },
+    { x = 0, y = 0, frame_width = 30, frame_height = 32, origin_x = 15, origin_y = 16 },
+  },
+}

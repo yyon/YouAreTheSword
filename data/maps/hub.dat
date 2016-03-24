@@ -285,6 +285,15 @@ tile{
   pattern = "607",
 }
 
+tile{
+  layer = 0,
+  x = 768,
+  y = 144,
+  width = 64,
+  height = 32,
+  pattern = "607",
+}
+
 npc{
   layer = 0,
   x = 400,
@@ -497,5 +506,25 @@ teletransporter{
   width = 32,
   height = 32,
   destination_map = "catmap",
+}
+
+teletransporter{
+  layer = 0,
+  x = 800,
+  y = 144,
+  width = 32,
+  height = 32,
+  destination_map = "puzzletest/1",
+}
+
+custom_entity{
+  name = "door",
+  layer = 0,
+  x = 848,
+  y = 149,
+  width = 40,
+  height = 64,
+  direction = 0,
+  model = "door",
 }
 

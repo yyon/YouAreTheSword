@@ -24,7 +24,10 @@ http://opengameart.org/content/lpc-skorpios-scifi-sprite-pack-0
 	mech
 https://pixabay.com/static/uploads/photo/2012/04/14/12/52/trap-33819_960_720.png
 	trap
-
+http://opengameart.org/content/side-scroller-tiles-and-objects-for-ardentryst-by-jordan-trudgett
+	lever
+http://opengameart.org/content/lpc-signposts-graves-line-cloths-and-scare-crow
+	sign
 		
 
 http://opengameart.org/content/jastivs-artwork
@@ -93,11 +96,13 @@ http://opengameart.org/content/osare-10-sound-pack
 http://opengameart.org/content/steam-release-sounds
 	stealth
 http://opengameart.org/content/metal-interactions
-	trap
+	trap, dooropen, doorclose
 http://opengameart.org/content/futuristic-weapons-assault-rifle
 	gun
 http://opengameart.org/content/4-projectile-launches
 	cat projectile
+http://opengameart.org/content/ticking-clock-0
+	ticking clock sound
 
 music:
 http://opengameart.org/content/generic-8-bit-jrpg-soundtrack
