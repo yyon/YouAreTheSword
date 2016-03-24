@@ -84,7 +84,6 @@ dialog{
 dialog{
   id = "sequencetest.cleric_afterwards",
   text = [[
-Cleric:
 "Hello Mr. Sword, please don't kill me."
 ]]
 }

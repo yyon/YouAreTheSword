@@ -9,7 +9,7 @@ sol.main.load_file("entities/projectile")(entity)
 function entity:getdamage()
   local aspects = {}
   aspects.knockback = 100
-  local damage = 1
+  local damage = 1.5
   return damage, aspects
 end
 
@@ -23,4 +23,5 @@ end
 
 function entity:onhit()
 	sol.audio.play_sound("arrow")
+    self:remove()
 end
