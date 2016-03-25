@@ -29,6 +29,7 @@ function damagedisp:initialize(dmg, x, y)
 		
 		self.text = sol.text_surface.create({horizontal_alignement="center", vertical_alignement="middle", text=tostring(dmg), font=font, color=col, font_size=size})
 	          self.w, self.h = self.text:get_size()
+		self.x = self.x - self.w / 2
 		damagedisps[self]=true
 	end
 end
