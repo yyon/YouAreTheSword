@@ -336,7 +336,7 @@ function EntityData:getotherentities()
 	-- does not include self
 	-- usage: for otherentitydata in entitydata:getotherentities()
 
-	if self.entity == nil then print(debug.traceback()) end
+	if self.entity == nil then print(debug.traceback()); return end
 
 	local map = self.entity:get_map()
 	local heroentity = map:get_hero()
@@ -695,6 +695,9 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 
 	target.life = target.life - damage
+	
+	local x, y = target.entity:get_position()
+	map:damagedisplay(damage, x, y)
 
 	if aspects.lifesteal then
 		self.life = self.life + damage
@@ -747,9 +750,14 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 
 	if target.life <= 0 or aspects.instantdeath or (game.instantdeath and damage ~= 0) then
+		local remainingmonsters = self:getremainingmonsters()
+		if self.team ~= "adventurer" then
+			remainingmonsters = remainingmonsters - 1
+		end
+		
 		target:kill()
-
-		if self:getremainingmonsters() == 0 then
+		
+		if remainingmonsters == 0 then
 			map.nomonstersleft = true
 		end
 	else

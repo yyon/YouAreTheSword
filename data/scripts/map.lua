@@ -1,6 +1,47 @@
 local map = ...
 
 local Effects = require "enemies/effect"
+local class = require "middleclass"
+local math = require "math"
+
+local damagedisps = {}
+local damagedisp = class("damagedisp")
+function damagedisp:initialize(dmg, x, y)
+	y = y - 50
+	dmg = math.floor(dmg * 10 + 0.5)
+	if dmg ~= 0 then
+		self.dmg, self.x, self.y = dmg, x, y
+		self.origy = self.y
+		local font
+		if dmg < 20 then
+			font = "damagedisp1"
+		else
+			font = "damagedisp2"
+		end
+		
+		local size = dmg/2+5
+		if size < 10 then size = 10 end
+		if size > 50 then size = 50 end
+		
+		local gb = 255 - (dmg / 100 * 255 * 2)
+		if gb < 0 then gb = 0 end
+		local col = {255, gb, gb}
+		
+		self.text = sol.text_surface.create({horizontal_alignement="center", vertical_alignement="middle", text=tostring(dmg), font=font, color=col, font_size=size})
+	          self.w, self.h = self.text:get_size()
+		damagedisps[self]=true
+	end
+end
+
+function damagedisp:draw(dst_surface, cx, cy)
+	self.text:draw(dst_surface, self.x-cx, self.y-cy)
+	if not (game:is_paused() or game:is_suspended()) then
+		self.y = self.y - 1
+		if self.origy - self.y > 50 then
+			damagedisps[self] = nil
+		end
+	end
+end
 
 local foundmonster = false
 for entity in map:get_entities("") do
@@ -136,6 +177,10 @@ function map:on_draw(dst_surface)
     self:drawlifebar(dst_surface, hero, cx, cy)
     for entity in self:get_entities("") do
         self:drawlifebar(dst_surface, entity, cx, cy)
+    end
+
+    for dmgdisp, _ in pairs(damagedisps) do
+	dmgdisp:draw(dst_surface, cx, cy)
     end
 end
 
@@ -312,4 +357,8 @@ end
 function map:reattachcamera()
     self.newentitypossesseffect:remove()
     self.heroentitydata:bepossessedbyhero()
+end
+
+function map:damagedisplay(damage, x, y)
+    damagedisp:new(damage, x, y)
 end

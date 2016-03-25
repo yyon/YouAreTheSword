@@ -341,3 +341,11 @@ font{ id = "8_bit_2", description = "8_bit_2" }
 font{ id = "8_bit_3", description = "8_bit_3" }
 font{ id = "minecraftia", description = "minecraftia" }
 
+font{
+	id = "damagedisp1",
+	description = "damagedisp1",
+}
+font{
+	id = "damagedisp2",
+	description = "damagedisp2",
+}
