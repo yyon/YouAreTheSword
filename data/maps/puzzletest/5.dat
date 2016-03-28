@@ -1,0 +1,42 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 720,
+  floor = 1,
+  tileset = "tileset2",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 736,
+  pattern = "5274",
+}
+
+enemy{
+  layer = 0,
+  x = 192,
+  y = 245,
+  direction = 0,
+  breed = "a_berserker",
+}
+
+destination{
+  layer = 0,
+  x = 72,
+  y = 109,
+  direction = 1,
+}
+
+teletransporter{
+  layer = 0,
+  x = 208,
+  y = 0,
+  width = 144,
+  height = 64,
+  destination_map = "puzzletest/puzzlehub",
+}
+

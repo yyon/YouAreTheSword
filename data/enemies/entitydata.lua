@@ -623,7 +623,7 @@ function EntityData:dodamage(target, damage, aspects)
 
 	-- aspects
 	if aspects.knockback == nil then
-		aspects.knockback = 500
+		aspects.knockback = 200
 	end
 	if aspects.fromentity == nil then
 		aspects.fromentity = self.entity
@@ -1254,14 +1254,15 @@ end
 
 function EntityData:totable()
 	return {
-		classname = self.class.name,
+		classname = self.class.name,	
 		life=self.life,
 		maxlife=self.maxlife,
 		team=self.team,
 		swordability=self.swordability.name,
 		transformability=self.transformability.name,
 		blockability=self.blockability.name,
-		specialability = self.specialability.name
+		specialability = self.specialability.name,
+		ispuzzle=(self.entity:get_map():get_floor() == 1)
 	}
 end
 
@@ -1290,24 +1291,26 @@ function EntityData.static:fromtable(table, entity)
 		entitydata.entity = entity
 		entitydata:applytoentity()
 
-		for index, ability in pairs(entitydata.normalabilities) do
-			if ability.name == table.swordability then
-				entitydata.swordability = ability
+		if not table.ispuzzle then
+			for index, ability in pairs(entitydata.normalabilities) do
+				if ability.name == table.swordability then
+					entitydata.swordability = ability
+				end
 			end
-		end
-		for index, ability in pairs(entitydata.transformabilities) do
-			if ability.name == table.transformability then
-				entitydata.transformability = ability
+			for index, ability in pairs(entitydata.transformabilities) do
+				if ability.name == table.transformability then
+					entitydata.transformability = ability	
+				end
 			end
-		end
-		for index, ability in pairs(entitydata.blockabilities) do
-			if ability.name == table.blockability then
-				entitydata.blockability = ability
+			for index, ability in pairs(entitydata.blockabilities) do
+				if ability.name == table.blockability then
+					entitydata.blockability = ability
+				end
 			end
-		end
-		for index, ability in pairs(entitydata.specialabilities) do
-			if ability.name == table.specialability then
-				entitydata.specialability = ability
+			for index, ability in pairs(entitydata.specialabilities) do
+				if ability.name == table.specialability then
+					entitydata.specialability = ability
+				end
 			end
 		end
 
