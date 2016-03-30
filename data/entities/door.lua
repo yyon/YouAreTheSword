@@ -2,13 +2,18 @@ local entity = ...
 
 function entity:on_created()
 	self.isdoor = true
+	self.openedby = {}
 	self.reversed = self:get_name():match(".*inv.*") ~= nil
 	self:set_optimization_distance(0)
 	self.sprite = self:create_sprite("Traps/door")
 	self:close()
 end
 
-function entity:open()
+function entity:open(lever)
+	if lever ~= nil then
+		self.openedby[lever] = true
+	end
+
 	if not self.reversed then
 		self:actuallyopen()
 	else
@@ -21,11 +26,21 @@ function entity:actuallyopen()
 	self:set_traversable_by(true)
 end
 
-function entity:close()
-	if not self.reversed then
-		self:actuallyclose()
-	else
-		self:actuallyopen()
+function entity:close(lever)
+	if lever ~= nil then
+		self.openedby[lever] = nil
+		local stillopen = false
+		for lever, opened in pairs(self.openedby) do
+			if opened then stillopen = true end
+		end
+	end
+	
+	if not stillopen then
+		if not self.reversed then
+			self:actuallyclose()
+		else
+			self:actuallyopen()
+		end
 	end
 end
 

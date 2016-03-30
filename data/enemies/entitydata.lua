@@ -2071,7 +2071,7 @@ function lever:initialize(entity)
 	local basestats = {movementspeed=0}
 	self.dontmove = true
 	self.doesntcountsasmonster = true
-	self.cantposses = true
+	self.cantpossess = true
 	self.time = 5000
 	self.dontdrawlifebar = true
 
@@ -2092,12 +2092,12 @@ function lever:receivedamage(fromentitydata, damage, aspects)
 				local name = self:getname()
 				if door:get_name():match(".*" .. name .. ".*") then
 					sol.audio.play_sound("dooropen")
-					door:open()
+					door:open(self)
 					sol.audio.play_sound("clock")
 					self.timer = Effects.SimpleTimer(self, self.time, function()
 						self:setanimation("stopped")
 						sol.audio.play_sound("doorclose")
-						door:close()
+						door:close(self)
 					end)
 				end
 			end
