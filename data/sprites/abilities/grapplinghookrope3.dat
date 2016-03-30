@@ -2,6 +2,13 @@ animation{
   name = "rope",
   src_image = "abilities/grapplinghookrope3.png",
   directions = {
-    { x =0, y =0, frame_width =40, frame_height =40, origin_x =20, origin_y =20, num_frames = 24 },
+    { x = 0, y = 0, frame_width = 40, frame_height = 40, origin_x = 20, origin_y = 20, num_frames = 24 },
+  },
+}
+animation{
+  name = "vine",
+  src_image = "abilities/grapplinghookrope3.png",
+  directions = {
+    { x = 0, y = 40, frame_width = 40, frame_height = 40, origin_x = 20, origin_y = 20, num_frames = 24 },
   },
 }

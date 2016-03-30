@@ -1726,7 +1726,7 @@ function flowerclass:initialize(entity)
 	local normalabilities = {FireballAbility:new(self)}
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {NothingAbility:new(self)}
-	local specialabilities = {GrapplingHookAbility:new(self)}
+	local specialabilities = {GrapplingHookAbility:new(self, "vine")}
 	local basestats = {movementspeed=0, cooldown=2}
 	self.cantdraweyes = true
 	self.cantcancel = true

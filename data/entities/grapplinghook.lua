@@ -15,8 +15,9 @@ local function round(num, idp)
 	return math.floor(num * mult + 0.5) / mult
 end
 
-function entity:start(target)
+function entity:start(target, type)
 	self.target = target
+	self.type = type
 
 	self.d4 = self.ability.entitydata.entity:get_direction4_to(self.target.entity)
 	self.d8 = self.ability.entitydata.entity:get_direction8_to(self.target.entity)
@@ -26,7 +27,11 @@ function entity:start(target)
 
 
 	self.hooksprite = self:create_sprite("abilities/grapplinghook")
-	self.hooksprite:set_animation("hook")
+	if self.type == nil then
+		self.hooksprite:set_animation("hook")
+	elseif self.type == "vine" then
+		self.hooksprite:set_animation("vine")
+	end
 	self.hooksprite:set_paused(false)
 	self.hooksprite:set_direction(self.d8)
 
@@ -90,7 +95,7 @@ function entity:tick()
 		local posx, posy = selfx * (d - i)/d + entityx * i/d,  selfy * (d - i)/d + entityy * i/d
 		if self.ropesprites[i] == nil then
 			self.ropesprites[i] = map:create_custom_entity({model="grapplinghookrope", x=posx, y=posy, layer=layer, direction=self.d8, width=8, height=8})
-			self.ropesprites[i]:setdirection(self.d16)
+			self.ropesprites[i]:start(self.type, self.d16)
 		end
 
 		self.ropesprites[i]:set_position(posx, posy)
