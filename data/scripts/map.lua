@@ -375,6 +375,7 @@ end
 local FiringBowAbility = require "abilities/firingBow"
 local StompAbility = require "abilities/stomp"
 local LightningAbility = require "abilities/lightning"
+local SwordAbility = require "abilities/sword"
 local NothingAbility = require "abilities/nothing"
 
 function map:puzzleabilities(entity)
@@ -401,7 +402,13 @@ function map:puzzleabilities(entity)
 			lightningability.warmup = 5000
 			entitydata.specialability = lightningability
 		elseif entitydata.theclass == "knight" then
-			
+			entitydata.swordability = SwordAbility:new(entitydata)
+			local a = SwordAbility:new(entitydata)
+			a.warmup = 5000
+			entitydata.specialability = a
+		elseif entitydata.theclass == "cleric" then
+			entitydata.swordability = SwordAbility:new(entitydata)
+			entitydata.specialability = NothingAbility:new(entitydata)
 		end
 	end
 end

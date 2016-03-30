@@ -91,7 +91,7 @@ function entity:tick()
 
 	local map = self:get_map()
 
-	for i = SPACING,d-SPACING,SPACING do
+	for i = SPACING,d,SPACING do
 		local posx, posy = selfx * (d - i)/d + entityx * i/d,  selfy * (d - i)/d + entityy * i/d
 		if self.ropesprites[i] == nil then
 			self.ropesprites[i] = map:create_custom_entity({model="grapplinghookrope", x=posx, y=posy, layer=layer, direction=self.d8, width=8, height=8})

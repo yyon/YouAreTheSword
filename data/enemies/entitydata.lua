@@ -2086,24 +2086,30 @@ end
 function lever:receivedamage(fromentitydata, damage, aspects)
 	if damage > 0 then
 		self:setanimation("pulled")
-		local door = self:getdoor()
-		sol.audio.play_sound("dooropen")
-		door:open()
-		sol.audio.play_sound("clock")
-		self.timer = Effects.SimpleTimer(self, self.time, function()
-			self:setanimation("stopped")
-			sol.audio.play_sound("doorclose")
-			door:close()
-		end)
+--		local door = self:getdoor()
+		for door in self.entity:get_map():get_entities("") do
+			if door.isdoor then
+				local name = self:getname()
+				if door:get_name():match(".*" .. name .. ".*") then
+					sol.audio.play_sound("dooropen")
+					door:open()
+					sol.audio.play_sound("clock")
+					self.timer = Effects.SimpleTimer(self, self.time, function()
+						self:setanimation("stopped")
+						sol.audio.play_sound("doorclose")
+						door:close()
+					end)
+				end
+			end
+		end
 	end
 	return true
 end
 
-function lever:getdoor()
+function lever:getname()
 	local myname = self.entity:get_name()
-	local startname, endname = myname:match("([^_]+)_([^_]+)") -- split by _
-	local doorentity = self.entity:get_map():get_entity(startname)
-	return doorentity
+	local startname, _, endname = myname:match("([^_]+)_([^_]+)") -- split by _
+	return startname
 end
 
 _EntityDatas = allclasses

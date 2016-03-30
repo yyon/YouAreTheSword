@@ -1,8 +1,8 @@
 properties{
   x = 0,
   y = 0,
-  width = 1280,
-  height = 720,
+  width = 2016,
+  height = 1024,
   floor = 1,
   tileset = "tileset2",
 }
@@ -11,32 +11,358 @@ tile{
   layer = 0,
   x = 0,
   y = 0,
-  width = 1280,
-  height = 736,
+  width = 2016,
+  height = 1024,
   pattern = "5274",
 }
 
-enemy{
+tile{
   layer = 0,
-  x = 192,
-  y = 245,
-  direction = 0,
-  breed = "a_berserker",
+  x = 0,
+  y = 864,
+  width = 128,
+  height = 32,
+  pattern = "4962",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 832,
+  width = 160,
+  height = 32,
+  pattern = "4950",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 896,
+  width = 96,
+  height = 32,
+  pattern = "4974",
+}
+
+tile{
+  layer = 0,
+  x = 160,
+  y = 832,
+  width = 32,
+  height = 32,
+  pattern = "4951",
+}
+
+tile{
+  layer = 0,
+  x = 160,
+  y = 864,
+  width = 32,
+  height = 160,
+  pattern = "4963",
+}
+
+tile{
+  layer = 0,
+  x = 128,
+  y = 864,
+  width = 32,
+  height = 160,
+  pattern = "4962",
+}
+
+tile{
+  layer = 0,
+  x = 96,
+  y = 896,
+  width = 32,
+  height = 32,
+  pattern = "4927",
+}
+
+tile{
+  layer = 0,
+  x = 96,
+  y = 928,
+  width = 32,
+  height = 96,
+  pattern = "4961",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 448,
+  width = 96,
+  height = 32,
+  pattern = "4520",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 416,
+  width = 96,
+  height = 32,
+  pattern = "4508",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 384,
+  width = 96,
+  height = 32,
+  pattern = "4496",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 352,
+  width = 96,
+  height = 32,
+  pattern = "4472",
+}
+
+tile{
+  layer = 0,
+  x = 96,
+  y = 384,
+  width = 32,
+  height = 32,
+  pattern = "4497",
+}
+
+tile{
+  layer = 0,
+  x = 96,
+  y = 416,
+  width = 32,
+  height = 32,
+  pattern = "4509",
+}
+
+tile{
+  layer = 0,
+  x = 96,
+  y = 448,
+  width = 32,
+  height = 32,
+  pattern = "4521",
+}
+
+tile{
+  layer = 0,
+  x = 96,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "4473",
+}
+
+tile{
+  layer = 0,
+  x = 120,
+  y = 384,
+  width = 32,
+  height = 32,
+  pattern = "4495",
+}
+
+tile{
+  layer = 0,
+  x = 120,
+  y = 416,
+  width = 32,
+  height = 32,
+  pattern = "4507",
+}
+
+tile{
+  layer = 0,
+  x = 120,
+  y = 448,
+  width = 32,
+  height = 32,
+  pattern = "4519",
+}
+
+tile{
+  layer = 0,
+  x = 120,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "4471",
+}
+
+tile{
+  layer = 0,
+  x = 152,
+  y = 448,
+  width = 480,
+  height = 32,
+  pattern = "4520",
+}
+
+tile{
+  layer = 0,
+  x = 152,
+  y = 416,
+  width = 480,
+  height = 32,
+  pattern = "4508",
+}
+
+tile{
+  layer = 0,
+  x = 152,
+  y = 384,
+  width = 480,
+  height = 32,
+  pattern = "4496",
+}
+
+tile{
+  layer = 0,
+  x = 152,
+  y = 352,
+  width = 480,
+  height = 32,
+  pattern = "4472",
+}
+
+tile{
+  layer = 0,
+  x = 632,
+  y = 384,
+  width = 32,
+  height = 32,
+  pattern = "4486",
+}
+
+tile{
+  layer = 0,
+  x = 632,
+  y = 416,
+  width = 32,
+  height = 32,
+  pattern = "4498",
+}
+
+tile{
+  layer = 0,
+  x = 632,
+  y = 448,
+  width = 32,
+  height = 32,
+  pattern = "4510",
+}
+
+tile{
+  layer = 0,
+  x = 632,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "4472",
+}
+
+tile{
+  layer = 0,
+  x = 664,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "4473",
+}
+
+tile{
+  layer = 0,
+  x = 664,
+  y = 384,
+  width = 32,
+  height = 640,
+  pattern = "4485",
+}
+
+tile{
+  layer = 0,
+  x = 632,
+  y = 480,
+  width = 32,
+  height = 544,
+  pattern = "4483",
 }
 
 destination{
   layer = 0,
-  x = 72,
-  y = 109,
+  x = 32,
+  y = 973,
   direction = 1,
 }
 
-teletransporter{
+wall{
+  name = "sword1",
   layer = 0,
-  x = 208,
-  y = 0,
-  width = 144,
+  x = 0,
+  y = 840,
+  width = 184,
+  height = 72,
+  stops_hero = true,
+  stops_npcs = true,
+  stops_enemies = true,
+  stops_blocks = true,
+  stops_projectiles = true,
+}
+
+wall{
+  name = "sword2",
+  layer = 0,
+  x = 112,
+  y = 912,
+  width = 64,
+  height = 112,
+  stops_hero = true,
+  stops_npcs = true,
+  stops_enemies = true,
+  stops_blocks = true,
+  stops_projectiles = true,
+}
+
+enemy{
+  layer = 0,
+  x = 112,
+  y = 533,
+  direction = 0,
+  breed = "a_cleric",
+}
+
+enemy{
+  layer = 0,
+  x = 272,
+  y = 853,
+  direction = 0,
+  breed = "a_knight",
+}
+
+custom_entity{
+  name = "door",
+  layer = 0,
+  x = 112,
+  y = 397,
+  width = 40,
   height = 64,
-  destination_map = "puzzletest/puzzlehub",
+  direction = 0,
+  model = "door",
+}
+
+enemy{
+  name = "door_lever",
+  layer = 0,
+  x = 592,
+  y = 853,
+  direction = 0,
+  breed = "m_lever",
 }
 
