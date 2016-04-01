@@ -45,6 +45,7 @@ local CatShootAbility = require "abilities/catshoot"
 local Effects = require "enemies/effect"
 
 local movementaccuracy = require "scripts/movementaccuracy"
+local astar = require "astar"
 
 local math = require "math"
 
@@ -695,7 +696,7 @@ function EntityData:dodamage(target, damage, aspects)
 	end
 
 	target.life = target.life - damage
-	
+
 	local x, y = target.entity:get_position()
 	map:damagedisplay(damage, x, y)
 
@@ -754,9 +755,9 @@ function EntityData:dodamage(target, damage, aspects)
 		if self.team ~= "adventurer" then
 			remainingmonsters = remainingmonsters - 1
 		end
-		
+
 		target:kill()
-		
+
 		if remainingmonsters == 0 then
 			map.nomonstersleft = true
 		end
@@ -2048,6 +2049,7 @@ function dummyclass:initialize(entity)
 	self.dontmove = true
 	self.doesntcountsasadventurer = true
 	self.cantposses = true
+	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)

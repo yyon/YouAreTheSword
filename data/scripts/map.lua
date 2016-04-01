@@ -363,3 +363,22 @@ end
 function map:damagedisplay(damage, x, y)
     damagedisp:new(damage, x, y)
 end
+
+function map:getgrid(NODESIZE)
+	local mapw, maph = map:get_size()
+	mapw, maph = mapw/NODESIZE, maph/NODESIZE
+	
+	if self.grid == nil then
+		self.grid = {}
+		local i = 0
+		
+		for x=0,mapw do
+			for y=0,maph do
+				i = i + 1
+				self.grid[i] = {x=x, y=y}
+			end
+		end
+	end
+	
+	return self.grid, mapw, maph
+end

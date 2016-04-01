@@ -28,6 +28,8 @@ http://opengameart.org/content/side-scroller-tiles-and-objects-for-ardentryst-by
 	lever
 http://opengameart.org/content/lpc-signposts-graves-line-cloths-and-scare-crow
 	sign
+http://opengameart.org/content/lpc-dungeon-elements
+	metal bars
 		
 
 http://opengameart.org/content/jastivs-artwork
