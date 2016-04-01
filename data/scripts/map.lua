@@ -20,15 +20,15 @@ function damagedisp:initialize(dmg, x, y)
 		else
 			font = "damagedisp2"
 		end
-		
+
 		local size = dmg/2+5
 		if size < 10 then size = 10 end
 		if size > 50 then size = 50 end
-		
+
 		local gb = 255 - (dmg / 100 * 255 * 2)
 		if gb < 0 then gb = 0 end
 		local col = {255, gb, gb}
-		
+
 		self.text = sol.text_surface.create({horizontal_alignement="center", vertical_alignement="middle", text=tostring(dmg), font=font, color=col, font_size=size})
 	          self.w, self.h = self.text:get_size()
 		self.x = self.x - self.w / 2
@@ -369,11 +369,11 @@ end
 function map:getgrid(NODESIZE)
 	local mapw, maph = map:get_size()
 	mapw, maph = mapw/NODESIZE, maph/NODESIZE
-	
+
 	if self.grid == nil then
 		self.grid = {}
 		local i = 0
-		
+
 		for x=0,mapw do
 			for y=0,maph do
 				i = i + 1
@@ -381,7 +381,7 @@ function map:getgrid(NODESIZE)
 			end
 		end
 	end
-	
+
 	return self.grid, mapw, maph
 end
 
@@ -407,7 +407,7 @@ function map:puzzleabilities(entity)
 		entitydata.blockability = NothingAbility:new(entitydata)--entitydata.blockabilities[1]
 		entitydata.transformability = NothingAbility:new(entitydata)--entitydata.transformabilities[1]
 		entitydata.specialability = entitydata.specialabilities[1]
-		
+
 		if entitydata.theclass == "archer" then
 			local bowability = FiringBowAbility:new(entitydata)
 			bowability.warmup = 5000
@@ -468,14 +468,57 @@ function map:fromgrid(x, y)
 	return x*8, y*8
 end
 
+function map:getclosestgrid(x, y)
+	local left, right = math.floor(x/8), math.ceil(x/8)
+	local top, bottom = math.floor(y/8), math.ceil(y/8)
+
+	if self.gridtable[left][top] == 0 then return left, top end
+	if self.gridtable[left][bottom] == 0 then return left, bottom end
+	if self.gridtable[right][top] == 0 then return right, top end
+	if self.gridtable[right][bottom] == 0 then return right, bottom end
+end
+
+function map:printgrid(gridtable)
+	if gridtable == nil then gridtable = self.gridtable end
+	local mapw, maph = self:get_size()
+	local gridw, gridh = self:togrid(mapw, maph)
+
+	for y = 1,gridh do
+		local line = ""
+		for x = 1,gridw do
+			if gridtable[x][y] == 0 then
+				line = line .. " "
+			elseif gridtable[x][y] == 1 then
+				line = line .. "#"
+			else
+				line = line .. gridtable[x][y]
+			end
+		end
+		print(line)
+	end
+end
+
+function map:copygrid()
+	local newgrid = {}
+	local mapw, maph = self:get_size()
+	local gridw, gridh = self:togrid(mapw, maph)
+	for x=1,gridw do
+		newgrid[x] = {}
+		for y = 1,gridh do
+			newgrid[x][y] = self.gridtable[x][y]
+		end
+	end
+	return newgrid
+end
+
 function map:calcgrid()
 	local grid = {}
 	local mapw, maph = self:get_size()
 	local gridw, gridh = self:togrid(mapw, maph)
-	
+
 	local hero = self:get_hero()
 	local herox, heroy = hero:get_position()
-	
+
 	for x = 1,gridw do
 		grid[x] = {}
 		for y = 1,gridh do
@@ -488,11 +531,13 @@ function map:calcgrid()
 			end
 		end
 	end
-	
+
 	print("GRID SIZE", gridw, gridh)
-	
+
+	self.gridtable = grid
 	self.grid = Grid(grid)
-	self.pathfinder = Pathfinder(self.grid, 'ASTAR', walkable) 
+	self.pathfinder = Pathfinder(self.grid, 'ASTAR', 0)
+--	self.pathfinder:setMode("ORTHOGONAL")
 end
 
 map:calcgrid()

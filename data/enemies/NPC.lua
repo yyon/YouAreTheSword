@@ -186,7 +186,7 @@ function GoTowardsState:tick()
 		local d = self.npc:get_direction4_to(target.entity)
 		self.npc:setdirection(d)
 
-		if self.npc.entitydata.entity:get_distance(target.entity) < 20 then
+--[[		if self.npc.entitydata.entity:get_distance(target.entity) < 20 then
 			if self.movement ~= nil then
 				self.movement:stop()
 				self.movement = nil
@@ -195,7 +195,7 @@ function GoTowardsState:tick()
 			if self.movement == nil then
 				self:start()
 			end
-		end
+		end --]]
 
 		local targetability = target.usingability
 		if targetability ~= nil and targetability.abilitytype ~= "block" and self.npc:get_distance(target.entity) < targetability.range then
@@ -251,7 +251,7 @@ function PickupState:start()
 	if not self.npc.entitydata:canmoveto(x, y) then
 		movement = self.npc:pathfind(self.npc.target)
 	end
-				
+
 	if movement == nil then
 		movement = sol.movement.create("target") -- "path_finding")
 		movement:set_speed(self.npc.entitydata.stats.movementspeed)
@@ -711,53 +711,76 @@ end
 
 function enemy:pathfind(target)
 	print("pathfinding", self.entitydata.theclass)
-	
+
 	local map = self:get_map()
-	
+
 	local x, y = self:get_position()
-	x, y = map:togrid(x, y)
+	x, y = map:getclosestgrid(x, y)
+	if not x then print("can't start"); return end
 	x, y = map:fromgrid(x, y)
-	
+
 	movement = sol.movement.create("target")
 	movement:set_speed(self.entitydata.stats.movementspeed)
 	movement:set_target(x, y)
 	movement:set_smooth(true)
 	movement:start(self)
-	
+
 	function movement.on_finished(movement)
 		local fromx, fromy = self:get_position()
-		fromx, fromy = map:togrid(fromx, fromy)
+		fromx, fromy = map:getclosestgrid(fromx, fromy)
+		if not fromx then return end
 		local tox, toy = target:get_position()
-		tox, toy = map:togrid(tox, toy)
-		
-		print("calc path", fromx, fromy, tox, toy)
-		
-		local path = map.pathfinder:getPath(fromx, fromy, tox, toy)
+		tox, toy = map:getclosestgrid(tox, toy)
+		if not tox then return end
+
+		print("calc path", fromx, fromy, tox, toy, map.gridtable[fromx][fromy], map.gridtable[tox][toy])
+
+		local path = map.pathfinder:getPath(fromy, fromx, toy, tox, false)
 		if path then
 			print("PATH FOUND", self.entitydata.theclass)
-			local prevx, prevy = self:get_position()
-			
+			local prevx, prevy = fromx, fromy
+
 			local dirpath = {}
-			
-			for node, count in path:nodes() do
-				local x, y = node:getX(), node:getY()
-				local dir
-				if x>prevx then
-					dir = 0
-				elseif x<prevx then
-					dir = 4
-				elseif y>prevy then
-					dir = 6
-				else
-					dir = 2
-				end
-				
+
+--			local gridcopy = map:copygrid()
+
+			local DIRS = {[-1]={[-1]=3, [0]=4, [1]=5}, [0]={[-1]=2, [1]=6}, [1]={[-1]=1, [0]=0, [1]=7}}
+
+			local function move(dx, dy)
+				local newx, newy = prevx + dx, prevy+dy
+				local dir = DIRS[dx][dy]
+
+--				gridcopy[newx][newy] = "O"
+
+				prevx, prevy = newx, newy
+
 				dirpath[#dirpath+1] = dir
 			end
+
+			for node, count in path:nodes() do
+				local y, x = node.x, node.y
+				local dx, dy = x-prevx, y-prevy
+				if dx == 0 or dy == 0 then
+					move(dx, dy)
+				else
+					if map.gridtable[prevx+dx][prevy] == 0 and map.gridtable[prevx][prevy+dy] == 0 then
+						move(dx, dy)
+					elseif map.gridtable[prevx+dx][prevy] == 0 then
+						move(dx, 0)
+						move(0, dy)
+					else
+						move(0, dy)
+						move(dx, 0)
+					end
+				end
+			end
+
+--			map:printgrid(gridcopy)
 
 			local movement = sol.movement.create("path")
 			movement:set_speed(self.entitydata.stats.movementspeed)
 			movement:set_path(dirpath)
+			movement:set_snap_to_grid(true)
 			movement:start(self)
 
 			function movement.on_obstacle_reached(movement)
