@@ -149,6 +149,7 @@ function GoTowardsState:start()
 				if not self.npc.entitydata:canmoveto(x, y) then
 					self.pathfindingtimer = Effects.SimpleTimer(self.npc.entitydata, 500, 
 						function()
+							local x, y = self.npc.entitytoattack.entity:get_position()
 							self.movement = self.npc:pathfind(x, y)
 						end
 					)
