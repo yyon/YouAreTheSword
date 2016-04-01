@@ -45,7 +45,6 @@ local CatShootAbility = require "abilities/catshoot"
 local Effects = require "enemies/effect"
 
 local movementaccuracy = require "scripts/movementaccuracy"
-local astar = require "astar"
 
 local math = require "math"
 
@@ -1255,7 +1254,7 @@ end
 
 function EntityData:totable()
 	return {
-		classname = self.class.name,	
+		classname = self.class.name,
 		life=self.life,
 		maxlife=self.maxlife,
 		team=self.team,
@@ -1300,7 +1299,7 @@ function EntityData.static:fromtable(table, entity)
 			end
 			for index, ability in pairs(entitydata.transformabilities) do
 				if ability.name == table.transformability then
-					entitydata.transformability = ability	
+					entitydata.transformability = ability
 				end
 			end
 			for index, ability in pairs(entitydata.blockabilities) do

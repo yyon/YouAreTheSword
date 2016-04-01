@@ -30,7 +30,6 @@ local enemy = ...
 local class = require "middleclass"
 local math = require "math"
 local Effects = require "enemies/effect"
-require "astar"
 
 -- constants:
 --[[
