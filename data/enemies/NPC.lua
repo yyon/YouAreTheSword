@@ -147,7 +147,13 @@ function GoTowardsState:start()
 			if self.npc.entitydata.stats.movementspeed ~= 0 then
 				local x, y = self.npc.entitytoattack.entity:get_position()
 				if not self.npc.entitydata:canmoveto(x, y) then
-					movement = self.npc:pathfind(x, y)
+					self.pathfindingtimer = Effects.SimpleTimer(self.npc.entitydata, 500, 
+						function()
+							self.movement = self.npc:pathfind(x, y)
+						end
+					)
+					
+--					movement = self.npc:pathfind(x, y)
 				end
 				
 				if movement == nil then
@@ -214,6 +220,13 @@ end
 
 function GoTowardsState:vartorecord()
 	return self.npc.entitytoattack
+end
+
+function GoTowardsState:cleanup()
+	State.cleanup(self)
+	if self.pathfindingtimer ~= nil then
+		self.pathfindingtimer:stop()
+	end
 end
 
 local GoAwayState = GoTowardsState:subclass("GoAwayState")
@@ -705,6 +718,8 @@ function enemy:on_position_changed(x, y, layer)
 end
 
 function enemy:pathfind(tox, toy)
+	print("pathfinding", self.entitydata.theclass)
+	
 	local NODESIZE = 8
 	
 	local map = self:get_map()
