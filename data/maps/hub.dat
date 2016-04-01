@@ -514,7 +514,7 @@ teletransporter{
   y = 144,
   width = 32,
   height = 32,
-  destination_map = "puzzletest/1",
+  destination_map = "puzzletest/puzzlehub",
 }
 
 custom_entity{

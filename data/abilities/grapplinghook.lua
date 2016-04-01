@@ -7,7 +7,8 @@ require "scripts/movementaccuracy"
 
 local GrapplingHookAbility = Ability:subclass("GrapplingHookAbility")
 
-function GrapplingHookAbility:initialize(entitydata)
+function GrapplingHookAbility:initialize(entitydata, type)
+	self.type = type
 	Ability.initialize(self, entitydata, "Grappling Hook", 800, "grapplinghook", 500, 2000, true)
 end
 
@@ -33,7 +34,7 @@ function GrapplingHookAbility:doability()
 	self.hookentity = map:create_custom_entity({model="grapplinghook", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.hookentity.ability = self
 
-	self.hookentity:start(target)
+	self.hookentity:start(target, self.type)
 
 	self.timer = Effects.SimpleTimer(self.entitydata, 5000, function() self:timeend() end)
 

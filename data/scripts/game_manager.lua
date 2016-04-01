@@ -17,6 +17,8 @@ game = nil
 
 local entitydatas = require "enemies/entitydata"
 local hud_manager = require "scripts/hud/hud"
+local pause_manager = require("scripts/menus/pause")
+local pause_menu
 
 require "pickle"
 
@@ -328,6 +330,8 @@ function sol.main:on_key_pressed(key, modifiers)
           end
 end
 
+
+
 function sol.main:on_key_released(key, modifiers)
 	local hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
@@ -579,6 +583,7 @@ function load()
 	sol.video.set_window_size(width, height)
 
 	game:set_pause_allowed(true)
+	pause_menu = pause_manager:create(game)
 	local hud = hud_manager:create(game)
 
 	local hero = game:get_hero()
@@ -643,6 +648,16 @@ function load()
 		hud_manager.dialog:ondialog(...)
 	end
 	game.startdialog = game.start_dialog
+
+	function game:on_paused()
+		hud:on_paused()
+		sol.menu.start(game, pause_menu, false)
+	end
+	
+	function game:on_unpaused()
+		hud:on_unpaused()
+		sol.menu.stop(pause_menu)
+	end
 
 	game.isgame = true
 	game.effects = {}

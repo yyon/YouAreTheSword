@@ -382,3 +382,78 @@ function map:getgrid(NODESIZE)
 	
 	return self.grid, mapw, maph
 end
+
+function map:onpuzzle()
+	self:puzzleabilities(self:get_hero())
+	self:get_hero().swordtransform = nil
+	for entity in self:get_entities("") do
+		self:puzzleabilities(entity)
+	end
+end
+
+local FiringBowAbility = require "abilities/firingBow"
+local StompAbility = require "abilities/stomp"
+local LightningAbility = require "abilities/lightning"
+local SwordAbility = require "abilities/sword"
+local NothingAbility = require "abilities/nothing"
+
+function map:puzzleabilities(entity)
+	local entitydata = entity.entitydata
+	if entitydata ~= nil then
+		entitydata.puzzled = {entitydata.swordability, entitydata.blockability, entitydata.transformability, entitydata.specialability}
+		entitydata.swordability = entitydata.normalabilities[1]
+		entitydata.blockability = NothingAbility:new(entitydata)--entitydata.blockabilities[1]
+		entitydata.transformability = NothingAbility:new(entitydata)--entitydata.transformabilities[1]
+		entitydata.specialability = entitydata.specialabilities[1]
+		
+		if entitydata.theclass == "archer" then
+			local bowability = FiringBowAbility:new(entitydata)
+			bowability.warmup = 5000
+			entitydata.specialability = bowability
+		elseif entitydata.theclass == "berserker" then
+			entitydata.swordability = StompAbility:new(entitydata)
+			local stompability = StompAbility:new(entitydata)
+			stompability.warmup = 5000
+			entitydata.specialability = stompability
+		elseif entitydata.theclass == "mage" then
+			entitydata.swordability = LightningAbility:new(entitydata)
+			local lightningability = LightningAbility:new(entitydata)
+			lightningability.warmup = 5000
+			entitydata.specialability = lightningability
+		elseif entitydata.theclass == "knight" then
+			entitydata.swordability = SwordAbility:new(entitydata)
+			local a = SwordAbility:new(entitydata)
+			a.warmup = 5000
+			entitydata.specialability = a
+		elseif entitydata.theclass == "cleric" then
+			entitydata.swordability = SwordAbility:new(entitydata)
+			entitydata.specialability = NothingAbility:new(entitydata)
+		end
+	end
+end
+
+function map:offpuzzle()
+	self:unpuzzle(self:get_hero())
+	for entity in self:get_entities("") do
+		self:unpuzzle(entity)
+	end
+end
+
+function map:unpuzzle(entity)
+	local entitydata = entity.entitydata
+	if entitydata ~= nil then
+		if entitydata.puzzled ~= nil then
+			entitydata.swordability = entitydata.puzzled[1]
+			entitydata.blockability = entitydata.puzzled[2]
+			entitydata.transformability = entitydata.puzzled[3]
+			entitydata.specialability = entitydata.puzzled[4]
+			entitydata.puzzled = nil
+		end
+	end
+end
+
+if map:get_floor() == 1 then
+	map:onpuzzle()
+else
+	map:offpuzzle()
+end

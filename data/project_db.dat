@@ -14,6 +14,8 @@ map{ id = "puzzletest/1", description = "1" }
 map{ id = "puzzletest/2", description = "2" }
 map{ id = "puzzletest/3", description = "3" }
 map{ id = "puzzletest/4", description = "4" }
+map{ id = "puzzletest/5", description = "5" }
+map{ id = "puzzletest/puzzlehub", description = "puzzlehub" }
 map{ id = "sequencetest", description = "sequencetest" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
@@ -339,13 +341,7 @@ language{ id = "en", description = "English" }
 font{ id = "8_bit", description = "8_bit" }
 font{ id = "8_bit_2", description = "8_bit_2" }
 font{ id = "8_bit_3", description = "8_bit_3" }
+font{ id = "damagedisp1", description = "damagedisp1" }
+font{ id = "damagedisp2", description = "damagedisp2" }
 font{ id = "minecraftia", description = "minecraftia" }
 
-font{
-	id = "damagedisp1",
-	description = "damagedisp1",
-}
-font{
-	id = "damagedisp2",
-	description = "damagedisp2",
-}

@@ -1,0 +1,114 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 720,
+  tileset = "tileset2",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 736,
+  pattern = "842",
+}
+
+tile{
+  layer = 0,
+  x = 80,
+  y = 0,
+  width = 32,
+  height = 64,
+  pattern = "727",
+}
+
+tile{
+  layer = 0,
+  x = 232,
+  y = 0,
+  width = 32,
+  height = 64,
+  pattern = "727",
+}
+
+tile{
+  layer = 0,
+  x = 360,
+  y = 0,
+  width = 32,
+  height = 64,
+  pattern = "727",
+}
+
+tile{
+  layer = 0,
+  x = 488,
+  y = 0,
+  width = 32,
+  height = 64,
+  pattern = "727",
+}
+
+tile{
+  layer = 0,
+  x = 624,
+  y = 0,
+  width = 32,
+  height = 64,
+  pattern = "727",
+}
+
+teletransporter{
+  layer = 0,
+  x = 80,
+  y = 0,
+  width = 32,
+  height = 32,
+  destination_map = "puzzletest/1",
+}
+
+teletransporter{
+  layer = 0,
+  x = 232,
+  y = 0,
+  width = 32,
+  height = 32,
+  destination_map = "puzzletest/2",
+}
+
+destination{
+  layer = 0,
+  x = 552,
+  y = 389,
+  direction = 1,
+}
+
+teletransporter{
+  layer = 0,
+  x = 360,
+  y = 0,
+  width = 32,
+  height = 32,
+  destination_map = "puzzletest/3",
+}
+
+teletransporter{
+  layer = 0,
+  x = 488,
+  y = 0,
+  width = 32,
+  height = 32,
+  destination_map = "puzzletest/4",
+}
+
+teletransporter{
+  layer = 0,
+  x = 624,
+  y = 0,
+  width = 32,
+  height = 32,
+  destination_map = "puzzletest/5",
+}
+

@@ -624,7 +624,7 @@ function EntityData:dodamage(target, damage, aspects)
 
 	-- aspects
 	if aspects.knockback == nil then
-		aspects.knockback = 500
+		aspects.knockback = 200
 	end
 	if aspects.fromentity == nil then
 		aspects.fromentity = self.entity
@@ -1255,14 +1255,15 @@ end
 
 function EntityData:totable()
 	return {
-		classname = self.class.name,
+		classname = self.class.name,	
 		life=self.life,
 		maxlife=self.maxlife,
 		team=self.team,
 		swordability=self.swordability.name,
 		transformability=self.transformability.name,
 		blockability=self.blockability.name,
-		specialability = self.specialability.name
+		specialability = self.specialability.name,
+		ispuzzle=(self.entity:get_map():get_floor() == 1)
 	}
 end
 
@@ -1291,24 +1292,26 @@ function EntityData.static:fromtable(table, entity)
 		entitydata.entity = entity
 		entitydata:applytoentity()
 
-		for index, ability in pairs(entitydata.normalabilities) do
-			if ability.name == table.swordability then
-				entitydata.swordability = ability
+		if not table.ispuzzle then
+			for index, ability in pairs(entitydata.normalabilities) do
+				if ability.name == table.swordability then
+					entitydata.swordability = ability
+				end
 			end
-		end
-		for index, ability in pairs(entitydata.transformabilities) do
-			if ability.name == table.transformability then
-				entitydata.transformability = ability
+			for index, ability in pairs(entitydata.transformabilities) do
+				if ability.name == table.transformability then
+					entitydata.transformability = ability	
+				end
 			end
-		end
-		for index, ability in pairs(entitydata.blockabilities) do
-			if ability.name == table.blockability then
-				entitydata.blockability = ability
+			for index, ability in pairs(entitydata.blockabilities) do
+				if ability.name == table.blockability then
+					entitydata.blockability = ability
+				end
 			end
-		end
-		for index, ability in pairs(entitydata.specialabilities) do
-			if ability.name == table.specialability then
-				entitydata.specialability = ability
+			for index, ability in pairs(entitydata.specialabilities) do
+				if ability.name == table.specialability then
+					entitydata.specialability = ability
+				end
 			end
 		end
 
@@ -1724,7 +1727,7 @@ function flowerclass:initialize(entity)
 	local normalabilities = {FireballAbility:new(self)}
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {NothingAbility:new(self)}
-	local specialabilities = {GrapplingHookAbility:new(self)}
+	local specialabilities = {GrapplingHookAbility:new(self, "vine")}
 	local basestats = {movementspeed=0, cooldown=2}
 	self.cantdraweyes = true
 	self.cantcancel = true
@@ -2070,7 +2073,7 @@ function lever:initialize(entity)
 	local basestats = {movementspeed=0}
 	self.dontmove = true
 	self.doesntcountsasmonster = true
-	self.cantposses = true
+	self.cantpossess = true
 	self.time = 5000
 	self.dontdrawlifebar = true
 
@@ -2085,24 +2088,30 @@ end
 function lever:receivedamage(fromentitydata, damage, aspects)
 	if damage > 0 then
 		self:setanimation("pulled")
-		local door = self:getdoor()
-		sol.audio.play_sound("dooropen")
-		door:open()
-		sol.audio.play_sound("clock")
-		self.timer = Effects.SimpleTimer(self, self.time, function()
-			self:setanimation("stopped")
-			sol.audio.play_sound("doorclose")
-			door:close()
-		end)
+--		local door = self:getdoor()
+		for door in self.entity:get_map():get_entities("") do
+			if door.isdoor then
+				local name = self:getname()
+				if door:get_name():match(".*" .. name .. ".*") then
+					sol.audio.play_sound("dooropen")
+					door:open(self)
+					sol.audio.play_sound("clock")
+					self.timer = Effects.SimpleTimer(self, self.time, function()
+						self:setanimation("stopped")
+						sol.audio.play_sound("doorclose")
+						door:close(self)
+					end)
+				end
+			end
+		end
 	end
 	return true
 end
 
-function lever:getdoor()
+function lever:getname()
 	local myname = self.entity:get_name()
-	local startname, endname = myname:match("([^_]+)_([^_]+)") -- split by _
-	local doorentity = self.entity:get_map():get_entity(startname)
-	return doorentity
+	local startname, _, endname = myname:match("([^_]+)_([^_]+)") -- split by _
+	return startname
 end
 
 _EntityDatas = allclasses
