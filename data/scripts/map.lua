@@ -3,6 +3,8 @@ local map = ...
 local Effects = require "enemies/effect"
 local class = require "middleclass"
 local math = require "math"
+local Grid = require ("jumper/grid") -- The grid class
+local Pathfinder = require ("jumper/pathfinder") -- The pathfinder lass
 
 local damagedisps = {}
 local damagedisp = class("damagedisp")
@@ -457,3 +459,40 @@ if map:get_floor() == 1 then
 else
 	map:offpuzzle()
 end
+
+function map:togrid(x, y)
+	return math.floor(x/8+0.5), math.floor(y/8+0.5)
+end
+
+function map:fromgrid(x, y)
+	return x*8, y*8
+end
+
+function map:calcgrid()
+	local grid = {}
+	local mapw, maph = self:get_size()
+	local gridw, gridh = self:togrid(mapw, maph)
+	
+	local hero = self:get_hero()
+	local herox, heroy = hero:get_position()
+	
+	for x = 1,gridw do
+		grid[x] = {}
+		for y = 1,gridh do
+			local realx, realy = self:fromgrid(x, y)
+			local dx, dy = realx-herox, realy-heroy
+			if hero:test_obstacles(dx, dy) then
+				grid[x][y] = 1
+			else
+				grid[x][y] = 0
+			end
+		end
+	end
+	
+	print("GRID SIZE", gridw, gridh)
+	
+	self.grid = Grid(grid)
+	self.pathfinder = Pathfinder(self.grid, 'ASTAR', walkable) 
+end
+
+map:calcgrid()

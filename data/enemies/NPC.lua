@@ -145,19 +145,10 @@ function GoTowardsState:start()
 			movement:start(self.npc)
 		else
 			if self.npc.entitydata.stats.movementspeed ~= 0 then
-				local x, y = self.npc.entitytoattack.entity:get_position()
-				if not self.npc.entitydata:canmoveto(x, y) then
-					self.pathfindingtimer = Effects.SimpleTimer(self.npc.entitydata, 500, 
-						function()
-							local x, y = self.npc.entitytoattack.entity:get_position()
-							self.movement = self.npc:pathfind(x, y)
-						end
-					)
-					
---					movement = self.npc:pathfind(x, y)
-				end
-				
-				if movement == nil then
+				local tox, toy = self.npc.entitytoattack.entity:get_position()
+				if not self.npc.entitydata:canmoveto(tox, toy) then
+					movement = self.npc:pathfind(self.npc.entitytoattack.entity)
+				else
 					movement = sol.movement.create("target") -- "path_finding")
 					movement:set_speed(self.npc.entitydata.stats.movementspeed)
 					movement:set_target(self.npc.entitytoattack.entity)
@@ -258,7 +249,7 @@ local PickupState = State:subclass("PickupState")
 function PickupState:start()
 	local x, y = self.npc.target:get_position()
 	if not self.npc.entitydata:canmoveto(x, y) then
-		movement = self.npc:pathfind(x, y)
+		movement = self.npc:pathfind(self.npc.target)
 	end
 				
 	if movement == nil then
@@ -718,120 +709,63 @@ function enemy:on_position_changed(x, y, layer)
 	end
 end
 
-function enemy:pathfind(tox, toy)
+function enemy:pathfind(target)
 	print("pathfinding", self.entitydata.theclass)
 	
-	local NODESIZE = 8
-	
 	local map = self:get_map()
-	local mapw, maph = map:get_size()
-	mapw, maph = mapw/NODESIZE, maph/NODESIZE
---	local graph, mapw, maph = map:getgrid(NODESIZE)
 	
-	local posx, posy = self:get_position()
+	local x, y = self:get_position()
+	x, y = map:togrid(x, y)
+	x, y = map:fromgrid(x, y)
 	
---	local DIRS = {[-1]={[1]=5, [0]=4, [-1]=3}, [0]={[1]=6, [-1]=2}, [1]={[1]=7, [0]=0, [-1]=1}}
-	local DIRS = {[-1]={[0]=4}, [0]={[1]=6, [-1]=2}, [1]={[0]=0}}
+	movement = sol.movement.create("target")
+	movement:set_speed(self.entitydata.stats.movementspeed)
+	movement:set_target(x, y)
+	movement:set_smooth(true)
+	movement:start(self)
 	
-	handler = TiledMapHandler:new(self, DIRS, NODESIZE, mapw, maph, tox, toy)
-	local astar = AStar(handler)
-	local path = astar:findPath({x=0, y=0}, handler.to)
-	
-	if path ~= nil then
-		local dirpath = {}
-		for i, node in ipairs(path:getNodes()) do
-			dirpath[i] = node.dir
-		end
+	function movement.on_finished(movement)
+		local fromx, fromy = self:get_position()
+		fromx, fromy = map:togrid(fromx, fromy)
+		local tox, toy = target:get_position()
+		tox, toy = map:togrid(tox, toy)
 		
-		local movement = sol.movement.create("path")
-		movement:set_speed(self.entitydata.stats.movementspeed)
-		movement:set_path(dirpath)
-		movement:start(self)
+		print("calc path", fromx, fromy, tox, toy)
 		
-		function movement.on_obstacle_reached(movement)
-			Effects.SimpleTimer(self.entitydata, 200, function() self:resetstate() end)
-		end
-		function movement.on_finished(movement)
-			Effects.SimpleTimer(self.entitydata, 200, function() self:resetstate() end)
-		end
-		
-		return movement
-	end
-end
+		local path = map.pathfinder:getPath(fromx, fromy, tox, toy)
+		if path then
+			print("PATH FOUND", self.entitydata.theclass)
+			local prevx, prevy = self:get_position()
+			
+			local dirpath = {}
+			
+			for node, count in path:nodes() do
+				local x, y = node:getX(), node:getY()
+				local dir
+				if x>prevx then
+					dir = 0
+				elseif x<prevx then
+					dir = 4
+				elseif y>prevy then
+					dir = 6
+				else
+					dir = 2
+				end
+				
+				dirpath[#dirpath+1] = dir
+			end
 
-TiledMapHandler = class('TiledMapHandler')
-function TiledMapHandler:initialize(entity, DIRS, NODESIZE, mapw, maph, tox, toy)
-	self.entity = entity
-	self.posx, self.posy = self.entity:get_position()
-	self.DIRS = DIRS
-	self.NODESIZE = NODESIZE
-	self.mapw, self.maph = mapw, maph
-	tox, toy = self:togrid(tox, toy)
-	self.to = {x=tox, y=toy}
-end
+			local movement = sol.movement.create("path")
+			movement:set_speed(self.entitydata.stats.movementspeed)
+			movement:set_path(dirpath)
+			movement:start(self)
 
-function TiledMapHandler:getNode(location)
-	local dx, dy = location.x*self.NODESIZE, location.y*self.NODESIZE
-	if not self.entity:test_obstacles(dx, dy) or self:locationsAreEqual(location, self.to) then
-		return Node(location, 1, location.y * self.mapw + location.x)
-	end
-end
-
-function TiledMapHandler:getAdjacentNodes(curnode, dest)
-	local result = {}
-	local cl = curnode.location
-	local dl = dest
-  
-	local n = false
-	
-	for dx, xtable in pairs(self.DIRS) do
-		for dy, dir in pairs(xtable) do
-			n = self:_handleNode(cl.x + dx, cl.y + dy, curnode, dl.x, dl.y, dir)
-			if n then
-				table.insert(result, n)
+			function movement.on_obstacle_reached(movement)
+				Effects.SimpleTimer(self.entitydata, 200, function() self:resetstate() end)
+			end
+			function movement.on_finished(movement)
+				Effects.SimpleTimer(self.entitydata, 200, function() self:resetstate() end)
 			end
 		end
 	end
-	
-	return result
-end
-
-function TiledMapHandler:togrid(x, y)
-	x, y = x - self.posx, y - self.posy
-	x, y = x/self.NODESIZE, y/self.NODESIZE
-	x, y = math.floor(x+0.5), math.floor(y+0.5)
-	return x, y
-end
-
-function TiledMapHandler:fromgrid(x, y)
-	return self.posx + x * self.NODESIZE, self.posy + y * self.NODESIZE
-end
-
-function TiledMapHandler:locationsAreEqual(a, b)
-	return a.x == b.x and a.y == b.y
-end
-
-function TiledMapHandler:_handleNode(x, y, fromnode, destx, desty, dir)
-	-- Fetch a Node for the given location and set its parameters
-	local loc = {
-		x = x,
-		y = y
-	}
-  
-	local n = self:getNode(loc)
-  
-	if n ~= nil then
-		local dx = math.max(x, destx) - math.min(x, destx)
-		local dy = math.max(y, desty) - math.min(y, desty)
-		local emCost = dx + dy
-    
-		n.mCost = n.mCost + fromnode.mCost
-		n.score = n.mCost + emCost
-		n.parent = fromnode
-		n.dir = dir
-    
-		return n
-	end
-	
-	return nil
 end
