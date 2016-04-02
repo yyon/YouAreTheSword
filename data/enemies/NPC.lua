@@ -718,7 +718,7 @@ function enemy:pathfind(target)
 	if not x then print("can't start"); return end
 	x, y = map:fromgrid(x, y)
 
-	movement = sol.movement.create("target")
+	local movement = sol.movement.create("target")
 	movement:set_speed(self.entitydata.stats.movementspeed)
 	movement:set_target(x, y)
 	movement:set_smooth(true)
@@ -732,11 +732,10 @@ function enemy:pathfind(target)
 		tox, toy = map:getclosestgrid(tox, toy)
 		if not tox then return end
 
-		print("calc path", fromx, fromy, tox, toy, map.gridtable[fromx][fromy], map.gridtable[tox][toy])
-
 		local path = map.pathfinder:getPath(fromy, fromx, toy, tox, false)
 		if path then
-			print("PATH FOUND", self.entitydata.theclass)
+			path:fill()
+			
 			local prevx, prevy = fromx, fromy
 
 			local dirpath = {}
@@ -767,9 +766,11 @@ function enemy:pathfind(target)
 					elseif map.gridtable[prevx+dx][prevy] == 0 then
 						move(dx, 0)
 						move(0, dy)
-					else
+					elseif map.gridtable[prevx][prevy+dy] == 0 then
 						move(0, dy)
 						move(dx, 0)
+					else
+						move(dx, dy)
 					end
 				end
 			end
@@ -780,6 +781,7 @@ function enemy:pathfind(target)
 			movement:set_speed(self.entitydata.stats.movementspeed)
 			movement:set_path(dirpath)
 			movement:set_snap_to_grid(true)
+			movement:set_ignore_obstacles(true)
 			movement:start(self)
 
 			function movement.on_obstacle_reached(movement)

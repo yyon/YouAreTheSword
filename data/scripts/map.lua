@@ -532,11 +532,9 @@ function map:calcgrid()
 		end
 	end
 
-	print("GRID SIZE", gridw, gridh)
-
 	self.gridtable = grid
 	self.grid = Grid(grid)
-	self.pathfinder = Pathfinder(self.grid, 'ASTAR', 0)
+	self.pathfinder = Pathfinder(self.grid, 'JPS', 0)
 --	self.pathfinder:setMode("ORTHOGONAL")
 end
 
