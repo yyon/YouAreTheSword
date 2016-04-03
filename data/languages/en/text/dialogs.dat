@@ -116,3 +116,10 @@ is very appreciated!
 ]]
 }
 
+dialog{
+  id = "title_screen.press_space",
+  text = [[
+Press The Space Bar
+]]
+}
+

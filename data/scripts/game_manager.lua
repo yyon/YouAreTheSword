@@ -17,7 +17,7 @@ game = nil
 
 local entitydatas = require "enemies/entitydata"
 local hud_manager = require "scripts/hud/hud"
-local pause_manager = require("scripts/menus/pause")
+local pause_manager = require("menus/pause")
 local pause_menu
 
 require "pickle"
