@@ -3,6 +3,8 @@ local map = ...
 local Effects = require "enemies/effect"
 local class = require "middleclass"
 local math = require "math"
+local Grid = require ("jumper/grid") -- The grid class
+local Pathfinder = require ("jumper/pathfinder") -- The pathfinder lass
 
 local damagedisps = {}
 local damagedisp = class("damagedisp")
@@ -18,15 +20,15 @@ function damagedisp:initialize(dmg, x, y)
 		else
 			font = "damagedisp2"
 		end
-		
+
 		local size = dmg/2+5
 		if size < 10 then size = 10 end
 		if size > 50 then size = 50 end
-		
+
 		local gb = 255 - (dmg / 100 * 255 * 2)
 		if gb < 0 then gb = 0 end
 		local col = {255, gb, gb}
-		
+
 		self.text = sol.text_surface.create({horizontal_alignement="center", vertical_alignement="middle", text=tostring(dmg), font=font, color=col, font_size=size})
 	          self.w, self.h = self.text:get_size()
 		self.x = self.x - self.w / 2
@@ -83,7 +85,7 @@ end
 
 function map:actuallydrawlifebar(entity)
     if entity.entitydata ~= nil and not entity.entitydata.dontdrawlifebar then
-        entity.lifebarsurface = sol.surface.create(70, 4)
+        entity.lifebarsurface = sol.surface.create(70, 8)
 
         local frame
         if entity.entitydata.life > 0 then
@@ -101,6 +103,18 @@ function map:actuallydrawlifebar(entity)
         end
         lifebarsprite:set_frame(frame)
         lifebarsprite:draw(entity.lifebarsurface, 35, 1)
+
+		if entity.entitydata.souls < 1 then
+			if entity.entitydata.life > 0 then
+	            frame = math.floor((1 - entity.entitydata.souls) * 49)
+	        else
+	            frame = 49
+	        end
+
+	        local soulbarsprite = game.soulbarsprite
+	        soulbarsprite:set_frame(frame)
+	        soulbarsprite:draw(entity.lifebarsurface, 35, 5)
+		end
     end
 end
 
@@ -364,6 +378,25 @@ function map:damagedisplay(damage, x, y)
     damagedisp:new(damage, x, y)
 end
 
+function map:getgrid(NODESIZE)
+	local mapw, maph = map:get_size()
+	mapw, maph = mapw/NODESIZE, maph/NODESIZE
+
+	if self.grid == nil then
+		self.grid = {}
+		local i = 0
+
+		for x=0,mapw do
+			for y=0,maph do
+				i = i + 1
+				self.grid[i] = {x=x, y=y}
+			end
+		end
+	end
+
+	return self.grid, mapw, maph
+end
+
 function map:onpuzzle()
 	self:puzzleabilities(self:get_hero())
 	self:get_hero().swordtransform = nil
@@ -386,7 +419,7 @@ function map:puzzleabilities(entity)
 		entitydata.blockability = NothingAbility:new(entitydata)--entitydata.blockabilities[1]
 		entitydata.transformability = NothingAbility:new(entitydata)--entitydata.transformabilities[1]
 		entitydata.specialability = entitydata.specialabilities[1]
-		
+
 		if entitydata.theclass == "archer" then
 			local bowability = FiringBowAbility:new(entitydata)
 			bowability.warmup = 5000
@@ -439,3 +472,82 @@ else
 	map:offpuzzle()
 end
 
+function map:togrid(x, y)
+	return math.floor(x/8+0.5), math.floor(y/8+0.5)
+end
+
+function map:fromgrid(x, y)
+	return x*8, y*8
+end
+
+function map:getclosestgrid(x, y)
+	local left, right = math.floor(x/8), math.ceil(x/8)
+	local top, bottom = math.floor(y/8), math.ceil(y/8)
+
+	if self.gridtable[left][top] == 0 then return left, top end
+	if self.gridtable[left][bottom] == 0 then return left, bottom end
+	if self.gridtable[right][top] == 0 then return right, top end
+	if self.gridtable[right][bottom] == 0 then return right, bottom end
+end
+
+function map:printgrid(gridtable)
+	if gridtable == nil then gridtable = self.gridtable end
+	local mapw, maph = self:get_size()
+	local gridw, gridh = self:togrid(mapw, maph)
+
+	for y = 1,gridh do
+		local line = ""
+		for x = 1,gridw do
+			if gridtable[x][y] == 0 then
+				line = line .. " "
+			elseif gridtable[x][y] == 1 then
+				line = line .. "#"
+			else
+				line = line .. gridtable[x][y]
+			end
+		end
+		print(line)
+	end
+end
+
+function map:copygrid()
+	local newgrid = {}
+	local mapw, maph = self:get_size()
+	local gridw, gridh = self:togrid(mapw, maph)
+	for x=1,gridw do
+		newgrid[x] = {}
+		for y = 1,gridh do
+			newgrid[x][y] = self.gridtable[x][y]
+		end
+	end
+	return newgrid
+end
+
+function map:calcgrid()
+	local grid = {}
+	local mapw, maph = self:get_size()
+	local gridw, gridh = self:togrid(mapw, maph)
+
+	local hero = self:get_hero()
+	local herox, heroy = hero:get_position()
+
+	for x = 1,gridw do
+		grid[x] = {}
+		for y = 1,gridh do
+			local realx, realy = self:fromgrid(x, y)
+			local dx, dy = realx-herox, realy-heroy
+			if hero:test_obstacles(dx, dy) then
+				grid[x][y] = 1
+			else
+				grid[x][y] = 0
+			end
+		end
+	end
+
+	self.gridtable = grid
+	self.grid = Grid(grid)
+	self.pathfinder = Pathfinder(self.grid, 'JPS', 0)
+--	self.pathfinder:setMode("ORTHOGONAL")
+end
+
+map:calcgrid()

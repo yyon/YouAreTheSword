@@ -21,6 +21,7 @@ function FiringBowAbility:doability()
 	local d = entitydata:getdirection()
 
 	self.arrowentity = map:create_custom_entity({model="arrow", x=x, y=y-35, layer=layer, direction=0, width=w, height=h})
+	if self.arrowentity == nil then self:cancel(); return end
 	self.arrowentity.rotationframes = 8
 	self.arrowentity.rotationframesoffset = 2
 	self.arrowentity.framenegative = true

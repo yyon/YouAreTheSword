@@ -49,7 +49,9 @@ function entity:finish()
 end
 
 function entity:on_removed()
-	self.ticker:remove()
+	if self.ticker ~= nil then
+		self.ticker:remove()
+	end
 end
 
 function entity:finishafter()

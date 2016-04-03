@@ -80,6 +80,7 @@ function EntityData:initialize(entity, theclass, main_sprite, life, team, sworda
 	self.main_sprite = main_sprite
 	self.life = life
 	self.maxlife = self.life
+	self.souls = 1
 	self.team = team
 	self.swordability = getrandomfromlist(swordabilities)
 	self.transformability = getrandomfromlist(transformabilities)
@@ -154,8 +155,8 @@ function EntityData:bepossessedbyhero()
 
 	local hero = game:get_hero()
 
-	hero.souls = hero.souls + 1
-	if hero.souls > 1 then hero.souls = 1 end
+--	hero.souls = hero.souls + 1
+--	if hero.souls > 1 then hero.souls = 1 end
 
 	hero:unfreeze()
 	hero.isdropped = false
@@ -682,20 +683,22 @@ function EntityData:dodamage(target, damage, aspects)
 	-- do damage
 	damage = damage * self.stats.damage
 
-	if self.entity.ishero then
-		if not aspects.natural then
-			local souls = self.entity.souls
-			local damagemultiplier = souls + 0.5
-			damage = damage * damagemultiplier
+	if not aspects.natural then
+		local souls = self.souls
+		local damagemultiplier = souls
+		if self.entity.ishero then
+			damagemultiplier = damagemultiplier + 0.5
 		end
+		damage = damage * damagemultiplier
 	end
+
 	if aspects.ap == nil then
 		local negateddamage = damage * target.stats.defense
 		damage = damage - negateddamage
 	end
 
 	target.life = target.life - damage
-	
+
 	local x, y = target.entity:get_position()
 	map:damagedisplay(damage, x, y)
 
@@ -754,9 +757,9 @@ function EntityData:dodamage(target, damage, aspects)
 		if self.team ~= "adventurer" then
 			remainingmonsters = remainingmonsters - 1
 		end
-		
+
 		target:kill()
-		
+
 		if remainingmonsters == 0 then
 			map.nomonstersleft = true
 		end
@@ -1254,7 +1257,7 @@ end
 
 function EntityData:totable()
 	return {
-		classname = self.class.name,	
+		classname = self.class.name,
 		life=self.life,
 		maxlife=self.maxlife,
 		team=self.team,
@@ -1299,7 +1302,7 @@ function EntityData.static:fromtable(table, entity)
 			end
 			for index, ability in pairs(entitydata.transformabilities) do
 				if ability.name == table.transformability then
-					entitydata.transformability = ability	
+					entitydata.transformability = ability
 				end
 			end
 			for index, ability in pairs(entitydata.blockabilities) do
@@ -1483,8 +1486,6 @@ function mageclass:initialize(entity)
 	local blockabilities = {TeleportAbility:new(self)}
 	local specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackholeAbility:new(self)}
 	local basestats = {}
-
-	self.alwaysrandom = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
@@ -1919,6 +1920,7 @@ function mageboss:initialize(entity)
 	local basestats = {movementspeed=0}
 	self.cantpossess=true
 	self.cantcancel = true
+	self.alwaysrandom = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
@@ -2051,6 +2053,7 @@ function dummyclass:initialize(entity)
 	self.dontmove = true
 	self.doesntcountsasadventurer = true
 	self.cantposses = true
+	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)

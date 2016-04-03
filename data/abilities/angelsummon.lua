@@ -31,6 +31,7 @@ function AngelSummonAbility:doability()
 		y=toy,
 		direction=0
 	})
+	if newentity == nil then self:cancel(); return end
 
 	local angelentitydata = _EntityDatas.angelclass:new()
 	angelentitydata.entity = newentity

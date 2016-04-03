@@ -431,24 +431,24 @@ function tick()
 			end
 		end
 
-		local soulsdrop = 0.0005
-		if hero.entitydata.team == "monster" then
-			soulsdrop = 0.01
-		elseif hero.entitydata.team == "dunsmur" then
-			soulsdrop = 0
-		end
-		if map.nomonstersleft then
-			soulsdrop = 0
-		end
-		hero.souls = hero.souls - soulsdrop
-		if hero.souls < 0 then
-			hero.souls = 0
-			if hero.entitydata.team == "monster" and not game.nodeaths then
-				hero.entitydata:dropsword()
-			end
-		end
-
 		if hero.entitydata ~= nil then
+			local soulsdrop = 0.0005
+			if hero.entitydata.team == "monster" then
+				soulsdrop = 0.01
+			elseif hero.entitydata.team == "dunsmur" then
+				soulsdrop = 0
+			end
+			if map.nomonstersleft then
+				soulsdrop = 0
+			end
+			hero.entitydata.souls = hero.entitydata.souls - soulsdrop
+			if hero.entitydata.souls < 0 then
+				hero.entitydata.souls = 0
+				if hero.entitydata.team == "monster" and not game.nodeaths then
+					hero.entitydata:dropsword()
+				end
+			end
+
 			local x, y = hero.entitydata:gettargetpos()
 
 			hero.entitydata:tickability(x, y)
@@ -482,7 +482,7 @@ function save()
 
 	local usersave = {}
 	usersave.hero = entitydatatable
-	usersave.souls = hero.souls
+--	usersave.souls = hero.souls
 	usersave.swordhealth = hero.swordhealth
 	usersave.maxswordhealth = hero.maxswordhealth
 	usersave.swordtransform = hero.swordtransform
@@ -598,7 +598,7 @@ function load()
 	if usersave ~= nil then
 		usersave = unpickle(usersave)
 		entitydatas.EntityData.static:fromtable(usersave.hero, hero)
-		hero.souls = usersave.souls
+--		hero.souls = usersave.souls
 		hero.swordhealth = usersave.swordhealth
 		hero.maxswordhealth = usersave.maxswordhealth
 		hero.swordtransform = usersave.swordtransform
@@ -606,7 +606,7 @@ function load()
 
 	if hero.entitydata == nil then
 		print("START")
-		hero.souls = 1
+--		hero.souls = 1
 		hero.swordhealth = 100
 		hero.maxswordhealth = 100
 		hero.entitydata = entitydatas.knightclass:new(hero)--sol.main.load_file("enemies/entitydata")()
@@ -629,6 +629,7 @@ function load()
 	game.lifebarsprite = sol.sprite.create("hud/lifebar")
 	game.allieslifebarsprite = sol.sprite.create("hud/allieslifebar")
 	game.herolifebarsprite = sol.sprite.create("hud/herolifebar")
+	game.soulbarsprite = sol.sprite.create("hud/soulbar")
 
 	function game:on_map_changed(map)
 		save()
@@ -653,7 +654,7 @@ function load()
 		hud:on_paused()
 		sol.menu.start(game, pause_menu, false)
 	end
-	
+
 	function game:on_unpaused()
 		hud:on_unpaused()
 		sol.menu.stop(pause_menu)
