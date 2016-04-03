@@ -285,15 +285,6 @@ tile{
   pattern = "607",
 }
 
-tile{
-  layer = 0,
-  x = 768,
-  y = 144,
-  width = 64,
-  height = 32,
-  pattern = "607",
-}
-
 npc{
   layer = 0,
   x = 400,
@@ -372,7 +363,7 @@ teletransporter{
   y = 352,
   width = 32,
   height = 32,
-  destination_map = "hub",
+  destination_map = "puzzletest/puzzlehub",
 }
 
 destination{
@@ -508,20 +499,11 @@ teletransporter{
   destination_map = "catmap",
 }
 
-teletransporter{
-  layer = 0,
-  x = 800,
-  y = 144,
-  width = 32,
-  height = 32,
-  destination_map = "puzzletest/puzzlehub",
-}
-
 custom_entity{
   name = "door",
   layer = 0,
-  x = 848,
-  y = 149,
+  x = 240,
+  y = 349,
   width = 40,
   height = 64,
   direction = 0,

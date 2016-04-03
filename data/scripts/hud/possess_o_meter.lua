@@ -39,7 +39,7 @@ function possess_o_meter:check()
 
 	local hero = game:get_hero()
     if hero.entitydata ~= nil then
-		self.stage = hero.souls
+		self.stage = hero.entitydata.souls
 	end
 
 

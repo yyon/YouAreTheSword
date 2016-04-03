@@ -85,7 +85,7 @@ end
 
 function map:actuallydrawlifebar(entity)
     if entity.entitydata ~= nil and not entity.entitydata.dontdrawlifebar then
-        entity.lifebarsurface = sol.surface.create(70, 4)
+        entity.lifebarsurface = sol.surface.create(70, 8)
 
         local frame
         if entity.entitydata.life > 0 then
@@ -103,6 +103,18 @@ function map:actuallydrawlifebar(entity)
         end
         lifebarsprite:set_frame(frame)
         lifebarsprite:draw(entity.lifebarsurface, 35, 1)
+
+		if entity.entitydata.souls < 1 then
+			if entity.entitydata.life > 0 then
+	            frame = math.floor((1 - entity.entitydata.souls) * 49)
+	        else
+	            frame = 49
+	        end
+
+	        local soulbarsprite = game.soulbarsprite
+	        soulbarsprite:set_frame(frame)
+	        soulbarsprite:draw(entity.lifebarsurface, 35, 5)
+		end
     end
 end
 

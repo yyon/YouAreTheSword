@@ -135,28 +135,14 @@ local GoTowardsState = State:subclass("GoTowardsState")
 
 function GoTowardsState:start()
 	if self.npc.entitytoattack ~= nil then
-		local x, y = self.npc.entitytoattack.entity:get_position()
-
 		local movement
 		if self.npc.entitydata.alwaysrandom then
 			movement = sol.movement.create("random_path")
 			movement:set_speed(normal_speed)
 			movement:start(self.npc)
 		else
-			if self.npc.entitydata.stats.movementspeed ~= 0 then
-				local tox, toy = self.npc.entitytoattack.entity:get_position()
-				if not self.npc.entitydata:canmoveto(tox, toy) then
-					movement = self.npc:pathfind(self.npc.entitytoattack.entity)
-				else
-					movement = sol.movement.create("target") -- "path_finding")
-					movement:set_speed(self.npc.entitydata.stats.movementspeed)
-					movement:set_target(self.npc.entitytoattack.entity)
-					movement:set_smooth(true)
-					movement:start(self.npc)
-				end
-			end
+			self.npc:pathfind(self.npc.entitytoattack.entity)
 		end
-		self.movement = movement
 	end
 end
 
@@ -246,17 +232,21 @@ end
 local PickupState = State:subclass("PickupState")
 
 function PickupState:start()
-	local x, y = self.npc.target:get_position()
-	if not self.npc.entitydata:canmoveto(x, y) then
-		movement = self.npc:pathfind(self.npc.target)
-	end
-
-	if movement == nil then
-		movement = sol.movement.create("target") -- "path_finding")
-		movement:set_speed(self.npc.entitydata.stats.movementspeed)
-		movement:set_target(self.npc.target)
-		movement:set_smooth(true)
-		movement:start(self.npc)
+	if self.npc.target ~= nil then
+		local movement
+		if self.npc.entitydata.stats.movementspeed ~= 0 then
+			local tox, toy = self.npc.target:get_position()
+			if not self.npc.entitydata:canmoveto(tox, toy) then
+				movement = self.npc:pathfind(self.npc.target)
+			else
+				movement = sol.movement.create("target") -- "path_finding")
+				movement:set_speed(self.npc.entitydata.stats.movementspeed)
+				movement:set_target(self.npc.target)
+				movement:set_smooth(true)
+				movement:start(self.npc)
+			end
+		end
+		self.movement = movement
 	end
 end
 
@@ -523,6 +513,11 @@ function enemy:tick(newstate)
 		self:go_pickup(changedstates, target)
 	end
 --]]
+	local soulsup = 0.01
+	self.entitydata.souls = self.entitydata.souls + soulsup
+	if self.entitydata.souls > 1 then
+		self.entitydata.souls = 1
+	end
 
 	end
 
@@ -709,13 +704,26 @@ function enemy:on_position_changed(x, y, layer)
 end
 
 function enemy:pathfind(target)
+	if target == nil then return end
+	if self.entitydata.stats.movementspeed == 0 then return end
+
+	local tox, toy = target:get_position()
+	if self.entitydata:canmoveto(tox, toy) then
+		self:gotowards(target)
+		return
+	end
+
 	print("pathfinding", self.entitydata.theclass)
 
 	local map = self:get_map()
 
 	local x, y = self:get_position()
 	x, y = map:getclosestgrid(x, y)
-	if not x then print("can't start"); return end
+	if not x then
+		print("can't start")
+		self:gotowards(target)
+		return
+	end
 	x, y = map:fromgrid(x, y)
 
 	local movement = sol.movement.create("target")
@@ -735,7 +743,7 @@ function enemy:pathfind(target)
 		local path = map.pathfinder:getPath(fromy, fromx, toy, tox, false)
 		if path then
 			path:fill()
-			
+
 			local prevx, prevy = fromx, fromy
 
 			local dirpath = {}
@@ -790,6 +798,16 @@ function enemy:pathfind(target)
 			function movement.on_finished(movement)
 				Effects.SimpleTimer(self.entitydata, 200, function() self:resetstate() end)
 			end
+		else
+			self:gotowards(target)
 		end
 	end
+end
+
+function enemy:gotowards(target)
+	local movement = sol.movement.create("target") -- "path_finding")
+	movement:set_speed(self.entitydata.stats.movementspeed)
+	movement:set_target(target)
+	movement:set_smooth(true)
+	movement:start(self)
 end

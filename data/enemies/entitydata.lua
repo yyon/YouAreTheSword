@@ -80,6 +80,7 @@ function EntityData:initialize(entity, theclass, main_sprite, life, team, sworda
 	self.main_sprite = main_sprite
 	self.life = life
 	self.maxlife = self.life
+	self.souls = 1
 	self.team = team
 	self.swordability = getrandomfromlist(swordabilities)
 	self.transformability = getrandomfromlist(transformabilities)
@@ -154,8 +155,8 @@ function EntityData:bepossessedbyhero()
 
 	local hero = game:get_hero()
 
-	hero.souls = hero.souls + 1
-	if hero.souls > 1 then hero.souls = 1 end
+--	hero.souls = hero.souls + 1
+--	if hero.souls > 1 then hero.souls = 1 end
 
 	hero:unfreeze()
 	hero.isdropped = false
@@ -682,13 +683,15 @@ function EntityData:dodamage(target, damage, aspects)
 	-- do damage
 	damage = damage * self.stats.damage
 
-	if self.entity.ishero then
-		if not aspects.natural then
-			local souls = self.entity.souls
-			local damagemultiplier = souls + 0.5
-			damage = damage * damagemultiplier
+	if not aspects.natural then
+		local souls = self.souls
+		local damagemultiplier = souls
+		if self.entity.ishero then
+			damagemultiplier = damagemultiplier + 0.5
 		end
+		damage = damage * damagemultiplier
 	end
+
 	if aspects.ap == nil then
 		local negateddamage = damage * target.stats.defense
 		damage = damage - negateddamage
@@ -1484,8 +1487,6 @@ function mageclass:initialize(entity)
 	local specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackholeAbility:new(self)}
 	local basestats = {}
 
-	self.alwaysrandom = true
-
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
 end
@@ -1919,6 +1920,7 @@ function mageboss:initialize(entity)
 	local basestats = {movementspeed=0}
 	self.cantpossess=true
 	self.cantcancel = true
+	self.alwaysrandom = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
