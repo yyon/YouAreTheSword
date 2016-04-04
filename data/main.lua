@@ -10,6 +10,7 @@ function sol.main:on_started()
 	print("This is a sample quest for Solarus.")
 
 	local width, height = sol.video.get_quest_size()
+	sol.video.set_fullscreen(false)
 	sol.video.set_mode("normal")
 	sol.video.set_window_size(width, height)
 
