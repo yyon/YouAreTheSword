@@ -3,7 +3,7 @@ local title_screen = {}
 function title_screen:on_started()
 	self.phase = "black"
 
-	self.surface = sol.surface.create(320,240)
+	self.surface = sol.surface.create(1280,900)
 	sol.timer.start(self, 300, function()
 		self:phase_the_team_presents()
 	end)
@@ -16,7 +16,7 @@ function title_screen:phase_the_team_presents()
 	self.the_team_presents_img = sol.surface.create("title_screen_initilization.png", true)
 
 	local width, height = self.the_team_presents_img:get_size()
-	self.the_team_presents_pos = {160 - width / 2, 120 - height / 2}
+	self.the_team_presents_pos = {1280/2 - width / 2, 900/2 - height / 2}
 
 	sol.timer.start(self, 2000, function()
 		self.surface:fade_out(10)
@@ -30,10 +30,10 @@ function title_screen:phase_title()
 
 	self.phase = "title"
 	
-	self.background_img = sol.surface.create("menus/title_daylight_background.png")
-	self.clouds_img = sol.surface.create("menus/title_daylight_clouds.png")
-	--add the logo once it's drawn
-	self.borders_img = sol.surface.create("menus/title_borders.png")
+	self.background_img = sol.surface.create("menus/title_daylight_background2.png")
+	self.clouds_img = sol.surface.create("menus/title_daylight_clouds2.png")
+	self.logo = sol.surface.create("menus/logo_title.png")
+	self.borders_img = sol.surface.create("menus/title_borders2.png")
 
 	local dialog_font, dialog_font_size = "8_bit_3", 12
 	local menu_font, menu_font_size = "8_bit_3", 12
@@ -55,15 +55,15 @@ function title_screen:phase_title()
 	sol.timer.start(self, 6500, switch_press_space)
 
 
-	self.clouds_xy = {x = 320, y = 240}
+	self.clouds_xy = {x = 1280, y = 720}
 	function move_clouds()
 		self.clouds_xy.x = self.clouds_xy.x + 1
 		self.clouds_xy.y = self.clouds_xy.y - 1
-		if self.clouds_xy.x >= 535 then
-			self.clouds_xy.x = self.clouds_xy.x - 535
+		if self.clouds_xy.x >= 2140 then
+			self.clouds_xy.x = self.clouds_xy.x - 2140
 		end
-		if self.clouds_xy.y >= 535 then
-			self.clouds_xy.y = self.clouds_xy.y + 299
+		if self.clouds_xy.y >= 2140 then
+			self.clouds_xy.y = self.clouds_xy.y + 1193
 		end
 		sol.timer.start(self, 50, move_clouds)
 	end
@@ -85,7 +85,7 @@ function title_screen:on_draw(dst_surface)
 	end
 
 	local width, height = dst_surface:get_size()
-	self.surface:draw(dst_surface, width/2 - 160, height/2 - 120)
+	self.surface:draw(dst_surface, width/2 - 1280/2, height/2 - 900/2)
 end
 
 function title_screen:draw_phase_present()
@@ -101,21 +101,21 @@ function title_screen:draw_phase_title()
 
 	local x, y = self.clouds_xy.x, self.clouds_xy.y
 	self.clouds_img:draw(self.surface, x, y)
-	x = self.clouds_xy.x - 535
+	x = self.clouds_xy.x - 2140
 	self.clouds_img:draw(self.surface, x, y)
 	x = self.clouds_xy.x
-	y = self.clouds_xy.y - 299
+	y = self.clouds_xy.y - 1192
 	self.clouds_img:draw(self.surface, x, y)
-	x = self.clouds_xy.x - 535
-	y = self.clouds_xy.y - 299
+	x = self.clouds_xy.x - 2140
+	y = self.clouds_xy.y - 1192
 	self.clouds_img:draw(self.surface, x, y)
 	
 	self.borders_img:draw(self.surface, 0, 0)
 
-	--draw logo
+	self.logo:draw(self.surface, 1280/2 - 746/2, 720/2 - 306/2)
 
 	if self.show_press_space then
-		self.press_space_img:draw(self.surface, 160, 200)
+		self.press_space_img:draw(self.surface, 1280/2, 780)
 	end
 end
 
