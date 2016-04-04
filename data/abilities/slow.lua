@@ -21,9 +21,9 @@ function SlowAbility:doability()
 --	self.slowentity.ability = self
 --	self.slowentity:start(tox, toy)
 
-	self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
+--	self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
 
-	sol.audio.play_sound("thunder")
+--	sol.audio.play_sound("slow")
 
 	self:finish()
 end
