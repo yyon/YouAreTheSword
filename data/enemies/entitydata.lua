@@ -2052,7 +2052,7 @@ function dummyclass:initialize(entity)
 	local basestats = {movementspeed=0}
 	self.dontmove = true
 	self.doesntcountsasadventurer = true
-	self.cantposses = true
+	self.cantpossess = true
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
