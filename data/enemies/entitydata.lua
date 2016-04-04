@@ -105,7 +105,11 @@ function EntityData:initialize(entity, theclass, main_sprite, life, team, sworda
 	if stats.cooldown == nil then
 		stats.cooldown = 1
 	end
-	self.originalstats = stats
+	
+	self.originalstats = {}
+	for k, v in pairs(stats) do
+		self.originalstats[k] = v
+	end
 	self.stats = stats
 end
 

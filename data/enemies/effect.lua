@@ -447,7 +447,6 @@ local SlowEffect = StatEffect:subclass("SlowEffect")
 --Usage: 
 
 function SlowEffect:start()
-
 	StatEffect.start(self, "movementspeed", 32, 5000)
 	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", 2, nil)
 	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", 2, nil)
