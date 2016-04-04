@@ -281,7 +281,7 @@ function EntityData:unpossess(name)
 	return self.entity
 end
 
-function EntityData:cantarget(entitydata, canbeonsameteam, isattack)
+function EntityData:cantarget(entitydata, canbeonsameteam, isattack, onlyonsameteam)
 --	print(debug.traceback())
 
 	-- is this entitydata a person which can be attacked?
@@ -300,8 +300,12 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack)
 		return false
 	end
 
-	if entitydata.team == self.team and not canbeonsameteam then
+	if entitydata.team == self.team and not (canbeonsameteam or onlyonsameteam) then
 --		self:log("can't target", entitydata, "because same team")
+		return false
+	end
+
+	if onlyonsameteam and entitydata.team ~= self.team then
 		return false
 	end
 
@@ -610,7 +614,7 @@ function EntityData:dodamage(target, damage, aspects)
 		aspects.sameteam = true
 	end
 
-	if not self:cantarget(target, aspects.sameteam) then
+	if not self:cantarget(target, aspects.sameteam, nil, aspects.onlyonsameteam) then
 		return
 	end
 
