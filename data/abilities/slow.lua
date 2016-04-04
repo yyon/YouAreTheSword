@@ -16,6 +16,8 @@ function SlowAbility:doability()
 	local x,y,layer = entity:get_position()
 	local w,h = entity:get_size()
 	local entitydata = self.entitydata
+	
+
 
 --	self.slowentity = map:create_custom_entity({model="slow", x=tox, y=toy, layer=2, direction=0, width=w, height=h})
 --	self.slowentity.ability = self

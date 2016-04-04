@@ -417,6 +417,20 @@ function StatEffect:getkey()
 	return self
 end
 
+local SlownessEffect = StatEffect:subclass("SlownessEffect")
+-- slows enemies in a targeted aoe
+--Usage: 
+
+function SlownessEffect:start(slow, time)
+	StatEffect.start(self, "slow", slow, time)
+	self.slownesseffect = SlownessEffect:new(self.entitydata)
+end
+function SlownessEffect:remove(...)
+	self.slownesseffect:remove(...)
+	StatEffect.remove(self, ...)
+end
+
+
 local PoisonWeaknessEffect = StatEffect:subclass("PoisonWeaknessEffect")
 -- poisons person for a certain amount of time
 -- Usage: Effects.PoisonWeaknessEffect:new(entitydata, <damage multiplier - poisoned people do less damage>, time)
@@ -490,4 +504,4 @@ function TauntEffect:remove(...)
 	MapTauntEffect.remove(self, ...)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect}
