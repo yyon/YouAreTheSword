@@ -148,6 +148,8 @@ end
 function EntityData:updatemovementspeed()
 	if self.entity.ishero then
 		self.entity:set_walking_speed(self.stats.movementspeed)
+	else
+		self.entity:resetstate()
 	end
 end
 

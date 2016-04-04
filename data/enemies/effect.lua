@@ -447,16 +447,19 @@ local SlowEffect = StatEffect:subclass("SlowEffect")
 --Usage: 
 
 function SlowEffect:start()
-	StatEffect.start(self, "movementspeed", 64, 5000)
+
+	StatEffect.start(self, "movementspeed", 32, 5000)
 	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", 2, nil)
 	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", 2, nil)
 	self.slownessdraw = SlowDraw:new(self.entitydata)
+	self.entitydata:updatemovementspeed()
 end
 function SlowEffect:remove(...)
 	self.warmupeffect:remove(...)
 	StatEffect.remove(self, ...)
 	self.cooldowneffect:remove(...)
 	self.slownessdraw:remove(...)
+	self.entitydata:updatemovementspeed()
 end
 
 local HasteEffect = StatEffect:subclass("HasteEffect")
@@ -467,12 +470,14 @@ function HasteEffect:start()
 	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", .5, nil)
 	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", .5, nil)
 	self.hastedraw = HasteDraw:new(self.entitydata)
+	self.entitydata:updatemovementspeed()
 end
 function HasteEffect:remove(...)
 	self.warmupeffect:remove(...)
 	StatEffect.remove(self, ...)
 	self.cooldowneffect:remove(...)
 	self.hastedraw:remove(...)
+	self.entitydata:updatemovementspeed()
 end
 
 local RageEffect = StatEffect:subclass("RageEffect")

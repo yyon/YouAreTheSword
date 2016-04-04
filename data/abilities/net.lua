@@ -6,7 +6,7 @@ local Effects = require "enemies/effect"
 local NetAbility = Ability:subclass("NetAbility")
 
 function NetAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Net", 800, "net", 500, 4000, true)
+	Ability.initialize(self, entitydata, "Net", 800, "net", 500, 2000, true)
 end
 
 function NetAbility:doability()
