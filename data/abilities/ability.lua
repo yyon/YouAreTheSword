@@ -204,9 +204,7 @@ end
 
 function Ability:dodamage(entitydata, damage, aspects)
 	-- check if you can attack someone, then attack them
-	if self.entitydata:cantarget(entitydata) then
-		self.entitydata:dodamage(entitydata, damage, aspects)
-	end
+	self.entitydata:dodamage(entitydata, damage, aspects)
 end
 
 function Ability:withinrange(tox, toy)

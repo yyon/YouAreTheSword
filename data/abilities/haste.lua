@@ -30,10 +30,6 @@ function HasteAbility:onfinish()
 end
 
 function HasteAbility:attack(entity)
-	if not self.entitydata:cantargetentity(entity) then
-		return
-	end
-
 	local entitydata = entity.entitydata
 
 	local damage = 0
