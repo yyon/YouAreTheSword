@@ -430,6 +430,17 @@ function SlownessEffect:remove(...)
 	StatEffect.remove(self, ...)
 end
 
+local HasteEffect = StatEffect:subclass("HasteEffect")
+--puts a haste buff on allies in targeted aoe
+
+function HasteEffect:start(haste,time)
+	StatEffect.start(self, "slow", haste, time)
+	self.hasteeffect = HasteEffect.new(self.entitydata)
+end
+function HasteEffect:remove(...)
+	self.hasteeffect:remove(...)
+	StatEffect.remove(self, ...)
+end
 
 local PoisonWeaknessEffect = StatEffect:subclass("PoisonWeaknessEffect")
 -- poisons person for a certain amount of time
@@ -504,4 +515,4 @@ function TauntEffect:remove(...)
 	MapTauntEffect.remove(self, ...)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect, HasteEffect=HasteEffect}
