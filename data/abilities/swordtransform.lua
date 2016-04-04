@@ -32,6 +32,9 @@ function TransformAbility:initialize(entitydata, transform)
 	elseif transform == "dagger" then
 		name = "Dagger"
 		icon = "dagger"
+	elseif transform == "slow" then
+		name = "Slow"
+		icon = "slowness2"
 	end
 
 	Ability.initialize(self, entitydata, name, 0, icon, 500, 10000, true, "casting")

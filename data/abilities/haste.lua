@@ -1,13 +1,16 @@
 local class = require "middleclass"
 local Ability = require "abilities/ability"
 
-local Effects = require "enemies/effect"
-
-local HasteAbility = Ability:subclass("Haste")
+local HasteAbility = Ability:subclass("HasteAbility")
 
 local Effects = require "enemies/effect"
+
+function HasteAbility:initialize(entitydata)
+	Ability.initialize(self, entitydata, "Stomp", 1000, "stomp", 500, 10000, true, "casting")
+end
 
 function HasteAbility:doability()
+
 	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 
@@ -16,19 +19,27 @@ function HasteAbility:doability()
 	local x,y,layer = entity:get_position()
 	local w,h = entity:get_size()
 	local entitydata = self.entitydata
-	
 
+	self.hasteentity = map:create_custom_entity({model="haste", x=tox, y=toy, layer=layer, direction=0, width=w, height=h})
+	self.hasteentity.ability = self
+	self.hasteentity:start()
 
---	self.hasteentity = map:create_custom_entity({model="haste", x=tox, y=toy, layer=2, direction=0, width=w, height=h})
---	self.hasteentity.ability = self
---	self.hasteentity:start(tox, toy)
-
---	self:AOE(200, 4, {electric=3000, dontblock=true}, self.lightningentity)
-
---	sol.audio.play_sound("haste")
-
-	self:finish()
 end
 
+function HasteAbility:onfinish()
+end
+
+function HasteAbility:attack(entity)
+	if not self.entitydata:cantargetentity(entity) then
+		return
+	end
+
+	local entitydata = entity.entitydata
+
+	local damage = 3
+	local aspects = {knockback=1000}
+
+	self:dodamage(entitydata, damage, aspects)
+end
 
 return HasteAbility

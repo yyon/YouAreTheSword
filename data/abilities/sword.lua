@@ -89,6 +89,11 @@ function SwordAbility:attack(entity)
 		aspects.dontblock = true
 	elseif transform == "electric" then
 		aspects.electric = 2000
+	elseif transform == "slow" then
+		aspects.slow = true
+	
+
+
 	elseif transform == "fire" then
 		aspects.fire = {damage=0.1, time=5000, timestep=500}
 	elseif transform == "poison" then
@@ -153,6 +158,8 @@ function SwordAbility:get_appearance(entity)
 		return "swords/holy"
 	elseif transform == "dagger" then
 		return "swords/dagger"
+	elseif transform == "slow" then
+		return "swords/slow"
 	end
 end
 

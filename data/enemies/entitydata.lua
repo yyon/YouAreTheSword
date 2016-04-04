@@ -150,6 +150,9 @@ function EntityData:updatechangepos(x, y, layer)
 end
 
 function EntityData:updatemovementspeed()
+	if self.entity == nil then
+		return 
+	end
 	if self.entity.ishero then
 		self.entity:set_walking_speed(self.stats.movementspeed)
 	else
@@ -1552,7 +1555,7 @@ function bardclass:initialize(entity)
 	local life = 10
 	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {SwordAbility:new(self)}
-	local transformabilities = {TransformAbility:new(self, "dagger")}
+	local transformabilities = {TransformAbility:new(self, "slow")}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {TauntAbility:new(self)}
 	local basestats = {}
