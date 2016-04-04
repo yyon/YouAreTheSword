@@ -47,6 +47,7 @@ sprite{ id = "abilities/guntest", description = "guntest" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
 sprite{ id = "abilities/meteor", description = "meteor" }
+sprite{ id = "abilities/net", description = "This is a net sprite" }
 sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
 sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
@@ -323,6 +324,7 @@ entity{ id = "guntest", description = "guntest" }
 entity{ id = "heart", description = "heart" }
 entity{ id = "heartexplosion", description = "heartexplosion" }
 entity{ id = "lightning", description = "lightning" }
+entity{ id = "net", description = "This is a net." }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "projectile", description = "projectile" }
 entity{ id = "rougetraps", description = "rougetraps" }

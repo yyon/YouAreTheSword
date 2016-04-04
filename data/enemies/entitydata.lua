@@ -654,6 +654,12 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.poison ~= nil then
 		local poisoneffect = Effects.PoisonWeaknessEffect(target, aspects.poison.weakness, aspects.poison.time)
 	end
+	if aspects.haste ~= nil then
+		local hasteeffect = Effects.HasteEffect(target)
+	end
+	if aspects.slow ~= nil then
+		local sloweffect = Effects.SlowEffect(target)
+	end
 	if aspects.rage ~= nil then
 		local rageeffect = Effects.RageEffect(target, aspects.rage.weakness, aspects.rage.time)
 	end

@@ -1,0 +1,7 @@
+animation{
+  name = "stopped",
+  src_image = "abilities/net.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 50, frame_height = 32, origin_x = 25, origin_y = 16 },
+  },
+}
