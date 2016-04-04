@@ -417,16 +417,16 @@ function StatEffect:getkey()
 	return self
 end
 
-local SlownessDraw = PhysicalEffect:subclass("SlownessDraw")
+local SlowDraw = PhysicalEffect:subclass("SlowDraw")
 -- draws poison over them
 -- use PoisonWeaknessEffect instead
 
-function SlownessDraw:getspritename()
+function SlowDraw:getspritename()
 	return "slow"
 end
 
-function SlownessDraw:getkey()
-	return "SlownessDraw"
+function SlowDraw:getkey()
+	return "SlowDraw"
 end
 
 local HasteDraw = PhysicalEffect:subclass("HasteDraw")
@@ -442,17 +442,17 @@ function HasteDraw:getkey()
 end
 
 
-local SlownessEffect = StatEffect:subclass("SlownessEffect")
+local SlowEffect = StatEffect:subclass("SlowEffect")
 -- slows enemies in a targeted aoe
 --Usage: 
 
-function SlownessEffect:start()
+function SlowEffect:start()
 	StatEffect.start(self, "movementspeed", 64, 5000)
 	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", 2, nil)
 	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", 2, nil)
-	self.slownessdraw = SlownessDraw:new(self.entitydata)
+	self.slownessdraw = SlowDraw:new(self.entitydata)
 end
-function SlownessEffect:remove(...)
+function SlowEffect:remove(...)
 	self.warmupeffect:remove(...)
 	StatEffect.remove(self, ...)
 	self.cooldowneffect:remove(...)

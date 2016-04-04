@@ -24,7 +24,7 @@ function NetAbility:doability()
 	self.shieldentity = map:create_custom_entity({model="net", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.shieldentity.ability = self
 
-	self.shieldentity:start(tox, toy)
+	self.shieldentity:start(self, tox, toy)
 
 	self:finish()
 end

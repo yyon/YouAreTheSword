@@ -3,6 +3,7 @@ local class = require "middleclass"
 local EntityData = class("EntityData")
 
 -- import all of the abilities
+local NetAbility = require "abilities/net"
 local SwordAbility = require "abilities/sword"
 local TransformAbility = require "abilities/swordtransform"
 local ShieldAbility = require "abilities/shield"
@@ -1583,7 +1584,7 @@ function archerclass:initialize(entity)
 	local normalabilities = {FiringBowAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "dagger")}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self)}
+	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self), NetAbility:new(self)}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
