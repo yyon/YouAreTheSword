@@ -57,6 +57,11 @@ function game_manager:start_game()
 end
 
 function sol.main:on_key_pressed(key, modifiers)
+	if game == nil then
+		keyhandler(key, modifiers)
+		return
+	end
+
 	local hero = game:get_hero()
 
 	if key == "p" then
@@ -333,6 +338,10 @@ end
 
 
 function sol.main:on_key_released(key, modifiers)
+	if game == nil then
+		return
+	end
+
 	local hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")
@@ -357,6 +366,11 @@ function sol.main:on_key_released(key, modifiers)
 end
 
 function sol.main:on_mouse_pressed(button, ...)
+	if game == nil then
+		mousehandler(button, ...)
+		return
+	end
+
 	local hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		print("PAUSED!")

@@ -3,7 +3,8 @@
 -- See the Lua API! http://www.solarus-games.org/solarus/documentation/
 
 local game_manager = require("scripts/game_manager")
-
+keyhandler = function() print("Error: unhandled key press") end
+mousehandler = function() print("Error: unhandled key press") end
 
 function sol.main:on_started()
 	-- This function is called when Solarus starts.

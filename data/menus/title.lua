@@ -1,6 +1,8 @@
 local title_screen = {}
 
 function title_screen:on_started()
+	keyhandler = self.on_key_pressed
+
 	self.phase = "black"
 
 	self.surface = sol.surface.create(1280,900)
@@ -29,7 +31,7 @@ end
 function title_screen:phase_title()
 
 	self.phase = "title"
-	
+
 	self.background_img = sol.surface.create("menus/title_daylight_background2.png")
 	self.clouds_img = sol.surface.create("menus/title_daylight_clouds2.png")
 	self.logo = sol.surface.create("menus/logo_title.png")
@@ -95,7 +97,7 @@ function title_screen:draw_phase_present()
 end
 
 function title_screen:draw_phase_title()
-	
+
 	self.surface:fill_color({0, 0, 0})
 	self.background_img:draw(self.surface)
 
@@ -109,7 +111,7 @@ function title_screen:draw_phase_title()
 	x = self.clouds_xy.x - 2140
 	y = self.clouds_xy.y - 1192
 	self.clouds_img:draw(self.surface, x, y)
-	
+
 	self.borders_img:draw(self.surface, 0, 0)
 
 	self.logo:draw(self.surface, 1280/2 - 746/2, 720/2 - 306/2)
@@ -152,25 +154,3 @@ function title_screen:finish_title()
 end
 
 return title_screen
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
