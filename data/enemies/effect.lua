@@ -417,29 +417,62 @@ function StatEffect:getkey()
 	return self
 end
 
+local SlownessDraw = PhysicalEffect:subclass("SlownessDraw")
+-- draws poison over them
+-- use PoisonWeaknessEffect instead
+
+function SlownessDraw:getspritename()
+	return "slow"
+end
+
+function SlownessDraw:getkey()
+	return "SlownessDraw"
+end
+
+local HasteDraw = PhysicalEffect:subclass("HasteDraw")
+-- draws poison over them
+-- use PoisonWeaknessEffect instead
+
+function HasteDraw:getspritename()
+	return "haste"
+end
+
+function HasteDraw:getkey()
+	return "HasteDraw"
+end
+
+
 local SlownessEffect = StatEffect:subclass("SlownessEffect")
 -- slows enemies in a targeted aoe
 --Usage: 
 
-function SlownessEffect:start(slow, time)
-	StatEffect.start(self, "slow", slow, time)
-	self.slownesseffect = SlownessEffect:new(self.entitydata)
+function SlownessEffect:start()
+	StatEffect.start(self, "movementspeed", 64, 5000)
+	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", 2, nil)
+	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", 2, nil)
+	self.slownessdraw = SlownessDraw:new(self.entitydata)
 end
 function SlownessEffect:remove(...)
-	self.slownesseffect:remove(...)
+	self.warmupeffect:remove(...)
 	StatEffect.remove(self, ...)
+	self.cooldowneffect:remove(...)
+	self.slownessdraw:remove(...)
 end
 
 local HasteEffect = StatEffect:subclass("HasteEffect")
 --puts a haste buff on allies in targeted aoe
 
-function HasteEffect:start(haste,time)
-	StatEffect.start(self, "slow", haste, time)
-	self.hasteeffect = HasteEffect.new(self.entitydata)
+function HasteEffect:start()
+	StatEffect.start(self, "movementspeed", 256, 5000)
+	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", .5, nil)
+	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", .5, nil)
+	self.hastedraw = HasteDraw:new(self.entitydata)
 end
 function HasteEffect:remove(...)
-	self.hasteeffect:remove(...)
+	self.warmupeffect:remove(...)
 	StatEffect.remove(self, ...)
+	self.cooldowneffect:remove(...)
+	self.hastedraw:remove(...)
 end
 
 local RageEffect = StatEffect:subclass("RageEffect")
