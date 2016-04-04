@@ -399,9 +399,11 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 --	if self:get_distance(hero) > 700 and not self.hasbeenhit then
 	local floor = self:get_map():get_floor()
 
-	if floor ~= 0 and not self.entitydata:isonscreen(200) then
+	if not self.wasonscreen and (floor ~= 0 and not self.entitydata:isonscreen(200)) then
 		return self.donothingstate
 	end
+
+	self.wasonscreen = true
 
 	if currentstate == self.pushedstate then
 		return currentstate
