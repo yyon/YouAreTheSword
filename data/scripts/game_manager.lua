@@ -577,10 +577,10 @@ function load()
 	game:set_command_keyboard_binding("item_1", "")
 	game:set_command_keyboard_binding("item_2", "")
 
-	local width, height = sol.video.get_quest_size()
+--	local width, height = sol.video.get_quest_size()
 --	sol.video.set_window_size(width*2, height*2)
-	sol.video.set_mode("normal") -- for some reason this has to be set for the mouse position to work
-	sol.video.set_window_size(width, height)
+--	sol.video.set_mode("normal") -- for some reason this has to be set for the mouse position to work
+--	sol.video.set_window_size(width, height)
 
 	game:set_pause_allowed(true)
 	pause_menu = pause_manager:create(game)

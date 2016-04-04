@@ -9,6 +9,10 @@ function sol.main:on_started()
 	-- This function is called when Solarus starts.
 	print("This is a sample quest for Solarus.")
 
+	local width, height = sol.video.get_quest_size()
+	sol.video.set_mode("normal")
+	sol.video.set_window_size(width, height)
+
 	-- Setting a language is useful to display text and dialogs.
 	sol.language.set_language("en")
 
