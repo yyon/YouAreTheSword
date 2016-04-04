@@ -1,7 +1,7 @@
 local title_screen = {}
 
 function title_screen:on_started()
-	keyhandler = self.on_key_pressed
+	keyhandler = function(...) self:on_key_pressed(...) end
 
 	self.phase = "black"
 
@@ -20,7 +20,7 @@ function title_screen:phase_the_team_presents()
 	local width, height = self.the_team_presents_img:get_size()
 	self.the_team_presents_pos = {1280/2 - width / 2, 900/2 - height / 2}
 
-	sol.timer.start(self, 2000, function()
+	self.presentstimer = sol.timer.start(self, 2000, function()
 		self.surface:fade_out(10)
 		sol.timer.start(self, 700, function()
 			self:phase_title()
@@ -135,9 +135,7 @@ end
 
 function title_screen:try_finish_title()
 	local handled = false
-	if self.phase == "title"
-		and self.allow_skip
-		and not self.finished then
+	if self.phase == "title" then
 		self.finished = true
 		self.surface:fade_out(30)
 		sol.timer.start(self, 700, function()
@@ -145,6 +143,11 @@ function title_screen:try_finish_title()
 		end)
 
 		handled = true
+	elseif self.phase == "the_team_presents" then
+		self.presentstimer:stop()
+		sol.timer.start(self, 100, function()
+			self:phase_title()
+		end)
 	end
 	return handled
 end

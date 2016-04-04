@@ -65,6 +65,7 @@ end
 
 -- Starting the menu.
 function solarus_logo_menu:on_started()
+	keyhandler = function(...) self:keyhandler(...) end
 
 	-- Initialize or reinitialize the animation.
 	animation_step = 0
@@ -77,6 +78,12 @@ function solarus_logo_menu:on_started()
 	solarus_logo_menu:start_animation()
 	-- Update the surface.
 	rebuild_surface()
+end
+
+function solarus_logo_menu:keyhandler(key)
+	if key == "space" then
+		sol.menu.stop(self)
+	end
 end
 
 -- Animation step 1.
@@ -203,4 +210,3 @@ end
 
 -- Return the menu to the caller.
 return solarus_logo_menu
-
