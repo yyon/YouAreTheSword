@@ -35,8 +35,8 @@ function title_screen:phase_title()
 	--add the logo once it's drawn
 	self.borders_img = sol.surface.create("menus/title_borders.png")
 
-	local dialog_font, dialog_font_size = sol.language.get_dialog_font()
-	local menu_font, menu_font_size = sol.language.get_menu_font()
+	local dialog_font, dialog_font_size = "8_bit_3", 12
+	local menu_font, menu_font_size = "8_bit_3", 12
 
 	self.press_space_img = sol.text_surface.create{
 		font = dialog_font,
@@ -46,7 +46,6 @@ function title_screen:phase_title()
 		horizontal_alignment = "center"
 	}
 
-	print("HERE")
 
 	self.show_press_space = false
 	function switch_press_space()
@@ -55,7 +54,6 @@ function title_screen:phase_title()
 	end
 	sol.timer.start(self, 6500, switch_press_space)
 
-	print("here also")
 
 	self.clouds_xy = {x = 320, y = 240}
 	function move_clouds()

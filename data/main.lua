@@ -19,14 +19,14 @@ function sol.main:on_started()
 
 	solarus_logo.on_finished = function()
 		if self.game == nil then
-			--sol.menu.start(self, title_screen)
-			game_manager:start_game()
+			sol.menu.start(self, title_screen)
+			--game_manager:start_game()
 		end
 	end
 
-	--title_screen.on_finished = function()
-		--game_manager:start_game()
-	--end
+	title_screen.on_finished = function()
+		game_manager:start_game()
+	end
 
 	-- Start the game when the Solarus logo menu is finished.
 --	solarus_logo.on_finished = function()
