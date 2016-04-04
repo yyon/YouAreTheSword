@@ -442,6 +442,18 @@ function HasteEffect:remove(...)
 	StatEffect.remove(self, ...)
 end
 
+local RageEffect = StatEffect:subclass("RageEffect")
+--increases damage on self
+
+function RageEffect:start(rage, time)
+	StatEffect.start(self, "damage", weakness, time)
+	self.rageeffect = RageEffect:new(self.entitydata)
+end
+function RageEffect:remove(...)
+	self.rageeffect:remove(...)
+	StatEffect.remove(self, ...)
+end
+
 local PoisonWeaknessEffect = StatEffect:subclass("PoisonWeaknessEffect")
 -- poisons person for a certain amount of time
 -- Usage: Effects.PoisonWeaknessEffect:new(entitydata, <damage multiplier - poisoned people do less damage>, time)
