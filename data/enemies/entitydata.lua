@@ -159,8 +159,11 @@ function EntityData:updatemovementspeed()
 	if self.entity.ishero then
 		self.entity:set_walking_speed(self.stats.movementspeed)
 	else
-		self.entity:resetstate()
+		if self.entity.movementspeed ~= self.stats.movementspeed then
+			self.entity:resetstate()
+		end
 	end
+	self.entity.movementspeed = self.stats.movementspeed
 end
 
 function EntityData:bepossessedbyhero()
