@@ -441,6 +441,17 @@ function HasteDraw:getkey()
 	return "HasteDraw"
 end
 
+local RageDraw = PhysicalEffect:subclass("RageDraw")
+-- draws poison over them
+-- use PoisonWeaknessEffect instead
+
+function RageDraw:getspritename()
+	return "rage"
+end
+
+function RageDraw:getkey()
+	return "RageDraw"
+end
 
 local SlowEffect = StatEffect:subclass("SlowEffect")
 -- slows enemies in a targeted aoe
@@ -482,12 +493,13 @@ end
 local RageEffect = StatEffect:subclass("RageEffect")
 --increases damage on self
 
-function RageEffect:start(rage, time)
-	StatEffect.start(self, "damage", weakness, time)
-	self.rageeffect = RageEffect:new(self.entitydata)
+function RageEffect:start()
+	StatEffect.start(self, "damage", 1.5, 5000)
+	self.ragedraw = RageDraw:new(self.entitydata)
+
 end
 function RageEffect:remove(...)
-	self.rageeffect:remove(...)
+	self.ragedraw:remove(...)
 	StatEffect.remove(self, ...)
 end
 
@@ -564,4 +576,4 @@ function TauntEffect:remove(...)
 	MapTauntEffect.remove(self, ...)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect, HasteEffect=HasteEffect}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect, HasteEffect=HasteEffect, RageEffect = RageEffect}

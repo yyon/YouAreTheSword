@@ -3,6 +3,7 @@ local class = require "middleclass"
 local EntityData = class("EntityData")
 
 -- import all of the abilities
+local RageAbility = require "abilities/rage"
 local HasteAbility = require "abilities/haste"
 local NetAbility = require "abilities/net"
 local SwordAbility = require "abilities/sword"
@@ -676,9 +677,7 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.slow ~= nil then
 		local sloweffect = Effects.SlowEffect(target)
 	end
-	if aspects.rage ~= nil then
-		local rageeffect = Effects.RageEffect(target, aspects.rage.weakness, aspects.rage.time)
-	end
+
 	if aspects.flame ~= nil then
 		aspects.knockback = 0
 	end
@@ -1581,7 +1580,7 @@ function berserkerclass:initialize(entity)
 	local normalabilities = {SwordAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "damage")}
 	local blockabilities = {ShieldAbility:new(self)}
-	local specialabilities = {StompAbility:new(self)}
+	local specialabilities = {StompAbility:new(self), RageAbility:new(self)}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
