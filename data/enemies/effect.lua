@@ -417,40 +417,89 @@ function StatEffect:getkey()
 	return self
 end
 
-local SlownessEffect = StatEffect:subclass("SlownessEffect")
+local SlowDraw = PhysicalEffect:subclass("SlowDraw")
+-- draws poison over them
+-- use PoisonWeaknessEffect instead
+
+function SlowDraw:getspritename()
+	return "slow"
+end
+
+function SlowDraw:getkey()
+	return "SlowDraw"
+end
+
+local HasteDraw = PhysicalEffect:subclass("HasteDraw")
+-- draws poison over them
+-- use PoisonWeaknessEffect instead
+
+function HasteDraw:getspritename()
+	return "haste"
+end
+
+function HasteDraw:getkey()
+	return "HasteDraw"
+end
+
+local RageDraw = PhysicalEffect:subclass("RageDraw")
+-- draws poison over them
+-- use PoisonWeaknessEffect instead
+
+function RageDraw:getspritename()
+	return "rage"
+end
+
+function RageDraw:getkey()
+	return "RageDraw"
+end
+
+local SlowEffect = StatEffect:subclass("SlowEffect")
 -- slows enemies in a targeted aoe
 --Usage: 
 
-function SlownessEffect:start(slow, time)
-	StatEffect.start(self, "slow", slow, time)
-	self.slownesseffect = SlownessEffect:new(self.entitydata)
+function SlowEffect:start()
+	StatEffect.start(self, "movementspeed", 32, 5000)
+	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", 2, nil)
+	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", 2, nil)
+	self.slownessdraw = SlowDraw:new(self.entitydata)
+	self.entitydata:updatemovementspeed()
 end
-function SlownessEffect:remove(...)
-	self.slownesseffect:remove(...)
+function SlowEffect:remove(...)
+	self.warmupeffect:remove(...)
 	StatEffect.remove(self, ...)
+	self.cooldowneffect:remove(...)
+	self.slownessdraw:remove(...)
+	self.entitydata:updatemovementspeed()
 end
 
 local HasteEffect = StatEffect:subclass("HasteEffect")
 --puts a haste buff on allies in targeted aoe
 
-function HasteEffect:start(haste,time)
-	StatEffect.start(self, "slow", haste, time)
-	self.hasteeffect = HasteEffect.new(self.entitydata)
+function HasteEffect:start()
+	StatEffect.start(self, "movementspeed", 256, 5000)
+	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", .5, nil)
+	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", .5, nil)
+	self.hastedraw = HasteDraw:new(self.entitydata)
+	self.entitydata:updatemovementspeed()
 end
 function HasteEffect:remove(...)
-	self.hasteeffect:remove(...)
+	self.warmupeffect:remove(...)
 	StatEffect.remove(self, ...)
+	self.cooldowneffect:remove(...)
+	self.hastedraw:remove(...)
+	self.entitydata:updatemovementspeed()
 end
 
 local RageEffect = StatEffect:subclass("RageEffect")
 --increases damage on self
 
-function RageEffect:start(rage, time)
-	StatEffect.start(self, "damage", weakness, time)
-	self.rageeffect = RageEffect:new(self.entitydata)
+function RageEffect:start()
+	StatEffect.start(self, "damage", 1.5, 5000)
+	self.ragedraw = RageDraw:new(self.entitydata)
+
 end
 function RageEffect:remove(...)
-	self.rageeffect:remove(...)
+	self.ragedraw:remove(...)
 	StatEffect.remove(self, ...)
 end
 
@@ -527,4 +576,4 @@ function TauntEffect:remove(...)
 	MapTauntEffect.remove(self, ...)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect, HasteEffect=HasteEffect}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect, HasteEffect=HasteEffect, RageEffect = RageEffect}

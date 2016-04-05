@@ -6,10 +6,10 @@ local Effects = require "enemies/effect"
 local NetAbility = Ability:subclass("NetAbility")
 
 function NetAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Net", 800, "net", 500, 4000, true)
+	Ability.initialize(self, entitydata, "Net", 800, "net", 500, 2000, true)
 end
 
-function BombAbility:doability()
+function NetAbility:doability()
 	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 
@@ -21,10 +21,10 @@ function BombAbility:doability()
 
 	local d = 0
 
---	self.shieldentity = map:create_custom_entity({model="net", x=x, y=y, layer=layer, direction=d, width=w, height=h})
---	self.shieldentity.ability = self
+	self.shieldentity = map:create_custom_entity({model="net", x=x, y=y, layer=layer, direction=d, width=w, height=h})
+	self.shieldentity.ability = self
 
---	self.shieldentity:start(tox, toy)
+	self.shieldentity:start(self, tox, toy)
 
 	self:finish()
 end

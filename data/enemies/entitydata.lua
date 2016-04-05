@@ -3,6 +3,9 @@ local class = require "middleclass"
 local EntityData = class("EntityData")
 
 -- import all of the abilities
+local RageAbility = require "abilities/rage"
+local HasteAbility = require "abilities/haste"
+local NetAbility = require "abilities/net"
 local SwordAbility = require "abilities/sword"
 local TransformAbility = require "abilities/swordtransform"
 local ShieldAbility = require "abilities/shield"
@@ -105,7 +108,11 @@ function EntityData:initialize(entity, theclass, main_sprite, life, team, sworda
 	if stats.cooldown == nil then
 		stats.cooldown = 1
 	end
-	self.originalstats = stats
+	
+	self.originalstats = {}
+	for k, v in pairs(stats) do
+		self.originalstats[k] = v
+	end
 	self.stats = stats
 end
 
@@ -146,8 +153,13 @@ function EntityData:updatechangepos(x, y, layer)
 end
 
 function EntityData:updatemovementspeed()
+	if self.entity == nil then
+		return 
+	end
 	if self.entity.ishero then
 		self.entity:set_walking_speed(self.stats.movementspeed)
+	else
+		self.entity:resetstate()
 	end
 end
 
@@ -272,7 +284,7 @@ function EntityData:unpossess(name)
 	return self.entity
 end
 
-function EntityData:cantarget(entitydata, canbeonsameteam, isattack)
+function EntityData:cantarget(entitydata, canbeonsameteam, isattack, onlyonsameteam)
 --	print(debug.traceback())
 
 	-- is this entitydata a person which can be attacked?
@@ -291,10 +303,15 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack)
 		return false
 	end
 
-	if entitydata.team == self.team and not canbeonsameteam then
+	if entitydata.team == self.team and not (canbeonsameteam or onlyonsameteam) then
 --		self:log("can't target", entitydata, "because same team")
 		return false
 	end
+	
+	if onlyonsameteam and entitydata.team ~= self.team then
+		return false
+	end
+
 
 	if entitydata.caught then
 		return false
@@ -308,7 +325,7 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack)
 	return true
 end
 
-function EntityData:cantargetentity(entity)
+function EntityData:cantargetentity(entity, canbeonsameteam, isattack, onlyonsameteam)
 	-- is this entity a person which can be attacked?
 
 	if entity == nil then
@@ -316,7 +333,7 @@ function EntityData:cantargetentity(entity)
 		return false
 	end
 
-	return self:cantarget(entity.entitydata)
+	return self:cantarget(entity.entitydata, canbeonsameteam, isattack, onlyonsameteam)
 end
 
 function EntityData:isvisible()
@@ -602,7 +619,7 @@ function EntityData:dodamage(target, damage, aspects)
 		aspects.sameteam = true
 	end
 
-	if not self:cantarget(target, aspects.sameteam) then
+	if not self:cantarget(target, aspects.sameteam, nil, aspects.onlyonsameteam) then
 		return
 	end
 
@@ -656,9 +673,13 @@ function EntityData:dodamage(target, damage, aspects)
 	if aspects.poison ~= nil then
 		local poisoneffect = Effects.PoisonWeaknessEffect(target, aspects.poison.weakness, aspects.poison.time)
 	end
-	if aspects.rage ~= nil then
-		local rageeffect = Effects.RageEffect(target, aspects.rage.weakness, aspects.rage.time)
+	if aspects.haste ~= nil then
+		local hasteeffect = Effects.HasteEffect(target)
 	end
+	if aspects.slow ~= nil then
+		local sloweffect = Effects.SlowEffect(target)
+	end
+
 	if aspects.flame ~= nil then
 		aspects.knockback = 0
 	end
@@ -1541,9 +1562,9 @@ function bardclass:initialize(entity)
 	local life = 10
 	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {SwordAbility:new(self)}
-	local transformabilities = {TransformAbility:new(self, "dagger")}
+	local transformabilities = {TransformAbility:new(self, "slow")}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {TauntAbility:new(self)}
+	local specialabilities = {TauntAbility:new(self), HasteAbility:new(self)}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1561,7 +1582,7 @@ function berserkerclass:initialize(entity)
 	local normalabilities = {SwordAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "damage")}
 	local blockabilities = {ShieldAbility:new(self)}
-	local specialabilities = {StompAbility:new(self)}
+	local specialabilities = {StompAbility:new(self), RageAbility:new(self)}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1579,7 +1600,7 @@ function archerclass:initialize(entity)
 	local normalabilities = {FiringBowAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "dagger")}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self)}
+	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self), NetAbility:new(self)}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

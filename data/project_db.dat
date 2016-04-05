@@ -47,6 +47,7 @@ sprite{ id = "abilities/guntest", description = "guntest" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
 sprite{ id = "abilities/meteor", description = "meteor" }
+sprite{ id = "abilities/net", description = "This is a net sprite" }
 sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
 sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
@@ -160,7 +161,9 @@ sprite{ id = "monsters/spiders/spider10", description = "spider10" }
 sprite{ id = "monsters/spiders/spider11", description = "spider11" }
 sprite{ id = "monsters/wolf", description = "wolf" }
 sprite{ id = "physicaleffects/fire", description = "fire" }
+sprite{ id = "physicaleffects/haste", description = "haste it up" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
+sprite{ id = "physicaleffects/slow", description = "slow down!" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 sprite{ id = "physicaleffects/taunt", description = "taunt" }
 sprite{ id = "sign", description = "sign" }
@@ -318,10 +321,12 @@ entity{ id = "fireball", description = "fireball" }
 entity{ id = "grapplinghook", description = "grappling hook" }
 entity{ id = "grapplinghookrope", description = "grappling hook rope" }
 entity{ id = "guntest", description = "guntest" }
+entity{ id = "haste", description = "hastefastah" }
 entity{ id = "heart", description = "heart" }
 entity{ id = "heartexplosion", description = "heartexplosion" }
 entity{ id = "lightning", description = "lightning" }
 entity{ id = "lightningball", description = "lightningball" }
+entity{ id = "net", description = "This is a net." }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "projectile", description = "projectile" }
 entity{ id = "rougetraps", description = "rougetraps" }
