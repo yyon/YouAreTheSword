@@ -44,11 +44,14 @@ sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/guntest", description = "guntest" }
+sprite{ id = "abilities/haste", description = "haste" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
+sprite{ id = "abilities/lightningball", description = "lightning ball" }
 sprite{ id = "abilities/meteor", description = "meteor" }
 sprite{ id = "abilities/net", description = "This is a net sprite" }
 sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
+sprite{ id = "abilities/spiderweb", description = "spider web" }
 sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
 sprite{ id = "abilities/throwtraps", description = "throwtraps" }
@@ -162,8 +165,11 @@ sprite{ id = "monsters/spiders/spider11", description = "spider11" }
 sprite{ id = "monsters/wolf", description = "wolf" }
 sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/haste", description = "haste it up" }
+sprite{ id = "physicaleffects/net", description = "net" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
+sprite{ id = "physicaleffects/rage", description = "rage" }
 sprite{ id = "physicaleffects/slow", description = "slow down!" }
+sprite{ id = "physicaleffects/spiderweb", description = "spider web" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 sprite{ id = "physicaleffects/taunt", description = "taunt" }
 sprite{ id = "sign", description = "sign" }
@@ -315,6 +321,7 @@ entity{ id = "boulder", description = "boulder" }
 entity{ id = "catattack", description = "catattack" }
 entity{ id = "catproj", description = "catproj" }
 entity{ id = "charge", description = "charge" }
+entity{ id = "death", description = "death" }
 entity{ id = "directionaltrap", description = "directionaltrap" }
 entity{ id = "door", description = "door" }
 entity{ id = "fireball", description = "fireball" }

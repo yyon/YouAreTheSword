@@ -421,8 +421,14 @@ local SlowDraw = PhysicalEffect:subclass("SlowDraw")
 -- draws poison over them
 -- use PoisonWeaknessEffect instead
 
+function SlowDraw:start(sprite)
+	self.sprite = sprite
+	if self.sprite == nil then self.sprite = "slow" end
+	PhysicalEffect.start(self)
+end
+
 function SlowDraw:getspritename()
-	return "slow"
+	return self.sprite
 end
 
 function SlowDraw:getkey()
@@ -457,11 +463,11 @@ local SlowEffect = StatEffect:subclass("SlowEffect")
 -- slows enemies in a targeted aoe
 --Usage: 
 
-function SlowEffect:start()
+function SlowEffect:start(sprite)
 	StatEffect.start(self, "movementspeed", 32, 5000)
 	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", 2, nil)
 	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", 2, nil)
-	self.slownessdraw = SlowDraw:new(self.entitydata)
+	self.slownessdraw = SlowDraw:new(self.entitydata, sprite)
 	self.entitydata:updatemovementspeed()
 end
 function SlowEffect:remove(...)

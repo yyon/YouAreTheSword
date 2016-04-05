@@ -9,11 +9,15 @@ sol.main.load_file("entities/projectile")(entity)
 function entity:getdamage()
 	local aspects = {}
 	local damage
-	aspects.slow = true
+	aspects.slow = {sprite=self.spritename}
 	damage = 0
 	return damage, aspects
 end
 
 function entity:getspritename()
-	return "abilities/net"
+	return "abilities/" .. self.spritename
+end
+
+function entity:onhit()
+	self:remove()
 end

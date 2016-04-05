@@ -5,7 +5,8 @@ local Effects = require "enemies/effect"
 
 local NetAbility = Ability:subclass("NetAbility")
 
-function NetAbility:initialize(entitydata)
+function NetAbility:initialize(entitydata, spritename)
+	self.spritename = spritename
 	Ability.initialize(self, entitydata, "Net", 800, "net", 500, 2000, true)
 end
 
@@ -21,32 +22,16 @@ function NetAbility:doability()
 
 	local d = 0
 
-	self.shieldentity = map:create_custom_entity({model="net", x=x, y=y, layer=layer, direction=d, width=w, height=h})
-	self.shieldentity.ability = self
+	self.netentity = map:create_custom_entity({model="net", x=x, y=y, layer=layer, direction=d, width=w, height=h})
+	self.netentity.ability = self
+	self.netentity.spritename = self.spritename
 
-	self.shieldentity:start(self, tox, toy)
+	self.netentity:start(self, tox, toy)
 
 	self:finish()
 end
 
 function NetAbility:onfinish()
-end
-
-function NetAbility:attack(entity, trapentity)
-	if not self.entitydata:cantargetentity(entity) then
-		return
-	end
-
-	self.shieldentity:remove()
-
-	local entitydata = entity.entitydata
-
-	local damage = 0
-	local aspects = {}
-	aspects.stun = 10000
-	aspects.knockback = 0
-
-	self:dodamage(entitydata, damage, aspects)
 end
 
 return NetAbility

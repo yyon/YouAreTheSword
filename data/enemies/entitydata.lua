@@ -680,9 +680,8 @@ function EntityData:dodamage(target, damage, aspects)
 		local hasteeffect = Effects.HasteEffect(target)
 	end
 	if aspects.slow ~= nil then
-		local sloweffect = Effects.SlowEffect(target)
+		local sloweffect = Effects.SlowEffect(target, aspects.slow.sprite)
 	end
-
 	if aspects.flame ~= nil then
 		aspects.knockback = 0
 	end
@@ -1603,7 +1602,7 @@ function archerclass:initialize(entity)
 	local normalabilities = {FiringBowAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "dagger")}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self), NetAbility:new(self)}
+	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self), NetAbility:new(self, "net")}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1680,7 +1679,7 @@ function spiderclass:initialize(entity)
 	local normalabilities = {NormalAbility:new(self, "sword", aspects)}
 	local transformabilities = {TransformAbility:new(self, "poison")}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {BackstabAbility:new(self)}
+	local specialabilities = {NetAbility:new(self, "spiderweb")}
 	local basestats = {}
 	self.cantdraweyes = true
 

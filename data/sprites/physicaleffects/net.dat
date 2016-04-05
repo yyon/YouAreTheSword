@@ -1,6 +1,6 @@
 animation{
   name = "stopped",
-  src_image = "abilities/net.png",
+  src_image = "physicaleffects/net.png",
   directions = {
     { x = 0, y = 0, frame_width = 88, frame_height = 100, origin_x = 44, origin_y = 70 },
   },

@@ -90,10 +90,7 @@ function SwordAbility:attack(entity)
 	elseif transform == "electric" then
 		aspects.electric = 2000
 	elseif transform == "slow" then
-		aspects.slow = true
-	
-
-
+		aspects.slow = {sprite = "slow"}
 	elseif transform == "fire" then
 		aspects.fire = {damage=0.1, time=5000, timestep=500}
 	elseif transform == "poison" then

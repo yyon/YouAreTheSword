@@ -30,6 +30,10 @@ http://opengameart.org/content/lpc-signposts-graves-line-cloths-and-scare-crow
 	sign
 http://opengameart.org/content/lpc-dungeon-elements
 	metal bars
+https://upload.wikimedia.org/wikipedia/commons/8/89/Lake_Erie_Sunset_with_fish_net.JPG
+	net
+http://opengameart.org/content/lpc-forest-tiles
+	spider web
 		
 
 http://opengameart.org/content/jastivs-artwork
