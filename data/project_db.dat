@@ -321,6 +321,7 @@ entity{ id = "guntest", description = "guntest" }
 entity{ id = "heart", description = "heart" }
 entity{ id = "heartexplosion", description = "heartexplosion" }
 entity{ id = "lightning", description = "lightning" }
+entity{ id = "lightningball", description = "lightningball" }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "projectile", description = "projectile" }
 entity{ id = "rougetraps", description = "rougetraps" }

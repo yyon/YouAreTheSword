@@ -11,11 +11,6 @@ end
 function GunAbility:doability()
 	self.entitydata:setanimation("gun")
 
-	self.ticker = Effects.Ticker(self.entitydata, 100, function() self:shoot() end)
-	self.timer = Effects.SimpleTimer(self.entitydata, 850, function() self:finish() end)
-end
-
-function GunAbility:shoot()
 	local tox, toy = self:gettargetpos()
 	self.tox, self.toy = tox, toy
 
@@ -27,12 +22,16 @@ function GunAbility:shoot()
 
 	local testerentity = map:create_custom_entity({model="guntest", x=x, y=y-40, layer=layer, direction=0, width=8, height=8})
 	testerentity.ability = self
-	local hitentitydata = testerentity:test(tox, toy)
+	self.hitentitydata = testerentity:test(tox, toy)
 
-	if hitentitydata ~= nil then
-		self:attack(hitentitydata)
+	self.ticker = Effects.Ticker(self.entitydata, 100, function() self:shoot() end)
+	self.timer = Effects.SimpleTimer(self.entitydata, 850, function() self:finish() end)
+end
+
+function GunAbility:shoot()
+	if self.hitentitydata ~= nil then
+		self:attack(self.hitentitydata)
 	end
-
 	sol.audio.play_sound("gun")
 end
 

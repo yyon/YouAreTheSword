@@ -20,10 +20,12 @@ end
 
 function NormalAbility:doability(tox, toy)
 	for entitydata in self.entitydata:getotherentities() do
-		local d = self.entitydata.entity:get_distance(entitydata.entity)
-		if d < 100 then
-			if self.entitydata.entity:get_direction4_to(entitydata.entity) == self.entitydata:getdirection() or d<10 then
-				self:dodamage(entitydata, 1, self.aspects)
+		if entitydata.entity ~= nil then
+			local d = self.entitydata.entity:get_distance(entitydata.entity)
+			if d < 100 then
+				if self.entitydata.entity:get_direction4_to(entitydata.entity) == self.entitydata:getdirection() or d<10 then
+					self:dodamage(entitydata, 1, self.aspects)
+				end
 			end
 		end
 	end

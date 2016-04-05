@@ -41,6 +41,7 @@ local SpaceShipProjectile6Ability = require "abilities/spaceshipproj6"
 local GunAbility = require "abilities/gun"
 local CatKickAbility = require "abilities/catkick"
 local CatShootAbility = require "abilities/catshoot"
+local LightningBallAbility = require "abilities/lightningball"
 
 local Effects = require "enemies/effect"
 
@@ -582,6 +583,7 @@ function EntityData:dodamage(target, damage, aspects)
 	-- call this to damage the target
 
 	if self.entity == nil then return end
+	if target.entity == nil then return end
 
 	if target.receivedamage ~= nil then
 		local returnvalue = target:receivedamage(self, damage, aspects)
@@ -1711,7 +1713,7 @@ function ghostclass:initialize(entity)
 	local normalabilities = {FireballAbility:new(self)}
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {TeleportAbility:new(self)}
-	local specialabilities = {StealthAbility:new(self), BlackholeAbility:new(self)}
+	local specialabilities = {StealthAbility:new(self)}
 	local basestats = {movementspeed=100}
 	self.cantdraweyes = true
 
@@ -1747,7 +1749,7 @@ function batclass:initialize(entity)
 	local main_sprite = "monsters/bat"
 	local life = 5
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
-	local normalabilities = {NormalAbility:new(self, "casting"), HealAbility:new(self)}
+	local normalabilities = {NormalAbility:new(self, "casting", {lifesteal=true}), HealAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "lifesteal")}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {HealExplosionAbility:new(self)}
@@ -1826,7 +1828,7 @@ function eyeclass:initialize(entity)
 	local normalabilities = {FireballAbility:new(self, "casting")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {TeleportAbility:new(self)}
-	local specialabilities = {BlackholeAbility:new(self)}
+	local specialabilities = {LightningBallAbility:new(self)}
 	local basestats = {warmup=0.5, cooldown=0.5}
 	self.cantdraweyes = true
 
