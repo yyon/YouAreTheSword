@@ -6,7 +6,7 @@ local HasteAbility = Ability:subclass("HasteAbility")
 local Effects = require "enemies/effect"
 
 function HasteAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Haste", 1000, "speed", 500, 10000, true, "casting")
+	Ability.initialize(self, entitydata, "Haste", 1000, "speed", 3000, 25000, true, "casting")
 end
 
 function HasteAbility:doability()
@@ -35,6 +35,7 @@ function HasteAbility:attack(entity)
 	local damage = 0
 	local aspects = {}
 	aspects.haste = true
+	aspects.knockback = 0
 	aspects.onlyonsameteam = true
 	self:dodamage(entitydata, damage, aspects)
 end

@@ -301,7 +301,7 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack, onlyonsamet
 		return false
 	end
 
-	if entitydata == self and not canbeonsameteam then
+	if entitydata == self and not (canbeonsameteam or onlyonsameteam) then
 --		self:log("can't target", entitydata, "because self-targeting")
 		return false
 	end

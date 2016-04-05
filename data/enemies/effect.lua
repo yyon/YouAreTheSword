@@ -464,7 +464,7 @@ local SlowEffect = StatEffect:subclass("SlowEffect")
 --Usage: 
 
 function SlowEffect:start(sprite)
-	StatEffect.start(self, "movementspeed", 32, 5000)
+	StatEffect.start(self, "movementspeed", 32, 15000)
 	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", 2, nil)
 	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", 2, nil)
 	self.slownessdraw = SlowDraw:new(self.entitydata, sprite)
@@ -482,7 +482,7 @@ local HasteEffect = StatEffect:subclass("HasteEffect")
 --puts a haste buff on allies in targeted aoe
 
 function HasteEffect:start()
-	StatEffect.start(self, "movementspeed", 256, 5000)
+	StatEffect.start(self, "movementspeed", 500, 15000)
 	self.warmupeffect = StatEffect:new(self.entitydata, "warmup", .5, nil)
 	self.cooldowneffect = StatEffect:new(self.entitydata, "cooldown", .5, nil)
 	self.hastedraw = HasteDraw:new(self.entitydata)
@@ -500,7 +500,7 @@ local RageEffect = StatEffect:subclass("RageEffect")
 --increases damage on self
 
 function RageEffect:start()
-	StatEffect.start(self, "damage", 1.5, 5000)
+	StatEffect.start(self, "damage", 1.5, 15000)
 	self.ragedraw = RageDraw:new(self.entitydata)
 
 end

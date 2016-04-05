@@ -12,7 +12,10 @@ function RageAbility:initialize(entitydata)
 end
 
 function RageAbility:doability()
-	local rageeffect = Effects.RageEffect(self.entitydata)
+	local tox, toy = self:gettargetpos()
+	self.target = self.entitydata:getclosestentity(tox, toy)
+	
+	local rageeffect = Effects.RageEffect(self.target)
 
 	self:finish()
 end
