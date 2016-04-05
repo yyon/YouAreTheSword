@@ -1,1 +1,7 @@
+text{ key = "save_dialog.continue_question_0", value = "Would you like to" }
+text{ key = "save_dialog.continue_question_1", value = "keep playing?" }
+text{ key = "save_dialog.no", value = "No" }
+text{ key = "save_dialog.save_question_0", value = "Would you like to" }
+text{ key = "save_dialog.save_question_1", value = "save your game?" }
+text{ key = "save_dialog.yes", value = "Yes" }
 text{ key = "title_screen.press_space", value = "Press the space bar" }
