@@ -45,6 +45,8 @@ local GunAbility = require "abilities/gun"
 local CatKickAbility = require "abilities/catkick"
 local CatShootAbility = require "abilities/catshoot"
 local LightningBallAbility = require "abilities/lightningball"
+local DefenseAbility = require "abilities/defense"
+local SeedShootAbility = require "abilities/seedshoot"
 
 local Effects = require "enemies/effect"
 
@@ -1124,7 +1126,7 @@ function EntityData:getstraightestentity(x, y)
 	return minentity
 end
 
-function EntityData:getclosestentity(x, y, isenemy, funct)
+function EntityData:getclosestentity(x, y, isenemy, funct, isself)
 	-- find person closest to a point
 	-- does not include self
 	-- can be used to find person closest to mouse pointer (used with gettargetpos)
@@ -1136,6 +1138,20 @@ function EntityData:getclosestentity(x, y, isenemy, funct)
 --	local hero = self.entity
 
 	for entitydata in self:getotherentities() do
+		if not isenemy or self:cantarget(entitydata) then
+			if (funct == nil) or (funct(entitydata) == true) then
+				local entity = entitydata.entity
+				local d = entity:get_distance(x, y)
+				if d < mindist then
+					mindist = d
+					minentity = entity.entitydata
+				end
+			end
+		end
+	end
+	
+	if isself then
+		local entitydata = self
 		if not isenemy or self:cantarget(entitydata) then
 			if (funct == nil) or (funct(entitydata) == true) then
 				local entity = entitydata.entity
@@ -1566,7 +1582,7 @@ function bardclass:initialize(entity)
 	local normalabilities = {SwordAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "slow")}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {TauntAbility:new(self), HasteAbility:new(self)}
+	local specialabilities = {TauntAbility:new(self), HasteAbility:new(self), DefenseAbility:new(self)}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1752,11 +1768,11 @@ function flowerclass:initialize(entity)
 	local main_sprite = "monsters/flower"
 	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
-	local normalabilities = {FireballAbility:new(self)}
+	local normalabilities = {SeedShootAbility:new(self)}
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {GrapplingHookAbility:new(self, "vine")}
-	local basestats = {movementspeed=0, cooldown=2}
+	local basestats = {movementspeed=0}
 	self.cantdraweyes = true
 	self.cantcancel = true
 
@@ -1869,7 +1885,7 @@ function maskmanclass:initialize(entity)
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self, "casting")}
 	local transformabilities = {NothingAbility:new(self)}
-	local blockabilities = {TeleportAbility:new(self)}
+	local blockabilities = {TeleportAbility:new(self), ShieldAbility:new(self)}
 	local specialabilities = {StompAbility:new(self)}
 	local basestats = {}
 	self.cantdraweyes = true
@@ -1889,7 +1905,7 @@ function wolfclass:initialize(entity)
 	local normalabilities = {NormalAbility:new(self, "sword")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
-	local specialabilities = {NothingAbility:new(self)}
+	local specialabilities = {HasteAbility:new(self), DefenseAbility:new(self)}
 	local basestats = {}
 	self.cantdraweyes = true
 

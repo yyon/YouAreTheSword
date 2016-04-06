@@ -1,0 +1,7 @@
+animation{
+  name = "seed",
+  src_image = "abilities/seed.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 10, frame_height = 10, origin_x = 5, origin_y = 5 },
+  },
+}

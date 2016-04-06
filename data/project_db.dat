@@ -47,11 +47,12 @@ sprite{ id = "abilities/guntest", description = "guntest" }
 sprite{ id = "abilities/haste", description = "haste" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
-sprite{ id = "abilities/lightningball", description = "lightning ball" }
+sprite{ id = "abilities/lightningball", description = "lightningball" }
 sprite{ id = "abilities/meteor", description = "meteor" }
 sprite{ id = "abilities/net", description = "This is a net sprite" }
+sprite{ id = "abilities/seed", description = "seed" }
 sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
-sprite{ id = "abilities/spiderweb", description = "spider web" }
+sprite{ id = "abilities/spiderweb", description = "spiderweb" }
 sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
 sprite{ id = "abilities/throwtraps", description = "throwtraps" }
@@ -168,9 +169,10 @@ sprite{ id = "physicaleffects/fire", description = "fire" }
 sprite{ id = "physicaleffects/haste", description = "haste it up" }
 sprite{ id = "physicaleffects/net", description = "net" }
 sprite{ id = "physicaleffects/poison", description = "poison" }
+sprite{ id = "physicaleffects/protect", description = "protect" }
 sprite{ id = "physicaleffects/rage", description = "rage" }
 sprite{ id = "physicaleffects/slow", description = "slow down!" }
-sprite{ id = "physicaleffects/spiderweb", description = "spider web" }
+sprite{ id = "physicaleffects/spiderweb", description = "spiderweb" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 sprite{ id = "physicaleffects/taunt", description = "taunt" }
 sprite{ id = "sign", description = "sign" }
@@ -338,6 +340,7 @@ entity{ id = "net", description = "This is a net." }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "projectile", description = "projectile" }
 entity{ id = "rougetraps", description = "rougetraps" }
+entity{ id = "seed", description = "seed" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
 entity{ id = "smoke", description = "smoke" }

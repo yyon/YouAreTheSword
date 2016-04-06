@@ -170,7 +170,11 @@ local PhysicalEffect = Effect:subclass("PhysicalEffect")
 -- Displays some animated sprite over the entity
 -- Use classes that extend this instead of this class directly
 
-function PhysicalEffect:start(time)
+function PhysicalEffect:start(time, spritename)
+	if self.spritename == nil then
+		self.spritename = spritename
+	end
+	
 	local w,h = self.entitydata.entity:get_size()
 	local x, y, layer = self.entitydata.entity:get_position()
 	local map = self.map
@@ -189,7 +193,12 @@ function PhysicalEffect:endeffect()
 end
 
 function PhysicalEffect:getkey()
-	return "physicaleffect" .. self:getspritename()
+	return self
+--	return "physicaleffect" .. self:getspritename()
+end
+
+function PhysicalEffect:getspritename()
+	return self.spritename
 end
 
 local FireEffect = PhysicalEffect:subclass("FireEffect")
@@ -522,6 +531,17 @@ function PoisonWeaknessEffect:remove(...)
 	StatEffect.remove(self, ...)
 end
 
+local DefenseEffect = StatEffect:subclass("DefenseEffect")
+
+function DefenseEffect:start()
+	StatEffect.start(self, "defense", 0.7, 15000)
+	self.pe = PhysicalEffect:new(self.entitydata, nil, "protect")
+end
+function DefenseEffect:remove(...)
+	self.pe:remove(...)
+	StatEffect.remove(self, ...)
+end
+
 local StealthEffect = Effect:subclass("StealthEffect")
 
 function StealthEffect:start(time)
@@ -576,10 +596,12 @@ local TauntEffect = MapTauntEffect:subclass("TauntEffect")
 function TauntEffect:start(time)
 	MapTauntEffect.start(self, time)
 	self.physicaleffect = TauntPhysicalEffect:new(self.entitydata)
+	self.defenseeffect = StatEffect:new(self.entitydata, "defense", 0.2, nil)
 end
 function TauntEffect:remove(...)
 	self.physicaleffect:remove(...)
+	self.defenseeffect:remove(...)
 	MapTauntEffect.remove(self, ...)
 end
 
-return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect, HasteEffect=HasteEffect, RageEffect = RageEffect}
+return {Effect=Effect, PhysicalEffect=PhysicalEffect, FireEffect=FireEffect, ElectricalEffect=ElectricalEffect, FreezeEffect=FreezeEffect, StunEffect=StunEffect, ElectricalStunEffect=ElectricalStunEffect, KnockBackEffect=KnockBackEffect, SimpleTimer=SimpleTimer, Ticker=Ticker, StatEffect = StatEffect, PoisonEffect=PoisonEffect, PoisonWeaknessEffect=PoisonWeaknessEffect, StealthEffect=StealthEffect, TauntEffect=TauntEffect, PossessEffect=PossessEffect, SlowEffect=SlowEffect, HasteEffect=HasteEffect, RageEffect = RageEffect, DefenseEffect=DefenseEffect}

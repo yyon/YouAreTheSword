@@ -42,7 +42,12 @@ http://opengameart.org/content/bomb-2d
 	bomb
 http://opengameart.org/content/explosion-sheet
 	bomb explosion
-		
+http://opengameart.org/content/painterly-spell-icons-part-1
+	protection		
+http://opengameart.org/content/oil-painting-landscapes
+	mountain pic
+http://opengameart.org/content/fluffy-clouds
+	clouds
 
 http://opengameart.org/content/jastivs-artwork
 	angel (wings)
