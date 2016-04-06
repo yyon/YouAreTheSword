@@ -148,7 +148,7 @@ function Ability:getremainingcooldown()
 	end
 
 	local timeremaining = self.cooldowntimer:getremainingtime()
-	local fraction = 1 - timeremaining / self.cooldown
+	local fraction = 1 - timeremaining / (self.cooldown * self.entitydata.stats.cooldown)
 --	timeremaining = math.floor((self.cooldown - self.cooldowntimetracker) / 1000)
 --	print(fraction, timeremaining)
 	return fraction, timeremaining

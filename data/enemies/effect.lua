@@ -596,9 +596,11 @@ local TauntEffect = MapTauntEffect:subclass("TauntEffect")
 function TauntEffect:start(time)
 	MapTauntEffect.start(self, time)
 	self.physicaleffect = TauntPhysicalEffect:new(self.entitydata)
+	self.defenseeffect = StatEffect:new(self.entitydata, "defense", 0.2, nil)
 end
 function TauntEffect:remove(...)
 	self.physicaleffect:remove(...)
+	self.defenseeffect:remove(...)
 	MapTauntEffect.remove(self, ...)
 end
 

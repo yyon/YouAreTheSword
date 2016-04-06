@@ -46,6 +46,7 @@ local CatKickAbility = require "abilities/catkick"
 local CatShootAbility = require "abilities/catshoot"
 local LightningBallAbility = require "abilities/lightningball"
 local DefenseAbility = require "abilities/defense"
+local SeedShootAbility = require "abilities/seedshoot"
 
 local Effects = require "enemies/effect"
 
@@ -1767,11 +1768,11 @@ function flowerclass:initialize(entity)
 	local main_sprite = "monsters/flower"
 	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
-	local normalabilities = {FireballAbility:new(self)}
+	local normalabilities = {SeedShootAbility:new(self)}
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {GrapplingHookAbility:new(self, "vine")}
-	local basestats = {movementspeed=0, cooldown=2}
+	local basestats = {movementspeed=0}
 	self.cantdraweyes = true
 	self.cantcancel = true
 
@@ -1884,7 +1885,7 @@ function maskmanclass:initialize(entity)
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self, "casting")}
 	local transformabilities = {NothingAbility:new(self)}
-	local blockabilities = {TeleportAbility:new(self)}
+	local blockabilities = {TeleportAbility:new(self), ShieldAbility:new(self)}
 	local specialabilities = {StompAbility:new(self)}
 	local basestats = {}
 	self.cantdraweyes = true

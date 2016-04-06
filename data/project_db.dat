@@ -44,11 +44,15 @@ sprite{ id = "abilities/fireball_smoke", description = "fireball_smoke" }
 sprite{ id = "abilities/grapplinghook", description = "grappling hook" }
 sprite{ id = "abilities/grapplinghookrope3", description = "grapplinghookrope3" }
 sprite{ id = "abilities/guntest", description = "guntest" }
+sprite{ id = "abilities/haste", description = "haste" }
 sprite{ id = "abilities/heart", description = "heart" }
 sprite{ id = "abilities/lightning", description = "lightning" }
+sprite{ id = "abilities/lightningball", description = "lightningball" }
 sprite{ id = "abilities/meteor", description = "meteor" }
 sprite{ id = "abilities/net", description = "This is a net sprite" }
+sprite{ id = "abilities/seed", description = "seed" }
 sprite{ id = "abilities/smokebomb", description = "stealth smoke" }
+sprite{ id = "abilities/spiderweb", description = "spiderweb" }
 sprite{ id = "abilities/teleportanim", description = "teleportanim" }
 sprite{ id = "abilities/thrownsword", description = "thrownsword" }
 sprite{ id = "abilities/throwtraps", description = "throwtraps" }
@@ -319,6 +323,7 @@ entity{ id = "boulder", description = "boulder" }
 entity{ id = "catattack", description = "catattack" }
 entity{ id = "catproj", description = "catproj" }
 entity{ id = "charge", description = "charge" }
+entity{ id = "death", description = "death" }
 entity{ id = "directionaltrap", description = "directionaltrap" }
 entity{ id = "door", description = "door" }
 entity{ id = "fireball", description = "fireball" }
@@ -334,6 +339,7 @@ entity{ id = "net", description = "This is a net." }
 entity{ id = "physicaleffect", description = "flame/stun/etc" }
 entity{ id = "projectile", description = "projectile" }
 entity{ id = "rougetraps", description = "rougetraps" }
+entity{ id = "seed", description = "seed" }
 entity{ id = "shield", description = "shield" }
 entity{ id = "shieldbash", description = "shieldbash" }
 entity{ id = "smoke", description = "smoke" }

@@ -12,7 +12,7 @@ end
 
 function DefenseAbility:doability()
 	local tox, toy = self:gettargetpos()
-	self.target = self.entitydata:getclosestentity(tox, toy, nil, nil, true)
+	self.target = self.entitydata:getclosestentity(tox, toy, false, nil, true)
 
 	Effects.DefenseEffect:new(self.target)
 	sol.audio.play_sound("zap2")
