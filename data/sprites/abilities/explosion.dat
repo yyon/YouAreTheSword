@@ -1,8 +1,8 @@
 animation{
   name = "explosion",
   src_image = "abilities/explosion.png",
-  frame_delay = 100,
+  frame_delay = 10,
   directions = {
-    { x =0, y =0, frame_width =96, frame_height =96, origin_x =48, origin_y =48, num_frames = 9 },
+    { x = 0, y = 0, frame_width = 256, frame_height = 256, origin_x = 128, origin_y = 200, num_frames = 64, num_columns = 8 },
   },
 }

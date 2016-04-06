@@ -60,6 +60,7 @@ sprite{ id = "adventurers/archer", description = "archer" }
 sprite{ id = "adventurers/bard", description = "bard" }
 sprite{ id = "adventurers/berserker", description = "berserker" }
 sprite{ id = "adventurers/cleric", description = "cleric" }
+sprite{ id = "adventurers/death", description = "death" }
 sprite{ id = "adventurers/dummy", description = "combat dummy" }
 sprite{ id = "adventurers/eyes", description = "eyes" }
 sprite{ id = "adventurers/guy2", description = "guy2" }

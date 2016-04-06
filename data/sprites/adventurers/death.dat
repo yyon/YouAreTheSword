@@ -1,0 +1,8 @@
+animation{
+  name = "death",
+  src_image = "adventurers/death.png",
+  frame_delay = 20,
+  directions = {
+    { x = 0, y = 0, frame_width = 128, frame_height = 126, origin_x = 64, origin_y = 90, num_frames = 30, num_columns = 6 },
+  },
+}
