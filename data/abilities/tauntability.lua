@@ -14,7 +14,7 @@ end
 
 function TauntAbility:doability()
 	local tox, toy = self:gettargetpos()
-	self.target = self.entitydata:getclosestentity(tox, toy)
+	self.target = self.entitydata:getclosestentity(tox, toy, nil, nil, true)
 
 	Effects.TauntEffect:new(self.target, 20000)
 	sol.audio.play_sound("zap2")
