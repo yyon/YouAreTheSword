@@ -45,6 +45,7 @@ local GunAbility = require "abilities/gun"
 local CatKickAbility = require "abilities/catkick"
 local CatShootAbility = require "abilities/catshoot"
 local LightningBallAbility = require "abilities/lightningball"
+local DefenseAbility = require "abilities/defense"
 
 local Effects = require "enemies/effect"
 
@@ -1580,7 +1581,7 @@ function bardclass:initialize(entity)
 	local normalabilities = {SwordAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "slow")}
 	local blockabilities = {SidestepAbility:new(self)}
-	local specialabilities = {TauntAbility:new(self), HasteAbility:new(self)}
+	local specialabilities = {TauntAbility:new(self), HasteAbility:new(self), DefenseAbility:new(self)}
 	local basestats = {}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1903,7 +1904,7 @@ function wolfclass:initialize(entity)
 	local normalabilities = {NormalAbility:new(self, "sword")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
-	local specialabilities = {NothingAbility:new(self)}
+	local specialabilities = {HasteAbility:new(self), DefenseAbility:new(self)}
 	local basestats = {}
 	self.cantdraweyes = true
 

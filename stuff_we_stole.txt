@@ -34,7 +34,8 @@ https://upload.wikimedia.org/wikipedia/commons/8/89/Lake_Erie_Sunset_with_fish_n
 	net
 http://opengameart.org/content/lpc-forest-tiles
 	spider web
-		
+http://opengameart.org/content/painterly-spell-icons-part-1
+	protection		
 
 http://opengameart.org/content/jastivs-artwork
 	angel (wings)
