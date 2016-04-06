@@ -29,7 +29,7 @@ function title_screen:phase_the_team_presents()
 end
 
 function title_screen:phase_title()
-
+	if self.phase == "title" then return end
 	self.phase = "title"
 
 	self.background_img = sol.surface.create("menus/title_daylight_background2.png")
@@ -97,7 +97,6 @@ function title_screen:draw_phase_present()
 end
 
 function title_screen:draw_phase_title()
-
 	self.surface:fill_color({0, 0, 0})
 	self.background_img:draw(self.surface)
 
@@ -145,7 +144,8 @@ function title_screen:try_finish_title()
 		handled = true
 	elseif self.phase == "the_team_presents" then
 		self.presentstimer:stop()
-		sol.timer.start(self, 100, function()
+		self.surface:fade_out(10)
+		sol.timer.start(self, 50, function()
 			self:phase_title()
 		end)
 	end
