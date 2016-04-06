@@ -1124,7 +1124,7 @@ function EntityData:getstraightestentity(x, y)
 	return minentity
 end
 
-function EntityData:getclosestentity(x, y, isenemy, funct)
+function EntityData:getclosestentity(x, y, isenemy, funct, isself)
 	-- find person closest to a point
 	-- does not include self
 	-- can be used to find person closest to mouse pointer (used with gettargetpos)
@@ -1136,6 +1136,20 @@ function EntityData:getclosestentity(x, y, isenemy, funct)
 --	local hero = self.entity
 
 	for entitydata in self:getotherentities() do
+		if not isenemy or self:cantarget(entitydata) then
+			if (funct == nil) or (funct(entitydata) == true) then
+				local entity = entitydata.entity
+				local d = entity:get_distance(x, y)
+				if d < mindist then
+					mindist = d
+					minentity = entity.entitydata
+				end
+			end
+		end
+	end
+	
+	if isself then
+		local entitydata = self
 		if not isenemy or self:cantarget(entitydata) then
 			if (funct == nil) or (funct(entitydata) == true) then
 				local entity = entitydata.entity
