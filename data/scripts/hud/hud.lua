@@ -6,7 +6,6 @@ function hud_manager:create(game)
 	local hud = {
 		enabled = false,
 		elements = {},
-		showing_dialog = false,
 		top_left_opacity = 255,
 		custom_command_effects = {},
 	}
@@ -14,7 +13,6 @@ function hud_manager:create(game)
 	local health_builder = require("scripts/hud/health")
 	local soul_builder = require("scripts/hud/possess_o_meter")
 	local sword_health_builder = require("scripts/hud/sword_health")
-	local dialog_builder = require("scripts/hud/dialog")
 
 --	menu = health_builder:new(game)
 --  	menu:set_dst_position(0, 10)
@@ -51,11 +49,6 @@ function hud_manager:create(game)
 	menu:set_dst_position(715,645)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
-
-	local dialog = dialog_builder:new(game)
-	hud.elements[#hud.elements + 1] = dialog
-	self.dialog = dialog
-	
 	
 	hud.groups = {}
 	for i, element in pairs(hud.elements) do

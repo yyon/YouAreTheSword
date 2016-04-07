@@ -17,6 +17,7 @@ game = nil
 
 local entitydatas = require "enemies/entitydata"
 local hud_manager = require "scripts/hud/hud"
+local dialogmenu = require "menus/dialog"
 local pause_manager = require("menus/pause")
 local pause_menu
 
@@ -215,17 +216,11 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		if key == "space" then
-			if game.dialog.isshowingdialog then
-				game.dialog:showscreen()
+			if game.dialog ~= nil then
+				if game.dialog.isshowingdialog then
+					game.dialog:showscreen()
+				end
 			end
---			if game.doingdialog then
---				game:simulate_command_pressed("action")
---				if not game:is_suspended() then
---					-- dialog ended
---					print("DIALOGEND!")
---					game.doingdialog = false
---				end
---			end
 		end
 		return
 	end
@@ -660,9 +655,14 @@ function load()
 		game:actually_start_dialog(dialog, ...)
 	end
 	function game:on_dialog_started(...)
-		hud_manager.dialog:ondialog(...)
+		self.dialog = dialogmenu:new(self)
+		sol.menu.start(self, self.dialog)
+		self.dialog:ondialog(...)
 	end
 	game.startdialog = game.start_dialog
+	function game:on_dialog_finished(...)
+		sol.menu.stop(self.dialog)
+	end
 
 	function game:on_paused()
 		hud:on_paused()
