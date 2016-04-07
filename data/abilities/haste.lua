@@ -24,6 +24,7 @@ function HasteAbility:doability()
 	self.hasteentity.ability = self
 	self.hasteentity:start()
 
+	sol.audio.play_sound("speed")
 end
 
 function HasteAbility:onfinish()

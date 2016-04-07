@@ -28,6 +28,8 @@ function NetAbility:doability()
 
 	self.netentity:start(self, tox, toy)
 
+	sol.audio.play_sound("swish5")
+	
 	self:finish()
 end
 

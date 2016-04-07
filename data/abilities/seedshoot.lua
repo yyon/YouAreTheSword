@@ -16,7 +16,7 @@ end
 function SeedShootAbility:firevolley()
 	local tox, toy = self:gettargetpos()
 	
-	sol.audio.play_sound("catproj")
+	sol.audio.play_sound("swish13")
 	
 	local entity = self.entitydata.entity
 	local map = entity:get_map()

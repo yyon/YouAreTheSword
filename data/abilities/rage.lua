@@ -16,6 +16,8 @@ function RageAbility:doability()
 	self.target = self.entitydata:getclosestentity(tox, toy, false, nil, true)
 	
 	local rageeffect = Effects.RageEffect(self.target)
+	
+	sol.audio.play_sound("rage")
 
 	self:finish()
 end

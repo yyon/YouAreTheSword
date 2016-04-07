@@ -15,7 +15,7 @@ function DefenseAbility:doability()
 	self.target = self.entitydata:getclosestentity(tox, toy, false, nil, true)
 
 	Effects.DefenseEffect:new(self.target)
-	sol.audio.play_sound("zap2")
+	sol.audio.play_sound("magicshield")
 
 	self:finish()
 end

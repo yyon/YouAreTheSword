@@ -99,7 +99,7 @@ http://opengameart.org/content/laser-shot
 http://opengameart.org/content/punches-hits-swords-and-squishes
 	sword, punch
 http://opengameart.org/content/spell-sounds-starter-pack
-	angel summon, explode, teleport, heal, stomp, swordtransform, taunt
+	angel summon, explode, teleport, heal, stomp, swordtransform, taunt, defense
 http://opengameart.org/content/rpg-sound-pack
 	swing, tentacles
 http://opengameart.org/content/rock-walk-step-sound-yo-frankie
@@ -124,6 +124,10 @@ http://opengameart.org/content/ticking-clock-0
 	ticking clock sound
 http://opengameart.org/content/8-bit-sound-effects-library
 	death sound
+http://opengameart.org/content/swishes-sound-pack
+	seed shoot, net
+http://opengameart.org/content/monster-or-beast-sounds
+	rage
 
 music:
 http://opengameart.org/content/generic-8-bit-jrpg-soundtrack
