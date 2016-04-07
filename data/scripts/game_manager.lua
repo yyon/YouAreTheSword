@@ -18,6 +18,7 @@ game = nil
 local entitydatas = require "enemies/entitydata"
 local hud_manager = require "scripts/hud/hud"
 local dialogmenu = require "menus/dialog"
+local abhelpmenu = require "menus/abilityhelp"
 local pause_manager = require("menus/pause")
 local pause_menu
 
@@ -143,7 +144,7 @@ function sol.main:on_key_pressed(key, modifiers)
 		if lastentitydata ~= nil then
 			lastentitydata:bepossessedbyhero()
 		end
-	elseif (key == "s" and dvorak) or (key == "left alt" and not dvorak) then
+	elseif (key == "s" and dvorak) or (key == "o" and not dvorak) then
 		if hero:get_walking_speed() == 500 then
 			print("ended cheat: fast walk")
 			hero:set_walking_speed(128)
@@ -279,6 +280,9 @@ function sol.main:on_key_pressed(key, modifiers)
 		hero.entitydata:startability("special", x, y)
 	elseif (key == "tab") then
 		hero.entitydata:throwclosest(x, y)
+	elseif (key == "left alt") then
+		self.helpmenu = abhelpmenu:new(game)
+		sol.menu.start(game, self.helpmenu)
 	--debug keys
 --		elseif key == "r" then
 --			hero.entitydata:throwrandom()
@@ -357,6 +361,10 @@ function sol.main:on_key_released(key, modifiers)
 		hero.entitydata:keyrelease("swordtransform")
 	elseif key == "left shift" then
 		hero.entitydata:keyrelease("block")
+	elseif (key == "left alt") then
+		if self.helpmenu ~= nil then
+			 sol.menu.stop(self.helpmenu)
+		end
 	end
 end
 

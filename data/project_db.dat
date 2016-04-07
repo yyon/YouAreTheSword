@@ -358,6 +358,7 @@ language{ id = "en", description = "English" }
 font{ id = "8_bit", description = "8_bit" }
 font{ id = "8_bit_2", description = "8_bit_2" }
 font{ id = "8_bit_3", description = "8_bit_3" }
+font{ id = "LiberationMono-Bold", description = "LiberationMono-Bold" }
 font{ id = "LiberationMono-Regular", description = "LiberationMono-Regular" }
 font{ id = "damagedisp1", description = "damagedisp1" }
 font{ id = "damagedisp2", description = "damagedisp2" }
