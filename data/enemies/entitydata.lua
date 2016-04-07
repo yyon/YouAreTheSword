@@ -47,6 +47,7 @@ local CatShootAbility = require "abilities/catshoot"
 local LightningBallAbility = require "abilities/lightningball"
 local DefenseAbility = require "abilities/defense"
 local SeedShootAbility = require "abilities/seedshoot"
+local BoomerangAbility = require "abilities/boomerang"
 
 local Effects = require "enemies/effect"
 
@@ -1615,7 +1616,7 @@ function archerclass:initialize(entity)
 	local main_sprite = "adventurers/archer"
 	local life = 10
 	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
-	local normalabilities = {FiringBowAbility:new(self)}
+	local normalabilities = {BoomerangAbility:new(self), FiringBowAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "dagger")}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self), NetAbility:new(self, "net")}
