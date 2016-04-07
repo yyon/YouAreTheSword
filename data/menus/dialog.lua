@@ -6,6 +6,8 @@ local entitydata = require "enemies/entitydata"
 
 local math = require "math"
 
+local lineify = require "menus/lineify"
+
 function dialog:initialize(game)
 	local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
@@ -27,58 +29,18 @@ end
 
 --  check heart data and fix periodically
 function dialog:check()
-	self:rebuild_surface()
-  	-- check again in 50ms
-  	sol.timer.start(self, 50, function()
-    		self:check()
-  	end)
-end
-
-function dialog:mysplit(inputstr, sep)
-    return string.gmatch(inputstr, "([^"..sep.."]+)")
+--	self:rebuild_surface()
+ 	-- check again in 50ms
+--  	sol.timer.start(self, 500, function()
+--    		self:check()
+--  	end)
 end
 
 function dialog:ondialog(dialog, endfunct)
     self.text = dialog.text
-    self.screens = {}
     self.screennum = 1
-    local linenum = 0
-    local currentstring = ""
-    function addline(line)
-        if linenum >= 7 or line == "NEWSCREEN" then
-            linenum = 0
-            self.screens[#self.screens+1] = currentstring
-            currentstring = ""
-        end
-        if line ~= "NEWSCREEN" then
-            currentstring = currentstring .. line .. "\n"
-            linenum = linenum + 1
-        end
-    end
-    for line in self:mysplit(self.text, "\n") do
-        local curlen = 0
-        local currentline = ""
-        local firstword = true
-        for word in self:mysplit(line, " ") do
-            local strlen = string.len(word)
-            if firstword then
-                firstword = false
-                currentline = word
-                curlen = strlen
-            else
-                if curlen + strlen + 1 > 50 then
-                    addline(currentline)
-                    currentline = word
-                    curlen = strlen
-                else
-                    currentline = currentline .. " " .. word
-                    curlen = curlen + 1 + strlen
-                end
-            end
-        end
-        addline(currentline)
-    end
-    self.screens[#self.screens+1] = currentstring
+    self.lines = lineify.tolines(self.text, 50)
+    self.screens = lineify.toscreens(self.lines, 6)
 
     self.endfunct = endfunct
     self.isshowingdialog = true
@@ -92,28 +54,19 @@ function dialog:showscreen()
         game:stop_dialog()
     else
         self.screentext = self.screens[self.screennum]
-        self:rebuild_surface()
+--        self:rebuild_surface()
         self.screennum = self.screennum + 1
+        self:rebuild_surface()
     end
 end
 
 function dialog:rebuild_surface()
     self.surface:clear()
 
-    local x = 115
-    local y = 15
-
     if self.isshowingdialog then
-        self.dialogsurface:draw_region(0, 0, self.w, self.h, self.surface, 0, 0)
-
-        for line in self:mysplit(self.screentext, "\n") do
-            local text = sol.text_surface.create({horizontal_alignement="left", vertical_alignement="bottom", text=line, font="8_bit_3"})
-            local w, h = text:get_size()
-            y = y + h/2
-            text:draw_region(0, 0, w, h, self.surface, x, y)
-            y = y + h/2
-        end
-    end
+          self.dialogsurface:draw_region(0, 0, self.w, self.h, self.surface, 0, 0)
+          lineify.rendertext(self.surface, self.screentext, "LiberationMono-Regular", 25, {255,255,255}, true, 115, 15)
+  end
 end
 
 function dialog:on_draw(dst_surface)

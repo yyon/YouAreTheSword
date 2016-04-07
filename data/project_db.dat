@@ -32,7 +32,6 @@ sprite{ id = "abilities/arrow", description = "arrow" }
 sprite{ id = "abilities/blackhole", description = "blackhole" }
 sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
 sprite{ id = "abilities/bomb", description = "bomb" }
-sprite{ id = "abilities/boomerang", description = "boomerang" }
 sprite{ id = "abilities/boulder", description = "boulder" }
 sprite{ id = "abilities/charge", description = "charge" }
 sprite{ id = "abilities/charge_sword", description = "charge_sword" }
@@ -321,7 +320,6 @@ entity{ id = "arrow", description = "arrow" }
 entity{ id = "blackhole", description = "blackhole" }
 entity{ id = "blackholeparticle", description = "blackholeparticle" }
 entity{ id = "bomb", description = "bomb" }
-entity{ id = "boomerang", description = "boomerang" }
 entity{ id = "boulder", description = "boulder" }
 entity{ id = "catattack", description = "catattack" }
 entity{ id = "catproj", description = "catproj" }
@@ -360,6 +358,7 @@ language{ id = "en", description = "English" }
 font{ id = "8_bit", description = "8_bit" }
 font{ id = "8_bit_2", description = "8_bit_2" }
 font{ id = "8_bit_3", description = "8_bit_3" }
+font{ id = "LiberationMono-Regular", description = "LiberationMono-Regular" }
 font{ id = "damagedisp1", description = "damagedisp1" }
 font{ id = "damagedisp2", description = "damagedisp2" }
 font{ id = "minecraftia", description = "minecraftia" }
