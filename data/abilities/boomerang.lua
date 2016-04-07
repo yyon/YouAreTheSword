@@ -21,7 +21,7 @@ function BoomerangAbility:doability()
  	local d = entitydata:getdirection()
  
  	self.boomerangentity = map:create_custom_entity({model="boomerang", x=x, y=y-35, layer=layer, direction=0, width=w, height=h})
- 
+ 	self.boomerangentity.ability = self
  	self.boomerangentity:start(tox, toy)
 	sol.audio.play_sound("shoot")
 
