@@ -11,18 +11,18 @@ end
 
 function BoomerangAbility:doability()
 	local tox, toy = self:gettargetpos()
-	self.tox, self.toy = tox, toy
-
-	local entity = self.entitydata.entity
-	local map = entity:get_map()
+ 	self.tox, self.toy = tox, toy
+ 
+ 	local entity = self.entitydata.entity
+ 	local map = entity:get_map()
 	local x,y,layer = entity:get_position()
-	local w,h = entity:get_size()
-	local entitydata = self.entitydata
-	local d = entitydata:getdirection()
-
-	self.boomerangentity = map:create_custom_entity({model="boomerang", x=x, y=y-35, layer=layer, direction=0, width=w, height=h})
-
-	self.boomerangentity:start(self, tox, toy)
+ 	local w,h = entity:get_size()
+ 	local entitydata = self.entitydata
+ 	local d = entitydata:getdirection()
+ 
+ 	self.boomerangentity = map:create_custom_entity({model="boomerang", x=x, y=y-35, layer=layer, direction=0, width=w, height=h})
+ 
+ 	self.boomerangentity:start(self, tox, toy, x, y)
 	sol.audio.play_sound("shoot")
 
 	self:finish()
