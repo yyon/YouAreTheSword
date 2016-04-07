@@ -23,32 +23,47 @@ function hud_manager:create(game)
 	local menu = soul_builder:new(game)
   	menu:set_dst_position(10, 65)
   	hud.elements[#hud.elements + 1] = menu
+	menu.group = 1
 
 	local menu = sword_health_builder:new(game)
   	menu:set_dst_position(10, 10)
   	hud.elements[#hud.elements + 1] = menu
+	menu.group = 1
 
 	local panel_builder = require("scripts/hud/panel")
 	
 	menu = panel_builder:new(game, "normal")
 	menu:set_dst_position(490,645)
 	hud.elements[#hud.elements + 1] = menu
+	menu.group = 2
 
 	local menu = panel_builder:new(game, "block")
 	menu:set_dst_position(565,645)
 	hud.elements[#hud.elements + 1] = menu
+	menu.group = 2
 
 	local menu = panel_builder:new(game, "swordtransform")
 	menu:set_dst_position(640,645)
 	hud.elements[#hud.elements + 1] = menu
+	menu.group = 2
 
 	local menu = panel_builder:new(game, "special")
 	menu:set_dst_position(715,645)
 	hud.elements[#hud.elements + 1] = menu
+	menu.group = 2
 
 	local dialog = dialog_builder:new(game)
 	hud.elements[#hud.elements + 1] = dialog
 	self.dialog = dialog
+	
+	
+	hud.groups = {}
+	for i, element in pairs(hud.elements) do
+		if element.group ~= nil then
+			if hud.groups[element.group] == nil then hud.groups[element.group] = {} end
+			hud.groups[element.group][#hud.groups[element.group]+1] = element
+		end
+	end
 
 	function hud:quit()
 		if hud:is_enabled() then
@@ -91,37 +106,59 @@ function hud_manager:create(game)
 
 -- Called periodically to change the transparency or position of icons.
   	local function check_hud()
-
+		
     		local map = game:get_map()
     		if map ~= nil then
       			-- If the hero is below the top-left icons, make them semi-transparent.
       			local hero = map:get_entity("hero")
-      			local hero_x, hero_y = hero:get_position()
       			local camera_x, camera_y = map:get_camera_position()
-      			local x = hero_x - camera_x
-      			local y = hero_y - camera_y
-     			local opacity = nil
-
-      			if hud.top_left_opacity == 255
-        				and not game:is_suspended()
-        				and x < 88
-        				and y < 80 then
-        				opacity = 96
-      			elseif hud.top_left_opacity == 96
-        				and (game:is_suspended()
-        				or x >= 88
-        				or y >= 80) then
-        				opacity = 255
-      			end
-
-      			if opacity ~= nil then
-        				hud.top_left_opacity = opacity
---        				hud.item_icon_1.surface:set_opacity(opacity)
---        				hud.item_icon_2.surface:set_opacity(opacity)
---        				hud.pause_icon.surface:set_opacity(opacity)
---        				hud.attack_icon.surface:set_opacity(opacity)
---        				hud.action_icon.surface:set_opacity(opacity)
-      			end
+      			local hero_x, hero_y = hero:get_position()
+      			hero_x = hero_x - camera_x
+      			hero_y = hero_y - camera_y
+			local screenw, screenh = sol.video.get_quest_size()
+			
+			--check panel
+			for groupnum, group in ipairs(hud.groups) do
+				local opacity = 255
+				for i, element in ipairs(group) do
+					local x, y = element.dst_x, element.dst_y
+					if x ~= nil then
+	  					if x < 0 then
+	    						x = width + x
+  						end
+				  		if y < 0 then
+				    			y = height + y
+				  		end
+						local w, h = element.surface:get_size()
+					
+					
+						if hero_x + 32 > x and hero_x - 32 < x + w and hero_y + 4 > y and hero_y - 60 < y + h then
+							opacity = 100
+							break
+						end
+					
+--[[
+						for entity in map:get_entities("") do
+							if entity.entitydata ~= nil then
+								local entityx, entityy = entity:get_position()
+      								entityx = entityx - camera_x
+					      			entityy = entityy - camera_y
+								if entityx + 32 > x and entityx - 32 < x + w and entityy + 4 > y and entityy - 60 < y + h then
+									opacity = 127
+								end
+							end
+						end
+--]]
+					end
+				end
+				
+				for i, element in ipairs(group) do
+					if element.opacity ~= opacity then
+						element.opacity = opacity
+						element.surface:set_opacity(opacity)
+					end
+				end
+			end
 		end
 		return true
 	end
@@ -148,7 +185,7 @@ function hud_manager:create(game)
       			end
 
       			if enabled then
-        				sol.timer.start(hud, 50, check_hud)
+        				sol.timer.start(hud, 100, check_hud)
       			end
     		end
   	end
