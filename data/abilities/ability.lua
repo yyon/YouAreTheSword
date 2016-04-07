@@ -13,6 +13,12 @@ function Ability:initialize(...)
 	self.entitydata, self.name, self.range, self.icon, self.warmup, self.cooldown, self.dofreeze, self.warmupanimation = ...
 	self.canuse = true
 end
+function Ability:getstats()
+	return self.stats
+end
+function Ability:getdesc()
+	return self.desc
+end
 
 function Ability:start(...)
 	-- call this to use the ability

@@ -7,6 +7,8 @@ local TrapsAbility = Ability:subclass("TrapsAbility")
 
 function TrapsAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Trap", 800, "trap", 500, 4000, true)
+	self.stats = [[140 dmg]]
+	self.desc = [[Places a trap on the map]]
 end
 
 function TrapsAbility:doability()

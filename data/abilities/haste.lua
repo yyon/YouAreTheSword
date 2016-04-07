@@ -7,6 +7,9 @@ local Effects = require "enemies/effect"
 
 function HasteAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Haste", 1000, "speed", 3000, 25000, true, "casting")
+	
+	self.stats = [[Speed for 15s]]
+	self.desc = [[Increases movement speed, reduces casting time, and cooldown time for all allies in an circle]]
 end
 
 function HasteAbility:doability()

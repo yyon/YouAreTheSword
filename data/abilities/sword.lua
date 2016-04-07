@@ -96,7 +96,7 @@ function SwordAbility:attack(entity)
 	elseif transform == "poison" then
 		aspects.poison = {weakness=0.1, time=5000}
 	elseif transform == "damage" then
-		damage = 3
+		damage = 2
 	elseif transform == "lifesteal" then
 		aspects.lifesteal = 1
 	elseif transform == "holy" then
@@ -158,6 +158,115 @@ function SwordAbility:get_appearance(entity)
 	elseif transform == "slow" then
 		return "swords/slow"
 	end
+end
+
+sworddesc = {}
+sworddesc.getnameicon = function(transform)
+	local name
+	local icon
+	if transform == "ap" then
+		name = "Axe"
+		icon = "axe"
+	elseif transform == "electric" then
+		name = "Electric Sword"
+		icon = "electricsword"
+	elseif transform == "fire" then
+		name = "Fire Sword"
+		icon = "firesword"
+	elseif transform == "poison" then
+		name = "Poisoned Sword"
+		icon = "poisonsword"
+	elseif transform == "damage" then
+		name = "Large Sword"
+		icon = "largesword"
+	elseif transform == "lifesteal" then
+		name = "Lifesteal"
+		icon = "lifestealsword"
+	elseif transform == "holy" then
+		name = "Holy Sword"
+		icon = "holysword"
+	elseif transform == "dagger" then
+		name = "Dagger"
+		icon = "dagger"
+	elseif transform == "slow" then
+		name = "Slow"
+		icon = "slowness2"
+	elseif transform == "normal" then
+		name = "None"
+		icon = "sword"
+	end
+	return name, icon
+end
+sworddesc.getdesc = function(transform)
+	local desc = ""
+	if transform == "normal" then
+		desc = desc .. ""
+	elseif transform == "ap" then
+		desc = desc .. "Does more damage against people with armor"
+	elseif transform == "fire" then
+		desc = desc .. "Sets enemy on fire"
+	elseif transform == "electric" then
+		desc = desc .. "Stuns enemy"
+	elseif transform == "poison" then
+		desc = desc .. "Poison makes enemy do less damage"
+	elseif transform == "damage" then
+		desc = desc .. "Does more damage"
+	elseif transform == "lifesteal" then
+		desc = desc .. "Heals user equal to the amount of damage done"
+	elseif transform == "holy" then
+		desc = desc .. "Does more damage against undead"
+	elseif transform == "dagger" then
+		desc = desc .. "Swings faster"
+	elseif transform == "slow" then
+		desc = desc .. [[Makes enemy move slower
+Enemy has longer casting time, cooldown time]]
+	end
+	return desc
+end
+sworddesc.getstats = function(transform)
+	local desc = ""
+	if transform == "normal" then
+		desc = desc .. "7 dmg"
+	elseif transform == "ap" then
+		desc = desc .. "10 dmg"
+	elseif transform == "fire" then
+		desc = desc .. [[7 dmg
+fire dmg 1s (7 dmg)]]
+	elseif transform == "electric" then
+		desc = desc .. [[7 dmg
+stun 2s]]
+	elseif transform == "poison" then
+		desc = desc .. [[7 dmg
+poison 5s]]
+	elseif transform == "damage" then
+		desc = desc .. [[14 dmg]]
+	elseif transform == "lifesteal" then
+		desc = desc .. [[7 dmg
+heals user]]
+	elseif transform == "holy" then
+		desc = desc .. [[7 dmg
+42 dmg against undead]]
+	elseif transform == "dagger" then
+		desc = desc .. [[7 dmg
+2x swing speed]]
+	elseif transform == "slow" then
+		desc = desc .. [[7 dmg
+slowness 15s]]
+	end
+	return desc
+end
+
+function SwordAbility:getdesc()
+	local desc = [[Swings sword
+Sword transformation abilties affect this ability
+Current transformation: ]]
+	local name = sworddesc.getnameicon(self:gettransform())
+	desc = desc .. name .. "\n\n"
+	desc = desc .. sworddesc.getdesc(self:gettransform())
+	return desc
+end
+function SwordAbility:getstats()
+	return sworddesc.getstats(self:gettransform())
 end
 
 return SwordAbility

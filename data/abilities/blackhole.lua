@@ -8,6 +8,10 @@ local BlackHoleAbility= Ability:subclass("BlackHoleAbility")
 function BlackHoleAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Black Hole", 20000, "blackhole", 2000, 30000, true, "casting")
 	self.caughtduringabilityuse = false
+	self.stats = [[Immobilizes 3s
+14 dmg]]
+	self.desc = [[Creates a black hole, sucking in all nearby enemies
+Disappears after 3s, damages enemies and shoots them out]]
 end
 
 function BlackHoleAbility:doability()

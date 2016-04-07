@@ -7,6 +7,10 @@ local LightningAbility = Ability:subclass("LightningAbility")
 
 function LightningAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Lightning", 20000, "lightning", 2000, 20000, true, "casting")
+	
+	self.stats = [[28 dmg
+stun 3s]]
+	self.desc = [[Creates a lightning bolt]]
 end
 
 function LightningAbility:doability()

@@ -7,6 +7,9 @@ local ShieldBashAbility = Ability:subclass("ShieldBashAbility")
 
 function ShieldBashAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Shield Bash", 100, "shieldbash", 0, 2000, true)
+	self.stats = [[7 dmg
+Extra knockback]]
+	self.desc = [[Hits enemy with shield]]
 end
 function ShieldBashAbility:doability()
 	local entity = self.entitydata.entity

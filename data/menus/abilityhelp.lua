@@ -67,7 +67,18 @@ function dialog:rebuild_surface()
 	
 	          lineify.rendertext(abilitysurface, ability.name, "LiberationMono-Bold", 25, {255,100,100}, true, self.w / 8, 200, true)
 		
+		local descy = 250
+		local stats = ability:getstats()
+		if stats ~= nil then
+			stats = lineify.tolines(stats, 28)
+			descy = lineify.rendertext(abilitysurface, stats, "LiberationMono-Regular", 15, {150,150,255}, true, 40, descy, false) + 30
+		end
 		
+		local desc = ability:getdesc()
+		if desc ~= nil then
+			desc = lineify.tolines(desc, 28)
+		          descy = lineify.rendertext(abilitysurface, desc, "LiberationMono-Regular", 15, {255,255,255}, true, 40, descy, false)
+		end
 		
 		abilitysurface:draw(self.surface, self.w / 4 * (i-1), 0)
 	end

@@ -5,37 +5,10 @@ local Effects = require "enemies/effect"
 
 local TransformAbility = Ability:subclass("TransformAbility")
 
+local SwordAbility = require "abilities/sword"
+
 function TransformAbility:initialize(entitydata, transform)
-	local name
-	local icon
-	if transform == "ap" then
-		name = "Axe"
-		icon = "axe"
-	elseif transform == "electric" then
-		name = "Electric Sword"
-		icon = "electricsword"
-	elseif transform == "fire" then
-		name = "Fire Sword"
-		icon = "firesword"
-	elseif transform == "poison" then
-		name = "Poisoned Sword"
-		icon = "poisonsword"
-	elseif transform == "damage" then
-		name = "Large Sword"
-		icon = "largesword"
-	elseif transform == "lifesteal" then
-		name = "Lifesteal"
-		icon = "lifestealsword"
-	elseif transform == "holy" then
-		name = "Holy Sword"
-		icon = "holysword"
-	elseif transform == "dagger" then
-		name = "Dagger"
-		icon = "dagger"
-	elseif transform == "slow" then
-		name = "Slow"
-		icon = "slowness2"
-	end
+	name, icon = sworddesc.getnameicon(transform)
 
 	Ability.initialize(self, entitydata, name, 0, icon, 500, 10000, true, "casting")
 
@@ -51,6 +24,20 @@ function TransformAbility:doability()
 end
 
 function TransformAbility:onfinish()
+end
+
+function TransformAbility:gettransform()
+	return self.transform
+end
+function TransformAbility:getdesc()
+		local desc = [[Transforms the sword
+This affects the "sword" ability
+]]
+	desc = desc .. sworddesc.getdesc(self:gettransform())
+	return desc
+end
+function TransformAbility:getstats()
+	return sworddesc.getstats(self:gettransform())
 end
 
 return TransformAbility

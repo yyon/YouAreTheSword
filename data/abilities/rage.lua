@@ -9,6 +9,9 @@ local Effects = require "enemies/effect"
 
 function RageAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Rage", 1000, "rage", 1000, 10000, true, "casting")
+	
+	self.stats = [[Rage 15s]]
+	self.desc = [[Increases damage for target]]
 end
 
 function RageAbility:doability()

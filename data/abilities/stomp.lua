@@ -7,6 +7,9 @@ local Effects = require "enemies/effect"
 
 function StompAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Stomp", 1000, "stomp", 500, 10000, true, "stomp")
+	self.stats = [[21 dmg
+Extra knockback]]
+	self.desc = [[Hits all enemies around user]]
 end
 
 function StompAbility:doability()

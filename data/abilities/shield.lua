@@ -7,6 +7,8 @@ local ShieldAbility = Ability:subclass("ShieldAbility")
 
 function ShieldAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Shield", 50, "shield", 0, 500, true)
+	self.stats = [[Blocks 100% of damage]]
+	self.desc = [[Blocks damage if user is facing the enemy]]
 end
 
 function ShieldAbility:doability()

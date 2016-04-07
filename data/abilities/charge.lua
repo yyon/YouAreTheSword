@@ -10,6 +10,7 @@ local ChargeAbility = Ability:subclass("ChangeAbility")
 
 function ChargeAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Charge", 800, "charge", 0, 2000, true)
+	self.desc = [[Rushes towards enemy and swings sword]]
 end
 
 function ChargeAbility:doability()

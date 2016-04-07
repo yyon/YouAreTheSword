@@ -72,6 +72,8 @@ lineify.rendertext = function(surface, lines, font, font_size, color, rendering_
             text:draw_region(0, 0, w, h, surface, actualx, y)
             y = y + h/2
         end
+        
+        return y
 end
 
 return lineify

@@ -11,6 +11,7 @@ local BackstabAbility = Ability:subclass("BackstabAbility")
 
 function BackstabAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Backstab", 800, "backstab", 0, 3000, true)
+	self.desc = [[Quickly moves to the back of the enemy and swings sword]]
 end
 
 function BackstabAbility:doability()

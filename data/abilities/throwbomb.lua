@@ -7,6 +7,9 @@ local BombAbility = Ability:subclass("BombAbility")
 
 function BombAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Bomb", 800, "bomb", 500, 4000, true)
+	self.stats = [[140 dmg]]
+	self.desc = [[Throws a bomb
+Explodes after 2s]]
 end
 
 function BombAbility:doability()

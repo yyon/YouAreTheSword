@@ -1661,6 +1661,7 @@ function orcclass:initialize(entity)
 	local specialabilities = {ShieldBashAbility:new(self), BombThrowAbility:new(self)}
 	local basestats = {damage=2, warmup=1.5}
 	self.cantdraweyes = true
+	self.undead = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
@@ -1679,6 +1680,7 @@ function evilmageclass:initialize(entity)
 	local blockabilities = {TeleportAbility:new(self)}
 	local specialabilities = {LightningAbility:new(self), EarthquakeAbility:new(self), BlackholeAbility:new(self)}
 	local basestats = {}
+	self.undead = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
@@ -1756,6 +1758,7 @@ function ghostclass:initialize(entity)
 	local specialabilities = {StealthAbility:new(self)}
 	local basestats = {movementspeed=100}
 	self.cantdraweyes = true
+	self.undead = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)
@@ -1890,6 +1893,7 @@ function maskmanclass:initialize(entity)
 	local specialabilities = {StompAbility:new(self)}
 	local basestats = {}
 	self.cantdraweyes = true
+	self.undead = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
 	EntityData.initialize(self, entity, class, main_sprite, life, team, normalabilities, transformabilities, blockabilities, specialabilities, basestats)

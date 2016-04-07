@@ -7,6 +7,9 @@ local HealAbility = Ability:subclass("HealAbility")
 function HealAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Heal", 800, "heal", 0, 500, false, "casting")
 	self.heals = true
+	
+	self.stats = [[heals 0.7 dmg]]
+	self.desc = [[Heals target]]
 end
 
 function HealAbility:doability()

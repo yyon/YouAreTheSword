@@ -8,6 +8,9 @@ local DefenseAbility = Ability:subclass("DefenseAbility")
 function DefenseAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Defense", 20000, "shield", 3000, 10000, true, "casting")
 	self.heals = true
+	
+	self.stats = [[Defense increases to 70% for 15s]]
+	self.desc = [[Increases defense for targeted person]]
 end
 
 function DefenseAbility:doability()

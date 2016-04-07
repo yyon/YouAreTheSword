@@ -9,6 +9,7 @@ local SidestepAbility = Ability:subclass("SidestepAbility")
 
 function SidestepAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Sidestep", 300, "sidestep", 0, 1000, true)
+	self.desc = [[Quickly moves to mouse pointer]]
 end
 
 function SidestepAbility:doability()

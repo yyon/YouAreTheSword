@@ -10,6 +10,8 @@ local Effects = require "enemies/effect"
 function TauntAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Taunt", 20000, "taunt", 3000, 10000, true, "casting")
 	self.nonpc = true
+	self.stats = [[Taunt 20s]]
+	self.desc = [[All enemies will try to attack target]]
 end
 
 function TauntAbility:doability()

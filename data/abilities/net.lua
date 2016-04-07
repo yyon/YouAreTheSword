@@ -8,6 +8,10 @@ local NetAbility = Ability:subclass("NetAbility")
 function NetAbility:initialize(entitydata, spritename)
 	self.spritename = spritename
 	Ability.initialize(self, entitydata, "Net", 800, "net", 500, 2000, true)
+	
+	self.stats = [[Slowness 15s]]
+	self.desc = [[Enemy gets tangled up in net.
+Reduces enemy's movement speed, increases casting time, and cooldown time]]
 end
 
 function NetAbility:doability()

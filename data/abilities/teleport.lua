@@ -8,6 +8,7 @@ local TeleportAbility = Ability:subclass("TeleportAbility")
 
 function TeleportAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Teleporter", 600, "teleport", 0, 2550, true)
+	self.desc = [[Teleports to mouse pointer]]
 end
 
 function TeleportAbility:doability()

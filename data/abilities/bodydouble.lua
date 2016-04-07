@@ -8,6 +8,8 @@ local BodyDoubleAbility = Ability:subclass("BodyDoubleAbility")
 
 function BodyDoubleAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Body Double", 600, "bodydouble", 0, 10000, true)
+	self.desc = [[Teleports away, leaving a combat dummy in its place
+Enemies which were previously attacking user will now attack combat dummy]]
 end
 
 function BodyDoubleAbility:doability()

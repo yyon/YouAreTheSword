@@ -8,6 +8,9 @@ local HealExplosionAbility = Ability:subclass("HealExplosionAbility")
 function HealExplosionAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Heal Explosion", 20000, "healexplosion", 500, 10000, true, "casting")
 	self.heals = true
+	
+	self.stats = [[Heals 100%]]
+	self.desc = [[Heals all allies hit]]
 end
 
 function HealExplosionAbility:doability()

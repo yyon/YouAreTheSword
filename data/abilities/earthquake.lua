@@ -9,6 +9,9 @@ local EarthquakeAbility= Ability:subclass("EarthquakeAbility")
 
 function EarthquakeAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Earthquake", 20000, "earthquake", 3000, 20000, true, "casting")
+	
+	self.stats = [[21 dmg]]
+	self.desc = [[Hits all enemies on map]]
 end
 
 function EarthquakeAbility:doability()

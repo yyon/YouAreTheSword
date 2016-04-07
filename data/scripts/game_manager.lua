@@ -283,6 +283,8 @@ function sol.main:on_key_pressed(key, modifiers)
 	elseif (key == "left alt") then
 		self.helpmenu = abhelpmenu:new(game)
 		sol.menu.start(game, self.helpmenu)
+		game.dontshowpausemenu = true
+		game:set_paused(true)
 	--debug keys
 --		elseif key == "r" then
 --			hero.entitydata:throwrandom()
@@ -342,8 +344,7 @@ function sol.main:on_key_released(key, modifiers)
 	end
 
 	local hero = game:get_hero()
-	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
-		print("PAUSED!")
+	if hero.entitydata == nil then
 		return
 	end
 
@@ -363,7 +364,9 @@ function sol.main:on_key_released(key, modifiers)
 		hero.entitydata:keyrelease("block")
 	elseif (key == "left alt") then
 		if self.helpmenu ~= nil then
-			 sol.menu.stop(self.helpmenu)
+			sol.menu.stop(self.helpmenu)
+			game:set_paused(false)
+			game.dontshowpausemenu = false
 		end
 	end
 end
@@ -673,8 +676,10 @@ function load()
 	end
 
 	function game:on_paused()
-		hud:on_paused()
-		sol.menu.start(game, pause_menu, false)
+		if not game.dontshowpausemenu then
+			hud:on_paused()
+			sol.menu.start(game, pause_menu, false)
+		end
 	end
 
 	function game:on_unpaused()

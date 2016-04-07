@@ -7,6 +7,9 @@ local FiringBowAbility = Ability:subclass("FiringBowAbility")
 
 function FiringBowAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Bow and Arrow", 500, "bowandarrow", 270, 540, true, "firingbow")
+	
+	self.stats = [[7 dmg]]
+	self.desc = [[Shoots an arrow]]
 end
 
 function FiringBowAbility:doability()

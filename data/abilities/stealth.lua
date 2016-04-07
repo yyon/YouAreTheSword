@@ -9,6 +9,8 @@ local math = require "math"
 
 function StealthAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Stealth", 500, "stealth", 500, 10000, true)
+	self.stats = [[Stealth 10s]]
+	self.desc = [[Becomes invisible to enemies]]
 end
 
 function StealthAbility:doability()
