@@ -13,6 +13,8 @@ function hud_manager:create(game)
 	local health_builder = require("scripts/hud/health")
 	local soul_builder = require("scripts/hud/possess_o_meter")
 	local sword_health_builder = require("scripts/hud/sword_health")
+	local person_status_builder = require("scripts/hud/personstatus")
+	local sword_status_builder = require("scripts/hud/swordstatus")
 
 --	menu = health_builder:new(game)
 --  	menu:set_dst_position(0, 10)
@@ -49,6 +51,17 @@ function hud_manager:create(game)
 	menu:set_dst_position(715,645)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
+	
+	local menu = person_status_builder:new(game)
+	menu:set_dst_position(-10,10)
+	local w, h = menu.surface:get_size()
+	hud.elements[#hud.elements + 1] = menu
+	menu.group = 3
+	
+	local menu = sword_status_builder:new(game)
+	menu:set_dst_position(-10,20+h)
+	hud.elements[#hud.elements + 1] = menu
+	menu.group = 3
 	
 	hud.groups = {}
 	for i, element in pairs(hud.elements) do
@@ -109,6 +122,7 @@ function hud_manager:create(game)
       			hero_x = hero_x - camera_x
       			hero_y = hero_y - camera_y
 			local screenw, screenh = sol.video.get_quest_size()
+			local width, height = screenw, screenh
 			
 			--check panel
 			for groupnum, group in ipairs(hud.groups) do

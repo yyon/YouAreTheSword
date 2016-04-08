@@ -127,6 +127,7 @@ function SwordAbility:get_appearance(entity)
 	local transform = self:gettransform(entity)
 
 	local ishero = false
+	if entity ~= nil and entity.ishero then ishero = true end
 	if self.entitydata ~= nil then
 		if self.entitydata.entity.ishero then
 			ishero = true

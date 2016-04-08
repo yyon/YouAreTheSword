@@ -17,7 +17,7 @@ end
 function sword_health:initialize(game)
 
   	self.game = game
-  	self.surface = sol.surface.create(224, 50)
+  	self.surface = sol.surface.create(112, 50)
   	self.dst_x = 0
   	self.dst_y = 0
 	self.stage = 0
