@@ -6,7 +6,10 @@ local Effects = require "enemies/effect"
 local BoomerangAbility = Ability:subclass("BoomerangAbility")
 
 function BoomerangAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "boomerang", 50, "boomerang", 0, 0, true, "casting")
+	Ability.initialize(self, entitydata, "boomerang", 50, "boomerang", 0, 500, true, "casting")
+
+	self.stats = [[5 dmg]]
+	self.desc = [[Shoots an boomerang, will come back to you when reach maximum range. It will hit all enemies on its path.]]
 end
 
 function BoomerangAbility:doability()
@@ -21,8 +24,9 @@ function BoomerangAbility:doability()
  	local d = entitydata:getdirection()
  
  	self.boomerangentity = map:create_custom_entity({model="boomerang", x=x, y=y-35, layer=layer, direction=0, width=w, height=h})
+	if self.boomerangentity == nil then self:cancel(); return end
  	self.boomerangentity.ability = self
- 	self.boomerangentity:start(tox, toy)
+ 	self.boomerangentity:start(self, tox, toy)
 	sol.audio.play_sound("shoot")
 
 	self:finish()

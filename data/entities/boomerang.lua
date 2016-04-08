@@ -1,28 +1,48 @@
 local entity = ...
 
 local Effects = require "enemies/effect"
-require "scripts/movementaccuracy"
 
-function entity:on_created()
-	self:set_optimization_distance(0)
+local math = require "math"
+
+sol.main.load_file("entities/projectile")(entity)
+
+local speed = 1000
+local xs, ys, xe, ye
+local returned = 0
+
+function entity:getdamage()
+  local aspects = {}
+  aspects.knockback = 100
+  local damage = 0.5
+  return damage, aspects
 end
 
-function entity:start(tox, toy)
-	self:create_sprite("abilities/boomerang")
+function entity:getspritename()
+  return "abilities/boomerang"
+end
 
-	local x, y = self:get_position()
-	local movement = sol.movement.create("circle")
-	movement:set_center(x,y)
-	movement:set_radius(500)
-	movement:set_radius_speed(1000)
-	movement:set_clockwise(false)
-	movement:set_loop_delay(0)
-	movement:set_duration(100)
-	movement:start(self)
-
+function entity:getspeed()
+	return speed
 end
 
 function entity:onhit()
 	sol.audio.play_sound("arrow")
-    self:remove()
+end
+
+function entity:getmaxdist()
+	return 500
+end
+
+function entity:onstart()
+	xs, ys = self.movement:get_xy()
+	print(xs, ys)
+end
+
+function entity:finish()
+	self.movement:stop()
+	if returned == 1 then
+		self:remove()
+	end
+	self:start(self.ability, xs, ys)
+	returned = 1
 end
