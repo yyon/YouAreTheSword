@@ -34,15 +34,26 @@ function entity:getmaxdist()
 end
 
 function entity:onstart()
-	xs, ys = self.movement:get_xy()
-	print(xs, ys)
+--	xs, ys = self.movement:get_xy()
+--	print(xs, ys)
 end
 
 function entity:finish()
 	self.movement:stop()
-	if returned == 1 then
+--	if returned == 1 then
+--		self:remove()
+--	end
+--	self:start(self.ability, xs, ys)
+--	returned = 1
+	local movement = sol.movement.create("target")
+	movement:set_target(self.ability.entitydata.entity)
+	movement:set_speed(self:getspeed())
+	movement:start(self)
+	
+	function movement.on_obstacle_reached(movement)
 		self:remove()
 	end
-	self:start(self.ability, xs, ys)
-	returned = 1
+	function movement.on_finished(movement)
+		self:remove()
+	end
 end
