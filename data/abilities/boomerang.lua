@@ -6,7 +6,7 @@ local Effects = require "enemies/effect"
 local BoomerangAbility = Ability:subclass("BoomerangAbility")
 
 function BoomerangAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Boomerang", 50, "boomerang", 0, 500, true, "casting")
+	Ability.initialize(self, entitydata, "Boomerang", 50, "boomerang", 0, 1000, true, "casting")
 
 	self.stats = [[3.5 dmg]]
 	self.desc = [[Shoots an boomerang, will come back to you when reach maximum range. It will hit all enemies on its path.]]

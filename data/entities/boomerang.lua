@@ -13,6 +13,7 @@ local returned = 0
 function entity:getdamage()
   local aspects = {}
   aspects.knockback = 100
+  aspects.fromentity = self
   local damage = 0.5
   return damage, aspects
 end
@@ -45,11 +46,29 @@ function entity:finish()
 --	end
 --	self:start(self.ability, xs, ys)
 --	returned = 1
+	if self.ability.entitydata.entity == nil then
+		self:remove()
+		return
+	end
+	
+	self.collided = {} -- allow 2x hit
+	
 	local movement = sol.movement.create("target")
 	movement:set_target(self.ability.entitydata.entity)
 	movement:set_speed(self:getspeed())
 	movement:start(self)
 	
+	function movement.on_position_updated(movement)
+		if self.ability.entitydata.entity == nil then
+			self:remove()
+			return
+		end
+		local d = self:get_distance(self.ability.entitydata.entity)
+		if d < 40 then
+			self:remove()
+			return
+		end
+	end
 	function movement.on_obstacle_reached(movement)
 		self:remove()
 	end
