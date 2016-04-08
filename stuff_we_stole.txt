@@ -38,6 +38,8 @@ http://opengameart.org/content/25-special-effects-rendered-with-blender
 	death effect
 http://opengameart.org/content/random-rpg-icons-part-1
 	death effect skull
+http://game-icons.net/delapouite/originals/boomerang.html
+	boomerang icon
 http://opengameart.org/content/bomb-2d
 	bomb
 http://opengameart.org/content/explosion-sheet
