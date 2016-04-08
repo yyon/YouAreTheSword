@@ -7,6 +7,9 @@ local Effects = require "enemies/effect"
 
 function PossessAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Possess", 20000, "possess", 500, 10000, true, "casting")
+	
+	self.desc = [[Possesses target to help fight
+re-possessing the person with the sword will cancel the effect]]
 end
 
 function PossessAbility:doability()

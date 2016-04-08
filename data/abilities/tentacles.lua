@@ -8,6 +8,9 @@ local math = require "math"
 
 function TentacleAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Tentacles", 2000, "tentacles", 0, 200, true)
+	
+	self.stats = [[7 dmg]]
+	self.desc = [[Creates a tentacle on a random point on the map]]
 end
 
 function TentacleAbility:doability()

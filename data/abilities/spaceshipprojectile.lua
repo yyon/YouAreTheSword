@@ -14,6 +14,8 @@ function SpaceShipProjectile:doability()
 	self.timer = Effects.SimpleTimer(self.entitydata, 2000, function() self:finish() end)
 --	self:firevolley()
 --	self:finish()
+	self.stats = [[14 dmg]]
+	self.desc = [[Shoots a barrage of projectiles in a pattern]]
 end
 
 function SpaceShipProjectile:firevolley(dx, dy)

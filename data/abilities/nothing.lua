@@ -8,6 +8,8 @@ local Effects = require "enemies/effect"
 function NothingAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Nothing", 0, "nothing", 0, 100000, true)
 	self.nonpc = true
+	
+	self.desc = [[Does nothing]]
 end
 
 function NothingAbility:doability()

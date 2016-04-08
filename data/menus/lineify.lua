@@ -58,7 +58,7 @@ lineify.toscreens = function(lines, numlines)
     return screens
 end
 
-lineify.rendertext = function(surface, lines, font, font_size, color, rendering_mode, x, y, centered)
+lineify.rendertext = function(surface, lines, font, font_size, color, rendering_mode, x, y, centered, centeredy)
         if rendering_mode then rendering_mode = "antialiasing" else rendering_mode = "solid" end
         if horizontal_alignement == nil then horizontal_alignement = "left" end
         if vertical_alignement == nil then vertical_alignement = "bottom" end
@@ -68,8 +68,10 @@ lineify.rendertext = function(surface, lines, font, font_size, color, rendering_
             local w, h = text:get_size()
             y = y + h/2
             local actualx = x
+            local actualy = y
             if centered then actualx = x - (w/2) end
-            text:draw_region(0, 0, w, h, surface, actualx, y)
+            if centeredy then actualy = y - (h/2) end 
+            text:draw_region(0, 0, w, h, surface, actualx, actualy)
             y = y + h/2
         end
         

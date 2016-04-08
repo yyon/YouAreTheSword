@@ -17,6 +17,8 @@ function CatShootAbility:initialize(entitydata, type)
 		warmuptime = 500
 	end
 	Ability.initialize(self, entitydata, "Cat Shoot", 800, "fireball", warmuptime, 2000, true, warmupanim)
+	self.stats = [[7-14 dmg]]
+	self.desc = [[Shoots a projectile]]
 end
 
 function CatShootAbility:doability()

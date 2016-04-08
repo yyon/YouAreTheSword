@@ -7,6 +7,10 @@ local FireballAbility = Ability:subclass("FireballAbility")
 
 function FireballAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Lightning Ball", 800, "fireball", 500, 2000, true, "casting")
+	
+	self.stats = [[3.5 dmg
+1s stun]]
+	self.desc = [[Shoots an electric projectile]]
 end
 
 function FireballAbility:doability()

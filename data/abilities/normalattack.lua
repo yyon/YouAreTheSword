@@ -16,6 +16,9 @@ function NormalAbility:initialize(entitydata, anim, aspects)
 	self.aspects = aspects
 
 	Ability.initialize(self, entitydata, "Attack", 50, "normal", 300, 0, true, anim)
+	
+	self.stats = [[7 dmg]]
+	self.desc = [[Generic attack for enemies]]
 end
 
 function NormalAbility:doability(tox, toy)

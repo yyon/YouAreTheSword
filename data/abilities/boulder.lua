@@ -5,6 +5,9 @@ local BoulderAbility = Ability:subclass("FireballAbility")
 
 function BoulderAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Meteor", 2000, "meteor", 0, 3000, true, "casting")
+	
+	self.stats = [[28 dmg]]
+	self.desc = [[A meteor falls from the sky]]
 end
 
 function BoulderAbility:doability()

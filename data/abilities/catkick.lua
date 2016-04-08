@@ -26,6 +26,8 @@ function CatKickAbility:initialize(entitydata, type)
 		warmuptime = 300
 	end
 	Ability.initialize(self, entitydata, "Cat Attack", 800, "", warmuptime, 2000, true, warmup)
+	self.stats = [[7-14 dmg]]
+	self.desc = [[Kicks or punches]]
 end
 
 function CatKickAbility:doability()

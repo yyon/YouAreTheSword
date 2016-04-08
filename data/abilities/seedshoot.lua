@@ -6,6 +6,9 @@ local SeedShootAbility = Ability:subclass("SeedShootAbility")
 
 function SeedShootAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Shoot Seeds", 800, "fireball", 0, 5000, true, "casting")
+	
+	self.stats = [[3.5 * 7 dmg]]
+	self.desc = [[Shoots seeds as projectiles]]
 end
 
 function SeedShootAbility:doability()

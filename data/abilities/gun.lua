@@ -6,6 +6,9 @@ local GunAbility = Ability:subclass("GunAbility")
 
 function GunAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Gun", 2000, "gun", 0, 2000, true, "gun")
+	
+	self.stats = [[0.7 * 8 dmg]]
+	self.desc = [[Shoots a machine gun at to the mouse]]
 end
 
 function GunAbility:doability()

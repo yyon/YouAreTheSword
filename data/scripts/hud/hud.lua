@@ -15,6 +15,7 @@ function hud_manager:create(game)
 	local sword_health_builder = require("scripts/hud/sword_health")
 	local person_status_builder = require("scripts/hud/personstatus")
 	local sword_status_builder = require("scripts/hud/swordstatus")
+	local remaining_status_builder = require("scripts/hud/remainingstatus")
 
 --	menu = health_builder:new(game)
 --  	menu:set_dst_position(0, 10)
@@ -60,6 +61,11 @@ function hud_manager:create(game)
 	
 	local menu = sword_status_builder:new(game)
 	menu:set_dst_position(-10,20+h)
+	hud.elements[#hud.elements + 1] = menu
+	menu.group = 3
+	
+	local menu = remaining_status_builder:new(game)
+	menu:set_dst_position(-10,30+h*2)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 3
 	

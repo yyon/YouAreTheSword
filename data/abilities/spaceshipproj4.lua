@@ -16,6 +16,8 @@ function SpaceShipProjectile:doability()
 --	self:finish()
 	self.angle = -math.pi*3/4
 	self.dangle = math.pi*3 / 32
+	self.stats = [[3.5 dmg]]
+	self.desc = [[Shoots a barrage of projectiles in a pattern]]
 end
 
 function SpaceShipProjectile:firevolley(dx, dy)

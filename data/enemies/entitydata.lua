@@ -785,10 +785,7 @@ function EntityData:dodamage(target, damage, aspects)
 
 	if target.life <= 0 or aspects.instantdeath or (game.instantdeath and damage ~= 0) then
 		local remainingmonsters = self:getremainingmonsters()
-		if self.team ~= "adventurer" then
-			remainingmonsters = remainingmonsters - 1
-		end
-
+		
 		target:kill()
 
 		if remainingmonsters == 0 then
