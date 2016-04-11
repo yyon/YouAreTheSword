@@ -1,11 +1,6 @@
-local submenu = {}
+local class = require "middleclass"
 
-function submenu:new(game)
-	local o = {game = game}
-	setmetatable(o, self)
-	self.__index = self
-	return o
-end
+local submenu = class("submenu")
 
 function submenu:on_started()
 	self.background_surfaces = sol.surface.create("pause_submenus.png", true)

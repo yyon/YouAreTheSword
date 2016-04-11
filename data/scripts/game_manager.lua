@@ -20,6 +20,7 @@ local hud_manager = require "scripts/hud/hud"
 local dialogmenu = require "menus/dialog"
 local abhelpmenu = require "menus/abilityhelp"
 local pause_manager = require("menus/pause")
+local keyconfmenu = require "menus/keyconfig"
 local pause_menu
 
 require "pickle"
@@ -213,6 +214,10 @@ function sol.main:on_key_pressed(key, modifiers)
 			hero.entitydata:throwclosest(true)
 			hero.entitydata:throwclosest(true)
 		end
+	elseif key == "h" then
+		configsave()
+	elseif key == "x" then
+		configload()
 	end
 
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
@@ -283,6 +288,11 @@ function sol.main:on_key_pressed(key, modifiers)
 	elseif (key == "left alt") then
 		self.helpmenu = abhelpmenu:new(game)
 		sol.menu.start(game, self.helpmenu)
+		game.dontshowpausemenu = true
+		game:set_paused(true)
+	elseif key == "-" then
+		self.keyconfmenu = keyconfmenu:new(game)
+		sol.menu.start(game, self.keyconfmenu)
 		game.dontshowpausemenu = true
 		game:set_paused(true)
 	--debug keys
@@ -498,6 +508,12 @@ function luastrsanitize(str)
 	str=str:gsub("\n","\\n")    --replace " with "
 	return str
 end
+function luastrunsanitize(str)
+	str=str:gsub("\\\\","\\")  --replace  with
+	str=str:gsub("\\\"","\"")    --replace " with "
+	str=str:gsub("\\n","\n")    --replace " with "
+	return str
+end
 
 function save()
 --	print("save")
@@ -698,5 +714,31 @@ function load()
 
 	tick()
 end
+
+function configsave()
+	if conf == nil then conf = {} end
+	
+	local conffile = sol.file.open("conf", "w")
+	
+	local conftext = pickle(conf)
+	conftext = luastrsanitize(conftext)
+	
+	conffile:write(conftext)
+	
+	conffile:close()
+end
+
+function configload()
+	local conffile = sol.file.open("conf", "r")
+	
+	local conftext = conffile:read()
+	conftext = luastrunsanitize(conftext)
+	
+	conf = unpickle(conftext)
+	
+	conffile.close()
+end
+
+configload()
 
 return game_manager
