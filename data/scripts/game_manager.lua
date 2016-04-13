@@ -26,7 +26,6 @@ local pause_menu
 require "pickle"
 
 local os = require "os"
-local dvorak = os.getenv("USER") == "yyon" -- TODO: keyboard config
 
 local Effects = require "enemies/effect"
 
@@ -59,13 +58,122 @@ function game_manager:start_game()
 
 end
 
+local function onkey(k, released)
+	local hero = game:get_hero()
+
+	local x, y = hero.entitydata:gettargetpos()
+	
+	local action 
+	for a, keylist in pairs(conf.keys) do
+		for i, key in pairs(keylist) do
+			if key == k then
+				action = a
+			end
+		end
+	end
+	
+	if action == nil then return false end
+	
+	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
+		if action == "normal" then
+			if game.dialog ~= nil then
+				if game.dialog.isshowingdialog then
+					game.dialog:showscreen()
+				end
+			end
+		elseif action == "abilityhelp" and released then
+			if game.helpmenu ~= nil then
+				sol.menu.stop(game.helpmenu)
+				game:set_paused(false)
+				game.dontshowpausemenu = false
+			end
+		end
+		return
+	end
+	
+	print(action)
+	
+	if not released then
+		if action == "pause" then
+			game:set_paused(true)
+		elseif action == "swordtransform" then
+			hero.entitydata:startability("swordtransform")
+		elseif action == "throwallies" then
+			hero.entitydata:throwclosest(true)
+		elseif action == "throwenemies" then
+			hero.entitydata:throwclosest(false)
+		elseif action == "throwany" then
+			hero.entitydata:throwclosest(x, y)
+		elseif action == "special" then
+			hero.entitydata:startability("special", x, y)
+		elseif action == "block" then
+			hero.entitydata:startability("block")
+		elseif action == "normal" then
+			local didsomething = false
+	
+			local map = hero:get_map()
+			for entity in map:get_entities("") do
+				if entity.dialog ~= nil then
+					if hero:get_distance(entity) < 80 then
+						if hero:get_direction4_to(entity) == hero:get_direction() then
+							didsomething = true
+							if entity.entitydata ~= nil then
+							local d = entity:get_direction4_to(hero)
+								entity.entitydata:setdirection(d)
+							end
+
+							game:start_dialog(entity.dialog)
+						end
+					end
+				end
+				if entity:get_type() == "npc" then
+					if hero:get_distance(entity) < 80 then
+						if hero:get_direction4_to(entity) == hero:get_direction() then
+							local name = entity:get_name()
+							if name ~= nil then
+								didsomething = true
+	
+								game:start_dialog(name)
+							end
+						end
+					end
+				end
+			end
+	
+			if not didsomething then
+				hero.entitydata:startability("normal")
+			end
+		elseif action == "abilityhelp" then
+			game.helpmenu = abhelpmenu:new(game)
+			sol.menu.start(game, game.helpmenu)
+			game.dontshowpausemenu = true
+			game:set_paused(true)
+		end
+	elseif released then	
+		if action == "normal" then
+			hero.entitydata:keyrelease("normal")
+		elseif action == "block" then
+			hero.entitydata:keyrelease("block")
+		elseif action == "special" then
+			hero.entitydata:keyrelease("special")
+		elseif action == "swordtransform" then
+			hero.entitydata:keyrelease("swordtransform")
+		end
+	end
+	
+	return true
+end
+
 function sol.main:on_key_pressed(key, modifiers)
-	if game == nil then
+	if game == nil or game:is_paused() then
 		keyhandler(key, modifiers)
 		return
 	end
 
 	local hero = game:get_hero()
+	
+	local result = onkey(key)
+	if result then return end
 
 	if key == "p" then
 		if game.dontattack then
@@ -219,18 +327,7 @@ function sol.main:on_key_pressed(key, modifiers)
 	elseif key == "x" then
 		configload()
 	end
-
-	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
-		if key == "space" then
-			if game.dialog ~= nil then
-				if game.dialog.isshowingdialog then
-					game.dialog:showscreen()
-				end
-			end
-		end
-		return
-	end
-
+	
 	local x, y = hero.entitydata:gettargetpos()
 
 	if x == nil then
@@ -240,57 +337,7 @@ function sol.main:on_key_pressed(key, modifiers)
 
 	hero:set_direction(hero:get_direction4_to(x, y))
 
-	if key == "space" then
-		local didsomething = false
-
-		local map = hero:get_map()
-		for entity in map:get_entities("") do
-			if entity.dialog ~= nil then
-				if hero:get_distance(entity) < 80 then
-					if hero:get_direction4_to(entity) == hero:get_direction() then
-						didsomething = true
-						if entity.entitydata ~= nil then
-							local d = entity:get_direction4_to(hero)
-							entity.entitydata:setdirection(d)
-						end
-
-						game:start_dialog(entity.dialog)
-					end
-				end
-			end
-			if entity:get_type() == "npc" then
-				if hero:get_distance(entity) < 80 then
-					if hero:get_direction4_to(entity) == hero:get_direction() then
-						local name = entity:get_name()
-						if name ~= nil then
-							didsomething = true
-
-							game:start_dialog(name)
-						end
-					end
-				end
-			end
-		end
-
-		if not didsomething then
-			hero.entitydata:startability("normal")
-		end
-	elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
-		hero.entitydata:startability("swordtransform")
-	elseif key == "left shift" then
-		hero.entitydata:startability("block")
-	elseif key == "escape" then
-		print("TODO: pause menu")
-	elseif (key == "q" and not dvorak) or (key == "'" and dvorak) then
-		hero.entitydata:startability("special", x, y)
-	elseif (key == "tab") then
-		hero.entitydata:throwclosest(x, y)
-	elseif (key == "left alt") then
-		self.helpmenu = abhelpmenu:new(game)
-		sol.menu.start(game, self.helpmenu)
-		game.dontshowpausemenu = true
-		game:set_paused(true)
-	elseif key == "-" then
+	if key == "-" then
 		self.keyconfmenu = keyconfmenu:new(game)
 		sol.menu.start(game, self.keyconfmenu)
 		game.dontshowpausemenu = true
@@ -353,17 +400,6 @@ function sol.main:on_key_released(key, modifiers)
 		return
 	end
 
-	if (key == "left alt") then
-		if self.helpmenu ~= nil then
-			sol.menu.stop(self.helpmenu)
-			game:set_paused(false)
-			game.dontshowpausemenu = false
-		end
-	end
-	
-	if game:is_paused() or game:is_suspended() then
-		return
-	end
 	
 	local hero = game:get_hero()
 	if hero.entitydata == nil then
@@ -378,17 +414,12 @@ function sol.main:on_key_released(key, modifiers)
 		hero:set_direction(hero:get_direction4_to(x, y))
 	end
 
-	if key == "space" then
-		hero.entitydata:keyrelease("normal")
-	elseif (key == "e" and not dvorak) or (key == "." and dvorak) then
-		hero.entitydata:keyrelease("swordtransform")
-	elseif key == "left shift" then
-		hero.entitydata:keyrelease("block")
-	end
+	local result = onkey(key, true)
+	if result then return end
 end
 
 function sol.main:on_mouse_pressed(button, ...)
-	if game == nil then
+	if game == nil or game:is_paused() then
 		mousehandler(button, ...)
 		return
 	end
@@ -413,13 +444,11 @@ function sol.main:on_mouse_pressed(button, ...)
 	end
 
 	hero = game:get_hero()
-	if button == "left" then
-		hero.entitydata:startability("special", x, y)
-	elseif button == "right" then
-		hero.entitydata:throwclosest(true)
-	elseif button == "middle" then
-		hero.entitydata:throwclosest(false)
-	end
+	
+	button = button .. "_mouse"
+	
+	local result = onkey(button)
+	if result then return end
 end
 
 function tick()
@@ -600,6 +629,9 @@ function load()
 --		game:set_ability("sword", 1)--"sprites/hero/sword1")
 		game:set_starting_location("hub")
 	end
+	
+	configload()
+	
 	game:start()
 
 	game:set_ability("sword", 0)
@@ -608,16 +640,8 @@ function load()
 	game:set_ability("lift", 0)
 	game:set_ability("swim", 0)
 	game:set_ability("detect_weak_walls", 0)
-
-	game:set_command_keyboard_binding("left", "a")
-	game:set_command_keyboard_binding("right", dvorak and "e" or "d")
-	game:set_command_keyboard_binding("up", dvorak and "," or "w")
-	game:set_command_keyboard_binding("down", dvorak and "o" or "s")
-	game:set_command_keyboard_binding("pause", "escape")
-	game:set_command_keyboard_binding("action", "")
-	game:set_command_keyboard_binding("attack", "")
-	game:set_command_keyboard_binding("item_1", "")
-	game:set_command_keyboard_binding("item_2", "")
+	
+	updatekeys()
 
 --	local width, height = sol.video.get_quest_size()
 --	sol.video.set_window_size(width*2, height*2)
@@ -736,9 +760,37 @@ function configload()
 	
 	conf = unpickle(conftext)
 	
+	if conf.keys == nil then
+		conf.keys = {
+			left={"a"},
+			up={"w"},
+			down={"s"},
+			right={"d"},
+			pause={"escape"},
+			swordtransform={"e"},
+			throwallies={"right_mouse"},
+			throwenemies={"middle_mouse"},
+			throwany={"tab"},
+			special={"left_mouse", "q"},
+			block={"left shift"},
+			normal={"space"},
+			abilityhelp={"left alt"}
+		}
+	end
+	
 	conffile.close()
 end
 
-configload()
+function updatekeys()
+	game:set_command_keyboard_binding("left", conf.keys.left[1])
+	game:set_command_keyboard_binding("right", conf.keys.right[1])
+	game:set_command_keyboard_binding("up", conf.keys.up[1])
+	game:set_command_keyboard_binding("down", conf.keys.down[1])
+	game:set_command_keyboard_binding("pause", "")
+	game:set_command_keyboard_binding("action", "")
+	game:set_command_keyboard_binding("attack", "")
+	game:set_command_keyboard_binding("item_1", "")
+	game:set_command_keyboard_binding("item_2", "")
+end
 
 return game_manager
