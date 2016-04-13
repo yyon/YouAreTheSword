@@ -1,5 +1,7 @@
 local submenu = require("menus/pause_submenu")
 
+local main_submenu = submenu:new()
+
 function main_submenu:on_started()
   submenu.on_started(self)
 
