@@ -400,7 +400,22 @@ function sol.main:on_key_released(key, modifiers)
 		return
 	end
 
+<<<<<<< HEAD
 	
+=======
+	if (key == "left alt") then
+		if self.helpmenu ~= nil then
+			sol.menu.stop(self.helpmenu)
+			game:set_paused(false)
+			game.dontshowpausemenu = false
+		end
+	end
+
+	if game:is_paused() or game:is_suspended() then
+		return
+	end
+
+>>>>>>> 0492bfa75ef22af573e44e52dcef451fac057630
 	local hero = game:get_hero()
 	if hero.entitydata == nil then
 		return
@@ -741,20 +756,19 @@ end
 
 function configsave()
 	if conf == nil then conf = {} end
-	
+
 	local conffile = sol.file.open("conf", "w")
-	
+
 	local conftext = pickle(conf)
 	conftext = luastrsanitize(conftext)
-	
+
 	conffile:write(conftext)
-	
+
 	conffile:close()
 end
 
 function configload()
 	local conffile = sol.file.open("conf", "r")
-	
 	local conftext = conffile:read()
 	conftext = luastrunsanitize(conftext)
 	

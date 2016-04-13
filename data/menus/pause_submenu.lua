@@ -96,7 +96,7 @@ function submenu:on_command_pressed(command)
 	end
 
 	if self.save_dialog_state == 0 then
-		
+
 	else
 		if command ~= "pause" then
 			handled = true
@@ -142,7 +142,7 @@ function submenu:draw_save_dialog_if_any(dst_surface)
 		self.save_dialog_sprite:draw(dst_surface, x - 110, y - 33)
 		self.question_text_1:draw(dst_surface, x, y - 8)
 		self.question_text_2:draw(dst_surface, x, y + 8)
-		self.answer_text_1:draw(dst_surface, x - 60, y + 28
+		self.answer_text_1:draw(dst_surface, x - 60, y + 28)
 		self.answer_text_2:draw(dst_surface, x + 59, y + 28)
 	end
 end
