@@ -62,8 +62,8 @@ local function onkey(k, released)
 	local hero = game:get_hero()
 
 	local x, y = hero.entitydata:gettargetpos()
-	
-	local action 
+
+	local action
 	for a, keylist in pairs(conf.keys) do
 		for i, key in pairs(keylist) do
 			if key == k then
@@ -71,9 +71,9 @@ local function onkey(k, released)
 			end
 		end
 	end
-	
+
 	if action == nil then return false end
-	
+
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
 		if action == "normal" then
 			if game.dialog ~= nil then
@@ -90,9 +90,9 @@ local function onkey(k, released)
 		end
 		return
 	end
-	
+
 	print(action)
-	
+
 	if not released then
 		if action == "pause" then
 			game:set_paused(true)
@@ -110,7 +110,7 @@ local function onkey(k, released)
 			hero.entitydata:startability("block")
 		elseif action == "normal" then
 			local didsomething = false
-	
+
 			local map = hero:get_map()
 			for entity in map:get_entities("") do
 				if entity.dialog ~= nil then
@@ -132,14 +132,14 @@ local function onkey(k, released)
 							local name = entity:get_name()
 							if name ~= nil then
 								didsomething = true
-	
+
 								game:start_dialog(name)
 							end
 						end
 					end
 				end
 			end
-	
+
 			if not didsomething then
 				hero.entitydata:startability("normal")
 			end
@@ -149,7 +149,7 @@ local function onkey(k, released)
 			game.dontshowpausemenu = true
 			game:set_paused(true)
 		end
-	elseif released then	
+	elseif released then
 		if action == "normal" then
 			hero.entitydata:keyrelease("normal")
 		elseif action == "block" then
@@ -160,7 +160,7 @@ local function onkey(k, released)
 			hero.entitydata:keyrelease("swordtransform")
 		end
 	end
-	
+
 	return true
 end
 
@@ -171,7 +171,7 @@ function sol.main:on_key_pressed(key, modifiers)
 	end
 
 	local hero = game:get_hero()
-	
+
 	local result = onkey(key)
 	if result then return end
 
@@ -327,7 +327,7 @@ function sol.main:on_key_pressed(key, modifiers)
 	elseif key == "x" then
 		configload()
 	end
-	
+
 	local x, y = hero.entitydata:gettargetpos()
 
 	if x == nil then
@@ -400,9 +400,9 @@ function sol.main:on_key_released(key, modifiers)
 		return
 	end
 
-<<<<<<< HEAD
-	
-=======
+--<<<<<<< HEAD
+
+--=======
 	if (key == "left alt") then
 		if self.helpmenu ~= nil then
 			sol.menu.stop(self.helpmenu)
@@ -415,7 +415,7 @@ function sol.main:on_key_released(key, modifiers)
 		return
 	end
 
->>>>>>> 0492bfa75ef22af573e44e52dcef451fac057630
+-->>>>>>> 0492bfa75ef22af573e44e52dcef451fac057630
 	local hero = game:get_hero()
 	if hero.entitydata == nil then
 		return
@@ -459,9 +459,9 @@ function sol.main:on_mouse_pressed(button, ...)
 	end
 
 	hero = game:get_hero()
-	
+
 	button = button .. "_mouse"
-	
+
 	local result = onkey(button)
 	if result then return end
 end
@@ -644,9 +644,9 @@ function load()
 --		game:set_ability("sword", 1)--"sprites/hero/sword1")
 		game:set_starting_location("hub")
 	end
-	
+
 	configload()
-	
+
 	game:start()
 
 	game:set_ability("sword", 0)
@@ -655,7 +655,7 @@ function load()
 	game:set_ability("lift", 0)
 	game:set_ability("swim", 0)
 	game:set_ability("detect_weak_walls", 0)
-	
+
 	updatekeys()
 
 --	local width, height = sol.video.get_quest_size()
@@ -771,9 +771,9 @@ function configload()
 	local conffile = sol.file.open("conf", "r")
 	local conftext = conffile:read()
 	conftext = luastrunsanitize(conftext)
-	
+
 	conf = unpickle(conftext)
-	
+
 	if conf.keys == nil then
 		conf.keys = {
 			left={"a"},
@@ -791,7 +791,7 @@ function configload()
 			abilityhelp={"left alt"}
 		}
 	end
-	
+
 	conffile.close()
 end
 

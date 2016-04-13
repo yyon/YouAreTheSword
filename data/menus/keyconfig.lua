@@ -13,13 +13,13 @@ local keylistener = class("keylistener")
 
 function dialog:initialize(game)
 	inputhandler:new(self)
-	
+
 	local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
   	self.game = game
 	self.w, self.h = self.screenw, self.screenh
   	self.surface = sol.surface.create(self.w, self.h)
-	
+
 	self.buttons = {}
 	self.buttons.upbutton1 = menubutton(self, w/2 - 305, 40, 600, 60, "", function() self:config("test", 1) end)
 	self.buttons.upbutton2 = menubutton(self, w/2 + 305, 40, 600, 60, "", function() self:config("test", 2) end)
@@ -27,7 +27,7 @@ function dialog:initialize(game)
 end
 
 function dialog:refresh()
-	
+
 	self:rebuild_surface()
 end
 
@@ -67,20 +67,20 @@ end
 
 function keylistener:initialize(game, parentmenu, type, num)
 	inputhandler:new(self)
-	
+
 	self.parentmenu = parentmenu
 	self.type = type
 	self.num = num
-	
+
 	local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
   	self.game = game
 	self.w, self.h = self.screenw, self.screenh
   	self.surface = sol.surface.create(self.w, self.h)
-	
+
 	self.box = createbox(800, 600, true, false)
 	lineify.rendertext(self.box, "Press key or mouse button\nPress delete to clear", "LiberationMono-Regular", 25, {255,255,255}, true, 400, 300, true, true)
-	
+
 	print "Key listener"
 end
 

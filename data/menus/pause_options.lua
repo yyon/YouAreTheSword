@@ -1,73 +1,57 @@
-local submenu = require("menus/pause_submenu")
+local class = require("middleclass")
 
-local main_submenu = submenu:new()
+require "scripts/inputhandler"
 
-function main_submenu:on_started()
-  submenu.on_started(self)
+local math = require "math"
 
-  local font, font_size = "8_bit_3", 12
-  local width, height = sol.video.get_quest_size()
-  local center_x, center_y = width / 2, height / 2
+local lineify = require("menus/lineify")
+local createbox = require "menus/drawbox"
 
-  self.resume_button_text = sol.text_surface.create {
-    horizontal_alignment = "center",
-    vertical_alignment = "top",
-    font = font,
-    font_size = font_size,
-    text_key = "selection_menu.main.resume",
-  }
-  self.resume_button_text:set_xy(center_x - 50, center_y)
+local dialog = class("dialog")
 
-  self.save_button_text = sol.text_surface.create {
-    horizontal_alignment = "center",
-    vertical_alignment = "top",
-    font = font,
-    font_size = font_size,
-    text_key = "selection_menu.main.save",
-  }
-  self.save_button_text:set_xy(center_x - 100, center_y)
+local keylistener = class("keylistener")
 
-  self.load_button_text = sol.text_surface.create {
-    horizontal_alignment = "center",
-    vertical_alignment = "top",
-    font = font,
-    font_size = font_size,
-    text_key = "selection_menu.main.load",
-  }
-  self.load_button_text:set_xy(center_x - 150, center_y)
+function dialog:initialize(game)
+  inputhandler:new(self)
 
+  self.game = game
+  local w, h = sol.video.get_quest_size()
+	self.screenw, self.screenh = w, h
+	self.w, self.h = self.screenw, self.screenh
+  self.surface = sol.surface.create(self.w, self.h)
 
-  self.options_button_text = sol.text_surface.create {
-    horizontal_alignment = "center",
-    vertical_alignment = "top",
-    font = font,
-    font_size = font_size,
-    text_key = "selection_menu.main.options",
-  }
-  self.options_button_text:set_xy(center_x - 200, center_y)
+  self.buttons = {}
 
-
-  self.quit_button_text = sol.text_surface.create {
-    horizontal_alignment = "center",
-    vertical_alignment = "top",
-    font = font,
-    font_size = font_size,
-    text_key = "selection_menu.main.quit",
-  }
-  self.quit_button_text:set_xy(center_x - 250, center_y)
-
+  self.buttons.resume_button = menubutton(self, center_x, center_y, 50, 30, selection_menu.options.resume, function() pause:on_finished() end)
+  self.buttons.save_button = menubutton(self, center_x, center_y - 50, 50, 30, selection_menu.options.save, nil)
+  self.buttons.load_button = menubutton(self, center_x, center_y - 100, 50, 30, selection_menu.options.load, nil)
+  self.buttons.options_button = menubutton(self, center_x, center_y - 150, 50, 30, selection_menu.options.options, nil)
+  self.buttons.quit_button = menubutton(self, center_x, center_y - 200, 50, 30, selection_menu.options.quit, nil)
 end
 
-function main_submenu:on_draw(dst_surface)
-  self:draw_background(dst_surface)
-  self:draw_caption(dst_surface)
-
-  self.resume_button_text:draw(dst_surface)
-  self.save_button_text:draw(dst_surface)
-  self.load_button_text:draw(dst_surface)
-  self.options_button_text:draw(dst_surface)
-  self.quit_button_text:draw(dst_surface)
-
+function dialog:on_started()
+  	self:check()
 end
 
-return main_submenu
+function dialog:check()
+  	self:rebuild_surface()
+  	sol.timer.start(self, 500, function()
+    		self:check()
+  	end)
+end
+
+function dialog:rebuild_surface()
+	self.surface:clear()
+	for _, button in pairs(self.buttons) do
+		button:draw(self.surface)
+	end
+end
+
+function dialog:on_draw(dst_surface)
+	self.surface:draw(dst_surface, self.dst_x, self.dst_y)
+end
+
+function dialog:finish()
+  game:set_paused(false)
+  sol.menu.stop(self)
+end
