@@ -400,20 +400,6 @@ function sol.main:on_key_released(key, modifiers)
 		return
 	end
 
-
-
-	if (key == "left alt") then
-		if self.helpmenu ~= nil then
-			sol.menu.stop(self.helpmenu)
-			game:set_paused(false)
-			game.dontshowpausemenu = false
-		end
-	end
-
-	if game:is_paused() or game:is_suspended() then
-		return
-	end
-
 	local hero = game:get_hero()
 	if hero.entitydata == nil then
 		return

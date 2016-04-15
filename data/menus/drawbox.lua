@@ -3,6 +3,7 @@ local corner2 = sol.surface.create("menus/corner2.png")
 local corner3 = sol.surface.create("menus/corner3.png")
 local corner4 = sol.surface.create("menus/corner4.png")
 local top = sol.surface.create("menus/top.png")
+local lineify = require("menus/lineify")
 
 local function drawbox(surface, w, h)
 	surface:fill_color({19,19,19})
@@ -22,7 +23,11 @@ local function drawtop(surface, w, h)
 	top:draw(surface, (w-tw) / 2, 0)
 end
 
-local function createbox(w, h, corners, top)
+local function centertext(surface, w, h, text)
+	lineify.rendertext(surface, text, "LiberationMono-Regular", 25, {255,255,255}, true, w/2, h/2, true, true)
+end
+
+local function createbox(w, h, corners, top, text)
 	local surface = sol.surface.create(w, h)
 	drawbox(surface, w, h)
 	if corners then
@@ -31,7 +36,21 @@ local function createbox(w, h, corners, top)
 	if top then
 		drawtop(surface, w, h)
 	end
+	if text ~= nil then
+		centertext(surface, w, h, text)
+	end
 	return surface
+end
+
+function boxsprite(x, y, w, h, corners, top, text)
+	local spr = {}
+	local surface = createbox(w, h, corners, top, text)
+	spr.surface = surface
+	spr.x, spr.y, spr.w, spr.h = x,y,w,h
+	function spr:draw(tosurface)
+		self.surface:draw(tosurface, self.x - self.w/2, self.y - self.h/2)
+	end
+	return spr
 end
 
 return createbox
