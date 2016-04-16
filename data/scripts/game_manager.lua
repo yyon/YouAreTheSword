@@ -61,8 +61,6 @@ end
 local function onkey(k, released)
 	local hero = game:get_hero()
 
-	local x, y = hero.entitydata:gettargetpos()
-
 	local action
 	for a, keylist in pairs(conf.keys) do
 		for i, key in pairs(keylist) do
@@ -91,7 +89,7 @@ local function onkey(k, released)
 		return
 	end
 
-	print(action)
+	local x, y = hero.entitydata:gettargetpos()
 
 	if not released then
 		if action == "pause" then
@@ -165,6 +163,16 @@ local function onkey(k, released)
 end
 
 function sol.main:on_key_pressed(key, modifiers)
+	if key == "n" then
+		print("started lines")
+		function trace (event, line)
+			local s = debug.getinfo(2).short_src
+			print(s .. ":" .. line)
+		end
+
+		debug.sethook(trace, "l")
+	end
+	
 	if game == nil or game:is_paused() then
 		keyhandler(key, modifiers)
 		return
@@ -275,14 +283,6 @@ function sol.main:on_key_pressed(key, modifiers)
 			outfile:close()
 			startedprofiler = false
 		end
-	elseif key == "n" then
-		print("started lines")
-		function trace (event, line)
-			local s = debug.getinfo(2).short_src
-			print(s .. ":" .. line)
-		end
-
-		debug.sethook(trace, "l")
 	elseif key == "m" then
 		if game.muted then
 			print("unmuted")
@@ -405,14 +405,6 @@ function sol.main:on_key_released(key, modifiers)
 		return
 	end
 
---	mousex, mousey = sol.input.get_mouse_position()
---	x, y = convert_to_map(mousex, mousey)
-	local x, y = hero.entitydata:gettargetpos()
-
-	if x ~= nil then
-		hero:set_direction(hero:get_direction4_to(x, y))
-	end
-
 	local result = onkey(key, true)
 	if result then return end
 end
@@ -497,9 +489,9 @@ function tick()
 
 		if hero.entitydata ~= nil then
 			local soulsdrop = 0.0005
-			if hero.entitydata.team == "monster" then
+			if hero.entitydata.actualteam == "monster" then
 				soulsdrop = 0.01
-			elseif hero.entitydata.team == "dunsmur" then
+			elseif hero.entitydata.actualteam == "dunsmur" then
 				soulsdrop = 0
 			end
 			if map.nomonstersleft then
@@ -753,11 +745,15 @@ end
 
 function configload()
 	local conffile = sol.file.open("conf", "r")
-	local conftext = conffile:read()
-	conftext = luastrunsanitize(conftext)
+	if conffile ~= nil then
+		local conftext = conffile:read()
+		conftext = luastrunsanitize(conftext)
+	
+		conf = unpickle(conftext)
+	end
 
-	conf = unpickle(conftext)
-
+	if conf == nil then conf = {} end
+	
 	if conf.keys == nil then
 		conf.keys = {
 			left={"a"},
@@ -775,8 +771,10 @@ function configload()
 			abilityhelp={"left alt"}
 		}
 	end
-
-	conffile.close()
+	
+	if conffile ~= nil then
+		conffile.close()
+	end
 end
 
 function updatekeys()

@@ -89,6 +89,7 @@ function EntityData:initialize(entity, theclass, main_sprite, life, team, sworda
 	self.maxlife = self.life
 	self.souls = 1
 	self.team = team
+	self.actualteam = team
 	self.swordability = getrandomfromlist(swordabilities)
 	self.transformability = getrandomfromlist(transformabilities)
 	self.blockability = getrandomfromlist(blockabilities)
@@ -207,6 +208,8 @@ function EntityData:bepossessedbyhero()
 
 	self.entity = hero
 	self:applytoentity()
+	
+	self.team = "adventurer"
 
 	if isfreezed then
 		hero:freeze()
@@ -266,6 +269,8 @@ function EntityData:unpossess(name)
 	self:applytoentity()
 
 	self.entity:setdirection(d)
+	
+	self.team = self.actualteam
 
 	if self:isfrozen(hero) then
 		hero:unfreeze()
@@ -1258,12 +1263,12 @@ end
 function EntityData:getremainingmonsters()
 	local enemiesremaining = 0
 
-	if self.team == "monster" then
+	if self.actualteam == "monster" then
 		enemiesremaining = 1
 	end
 
 	for entitydata in self:getotherentities() do
-		if entitydata.team == "monster" and not entitydata.doesntcountsasmonster then
+		if entitydata.actualteam == "monster" and not entitydata.doesntcountsasmonster then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
@@ -1275,13 +1280,13 @@ function EntityData:getremainingadventurers(dontcountself)
 	local enemiesremaining = 0
 
 	if not dontcountself then
-		if self.team == "adventurer" and self.entity ~= nil then
+		if self.actualteam == "adventurer" and self.entity ~= nil then
 			enemiesremaining = 1
 		end
 	end
 
 	for entitydata in self:getotherentities() do
-		if entitydata.team == "adventurer" and not entitydata.doesntcountsasadventurer then
+		if entitydata.actualteam == "adventurer" and not entitydata.doesntcountsasadventurer then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
