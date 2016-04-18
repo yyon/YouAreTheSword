@@ -5,6 +5,7 @@ local class = require "middleclass"
 local math = require "math"
 local Grid = require ("jumper/grid") -- The grid class
 local Pathfinder = require ("jumper/pathfinder") -- The pathfinder lass
+local Choice = require "menus/choice"
 
 local damagedisps = {}
 local damagedisp = class("damagedisp")
@@ -211,6 +212,7 @@ function map:freezeentity(entity)
         if entity.entitydata.mapfrozeneffect == nil then
             local newfreezeeffect = Effects.FreezeEffect:new(entity.entitydata)
             entity.entitydata.mapfrozeneffect = newfreezeeffect
+            entity.entitydata:setanimation("stopped")
         end
     end
 end
@@ -279,6 +281,14 @@ end
 
 function map:startdialog(...)
     game:start_dialog(...)
+end
+
+function map:choice(dialog, choice1, choicefunct1, choice2, choicefunct2)
+	self:startdialog(dialog)
+	local choicemenu = Choice(game, choice1, choicefunct1, choice2, choicefunct2)
+	sol.menu.start(game, choicemenu)
+	game.dontshowpausemenu = true
+	game:set_paused(true)
 end
 
 function map:look(name, target)

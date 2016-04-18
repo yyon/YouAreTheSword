@@ -73,7 +73,7 @@ local function onkey(k, released)
 	if action == nil then return false end
 
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
-		if action == "normal" then
+		if action == "normal" and not released then
 			if game.dialog ~= nil then
 				if game.dialog.isshowingdialog then
 					game.dialog:showscreen()
@@ -92,6 +92,8 @@ local function onkey(k, released)
 	local x, y = hero.entitydata:gettargetpos()
 
 	if not released then
+		hero:set_direction(hero:get_direction4_to(x, y))
+
 		if action == "pause" then
 			game:set_paused(true)
 		elseif action == "swordtransform" then
@@ -174,7 +176,9 @@ function sol.main:on_key_pressed(key, modifiers)
 	end
 	
 	if game == nil or game:is_paused() then
-		keyhandler(key, modifiers)
+		if keyhandler ~= nil then
+			keyhandler(key, modifiers)
+		end
 		return
 	end
 
@@ -327,6 +331,8 @@ function sol.main:on_key_pressed(key, modifiers)
 	elseif key == "x" then
 		configload()
 	end
+	
+	if hero.entitydata == nil then return end
 
 	local x, y = hero.entitydata:gettargetpos()
 
@@ -334,8 +340,6 @@ function sol.main:on_key_pressed(key, modifiers)
 		print("COULDN'T FIND MOUSE")
 		return
 	end
-
-	hero:set_direction(hero:get_direction4_to(x, y))
 
 	if key == "-" then
 		self.keyconfmenu = keyconfmenu:new(game)
@@ -411,7 +415,9 @@ end
 
 function sol.main:on_mouse_pressed(button, ...)
 	if game == nil or game:is_paused() then
-		mousehandler(button, ...)
+		if mousehandler ~= nil then
+			mousehandler(button, ...)
+		end
 		return
 	end
 

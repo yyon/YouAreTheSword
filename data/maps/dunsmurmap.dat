@@ -90,32 +90,33 @@ tile{
 
 destination{
   layer = 0,
-  x = 256,
-  y = 621,
+  x = 592,
+  y = 589,
   direction = 1,
 }
 
 enemy{
+  name = "dunsmur",
   layer = 0,
-  x = 512,
+  x = 592,
   y = 181,
-  direction = 0,
+  direction = 3,
   breed = "f_dunsmur",
 }
 
 enemy{
   layer = 0,
-  x = 520,
-  y = 581,
-  direction = 0,
+  x = 400,
+  y = 517,
+  direction = 1,
   breed = "a_knight",
 }
 
 enemy{
   layer = 0,
-  x = 712,
+  x = 792,
   y = 549,
-  direction = 0,
+  direction = 1,
   breed = "a_rogue",
 }
 

@@ -961,7 +961,7 @@ function EntityData:emergencyrescuehero(hero)
 	end
 end
 
-function EntityData:throwsword(entitydata2)
+function EntityData:throwsword(entitydata2, slow)
 	-- throws the demon sword to another person
 
 --	self:log("going to throw to", entitydata2.class)
@@ -1015,7 +1015,11 @@ function EntityData:throwsword(entitydata2)
 			entitydata2:bepossessedbyhero()
 		else
 			local movement = sol.movement.create("target")
-			movement:set_speed(1000)
+			if slow then
+				movement:set_speed(500)
+			else
+				movement:set_speed(1000)
+			end
 			movement:set_target(entitydata2.entity)
 			movement:start(hero)
 
@@ -2058,14 +2062,29 @@ end
 
 function dunsmurclass:stage2()
 	self.main_sprite = "bosses/dunsmur-2"
-	self.swordability = PossessAbility:new(self)
-	self.specialability = FireballConeAbility:new(self)
+	if game.chosedunsmur then
+		self.swordability = SwordAbility:new(self)
+		self.specialability = BoulderAbility:new(self)
+	else
+		self.swordability = PossessAbility:new(self)
+		self.specialability = FireballConeAbility:new(self)
+	end
 end
 
 function dunsmurclass:stage3()
 	self.main_sprite = "bosses/dunsmur-3"
-	self.swordability = PossessAbility:new(self)
-	self.specialability = BoulderAbility:new(self)
+	if game.chosedunsmur then
+		self.swordability = FireballConeAbility:new(self)
+		self.specialability = BoulderAbility:new(self)
+	else
+		self.swordability = PossessAbility:new(self)
+		self.specialability = BoulderAbility:new(self)
+	end
+end
+
+function dunsmurclass:playerstage()
+	self.swordability = SwordAbility:new(self)
+	self.specialability = FireballConeAbility:new(self)
 end
 
 -- Summoned:

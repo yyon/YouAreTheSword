@@ -45,7 +45,7 @@ lineify.toscreens = function(lines, numlines)
     for line in mysplit(lines, "\n") do
         if linenum >= 7 or line == "NEWSCREEN" then
             linenum = 0
-            screens[#self.screens+1] = currentstring
+            screens[#screens+1] = currentstring
             currentstring = ""
         end
         if line ~= "NEWSCREEN" then

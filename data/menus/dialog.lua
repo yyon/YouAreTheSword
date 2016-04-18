@@ -48,10 +48,14 @@ function dialog:ondialog(dialog, endfunct)
     self:showscreen()
 end
 
-function dialog:showscreen()
-    if self.screennum > #self.screens then
+function dialog:finish()
         self.isshowingdialog = false
         game:stop_dialog()
+end
+
+function dialog:showscreen()
+    if self.screennum > #self.screens then
+	self:finish()
     else
         self.screentext = self.screens[self.screennum]
 --        self:rebuild_surface()
