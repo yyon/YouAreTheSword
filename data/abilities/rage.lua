@@ -12,6 +12,8 @@ function RageAbility:initialize(entitydata)
 	
 	self.stats = [[Rage 15s]]
 	self.desc = [[Increases damage for target]]
+	
+	self.heals = true
 end
 
 function RageAbility:doability()
