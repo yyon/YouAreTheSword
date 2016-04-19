@@ -19,10 +19,10 @@ function dialog:initialize(game)
   	self.game = game
 	self.w, self.h = self.screenw, self.screenh
   	self.surface = sol.surface.create(self.w, self.h)
-	
+
 	local h = 40
-	
 	local y = 40
+
 	self.labels = {}
 	self.buttons = {}
 	self.labels.up = boxsprite(w/2 - 355, y, 400, h, false, false, "Up:")
@@ -96,7 +96,7 @@ function dialog:initialize(game)
 	self.buttons.pausebutton2.key = {"pause", 2}
 	y = y + h + 10
 	self.buttons.exitbutton = menubutton(self, w/2, y, 600, h, "exit", function() self:finish() end)
-	
+
 	self:refresh()
 end
 
@@ -112,7 +112,6 @@ function dialog:refresh()
 			button:rebuild()
 		end
 	end
-	
 	self:rebuild_surface()
 end
 
