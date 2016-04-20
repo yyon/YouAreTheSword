@@ -9,8 +9,6 @@ local createbox = require "menus/drawbox"
 
 local dialog = class("dialog")
 
-local keylistener = class("keylistener")
-
 function dialog:initialize(game)
   inputhandler:new(self)
 
@@ -18,15 +16,21 @@ function dialog:initialize(game)
   local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
 	self.w, self.h = self.screenw, self.screenh
+	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
+	local y = center_y
 
   self.buttons = {}
 
-  self.buttons.resume_button = menubutton(self, center_x, center_y, 50, 30, selection_menu.options.resume, function() pause:on_finished() end)
-  self.buttons.save_button = menubutton(self, center_x, center_y - 50, 50, 30, selection_menu.options.save, nil)
-  self.buttons.load_button = menubutton(self, center_x, center_y - 100, 50, 30, selection_menu.options.load, nil)
-  self.buttons.options_button = menubutton(self, center_x, center_y - 150, 50, 30, selection_menu.options.options, nil)
-  self.buttons.quit_button = menubutton(self, center_x, center_y - 200, 50, 30, selection_menu.options.quit, nil)
+  self.buttons.resume_button = menubutton(self, center_x, y, 600, 60, "Resume", function() self:finish() end)
+	y = y - 70
+  self.buttons.save_button = menubutton(self, center_x, y, 600, 60, "Save", nil)
+	y = y - 70
+  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load", nil)
+	y = y - 70
+  self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", nil)
+	y = y - 70
+  self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", nil)
 end
 
 function dialog:on_started()
@@ -54,55 +58,6 @@ end
 function dialog:finish()
   game:set_paused(false)
   sol.menu.stop(self)
-end
-
-function keylistener:initialize(game, parentmenu, type, num)
-	inputhandler:new(self)
-
-	self.parentmenu = parentmenu
-	self.type = type
-	self.num = num
-
-	local w, h = sol.video.get_quest_size()
-	self.screenw, self.screenh = w, h
-  	self.game = game
-	self.w, self.h = self.screenw, self.screenh
-  	self.surface = sol.surface.create(self.w, self.h)
-
-	print "Key listener"
-end
-
-function keylistener:on_started()
-  	self:check()
-end
-
-function keylistener:check()
-  	self:rebuild_surface()
-  	sol.timer.start(self, 500, function()
-    		self:check()
-  	end)
-end
-
-function keylistener:rebuild_surface()
-	self.surface:clear()
-	self.box:draw(self.surface, self.screenw/2 - 400, self.screenh/2 - 300)
-end
-
-function keylistener:on_draw(dst_surface)
-	self.surface:draw(dst_surface, self.dst_x, self.dst_y)
-end
-
-function keylistener:onkey(key)
-	self:finish(key)
-end
-function keylistener:onmouse(button)
-	button = button .. "_mouse"
-	self:finish(button)
-end
-
-function keylistener:finish(key)
-	sol.menu.stop(self)
-	
 end
 
 

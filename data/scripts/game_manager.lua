@@ -95,6 +95,8 @@ local function onkey(k, released)
 		hero:set_direction(hero:get_direction4_to(x, y))
 
 		if action == "pause" then
+			pause_menu = pause_manager:new(game)
+			sol.menu.start(game, pause_menu, false)
 			game:set_paused(true)
 		elseif action == "swordtransform" then
 			hero.entitydata:startability("swordtransform")
@@ -646,7 +648,6 @@ function load()
 --	sol.video.set_window_size(width, height)
 
 	game:set_pause_allowed(true)
-	pause_menu = pause_manager:create(game)
 	local hud = hud_manager:create(game)
 
 	local hero = game:get_hero()
@@ -719,9 +720,8 @@ function load()
 	end
 
 	function game:on_paused()
+		hud:on_paused()
 		if not game.dontshowpausemenu then
-			hud:on_paused()
-			sol.menu.start(game, pause_menu, false)
 		end
 	end
 
