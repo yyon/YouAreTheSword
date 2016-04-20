@@ -154,7 +154,7 @@ function title_screen:try_finish_title()
 		sol.timer.start(self, 50, function()
 			self:phase_title()
 		end)
-		
+
 		handled = true
 	end
 	return handled
