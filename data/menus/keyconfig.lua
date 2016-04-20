@@ -1,4 +1,5 @@
 local class = require("middleclass")
+--local pause_menu = require "menus/pause"
 
 require "scripts/inputhandler"
 
@@ -211,6 +212,8 @@ function keylistener:finish(key)
 	self.parentmenu:refresh()
 	updatekeys()
 	configsave()
+	--self.pause_menu = pause_menu:new(game)
+  --sol.menu.start(game, self.pause_menu)
 end
 
 

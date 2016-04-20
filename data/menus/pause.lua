@@ -1,4 +1,5 @@
 local class = require("middleclass")
+local keyconfmenu = require "menus/keyconfig"
 
 require "scripts/inputhandler"
 
@@ -28,9 +29,16 @@ function dialog:initialize(game)
 	y = y + 70
   self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load", function() self:finish() end)
 	y = y + 70
-  self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:finish() end)
+  self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
 	y = y + 70
   self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () sol.main.exit() end)
+end
+
+function dialog:start_config()
+  sol.menu.stop(self)
+  self.keyconfmenu = keyconfmenu:new(game)
+  sol.menu.start(game, self.keyconfmenu)
+
 end
 
 function dialog:on_started()
