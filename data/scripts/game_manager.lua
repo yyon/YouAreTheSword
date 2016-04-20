@@ -463,17 +463,17 @@ function tick()
 		return
 	end
 
-	if josh and not game:is_paused() then
-		pause()
-		if not didreset then
-			didreset = true
-			load()
-		end
-	end
-
 
 	local hero = game:get_hero()
 	local map = game:get_map()
+	
+	if josh and not game:is_paused() then
+		pause()
+		if map ~= nil and map:get_id() ~= "hub" then
+			deletesave(1)
+			loadfrom(1)
+		end
+	end
 
 	if not (game:is_paused() or game:is_suspended() or hero.entitydata == nil) then
 		if hero.entitydata ~= nil then
