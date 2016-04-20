@@ -30,7 +30,7 @@ function dialog:initialize(game)
 	y = y + 70
   self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:finish() end)
 	y = y + 70
-  self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () self:finish() end)
+  self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () sol.main.exit() end)
 end
 
 function dialog:on_started()
