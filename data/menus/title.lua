@@ -2,6 +2,8 @@ local title_screen = {}
 
 function title_screen:on_started()
 	keyhandler = function(...) self:on_key_pressed(...) end
+	mousehandler = function(...) self:onmouse(...) end
+
 
 	self.phase = "black"
 
@@ -118,6 +120,10 @@ function title_screen:draw_phase_title()
 	if self.show_press_space then
 		self.press_space_img:draw(self.surface, 1280/2, 780)
 	end
+end
+
+function title_screen:onmouse(button)
+	handled = self:try_finish_title()
 end
 
 function title_screen:on_key_pressed(key)
