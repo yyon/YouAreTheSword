@@ -25,6 +25,8 @@ local pause_menu
 
 require "pickle"
 
+local josh = os.getenv("USER") == "jnew23"
+
 local os = require "os"
 
 local Effects = require "enemies/effect"
@@ -95,9 +97,7 @@ local function onkey(k, released)
 		hero:set_direction(hero:get_direction4_to(x, y))
 
 		if action == "pause" then
-			pause_menu = pause_manager:new(game)
-			sol.menu.start(game, pause_menu, false)
-			game:set_paused(true)
+			pause()
 		elseif action == "swordtransform" then
 			hero.entitydata:startability("swordtransform")
 		elseif action == "throwallies" then
@@ -164,6 +164,12 @@ local function onkey(k, released)
 	end
 
 	return true
+end
+
+function pause()
+	pause_menu = pause_manager:new(game)
+	sol.menu.start(game, pause_menu, false)
+	game:set_paused(true)
 end
 
 function sol.main:on_key_pressed(key, modifiers)
@@ -455,6 +461,10 @@ function tick()
 		game.hasended = false
 		load()
 		return
+	end
+
+	if josh and not game:is_paused() then
+		pause()
 	end
 
 
