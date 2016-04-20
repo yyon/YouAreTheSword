@@ -465,6 +465,10 @@ function tick()
 
 	if josh and not game:is_paused() then
 		pause()
+		if not didreset then
+			didreset = true
+			load()
+		end
 	end
 
 
