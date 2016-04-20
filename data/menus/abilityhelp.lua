@@ -15,6 +15,7 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
   	self.surface = sol.surface.create(self.w, self.h)
 	self.types = {"normal", "block", "swordtransform", "special"}
+	self.typenames = {"Normal Ability", "Block Ability", "Sword Transform Ability", "Special Ability"}
 	local hero = self.game:get_hero().entitydata
 	if hero ~= nil then
 		self:rebuild_surface()
@@ -79,6 +80,14 @@ function dialog:rebuild_surface()
 			desc = lineify.tolines(desc, 28)
 		          descy = lineify.rendertext(abilitysurface, desc, "LiberationMono-Regular", 15, {255,255,255}, true, 40, descy, false)
 		end
+		
+		typedesc = lineify.rendertext(abilitysurface, self.typenames[i], "LiberationMono-Regular", 15, {255,255,255}, true, self.w/8, self.h-50, true, true)
+		local keys = conf.keys[type]
+		local key = keys[1]
+		if key == nil then key = keys[2]
+		elseif keys[2] ~= nil then key = key .. " or " .. keys[2] end
+		if key == nil then key = "[UNBOUND]" end
+		keydesc = lineify.rendertext(abilitysurface, key, "LiberationMono-Regular", 15, {255,255,255}, true, self.w/8, self.h-30, true, true)
 		
 		abilitysurface:draw(self.surface, self.w / 4 * (i-1), 0)
 	end

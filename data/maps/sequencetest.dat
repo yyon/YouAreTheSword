@@ -1813,3 +1813,12 @@ wall{
   stops_projectiles = true,
 }
 
+teletransporter{
+  layer = 0,
+  x = -64,
+  y = 864,
+  width = 1504,
+  height = 32,
+  destination_map = "tutorial/1",
+}
+

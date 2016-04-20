@@ -10,7 +10,7 @@ and blow everything up!
 dialog{
   id = "dunsmur.1",
   text = [[
-Oh look, it's my sword.
+Oh look, it's my sword
 NEWSCREEN
 Come back to me, sword
 ]]
@@ -110,6 +110,8 @@ dialog{
   id = "sequencetest.8",
   text = [[
 "..."
+NEWSCREEN
+Use ${up}, ${left}, ${down}, and ${right} to move.
 ]]
 }
 
@@ -136,6 +138,13 @@ dialog{
   id = "title_screen.press_space",
   text = [[
 Press The Space Bar
+]]
+}
+
+dialog{
+  id = "tutorial.1",
+  text = [[
+Press ${normal} to speak to people or read signs.
 ]]
 }
 

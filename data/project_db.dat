@@ -20,6 +20,7 @@ map{ id = "sequencetest", description = "sequencetest" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
+map{ id = "tutorial/1", description = "1" }
 
 tileset{ id = "tileset2", description = "tileset2" }
 tileset{ id = "zmagecity", description = "zmagecity" }

@@ -59,6 +59,16 @@ lineify.toscreens = function(lines, numlines)
 end
 
 lineify.rendertext = function(surface, lines, font, font_size, color, rendering_mode, x, y, centered, centeredy)
+	for action, keys in pairs(conf.keys) do
+		if keys ~= nil then
+			local key = keys[1]
+			if key == nil then key = keys[2]
+			elseif keys[2] ~= nil then key = key .. " or " .. keys[2] end
+			if key == nil then key = "[UNBOUND]" end
+			lines = lines:gsub("${" .. action .. "}", key)
+		end
+	end
+	
         if rendering_mode then rendering_mode = "antialiasing" else rendering_mode = "solid" end
         if horizontal_alignement == nil then horizontal_alignement = "left" end
         if vertical_alignement == nil then vertical_alignement = "bottom" end

@@ -727,7 +727,7 @@ function load()
 
 	function game:on_unpaused()
 		hud:on_unpaused()
-		sol.menu.stop(pause_menu)
+--		sol.menu.stop(pause_menu)
 	end
 
 	game.isgame = true
