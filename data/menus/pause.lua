@@ -18,19 +18,19 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
-	local y = center_y
+	local y = center_y - h/4
 
   self.buttons = {}
 
   self.buttons.resume_button = menubutton(self, center_x, y, 600, 60, "Resume", function() self:finish() end)
-	y = y - 70
-  self.buttons.save_button = menubutton(self, center_x, y, 600, 60, "Save", nil)
-	y = y - 70
-  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load", nil)
-	y = y - 70
-  self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", nil)
-	y = y - 70
-  self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", nil)
+	y = y + 70
+  self.buttons.save_button = menubutton(self, center_x, y, 600, 60, "Save", function() self:finish() end)
+	y = y + 70
+  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load", function() self:finish() end)
+	y = y + 70
+  self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:finish() end)
+	y = y + 70
+  self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () self:finish() end)
 end
 
 function dialog:on_started()
