@@ -149,8 +149,7 @@ function dialog:on_draw(dst_surface)
 end
 
 function dialog:finish()
-	game.dontshowpausemenu = false
-	game:set_paused(false)
+	print("FINISH")
 	sol.menu.stop(self)
 end
 

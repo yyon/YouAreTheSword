@@ -35,10 +35,18 @@ function dialog:initialize(game)
 end
 
 function dialog:start_config()
-  sol.menu.stop(self)
-  self.keyconfmenu = keyconfmenu:new(game)
-  sol.menu.start(game, self.keyconfmenu)
+	self:launchsubmenu(keyconfmenu)
+end
 
+function dialog:launchsubmenu(menu)
+	sol.menu.stop(self)
+	local submenu = menu:new()
+	local oldonfinished = submenu.on_finished
+	function submenu.on_finished()
+		oldonfinished()
+		sol.menu.start(game, dialog:new())
+	end
+	sol.menu.start(game, submenu)
 end
 
 function dialog:on_started()
