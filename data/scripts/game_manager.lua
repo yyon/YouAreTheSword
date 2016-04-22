@@ -182,7 +182,7 @@ function sol.main:on_key_pressed(key, modifiers)
 
 		debug.sethook(trace, "l")
 	end
-	
+
 	if game == nil or game:is_paused() then
 		if keyhandler ~= nil then
 			keyhandler(key, modifiers)
@@ -339,7 +339,7 @@ function sol.main:on_key_pressed(key, modifiers)
 	elseif key == "x" then
 		configload()
 	end
-	
+
 	if hero.entitydata == nil then return end
 
 	local x, y = hero.entitydata:gettargetpos()
@@ -466,7 +466,7 @@ function tick()
 
 	local hero = game:get_hero()
 	local map = game:get_map()
-	
+
 	if josh and not game:is_paused() then
 		pause()
 		if map ~= nil and map:get_id() ~= "hub" then
@@ -768,12 +768,12 @@ function configload()
 	if conffile ~= nil then
 		local conftext = conffile:read()
 		conftext = luastrunsanitize(conftext)
-	
+
 		conf = unpickle(conftext)
 	end
 
 	if conf == nil then conf = {} end
-	
+
 	if conf.keys == nil then
 		conf.keys = {
 			left={"a"},
@@ -791,7 +791,7 @@ function configload()
 			abilityhelp={"left alt"}
 		}
 	end
-	
+
 	if conffile ~= nil then
 		conffile.close()
 	end

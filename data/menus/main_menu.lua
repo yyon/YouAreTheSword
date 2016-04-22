@@ -23,11 +23,9 @@ function dialog:initialize(game)
 
   self.buttons = {}
 
-  self.buttons.resume_button = menubutton(self, center_x, y, 600, 60, "Resume", function() self:finish() end)
+  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:finish() end)
 	y = y + 70
-  self.buttons.save_button = menubutton(self, center_x, y, 600, 60, "Save", function() self:finish() end)
-	y = y + 70
-  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load", function() self:finish() end)
+  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load game", function() self:finish() end)
 	y = y + 70
   self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
 	y = y + 70
@@ -35,18 +33,10 @@ function dialog:initialize(game)
 end
 
 function dialog:start_config()
-	self:launchsubmenu(keyconfmenu)
-end
+  sol.menu.stop(self)
+  self.keyconfmenu = keyconfmenu:new(game)
+  sol.menu.start(game, self.keyconfmenu)
 
-function dialog:launchsubmenu(menu)
-	sol.menu.stop(self)
-	local submenu = menu:new()
-	local oldonfinished = submenu.on_finished
-	function submenu.on_finished()
-		oldonfinished()
-		sol.menu.start(game, dialog:new())
-	end
-	sol.menu.start(game, submenu)
 end
 
 function dialog:on_started()
@@ -72,7 +62,6 @@ function dialog:on_draw(dst_surface)
 end
 
 function dialog:finish()
-  game:set_paused(false)
   sol.menu.stop(self)
 end
 

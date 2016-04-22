@@ -1,4 +1,5 @@
 local class = require("middleclass")
+--local pause_menu = require "menus/pause"
 
 require "scripts/inputhandler"
 
@@ -148,8 +149,7 @@ function dialog:on_draw(dst_surface)
 end
 
 function dialog:finish()
-	game.dontshowpausemenu = false
-	game:set_paused(false)
+	print("FINISH")
 	sol.menu.stop(self)
 end
 
@@ -211,6 +211,9 @@ function keylistener:finish(key)
 	self.parentmenu:refresh()
 	updatekeys()
 	configsave()
+	pause()
+	--self.pause_menu = pause_menu:new(game)
+  --sol.menu.start(game, self.pause_menu)
 end
 
 
