@@ -42,83 +42,83 @@ Archers will wait before firing arrows as a special ability. The normal ability 
 dialog{
   id = "sequencetest.1",
   text = [[
-"Don't do it!"
+Don't do it!
 ]]
 }
 
 dialog{
   id = "sequencetest.2",
   text = [[
-"This war has gone on for far too long. 
+This war has gone on for far too long. 
 There has been too many casualties. 
-We have no choice but to call upon the power of the sword."
+We have no choice but to call upon the power of the sword.
 ]]
 }
 
 dialog{
   id = "sequencetest.3",
   text = [[
-"This isn't just your sacrifice!
+This isn't just your sacrifice!
 According to the legends, over 500 soldiers lost their souls during the previous war.
-If you take this sword, you will sacrifice our entire army!"
+If you take this sword, you will sacrifice our entire army!
 ]]
 }
 
 dialog{
   id = "sequencetest.4",
   text = [[
-"That's a sacrifice I'm willing to make."
+That's a sacrifice I'm willing to make.
 ]]
 }
 
 dialog{
   id = "sequencetest.4.1",
   text = [[
-"Skeletons - how did they manage to get this far into town?"
+Skeletons - how did they manage to get this far into town?
 ]]
 }
 
 dialog{
   id = "sequencetest.4.2",
   text = [[
-"No matter - once we have awoken the sword, we won't have to worry about our defenses."
+No matter - once we have awoken the sword, we won't have to worry about our defenses.
 ]]
 }
 
 dialog{
   id = "sequencetest.5",
   text = [[
-"I'm going to pick it up."
+I'm going to pick it up.
 ]]
 }
 
 dialog{
   id = "sequencetest.6",
   text = [[
-"Aaaaarggghhhh!"
+Aaaaarggghhhh!
 ]]
 }
 
 dialog{
   id = "sequencetest.7",
   text = [[
-"What have you done!?"
+What have you done!?
 ]]
 }
 
 dialog{
   id = "sequencetest.8",
   text = [[
-"..."
+...
 NEWSCREEN
-Use ${up}, ${left}, ${down}, and ${right} to move.
+(Use ${up}, ${left}, ${down}, and ${right} to move.)
 ]]
 }
 
 dialog{
   id = "sequencetest.cleric_afterwards",
   text = [[
-"Hello Mr. Sword, please don't kill me."
+Hello Mr. Sword, please don't kill me.
 ]]
 }
 
@@ -144,7 +144,87 @@ Press The Space Bar
 dialog{
   id = "tutorial.1",
   text = [[
-Press ${normal} to speak to people or read signs.
+Defeating the Demon Lord with the Demon Lord's sword? This has got to be the stupidest idea I have ever heard.
+]]
+}
+
+dialog{
+  id = "tutorial.2",
+  text = [[
+We only won the last war because of the power of the Demon Sword.
+]]
+}
+
+dialog{
+  id = "tutorial.3",
+  text = [[
+Yeah, but this time we're fighting the Demon Lord. How do we know the Demon Sword isn't going to betray us?
+]]
+}
+
+dialog{
+  id = "tutorial.4",
+  text = [[
+Huh, I didn't think of that.
+]]
+}
+
+dialog{
+  id = "tutorial.5",
+  text = [[
+Anyway, what's with the signs around here? Like, what does "Press ${normal}" even mean?
+]]
+}
+
+dialog{
+  id = "tutorial.6",
+  text = [[
+What I want to know is why a sign is telling me how to read signs.
+]]
+}
+
+dialog{
+  id = "tutorial.bard",
+  text = [[
+These signs are really bothering me.
+]]
+}
+
+dialog{
+  id = "tutorial.knight",
+  text = [[
+I think a couple of skeletons walked past us while we were talking ...
+NEWSCREEN
+Well, it's probably fine.
+]]
+}
+
+dialog{
+  id = "tutorial.sign1",
+  text = [[
+Press ${normal} to read signs. You probably already knew that, though.
+NEWSCREEN
+You can also press ${normal} to talk to people.
+]]
+}
+
+dialog{
+  id = "tutorial.sign2",
+  text = [[
+Press ${normal} to use your normal attack. For most people, the normal attack is to swing a sword. You can check what your normal ability is by looking at the left-most icon at the bottom.
+NEWSCREEN
+Use your mouse cursor to aim. You will attack in the direction of your mouse cursor.
+]]
+}
+
+dialog{
+  id = "tutorial.sign3",
+  text = [[
+You must defeat all enemies before you can leave a map.
+NEWSCREEN
+You can tell someone is an enemy when they look like they are up to no good.
+NEWSCREEN
+Enemies also have a red lifebar above them, so you can use that too.
 ]]
 }
 

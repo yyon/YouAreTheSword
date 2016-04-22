@@ -117,7 +117,7 @@ local function onkey(k, released)
 			for entity in map:get_entities("") do
 				if entity.dialog ~= nil then
 					if hero:get_distance(entity) < 80 then
-						if hero:get_direction4_to(entity) == hero:get_direction() then
+--						if hero:get_direction4_to(entity) == hero:get_direction() then
 							didsomething = true
 							if entity.entitydata ~= nil then
 							local d = entity:get_direction4_to(hero)
@@ -125,19 +125,19 @@ local function onkey(k, released)
 							end
 
 							game:start_dialog(entity.dialog)
-						end
+--						end
 					end
 				end
 				if entity:get_type() == "npc" then
 					if hero:get_distance(entity) < 80 then
-						if hero:get_direction4_to(entity) == hero:get_direction() then
+--						if hero:get_direction4_to(entity) == hero:get_direction() then
 							local name = entity:get_name()
 							if name ~= nil then
 								didsomething = true
 
 								game:start_dialog(name)
 							end
-						end
+--						end
 					end
 				end
 			end
