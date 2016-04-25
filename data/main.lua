@@ -34,14 +34,11 @@ function sol.main:on_started()
 
 	title_screen.on_finished = function()
 		configload()
-		main_menu = main_menu_file:new()
+		main_menu = main_menu_file:new(self)
 		sol.menu.start(self, main_menu)
 		--game_manager:start_game()
 	end
 
-	main_menu.on_finished = function()
-		game_manager:start_game()
-	end
 
 	-- Start the game when the Solarus logo menu is finished.
 --	solarus_logo.on_finished = function()

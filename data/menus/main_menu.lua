@@ -55,9 +55,9 @@ function dialog:launchsubmenu(menu)
 		oldonfinished()
 		local newdialog = dialog:new()
 		newdialog.on_finished = myoldonfinished
-		sol.menu.start(self, newdialog)
+		sol.menu.start(self.game, newdialog)
 	end
-	sol.menu.start(self, submenu)
+	sol.menu.start(self.game, submenu)
 end
 
 function dialog:start_new()

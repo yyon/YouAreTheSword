@@ -1,2 +1,1 @@
 Warning: Cannot use quest size 320x240: this quest only supports 1280x720 to 1280x720. Using 1280x720 instead.
-Error: In on_started: [string "main.lua"]:44: attempt to index upvalue 'main_menu' (a nil value)
