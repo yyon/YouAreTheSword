@@ -9,10 +9,11 @@ local createbox = require "menus/drawbox"
 
 local dialog = class("dialog")
 
-function dialog:initialize(game)
+function dialog:initialize(game, title)
   inputhandler:new(self)
 
   self.game = game
+  self.title = title
   local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
 	self.w, self.h = self.screenw, self.screenh
@@ -33,6 +34,7 @@ end
 function dialog:yes()
   function self:on_finished() end
   sol.menu.stop(self)
+	if self.title ~= nil then sol.menu.stop(self.title) end
   loadfrom(0)
 end
 

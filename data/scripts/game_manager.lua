@@ -619,6 +619,10 @@ function loadfrom(name)
 	load()
 end
 
+function autosaveexists()
+	return sol.file.exists(AUTOSAVE)
+end
+
 function saveexists(name)
 	local savename = "save" .. name .. ".dat"
 	return sol.file.exists(savename)

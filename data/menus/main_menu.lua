@@ -1,6 +1,7 @@
 local class = require("middleclass")
 local keyconfmenu = require "menus/keyconfig"
 local loadmenu = require "menus/loadmenu"
+local areyousuregame = require "menus/areyousuregame"
 
 
 require "scripts/inputhandler"
@@ -27,10 +28,15 @@ function dialog:initialize(game, title)
 
   self.buttons = {}
 
-  self.buttons.continue_button = menubutton(self, center_x, y, 600, 60, "Continue", function() self:continue() end)
-	y = y + 70
-  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new() end)
-	y = y + 70
+	if autosaveexists() then
+	  self.buttons.continue_button = menubutton(self, center_x, y, 600, 60, "Continue", function() self:continue() end)
+		y = y + 70
+	  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new_conf() end)
+		y = y + 70
+	else
+	  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new() end)
+		y = y + 70
+	end
   self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load game", function() self:start_load() end)
 	y = y + 70
   self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
@@ -62,6 +68,10 @@ function dialog:launchsubmenu(menu)
 	sol.menu.start(self.game, submenu)
 end
 
+
+function dialog:start_new_conf()
+	self:launchsubmenu(areyousuregame)
+end
 
 function dialog:start_new()
 	self:finish()
