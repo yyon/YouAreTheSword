@@ -672,6 +672,7 @@ function load()
 
 	game:set_pause_allowed(true)
 	local hud = hud_manager:create(game)
+	game.hud = hud
 
 	local hero = game:get_hero()
 	hero.ishero = true

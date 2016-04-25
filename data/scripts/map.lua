@@ -358,6 +358,7 @@ function map:startcutscene()
     hero:freeze()
 
     self.dontdrawlifebars = true
+    game.hud:set_enabled(false)
 end
 
 function map:finish()
@@ -368,6 +369,7 @@ function map:finish()
     self.dontdrawlifebars = false
 
     self:reattachcamera()
+    game.hud:set_enabled(true)
 end
 
 function map:deattachcamera()
