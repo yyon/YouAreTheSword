@@ -32,9 +32,9 @@ function sol.main:on_started()
 		end
 	end
 
-	title_screen.on_finished = function()
+	title_screen.startmain = function(title)
 		configload()
-		main_menu = main_menu_file:new(self)
+		main_menu = main_menu_file:new(self, title)
 		sol.menu.start(self, main_menu)
 		--game_manager:start_game()
 	end

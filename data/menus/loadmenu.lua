@@ -10,16 +10,20 @@ local createbox = require "menus/drawbox"
 
 local dialog = class("dialog")
 
-function dialog:initialize(game)
+function dialog:initialize(game, title)
   inputhandler:new(self)
 
   self.game = game
+  self.title = title
   local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
   local y = center_y - 140
+	if self.title ~= nil then
+		y = 300
+	end
 
   self.buttons = {}
 
@@ -37,6 +41,7 @@ function dialog:loadfile(file)
   if saveexists(file) then
 	function self:on_finished() end
 	sol.menu.stop(self)
+	if self.title ~= nil then sol.menu.stop(self.title) end
     loadfrom(file)
   else
     self:launchsubmenu(nofile)
@@ -48,16 +53,17 @@ function dialog:launchsubmenu(menu)
 	function self:on_finished() end
 
 	sol.menu.stop(self)
-	local submenu = menu:new(self.game)
+	local submenu = menu:new(self.game, self.title)
 	local oldonfinished = submenu.on_finished
 	function submenu.on_finished(submenu)
 		oldonfinished()
-		local newdialog = dialog:new(self.game)
+		local newdialog = dialog:new(self.game, self.title)
 		newdialog.on_finished = myoldonfinished
 		sol.menu.start(self.game, newdialog)
 	end
 	sol.menu.start(self.game, submenu)
 end
+
 
 function dialog:on_started()
   	self:check()

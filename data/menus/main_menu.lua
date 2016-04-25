@@ -12,7 +12,7 @@ local createbox = require "menus/drawbox"
 
 local dialog = class("dialog")
 
-function dialog:initialize(game)
+function dialog:initialize(game, title)
   inputhandler:new(self)
 
   self.game = game
@@ -21,7 +21,9 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
-	local y = center_y - h/4
+	local y = 300
+
+	self.title = title
 
   self.buttons = {}
 
@@ -49,11 +51,11 @@ function dialog:launchsubmenu(menu)
 	function self:on_finished() end
 
 	sol.menu.stop(self)
-	local submenu = menu:new(self.game)
+	local submenu = menu:new(self.game, self.title)
 	local oldonfinished = submenu.on_finished
 	function submenu.on_finished(submenu)
 		oldonfinished()
-		local newdialog = dialog:new(self.game)
+		local newdialog = dialog:new(self.game, self.title)
 		newdialog.on_finished = myoldonfinished
 		sol.menu.start(self.game, newdialog)
 	end
@@ -62,11 +64,13 @@ end
 
 
 function dialog:start_new()
+	self:finish()
 	sol.menu.stop(self)
 	loadfrom(0)
 end
 
 function dialog:continue()
+	self:finish()
 	sol.menu.stop(self)
 	load()
 end
@@ -95,7 +99,11 @@ function dialog:on_draw(dst_surface)
 end
 
 function dialog:finish()
-  sol.menu.stop(self)
+	sol.menu.stop(self)
+end
+
+function dialog:on_finished()
+	sol.menu.stop(self.title)
 end
 
 
