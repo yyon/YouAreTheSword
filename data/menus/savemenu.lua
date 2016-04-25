@@ -19,7 +19,7 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
-	local y = center_y - h/2 + 70
+	local y = center_y - 140
 
   self.buttons = {}
 
@@ -41,7 +41,7 @@ end
 function dialog:launchsubmenu(menu)
 	local myoldonfinished = self.on_finished
 	function self:on_finished() end
-	
+
 	sol.menu.stop(self)
 	local submenu = menu:new()
 	local oldonfinished = submenu.on_finished

@@ -18,12 +18,26 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
-	local y = center_y - 35
+	local y = center_y - 70
 
   self.buttons = {}
 
-  self.buttons.save1_button = menubutton(self, center_x, y, 600, 60, "Successfully saved", function() self:finish() end)
+  self.buttons.sure_button = menubutton(self, center_x, y, 600, 60, "Are you sure?", function() self:rebuild_surface() end)
+  y = y + 70
+  self.buttons.yes_button = menubutton(self, center_x, y, 600, 60, "Yes", function() self:yes() end)
+  y = y + 70
+  self.buttons.no_button = menubutton(self, center_x, y, 600, 60, "No", function() self:no() end)
 
+end
+
+function dialog:yes()
+  function self:on_finished() end
+  sol.menu.stop(self)
+  load()
+end
+
+function dialog:no()
+  sol.menu.stop(self)
 end
 
 function dialog:on_started()

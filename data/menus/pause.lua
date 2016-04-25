@@ -2,6 +2,8 @@ local class = require("middleclass")
 local keyconfmenu = require "menus/keyconfig"
 local savemenu = require "menus/savemenu"
 local loadmenu = require "menus/loadmenu"
+local areyousurelevel = require "menus/areyousurelevel"
+local areyousuregame = require "menus/areyousuregame"
 
 require "scripts/inputhandler"
 
@@ -53,21 +55,18 @@ function dialog:start_load()
 end
 
 function dialog:restart_level()
-  function self:on_finished() end
-	sol.menu.stop(self)
-  load()
+  self:launchsubmenu(areyousurelevel)
+
 end
 
 function dialog:restart_game()
-  function self:on_finished() end
-	sol.menu.stop(self)
-  loadfrom(0)
+  self:launchsubmenu(areyousuregame)
 end
 
 function dialog:launchsubmenu(menu)
 	local myoldonfinished = self.on_finished
 	function self:on_finished() end
-	
+
 	sol.menu.stop(self)
 	local submenu = menu:new()
 	local oldonfinished = submenu.on_finished
