@@ -33,6 +33,8 @@ local Effects = require "enemies/effect"
 
 require "profiler"
 
+AUTOSAVE = "save.dat"
+
 _movements = {}
 local actualcreatemovement = sol.movement.create
 function sol.movement.create(movementtype, ...)
@@ -365,8 +367,7 @@ function sol.main:on_key_pressed(key, modifiers)
 		loadfrom(1)
 	elseif key == "7" then
 		print("cheat: restarted game")
-		deletesave(1)
-		loadfrom(1)
+		loadfrom(0)
 	elseif key == "1" or key == "2" or key == "3" or key == "4" then
 		if hero.entitydata.cheatyabilityswitcher == nil then
 			hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
@@ -601,39 +602,35 @@ local function copy(from, to)
 end
 
 function saveto(name)
-	name = name + 1
 	save()
 
 	local savename = "save" .. name .. ".dat"
-	copy("save.dat", savename)
+	copy(AUTOSAVE, savename)
 end
 
 function deletesave(name)
-	name = name + 1
 	local savename = "save" .. name .. ".dat"
 	sol.file.remove(savename)
 end
 
 function loadfrom(name)
-	name = name + 1
 	local savename = "save" .. name .. ".dat"
 	if sol.file.exists(savename) then
-		copy(savename, "save.dat")
+		copy(savename, AUTOSAVE)
 	else
-		sol.file.remove("save.dat")
+		sol.file.remove(AUTOSAVE)
 	end
 
 	load()
 end
 
 function saveexists(name)
-	name = name + 1
 	local savename = "save" .. name .. ".dat"
 	return sol.file.exists(savename)
 end
 
 function load()
-	local savefile = "save.dat"
+	local savefile = AUTOSAVE
 
 	local exists = sol.game.exists(savefile)
 	game = sol.game.load(savefile)
