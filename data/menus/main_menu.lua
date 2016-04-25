@@ -49,16 +49,17 @@ function dialog:launchsubmenu(menu)
 	function self:on_finished() end
 
 	sol.menu.stop(self)
-	local submenu = menu:new()
+	local submenu = menu:new(self.game)
 	local oldonfinished = submenu.on_finished
 	function submenu.on_finished(submenu)
 		oldonfinished()
-		local newdialog = dialog:new()
+		local newdialog = dialog:new(self.game)
 		newdialog.on_finished = myoldonfinished
 		sol.menu.start(self.game, newdialog)
 	end
 	sol.menu.start(self.game, submenu)
 end
+
 
 function dialog:start_new()
 	sol.menu.stop(self)
