@@ -601,6 +601,7 @@ local function copy(from, to)
 end
 
 function saveto(name)
+	name = name + 1
 	save()
 
 	local savename = "save" .. name .. ".dat"
@@ -608,11 +609,13 @@ function saveto(name)
 end
 
 function deletesave(name)
+	name = name + 1
 	local savename = "save" .. name .. ".dat"
 	sol.file.remove(savename)
 end
 
 function loadfrom(name)
+	name = name + 1
 	local savename = "save" .. name .. ".dat"
 	if sol.file.exists(savename) then
 		copy(savename, "save.dat")
@@ -624,6 +627,7 @@ function loadfrom(name)
 end
 
 function saveexists(name)
+	name = name + 1
 	local savename = "save" .. name .. ".dat"
 	return sol.file.exists(savename)
 end
