@@ -55,13 +55,13 @@ end
 function dialog:restart_level()
   function self:on_finished() end
 	sol.menu.stop(self)
-  loadfrom(0)
+  load()
 end
 
 function dialog:restart_game()
   function self:on_finished() end
 	sol.menu.stop(self)
-  load()
+  loadfrom(0)
 end
 
 function dialog:launchsubmenu(menu)
