@@ -44,11 +44,15 @@ function dialog:loadfile(file)
 end
 
 function dialog:launchsubmenu(menu)
+	local myoldonfinished = self.on_finished
+	function self:on_finished() end
+	
 	sol.menu.stop(self)
 	local submenu = menu:new()
 	local oldonfinished = submenu.on_finished
 	function submenu.on_finished()
 		oldonfinished()
+		self.on_finished = myoldonfinished
 		sol.menu.start(game, dialog:new())
 	end
 	sol.menu.start(game, submenu)
