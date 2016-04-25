@@ -35,6 +35,8 @@ end
 
 function dialog:loadfile(file)
   if saveexists(file) then
+	function self:on_finished() end
+	sol.menu.stop(self)
     loadfrom(file)
   else
     self:launchsubmenu(nofile)
