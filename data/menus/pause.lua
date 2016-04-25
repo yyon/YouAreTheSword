@@ -41,11 +41,11 @@ function dialog:start_config()
 end
 
 function dialog:start_save()
-	self:launchsubmenu(keyconfmenu)
+	self:launchsubmenu(savemenu)
 end
 
 function dialog:start_load()
-	self:launchsubmenu(keyconfmenu)
+	self:launchsubmenu(loadmenu)
 end
 
 function dialog:launchsubmenu(menu)
