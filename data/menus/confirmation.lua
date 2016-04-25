@@ -1,5 +1,5 @@
 local class = require("middleclass")
-local nofile = require("menus/nofile")
+local confirmation = require("menus/confirmation")
 
 require "scripts/inputhandler"
 
@@ -19,37 +19,12 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
-  local y = center_y - h/2 + 70
+	local y = center_y - h/2 + 35
 
   self.buttons = {}
 
-  self.buttons.load1_button = menubutton(self, center_x, y, 600, 60, "Save 1", function() self:loadfile(1) end)
-  y = y + 70
-  self.buttons.load2_button = menubutton(self, center_x, y, 600, 60, "Save 2", function() self:loadfile(2) end)
-  y = y + 70
-  self.buttons.load3_button = menubutton(self, center_x, y, 600, 60, "Save 3", function() self:loadfile(3) end)
-  y = y + 70
-  self.buttons.exit_button = menubutton(self, center_x, y, 600, 60, "Exit", function() self:finish() end)
+  self.buttons.save1_button = menubutton(self, center_x, y, 600, 60, "Successfully saved", function() self:finish() end)
 
-end
-
-function dialog:loadfile(file)
-  if saveexists(file) then
-    loadfrom(file)
-  else
-    self:launchsubmenu(nofile)
-  end
-end
-
-function dialog:launchsubmenu(menu)
-	sol.menu.stop(self)
-	local submenu = menu:new()
-	local oldonfinished = submenu.on_finished
-	function submenu.on_finished()
-		oldonfinished()
-		sol.menu.start(game, dialog:new())
-	end
-	sol.menu.start(game, submenu)
 end
 
 function dialog:on_started()

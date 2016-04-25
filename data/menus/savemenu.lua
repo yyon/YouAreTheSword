@@ -1,4 +1,5 @@
 local class = require("middleclass")
+local confirmation = require("menus/confirmation")
 
 require "scripts/inputhandler"
 
@@ -22,12 +23,30 @@ function dialog:initialize(game)
 
   self.buttons = {}
 
-  self.buttons.save1_button = menubutton(self, center_x, y, 600, 60, "Save 1", function() saveto(1) end)
+  self.buttons.save1_button = menubutton(self, center_x, y, 600, 60, "Save 1", function() self:pressed_button(1) end)
   y = y + 70
-  self.buttons.save2_button = menubutton(self, center_x, y, 600, 60, "Save 2", function() saveto(2) end)
+  self.buttons.save2_button = menubutton(self, center_x, y, 600, 60, "Save 2", function() self:pressed_button(2) end)
   y = y + 70
-  self.buttons.save3_button = menubutton(self, center_x, y, 600, 60, "Save 3", function() saveto(3) end)
+  self.buttons.save3_button = menubutton(self, center_x, y, 600, 60, "Save 3", function() self:pressed_button(3) end)
+  y = y + 70
+  self.buttons.exit_button = menubutton(self, center_x, y, 600, 60, "Exit", function() self:finish() end)
 
+end
+
+function dialog:pressed_button(button_num)
+  saveto(button_num)
+  self:launchsubmenu(confirmation)
+end
+
+function dialog:launchsubmenu(menu)
+	sol.menu.stop(self)
+	local submenu = menu:new()
+	local oldonfinished = submenu.on_finished
+	function submenu.on_finished()
+		oldonfinished()
+		sol.menu.start(game, dialog:new())
+	end
+	sol.menu.start(game, submenu)
 end
 
 function dialog:on_started()
