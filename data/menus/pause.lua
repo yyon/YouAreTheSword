@@ -31,6 +31,10 @@ function dialog:initialize(game)
 	y = y + 70
   self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load", function() self:start_load() end)
 	y = y + 70
+  self.buttons.restart_level_button = menubutton(self, center_x, y, 600, 60, "Restart Level", function() self:restart_level() end)
+  y = y + 70
+  self.buttons.restart_game_button = menubutton(self, center_x, y, 600, 60, "Restart Game", function() self:restart_game() end)
+  y = y + 70
   self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
 	y = y + 70
   self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () sol.main.exit() end)
@@ -46,6 +50,18 @@ end
 
 function dialog:start_load()
 	self:launchsubmenu(loadmenu)
+end
+
+function dialog:restart_level()
+  function self:on_finished() end
+	sol.menu.stop(self)
+  loadfrom(0)
+end
+
+function dialog:restart_game()
+  function self:on_finished() end
+	sol.menu.stop(self)
+  load()
 end
 
 function dialog:launchsubmenu(menu)
