@@ -298,17 +298,15 @@ function sol.main:on_key_pressed(key, modifiers)
 			startedprofiler = false
 		end
 	elseif key == "m" then
-		if game.muted then
-			print("unmuted")
-			game.muted = nil
-			sol.audio.set_sound_volume(100)
-			sol.audio.set_music_volume(100)
+		if conf.music == 0 then
+			conf.sound = 100
+			conf.music = 100
 		else
-			print("muted")
-			game.muted = true
-			sol.audio.set_sound_volume(0)
-			sol.audio.set_music_volume(0)
+			conf.sound = 0
+			conf.music = 0
 		end
+		configsave()
+		updatevolume()
 	elseif key == "g" then
 		for k,v in pairs( _G ) do
 			if not builtinglobals[k] then
@@ -576,9 +574,6 @@ function save()
 	pickleduserdata = luastrsanitize(pickleduserdata)
 	game:set_value("usersave", pickleduserdata)
 
-	game:set_value("music", sol.audio.get_music_volume())
-	game:set_value("sound", sol.audio.get_sound_volume())
-
 	game:save()
 end
 
@@ -668,9 +663,8 @@ function load()
 	local hero = game:get_hero()
 	hero.ishero = true
 	hero.is_possessing = true
-
-	sol.audio.set_music_volume(game:get_value("music") or 100)
-	sol.audio.set_sound_volume(game:get_value("sound") or 100)
+	
+	updatevolume()
 
 	local usersave = game:get_value("usersave")
 --	print("unpickle", pickledheroentitydata)
@@ -751,6 +745,11 @@ function load()
 	tick()
 end
 
+function updatevolume()
+	sol.audio.set_music_volume(conf.music)
+	sol.audio.set_sound_volume(conf.sound)
+end
+
 function configsave()
 	if conf == nil then conf = {} end
 
@@ -792,6 +791,9 @@ function configload()
 			abilityhelp={"left alt"}
 		}
 	end
+	
+	if conf.music == nil then conf.music = 100 end
+	if conf.sound == nil then conf.sound = 100 end
 
 	if conffile ~= nil then
 		conffile.close()
