@@ -25,7 +25,9 @@ function dialog:initialize(game)
 
   self.buttons = {}
 
-  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:finish() end)
+  self.buttons.continue_button = menubutton(self, center_x, y, 600, 60, "Continue", function() self:continue() end)
+	y = y + 70
+  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new() end)
 	y = y + 70
   self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load game", function() self:start_load() end)
 	y = y + 70
@@ -56,6 +58,16 @@ function dialog:launchsubmenu(menu)
 		sol.menu.start(self, newdialog)
 	end
 	sol.menu.start(self, submenu)
+end
+
+function dialog:start_new()
+	sol.menu.stop(self)
+	loadfrom(0)
+end
+
+function dialog:continue()
+	sol.menu.stop(self)
+	load()
 end
 
 
