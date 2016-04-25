@@ -524,7 +524,7 @@ function tick()
 			elseif hero.entitydata.actualteam == "dunsmur" then
 				soulsdrop = 0
 			end
-			if map.nomonstersleft then
+			if map.nomonstersleft or map.nootheradvs then
 				soulsdrop = 0
 			end
 			hero.entitydata.souls = hero.entitydata.souls - soulsdrop

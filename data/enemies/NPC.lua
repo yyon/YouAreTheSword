@@ -150,6 +150,7 @@ function GoTowardsState:tick()
 	if self.npc.entitydata.entity:get_game().dontattack then
 		return
 	end
+	
 	local target = self.npc.entitytoattack
 
 	local attackability = math.random(10) == 1 and "special" or "normal"

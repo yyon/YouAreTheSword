@@ -48,6 +48,7 @@ function damagedisp:draw(dst_surface, cx, cy)
 end
 
 local foundmonster = false
+local foundadv = false
 for entity in map:get_entities("") do
     if entity.get_destination_map ~= nil then
         local x, y, layer = entity:get_position()
@@ -56,11 +57,16 @@ for entity in map:get_entities("") do
     if entity.entitydata ~= nil then
         if entity.entitydata.team ~= "adventurer" then
             foundmonster = true
+        elseif entity.entitydata.team == "adventurer" then
+            foundadv = true
         end
     end
 end
 if not foundmonster then
     map.nomonstersleft = true
+end
+if not foundadv then
+    map.nootheradvs = true
 end
 
 local hero = map:get_hero()
