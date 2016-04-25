@@ -1,7 +1,5 @@
 local class = require("middleclass")
-local keyconfmenu = require "menus/keyconfig"
-local savemenu = require "menus/savemenu"
-local loadmenu = require "menus/loadmenu"
+local nofile = require("menus/nofile")
 
 require "scripts/inputhandler"
 
@@ -21,31 +19,24 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
-	local y = center_y - h/4
+  local y = center_y - h/2 + 70
 
   self.buttons = {}
 
-  self.buttons.resume_button = menubutton(self, center_x, y, 600, 60, "Resume", function() self:finish() end)
-	y = y + 70
-  self.buttons.save_button = menubutton(self, center_x, y, 600, 60, "Save", function() self:start_save() end)
-	y = y + 70
-  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load", function() self:start_load() end)
-	y = y + 70
-  self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
-	y = y + 70
-  self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () sol.main.exit() end)
+  self.buttons.load1_button = menubutton(self, center_x, y, 600, 60, "Save 1", function() self:loadfile(1) end)
+  y = y + 70
+  self.buttons.load2_button = menubutton(self, center_x, y, 600, 60, "Save 2", function() self:loadfile(2) end)
+  y = y + 70
+  self.buttons.load3_button = menubutton(self, center_x, y, 600, 60, "Save 3", function() self:loadfile(3) end)
+
 end
 
-function dialog:start_config()
-	self:launchsubmenu(keyconfmenu)
-end
-
-function dialog:start_save()
-	self:launchsubmenu(keyconfmenu)
-end
-
-function dialog:start_load()
-	self:launchsubmenu(keyconfmenu)
+function dialog:loadfile(file)
+  if saveexists(file) then
+    loadfrom(file)
+  else
+    self:launchsubmenu(nofile)
+  end
 end
 
 function dialog:launchsubmenu(menu)
@@ -82,7 +73,6 @@ function dialog:on_draw(dst_surface)
 end
 
 function dialog:finish()
-  game:set_paused(false)
   sol.menu.stop(self)
 end
 
