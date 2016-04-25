@@ -1,0 +1,10 @@
+animation{
+  name = "beam",
+  src_image = "misc/abductionbeam.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 400, frame_height = 400, origin_x = 200, origin_y = 0 },
+    { x = 0, y = 0, frame_width = 400, frame_height = 400, origin_x = 200, origin_y = 0 },
+    { x = 0, y = 0, frame_width = 400, frame_height = 400, origin_x = 200, origin_y = 0 },
+    { x = 0, y = 0, frame_width = 400, frame_height = 400, origin_x = 200, origin_y = 0 },
+  },
+}

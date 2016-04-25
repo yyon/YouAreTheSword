@@ -1,0 +1,84 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 2000,
+  tileset = "tileset2",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1280,
+  height = 2016,
+  pattern = "1916",
+}
+
+destination{
+  layer = 0,
+  x = 584,
+  y = 949,
+  direction = 3,
+}
+
+destination{
+  name = "inship",
+  layer = 0,
+  x = 584,
+  y = 685,
+  direction = 1,
+}
+
+destination{
+  name = "shipstop1",
+  layer = 0,
+  x = 584,
+  y = 741,
+  direction = 1,
+}
+
+destination{
+  name = "shipstop2",
+  layer = 0,
+  x = 1248,
+  y = 237,
+  direction = 1,
+}
+
+destination{
+  name = "inship_2",
+  layer = 0,
+  x = 744,
+  y = 1021,
+  direction = 1,
+}
+
+destination{
+  name = "beampos",
+  layer = 0,
+  x = 584,
+  y = 661,
+  direction = 1,
+}
+
+npc{
+  name = "beam",
+  layer = 1,
+  x = 1112,
+  y = 1909,
+  direction = 3,
+  subtype = 1,
+  sprite = "misc/abductionbeam",
+}
+
+npc{
+  name = "spaceship",
+  layer = 2,
+  x = 136,
+  y = 509,
+  direction = 3,
+  subtype = 0,
+  sprite = "bosses/spaceship-1",
+}
+

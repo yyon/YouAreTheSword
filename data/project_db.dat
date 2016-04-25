@@ -4,6 +4,7 @@ map{ id = "Ian's Test Dungeon/3", description = "3" }
 map{ id = "Ian's Test Dungeon/4", description = "4" }
 map{ id = "Ian's Test Dungeon/5", description = "5" }
 map{ id = "Ian's Test Dungeon/6", description = "6" }
+map{ id = "abductiontest", description = "abductiontest" }
 map{ id = "catmap", description = "catmap" }
 map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "hub", description = "hub" }
@@ -142,6 +143,7 @@ sprite{ id = "hud/soul_meter", description = "sword possess meter" }
 sprite{ id = "hud/sword_health", description = "sword's health" }
 sprite{ id = "hud/target", description = "target" }
 sprite{ id = "menus/solarus_logo", description = "Menu: Solarus logo" }
+sprite{ id = "misc/abductionbeam", description = "abductionbeam" }
 sprite{ id = "monsters/bat", description = "bat" }
 sprite{ id = "monsters/bee", description = "bee" }
 sprite{ id = "monsters/beetle", description = "beetle" }

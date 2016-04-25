@@ -25,7 +25,10 @@ local pause_menu
 
 require "pickle"
 
-local josh = os.getenv("USER") == "jnew23"
+local USER = os.getenv("USER")
+local josh = USER == "jnew23"
+local ian = USER == "yyon"
+local isdev = josh or ian
 
 local os = require "os"
 
@@ -175,15 +178,7 @@ function pause()
 end
 
 function sol.main:on_key_pressed(key, modifiers)
-	if key == "n" then
-		print("started lines")
-		function trace (event, line)
-			local s = debug.getinfo(2).short_src
-			print(s .. ":" .. line)
-		end
-
-		debug.sethook(trace, "l")
-	end
+	local cheating = (modifiers.control and isdev)
 
 	if game == nil or game:is_paused() then
 		if keyhandler ~= nil then
@@ -197,203 +192,213 @@ function sol.main:on_key_pressed(key, modifiers)
 	local result = onkey(key)
 	if result then return end
 
-	if key == "p" then
-		if game.dontattack then
-			print("ended cheat: AIs don't attack")
-			game.dontattack = nil
-		else
-			print("cheat: AIs don't attack")
-			game.dontattack = true
-		end
-	elseif key == "i" then
-		if game.nodeaths then
-			print("ended cheat: invincibility")
-			game.nodeaths = nil
-		else
-			print("cheat: invincibility")
-			game.nodeaths = true
-		end
-	elseif key == "b" then
-		print("cheat: catch everyone")
-		for entity in game:get_map():get_entities("") do
-			if entity.entitydata ~= nil then
-				print("caught", entity.entitydata.theclass)
-				entity.entitydata.caught = true
+	if cheating then
+		if key == "n" then
+			print("started lines")
+			function trace (event, line)
+				local s = debug.getinfo(2).short_src
+				print(s .. ":" .. line)
+			end	
+
+			debug.sethook(trace, "l")
+		elseif key == "p" then
+			if game.dontattack then
+				print("ended cheat: AIs don't attack")
+				game.dontattack = nil
+			else
+				print("cheat: AIs don't attack")
+				game.dontattack = true
 			end
-		end
-		if hero.entitydata ~= nil then
-			hero.entitydata.caught = true
-		end
-	elseif key == "j" then
-		if game.nocooldown then
-			print("ended cheat: no cooldown")
-			game.nocooldown = nil
-		else
-			print("cheat: cooldown")
-			game.nocooldown = true
-		end
-	elseif key == "[" then
-		massacre = {}
-		for entity in game:get_map():get_entities("") do
-			if entity.entitydata ~= nil then
-				local theclassname = entity.entitydata.class.name
-				local x, y = entity:get_position()
-				massacre[theclassname] = {x=x,y=y}
-				entity.entitydata:kill()
+		elseif key == "i" then
+			if game.nodeaths then
+				print("ended cheat: invincibility")
+				game.nodeaths = nil
+			else
+				print("cheat: invincibility")
+				game.nodeaths = true
 			end
-		end
-	elseif key == "]" then
-		for theclassname, pos in pairs(massacre) do
-			local map = hero:get_map()
-
-			local newentity = map:create_enemy({
-				breed="enemy_constructor",
-				layer=0,
-				x=pos.x,
-				y=pos.y,
-				direction=0
-			})
-
-			local angelentitydata = _EntityDatas[theclassname]:new()
-			angelentitydata.entity = newentity
-			angelentitydata:applytoentity()
-		end
-	elseif key == "z" then
-		if game.bypassteleport then
-			print("ended cheat: bypass teleport")
-			game.bypassteleport = nil
-		else
-			print("cheat: bypass teleport (allows you to go between maps without defeating all the enemies)")
-			game.bypassteleport = true
-		end
-	elseif key == "k" then
-		print("cheat: dropped sword")
-		lastentitydata = hero.entitydata
-		hero.entitydata:kill()
-	elseif key == ":" then
-		print("cheat: resurrected")
-		if lastentitydata ~= nil then
-			lastentitydata:bepossessedbyhero()
-		end
-	elseif (key == "s" and dvorak) or (key == "o" and not dvorak) then
-		if hero:get_walking_speed() == 500 then
-			print("ended cheat: fast walk")
-			hero:set_walking_speed(128)
-		else
-			print("cheat: fast walk")
-			hero:set_walking_speed(500)
-		end
-	elseif key == "/" then
-		if not startedprofiler then
-			print("started profiler")
-			startedprofiler = true
-			profiler = newProfiler()
-			profiler:start()
-		else
-			print("stopped profiler")
-			profiler:stop()
-			local outfile = io.open( "profile.txt", "w+" )
-			profiler:report( outfile, true )
-			outfile:close()
-			startedprofiler = false
-		end
-	elseif key == "m" then
-		if conf.music == 0 then
-			conf.sound = 100
-			conf.music = 100
-		else
-			conf.sound = 0
-			conf.music = 0
-		end
-		configsave()
-		updatevolume()
-	elseif key == "g" then
-		for k,v in pairs( _G ) do
-			if not builtinglobals[k] then
-				print( k .. " =&gt; ", v )
+		elseif key == "b" then
+			print("cheat: catch everyone")	
+			for entity in game:get_map():get_entities("") do
+				if entity.entitydata ~= nil then
+					print("caught", entity.entitydata.theclass)
+					entity.entitydata.caught = true
+				end
 			end
+			if hero.entitydata ~= nil then
+				hero.entitydata.caught = true
+			end
+		elseif key == "j" then
+			if game.nocooldown then
+				print("ended cheat: no cooldown")
+				game.nocooldown = nil
+			else
+				print("cheat: cooldown")
+				game.nocooldown = true
+			end
+		elseif key == "[" then
+			massacre = {}
+			for entity in game:get_map():get_entities("") do
+				if entity.entitydata ~= nil then
+					local theclassname = entity.entitydata.class.name
+					local x, y = entity:get_position()
+					massacre[theclassname] = {x=x,y=y}
+					entity.entitydata:kill()
+				end
+			end
+		elseif key == "]" then
+			for theclassname, pos in pairs(massacre) do
+				local map = hero:get_map()
+	
+				local newentity = map:create_enemy({
+					breed="enemy_constructor",
+					layer=0,
+					x=pos.x,
+					y=pos.y,
+					direction=0
+					})	
+	
+				local angelentitydata = _EntityDatas[theclassname]:new()
+				angelentitydata.entity = newentity
+				angelentitydata:applytoentity()
+			end
+		elseif key == "z" then
+			if game.bypassteleport then
+				print("ended cheat: bypass teleport")
+				game.bypassteleport = nil
+			else
+				print("cheat: bypass teleport (allows you to go between maps without defeating all the enemies)"	)
+				game.bypassteleport = true
+			end
+		elseif key == "k" then
+			print("cheat: dropped sword")
+			lastentitydata = hero.entitydata
+			hero.entitydata:kill()
+		elseif key == ":" then
+			print("cheat: resurrected")
+			if lastentitydata ~= nil then
+				lastentitydata:bepossessedbyhero()
+			end
+		elseif (key == "r") then
+			if hero:get_walking_speed() == 500 then
+				print("ended cheat: fast walk")
+				hero:set_walking_speed(128)
+			else
+				print("cheat: fast walk")
+				hero:set_walking_speed(500)
+			end
+		elseif key == "/" then
+			if not startedprofiler then
+				print("started profiler")
+				startedprofiler = true
+				profiler = newProfiler()
+				profiler:start()
+			else
+				print("stopped profiler")
+				profiler:stop()
+				local outfile = io.open( "profile.txt", "w+" )
+				profiler:report( outfile, true )
+				outfile:close()
+				startedprofiler = false
+			end
+		elseif key == "m" then
+			if conf.music == 0 then
+				conf.sound = 100
+				conf.music = 100
+			else
+				conf.sound = 0
+				conf.music = 0
+			end
+			configsave()
+			updatevolume()
+		elseif key == "g" then
+			for k,v in pairs( _G ) do
+				if not builtinglobals[k] then
+					print( k .. " =&gt; ", v )
+				end
+			end
+		elseif key == "t" then
+			local entitydata = hero.entitydata:getclosestentity(hero.entitydata:gettargetpos())
+			entitydata:kill()
+		elseif key == "u" then
+			if hero.entitydata.usingability ~= nil then
+				hero.entitydata.usingability:cancel()
+			end
+		elseif key == "f" then
+			if game.fastthrow then
+				print("ended cheat: fast throw")
+				game.fastthrow = false
+			else
+				print("cheat: fast throw")
+				game.fastthrow = true
+			end
+		elseif key == "r" then
+			if hero.entitydata ~= nil then
+				local x, y = hero:get_position()
+				hero.entitydata:throwclosest(true)
+				hero.entitydata:throwclosest(true)
+			end
+		elseif key == "h" then
+			configsave()
+		elseif key == "x" then
+			configload()
 		end
-	elseif key == "t" then
-		local entitydata = hero.entitydata:getclosestentity(hero.entitydata:gettargetpos())
-		entitydata:kill()
-	elseif key == "u" then
-		if hero.entitydata.usingability ~= nil then
-			hero.entitydata.usingability:cancel()
-		end
-	elseif key == "f" then
-		if game.fastthrow then
-			print("ended cheat: fast throw")
-			game.fastthrow = false
-		else
-			print("cheat: fast throw")
-			game.fastthrow = true
-		end
-	elseif key == "r" then
-		if hero.entitydata ~= nil then
-			local x, y = hero:get_position()
-			hero.entitydata:throwclosest(true)
-			hero.entitydata:throwclosest(true)
-		end
-	elseif key == "h" then
-		configsave()
-	elseif key == "x" then
-		configload()
-	end
 
-	if hero.entitydata == nil then return end
-
-	local x, y = hero.entitydata:gettargetpos()
-
-	if x == nil then
-		print("COULDN'T FIND MOUSE")
-		return
-	end
-
-	if key == "-" then
-		self.keyconfmenu = keyconfmenu:new(game)
-		sol.menu.start(game, self.keyconfmenu)
-		game.dontshowpausemenu = true
-		game:set_paused(true)
-	--debug keys
---		elseif key == "r" then
---			hero.entitydata:throwrandom()
-	elseif key == "5" then
-		print("cheat: saved game")
-		saveto(1)
-	elseif key == "6" then
-		print("cheat: loaded game")
-		loadfrom(1)
-	elseif key == "7" then
-		print("cheat: restarted game")
-		loadfrom(0)
-	elseif key == "1" or key == "2" or key == "3" or key == "4" then
-		if hero.entitydata.cheatyabilityswitcher == nil then
-			hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
+		if hero.entitydata == nil then return end
+	
+		local x, y = hero.entitydata:gettargetpos()
+	
+		if x == nil then
+			print("COULDN'T FIND MOUSE")
+			return
 		end
-		local cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.blockabilities, ["3"]=hero.entitydata.transformabilities, ["4"]=hero.entitydata.specialabilities}
-		local cheatyabilities = cheatyabilities[key]
-		hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
-		if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
-			hero.entitydata.cheatyabilityswitcher[key] = 1
-		end
-		cheatyability = cheatyabilities[hero.entitydata.cheatyabilityswitcher[key]]
-		if key == "1" then
-			hero.entitydata.swordability = cheatyability
-		elseif key == "2" then
-			hero.entitydata.blockability = cheatyability
-		elseif key == "3" then
-			hero.entitydata.transformability = cheatyability
-		elseif key == "4" then
-			hero.entitydata.specialability = cheatyability
-		end
-		print("CHEAT: ability changed to", cheatyability.name)
-		if hero.entitydata.theclass == "debugger" then
-			hero.entitydata:onabilitychanged()
-		end
-	elseif key == "c" then
-		for num, ability in pairs({hero.entitydata.swordability, hero.entitydata.blockability, hero.entitydata.transformability, hero.entitydata.specialability}) do
-			if ability.usingcooldown then
-				ability.cooldowntimer:remove()
+	
+		if key == "-" then
+			self.keyconfmenu = keyconfmenu:new(game)
+			sol.menu.start(game, self.keyconfmenu)
+			game.dontshowpausemenu = true
+			game:set_paused(true)
+		--debug keys
+	--		elseif key == "r" then
+	--			hero.entitydata:throwrandom()
+		elseif key == "5" then
+			print("cheat: saved game")
+			saveto(1)
+		elseif key == "6" then
+			print("cheat: loaded game")
+			loadfrom(1)
+		elseif key == "7" then
+			print("cheat: restarted game")
+			loadfrom(0)
+		elseif key == "1" or key == "2" or key == "3" or key == "4" then
+			if hero.entitydata.cheatyabilityswitcher == nil then
+				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}
+			end
+			local cheatyabilities = {["1"]=hero.entitydata.normalabilities, ["2"]=hero.entitydata.blockabilities, ["3"]=hero.entitydata.transformabilities, ["4"]=hero.entitydata.specialabilities}
+			local cheatyabilities = cheatyabilities[key]
+			hero.entitydata.cheatyabilityswitcher[key] = hero.entitydata.cheatyabilityswitcher[key] + 1
+			if hero.entitydata.cheatyabilityswitcher[key] > #cheatyabilities then
+					hero.entitydata.cheatyabilityswitcher[key] = 1
+			end
+			cheatyability = cheatyabilities[hero.entitydata.cheatyabilityswitcher[key]]
+			if key == "1" then
+				hero.entitydata.swordability = cheatyability
+			elseif key == "2" then
+				hero.entitydata.blockability = cheatyability
+			elseif key == "3" then
+				hero.entitydata.transformability = cheatyability
+			elseif key == "4" then
+				hero.entitydata.specialability = cheatyability
+			end
+			print("CHEAT: ability changed to", cheatyability.name)
+			if hero.entitydata.theclass == "debugger" then
+				hero.entitydata:onabilitychanged()
+			end
+		elseif key == "c" then
+			for num, ability in pairs({hero.entitydata.swordability, hero.entitydata.blockability, hero.entitydata.transformability, hero.entitydata.specialability}) do
+				if ability.usingcooldown then
+					ability.cooldowntimer:remove()
+				end
 			end
 		end
 	end
@@ -455,6 +460,31 @@ function sol.main:on_mouse_pressed(button, ...)
 	if result then return end
 end
 
+function teleport(map, name, transition)
+	local hero = game:get_hero()
+	for entity in hero:get_map():get_entities("") do
+		entity.removed = true
+	end
+	if hero.entitydata.usingability ~= nil then
+		hero.entitydata.usingability:cancel()
+	end
+
+	if hero:get_map().effects ~= nil then
+		while true do
+			local foundeffect = false
+			for effect, b in pairs(hero:get_map().effects) do
+				foundeffect = true
+				pcall(function() effect:forceremove() end)
+				hero:get_map().effects[effect:getkey()] = nil -- just to make sure
+			end
+			if not foundeffect then
+				break
+			end
+		end
+	end
+	hero:teleport(map, name, transition)
+end
+
 function tick()
 	if game.hasended then
 		game.hasended = false
@@ -480,28 +510,7 @@ function tick()
 				if entity.get_destination_map ~= nil then
 					if hero:overlaps(entity) then
 						if game.bypassteleport or hero.entitydata:getremainingmonsters() == 0 then
-							for entity in hero:get_map():get_entities("") do
-								entity.removed = true
-							end
-
-							if hero.entitydata.usingability ~= nil then
-								hero.entitydata.usingability:cancel()
-							end
-
-							if hero:get_map().effects ~= nil then
-								while true do
-									local foundeffect = false
-									for effect, b in pairs(hero:get_map().effects) do
-										foundeffect = true
-										pcall(function() effect:forceremove() end)
-										hero:get_map().effects[effect:getkey()] = nil -- just to make sure
-									end
-									if not foundeffect then
-										break
-									end
-								end
-							end
-							hero:teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
+							teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
 						end
 					end
 				end
