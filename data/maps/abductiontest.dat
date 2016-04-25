@@ -54,14 +54,6 @@ destination{
   direction = 1,
 }
 
-destination{
-  name = "beampos",
-  layer = 0,
-  x = 584,
-  y = 661,
-  direction = 1,
-}
-
 npc{
   name = "beam",
   layer = 1,
@@ -70,6 +62,14 @@ npc{
   direction = 3,
   subtype = 1,
   sprite = "misc/abductionbeam",
+}
+
+destination{
+  name = "beampos",
+  layer = 1,
+  x = 584,
+  y = 661,
+  direction = 1,
 }
 
 npc{

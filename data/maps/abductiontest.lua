@@ -19,8 +19,20 @@ function map:on_opening_transition_finished()
 		movement:set_target(inship)
 		movement:start(player)
 		player.entitydata:setdirection(3)
+		local i = 0
+		local d = 3
+		local shipx, shipy = spaceship:get_position()
 		function movement.on_position_changed()
 			hero:set_position(player:get_position())
+			i = i + 1
+			if i % 5 == 0 then
+				d = (d + 1) % 4
+				player.entitydata:setdirection(d)
+			end
+			local x, y = player:get_position()
+			if y < shipy + 40 then
+				self.newentitypossesseffect:remove()
+			end
 		end
 		function movement.on_finished(movement)
 			player:set_position(0, 0)
