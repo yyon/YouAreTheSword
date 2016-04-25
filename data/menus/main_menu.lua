@@ -1,5 +1,7 @@
 local class = require("middleclass")
 local keyconfmenu = require "menus/keyconfig"
+local loadmenu = require "menus/loadmenu"
+
 
 require "scripts/inputhandler"
 
@@ -25,7 +27,7 @@ function dialog:initialize(game)
 
   self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:finish() end)
 	y = y + 70
-  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load game", function() self:finish() end)
+  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load game", function() self:start_load() end)
 	y = y + 70
   self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
 	y = y + 70
@@ -33,11 +35,29 @@ function dialog:initialize(game)
 end
 
 function dialog:start_config()
-  sol.menu.stop(self)
-  self.keyconfmenu = keyconfmenu:new(game)
-  sol.menu.start(game, self.keyconfmenu)
-
+	self:launchsubmenu(keyconfmenu)
 end
+
+function dialog:start_load()
+	self:launchsubmenu(loadmenu)
+end
+
+function dialog:launchsubmenu(menu)
+	local myoldonfinished = self.on_finished
+	function self:on_finished() end
+
+	sol.menu.stop(self)
+	local submenu = menu:new()
+	local oldonfinished = submenu.on_finished
+	function submenu.on_finished(submenu)
+		oldonfinished()
+		local newdialog = dialog:new()
+		newdialog.on_finished = myoldonfinished
+		sol.menu.start(self, newdialog)
+	end
+	sol.menu.start(self, submenu)
+end
+
 
 function dialog:on_started()
   	self:check()

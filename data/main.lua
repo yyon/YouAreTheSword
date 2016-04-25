@@ -5,6 +5,8 @@
 local game_manager = require("scripts/game_manager")
 keyhandler = function() print("Error: unhandled key press") end
 mousehandler = function() print("Error: unhandled key press") end
+local main_menu
+local main_menu_file = require "menus/main_menu"
 
 function sol.main:on_started()
 	-- This function is called when Solarus starts.
@@ -31,6 +33,13 @@ function sol.main:on_started()
 	end
 
 	title_screen.on_finished = function()
+		configload()
+		main_menu = main_menu_file:new()
+		sol.menu.start(self, main_menu)
+		--game_manager:start_game()
+	end
+
+	main_menu.on_finished = function()
 		game_manager:start_game()
 	end
 

@@ -103,7 +103,9 @@ function dialog:on_draw(dst_surface)
 end
 
 function dialog:finish()
-  game:set_paused(false)
+  if game ~= nil then
+    game:set_paused(false)
+  end
   sol.menu.stop(self)
 end
 
