@@ -1,5 +1,4 @@
 local class = require("middleclass")
-local confirmation = require("menus/confirmation")
 
 require "scripts/inputhandler"
 
