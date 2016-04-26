@@ -1302,3 +1302,12 @@ tile{
   pattern = "191",
 }
 
+teletransporter{
+  layer = 0,
+  x = 1016,
+  y = 24,
+  width = 288,
+  height = 32,
+  destination_map = "CatDungeon/BossMap",
+}
+

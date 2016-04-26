@@ -357,6 +357,15 @@ tile{
   pattern = "2634",
 }
 
+tile{
+  layer = 0,
+  x = 768,
+  y = 376,
+  width = 32,
+  height = 32,
+  pattern = "730",
+}
+
 npc{
   layer = 0,
   x = 400,
@@ -539,7 +548,7 @@ teletransporter{
   y = 128,
   width = 32,
   height = 32,
-  destination_map = "catmap",
+  destination_map = "CatDungeon/1",
 }
 
 custom_entity{
@@ -569,5 +578,14 @@ npc{
   direction = 3,
   subtype = 1,
   sprite = "bosses/dunsmur-1",
+}
+
+teletransporter{
+  layer = 0,
+  x = 800,
+  y = 376,
+  width = 32,
+  height = 32,
+  destination_map = "catmap",
 }
 
