@@ -1,0 +1,112 @@
+properties{
+  x = 0,
+  y = 0,
+  width = 1984,
+  height = 1984,
+  tileset = "tileset2",
+}
+
+tile{
+  layer = 0,
+  x = 0,
+  y = 0,
+  width = 1984,
+  height = 1984,
+  pattern = "2966",
+}
+
+tile{
+  layer = 0,
+  x = 288,
+  y = 192,
+  width = 32,
+  height = 32,
+  pattern = "3439",
+}
+
+tile{
+  layer = 0,
+  x = 256,
+  y = 192,
+  width = 32,
+  height = 32,
+  pattern = "3438",
+}
+
+tile{
+  layer = 0,
+  x = 256,
+  y = 160,
+  width = 32,
+  height = 32,
+  pattern = "3426",
+}
+
+tile{
+  layer = 0,
+  x = 320,
+  y = 128,
+  width = 32,
+  height = 32,
+  pattern = "3416",
+}
+
+tile{
+  layer = 0,
+  x = 256,
+  y = 128,
+  width = 32,
+  height = 32,
+  pattern = "3414",
+}
+
+tile{
+  layer = 0,
+  x = 320,
+  y = 160,
+  width = 32,
+  height = 32,
+  pattern = "3428",
+}
+
+tile{
+  layer = 0,
+  x = 288,
+  y = 160,
+  width = 32,
+  height = 32,
+  pattern = "3427",
+}
+
+tile{
+  layer = 0,
+  x = 288,
+  y = 128,
+  width = 32,
+  height = 32,
+  pattern = "3415",
+}
+
+destination{
+  layer = 0,
+  x = 120,
+  y = 357,
+  direction = 1,
+}
+
+enemy{
+  layer = 0,
+  x = 584,
+  y = 157,
+  direction = 0,
+  breed = "a_cleric",
+}
+
+enemy{
+  layer = 0,
+  x = 528,
+  y = 421,
+  direction = 0,
+  breed = "a_mage",
+}
+

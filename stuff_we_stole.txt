@@ -162,6 +162,8 @@ http://opengameart.org/content/lpc-tile-atlas
 	lpc tileset
 http://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
 	hyptosis tileset
+http://opengameart.org/content/castle-tiles-for-rpgs
+	castles
 
 gui
 http://opengameart.org/content/ui-resources
