@@ -12,6 +12,8 @@ function sol.main:on_started()
 	-- This function is called when Solarus starts.
 	print("This is a sample quest for Solarus.")
 
+	--print(sol.main.get_quest_write_dir())
+
 	local width, height = sol.video.get_quest_size()
 	sol.video.set_fullscreen(false)
 	sol.video.set_mode("normal")

@@ -18,7 +18,7 @@ function dialog:initialize(game)
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
   self.surface = sol.surface.create(self.w, self.h)
-  local y = center_y - h/2 + 70
+  local y = center_y
 
   self.buttons = {}
 
