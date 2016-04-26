@@ -13,6 +13,8 @@ function sol.main:on_started()
 	print("This is a sample quest for Solarus.")
 
 	--print(sol.main.get_quest_write_dir())
+	configload()
+	updatevolume()
 
 	local width, height = sol.video.get_quest_size()
 	sol.video.set_fullscreen(false)
@@ -35,7 +37,6 @@ function sol.main:on_started()
 	end
 
 	title_screen.startmain = function(title)
-		configload()
 		main_menu = main_menu_file:new(self, title)
 		sol.menu.start(self, main_menu)
 		--game_manager:start_game()

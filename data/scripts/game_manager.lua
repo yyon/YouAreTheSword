@@ -678,8 +678,6 @@ function load()
 	hero.ishero = true
 	hero.is_possessing = true
 	
-	updatevolume()
-
 	local usersave = game:get_value("usersave")
 --	print("unpickle", pickledheroentitydata)
 	if usersave ~= nil then
