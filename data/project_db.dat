@@ -23,12 +23,15 @@ map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
 map{ id = "tutorial/1", description = "1" }
 map{ id = "tutorial/2", description = "2" }
+map{ id = "tutorial/3", description = "3" }
 
 tileset{ id = "tileset2", description = "tileset2" }
 tileset{ id = "zmagecity", description = "zmagecity" }
 
+sprite{ id = "Traps/alwaysspikes", description = "alwaysspikes" }
 sprite{ id = "Traps/door", description = "door" }
 sprite{ id = "Traps/lever", description = "lever" }
+sprite{ id = "Traps/newspikes", description = "newspikes" }
 sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
 sprite{ id = "abilities/arrow", description = "arrow" }

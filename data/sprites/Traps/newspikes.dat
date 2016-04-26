@@ -1,0 +1,9 @@
+animation{
+  name = "5",
+  src_image = "Traps/newspikes.png",
+  frame_delay = 500,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 22, frame_height = 22, origin_x = 11, origin_y = 11, num_frames = 5 },
+  },
+}

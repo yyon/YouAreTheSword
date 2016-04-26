@@ -1972,8 +1972,8 @@ function mageboss:initialize(entity)
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {TentacleAbility:new(self)}
-	local basestats = {movementspeed=0}
-	self.cantpossess=true
+	local basestats = {movementspeed=30}
+	self.cantpossess = true
 	self.cantcancel = true
 	self.alwaysrandom = true
 
@@ -1985,13 +1985,14 @@ end
 
 function mageboss:stage2()
 	self.main_sprite = "bosses/mage-2"
-	self.stats.movementspeed = 50
+	self.stats.movementspeed = 60
 	self.swordability = FireballAbility:new(self)
 	self.specialability = NothingAbility:new(self)
 end
 
 function mageboss:stage3()
 	self.main_sprite = "bosses/mage-3"
+	self.stats.movementspeed = 90
 	self.blockability = TeleportAbility:new(self)
 	self.specialability = TentacleAbility:new(self)
 end

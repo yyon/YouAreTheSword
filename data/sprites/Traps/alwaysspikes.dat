@@ -1,0 +1,10 @@
+animation{
+  name = "always",
+  src_image = "Traps/newspikes.png",
+  directions = {
+    { x = 88, y = 0, frame_width = 22, frame_height = 22, origin_x = 11, origin_y = 11 },
+    { x = 88, y = 0, frame_width = 22, frame_height = 22, origin_x = 11, origin_y = 11 },
+    { x = 88, y = 0, frame_width = 22, frame_height = 22, origin_x = 11, origin_y = 11 },
+    { x = 88, y = 0, frame_width = 22, frame_height = 22, origin_x = 11, origin_y = 11 },
+  },
+}

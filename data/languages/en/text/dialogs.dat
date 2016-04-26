@@ -228,3 +228,76 @@ Enemies also have a red lifebar above them, so you can use that too.
 ]]
 }
 
+dialog{
+  id = "tutorial2.knight",
+  text = [[
+I keep throwing these swords like the sign tells me to, but nothings happening!
+]]
+}
+
+dialog{
+  id = "tutorial2.sign1",
+  text = [[
+To go over this cliff, use ${throwallies} to throw your sword.
+This will pass your sword to the closest ally to your mouse pointer.
+]]
+}
+
+dialog{
+  id = "tutorial2.sign2",
+  text = [[
+Your special ability is displayed in the rightmost icon.
+Use ${special} to use your special ability.
+NEWSCREEN
+Many abilities have a casting time, where there is a delay between the starting the ability and using the ability.
+Many abilities also have a cooldown time, where the ability can't be used again until the timer ends.
+]]
+}
+
+dialog{
+  id = "tutorial2.sign3",
+  text = [[
+I spent years of research creating this combat dummy.
+It's completely invincible!
+NEWSCREEN
+Unless it's hit by an axe.
+Its one weakness..
+NEWSCREEN
+The third icon is your Sword Transformation ability.
+Use ${swordtransform} to transform your sword.
+Then use ${normal} to swing it. 
+]]
+}
+
+dialog{
+  id = "tutorial2.sign4",
+  text = [[
+Hold down ${abilityhelp} to see a description of your abilities.
+It will also pause time while you're reading it.
+NEWSCREEN
+Be sure to not misuse this power or you will cause a time paradox.
+]]
+}
+
+dialog{
+  id = "tutorial3.sign",
+  text = [[
+You should not use ${block} to defend yourself.
+Defense is for losers.
+Winners use only offensive moves.
+]]
+}
+
+dialog{
+  id = "tutorial3.sign2",
+  text = [[
+The blue bar is the adventurer's soul.
+NEWSCREEN
+The adventurer's soul gets weaker the longer they are possessed.
+This means you do less damage.
+The soul will heal naturally if you stop possessing that person.
+NEWSCREEN
+If your soul bar gets low, switch to a different person!
+]]
+}
+

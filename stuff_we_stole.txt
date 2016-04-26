@@ -50,6 +50,8 @@ http://opengameart.org/content/oil-painting-landscapes
 	mountain pic
 http://opengameart.org/content/fluffy-clouds
 	clouds
+http://opengameart.org/content/spikes-0
+	spike trap
 
 http://opengameart.org/content/jastivs-artwork
 	angel (wings)
@@ -165,7 +167,3 @@ gui
 http://opengameart.org/content/ui-resources
 	dialog textbox
 
-stuff that probably needs to be replaced:
-bomb texture
-die sprite
-die sound

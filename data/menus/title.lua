@@ -33,6 +33,8 @@ function title_screen:phase_the_team_presents()
 end
 
 function title_screen:phase_title()
+	sol.audio.play_music("singles/techno minutesloopNES")
+	
 	if self.phase == "title" then return end
 	self.phase = "title"
 
@@ -171,6 +173,10 @@ function title_screen:finish_title()
 	self.show_press_space = false
 	self.logoy = 70
 	self:startmain(self)
+end
+
+function title_screen:on_finished()
+	sol.audio.stop_music()
 end
 
 return title_screen

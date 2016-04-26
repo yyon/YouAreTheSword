@@ -50,6 +50,7 @@ end
 local foundmonster = false
 local foundadv = false
 for entity in map:get_entities("") do
+    entity:set_optimization_distance(0)
     if entity.get_destination_map ~= nil then
         local x, y, layer = entity:get_position()
         entity:set_position(x, y, 2)
