@@ -1,3 +1,5 @@
+map{ id = "CatDungeon", description = "This is the dungeon for the cat" }
+map{ id = "CatDungeon/1", description = "First part" }
 map{ id = "DunsMurDungeon/1", description = "1" }
 map{ id = "Ian's Test Dungeon/1", description = "1" }
 map{ id = "Ian's Test Dungeon/2", description = "2" }
