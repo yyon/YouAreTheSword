@@ -23,13 +23,13 @@ function dialog:initialize(game)
 
   self.buttons = {}
 
-  self.buttons.sound_button = menubutton(self, center_x - 205, y, 400, 60, "Sound Volume: " .. conf.sound, function() self:sound_up() end)
+  self.buttons.sound_button = menubutton(self, center_x - 205, y, 400, 60, "Sound Volume: " .. conf.sound, function() self:rebuild_surface() end)
 y = y + 70
 self.buttons.sound_up_button = menubutton(self, center_x - 205, y, 400, 60, "Sound Volume +", function() self:sound_up() end)
   y = y + 70
   self.buttons.sound_down_button = menubutton(self, center_x - 205, y, 400, 60, "Sound Volume -", function() self:sound_down() end)
   y = y - 140
-  self.buttons.music_button = menubutton(self, center_x + 205, y, 400, 60, "Music Volume: " .. conf.music, function() self:sound_up() end)
+  self.buttons.music_button = menubutton(self, center_x + 205, y, 400, 60, "Music Volume: " .. conf.music, function() self:rebuild_surface() end)
 y = y + 70
   self.buttons.music_up_button = menubutton(self, center_x + 205, y, 400, 60, "Music Volume +", function() self:music_up() end)
   y = y + 70
