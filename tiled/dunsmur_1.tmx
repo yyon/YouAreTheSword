@@ -105,12 +105,12 @@
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
   </data>
  </layer>
- <layer name="1" width="50" height="50">
+ <layer name="object" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt2bkOwjAQBFBLqThaCC1Hy9EG+P/vYtxGaUYbsRNnnjSlJbvZlcaltGPTlbJFdsi+W+49DjhzRHrklPiO6D3OOHNBrsgt8R3Re9xx5oE8kVfiO6L3GHDmjXyQb+I7VO5hZmZmZma2Bgo9yRwUepI5KPQkrKmeS6EnYU31XEvsJ1T6tiiVvi3KPZfZf7F/Lyp/RmPs34vKn9EYu5NUdxi7k1R3GLuTvMMsk+p8ZqnOZ5bqfGapzmfWWudzCzOhamEmVC3MhOoHAgEUuQ==
   </data>
  </layer>
- <layer name="1" width="50" height="50">
+ <layer name="object" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJztmjlPwzAUx6tYsHOsHDOwcnwbzg0ELFyChUvwhThWjrl7gZEWFiQKLCAK/Csliklfrmc7R+WfZDly8/yOJM/PaSoVSxQbDn1cNvYd+jhrJkXycx9hZx2tUcC4j6Xw4xX2N9HeJD/6IN8v/D4vplLo/ob9LbQfyY8hyA8Lv7dYupkXRi5SleHIx/HJmFNVJk6ek+97GDlHVSZOnsr3pthh6JhNKEPle1McK+r4IuSpsaRUcY2bKe8TzrUI0uvqHEA/KP6PcbhjyKpeC5kR6B8NsWEuhZ5GRrVF2DUfx/gE8dsmfNiK8CPtPWSaadgzQ9h0AB8OC1Zn12DnSsAm3c+5KeQcWyfiTT3TwbH5CL+WmT5z5bhsG9DHrafu0R6IPsl8RxHncPdw3HrqCe2Z6OPmi1ufuHs4bj31Dns+nM4+bD7vmdK5Pungt22P6Owt3Ym33sh5I2qsqHjrjZw3osayQGWvS+UNTm7SASe3FxGT8cu6FukWaiVfW7w9EVUXm+Sq5HG7gP2XAR/ONflUzTA2N9B16+o7c/trTfo57zsoWsKPSR57eJ3vO+SYlCl37GJ92JPWCDkmunNH0neiHE4w96mh+Tl2p5Ux8f+DaZYIm8tUk7XtX0BbJGzOq6blsgof1gg/yvY9xXqIvXl+T2GxWPTxB5Xeb6w=
   </data>
@@ -142,7 +142,7 @@
  </layer>
  <layer name="wall" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt00EKgCAQBVBX3Z9OHC0CCbE0g8neAxc5k9OnSqluXS4aGvp7aq3ze2bX+vP7Snt358jx7Jwvfld77Vj59bkW/X2UnjmvRctRW2+fNWp2VHLEIkcss/3rM+UBAAAAAAAA/mUDKYcwGQ==
+   eJztVtEOAyEIu6f9f/bFy96MUUuBct7FJsuSDShVBK5rje8HGBD2nv9Yfg83a390xPE0HX/7kQ/ibv1mMayxRjEq7qPnRpx319Xqo46Vxb0rjo698FYd6O3NenGFD9LB+LAzJdMHgTmDnXUwyNSB5kQmrLWOYrD/K3REbVR1F33XHk5LTso9w6ojs4cqsEMOHqCztJx9xdyLonLGKPEmHaNasNbVKuYslrruWJ5d3saTcM7nIAPKOrLOTEuvYntDZh+x+vc6MmOztjN/y9yo1BG5a+b3Ch3e2Ow+yebG2EZ0MKjWodov7tChgFfH6jy9Oti7ae3bb+YdoXx6LvWO6p2DVh27Q6kjY79guFbcmbG9Nllc0dire7hTB/MWUb+J7juR2mF9IvtHa9vnW1H3yN47jyN5jPwz6irij2IcHCjwAxLJBoA=
   </data>
  </layer>
 </map>
