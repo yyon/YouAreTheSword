@@ -686,3 +686,12 @@ enemy{
   breed = "",
 }
 
+teletransporter{
+  layer = 0,
+  x = 464,
+  y = 72,
+  width = 48,
+  height = 16,
+  destination_map = "CatDungeon/2",
+}
+

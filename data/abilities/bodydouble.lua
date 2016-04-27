@@ -36,6 +36,7 @@ function BodyDoubleAbility:doability()
 
 		local dummyentitydata = _EntityDatas.dummyclass:new()
 		dummyentitydata.team = self.entitydata.team
+		dummyentitydata.actualteam = self.entitydata.actualteam
 		dummyentitydata.entity = newentity
 		dummyentitydata:applytoentity()
 

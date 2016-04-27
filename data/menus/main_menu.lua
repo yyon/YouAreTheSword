@@ -2,6 +2,7 @@ local class = require("middleclass")
 local keyconfmenu = require "menus/keyconfig"
 local loadmenu = require "menus/loadmenu"
 local areyousuregame = require "menus/areyousuregame"
+local sub_options = require "menus/sub_options"
 
 
 require "scripts/inputhandler"
@@ -45,7 +46,7 @@ function dialog:initialize(game, title)
 end
 
 function dialog:start_config()
-	self:launchsubmenu(keyconfmenu)
+	self:launchsubmenu(sub_options)
 end
 
 function dialog:start_load()
