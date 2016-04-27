@@ -31,10 +31,37 @@ for layeri, layer in ipairs(data.layers) do
   stops_blocks = true,
   stops_projectiles = true,
 }]])
+			elseif layername == "object" then
+			    local posbelow = i + width
+			    local hasbelow = (layerdata[posbelow] ~= nil and layerdata[posbelow] ~= 0)
+			    local newlayer = (hasbelow and 1 or 0)
+			    print([[tile{
+	layer = ]] .. tonumber(newlayer) .. [[,
+	x = ]] .. x * 32 .. [[,
+	y = ]] .. y * 32 .. [[,
+	width = 32,
+	height = 32,
+	pattern = "]] .. tile + 1 .. [[",
+}
+]])
+			    if not hasbelow then
+				print([[wall{
+  layer = 0,
+  x = ]] .. x*32 .. [[,
+  y = ]] .. y*32 .. [[,
+  width = 32,
+  height = 32,
+  stops_hero = true,
+  stops_npcs = true,
+  stops_enemies = true,
+  stops_blocks = true,
+  stops_projectiles = true,
+}]])
+			    end
 			else
 				local newlayer = tonumber(layername - 1)
 				print([[tile{
-	layer = ]] .. newlayer .. [[,
+	layer = ]] .. tonumber(layername)-1 .. [[,
 	x = ]] .. x * 32 .. [[,
 	y = ]] .. y * 32 .. [[,
 	width = 32,

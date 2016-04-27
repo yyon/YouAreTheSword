@@ -659,7 +659,7 @@ enemy{
   x = 632,
   y = 357,
   direction = 0,
-  breed = "",
+  breed = "a_archer",
 }
 
 enemy{
@@ -667,7 +667,7 @@ enemy{
   x = 456,
   y = 237,
   direction = 0,
-  breed = "",
+  breed = "a_archer",
 }
 
 enemy{
@@ -675,7 +675,7 @@ enemy{
   x = 936,
   y = 293,
   direction = 0,
-  breed = "",
+  breed = "a_archer",
 }
 
 enemy{
@@ -683,7 +683,7 @@ enemy{
   x = 392,
   y = 525,
   direction = 0,
-  breed = "",
+  breed = "a_archer",
 }
 
 teletransporter{
