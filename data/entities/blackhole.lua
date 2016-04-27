@@ -57,7 +57,7 @@ function entity:tick()
 	for i = 1,math.random(3,6) do
 		local newx, newy = x + math.random(-PARTICLEDIST, PARTICLEDIST), y + math.random(-PARTICLEDIST, PARTICLEDIST)
 		local particle = map:create_custom_entity({model="blackholeparticle", x=newx, y=newy, layer=layer, direction=0, width=8, height=8})
-		if partile ~= nil then
+		if particle ~= nil then
 			particle:start(self)
 			self.particles[particle] = true
 		end

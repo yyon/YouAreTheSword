@@ -4,8 +4,6 @@ data = dofile(infile)
 
 local width, height = data.width, data.height
 
-local layertranslation = {[1]=0, [2]=0, [3]=1, [4]="wall"}
-
 print([[properties{
   x = 0,
   y = 0,
@@ -16,11 +14,11 @@ print([[properties{
 
 for layeri, layer in ipairs(data.layers) do
 	local layerdata = layer.data
+	local layername = layer.name
 	for i, tile in ipairs(layerdata) do
 		local x, y = (i-1) % width, math.floor((i-1) / width)
 		if tile ~= 0 then
-			local newlayer = layertranslation[layeri]
-			if newlayer == "wall" then
+			if layername == "wall" or layername == "walls" then
 				print([[wall{
   layer = 0,
   x = ]] .. x*32 .. [[,
@@ -34,6 +32,7 @@ for layeri, layer in ipairs(data.layers) do
   stops_projectiles = true,
 }]])
 			else
+				local newlayer = tonumber(layername - 1)
 				print([[tile{
 	layer = ]] .. newlayer .. [[,
 	x = ]] .. x * 32 .. [[,
