@@ -21,6 +21,7 @@ map{ id = "puzzletest/4", description = "4" }
 map{ id = "puzzletest/5", description = "5" }
 map{ id = "puzzletest/puzzlehub", description = "puzzlehub" }
 map{ id = "sequencetest", description = "sequencetest" }
+map{ id = "something", description = "something" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
