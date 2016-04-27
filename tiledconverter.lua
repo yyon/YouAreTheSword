@@ -1,11 +1,10 @@
 infile = ...
 
-infile = string.sub(infile, 1, -5)
-data = require(infile)
+data = dofile(infile)
 
 local width, height = data.width, data.height
 
-local layertranslation = {[0]=0, [1]=0, [2]=1, [3]="wall"}
+local layertranslation = {[1]=0, [2]=0, [3]=1, [4]="wall"}
 
 print([[properties{
   x = 0,
@@ -18,11 +17,11 @@ print([[properties{
 for layeri, layer in ipairs(data.layers) do
 	local layerdata = layer.data
 	for i, tile in ipairs(layerdata) do
-		local x, y = i % width, math.floor(i / width)
+		local x, y = (i-1) % width, math.floor((i-1) / width)
 		if tile ~= 0 then
 			local newlayer = layertranslation[layeri]
 			if newlayer == "wall" then
-				print([[wall{wall{
+				print([[wall{
   layer = 0,
   x = ]] .. x*32 .. [[,
   y = ]] .. y*32 .. [[,

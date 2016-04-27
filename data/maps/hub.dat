@@ -460,7 +460,7 @@ teletransporter{
   y = 480,
   width = 32,
   height = 32,
-  destination_map = "abductiontest",
+  destination_map = "something",
 }
 
 teletransporter{
