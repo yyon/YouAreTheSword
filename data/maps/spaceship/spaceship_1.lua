@@ -1,6 +1,6 @@
 local map = ...
 
-map.dialogprefix = "tutorial."
+map.dialogprefix = "spaceship.level1."
 
 local Effects = require "enemies/effect"
 
