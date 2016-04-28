@@ -42,6 +42,7 @@ sprite{ id = "Traps/newspikes", description = "newspikes" }
 sprite{ id = "Traps/spikes_larger", description = "larger spikes" }
 sprite{ id = "Traps/spiketrap", description = "spiketrap" }
 sprite{ id = "abilities/arrow", description = "arrow" }
+sprite{ id = "abilities/beams", description = "beams" }
 sprite{ id = "abilities/blackhole", description = "blackhole" }
 sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
 sprite{ id = "abilities/bomb", description = "bomb" }
@@ -191,9 +192,12 @@ sprite{ id = "physicaleffects/spiderweb", description = "spiderweb" }
 sprite{ id = "physicaleffects/stun", description = "electrical stun effect" }
 sprite{ id = "physicaleffects/taunt", description = "taunt" }
 sprite{ id = "sign", description = "sign" }
+sprite{ id = "swords/dagger", description = "dagger" }
 sprite{ id = "swords/electric", description = "electric" }
+sprite{ id = "swords/glowing", description = "glowing" }
 sprite{ id = "swords/largesword", description = "largesword" }
 sprite{ id = "swords/mace", description = "mace" }
+sprite{ id = "swords/slow", description = "slow" }
 sprite{ id = "swords/swordanim", description = "swordanim" }
 
 music{ id = "8-bit/01 - Opening", description = "01 - Opening" }
@@ -365,6 +369,7 @@ entity{ id = "spiketrap", description = "spiketrap" }
 entity{ id = "stealth", description = "stealth smoke" }
 entity{ id = "stomp", description = "stomp" }
 entity{ id = "sword", description = "sword" }
+entity{ id = "swordbeam", description = "swordbeam" }
 entity{ id = "target", description = "target" }
 entity{ id = "teleportanim", description = "teleportanim" }
 entity{ id = "tentacle", description = "tentacle" }

@@ -1519,7 +1519,7 @@ function knightclass:initialize(entity)
 	local life = 10
 	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {SwordAbility:new(self)}
-	local transformabilities = {TransformAbility:new(self, "ap")}
+	local transformabilities = {TransformAbility:new(self, "projectile")}
 	local blockabilities = {ShieldAbility:new(self)}
 	local specialabilities = {ChargeAbility:new(self), ShieldBashAbility:new(self)}
 	local basestats = {}

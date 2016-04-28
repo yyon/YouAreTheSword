@@ -56,6 +56,15 @@ function SwordAbility:doability()
 	self.topsword = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.topsword.ability = self
 	self.topsword:start(self:get_appearance(), true)
+	
+	local transform = self:gettransform()
+	if transform == "projectile" then
+		local tox, toy = self:gettargetpos()
+		self.tox, self.toy = tox, toy
+
+		self.arrowentity = map:create_custom_entity({model="swordbeam", x=x, y=y-35, layer=layer, direction=d, width=w, height=h})
+		self.arrowentity:start(self, tox, toy)
+	end	
 
 	sol.audio.play_sound("sword" .. math.random(1,3))
 end
@@ -82,7 +91,7 @@ function SwordAbility:attack(entity)
 
 	local damage = 1
 	local aspects = {}
-
+	
 	local transform = self:gettransform()
 	if transform == "ap" then
 		aspects.ap = true
@@ -158,6 +167,8 @@ function SwordAbility:get_appearance(entity)
 		return "swords/dagger"
 	elseif transform == "slow" then
 		return "swords/slow"
+	elseif transform == "projectile" then
+		return "swords/glowing"
 	end
 end
 
@@ -195,6 +206,9 @@ sworddesc.getnameicon = function(transform)
 	elseif transform == "normal" then
 		name = "None"
 		icon = "sword"
+	elseif transform == "projectile" then
+		name = "Glowing"
+		icon = "glowing"
 	end
 	return name, icon
 end
@@ -202,6 +216,8 @@ sworddesc.getdesc = function(transform)
 	local desc = ""
 	if transform == "normal" then
 		desc = desc .. ""
+	elseif transform == "projectile" then
+		desc = desc .. "Shoots an projectile"
 	elseif transform == "ap" then
 		desc = desc .. "Does more damage against people with armor"
 	elseif transform == "fire" then
@@ -227,6 +243,8 @@ end
 sworddesc.getstats = function(transform)
 	local desc = ""
 	if transform == "normal" then
+		desc = desc .. "7 dmg"
+	elseif transform == "projectile" then
 		desc = desc .. "7 dmg"
 	elseif transform == "ap" then
 		desc = desc .. "10 dmg"
