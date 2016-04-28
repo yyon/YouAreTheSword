@@ -12,6 +12,7 @@ animation{
   name = "casting",
   src_image = "monsters/wolf.png",
   frame_delay = 100,
+  frame_to_loop_on = 3,
   directions = {
     { x = 320, y = 48, frame_width = 64, frame_height = 48, origin_x = 32, origin_y = 24, num_frames = 4 },
     { x = 160, y = 64, frame_width = 32, frame_height = 64, origin_x = 16, origin_y = 32, num_frames = 4 },

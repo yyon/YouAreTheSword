@@ -44728,40 +44728,24 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 1168,
-  y = 461,
+  x = 1216,
+  y = 317,
   direction = 0,
   breed = "e_eyeball",
 }
 
 enemy{
   layer = 0,
-  x = 1488,
-  y = 701,
+  x = 248,
+  y = 845,
   direction = 0,
   breed = "e_wolf",
 }
 
 enemy{
   layer = 0,
-  x = 168,
-  y = 909,
-  direction = 0,
-  breed = "e_worm",
-}
-
-enemy{
-  layer = 0,
-  x = 1360,
-  y = 845,
-  direction = 0,
-  breed = "a_bard",
-}
-
-enemy{
-  layer = 0,
-  x = 248,
-  y = 1533,
+  x = 184,
+  y = 1381,
   direction = 0,
   breed = "a_archer",
 }
@@ -44810,18 +44794,35 @@ wall{
 
 separator{
   layer = 0,
-  x = -8,
-  y = 560,
+  x = -16,
+  y = 536,
   width = 1632,
   height = 16,
 }
 
 separator{
   layer = 0,
-  x = -16,
-  y = 1160,
+  x = -24,
+  y = 1104,
   width = 1632,
   height = 16,
+}
+
+enemy{
+  layer = 0,
+  x = 1384,
+  y = 861,
+  direction = 0,
+  breed = "a_bard",
+}
+
+teletransporter{
+  layer = 0,
+  x = 1568,
+  y = 1504,
+  width = 32,
+  height = 96,
+  destination_map = "DunsMurDungeon/2",
 }
 
 tile{

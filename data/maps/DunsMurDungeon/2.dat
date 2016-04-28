@@ -39386,8 +39386,8 @@ wall{
 
 wall{
   layer = 0,
-  x = 1120,
-  y = 1024,
+  x = 1152,
+  y = 992,
   width = 32,
   height = 32,
   stops_hero = true,
@@ -39425,8 +39425,8 @@ wall{
 
 wall{
   layer = 0,
-  x = 1216,
-  y = 1024,
+  x = 1184,
+  y = 992,
   width = 32,
   height = 32,
   stops_hero = true,
@@ -44909,8 +44909,8 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 600,
-  y = 333,
+  x = 464,
+  y = 317,
   direction = 0,
   breed = "e_slime",
 }
@@ -44945,6 +44945,29 @@ enemy{
   y = 941,
   direction = 0,
   breed = "e_maskman",
+}
+
+separator{
+  layer = 0,
+  x = 808,
+  y = -40,
+  width = 16,
+  height = 1680,
+}
+
+enemy{
+  layer = 0,
+  x = 1304,
+  y = 1509,
+  direction = 0,
+  breed = "a_mage",
+}
+
+destination{
+  layer = 0,
+  x = 24,
+  y = 1509,
+  direction = 1,
 }
 
 tile{
