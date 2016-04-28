@@ -366,6 +366,15 @@ tile{
   pattern = "730",
 }
 
+tile{
+  layer = 0,
+  x = 840,
+  y = 224,
+  width = 32,
+  height = 32,
+  pattern = "5",
+}
+
 npc{
   layer = 0,
   x = 400,
@@ -587,5 +596,15 @@ teletransporter{
   width = 32,
   height = 32,
   destination_map = "catmap",
+}
+
+teletransporter{
+  name = "spaceship_level",
+  layer = 0,
+  x = 800,
+  y = 224,
+  width = 32,
+  height = 32,
+  destination_map = "spaceship/spaceship_1",
 }
 
