@@ -132,6 +132,7 @@ Whoa...
 dialog{
   id = "spaceship.level1.2",
   text = [[
+Where am I?
 ]]
 }
 
