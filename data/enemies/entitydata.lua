@@ -928,7 +928,10 @@ function EntityData:swordkill()
 
 --	-- TODO: make this work
 --	self.entity:teleport(self.entity:get_map():get_id())
-	game.hasended = true
+--	game.hasended = true
+	local gameover = require("menus/gameover")
+	game.newinput = true
+	sol.menu.start(game, gameover:new())
 end
 
 function EntityData:drop(hero, notimer)

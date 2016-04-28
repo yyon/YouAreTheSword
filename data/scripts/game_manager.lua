@@ -450,7 +450,7 @@ function sol.main:on_key_released(key, modifiers)
 end
 
 function sol.main:on_mouse_pressed(button, ...)
-	if game == nil or game:is_paused() then
+	if game == nil or game:is_paused() or game.newinput then
 		if mousehandler ~= nil then
 			mousehandler(button, ...)
 		end
