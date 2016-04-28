@@ -1519,7 +1519,7 @@ function knightclass:initialize(entity)
 	local life = 10
 	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {SwordAbility:new(self)}
-	local transformabilities = {TransformAbility:new(self, "projectile")}
+	local transformabilities = {TransformAbility:new(self, "ap")}
 	local blockabilities = {ShieldAbility:new(self)}
 	local specialabilities = {ChargeAbility:new(self), ShieldBashAbility:new(self)}
 	local basestats = {}
@@ -1627,7 +1627,7 @@ function archerclass:initialize(entity)
 	local life = 10
 	local team = "adventurer" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {BoomerangAbility:new(self), FiringBowAbility:new(self)}
-	local transformabilities = {TransformAbility:new(self, "dagger")}
+	local transformabilities = {TransformAbility:new(self, "projectile")}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {GrapplingHookAbility:new(self), BombThrowAbility:new(self), NetAbility:new(self, "net")}
 	local basestats = {}
@@ -2057,8 +2057,8 @@ function dunsmurclass:initialize(entity)
 	local blockabilities = {ShieldAbility:new(self)}
 	local specialabilities = {PossessAbility:new(self)}
 	local basestats = {}
-	self.cantcancel = true
-
+--	self.cantcancel = true
+	
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -2090,6 +2090,19 @@ end
 function dunsmurclass:playerstage()
 	self.swordability = SwordAbility:new(self)
 	self.specialability = FireballConeAbility:new(self)
+end
+
+function dunsmurclass:startpuns()
+	self.puneffect = Effects.Ticker:new(self, 10000, function() self:pun() end)
+end
+
+function dunsmurclass:pun()
+	local map = self.entity:get_map()
+	local x, y, layer = self.entity:get_position()
+	y = y - 40
+	x = x + 0
+	local punentity = map:create_custom_entity({model="pun", x=x, y=y, layer=layer, direction=0, width=8, height=8})
+	punentity:start(self, self.angle)
 end
 
 -- Summoned:

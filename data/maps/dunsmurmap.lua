@@ -47,6 +47,10 @@ function map:dunsmurcatch()
 end
 
 function map:startadventurer()
+	dunsmur.entitydata.cantpossess = true
+	
+	dunsmur.entitydata:startpuns()
+	
 	self:doend()
 end
 

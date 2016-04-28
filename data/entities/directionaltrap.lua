@@ -1,6 +1,8 @@
 local entity = ...
 
 function entity:on_created()
+	self:set_optimization_distance(0)
+	
 	self.collided = {}
 	self:add_collision_test("sprite", self.oncollision)
 	if self:get_sprite():get_animation() == "5" then

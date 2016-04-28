@@ -3,6 +3,7 @@ local entity = ...
 local Effects = require "enemies/effect"
 
 function entity:on_created()
+	self:set_optimization_distance(0)
 end
 
 function entity:start(ability, target, playsound)

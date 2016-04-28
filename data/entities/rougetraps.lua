@@ -4,6 +4,7 @@ local Effects = require "enemies/effect"
 require "scripts/movementaccuracy"
 
 function entity:on_created()
+	self:set_optimization_distance(0)
 end
 
 function entity:start(tox, toy)

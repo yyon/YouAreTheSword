@@ -98,6 +98,8 @@ function entity:tick()
 			if self.ropesprites[i] ~= nil then
 				self.ropesprites[i]:start(self.type, self.d16)
 			end
+		else
+			self.ropesprites[i]:set_visible(true)
 		end
 
 		self.ropesprites[i]:set_position(posx, posy)
@@ -105,8 +107,9 @@ function entity:tick()
 
 	for dist, ropesprite in pairs(self.ropesprites) do
 		if dist > d-SPACING then
-			ropesprite:remove()
-			self.ropesprites[dist] = nil
+--			ropesprite:remove()
+--			self.ropesprites[dist] = nil
+			ropesprite:set_visible(false)
 		end
 	end
 

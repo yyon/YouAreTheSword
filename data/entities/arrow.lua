@@ -6,6 +6,10 @@ local math = require "math"
 
 sol.main.load_file("entities/projectile")(entity)
 
+function entity:on_created()
+	self:set_optimization_distance(0)
+end
+
 function entity:getdamage()
   local aspects = {}
   aspects.knockback = 100

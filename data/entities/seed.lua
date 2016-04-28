@@ -23,3 +23,7 @@ end
 function entity:onhit()
 	self:remove()
 end
+
+function entity:isfast()
+	return true
+end

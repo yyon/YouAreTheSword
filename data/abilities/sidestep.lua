@@ -8,7 +8,7 @@ local SidestepAbility = Ability:subclass("SidestepAbility")
 -- a replacement for sword ability for classes that don't have that animation
 
 function SidestepAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Sidestep", 300, "sidestep", 0, 1000, true)
+	Ability.initialize(self, entitydata, "Sidestep", 300, "sidestep", 0, 700, true)
 	self.desc = [[Quickly moves to mouse pointer]]
 end
 
@@ -43,15 +43,22 @@ function SidestepAbility:doability()
 	sol.audio.play_sound("sidestep2")
 	self.timer = Effects.SimpleTimer:new(self.entitydata, 100, function() sol.audio.play_sound("sidestep") end)
 	self.timer = Effects.SimpleTimer:new(self.entitydata, 200, function() sol.audio.play_sound("sidestep2") end)
+	self.endtimer = Effects.SimpleTimer:new(self.entitydata, 500, function() self:finish() end)
 end
 
 function SidestepAbility:oncancel()
+	if self.endtimer ~= nil then
+		self.endtimer:stop()
+	end
 	if self.movement ~= nil then
 		self.movement:stop()
 	end
 end
 
 function SidestepAbility:onfinish()
+	if self.endtimer ~= nil then
+		self.endtimer:stop()
+	end
 	self.entitydata:setanimation("stopped")
 end
 

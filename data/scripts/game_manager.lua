@@ -361,6 +361,8 @@ function sol.main:on_key_pressed(key, modifiers)
 			end	
 
 			debug.sethook(trace, "c")
+		elseif key == "s" then
+			debug.debug()
 		end
 
 		if hero.entitydata == nil then return end
@@ -389,6 +391,9 @@ function sol.main:on_key_pressed(key, modifiers)
 		elseif key == "7" then
 			print("cheat: restarted game")
 			loadfrom(0)
+		elseif key == "l" then
+			print("cheat: extra damage")
+			hero.entitydata.stats.damage = 50
 		elseif key == "1" or key == "2" or key == "3" or key == "4" then
 			if hero.entitydata.cheatyabilityswitcher == nil then
 				hero.entitydata.cheatyabilityswitcher = {["1"]=0, ["2"]=0, ["3"]=0, ["4"]=0}

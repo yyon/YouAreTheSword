@@ -1,6 +1,8 @@
 local entity = ...
 
 function entity:on_created()
+	self:set_optimization_distance(0)
+	
 	self.isdoor = true
 	self.openedby = {}
 	self.reversed = self:get_name():match(".*inv.*") ~= nil

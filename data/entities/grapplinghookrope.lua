@@ -2,7 +2,6 @@ local entity = ...
 
 function entity:on_created()
 	self:set_optimization_distance(0)
-
 end
 
 function entity:setdirection(d)

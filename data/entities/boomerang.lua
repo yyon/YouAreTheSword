@@ -10,6 +10,10 @@ local speed = 1000
 local xs, ys, xe, ye
 local returned = 0
 
+function entity:on_created()
+	self:set_optimization_distance(0)
+end
+
 function entity:getdamage()
   local aspects = {}
   aspects.knockback = 100
@@ -56,6 +60,7 @@ function entity:finish()
 	local movement = sol.movement.create("target")
 	movement:set_target(self.ability.entitydata.entity)
 	movement:set_speed(self:getspeed())
+	movement:set_ignore_obstacles(true)
 	movement:start(self)
 	
 	function movement.on_position_updated(movement)

@@ -208,7 +208,7 @@ sworddesc.getnameicon = function(transform)
 		icon = "sword"
 	elseif transform == "projectile" then
 		name = "Glowing"
-		icon = "glowing"
+		icon = "projectile"
 	end
 	return name, icon
 end

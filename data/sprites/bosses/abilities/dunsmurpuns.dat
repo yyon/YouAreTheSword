@@ -1,0 +1,7 @@
+animation{
+  name = "pun",
+  src_image = "bosses/abilities/dunsmurpuns.png",
+  directions = {
+    { x = 0, y = 0, frame_width = 150, frame_height = 150, origin_x = 0, origin_y = 150, num_frames = 5, num_columns = 4 },
+  },
+}
