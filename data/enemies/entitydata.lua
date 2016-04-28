@@ -327,6 +327,10 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack, onlyonsamet
 	if entitydata.caught then
 		return false
 	end
+	
+	if not self.entity:is_in_same_region(entitydata.entity) then
+		return false
+	end
 
 --	if not entitydata:isvisible() and not isattack then
 --		print("can't target", entitydata, "because invisible")

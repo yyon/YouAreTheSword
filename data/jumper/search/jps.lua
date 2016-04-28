@@ -171,7 +171,7 @@ if (...) then
 	if not node then return end
 	
 	JPSCOUNTER = JPSCOUNTER + 1
-	if JPSCOUNTER > 20000 then
+	if JPSCOUNTER > 50000 then
 --		print("OVER LIMIT", JPSCOUNTER)
 		return nil
 	end

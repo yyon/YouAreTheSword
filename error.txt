@@ -1,1 +1,3 @@
 Warning: Cannot use quest size 320x240: this quest only supports 1280x720 to 1280x720. Using 1280x720 instead.
+Error: In timer callback: [string "enemies/entitydata.lua"]:1247: attempt to index local 'target' (a nil value)
+Error: In collision callback: [string "abilities/ability.lua"]:181: attempt to index field 'warmuptimer' (a nil value)

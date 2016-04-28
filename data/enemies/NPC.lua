@@ -403,6 +403,10 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	if not self.wasonscreen and (floor ~= 0 and not self.entitydata:isonscreen(200)) then
 		return self.donothingstate
 	end
+	
+	if not self:is_in_same_region(hero) then
+		return self.donothingstate
+	end
 
 	self.wasonscreen = true
 

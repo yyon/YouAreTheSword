@@ -3,6 +3,7 @@ map{ id = "CatDungeon/1", description = "First part" }
 map{ id = "CatDungeon/2", description = "second part" }
 map{ id = "CatDungeon/BossMap", description = "this is the boss part" }
 map{ id = "DunsMurDungeon/1", description = "1" }
+map{ id = "DunsMurDungeon/2", description = "2" }
 map{ id = "Ian's Test Dungeon/1", description = "1" }
 map{ id = "Ian's Test Dungeon/2", description = "2" }
 map{ id = "Ian's Test Dungeon/3", description = "3" }
@@ -13,6 +14,7 @@ map{ id = "abductiontest", description = "abductiontest" }
 map{ id = "catmap", description = "catmap" }
 map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "hub", description = "hub" }
+map{ id = "largemaze", description = "something" }
 map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "misc_testing", description = "misc_testing" }
@@ -23,7 +25,6 @@ map{ id = "puzzletest/4", description = "4" }
 map{ id = "puzzletest/5", description = "5" }
 map{ id = "puzzletest/puzzlehub", description = "puzzlehub" }
 map{ id = "sequencetest", description = "sequencetest" }
-map{ id = "something", description = "something" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
 map{ id = "traps", description = "traps" }
