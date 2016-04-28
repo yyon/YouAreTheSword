@@ -342,6 +342,25 @@ function sol.main:on_key_pressed(key, modifiers)
 			configsave()
 		elseif key == "x" then
 			configload()
+		elseif key == "v" then
+			print("started signal")
+			require('signal')
+			signal.signal("SIGTERM", function()
+				print(debug.traceback())
+				debug.debug()
+			end);
+		elseif key == "d" then
+			print("started funct")
+			function trace (event)
+				local s = debug.getinfo(2)
+				if s.short_src ~= "[C]" then
+					if s.name ~= nil then
+						print(s.short_src .. ":" .. s.name)
+					end
+				end
+			end	
+
+			debug.sethook(trace, "c")
 		end
 
 		if hero.entitydata == nil then return end

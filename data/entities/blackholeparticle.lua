@@ -5,11 +5,9 @@ local math = require "math"
 
 function entity:on_created()
 	self:set_optimization_distance(0)
-	print("CREATE")
 end
 
 function entity:start(blackhole)
-	print("START")
 	self.blackhole = blackhole
 
 	self.blackholesprite = self:create_sprite("abilities/blackholeparticles")

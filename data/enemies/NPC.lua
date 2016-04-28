@@ -716,8 +716,6 @@ function enemy:pathfind(target)
 		return
 	end
 
-	print("pathfinding", self.entitydata.theclass)
-
 	local map = self:get_map()
 
 	local x, y = self:get_position()
@@ -742,7 +740,9 @@ function enemy:pathfind(target)
 		local tox, toy = target:get_position()
 		tox, toy = map:getclosestgrid(tox, toy)
 		if not tox then return end
-
+		
+		print(self.entitydata.theclass, "pathfinding")
+		
 		local path = map.pathfinder:getPath(fromy, fromx, toy, tox, false)
 		if path then
 			path:fill()

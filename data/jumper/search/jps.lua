@@ -169,7 +169,14 @@ if (...) then
   --]]
   local function jump(finder, node, parent, endNode)
 	if not node then return end
+	
+	JPSCOUNTER = JPSCOUNTER + 1
+	if JPSCOUNTER > 20000 then
+--		print("OVER LIMIT", JPSCOUNTER)
+		return nil
+	end
 
+	
     local x,y = node.x, node.y
     local dx, dy = x - parent.x,y - parent.y
 
@@ -294,6 +301,8 @@ end
   -- Calculates a path.
   -- Returns the path from location `<startX, startY>` to location `<endX, endY>`.
   return function(finder, startNode, endNode, toClear, tunnel)
+
+	JPSCOUNTER = 0
 
     step_first = false
     startNode.g, startNode.f = 0,0
