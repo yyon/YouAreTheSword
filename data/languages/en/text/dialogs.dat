@@ -123,6 +123,19 @@ Hello Mr. Sword, please don't kill me.
 }
 
 dialog{
+  id = "spaceship.level1.1",
+  text = [[
+Whoa...
+]]
+}
+
+dialog{
+  id = "spaceship.level1.2",
+  text = [[
+]]
+}
+
+dialog{
   id = "test",
   text = [[
 Hello player!
