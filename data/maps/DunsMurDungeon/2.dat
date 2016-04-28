@@ -44970,6 +44970,15 @@ destination{
   direction = 1,
 }
 
+teletransporter{
+  layer = 0,
+  x = 1584,
+  y = 1208,
+  width = 16,
+  height = 400,
+  destination_map = "DunsMurDungeon/3",
+}
+
 tile{
   layer = 1,
   x = 128,

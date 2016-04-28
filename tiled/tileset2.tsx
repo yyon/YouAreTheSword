@@ -7,8 +7,16 @@
   <terrain name="roof2" tile="-1"/>
   <terrain name="walls" tile="-1"/>
   <terrain name="stone" tile="-1"/>
+  <terrain name="brick" tile="-1"/>
+  <terrain name="brick2" tile="-1"/>
  </terraintypes>
  <tile id="605" terrain="0,0,0,0"/>
+ <tile id="652" terrain=",5,,5"/>
+ <tile id="653" terrain="5,5,5,5"/>
+ <tile id="654" terrain="5,,5,"/>
+ <tile id="664" terrain=",6,,6"/>
+ <tile id="665" terrain="6,6,6,6"/>
+ <tile id="666" terrain="6,,6,"/>
  <tile id="712" terrain=",,,4"/>
  <tile id="713" terrain=",,4,4"/>
  <tile id="714" terrain=",,4,"/>
@@ -22,14 +30,34 @@
  <tile id="736" terrain=",4,,"/>
  <tile id="737" terrain="4,4,,"/>
  <tile id="738" terrain="4,,,"/>
+ <tile id="746" terrain=",,,5"/>
+ <tile id="747" terrain=",,5,5"/>
+ <tile id="751" terrain=",5,5,5"/>
+ <tile id="752" terrain="5,,5,5"/>
+ <tile id="754" terrain="6,6,6,"/>
+ <tile id="755" terrain="6,6,,6"/>
+ <tile id="758" terrain=",,5,"/>
+ <tile id="759" terrain=",5,,"/>
+ <tile id="763" terrain="5,5,,5"/>
+ <tile id="764" terrain="5,5,5,"/>
+ <tile id="766" terrain="6,,6,6"/>
+ <tile id="767" terrain=",6,6,6"/>
+ <tile id="770" terrain="5,5,,"/>
+ <tile id="771" terrain="5,,,"/>
+ <tile id="782" terrain=",6,,"/>
+ <tile id="783" terrain="6,6,,"/>
+ <tile id="794" terrain="6,,,"/>
+ <tile id="795" terrain=",,,6"/>
  <tile id="798" terrain=",3,3,3"/>
  <tile id="799" terrain="3,,3,3"/>
  <tile id="801" terrain=",1,1,1"/>
  <tile id="802" terrain="1,,1,1"/>
+ <tile id="807" terrain=",,6,6"/>
  <tile id="810" terrain="3,3,,3"/>
  <tile id="811" terrain="3,3,3,"/>
  <tile id="813" terrain=",2,2,2"/>
  <tile id="814" terrain="2,,2,2"/>
+ <tile id="819" terrain=",,6,"/>
  <tile id="880" terrain=",,,1"/>
  <tile id="881" terrain=",,1,1"/>
  <tile id="882" terrain=",,1,"/>
