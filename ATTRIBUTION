@@ -5,11 +5,12 @@ URL
 	licenses
 	description
 
+Developers: Ian Campbell, Josh Newlin, Chris Schlatter, Yidi Xiao
 
 https://www.reddit.com/r/gameideas/comments/2kohuo/its_called_you_are_the_sword/
 	wordywise
 	2015
-	
+	None
 	basic game idea
 
 Adventurers/monsters/bosses:
@@ -20,7 +21,7 @@ http://opengameart.org/content/lpc-medieval-fantasy-character-sprites
 	knight, shield, combat dummy
 http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator
 	Luke Mehl, Johannes Sjölund, Marcel van de Steeg, Manuel Riecke, Thane Brimhall, Matthew Krohn, Lori Angela Nagel, Lanea Zimmerman (AKA Sharm), Stephen Challener (AKA Redshrike), Daniel Eddeland, Shaun Williams, Joe White, Mark Weyer, Barbara Rivera, JaidynReiman, Nila122
-	
+	Various
 	gpl3, cc-by-sa3
 	archer, berserker, cleric, bard, rogue, Duns Mur, angel (base), skeleton
 http://opengameart.org/content/lpc-white-beard
@@ -45,7 +46,7 @@ http://opengameart.org/content/lpc-skorpios-scifi-sprite-pack-0
 	mech
 http://opengameart.org/content/jastivs-artwork
 	Lori Angela Nagel (AKA Jastiv)
-	
+	2012
 	gpl-3, cc-by-sa 3
 	angel (wings)
 http://opengameart.org/content/lpc-spider
@@ -79,9 +80,9 @@ http://opengameart.org/content/lpc-beetle
 	cc-by 3, gpl 3, gpl 2, oga-by 3
 	beetle
 http://lpc.opengameart.org/static/lpc-style-guide/assets.html
-	
-	
-	
+	Charles Sanchez (AKA CharlesGabriel)
+	2012
+	cc-by-sa 3, gpl 3
 	bat, bee, eyeball, ghost, pumpkin, slime, worm, snake, flower
 http://opengameart.org/content/cat-fighter-sprite-sheet
 	dogchicken
@@ -137,7 +138,7 @@ http://opengameart.org/content/lpc-forest-tiles
 	spider web
 http://game-icons.net/delapouite/originals/boomerang.html
 	delapouite
-	
+	Unknown
 	cc-by 3
 	boomerang
 http://opengameart.org/content/bomb-2d
@@ -165,6 +166,11 @@ http://opengameart.org/content/lasers-and-beams
 	2013
 	public domain
 	spaceship lasers and beams
+http://opengameart.org/content/painterly-spell-icons-part-1
+	J. W. Bjerk
+	2010
+	cc-by 3, cc-by-sa 3, gpl 3, gpl 2
+	Defense effect
 
 sound effects:
 http://opengameart.org/content/rockbreaking
@@ -376,7 +382,7 @@ http://opengameart.org/content/peaceful-place
 
 tilesets:
 http://opengameart.org/content/lpc-tile-atlas
-	Casper Nilsson, Daniel Eddeland, Johann Charlot, Lanea Zimmerman (AKA Sharm), Stephen Challner (AKA Redshrike), Charles Sanches (AKA CharlesGabriel), Maniel Riecke (AKA MrBeast), Daniel Armstrong (AKA HughSpectrum)
+	Casper Nilsson, Daniel Eddeland, Johann Charlot, Lanea Zimmerman (AKA Sharm), Stephen Challner (AKA Redshrike), Charles Sanchez (AKA CharlesGabriel), Maniel Riecke (AKA MrBeast), Daniel Armstrong (AKA HughSpectrum)
 	2012
 	cc-by-sa 3, gpl 3
 	lpc tileset
