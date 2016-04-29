@@ -1,0 +1,84 @@
+enemy{
+	y = 1373,
+	x = 304,
+	breed = "a_rogue",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1501,
+	x = 528,
+	breed = "a_mage",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 365,
+	x = 128,
+	breed = "e_slime",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 317,
+	x = 464,
+	breed = "e_slime",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 221,
+	x = 1240,
+	breed = "e_wolf",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 349,
+	x = 1344,
+	breed = "e_wolf",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 813,
+	x = 1328,
+	breed = "e_maskman",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 941,
+	x = 1344,
+	breed = "e_maskman",
+	layer = 0,
+	direction = 0,
+}
+separator{
+	y = -40,
+	x = 808,
+	height = 1680,
+	layer = 0,
+	width = 16,
+}
+enemy{
+	y = 1509,
+	x = 1304,
+	breed = "a_mage",
+	layer = 0,
+	direction = 0,
+}
+destination{
+	y = 1509,
+	layer = 0,
+	direction = 1,
+	x = 24,
+}
+teletransporter{
+	y = 1208,
+	x = 1584,
+	destination_map = "DunsMurDungeon/3",
+	height = 400,
+	layer = 0,
+	width = 16,
+}

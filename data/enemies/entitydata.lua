@@ -863,6 +863,10 @@ function EntityData:kill()
 		self.usingability:cancel()
 	end
 
+	for key, effect in pairs(self.effects) do
+		effect:forceremove()
+	end
+	
 	if self.entity ~= nil then
 		self.entity.entitydata = nil
 
@@ -871,9 +875,6 @@ function EntityData:kill()
 		end
 	end
 
-	for key, effect in pairs(self.effects) do
-		effect:forceremove()
-	end
 
 	if theishero then
 		-- drop sword

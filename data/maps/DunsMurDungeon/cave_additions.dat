@@ -1,0 +1,161 @@
+separator{
+	y = -24,
+	x = 1576,
+	height = 3328,
+	layer = 0,
+	width = 16,
+}
+separator{
+	y = 1400,
+	x = -48,
+	height = 16,
+	layer = 0,
+	width = 3504,
+}
+enemy{
+	y = 2997,
+	x = 80,
+	breed = "a_rogue",
+	layer = 0,
+	direction = 0,
+}
+destination{
+	y = 3045,
+	layer = 0,
+	direction = 1,
+	x = 304,
+}
+enemy{
+	y = 3165,
+	x = 192,
+	breed = "a_berserker",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2029,
+	x = 504,
+	breed = "e_bat",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1805,
+	x = 1256,
+	breed = "e_bat",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2253,
+	x = 1456,
+	breed = "e_spider",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2037,
+	x = 1488,
+	breed = "e_bat",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2021,
+	x = 1848,
+	breed = "a_rogue",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2125,
+	x = 2048,
+	breed = "a_rogue",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2165,
+	x = 2960,
+	breed = "e_skeleton",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2053,
+	x = 2896,
+	breed = "e_skeleton",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1221,
+	x = 2872,
+	breed = "a_knight",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1157,
+	x = 3016,
+	breed = "a_mage",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1085,
+	x = 1984,
+	breed = "e_spider",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 581,
+	x = 2008,
+	breed = "e_worm",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 165,
+	x = 2336,
+	breed = "e_maskman",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 253,
+	x = 2640,
+	breed = "e_maskman",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1069,
+	x = 1416,
+	breed = "a_cleric",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 845,
+	x = 440,
+	breed = "e_bat",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 445,
+	x = 680,
+	breed = "e_orc",
+	layer = 0,
+	direction = 0,
+}
+teletransporter{
+	y = 144,
+	x = 960,
+	destination_map = "DunsMurDungeon/cave",
+	height = 48,
+	layer = 1,
+	width = 96,
+}

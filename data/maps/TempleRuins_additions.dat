@@ -1,0 +1,49 @@
+destination{
+	y = 613,
+	layer = 0,
+	direction = 1,
+	x = 40,
+}
+teletransporter{
+	y = 224,
+	x = 1584,
+	destination_map = "TempleRuins",
+	height = 96,
+	layer = 0,
+	width = 16,
+}
+enemy{
+	y = 293,
+	x = 264,
+	breed = "a_mage",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 773,
+	x = 248,
+	breed = "a_bard",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 645,
+	x = 1376,
+	breed = "e_beetle",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1149,
+	x = 1368,
+	breed = "e_spider",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 981,
+	x = 1416,
+	breed = "e_mage_evil",
+	layer = 0,
+	direction = 0,
+}

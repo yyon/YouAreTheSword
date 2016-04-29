@@ -1,0 +1,169 @@
+destination{
+	y = 309,
+	layer = 0,
+	direction = 1,
+	x = 200,
+}
+separator{
+	y = -80,
+	x = 1544,
+	height = 3280,
+	layer = 0,
+	width = 16,
+}
+separator{
+	y = 1544,
+	x = 0,
+	height = 16,
+	layer = 0,
+	width = 3344,
+}
+enemy{
+	y = 85,
+	x = 776,
+	breed = "a_archer",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1173,
+	x = 472,
+	breed = "e_flower",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 637,
+	x = 1320,
+	breed = "e_worm",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 885,
+	x = 960,
+	breed = "e_flower",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1781,
+	x = 208,
+	breed = "a_bard",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2277,
+	x = 1400,
+	breed = "e_ghost",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1901,
+	x = 1136,
+	breed = "e_spider",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2453,
+	x = 456,
+	breed = "e_spider",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2005,
+	x = 1712,
+	breed = "a_rogue",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1669,
+	x = 1896,
+	breed = "a_cleric",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2621,
+	x = 3112,
+	breed = "e_beetle",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 2029,
+	x = 2952,
+	breed = "e_maskman",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 293,
+	x = 2712,
+	breed = "e_slime",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 157,
+	x = 2984,
+	breed = "e_slime",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 173,
+	x = 2832,
+	breed = "e_slime",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 293,
+	x = 2936,
+	breed = "e_slime",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 893,
+	x = 3048,
+	breed = "e_orc",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1485,
+	x = 2280,
+	breed = "a_berserker",
+	layer = 0,
+	direction = 0,
+}
+enemy{
+	y = 1421,
+	x = 2992,
+	breed = "a_mage",
+	layer = 0,
+	direction = 0,
+}
+teletransporter{
+	y = 0,
+	x = 2496,
+	destination_map = "DunsMurDungeon/cave",
+	height = 16,
+	layer = 0,
+	width = 704,
+}
+teletransporter{
+	y = 16,
+	x = 3184,
+	destination_map = "DunsMurDungeon/cave",
+	height = 1168,
+	layer = 0,
+	width = 16,
+}

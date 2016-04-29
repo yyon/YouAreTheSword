@@ -5,6 +5,7 @@ map{ id = "CatDungeon/BossMap", description = "this is the boss part" }
 map{ id = "DunsMurDungeon/1", description = "1" }
 map{ id = "DunsMurDungeon/2", description = "2" }
 map{ id = "DunsMurDungeon/3", description = "3" }
+map{ id = "DunsMurDungeon/cave", description = "cave" }
 map{ id = "Ian's Test Dungeon/1", description = "1" }
 map{ id = "Ian's Test Dungeon/2", description = "2" }
 map{ id = "Ian's Test Dungeon/3", description = "3" }
