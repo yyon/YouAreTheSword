@@ -134,9 +134,17 @@ function map:on_finished()
     hero.lifebarsurface = nil
 end
 
-function map:say(name, ...)
-    self:camera(name)
-    self:startdialog(...)
+function map:say(name, dialog, funct)
+	self:camera(name)
+	local hero = self:get_hero()
+	hero:set_tunic_sprite_id("misc/speaking")
+	hero:set_direction(0)
+	hero:set_animation("stopped")
+	
+	self:startdialog(dialog, function()
+		hero:set_tunic_sprite_id("adventurers/transparent")
+		funct()
+	end)
 end
 
 function map:drawlifebar(dst_surface, entity, cx, cy)

@@ -11374,10 +11374,11 @@ tile{
 }
 
 enemy{
+  name = "cat",
   layer = 0,
   x = 1000,
   y = 357,
-  direction = 0,
+  direction = 2,
   breed = "f_cat",
 }
 

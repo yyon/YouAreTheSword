@@ -7,7 +7,7 @@ end
 function entity:start()
 	self.blackholesprite = self:create_sprite("bosses/abilities/dunsmurpuns")
 	self.blackholesprite:set_paused(true)
-	self.blackholesprite:set_frame(math.random(0,4))
+	self.blackholesprite:set_frame(math.random(0,5))
 	
 	local movement = sol.movement.create("straight")
 	movement:set_speed(30)
