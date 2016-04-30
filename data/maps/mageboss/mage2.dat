@@ -4,7 +4,7 @@ properties{
   width = 1600,
   height = 1600,
   tileset = "tileset2",
-  music = "8-bit/13 - Danger",
+  music = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Great mission",
 }
 
 tile{

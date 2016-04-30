@@ -5,6 +5,7 @@ properties{
   height = 1000,
   floor = 0,
   tileset = "tileset2",
+  music = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Warped",
 }
 
 tile{

@@ -236,6 +236,13 @@ music{ id = "8-bit/22 - A New Comrade", description = "22 - A New Comrade" }
 music{ id = "8-bit/23 - Inn", description = "23 - Inn" }
 music{ id = "8-bit/24 - RV 610 - Fecit potentiam", description = "24 - RV 610 - Fecit potentiam" }
 music{ id = "8-bit/25 - Finale", description = "25 - Finale" }
+music{ id = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Doomed", description = "Doomed" }
+music{ id = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Flags", description = "Flags" }
+music{ id = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Great mission", description = "Great Mission" }
+music{ id = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Spacetime", description = "Spacetime" }
+music{ id = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Twists", description = "Twists" }
+music{ id = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Waking the devil", description = "Waking the devil" }
+music{ id = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Warped", description = "Warped" }
 music{ id = "FullScores/Orchestral Scores/Ambient Style/Ove Melaa - Psycho Behind The Keys", description = "Ambient Style/Ove Melaa - Psycho Behind The Keys" }
 music{ id = "FullScores/Orchestral Scores/Ove Melaa - Heaven Sings", description = "Ove Melaa - Heaven Sings" }
 music{ id = "FullScores/Orchestral Scores/Ove Melaa - Theme Crystalized", description = "Ove Melaa - Theme Crystalized" }

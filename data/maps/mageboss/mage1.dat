@@ -4,7 +4,7 @@ properties{
   width = 3200,
   height = 3200,
   tileset = "tileset2",
-  music = "8-bit/12 - Timeworn Pagoda",
+  music = "Alexander Ehlers - Free Music Pack/Alexander Ehlers - Flags",
 }
 
 tile{

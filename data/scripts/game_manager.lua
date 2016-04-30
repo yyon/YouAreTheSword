@@ -532,11 +532,8 @@ function tick()
 		if hero.entitydata ~= nil then
 			for entity in hero:get_map():get_entities("") do
 				if entity.get_destination_map ~= nil then
-					print("DEST")
 					if hero:overlaps(entity) then
-						print("DES2")
 						if game.bypassteleport or hero.entitydata:getremainingmonsters() == 0 then
-							print("DES3")
 							teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
 						end
 					end
