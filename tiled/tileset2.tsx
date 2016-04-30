@@ -20,6 +20,10 @@
   <terrain name="shortgrass" tile="-1"/>
   <terrain name="longgrass" tile="-1"/>
   <terrain name="darkgrass" tile="-1"/>
+  <terrain name="yellowgrass" tile="-1"/>
+  <terrain name="dirtcliff" tile="-1"/>
+  <terrain name="greenyellowgrass" tile="-1"/>
+  <terrain name="yellow" tile="-1"/>
  </terraintypes>
  <tile id="605" terrain="0,0,0,0"/>
  <tile id="652" terrain=",5,,5"/>
@@ -112,6 +116,71 @@
  <tile id="957" terrain="0,0,0,"/>
  <tile id="958" terrain=",0,0,0"/>
  <tile id="959" terrain="0,,0,0"/>
+ <tile id="2964" terrain="18,18,18,18"/>
+ <tile id="2965" terrain="18,18,18,21"/>
+ <tile id="2966" terrain="18,18,21,21"/>
+ <tile id="2967" terrain="18,18,21,18"/>
+ <tile id="2968" terrain="18,18,18,21"/>
+ <tile id="2969" terrain="18,18,21,21"/>
+ <tile id="2970" terrain="18,18,21,18"/>
+ <tile id="2971" terrain="21,18,21,21"/>
+ <tile id="2976" terrain="18,18,18,18"/>
+ <tile id="2977" terrain="18,21,18,21"/>
+ <tile id="2978" terrain="21,21,21,21"/>
+ <tile id="2979" terrain="21,18,21,18"/>
+ <tile id="2980" terrain="18,21,18,21"/>
+ <tile id="2981" terrain="21,21,21,21"/>
+ <tile id="2982" terrain="21,18,21,18"/>
+ <tile id="2983" terrain="21,21,21,18"/>
+ <tile id="2988" terrain="18,18,18,18"/>
+ <tile id="2989" terrain="18,21,18,18"/>
+ <tile id="2990" terrain="21,21,18,18"/>
+ <tile id="2991" terrain="21,18,18,18"/>
+ <tile id="2992" terrain="18,21,18,18"/>
+ <tile id="2993" terrain="21,21,18,18"/>
+ <tile id="2994" terrain="21,18,18,18"/>
+ <tile id="2995" terrain="21,21,18,21"/>
+ <tile id="3000" terrain="18,18,18,20"/>
+ <tile id="3001" terrain="18,18,20,20"/>
+ <tile id="3002" terrain="18,18,20,18"/>
+ <tile id="3007" terrain="18,21,21,21"/>
+ <tile id="3012" terrain="18,20,18,20"/>
+ <tile id="3013" terrain="20,20,20,20"/>
+ <tile id="3014" terrain="20,18,20,18"/>
+ <tile id="3015" terrain="18,20,20,20"/>
+ <tile id="3016" terrain="20,18,20,20"/>
+ <tile id="3024" terrain="18,20,18,18"/>
+ <tile id="3025" terrain="20,20,18,18"/>
+ <tile id="3026" terrain="20,18,18,18"/>
+ <tile id="3027" terrain="20,20,18,20"/>
+ <tile id="3028" terrain="20,20,20,18"/>
+ <tile id="3038" terrain="19,19,19,19"/>
+ <tile id="3039" terrain="19,19,19,19"/>
+ <tile id="3040" terrain="19,19,19,19"/>
+ <tile id="3041" terrain="19,19,19,19"/>
+ <tile id="3042" terrain="19,19,19,19"/>
+ <tile id="3048" terrain="19,19,19,18"/>
+ <tile id="3049" terrain="19,19,19,18"/>
+ <tile id="3050" terrain="19,19,19,19"/>
+ <tile id="3051" terrain="19,19,19,19"/>
+ <tile id="3052" terrain="19,19,19,19"/>
+ <tile id="3054" terrain="19,19,19,19"/>
+ <tile id="3060" terrain="19,19,18,19"/>
+ <tile id="3061" terrain="19,19,18,19"/>
+ <tile id="3064" terrain="18,19,19,19"/>
+ <tile id="3076" terrain="19,18,19,19"/>
+ <tile id="3078" terrain="19,19,18,18"/>
+ <tile id="3079" terrain="19,19,18,18"/>
+ <tile id="3080" terrain="18,18,18,19"/>
+ <tile id="3081" terrain="18,18,19,18"/>
+ <tile id="3082" terrain="18,19,18,19"/>
+ <tile id="3083" terrain="19,18,19,18"/>
+ <tile id="3090" terrain="18,18,19,19"/>
+ <tile id="3091" terrain="18,18,19,19"/>
+ <tile id="3092" terrain="18,19,18,18"/>
+ <tile id="3093" terrain="19,18,18,18"/>
+ <tile id="3799" terrain=",,,18"/>
+ <tile id="3835" terrain=",,18,"/>
  <tile id="3973" terrain=",9,9,9"/>
  <tile id="3974" terrain="9,,9,9"/>
  <tile id="4076" terrain="9,9,,9"/>
