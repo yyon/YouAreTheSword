@@ -100,3 +100,30 @@ wall{
   stops_blocks = true,
 }
 
+teletransporter{
+  layer = 0,
+  x = -16,
+  y = 344,
+  width = 32,
+  height = 736,
+  destination_map = "DunsMurDungeon/castle",
+}
+
+teletransporter{
+  layer = 0,
+  x = 1240,
+  y = 336,
+  width = 32,
+  height = 736,
+  destination_map = "DunsMurDungeon/castle",
+}
+
+teletransporter{
+  layer = 0,
+  x = 8,
+  y = 1024,
+  width = 1280,
+  height = 48,
+  destination_map = "DunsMurDungeon/castle",
+}
+

@@ -4,6 +4,7 @@ properties{
   width = 1600,
   height = 1600,
   tileset = "tileset2",
+  music = "Loops/Ove Melaa -Supa Powa C",
 }
 
 tile{
@@ -21068,7 +21069,7 @@ teletransporter{
   y = 224,
   width = 16,
   height = 96,
-  destination_map = "TempleRuins",
+  destination_map = "CatDungeon/BossMap",
 }
 
 enemy{

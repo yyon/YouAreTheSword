@@ -1472,7 +1472,7 @@ teletransporter{
   y = 0,
   width = 48,
   height = 736,
-  destination_map = "magebossmap",
+  destination_map = "spaceshipmap",
 }
 
 wall{

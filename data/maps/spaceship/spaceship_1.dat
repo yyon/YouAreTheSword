@@ -219,7 +219,7 @@ tile{
   x = 736,
   y = 0,
   width = 32,
-  height = 32,
+  height = 928,
   pattern = "3023",
 }
 
@@ -7358,7 +7358,7 @@ wall{
 
 wall{
   layer = 0,
-  x = 736,
+  x = 728,
   y = 896,
   width = 32,
   height = 32,
@@ -7384,7 +7384,7 @@ teletransporter{
   y = 912,
   width = 64,
   height = 16,
-  destination_map = "spaceship/spaceship_1",
+  destination_map = "Ian's Test Dungeon/4",
 }
 
 destination{
@@ -7433,6 +7433,150 @@ enemy{
   y = 645,
   direction = 0,
   breed = "e_mech",
+}
+
+custom_entity{
+  layer = 0,
+  x = 336,
+  y = 557,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 368,
+  y = 557,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 400,
+  y = 557,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 336,
+  y = 269,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 368,
+  y = 269,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 400,
+  y = 269,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 432,
+  y = 269,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 272,
+  y = 877,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 336,
+  y = 845,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 368,
+  y = 845,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 400,
+  y = 845,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 432,
+  y = 845,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 312,
+  y = 413,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 456,
+  y = 325,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 112,
+  y = 333,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
+}
+
+custom_entity{
+  layer = 0,
+  x = 600,
+  y = 285,
+  direction = 0,
+  sprite = "Traps/spiketrap",
+  model = "spiketrap",
 }
 
 tile{

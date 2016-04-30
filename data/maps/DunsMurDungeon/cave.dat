@@ -4,6 +4,7 @@ properties{
   width = 3200,
   height = 3200,
   tileset = "tileset2",
+  music = "singles/music_jewels",
 }
 
 tile{
@@ -89894,6 +89895,6 @@ teletransporter{
   y = 144,
   width = 96,
   height = 48,
-  destination_map = "DunsMurDungeon/cave",
+  destination_map = "dunsmurmap",
 }
 

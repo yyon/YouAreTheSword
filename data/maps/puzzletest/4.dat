@@ -975,3 +975,23 @@ npc{
   sprite = "sign",
 }
 
+custom_entity{
+  name = "door2_2",
+  layer = 0,
+  x = 1168,
+  y = 445,
+  width = 40,
+  height = 64,
+  direction = 0,
+  model = "door",
+}
+
+teletransporter{
+  layer = 0,
+  x = 1032,
+  y = 0,
+  width = 256,
+  height = 48,
+  destination_map = "DunsMurDungeon/TempleRuins",
+}
+

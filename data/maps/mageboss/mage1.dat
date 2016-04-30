@@ -11949,8 +11949,7 @@ teletransporter{
   y = 3136,
   width = 128,
   height = 64,
-  destination_map = "mageboss/mage2",
-  destination = "mapin",
+  destination_map = "puzzletest/1",
 }
 
 destination{

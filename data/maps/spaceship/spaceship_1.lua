@@ -10,6 +10,7 @@ function map:on_opening_transition_finished()
 	self:camera("player")
 	self:say("player", "1", function()
 	self:say("player", "2", function()
+		self:doend()
 	end)
 	end)
 end

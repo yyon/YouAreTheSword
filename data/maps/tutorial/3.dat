@@ -308,7 +308,7 @@ teletransporter{
   y = 344,
   width = 16,
   height = 128,
-  destination_map = "Ian's Test Dungeon/2",
+  destination_map = "mageboss/mage1",
 }
 
 wall{

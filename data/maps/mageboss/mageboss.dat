@@ -4,7 +4,7 @@ properties{
   width = 1600,
   height = 1600,
   tileset = "tileset2",
-  music = "Loops/Ove Melaa - They Ate My Family",
+  music = "FullScores/Retro Scores/Ove Melaa - Dark",
 }
 
 tile{
@@ -2664,8 +2664,8 @@ wall{
 
 destination{
   layer = 0,
-  x = 672,
-  y = 221,
+  x = 560,
+  y = 1317,
   direction = 3,
 }
 
@@ -2700,5 +2700,14 @@ enemy{
   y = 589,
   direction = 0,
   breed = "a_cleric",
+}
+
+teletransporter{
+  layer = 0,
+  x = 640,
+  y = 160,
+  width = 64,
+  height = 32,
+  destination_map = "CatDungeon/1",
 }
 

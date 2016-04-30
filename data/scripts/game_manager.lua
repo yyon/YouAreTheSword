@@ -673,7 +673,7 @@ function load()
 		game:set_life(game:get_max_life())
 --		game:set_ability("lift", 2)
 --		game:set_ability("sword", 1)--"sprites/hero/sword1")
-		game:set_starting_location("hub")
+		game:set_starting_location("sequencetest")
 	end
 
 	configload()

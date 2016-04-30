@@ -47,5 +47,5 @@ end
 
 function map:doend()
 	self:finish()
-	teleport("hub")
+	teleport("spaceship/spaceship_1")
 end

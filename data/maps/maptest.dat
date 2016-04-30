@@ -1133,3 +1133,12 @@ enemy{
   breed = "a_cleric",
 }
 
+teletransporter{
+  layer = 0,
+  x = 1264,
+  y = 280,
+  width = 16,
+  height = 80,
+  destination_map = "maptest",
+}
+

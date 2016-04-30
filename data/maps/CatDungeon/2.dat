@@ -4,6 +4,7 @@ properties{
   width = 1280,
   height = 720,
   tileset = "tileset2",
+  music = "singles/n-Dimensions",
 }
 
 tile{
@@ -2647,7 +2648,7 @@ teletransporter{
   y = 0,
   width = 288,
   height = 80,
-  destination_map = "CatDungeon/BossMap",
+  destination_map = "Ian's Test Dungeon/2",
 }
 
 wall{

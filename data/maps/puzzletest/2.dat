@@ -174,7 +174,7 @@ teletransporter{
   y = -8,
   width = 560,
   height = 32,
-  destination_map = "puzzletest/3",
+  destination_map = "mageboss/mage2",
 }
 
 teletransporter{
@@ -183,7 +183,7 @@ teletransporter{
   y = 24,
   width = 32,
   height = 96,
-  destination_map = "puzzletest/3",
+  destination_map = "mageboss/mage2",
 }
 
 enemy{

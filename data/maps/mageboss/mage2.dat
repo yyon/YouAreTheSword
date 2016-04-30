@@ -3258,6 +3258,7 @@ destination{
   x = 672,
   y = 77,
   direction = 3,
+  default = true,
 }
 
 enemy{

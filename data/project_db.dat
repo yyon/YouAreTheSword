@@ -256,11 +256,15 @@ music{ id = "Loops/Ove Melaa - Whoozer", description = "Ove Melaa - Whoozer" }
 music{ id = "Loops/Ove Melaa -Supa Powa C", description = "Ove Melaa -Supa Powa C" }
 music{ id = "Loops/Ove Melaa Supa Powa Loop B", description = "Ove Melaa Supa Powa Loop B" }
 music{ id = "Loops/OveMelaa - Trance Bit Bit Loop", description = "OveMelaa - Trance Bit Bit Loop" }
-music{ id = "singles/Heroic Demise (New)", description = "heroic demise" }
+music{ id = "singles/Peaceful Place", description = "Peaceful Place" }
 music{ id = "singles/Put yourself in my place PSG", description = "put yourself in my place" }
+music{ id = "singles/Sky Portal", description = "Sky Portal" }
 music{ id = "singles/battleThemeA", description = "battle theme A" }
 music{ id = "singles/cannontube", description = "cannon tube" }
 music{ id = "singles/crystal_cave", description = "crystal cave" }
+music{ id = "singles/music_jewels", description = "music_jewels" }
+music{ id = "singles/n-Dimensions", description = "n-Dimensions" }
+music{ id = "singles/techno minutesloopNES", description = "technominutesloopNES" }
 music{ id = "village", description = "Village" }
 
 sound{ id = "arrow_hit", description = "arrow_hit" }

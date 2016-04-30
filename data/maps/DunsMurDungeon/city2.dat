@@ -4,6 +4,7 @@ properties{
   width = 1600,
   height = 1600,
   tileset = "tileset2",
+  music = "FullScores/Retro Scores/Ove Melaa - Italo Unlimited",
 }
 
 tile{
@@ -7782,7 +7783,7 @@ teletransporter{
   y = 1208,
   width = 16,
   height = 400,
-  destination_map = "DunsMurDungeon/3",
+  destination_map = "DunsMurDungeon/river",
 }
 
 tile{

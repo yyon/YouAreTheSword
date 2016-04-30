@@ -4,6 +4,7 @@ properties{
   width = 1280,
   height = 720,
   tileset = "tileset2",
+  music = "FullScores/Retro Scores/Ove Melaa - High Stakes,Low Chances",
 }
 
 tile{
@@ -11416,5 +11417,14 @@ wall{
   stops_enemies = true,
   stops_blocks = true,
   stops_projectiles = true,
+}
+
+teletransporter{
+  layer = 0,
+  x = 1280,
+  y = -40,
+  width = 32,
+  height = 976,
+  destination_map = "abductiontest",
 }
 

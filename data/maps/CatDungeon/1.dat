@@ -4,6 +4,7 @@ properties{
   width = 1280,
   height = 720,
   tileset = "tileset2",
+  music = "8-bit/02 - BWV 1007 - Prelude",
 }
 
 tile{
