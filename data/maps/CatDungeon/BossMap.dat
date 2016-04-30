@@ -11421,8 +11421,8 @@ wall{
 
 teletransporter{
   layer = 0,
-  x = 1280,
-  y = -40,
+  x = 1184,
+  y = -48,
   width = 32,
   height = 976,
   destination_map = "abductiontest",

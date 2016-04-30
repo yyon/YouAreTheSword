@@ -78,8 +78,8 @@ local function onkey(k, released)
 	end
 
 	if action == nil then return false end
-
-	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
+	
+	if game:is_paused() or game:is_suspended() or hero.entitydata == nil or game:get_map().isincutscene then
 		if action == "normal" and not released then
 			if game.dialog ~= nil then
 				if game.dialog.isshowingdialog then
@@ -532,8 +532,11 @@ function tick()
 		if hero.entitydata ~= nil then
 			for entity in hero:get_map():get_entities("") do
 				if entity.get_destination_map ~= nil then
+					print("DEST")
 					if hero:overlaps(entity) then
+						print("DES2")
 						if game.bypassteleport or hero.entitydata:getremainingmonsters() == 0 then
+							print("DES3")
 							teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
 						end
 					end

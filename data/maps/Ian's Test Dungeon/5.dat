@@ -5033,7 +5033,7 @@ teletransporter{
   y = -40,
   width = 64,
   height = 1760,
-  destination_map = "puzzletest/3",
+  destination_map = "spaceshipmap",
 }
 
 teletransporter{
@@ -5042,7 +5042,7 @@ teletransporter{
   y = 1504,
   width = 832,
   height = 80,
-  destination_map = "puzzletest/3",
+  destination_map = "spaceshipmap",
 }
 
 teletransporter{
@@ -5051,7 +5051,7 @@ teletransporter{
   y = 0,
   width = 304,
   height = 48,
-  destination_map = "puzzletest/3",
+  destination_map = "spaceshipmap",
 }
 
 wall{

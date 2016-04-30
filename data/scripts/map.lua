@@ -366,6 +366,8 @@ function map:camera(name)
 end
 
 function map:startcutscene()
+    self.isincutscene = true
+
     self:deattachcamera()
 
     local hero = self:get_hero()
@@ -377,6 +379,8 @@ function map:startcutscene()
 end
 
 function map:finish()
+    self.isincutscene = false
+
     self:unfreezeeveryone()
     local hero = self:get_hero()
     hero:unfreeze()

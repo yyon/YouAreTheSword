@@ -35,6 +35,7 @@ map{ id = "sequencetest", description = "sequencetest" }
 map{ id = "spaceship/spaceship_1", description = "first stage" }
 map{ id = "spaceshipmap", description = "spaceshipmap" }
 map{ id = "test2", description = "test2" }
+map{ id = "theend", description = "theend" }
 map{ id = "traps", description = "traps" }
 map{ id = "tutorial/1", description = "1" }
 map{ id = "tutorial/2", description = "2" }

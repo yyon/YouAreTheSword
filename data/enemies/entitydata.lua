@@ -2018,7 +2018,7 @@ function catboss:initialize(entity)
 	local class = "Cat (Boss)"
 	local main_sprite = "bosses/cat-1"
 	local life = 200
-	local team = "boss" -- should be either "adventurer" or "monster" in the final version
+	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {CatKickAbility:new(self, "kick")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {SidestepAbility:new(self)}

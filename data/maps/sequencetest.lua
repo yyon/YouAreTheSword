@@ -22,6 +22,7 @@ function map:on_opening_transition_finished()
 --	hero:freeze()
 --	self:freezeeveryone()
 	
+	cleric.entitydata.stats.defense = 1
 	
 	self:startcutscene()
 	self.newentitypossesseffect:remove()

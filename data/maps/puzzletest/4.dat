@@ -5,6 +5,7 @@ properties{
   height = 720,
   floor = 1,
   tileset = "tileset2",
+  music = "same",
 }
 
 tile{
@@ -852,7 +853,7 @@ enemy{
 custom_entity{
   name = "door2",
   layer = 0,
-  x = 1112,
+  x = 1168,
   y = 445,
   width = 40,
   height = 64,
@@ -973,17 +974,6 @@ npc{
   direction = 3,
   subtype = 1,
   sprite = "sign",
-}
-
-custom_entity{
-  name = "door2_2",
-  layer = 0,
-  x = 1168,
-  y = 445,
-  width = 40,
-  height = 64,
-  direction = 0,
-  model = "door",
 }
 
 teletransporter{
