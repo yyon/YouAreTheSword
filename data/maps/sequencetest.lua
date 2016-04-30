@@ -23,6 +23,7 @@ function map:on_opening_transition_finished()
 --	self:freezeeveryone()
 	
 	cleric.entitydata.stats.defense = 1
+	knight.entitydata.stats.defense = 1
 	
 	self:startcutscene()
 	self.newentitypossesseffect:remove()
@@ -134,6 +135,10 @@ function map:testend()
 	game.instantdeath = false
 	
 	self:finish()
+	
+	local hero = self:get_hero()
+	hero.entitydata.stats.defense = 0.3
+	cleric.entitydata.stats.defense = 0.3
 	
 	self:freezeentity(cleric)
 	self:setanim("cleric", "stopped")
