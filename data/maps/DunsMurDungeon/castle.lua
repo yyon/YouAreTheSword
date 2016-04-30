@@ -5,7 +5,10 @@ map.dialogprefix = "castle."
 local Effects = require "enemies/effect"
 
 function map:on_opening_transition_finished()
+	function dunsmur.entitydata:isvisible() return false end
+	
 	self:startcutscene()
+	
 	
 	self:say("knight", "1", function()
 		self:move("knight", "center", function() 

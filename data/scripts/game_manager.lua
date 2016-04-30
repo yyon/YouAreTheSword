@@ -363,6 +363,12 @@ function sol.main:on_key_pressed(key, modifiers)
 			debug.sethook(trace, "c")
 		elseif key == "s" then
 			debug.debug()
+		elseif key == "w" then
+			for door in hero:get_map():get_entities("") do
+				if door.isdoor then
+					door:open(self)
+				end
+			end
 		end
 
 		if hero.entitydata == nil then return end
