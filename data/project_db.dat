@@ -18,6 +18,9 @@ map{ id = "catmap", description = "catmap" }
 map{ id = "dunsmurmap", description = "dunsmurmap" }
 map{ id = "hub", description = "hub" }
 map{ id = "largemaze", description = "something" }
+map{ id = "mageboss/mage1", description = "mage1" }
+map{ id = "mageboss/mage2", description = "mage2" }
+map{ id = "mageboss/mageboss", description = "mageboss" }
 map{ id = "magebossmap", description = "magebossmap" }
 map{ id = "maptest", description = "maptest" }
 map{ id = "misc_testing", description = "misc_testing" }

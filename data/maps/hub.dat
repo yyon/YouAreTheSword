@@ -404,7 +404,7 @@ npc{
 
 teletransporter{
   layer = 0,
-  x = 568,
+  x = 544,
   y = 128,
   width = 32,
   height = 32,
@@ -606,5 +606,14 @@ teletransporter{
   width = 32,
   height = 32,
   destination_map = "spaceship/spaceship_1",
+}
+
+teletransporter{
+  layer = 0,
+  x = 576,
+  y = 128,
+  width = 32,
+  height = 32,
+  destination_map = "mageboss/mageboss",
 }
 

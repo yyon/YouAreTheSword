@@ -59,6 +59,38 @@ Will you return to Duns Mur?
 }
 
 dialog{
+  id = "mageboss.map1.1",
+  text = [[
+ugh, this place is too quiet.
+NEWSCREEN
+I have a bad feeling of this.
+]]
+}
+
+dialog{
+  id = "mageboss.map2.1",
+  text = [[
+This place is ... corrupted.
+NEWSCREEN
+I must defeat the evil mage!
+]]
+}
+
+dialog{
+  id = "mageboss.map3.1",
+  text = [[
+Die! Evil!
+]]
+}
+
+dialog{
+  id = "mageboss.map3.2",
+  text = [[
+Taste my tentacle!
+]]
+}
+
+dialog{
   id = "puzzletest.3sign",
   text = [[
 Press the key you used to activate the ability again in order to "lock" the targeting system which allows you to freely move your mouse without changing where you are targeting.
