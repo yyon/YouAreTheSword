@@ -1996,6 +1996,11 @@ function mageboss:stage2()
 	self.stats.movementspeed = 60
 	self.swordability = FireballAbility:new(self)
 	self.specialability = NothingAbility:new(self)
+	self.entity:get_map():startcutscene()
+	self.entity:get_map():say("boss", "2", function()
+		self.entity:get_map():finish()
+	end)
+	
 end
 
 function mageboss:stage3()

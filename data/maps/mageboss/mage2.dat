@@ -3243,14 +3243,6 @@ wall{
   stops_projectiles = true,
 }
 
-destination{
-  name = "outofcave",
-  layer = 0,
-  x = 672,
-  y = 1085,
-  direction = 1,
-}
-
 teletransporter{
   layer = 0,
   x = 608,
@@ -3266,16 +3258,6 @@ destination{
   x = 672,
   y = 77,
   direction = 3,
-}
-
-teletransporter{
-  layer = 0,
-  x = 640,
-  y = 0,
-  width = 64,
-  height = 48,
-  destination_map = "mageboss/mage1",
-  destination = "outofdarkzone",
 }
 
 enemy{
@@ -3308,6 +3290,38 @@ enemy{
   y = 1013,
   direction = 0,
   breed = "e_mage_evil",
+}
+
+enemy{
+  layer = 0,
+  x = 528,
+  y = 813,
+  direction = 0,
+  breed = "a_archer",
+}
+
+enemy{
+  layer = 0,
+  x = 608,
+  y = 709,
+  direction = 0,
+  breed = "a_berserker",
+}
+
+enemy{
+  layer = 0,
+  x = 720,
+  y = 709,
+  direction = 0,
+  breed = "a_cleric",
+}
+
+enemy{
+  layer = 0,
+  x = 784,
+  y = 797,
+  direction = 0,
+  breed = "a_knight",
 }
 
 tile{

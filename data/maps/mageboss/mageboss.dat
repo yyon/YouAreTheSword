@@ -2669,21 +2669,36 @@ destination{
   direction = 3,
 }
 
-teletransporter{
-  layer = 0,
-  x = 640,
-  y = 160,
-  width = 64,
-  height = 32,
-  destination_map = "mageboss/mage2",
-  destination = "outofcave",
-}
-
 enemy{
+  name = "boss",
   layer = 0,
   x = 864,
   y = 789,
   direction = 0,
   breed = "f_mage_boss",
+}
+
+enemy{
+  layer = 0,
+  x = 592,
+  y = 781,
+  direction = 0,
+  breed = "a_archer",
+}
+
+enemy{
+  layer = 0,
+  x = 728,
+  y = 621,
+  direction = 0,
+  breed = "a_bard",
+}
+
+enemy{
+  layer = 0,
+  x = 928,
+  y = 589,
+  direction = 0,
+  breed = "a_cleric",
 }
 
