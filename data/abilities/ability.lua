@@ -236,9 +236,17 @@ function Ability:catch(target, dontend)
 			return false
 		end
 	else
-		self.caughttargets[target] = true
-		target.caught = true
-		return true
+		if target.entity == nil or self.entity == nil then
+			return false
+		end
+		
+		if target.entity:is_in_same_region(self.entitydata.entity) then
+			self.caughttargets[target] = true
+			target.caught = true
+			return true
+		else
+			return false
+		end
 	end
 end
 

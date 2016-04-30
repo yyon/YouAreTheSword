@@ -8,6 +8,22 @@ and blow everything up!
 }
 
 dialog{
+  id = "castle.1",
+  text = [[
+It's the Demon Lord, Duns Mur!
+NEWSCREEN
+After him!
+]]
+}
+
+dialog{
+  id = "castle.2",
+  text = [[
+Where'd he go?
+]]
+}
+
+dialog{
   id = "catdungeon.1",
   text = [[
 Thank god THAT'S over with.
@@ -45,9 +61,9 @@ This has got to be animal abuse...
 dialog{
   id = "dunsmur.1",
   text = [[
-Oh look, it's my sword
+It's my sword!
 NEWSCREEN
-Come back to me, sword
+Come with me to take over the world!
 ]]
 }
 

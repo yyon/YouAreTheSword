@@ -613,7 +613,7 @@ teletransporter{
   y = 448,
   width = 32,
   height = 32,
-  destination_map = "DunsMurDungeon/1",
+  destination_map = "DunsMurDungeon/castle",
 }
 
 npc{

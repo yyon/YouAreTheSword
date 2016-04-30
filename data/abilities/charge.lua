@@ -61,7 +61,7 @@ function ChargeAbility:doability()
 	end
 	movementaccuracy(movement, angle, self.entitydata.entity)
 
-	self.entitydata.positionlisteners[self] = function(x, y, layer) self:updatepos(x, y, layer) end
+--	self.entitydata.positionlisteners[self] = function(x, y, layer) self:updatepos(x, y, layer) end
 end
 
 function ChargeAbility:onfinish()
@@ -79,9 +79,9 @@ function ChargeAbility:blockdamage(fromentity, damage, aspects)
 	return 0, aspects
 end
 
-function ChargeAbility:updatepos(x, y, layer)
-	local entity = self.entitydata.entity
-	local map = entity:get_map()
+--function ChargeAbility:updatepos(x, y, layer)
+--	local entity = self.entitydata.entity
+--	local map = entity:get_map()
 
 --[[
 	for entitydata2 in self.entitydata:getotherentities() do
@@ -97,7 +97,7 @@ function ChargeAbility:updatepos(x, y, layer)
 		end
 	end
 --]]
-end
+--end
 
 function ChargeAbility:attack(entity)
 	if not self.entitydata:cantargetentity(entity) then

@@ -1,1 +1,1 @@
-Warning: Cannot use quest size 320x240: this quest only supports 1280x720 to 1280x720. Using 1280x720 instead.
+Error: Failed to load data file '/home/yyon/Workspace/YouAreTheSword/data/maps/DunsMurDungeon/1.dat': cannot open /home/yyon/Workspace/YouAreTheSword/data/maps/DunsMurDungeon/1.dat: No such file or directory

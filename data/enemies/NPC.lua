@@ -713,6 +713,7 @@ end
 function enemy:pathfind(target)
 	if target == nil then return end
 	if self.entitydata.stats.movementspeed == 0 then return end
+	if self.entitydata.caught then return end
 
 	local tox, toy = target:get_position()
 	if self.entitydata:canmoveto(tox, toy) then

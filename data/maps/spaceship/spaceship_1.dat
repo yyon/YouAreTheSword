@@ -7395,6 +7395,46 @@ destination{
   direction = 1,
 }
 
+enemy{
+  layer = 0,
+  x = 360,
+  y = 117,
+  direction = 0,
+  breed = "a_mage",
+}
+
+enemy{
+  layer = 0,
+  x = 432,
+  y = 165,
+  direction = 0,
+  breed = "a_archer",
+}
+
+enemy{
+  layer = 0,
+  x = 80,
+  y = 605,
+  direction = 0,
+  breed = "e_mech",
+}
+
+enemy{
+  layer = 0,
+  x = 312,
+  y = 709,
+  direction = 0,
+  breed = "e_mech",
+}
+
+enemy{
+  layer = 0,
+  x = 640,
+  y = 645,
+  direction = 0,
+  breed = "e_mech",
+}
+
 tile{
   layer = 1,
   x = 256,
