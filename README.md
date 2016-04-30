@@ -30,10 +30,6 @@ Switch between controlling different adventurers with unique abilites.
 1. Download this folder
 2. Go to [http://www.solarus-games.org/engine/download/](http://www.solarus-games.org/engine/download/)
 3. Download solarus 1.4.5
-4. If Windows or Mac:
+4. If Windows or Mac: Put solarus in the folder and run it
 
-  Put solarus in the folder and run it
-
-If Linux:
-
-  Install, run "solarus_run /path/to/YouAreTheSword" in terminal
+    If Linux: Install, run "solarus_run /path/to/YouAreTheSword" in terminal
