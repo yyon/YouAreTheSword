@@ -8,9 +8,9 @@ Switch between controlling different adventurers with unique abilites.
 
 ![screenshot](http://i.imgur.com/QjGfRlU.png)
 
-![screenshot](http://i.imgur.com/yAPH10i.png)
-
 ![screenshot](http://i.imgur.com/PvWdBnO.png)
+
+![screenshot](http://i.imgur.com/tBeMMmL.png)
 
 ![screenshot](http://i.imgur.com/WOARDhp.png)
 
