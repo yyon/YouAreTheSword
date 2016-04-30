@@ -86,6 +86,8 @@ Die! Evil!
 dialog{
   id = "mageboss.map3.2",
   text = [[
+You enraged me!
+
 Taste my tentacle!
 ]]
 }

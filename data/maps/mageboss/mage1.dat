@@ -11943,14 +11943,6 @@ wall{
   stops_projectiles = true,
 }
 
-destination{
-  name = "outofdarkzone",
-  layer = 0,
-  x = 1176,
-  y = 3045,
-  direction = 1,
-}
-
 teletransporter{
   layer = 0,
   x = 1120,
@@ -11987,14 +11979,6 @@ enemy{
 
 enemy{
   layer = 0,
-  x = 944,
-  y = 2789,
-  direction = 0,
-  breed = "e_skeleton",
-}
-
-enemy{
-  layer = 0,
   x = 1536,
   y = 2837,
   direction = 0,
@@ -12013,14 +11997,6 @@ enemy{
   layer = 0,
   x = 1416,
   y = 253,
-  direction = 0,
-  breed = "e_orc",
-}
-
-enemy{
-  layer = 0,
-  x = 776,
-  y = 1949,
   direction = 0,
   breed = "e_orc",
 }
@@ -12073,14 +12049,6 @@ enemy{
   breed = "e_skeleton",
 }
 
-enemy{
-  layer = 0,
-  x = 2256,
-  y = 2677,
-  direction = 0,
-  breed = "e_skeleton",
-}
-
 npc{
   layer = 0,
   x = 2696,
@@ -12089,6 +12057,62 @@ npc{
   subtype = 0,
   sprite = "sign",
   behavior = "dialog#This house is abandoned. Go south to find the truth.",
+}
+
+enemy{
+  layer = 0,
+  x = 2152,
+  y = 1749,
+  direction = 0,
+  breed = "a_archer",
+}
+
+enemy{
+  layer = 0,
+  x = 1584,
+  y = 1421,
+  direction = 0,
+  breed = "a_cleric",
+}
+
+enemy{
+  layer = 0,
+  x = 2432,
+  y = 1749,
+  direction = 0,
+  breed = "a_rogue",
+}
+
+enemy{
+  layer = 0,
+  x = 2768,
+  y = 1757,
+  direction = 0,
+  breed = "a_knight",
+}
+
+enemy{
+  layer = 0,
+  x = 728,
+  y = 2629,
+  direction = 0,
+  breed = "a_knight",
+}
+
+enemy{
+  layer = 0,
+  x = 1424,
+  y = 2573,
+  direction = 0,
+  breed = "a_mage",
+}
+
+enemy{
+  layer = 0,
+  x = 2696,
+  y = 2693,
+  direction = 0,
+  breed = "a_archer",
 }
 
 tile{
