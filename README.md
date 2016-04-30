@@ -18,18 +18,16 @@ Switch between controlling different adventurers with unique abilites.
 
 ## Download
 
-Either download a version, or download this github repository and install.
-
-### Version 1.0
+### Version 1.0 (current)
 [Windows](https://drive.google.com/file/d/0Bwum1DVR9SNNbktrLVZ1YWx0Sm8/view?usp=sharing)
 
 [Mac](https://drive.google.com/file/d/0Bwum1DVR9SNNY0hKaFVpZlBRRWs/view?usp=sharing)
 
 [Linux x64](https://drive.google.com/file/d/0Bwum1DVR9SNNR1hoZkpFek5keDA/view?usp=sharing)
 
-### How to manually install
+### Or download the latest from this github repository
 
-1. Download this folder
+1. Download this folder [https://github.com/yyon/YouAreTheSword/archive/master.zip](https://github.com/yyon/YouAreTheSword/archive/master.zip)
 2. Go to [http://www.solarus-games.org/engine/download/](http://www.solarus-games.org/engine/download/)
 3. Download solarus 1.4.5
 4. If Windows or Mac: Put solarus in the folder and run it
