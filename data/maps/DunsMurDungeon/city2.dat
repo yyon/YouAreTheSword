@@ -7783,7 +7783,7 @@ teletransporter{
   y = 1208,
   width = 16,
   height = 400,
-  destination_map = "DunsMurDungeon/river",
+  destination_map = "puzzletest/5",
 }
 
 tile{

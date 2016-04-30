@@ -3387,3 +3387,12 @@ wall{
   stops_projectiles = true,
 }
 
+teletransporter{
+  layer = 0,
+  x = 1520,
+  y = -8,
+  width = 512,
+  height = 80,
+  destination_map = "DunsMurDungeon/river",
+}
+
