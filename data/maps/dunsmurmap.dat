@@ -5,6 +5,7 @@ properties{
   height = 5000,
   floor = 0,
   tileset = "tileset2",
+  music = "singles/techno minutesloopNES",
 }
 
 tile{
