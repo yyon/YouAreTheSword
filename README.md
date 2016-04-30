@@ -18,6 +18,8 @@ Switch between controlling different adventurers with unique abilites.
 
 ## Download
 
+Either download a version, or download this github repository and install.
+
 ### Version 1.0
 [Windows](https://drive.google.com/file/d/0Bwum1DVR9SNNbktrLVZ1YWx0Sm8/view?usp=sharing)
 
@@ -25,7 +27,7 @@ Switch between controlling different adventurers with unique abilites.
 
 [Linux x64](https://drive.google.com/file/d/0Bwum1DVR9SNNR1hoZkpFek5keDA/view?usp=sharing)
 
-### How to install most recent version
+### How to manually install
 
 1. Download this folder
 2. Go to [http://www.solarus-games.org/engine/download/](http://www.solarus-games.org/engine/download/)
