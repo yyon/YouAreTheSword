@@ -31,7 +31,10 @@ function CatKickAbility:initialize(entitydata, type)
 end
 
 function CatKickAbility:doability()
-	if not self:catch(self.entitydata) then return end
+	if not self:catch(self.entitydata) then
+		self:finish(true)
+		return
+	end
 	
 	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)

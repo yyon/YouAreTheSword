@@ -14,7 +14,10 @@ function ChargeAbility:initialize(entitydata)
 end
 
 function ChargeAbility:doability()
-	if not self:catch(self.entitydata) then return end
+	if not self:catch(self.entitydata) then
+		self:finish(true)
+		return
+	end
 
 	local entity = self.entitydata.entity
 	local map = entity:get_map()

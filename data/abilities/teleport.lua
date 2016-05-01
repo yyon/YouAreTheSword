@@ -12,6 +12,11 @@ function TeleportAbility:initialize(entitydata)
 end
 
 function TeleportAbility:doability()
+	if not self:catch(self.entitydata) then
+		self:finish(true)
+		return
+	end
+	
 	local tox, toy = self:gettargetpos()
 	tox, toy = self:withinrange(tox, toy)
 

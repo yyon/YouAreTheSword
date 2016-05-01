@@ -236,7 +236,7 @@ function Ability:catch(target, dontend)
 			return false
 		end
 	else
-		if target.entity == nil or self.entity == nil then
+		if target.entity == nil or self.entitydata.entity == nil then
 			return false
 		end
 		

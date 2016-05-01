@@ -350,6 +350,10 @@ Use ${special} to use your special ability.
 NEWSCREEN
 Many abilities have a casting time, where there is a delay between the starting the ability and using the ability.
 Many abilities also have a cooldown time, where the ability can't be used again until the timer ends.
+NEWSCREEN
+Most special abilities use your mouse pointer to aim.
+NEWSCREEN
+Use your lightning ability to smoke that combat dummy on the cliff!
 ]]
 }
 
@@ -365,6 +369,13 @@ NEWSCREEN
 The third icon is your Sword Transformation ability.
 Use ${swordtransform} to transform your sword.
 Then use ${normal} to swing it. 
+NEWSCREEN
+Your current sword transformation is displayed in the top-right.
+Your sword will stay transformed even when it is passed between people.
+Except the throwing animation won't change because we haven't programmed that in yet.
+NEWSCREEN
+Still, you can transform your sword with one person and swing your sword with another person.
+Try it out by using a knight to transform your sword into an axe, and use the mage to attack this combat dummy.
 ]]
 }
 
