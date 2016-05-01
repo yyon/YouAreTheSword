@@ -20,7 +20,7 @@ Switch between controlling different adventurers with unique abilites.
 
 ## Download
 
-### Version 1.0 (current)
+### Version 1.1 (current)
 [Windows](https://drive.google.com/file/d/0Bwum1DVR9SNNbktrLVZ1YWx0Sm8/view?usp=sharing)
 
 [Mac](https://drive.google.com/file/d/0Bwum1DVR9SNNY0hKaFVpZlBRRWs/view?usp=sharing)
