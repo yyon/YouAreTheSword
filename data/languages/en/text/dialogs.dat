@@ -348,7 +348,7 @@ dialog{
 Your special ability is displayed in the rightmost icon.
 Use ${special} to use your special ability.
 NEWSCREEN
-Many abilities have a casting time, where there is a delay between the starting the ability and using the ability.
+Many abilities have a casting time, where there is a delay between the starting of the ability and using the ability.
 Many abilities also have a cooldown time, where the ability can't be used again until the timer ends.
 NEWSCREEN
 Most special abilities use your mouse pointer to aim.
