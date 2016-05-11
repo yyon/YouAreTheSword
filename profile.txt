@@ -1,0 +1,440 @@
+Lua Profile output created by profiler.lua. Copyright Pepperfish 2002+
+
+------------------- L:<function: 0x418942f8>@scripts/map.lua:183 -------------------
+Sample count:           17
+Time spend total:       1.085s
+Time spent in children: 0.366s
+Time spent in self:     0.719s
+Time spent per sample:  0.06382s/sample
+Time spent in self per sample: 0.04228s/sample
+
+Child L:drawlifebar@scripts/map.lua:150         sampled      6 times. Took 0.37s
+
+---------------------- L:drawlifebar@scripts/map.lua:150 -----------------------
+Sample count:            6
+Time spend total:       0.366s
+Time spent in children: 0.000s
+Time spent in self:     0.366s
+Time spent per sample:  0.06102s/sample
+Time spent in self per sample: 0.06102s/sample
+
+----------------------- L:dotick@enemies/effect.lua:108 ------------------------
+Sample count:            3
+Time spend total:       0.184s
+Time spent in children: 0.184s
+Time spent in self:     0.000s
+Time spent per sample:  0.06129s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@enemies/effect.lua:162             sampled      3 times. Took 0.18s
+
+------------------------ L:tick@enemies/effect.lua:162 -------------------------
+Sample count:            3
+Time spend total:       0.184s
+Time spent in children: 0.184s
+Time spent in self:     0.000s
+Time spent per sample:  0.06129s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tickfunction@scripts/map.lua:129        sampled      3 times. Took 0.18s
+
+---------------------- L:tickfunction@scripts/map.lua:129 ----------------------
+Sample count:            3
+Time spend total:       0.184s
+Time spent in children: 0.184s
+Time spent in self:     0.000s
+Time spent per sample:  0.06129s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:actuallydrawlifebars@scripts/map.lua:86 sampled      3 times. Took 0.18s
+
+------------------- L:actuallydrawlifebars@scripts/map.lua:86 -------------------
+Sample count:            3
+Time spend total:       0.184s
+Time spent in children: 0.129s
+Time spent in self:     0.055s
+Time spent per sample:  0.06129s/sample
+Time spent in self per sample: 0.01830s/sample
+
+Child L:actuallydrawlifebar@scripts/map.lua:94  sampled      2 times. Took 0.13s
+
+------------------- L:getremainingmonsters@enemies/entitydata.lua:1275 -------------------
+Sample count:            2
+Time spend total:       0.135s
+Time spent in children: 0.135s
+Time spent in self:     0.000s
+Time spent per sample:  0.06741s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:(for generator)@enemies/entitydata.lua:386 sampled      1 times. Took 0.07s
+Child L:(for generator)@enemies/entitydata.lua:386 sampled      1 times. Took 0.07s
+
+------------------- L:check@scripts/hud/remainingstatus.lua:25 -------------------
+Sample count:            2
+Time spend total:       0.135s
+Time spent in children: 0.135s
+Time spent in self:     0.000s
+Time spent per sample:  0.06741s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:rebuild_surface@scripts/hud/remainingstatus.lua:34 sampled      2 times. Took 0.13s
+
+------------------- L:rebuild_surface@scripts/hud/remainingstatus.lua:34 -------------------
+Sample count:            2
+Time spend total:       0.135s
+Time spent in children: 0.135s
+Time spent in self:     0.000s
+Time spent per sample:  0.06741s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:getremainingmonsters@enemies/entitydata.lua:1275 sampled      2 times. Took 0.13s
+
+--------------------- L:tick@scripts/game_manager.lua:518 ----------------------
+Sample count:            2
+Time spend total:       0.130s
+Time spent in children: 0.060s
+Time spent in self:     0.070s
+Time spent per sample:  0.06523s/sample
+Time spent in self per sample: 0.03509s/sample
+
+Child L:tickability@enemies/entitydata.lua:468  sampled      1 times. Took 0.06s
+
+------------------- L:actuallydrawlifebar@scripts/map.lua:94 -------------------
+Sample count:            2
+Time spend total:       0.129s
+Time spent in children: 0.000s
+Time spent in self:     0.129s
+Time spent per sample:  0.06448s/sample
+Time spent in self per sample: 0.06448s/sample
+
+--------------------- L:onkey@scripts/game_manager.lua:68 ----------------------
+Sample count:            2
+Time spend total:       0.126s
+Time spent in children: 0.057s
+Time spent in self:     0.069s
+Time spent per sample:  0.06278s/sample
+Time spent in self per sample: 0.03429s/sample
+
+Child L:startability@enemies/entitydata.lua:422 sampled      1 times. Took 0.06s
+
+------------------- L:<function: 0x413f9a58>@scripts/game_manager.lua:180 -------------------
+Sample count:            2
+Time spend total:       0.126s
+Time spent in children: 0.126s
+Time spent in self:     0.000s
+Time spent per sample:  0.06278s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:onkey@scripts/game_manager.lua:68       sampled      2 times. Took 0.13s
+
+------------------- L:<function: 0x42f4d900>@scripts/game_manager.lua:582 -------------------
+Sample count:            1
+Time spend total:       0.070s
+Time spent in children: 0.070s
+Time spent in self:     0.000s
+Time spent per sample:  0.07018s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@scripts/game_manager.lua:518       sampled      1 times. Took 0.07s
+
+------------------- L:(for generator)@enemies/entitydata.lua:386 -------------------
+Sample count:            1
+Time spend total:       0.069s
+Time spent in children: 0.000s
+Time spent in self:     0.069s
+Time spent per sample:  0.06922s/sample
+Time spent in self per sample: 0.06922s/sample
+
+------------------- L:<function: 0x42bc8e98>@scripts/hud/remainingstatus.lua:28 -------------------
+Sample count:            1
+Time spend total:       0.069s
+Time spent in children: 0.069s
+Time spent in self:     0.000s
+Time spent per sample:  0.06922s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:check@scripts/hud/remainingstatus.lua:25 sampled      1 times. Took 0.07s
+
+------------------- L:<function: 0x426cc1e8>@enemies/effect.lua:111 -------------------
+Sample count:            1
+Time spend total:       0.068s
+Time spent in children: 0.068s
+Time spent in self:     0.000s
+Time spent per sample:  0.06760s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:dotick@enemies/effect.lua:108           sampled      1 times. Took 0.07s
+
+------------------- L:<function: 0x4315b9b0>@scripts/hud/remainingstatus.lua:28 -------------------
+Sample count:            1
+Time spend total:       0.066s
+Time spent in children: 0.066s
+Time spent in self:     0.000s
+Time spent per sample:  0.06561s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:check@scripts/hud/remainingstatus.lua:25 sampled      1 times. Took 0.07s
+
+------------------- L:(for generator)@enemies/entitydata.lua:386 -------------------
+Sample count:            1
+Time spend total:       0.066s
+Time spent in children: 0.000s
+Time spent in self:     0.066s
+Time spent per sample:  0.06561s/sample
+Time spent in self per sample: 0.06561s/sample
+
+------------------------ L:fill@jumper/core/path.lua:80 ------------------------
+Sample count:            1
+Time spend total:       0.064s
+Time spent in children: 0.000s
+Time spent in self:     0.064s
+Time spent per sample:  0.06384s/sample
+Time spent in self per sample: 0.06384s/sample
+
+------------------- L:<function: 0x4320e868>@enemies/NPC.lua:741 -------------------
+Sample count:            1
+Time spend total:       0.064s
+Time spent in children: 0.064s
+Time spent in self:     0.000s
+Time spent per sample:  0.06384s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:fill@jumper/core/path.lua:80            sampled      1 times. Took 0.06s
+
+------------------- L:check@scripts/hud/possess_o_meter.lua:36 -------------------
+Sample count:            1
+Time spend total:       0.062s
+Time spent in children: 0.000s
+Time spent in self:     0.062s
+Time spent per sample:  0.06249s/sample
+Time spent in self per sample: 0.06249s/sample
+
+------------------- L:<function: 0x417ae440>@scripts/hud/possess_o_meter.lua:64 -------------------
+Sample count:            1
+Time spend total:       0.062s
+Time spent in children: 0.062s
+Time spent in self:     0.000s
+Time spent per sample:  0.06249s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:check@scripts/hud/possess_o_meter.lua:36 sampled      1 times. Took 0.06s
+
+------------------- L:<function: 0x4310b568>@enemies/effect.lua:111 -------------------
+Sample count:            1
+Time spend total:       0.061s
+Time spent in children: 0.061s
+Time spent in self:     0.000s
+Time spent per sample:  0.06136s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:dotick@enemies/effect.lua:108           sampled      1 times. Took 0.06s
+
+------------------------- L:__index@middleclass.lua:35 -------------------------
+Sample count:            1
+Time spend total:       0.060s
+Time spent in children: 0.000s
+Time spent in self:     0.060s
+Time spent per sample:  0.06028s/sample
+Time spent in self per sample: 0.06028s/sample
+
+------------------- L:<function: 0x428db580>@scripts/game_manager.lua:582 -------------------
+Sample count:            1
+Time spend total:       0.060s
+Time spent in children: 0.060s
+Time spent in self:     0.000s
+Time spent per sample:  0.06028s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:tick@scripts/game_manager.lua:518       sampled      1 times. Took 0.06s
+
+------------------- L:tickability@enemies/entitydata.lua:468 -------------------
+Sample count:            1
+Time spend total:       0.060s
+Time spent in children: 0.060s
+Time spent in self:     0.000s
+Time spent per sample:  0.06028s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:__index@middleclass.lua:35              sampled      1 times. Took 0.06s
+
+------------------- L:<function: 0x4187b048>@enemies/NPC.lua:707 -------------------
+Sample count:            1
+Time spend total:       0.058s
+Time spent in children: 0.000s
+Time spent in self:     0.058s
+Time spent per sample:  0.05817s/sample
+Time spent in self per sample: 0.05817s/sample
+
+------------------- L:<function: 0x42415b80>@abilities/ability.lua:61 -------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:doability@abilities/sword.lua:41        sampled      1 times. Took 0.06s
+
+-------------------------------- C:start@=[C]:? --------------------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:<function: 0x42415b40>@enemies/effect.lua:92 sampled      1 times. Took 0.06s
+
+---------------------- L:initialize@enemies/effect.lua:8 -----------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:start@enemies/effect.lua:140            sampled      1 times. Took 0.06s
+
+-------------------- L:endfunction@abilities/ability.lua:41 --------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:finishwarmup@abilities/ability.lua:48   sampled      1 times. Took 0.06s
+
+------------------------------- C:xpcall@=[C]:? --------------------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:<function: 0x42415b80>@abilities/ability.lua:61 sampled      1 times. Took 0.06s
+
+------------------------ L:start@enemies/effect.lua:140 ------------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:removeeffectafter@enemies/effect.lua:86 sampled      1 times. Took 0.06s
+
+------------------------ L:remove@enemies/effect.lua:47 ------------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:endeffect@enemies/effect.lua:144        sampled      1 times. Took 0.06s
+
+------------------- L:<function: 0x42415b40>@enemies/effect.lua:92 -------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:endtimer@enemies/effect.lua:99          sampled      1 times. Took 0.06s
+
+----------------------- L:endtimer@enemies/effect.lua:99 -----------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:remove@enemies/effect.lua:47            sampled      1 times. Took 0.06s
+
+------------------- L:startability@enemies/entitydata.lua:422 -------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:start@abilities/ability.lua:23          sampled      1 times. Took 0.06s
+
+---------------------- L:endeffect@enemies/effect.lua:144 ----------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:endfunction@abilities/ability.lua:41    sampled      1 times. Took 0.06s
+
+---------------------- L:doability@abilities/sword.lua:41 ----------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.000s
+Time spent in self:     0.057s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.05699s/sample
+
+---------------------- L:SimpleTimer@middleclass.lua:128 -----------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:initialize@enemies/effect.lua:8         sampled      1 times. Took 0.06s
+
+------------------- L:removeeffectafter@enemies/effect.lua:86 -------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child C:start@=[C]:?                            sampled      1 times. Took 0.06s
+
+------------------- L:finishwarmup@abilities/ability.lua:48 --------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child C:xpcall@=[C]:?                           sampled      1 times. Took 0.06s
+
+----------------------- L:start@abilities/ability.lua:23 -----------------------
+Sample count:            1
+Time spend total:       0.057s
+Time spent in children: 0.057s
+Time spent in self:     0.000s
+Time spent per sample:  0.05699s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:SimpleTimer@middleclass.lua:128         sampled      1 times. Took 0.06s
+
+------------------- L:<function: 0x419f07f8>@enemies/effect.lua:111 -------------------
+Sample count:            1
+Time spend total:       0.055s
+Time spent in children: 0.055s
+Time spent in self:     0.000s
+Time spent per sample:  0.05490s/sample
+Time spent in self per sample: 0.00000s/sample
+
+Child L:dotick@enemies/effect.lua:108           sampled      1 times. Took 0.05s
+
+
+
+Total time spent in profiled functions:  1.84s
+
+END
