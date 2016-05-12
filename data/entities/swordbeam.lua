@@ -14,7 +14,7 @@ function entity:getdamage()
 end
 
 function entity:getspritename()
-  return "abilities/beams"
+  return "abilities/bluebeam"
 end
 
 function entity:getspeed()

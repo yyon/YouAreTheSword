@@ -46,7 +46,7 @@ function SwordAbility:doability()
 	local entitydata = self.entitydata
 
 	local d = entitydata:getdirection()
-	
+
 	self.entitydata:setanimation("sword")
 
 	self.swordentity = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
@@ -56,15 +56,16 @@ function SwordAbility:doability()
 	self.topsword = map:create_custom_entity({model="sword", x=x, y=y, layer=layer, direction=d, width=w, height=h})
 	self.topsword.ability = self
 	self.topsword:start(self:get_appearance(), true)
-	
+
 	local transform = self:gettransform()
 	if transform == "projectile" then
 		local tox, toy = self:gettargetpos()
 		self.tox, self.toy = tox, toy
 
-		self.arrowentity = map:create_custom_entity({model="swordbeam", x=x, y=y-35, layer=layer, direction=d, width=w, height=h})
+		self.arrowentity = map:create_custom_entity({model="swordbeam", x=x, y=y-35, layer=layer, direction=0, width=w, height=h})
+		self.arrowentity.rotationframes = 50
 		self.arrowentity:start(self, tox, toy)
-	end	
+	end
 
 	sol.audio.play_sound("sword" .. math.random(1,3))
 end
@@ -91,7 +92,7 @@ function SwordAbility:attack(entity)
 
 	local damage = 1
 	local aspects = {}
-	
+
 	local transform = self:gettransform()
 	if transform == "ap" then
 		aspects.ap = true

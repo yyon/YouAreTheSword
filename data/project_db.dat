@@ -54,6 +54,7 @@ sprite{ id = "abilities/arrow", description = "arrow" }
 sprite{ id = "abilities/beams", description = "beams" }
 sprite{ id = "abilities/blackhole", description = "blackhole" }
 sprite{ id = "abilities/blackholeparticles", description = "blackholeparticle" }
+sprite{ id = "abilities/bluebeam", description = "bluebeam" }
 sprite{ id = "abilities/bomb", description = "bomb" }
 sprite{ id = "abilities/boomerang", description = "boomerang" }
 sprite{ id = "abilities/boulder", description = "boulder" }
