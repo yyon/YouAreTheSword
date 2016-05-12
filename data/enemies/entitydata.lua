@@ -112,7 +112,7 @@ function EntityData:initialize(entity, theclass, main_sprite, life, team, sworda
 	if stats.cooldown == nil then
 		stats.cooldown = 1
 	end
-	
+
 	self.originalstats = {}
 	for k, v in pairs(stats) do
 		self.originalstats[k] = v
@@ -158,7 +158,7 @@ end
 
 function EntityData:updatemovementspeed()
 	if self.entity == nil then
-		return 
+		return
 	end
 	if self.entity.ishero then
 		self.entity:set_walking_speed(self.stats.movementspeed)
@@ -208,7 +208,7 @@ function EntityData:bepossessedbyhero()
 
 	self.entity = hero
 	self:applytoentity()
-	
+
 	self.team = "adventurer"
 
 	if isfreezed then
@@ -269,7 +269,7 @@ function EntityData:unpossess(name)
 	self:applytoentity()
 
 	self.entity:setdirection(d)
-	
+
 	self.team = self.actualteam
 
 	if self:isfrozen(hero) then
@@ -318,7 +318,7 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack, onlyonsamet
 --		self:log("can't target", entitydata, "because same team")
 		return false
 	end
-	
+
 	if onlyonsameteam and entitydata.team ~= self.team then
 		return false
 	end
@@ -327,7 +327,7 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack, onlyonsamet
 	if entitydata.caught then
 		return false
 	end
-	
+
 	if not self.entity:is_in_same_region(entitydata.entity) then
 		return false
 	end
@@ -373,33 +373,17 @@ function EntityData:getotherentities()
 	if self.entity == nil then print(debug.traceback()); return end
 
 	local map = self.entity:get_map()
-	local heroentity = map:get_hero()
-	local saidhero = false
-	if self.entity.ishero then
-		saidhero = true
-	end
-	if heroentity.entitydata == nil then
-		saidhero = true
-	end
-	local entityiter, iterstate, lastentity = map:get_entities("")
+	local entityiter, iterstate, lastentity = map:getpeople()
 
 	local iterfunction = function()
-		if saidhero == false then
-			saidhero = true
-			return heroentity.entitydata
-		else
-			while true do
-				local newentity = entityiter(iterstate, lastentity)
-				lastentity = newentity
-				if newentity == nil then
-					return nil
-				end
-				if newentity.entitydata ~= nil then
-					local newentitydata = newentity.entitydata
-					if newentitydata ~= self and newentitydata ~= heroentity.entitydata and newentitydata.entity ~= nil then
-						return newentitydata
-					end
-				end
+		while true do
+			local newperson, iterstate = entityiter(iterstate, lastentity)
+			lastentity = newperson
+			if newperson == nil then
+				return nil
+			end
+			if newperson ~= self then
+				return newperson
 			end
 		end
 	end
@@ -794,7 +778,7 @@ function EntityData:dodamage(target, damage, aspects)
 
 	if target.life <= 0 or aspects.instantdeath or (game.instantdeath and damage ~= 0) then
 		local remainingmonsters = self:getremainingmonsters()
-		
+
 		target:kill()
 
 		if remainingmonsters == 0 then
@@ -866,7 +850,7 @@ function EntityData:kill()
 	for key, effect in pairs(self.effects) do
 		effect:forceremove()
 	end
-	
+
 	if self.entity ~= nil then
 		self.entity.entitydata = nil
 
@@ -1164,7 +1148,7 @@ function EntityData:getclosestentity(x, y, isenemy, funct, isself)
 			end
 		end
 	end
-	
+
 	if isself then
 		local entitydata = self
 		if not isenemy or self:cantarget(entitydata) then
@@ -2000,7 +1984,7 @@ function mageboss:stage2()
 	self.entity:get_map():say("boss", "2", function()
 		self.entity:get_map():finish()
 	end)
-	
+
 end
 
 function mageboss:stage3()
@@ -2067,7 +2051,7 @@ function dunsmurclass:initialize(entity)
 	local specialabilities = {PossessAbility:new(self)}
 	local basestats = {}
 --	self.cantcancel = true
-	
+
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

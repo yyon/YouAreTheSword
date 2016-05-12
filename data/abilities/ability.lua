@@ -239,10 +239,11 @@ function Ability:catch(target, dontend)
 		if target.entity == nil or self.entitydata.entity == nil then
 			return false
 		end
-		
+
 		if target.entity:is_in_same_region(self.entitydata.entity) then
 			self.caughttargets[target] = true
 			target.caught = true
+			target.caughteffect = Effects.FreezeEffect(target)
 			return true
 		else
 			return false
@@ -258,6 +259,7 @@ function Ability:uncatch()
 	self.uncatched = true
 	for entitydata, b in pairs(self.caughttargets) do
 		entitydata.caught = false
+		entitydata.caughteffect:remove()
 	end
 	self.caughttargets = {}
 end

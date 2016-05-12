@@ -12049,6 +12049,7 @@ enemy{
 }
 
 npc{
+  name = "sign1",
   layer = 0,
   x = 2696,
   y = 453,

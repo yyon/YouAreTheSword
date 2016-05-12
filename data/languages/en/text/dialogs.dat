@@ -84,6 +84,13 @@ I have a bad feeling of this.
 }
 
 dialog{
+  id = "mageboss.map1.sign1",
+  text = [[
+This house is abandoned. Go south to find the truth.
+]]
+}
+
+dialog{
   id = "mageboss.map2.1",
   text = [[
 This place is ... corrupted.
@@ -195,7 +202,12 @@ dialog{
   id = "sequencetest.8",
   text = [[
 ...
-NEWSCREEN
+]]
+}
+
+dialog{
+  id = "sequencetest.9",
+  text = [[
 (Use ${up}, ${left}, ${down}, and ${right} to move.)
 ]]
 }

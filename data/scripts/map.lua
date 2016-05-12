@@ -74,6 +74,7 @@ end
 
 local hero = map:get_hero()
 if hero.entitydata ~= nil then
+    map.people[hero.entitydata] = true
     if hero.entitydata.theclass == "debugger" then
         for entity in map:get_entities("") do
             if entity.entitydata ~= nil then
@@ -96,13 +97,13 @@ end
 
 function map:actuallydrawlifebars()
     local hero = self:get_hero()
-    self:actuallydrawlifebar(hero)
-    for entity in self:get_entities("") do
-        self:actuallydrawlifebar(entity)
+    for person in self:getpeople() do
+        self:actuallydrawlifebar(person)
     end
 end
 
-function map:actuallydrawlifebar(entity)
+function map:actuallydrawlifebar(person)
+	local entity = person.entity
     if entity.entitydata ~= nil and not entity.entitydata.dontdrawlifebar then
         entity.lifebarsurface = sol.surface.create(70, 8)
 
@@ -137,7 +138,7 @@ function map:actuallydrawlifebar(entity)
     end
 end
 
-map.ticker = Effects.Ticker(game, 100, function() map:actuallydrawlifebars() end)
+map.ticker = Effects.Ticker(game, 200, function() map:actuallydrawlifebars() end)
 
 function map:on_finished()
     self.ticker:remove()
@@ -151,43 +152,42 @@ function map:say(name, dialog, funct)
 	hero:set_tunic_sprite_id("misc/speaking")
 	hero:set_direction(0)
 	hero:set_animation("stopped")
-	
+
 	self:startdialog(dialog, function()
 		hero:set_tunic_sprite_id("adventurers/transparent")
 		funct()
 	end)
 end
 
-function map:drawlifebar(dst_surface, entity, cx, cy)
-        if entity.entitydata ~= nil then
-            local x, y = entity:get_position()
+function map:drawlifebar(dst_surface, person, cx, cy)
+		local entity = person.entity
+        local x, y = entity:get_position()
 
-            if entity.entitydata.effects["possess"] ~= nil then
-                if entity.eyessprite == nil then
-                    entity.eyessprite = sol.sprite.create("adventurers/eyes")
-                end
-
-                local anim = entity.main_sprite:get_animation()
-                if entity.eyessprite:has_animation(anim) then
-                    if anim ~= entity.eyessprite:get_animation() then
-                        entity.eyessprite:set_animation(anim)
-                    end
-                    local d = entity.main_sprite:get_direction()
-                    if entity.eyessprite:get_num_directions() < d then
-                        d = 0
-                    end
-                    entity.eyessprite:set_direction(d)
-
-                    map:draw_sprite(entity.eyessprite, x, y)
-                end
+        if entity.entitydata.effects["possess"] ~= nil then
+            if entity.eyessprite == nil then
+                entity.eyessprite = sol.sprite.create("adventurers/eyes")
             end
 
-            y = y - 65
+            local anim = entity.main_sprite:get_animation()
+            if entity.eyessprite:has_animation(anim) then
+                if anim ~= entity.eyessprite:get_animation() then
+                    entity.eyessprite:set_animation(anim)
+                end
+                local d = entity.main_sprite:get_direction()
+                if entity.eyessprite:get_num_directions() < d then
+                    d = 0
+                end
+                entity.eyessprite:set_direction(d)
+
+                map:draw_sprite(entity.eyessprite, x, y)
+            end
+        end
+
+        y = y - 65
 
 --            map:draw_sprite(lifebarsprite, x, y)
-            if entity.lifebarsurface ~= nil and not self.dontdrawlifebars then
-                entity.lifebarsurface:draw(dst_surface, x-cx-35, y-cy-1)
-            end
+        if entity.lifebarsurface ~= nil and not self.dontdrawlifebars then
+            entity.lifebarsurface:draw(dst_surface, x-cx-35, y-cy-1)
         end
 end
 
@@ -216,9 +216,8 @@ function map:on_draw(dst_surface)
 
     local cx, cy = self:get_camera_position()
 
-    self:drawlifebar(dst_surface, hero, cx, cy)
-    for entity in self:get_entities("") do
-        self:drawlifebar(dst_surface, entity, cx, cy)
+    for person in self:getpeople() do
+        self:drawlifebar(dst_surface, person, cx, cy)
     end
 
     for dmgdisp, _ in pairs(damagedisps) do
@@ -227,36 +226,32 @@ function map:on_draw(dst_surface)
 end
 
 function map:freezeeveryone()
-    for entity in self:get_entities("") do
-        self:freezeentity(entity)
+    for person in self:getpeople() do
+        self:freezeentity(person)
     end
-    self:freezeentity(self:get_hero())
 end
 
-function map:freezeentity(entity)
-    if entity.entitydata ~= nil then
-        if entity.entitydata.mapfrozeneffect == nil then
-            local newfreezeeffect = Effects.FreezeEffect:new(entity.entitydata)
-            entity.entitydata.mapfrozeneffect = newfreezeeffect
-            entity.entitydata:setanimation("stopped")
-        end
+function map:freezeentity(entitydata)
+	local entity = entitydata.entity
+    if entity.entitydata.mapfrozeneffect == nil then
+        local newfreezeeffect = Effects.FreezeEffect:new(entity.entitydata)
+        entity.entitydata.mapfrozeneffect = newfreezeeffect
+        entity.entitydata:setanimation("stopped")
     end
 end
 
 function map:unfreezeeveryone()
-    for entity in self:get_entities("") do
-        self:unfreezeentity(entity)
+    for entitydata in self:getpeople() do
+        self:unfreezeentity(entitydata)
     end
-    self:unfreezeentity(self:get_hero())
 end
 
-function map:unfreezeentity(entity)
-    if entity.entitydata ~= nil then
-        if entity.entitydata.mapfrozeneffect ~= nil then
-            entity.entitydata.mapfrozeneffect:remove()
-            entity.entitydata.mapfrozeneffect = nil
-            entity.entitydata.manualtarget = nil
-        end
+function map:unfreezeentity(entitydata)
+	local entity = entitydata.entity
+    if entity.entitydata.mapfrozeneffect ~= nil then
+        entity.entitydata.mapfrozeneffect:remove()
+        entity.entitydata.mapfrozeneffect = nil
+        entity.entitydata.manualtarget = nil
     end
 end
 

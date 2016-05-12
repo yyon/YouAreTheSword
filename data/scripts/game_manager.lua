@@ -78,7 +78,7 @@ local function onkey(k, released)
 	end
 
 	if action == nil then return false end
-	
+
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil or game:get_map().isincutscene then
 		if action == "normal" and not released then
 			if game.dialog ~= nil then
@@ -125,11 +125,17 @@ local function onkey(k, released)
 --						if hero:get_direction4_to(entity) == hero:get_direction() then
 							didsomething = true
 							if entity.entitydata ~= nil then
-							local d = entity:get_direction4_to(hero)
+								local d = entity:get_direction4_to(hero)
 								entity.entitydata:setdirection(d)
 							end
 
+							if hero.entitydata ~= nil then
+								local d = hero:get_direction4_to(entity)
+								hero.entitydata:setdirection(d)
+							end
+
 							game:start_dialog(entity.dialog)
+							break
 --						end
 					end
 				end
@@ -139,8 +145,18 @@ local function onkey(k, released)
 							local name = entity:get_name()
 							if name ~= nil then
 								didsomething = true
+								if entity.entitydata ~= nil then
+									local d = entity:get_direction4_to(hero)
+									entity.entitydata:setdirection(d)
+								end
+
+								if hero.entitydata ~= nil then
+									local d = hero:get_direction4_to(entity)
+									hero.entitydata:setdirection(d)
+								end
 
 								game:start_dialog(name)
+								break
 							end
 --						end
 					end
@@ -198,7 +214,7 @@ function sol.main:on_key_pressed(key, modifiers)
 			function trace (event, line)
 				local s = debug.getinfo(2).short_src
 				print(s .. ":" .. line)
-			end	
+			end
 
 			debug.sethook(trace, "l")
 		elseif key == "p" then
@@ -218,7 +234,7 @@ function sol.main:on_key_pressed(key, modifiers)
 				game.nodeaths = true
 			end
 		elseif key == "b" then
-			print("cheat: catch everyone")	
+			print("cheat: catch everyone")
 			for entity in game:get_map():get_entities("") do
 				if entity.entitydata ~= nil then
 					print("caught", entity.entitydata.theclass)
@@ -249,15 +265,15 @@ function sol.main:on_key_pressed(key, modifiers)
 		elseif key == "]" then
 			for theclassname, pos in pairs(massacre) do
 				local map = hero:get_map()
-	
+
 				local newentity = map:create_enemy({
 					breed="enemy_constructor",
 					layer=0,
 					x=pos.x,
 					y=pos.y,
 					direction=0
-					})	
-	
+					})
+
 				local angelentitydata = _EntityDatas[theclassname]:new()
 				angelentitydata.entity = newentity
 				angelentitydata:applytoentity()
@@ -358,7 +374,7 @@ function sol.main:on_key_pressed(key, modifiers)
 						print(s.short_src .. ":" .. s.name)
 					end
 				end
-			end	
+			end
 
 			debug.sethook(trace, "c")
 		elseif key == "s" then
@@ -372,14 +388,14 @@ function sol.main:on_key_pressed(key, modifiers)
 		end
 
 		if hero.entitydata == nil then return end
-	
+
 		local x, y = hero.entitydata:gettargetpos()
-	
+
 		if x == nil then
 			print("COULDN'T FIND MOUSE")
 			return
 		end
-	
+
 		if key == "-" then
 			self.keyconfmenu = keyconfmenu:new(game)
 			sol.menu.start(game, self.keyconfmenu)
@@ -707,7 +723,7 @@ function load()
 	local hero = game:get_hero()
 	hero.ishero = true
 	hero.is_possessing = true
-	
+
 	local usersave = game:get_value("usersave")
 --	print("unpickle", pickledheroentitydata)
 	if usersave ~= nil then
@@ -833,7 +849,7 @@ function configload()
 			abilityhelp={"left alt"}
 		}
 	end
-	
+
 	if conf.music == nil then conf.music = 100 end
 	if conf.sound == nil then conf.sound = 100 end
 

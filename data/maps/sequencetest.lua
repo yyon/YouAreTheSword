@@ -6,9 +6,9 @@ local Effects = require "enemies/effect"
 
 function map:on_started()
 	local hero = self:get_hero()
-	
+
 	game.instantdeath = true
-	
+
 --	self.herosentitydata = hero.entitydata
 --	hero.entitydata:drop(hero, true)
 --	hero.entitydata = self.herosentitydata
@@ -18,23 +18,23 @@ end
 
 function map:on_opening_transition_finished()
 --	hero.entitydata = nil
-	
+
 --	hero:freeze()
 --	self:freezeeveryone()
-	
+
 	cleric.entitydata.stats.defense = 1
 	knight.entitydata.stats.defense = 1
-	
+
 	self:startcutscene()
 	self.newentitypossesseffect:remove()
-	
+
 	self:move("knight", "knightdest", function() self:look("knight", "cleric") end)
 	self:move("cleric", "clericdest", function() self:advwalked() end)
 end
 
 function map:advwalked()
 	self:look("cleric", "knight")
-	
+
 	self:say("cleric", "1", function()
 		self:say("knight", "2", function()
 			self:say("cleric", "3", function()
@@ -120,7 +120,9 @@ function map:endfight()
 						self:wait(500, function()
 							self:say("cleric", "7", function()
 								self:say("knight", "8", function()
-									self:testend()
+									self:startdialog("9", function()
+										self:testend()
+									end)
 								end)
 							end)
 						end)
@@ -133,14 +135,14 @@ end
 
 function map:testend()
 	game.instantdeath = false
-	
+
 	self:finish()
-	
+
 	local hero = self:get_hero()
 	hero.entitydata.stats.defense = 0.3
 	cleric.entitydata.stats.defense = 0.3
-	
-	self:freezeentity(cleric)
+
+	self:freezeentity(cleric.entitydata)
 	self:setanim("cleric", "stopped")
 	cleric.dialog = "cleric_afterwards"
 end
