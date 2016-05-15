@@ -781,3 +781,11 @@ wall{
   stops_projectiles = true,
 }
 
+enemy{
+  layer = 0,
+  x = 744,
+  y = 517,
+  direction = 0,
+  breed = "a_rogue",
+}
+

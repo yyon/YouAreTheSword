@@ -35,7 +35,7 @@ end
 local SwordAbility = Ability:subclass("SwordAbility")
 
 function SwordAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Sword", 50, "sword", 0, 0, true)
+	Ability.initialize(self, entitydata, "Swing Sword", 50, "sword", 0, 0, true)
 end
 
 function SwordAbility:doability()
@@ -98,7 +98,7 @@ function SwordAbility:attack(entity)
 		aspects.ap = true
 		aspects.dontblock = true
 	elseif transform == "electric" then
-		aspects.electric = 2000
+		aspects.electric = 250
 	elseif transform == "slow" then
 		aspects.slow = {sprite = "slow"}
 	elseif transform == "fire" then
@@ -254,7 +254,7 @@ sworddesc.getstats = function(transform)
 fire dmg 1s (7 dmg)]]
 	elseif transform == "electric" then
 		desc = desc .. [[7 dmg
-stun 2s]]
+stun 0.25s]]
 	elseif transform == "poison" then
 		desc = desc .. [[7 dmg
 poison 5s]]
@@ -278,7 +278,8 @@ end
 
 function SwordAbility:getdesc()
 	local desc = [[Swings sword
-Sword transformation abilties affect this ability
+The type of sword you swing can be changed using Sword Transformation abilities
+
 Current transformation: ]]
 	local name = sworddesc.getnameicon(self:gettransform())
 	desc = desc .. name .. "\n\n"

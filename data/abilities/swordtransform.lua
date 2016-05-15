@@ -8,7 +8,7 @@ local TransformAbility = Ability:subclass("TransformAbility")
 local SwordAbility = require "abilities/sword"
 
 function TransformAbility:initialize(entitydata, transform)
-	name, icon = sworddesc.getnameicon(transform)
+	local name, icon = sworddesc.getnameicon(transform)
 
 	Ability.initialize(self, entitydata, name, 0, icon, 500, 10000, true, "casting")
 
@@ -31,7 +31,8 @@ function TransformAbility:gettransform()
 end
 function TransformAbility:getdesc()
 		local desc = [[Transforms the sword
-This affects the "sword" ability
+This is used with the "Swing Sword" ability
+
 ]]
 	desc = desc .. sworddesc.getdesc(self:gettransform())
 	return desc

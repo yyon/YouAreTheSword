@@ -90,8 +90,12 @@ function entity:finish()
 end
 
 function entity:on_removed()
-	self.ticker:remove()
-	self.timer:stop()
+	if self.ticker ~= nil then
+		self.ticker:remove()
+	end
+	if self.timer ~= nil then
+		self.timer:stop()
+	end
 end
 
 

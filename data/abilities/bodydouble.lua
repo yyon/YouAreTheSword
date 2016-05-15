@@ -39,6 +39,7 @@ function BodyDoubleAbility:doability()
 		dummyentitydata.actualteam = self.entitydata.actualteam
 		dummyentitydata.entity = newentity
 		dummyentitydata:applytoentity()
+		map:addperson(dummyentitydata)
 
 		-- teleport away
 

@@ -7,7 +7,7 @@ local Effects = require "enemies/effect"
 local AngelSummonAbility = Ability:subclass("AngelSummonAbility")
 
 function AngelSummonAbility:initialize(entitydata)
-	Ability.initialize(self, entitydata, "Summon Angel", 20000, "angel", 2000, 10000, true, "casting")
+	Ability.initialize(self, entitydata, "Summon Angel", 20000, "angel", 2000, 30000, true, "casting")
 	self.desc = [[Summons an angel]]
 end
 
@@ -37,6 +37,7 @@ function AngelSummonAbility:doability()
 	local angelentitydata = _EntityDatas.angelclass:new()
 	angelentitydata.entity = newentity
 	angelentitydata:applytoentity()
+	map:addperson(angelentitydata)
 
 	sol.audio.play_sound("blessing")
 

@@ -8493,14 +8493,6 @@ enemy{
   breed = "e_bee",
 }
 
-separator{
-  layer = 0,
-  x = -16,
-  y = 872,
-  width = 1632,
-  height = 16,
-}
-
 teletransporter{
   layer = 0,
   x = 1568,

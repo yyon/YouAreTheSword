@@ -143,7 +143,7 @@ function Ability:finishcooldown(skipcooldown)
 	-- sets the ability to be able to be used again after the cooldown
 	self.canuse = true
 
-	if not self.entitydata.entity.ishero and not skipcooldown then
+	if not self.entitydata.entity.ishero and not skipcooldown and not self.entitydata.isbeingremoved then
 		self.entitydata.entity:tick()
 	end
 end

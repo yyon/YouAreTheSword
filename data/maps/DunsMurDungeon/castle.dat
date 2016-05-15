@@ -57535,7 +57535,7 @@ destination{
   name = "escape",
   layer = 0,
   x = 880,
-  y = 2309,
+  y = 2141,
   direction = 1,
 }
 

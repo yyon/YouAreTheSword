@@ -47,9 +47,13 @@ function damagedisp:draw(dst_surface, cx, cy)
 	end
 end
 
+map.people = {}
+function map:addperson(entitydata)
+	self.people[entitydata] = true
+end
+
 local foundmonster = false
 local foundadv = false
-map.people = {}
 for entity in map:get_entities("") do
     entity:set_optimization_distance(0)
     if entity.get_destination_map ~= nil then
@@ -57,7 +61,7 @@ for entity in map:get_entities("") do
         entity:set_position(x, y, 2)
     end
     if entity.entitydata ~= nil then
-        map.people[entity.entitydata] = true
+		map:addperson(entity.entitydata)
         if entity.entitydata.team ~= "adventurer" then
             foundmonster = true
         elseif entity.entitydata.team == "adventurer" then
@@ -74,7 +78,7 @@ end
 
 local hero = map:get_hero()
 if hero.entitydata ~= nil then
-    map.people[hero.entitydata] = true
+	map:addperson(hero.entitydata)
     if hero.entitydata.theclass == "debugger" then
         for entity in map:get_entities("") do
             if entity.entitydata ~= nil then
@@ -449,6 +453,10 @@ local SwordAbility = require "abilities/sword"
 local NothingAbility = require "abilities/nothing"
 
 function map:puzzleabilities(entity)
+	if entity.ishero then
+		entity.swordtransform = nil
+	end
+
 	local entitydata = entity.entitydata
 	if entitydata ~= nil then
 		entitydata.puzzled = {entitydata.swordability, entitydata.blockability, entitydata.transformability, entitydata.specialability}

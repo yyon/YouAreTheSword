@@ -283,6 +283,7 @@ function EntityData:unpossess(name)
 
 	self:setanimation(anim)
 	self.entity:set_visible(visible)
+	hero:set_visible(true)
 
 	self:changemovements(hero, newentity)
 
@@ -306,6 +307,10 @@ function EntityData:cantarget(entitydata, canbeonsameteam, isattack, onlyonsamet
 	end
 
 	if entitydata.entity == nil then
+		return false
+	end
+
+	if self.entity == nil then
 		return false
 	end
 
@@ -843,13 +848,15 @@ function EntityData:kill()
 		direction=0
 	})
 
+	self.isbeingremoved = true
 	if self.usingability then
 		self.usingability:cancel()
 	end
 
 	for key, effect in pairs(self.effects) do
-		effect:forceremove()
+		effect:remove()
 	end
+	self.isbeingremoved = false
 
 	if self.entity ~= nil then
 		self.entity.entitydata = nil
@@ -1259,12 +1266,12 @@ end
 function EntityData:getremainingmonsters()
 	local enemiesremaining = 0
 
-	if self.actualteam == "monster" then
+	if self.actualteam ~= "adventurer" then
 		enemiesremaining = 1
 	end
 
 	for entitydata in self:getotherentities() do
-		if entitydata.actualteam == "monster" and not entitydata.doesntcountsasmonster then
+		if entitydata.actualteam ~= "adventurer" and not entitydata.doesntcountsasmonster then
 			enemiesremaining = enemiesremaining + 1
 		end
 	end
@@ -1958,13 +1965,13 @@ allclasses.mageboss = mageboss
 function mageboss:initialize(entity)
 	local class = "Mage (Boss)"
 	local main_sprite = "bosses/mage-1"
-	local life = 200
+	local life = 100
 	local team = "boss" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NothingAbility:new(self)}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {TentacleAbility:new(self)}
-	local basestats = {movementspeed=30}
+	local basestats = {movementspeed=90}
 	self.cantpossess = true
 	self.cantcancel = true
 	self.alwaysrandom = true
@@ -1977,9 +1984,8 @@ end
 
 function mageboss:stage2()
 	self.main_sprite = "bosses/mage-2"
-	self.stats.movementspeed = 60
-	self.swordability = FireballAbility:new(self)
-	self.specialability = NothingAbility:new(self)
+	self.stats.movementspeed = 120
+	self.blockability = TeleportAbility:new(self)
 	self.entity:get_map():startcutscene()
 	self.entity:get_map():say("boss", "2", function()
 		self.entity:get_map():finish()
@@ -1989,9 +1995,9 @@ end
 
 function mageboss:stage3()
 	self.main_sprite = "bosses/mage-3"
-	self.stats.movementspeed = 90
-	self.blockability = TeleportAbility:new(self)
-	self.specialability = TentacleAbility:new(self)
+	self.stats.movementspeed = 135
+	self.swordability = FireballAbility:new(self)
+	self.swordability.cooldown = 5000
 end
 
 
@@ -2001,7 +2007,7 @@ allclasses.catboss = catboss
 function catboss:initialize(entity)
 	local class = "Cat (Boss)"
 	local main_sprite = "bosses/cat-1"
-	local life = 200
+	local life = 70
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {CatKickAbility:new(self, "kick")}
 	local transformabilities = {NothingAbility:new(self)}

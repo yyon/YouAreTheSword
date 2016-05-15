@@ -103,6 +103,7 @@ function map:endfight()
 --				self:freezeentity(entitydata.entity)
 				self.newentitypossesseffect = Effects.PossessEffect(knight.entitydata)
 				self.heroentitydata.entity:remove()
+				self.heroentitydata.entity = nil
 				self.heroentitydata = knight.entitydata
 				self:attack("mage", "hero", "EarthquakeAbility", true)
 				local hero = self:get_hero()

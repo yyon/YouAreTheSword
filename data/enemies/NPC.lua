@@ -150,7 +150,7 @@ function GoTowardsState:tick()
 	if self.npc.entitydata.entity:get_game().dontattack then
 		return
 	end
-	
+
 	local target = self.npc.entitytoattack
 
 	local attackability = math.random(10) == 1 and "special" or "normal"
@@ -383,6 +383,7 @@ end
 function enemy:cantarget(entitydata)
 	if not self.entitydata:cantarget(entitydata) then return false end
 	if not entitydata:isvisible() then return false end
+	if not entitydata.entity.ishero and not entitydata.entity.wasonscreen then return false end
 --	if self:get_distance(entitydata.entity) > 200 and self.entitytoattack == nil then
 --		return false
 --	end
@@ -403,7 +404,7 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	if not self.wasonscreen and (floor ~= 0 and not self.entitydata:isonscreen(200)) then
 		return self.donothingstate
 	end
-	
+
 	if not self:is_in_same_region(hero) then
 		return self.donothingstate
 	end
@@ -435,11 +436,13 @@ function enemy:determinenewstate(entitytoattack, currentstate)
 	end
 
 	if entitytoattack ~= nil then
-		local d = self:get_distance(entitytoattack)
-		if d < 20 then
-			return self.goawaystate
-		elseif d < 40 then
-			return self.standandattackstate
+		if not self.entitydata.alwaysrandom then
+			local d = self:get_distance(entitytoattack)
+			if d < 20 then
+				return self.goawaystate
+			elseif d < 40 then
+				return self.standandattackstate
+			end
 		end
 	end
 
@@ -494,7 +497,6 @@ function enemy:tick(newstate)
 
 	if changedstates then
 		prevstate:cleanup()
---		self.entitydata:log("changed states from", prevstate, "to", self.state, self.entitytoattack and "Target: "..self.entitytoattack.team or "")
 	end
 	self.state:ontick(changedstates)
 --[[
@@ -745,9 +747,9 @@ function enemy:pathfind(target)
 		local tox, toy = target:get_position()
 		tox, toy = map:getclosestgrid(tox, toy)
 		if not tox then return end
-		
-		print(self.entitydata.theclass, "pathfinding")
-		
+
+--		print(self.entitydata.theclass, "pathfinding")
+
 		local path = map.pathfinder:getPath(fromy, fromx, toy, tox, false)
 		if path then
 			path:fill()

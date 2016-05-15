@@ -9,8 +9,8 @@ local GrapplingHookAbility = Ability:subclass("GrapplingHookAbility")
 
 function GrapplingHookAbility:initialize(entitydata, type)
 	self.type = type
-	Ability.initialize(self, entitydata, "Grappling Hook", 800, "grapplinghook", 500, 2000, true)
-	
+	Ability.initialize(self, entitydata, "Grappling Hook", 800, "grapplinghook", 0, 4000, true)
+
 	self.desc = [[Pulls enemy to user]]
 end
 

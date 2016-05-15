@@ -481,7 +481,6 @@ function sol.main:on_mouse_pressed(button, ...)
 
 	local hero = game:get_hero()
 	if game:is_paused() or game:is_suspended() or hero.entitydata == nil then
-		print("PAUSED!")
 		return
 	end
 
@@ -516,16 +515,10 @@ function teleport(map, name, transition)
 	end
 
 	if hero:get_map().effects ~= nil then
-		while true do
-			local foundeffect = false
-			for effect, b in pairs(hero:get_map().effects) do
-				foundeffect = true
-				pcall(function() effect:forceremove() end)
-				hero:get_map().effects[effect:getkey()] = nil -- just to make sure
-			end
-			if not foundeffect then
-				break
-			end
+		hero:get_map().isbeingremoved = true
+		for effect, b in pairs(hero:get_map().effects) do
+			effect:remove()
+--			hero:get_map().effects[effect:getkey()] = nil -- just to make sure
 		end
 	end
 	hero:teleport(map, name, transition)

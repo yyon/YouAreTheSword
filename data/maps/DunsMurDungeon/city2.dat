@@ -7754,14 +7754,6 @@ enemy{
   breed = "e_maskman",
 }
 
-separator{
-  layer = 0,
-  x = 808,
-  y = -40,
-  width = 16,
-  height = 1680,
-}
-
 enemy{
   layer = 0,
   x = 1304,

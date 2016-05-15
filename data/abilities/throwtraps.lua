@@ -41,7 +41,7 @@ function TrapsAbility:attack(entity, trapentity)
 		return
 	end
 
-	self.shieldentity:remove()
+	trapentity:remove()
 
 	local entitydata = entity.entitydata
 

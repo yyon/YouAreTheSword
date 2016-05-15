@@ -9,7 +9,7 @@ local EarthquakeAbility= Ability:subclass("EarthquakeAbility")
 
 function EarthquakeAbility:initialize(entitydata)
 	Ability.initialize(self, entitydata, "Earthquake", 20000, "earthquake", 3000, 20000, true, "casting")
-	
+
 	self.stats = [[21 dmg]]
 	self.desc = [[Hits all enemies on map]]
 end
@@ -76,12 +76,11 @@ function EarthquakeAbility:attack(entitydata)
 end
 
 function EarthquakeAbility:onfinish()
-	if self.ticker == nil then
-		print(debug.traceback())
+	if self.ticker ~= nil then
+		self.ticker:remove()
+		self.soundticker:remove()
+		self.timer:stop()
 	end
-	self.ticker:remove()
-	self.soundticker:remove()
-	self.timer:stop()
 
 	self:resetenemypos()
 end
@@ -96,13 +95,13 @@ function EarthquakeAbility:resetenemypos()
 end
 
 function EarthquakeAbility:shake()
-	local dx = math.random(-50, 50)
-	local dy = math.random(-50, 50)
 
 	self:resetenemypos()
 	for entitydata, iscollided in pairs(self.collided) do
 		local entity = entitydata.entity
 		if entity ~= nil then
+			local dx = math.random(-50, 50)
+			local dy = math.random(-50, 50)
 			local x, y = entity:get_position()
 			x, y = x + dx, y + dy
 			entity:set_position(x, y)

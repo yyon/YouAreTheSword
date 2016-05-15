@@ -18,6 +18,7 @@ function map:on_opening_transition_finished()
 			self:move("berserker", "escape", function() end)
 		end)
 		self:move("dunsmur", "escape", function() 
+			dunsmur.entitydata.entity = nil
 			dunsmur:remove()
 			self:say("knight", "2", function()
 				self:doend()

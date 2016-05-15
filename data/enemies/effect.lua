@@ -25,6 +25,12 @@ function Effect:initialize(affected, ...)
 	if self:get() ~= nil then
 		self:alreadyexists(self:get(), ...)
 	else
+		if self.affected.removecount ~= nil and self.affected.removecount > 100 then
+			print("TOO MUCH AFFECTED!", self, self.affected)
+			print(debug.traceback())
+			return
+		end
+
 		self.affected.effects[self:getkey()] = self
 		if self.map ~= nil then
 			if self.map.effects == nil then
@@ -35,6 +41,14 @@ function Effect:initialize(affected, ...)
 		self.active = true
 --		self.entitydata:log("starting effect", self)
 		self:start(...)
+		if self.affected.isbeingremoved or (self.map ~= nil and self.map.isbeingremoved) then
+			if self.affected.removecount == nil then self.affected.removecount = 0 end
+			self.affected.removecount = self.affected.removecount + 1
+
+			self:remove()
+		else
+			self.affected.removecount = 0
+		end
 	end
 end
 
@@ -174,7 +188,7 @@ function PhysicalEffect:start(time, spritename)
 	if self.spritename == nil then
 		self.spritename = spritename
 	end
-	
+
 	local w,h = self.entitydata.entity:get_size()
 	local x, y, layer = self.entitydata.entity:get_position()
 	local map = self.map
@@ -470,7 +484,7 @@ end
 
 local SlowEffect = StatEffect:subclass("SlowEffect")
 -- slows enemies in a targeted aoe
---Usage: 
+--Usage:
 
 function SlowEffect:start(sprite)
 	StatEffect.start(self, "movementspeed", 32, 15000)
