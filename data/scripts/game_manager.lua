@@ -21,6 +21,8 @@ local dialogmenu = require "menus/dialog"
 local abhelpmenu = require "menus/abilityhelp"
 local pause_manager = require("menus/pause")
 local keyconfmenu = require "menus/keyconfig"
+local maptable = require "scripts/mapsequence"
+
 local pause_menu
 
 require "pickle"
@@ -521,6 +523,13 @@ function teleport(map, name, transition)
 --			hero:get_map().effects[effect:getkey()] = nil -- just to make sure
 		end
 	end
+
+	local currentmap = hero:get_map():get_id()
+
+	if maptable[currentmap] ~= nil then
+		map = maptable[currentmap]
+	end
+
 	hero:teleport(map, name, transition)
 end
 

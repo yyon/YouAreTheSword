@@ -1114,25 +1114,6 @@ destination{
   default = true,
 }
 
-npc{
-  name = "test",
-  layer = 0,
-  x = 344,
-  y = 469,
-  direction = 3,
-  subtype = 0,
-  sprite = "adventurers/guy2",
-  behavior = "dialog#test",
-}
-
-enemy{
-  layer = 0,
-  x = 864,
-  y = 421,
-  direction = 0,
-  breed = "a_cleric",
-}
-
 teletransporter{
   layer = 0,
   x = 1264,
@@ -1140,5 +1121,30 @@ teletransporter{
   width = 16,
   height = 80,
   destination_map = "maptest",
+}
+
+enemy{
+  layer = 0,
+  x = 272,
+  y = 629,
+  direction = 0,
+  breed = "a_cleric",
+}
+
+teletransporter{
+  layer = 0,
+  x = 1216,
+  y = 256,
+  width = 16,
+  height = 128,
+  destination_map = "maptest",
+}
+
+enemy{
+  layer = 0,
+  x = 992,
+  y = 101,
+  direction = 0,
+  breed = "e_wolf",
 }
 

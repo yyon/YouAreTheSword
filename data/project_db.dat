@@ -40,6 +40,8 @@ map{ id = "traps", description = "traps" }
 map{ id = "tutorial/1", description = "1" }
 map{ id = "tutorial/2", description = "2" }
 map{ id = "tutorial/3", description = "3" }
+map{ id = "tutorial/special", description = "special" }
+map{ id = "tutorial/swordtransform", description = "swordtransform" }
 
 tileset{ id = "tileset2", description = "tileset2" }
 tileset{ id = "zmagecity", description = "zmagecity" }

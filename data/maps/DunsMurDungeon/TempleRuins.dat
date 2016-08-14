@@ -19717,6 +19717,78 @@ tile{
   pattern = "135",
 }
 
+tile{
+  layer = 0,
+  x = 320,
+  y = 416,
+  width = 32,
+  height = 32,
+  pattern = "5743",
+}
+
+tile{
+  layer = 0,
+  x = 320,
+  y = 608,
+  width = 32,
+  height = 32,
+  pattern = "5743",
+}
+
+tile{
+  layer = 0,
+  x = 320,
+  y = 584,
+  width = 32,
+  height = 32,
+  pattern = "5719",
+}
+
+tile{
+  layer = 0,
+  x = 320,
+  y = 656,
+  width = 32,
+  height = 32,
+  pattern = "5719",
+}
+
+tile{
+  layer = 0,
+  x = 1280,
+  y = 1056,
+  width = 32,
+  height = 32,
+  pattern = "5741",
+}
+
+tile{
+  layer = 0,
+  x = 1280,
+  y = 512,
+  width = 32,
+  height = 32,
+  pattern = "5741",
+}
+
+tile{
+  layer = 0,
+  x = 1280,
+  y = 392,
+  width = 32,
+  height = 32,
+  pattern = "5717",
+}
+
+tile{
+  layer = 0,
+  x = 1280,
+  y = 776,
+  width = 32,
+  height = 32,
+  pattern = "5717",
+}
+
 wall{
   layer = 0,
   x = 128,

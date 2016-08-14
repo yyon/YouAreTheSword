@@ -721,15 +721,6 @@ tile{
 tile{
   layer = 0,
   x = 736,
-  y = 416,
-  width = 32,
-  height = 32,
-  pattern = "3078",
-}
-
-tile{
-  layer = 0,
-  x = 736,
   y = 448,
   width = 32,
   height = 64,
@@ -1323,29 +1314,11 @@ tile{
 
 tile{
   layer = 0,
-  x = 1000,
-  y = 696,
-  width = 32,
-  height = 32,
-  pattern = "3398",
-}
-
-tile{
-  layer = 0,
   x = 1032,
   y = 696,
   width = 32,
   height = 32,
   pattern = "3399",
-}
-
-tile{
-  layer = 0,
-  x = 1000,
-  y = 664,
-  width = 32,
-  height = 32,
-  pattern = "3386",
 }
 
 tile{
@@ -1843,6 +1816,411 @@ tile{
   pattern = "3364",
 }
 
+tile{
+  layer = 0,
+  x = 784,
+  y = 320,
+  width = 64,
+  height = 96,
+  pattern = "3015",
+}
+
+tile{
+  layer = 0,
+  x = 752,
+  y = 288,
+  width = 32,
+  height = 64,
+  pattern = "3015",
+}
+
+tile{
+  layer = 0,
+  x = 752,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "3029",
+}
+
+tile{
+  layer = 0,
+  x = 784,
+  y = 288,
+  width = 32,
+  height = 32,
+  pattern = "3018",
+}
+
+tile{
+  layer = 0,
+  x = 720,
+  y = 288,
+  width = 32,
+  height = 32,
+  pattern = "3029",
+}
+
+tile{
+  layer = 0,
+  x = 720,
+  y = 256,
+  width = 32,
+  height = 32,
+  pattern = "3017",
+}
+
+tile{
+  layer = 0,
+  x = 752,
+  y = 256,
+  width = 32,
+  height = 32,
+  pattern = "3018",
+}
+
+tile{
+  layer = 0,
+  x = 848,
+  y = 320,
+  width = 32,
+  height = 96,
+  pattern = "3016",
+}
+
+tile{
+  layer = 0,
+  x = 848,
+  y = 288,
+  width = 32,
+  height = 32,
+  pattern = "3004",
+}
+
+tile{
+  layer = 0,
+  x = 816,
+  y = 288,
+  width = 32,
+  height = 32,
+  pattern = "3003",
+}
+
+tile{
+  layer = 0,
+  x = 752,
+  y = 384,
+  width = 32,
+  height = 32,
+  pattern = "3014",
+}
+
+tile{
+  layer = 0,
+  x = 752,
+  y = 416,
+  width = 32,
+  height = 32,
+  pattern = "3026",
+}
+
+tile{
+  layer = 0,
+  x = 736,
+  y = 416,
+  width = 32,
+  height = 32,
+  pattern = "3078",
+}
+
+tile{
+  layer = 0,
+  x = 784,
+  y = 416,
+  width = 64,
+  height = 32,
+  pattern = "3027",
+}
+
+tile{
+  layer = 0,
+  x = 848,
+  y = 416,
+  width = 32,
+  height = 32,
+  pattern = "3028",
+}
+
+tile{
+  layer = 0,
+  x = 720,
+  y = 320,
+  width = 32,
+  height = 32,
+  pattern = "3014",
+}
+
+tile{
+  layer = 0,
+  x = 720,
+  y = 352,
+  width = 32,
+  height = 32,
+  pattern = "3026",
+}
+
+tile{
+  layer = 0,
+  x = 752,
+  y = 224,
+  width = 32,
+  height = 32,
+  pattern = "3004",
+}
+
+tile{
+  layer = 0,
+  x = 720,
+  y = 224,
+  width = 32,
+  height = 32,
+  pattern = "3002",
+}
+
+tile{
+  layer = 0,
+  x = 688,
+  y = 288,
+  width = 32,
+  height = 32,
+  pattern = "3026",
+}
+
+tile{
+  layer = 0,
+  x = 688,
+  y = 256,
+  width = 32,
+  height = 32,
+  pattern = "3002",
+}
+
+tile{
+  layer = 0,
+  x = 1160,
+  y = 640,
+  width = 160,
+  height = 128,
+  pattern = "3015",
+}
+
+tile{
+  layer = 0,
+  x = 1096,
+  y = 672,
+  width = 64,
+  height = 96,
+  pattern = "3015",
+}
+
+tile{
+  layer = 0,
+  x = 1064,
+  y = 672,
+  width = 32,
+  height = 64,
+  pattern = "3014",
+}
+
+tile{
+  layer = 0,
+  x = 1064,
+  y = 640,
+  width = 32,
+  height = 32,
+  pattern = "3002",
+}
+
+tile{
+  layer = 0,
+  x = 1096,
+  y = 640,
+  width = 32,
+  height = 32,
+  pattern = "3003",
+}
+
+tile{
+  layer = 0,
+  x = 1128,
+  y = 640,
+  width = 32,
+  height = 32,
+  pattern = "3017",
+}
+
+tile{
+  layer = 0,
+  x = 1128,
+  y = 608,
+  width = 32,
+  height = 32,
+  pattern = "3002",
+}
+
+tile{
+  layer = 0,
+  x = 1160,
+  y = 608,
+  width = 128,
+  height = 32,
+  pattern = "3003",
+}
+
+tile{
+  layer = 0,
+  x = 1256,
+  y = 608,
+  width = 32,
+  height = 32,
+  pattern = "3017",
+}
+
+tile{
+  layer = 0,
+  x = 880,
+  y = 616,
+  width = 96,
+  height = 32,
+  pattern = "3015",
+}
+
+tile{
+  layer = 0,
+  x = 944,
+  y = 648,
+  width = 32,
+  height = 32,
+  pattern = "3015",
+}
+
+tile{
+  layer = 0,
+  x = 912,
+  y = 648,
+  width = 32,
+  height = 32,
+  pattern = "3029",
+}
+
+tile{
+  layer = 0,
+  x = 912,
+  y = 680,
+  width = 32,
+  height = 32,
+  pattern = "3026",
+}
+
+tile{
+  layer = 0,
+  x = 944,
+  y = 680,
+  width = 32,
+  height = 32,
+  pattern = "3027",
+}
+
+tile{
+  layer = 0,
+  x = 976,
+  y = 680,
+  width = 32,
+  height = 32,
+  pattern = "3028",
+}
+
+tile{
+  layer = 0,
+  x = 1000,
+  y = 664,
+  width = 32,
+  height = 32,
+  pattern = "3386",
+}
+
+tile{
+  layer = 0,
+  x = 1000,
+  y = 696,
+  width = 32,
+  height = 32,
+  pattern = "3398",
+}
+
+tile{
+  layer = 0,
+  x = 976,
+  y = 616,
+  width = 32,
+  height = 64,
+  pattern = "3016",
+}
+
+tile{
+  layer = 0,
+  x = 848,
+  y = 648,
+  width = 32,
+  height = 32,
+  pattern = "3026",
+}
+
+tile{
+  layer = 0,
+  x = 880,
+  y = 648,
+  width = 32,
+  height = 32,
+  pattern = "3027",
+}
+
+tile{
+  layer = 0,
+  x = 848,
+  y = 616,
+  width = 32,
+  height = 32,
+  pattern = "3014",
+}
+
+tile{
+  layer = 0,
+  x = 848,
+  y = 584,
+  width = 32,
+  height = 32,
+  pattern = "3002",
+}
+
+tile{
+  layer = 0,
+  x = 880,
+  y = 584,
+  width = 96,
+  height = 32,
+  pattern = "3003",
+}
+
+tile{
+  layer = 0,
+  x = 976,
+  y = 584,
+  width = 32,
+  height = 32,
+  pattern = "3004",
+}
+
 destination{
   layer = 0,
   x = 192,
@@ -1853,37 +2231,10 @@ destination{
 enemy{
   name = "mage",
   layer = 0,
-  x = 128,
-  y = 245,
-  direction = 0,
-  breed = "a_mage",
-}
-
-enemy{
-  name = "knight",
-  layer = 0,
-  x = 360,
-  y = 469,
+  x = 224,
+  y = 213,
   direction = 0,
   breed = "a_knight",
-}
-
-enemy{
-  name = "armordummy",
-  layer = 0,
-  x = 1024,
-  y = 237,
-  direction = 0,
-  breed = "m_combat_dummy",
-}
-
-enemy{
-  name = "dummy2",
-  layer = 0,
-  x = 184,
-  y = 77,
-  direction = 0,
-  breed = "m_combat_dummy",
 }
 
 npc{
@@ -1891,36 +2242,6 @@ npc{
   layer = 0,
   x = 112,
   y = 477,
-  direction = 3,
-  subtype = 1,
-  sprite = "sign",
-}
-
-npc{
-  name = "sign2",
-  layer = 0,
-  x = 328,
-  y = 109,
-  direction = 3,
-  subtype = 1,
-  sprite = "sign",
-}
-
-npc{
-  name = "sign3",
-  layer = 0,
-  x = 936,
-  y = 101,
-  direction = 3,
-  subtype = 1,
-  sprite = "sign",
-}
-
-npc{
-  name = "sign4",
-  layer = 0,
-  x = 1120,
-  y = 565,
   direction = 3,
   subtype = 1,
   sprite = "sign",
@@ -2449,6 +2770,16 @@ teletransporter{
   width = 16,
   height = 208,
   destination_map = "tutorial/3",
+}
+
+npc{
+  name = "knight",
+  layer = 0,
+  x = 352,
+  y = 525,
+  direction = 1,
+  subtype = 1,
+  sprite = "adventurers/knight",
 }
 
 tile{
