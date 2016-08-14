@@ -144,6 +144,11 @@ function SwordAbility:get_appearance(entity)
 		end
 	end
 
+	return sworddesc.getappearance(transform, ishero)
+end
+
+sworddesc = {}
+sworddesc.getappearance = function(transform, ishero)
 	if transform == "normal" then
 		if ishero then
 			return "swords/swordanim"
@@ -172,8 +177,6 @@ function SwordAbility:get_appearance(entity)
 		return "swords/glowing"
 	end
 end
-
-sworddesc = {}
 sworddesc.getnameicon = function(transform)
 	local name
 	local icon

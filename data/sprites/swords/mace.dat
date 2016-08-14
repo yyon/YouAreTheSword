@@ -9,3 +9,16 @@ animation{
     { x =0, y =256, frame_width =128, frame_height =128, origin_x =62, origin_y =84, num_frames = 6 },
   },
 }
+animation{
+  name = "stopped",
+  src_image = "swords/thrown/mace.png",
+  frame_delay = 30,
+  frame_to_loop_on = 0,
+  directions = {
+    { x = 0, y = 0, frame_width = 80, frame_height = 80, origin_x = 40, origin_y = 60, num_frames = 20 },
+    { x = 0, y = 0, frame_width = 80, frame_height = 80, origin_x = 40, origin_y = 60, num_frames = 20 },
+    { x = 0, y = 0, frame_width = 80, frame_height = 80, origin_x = 40, origin_y = 60, num_frames = 20 },
+    { x = 0, y = 0, frame_width = 80, frame_height = 80, origin_x = 40, origin_y = 60, num_frames = 20 },
+    { x = 0, y = 0, frame_width = 80, frame_height = 80, origin_x = 40, origin_y = 60, num_frames = 20 },
+  },
+}

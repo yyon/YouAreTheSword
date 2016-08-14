@@ -1004,8 +1004,14 @@ function EntityData:throwsword(entitydata2, slow)
 		local newentity = self:unpossess()
 
 		hero:freeze()
-
-		hero:set_tunic_sprite_id("abilities/thrownsword")
+		
+		swtr = "normal"
+		if hero.swordtransform ~= nil then
+			swtr = hero.swordtransform
+		end
+		sprite = sworddesc.getappearance(swtr, true)
+		
+		hero:set_tunic_sprite_id(sprite)
 		hero:set_animation("stopped")
 
 		hero:stop_movement()

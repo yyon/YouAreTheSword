@@ -208,9 +208,14 @@ sprite{ id = "physicaleffects/taunt", description = "taunt" }
 sprite{ id = "sign", description = "sign" }
 sprite{ id = "swords/dagger", description = "dagger" }
 sprite{ id = "swords/electric", description = "electric" }
+sprite{ id = "swords/fire", description = "fire" }
 sprite{ id = "swords/glowing", description = "glowing" }
+sprite{ id = "swords/holy", description = "holy" }
 sprite{ id = "swords/largesword", description = "largesword" }
+sprite{ id = "swords/lifesteal", description = "lifesteal" }
 sprite{ id = "swords/mace", description = "mace" }
+sprite{ id = "swords/normalsword", description = "normalsword" }
+sprite{ id = "swords/poison", description = "poison" }
 sprite{ id = "swords/slow", description = "slow" }
 sprite{ id = "swords/swordanim", description = "swordanim" }
 
