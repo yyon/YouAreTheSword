@@ -9,6 +9,9 @@ function title_screen:on_started()
 	self.phase = "black"
 	self.logoy = 720/2 - 306/2
 
+	local w, h = sol.video.get_quest_size()
+	self.screenw, self.screenh = w, h
+
 	self.surface = sol.surface.create(1280,900)
 	sol.timer.start(self, 300, function()
 		self:phase_the_team_presents()
@@ -171,7 +174,8 @@ function title_screen:finish_title()
 	self.showborders = false
 	self.spacetimer:stop()
 	self.show_press_space = false
-	self.logoy = 70
+	local topgap = self.screenh/2 - 900/2
+	self.logoy = 70-90 - topgap
 	self:startmain(self)
 end
 

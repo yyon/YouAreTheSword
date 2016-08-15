@@ -15,34 +15,34 @@ local createbox = require "menus/drawbox"
 local dialog = class("dialog")
 
 function dialog:initialize(game, title)
-  inputhandler:new(self)
+	inputhandler:new(self)
 
-  self.game = game
-  local w, h = sol.video.get_quest_size()
+	self.game = game
+	local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
-  self.surface = sol.surface.create(self.w, self.h)
+	self.surface = sol.surface.create(self.w, self.h)
 	local y = 300
 
 	self.title = title
 
-  self.buttons = {}
+	self.buttons = {}
 
 	if autosaveexists() then
-	  self.buttons.continue_button = menubutton(self, center_x, y, 600, 60, "Continue", function() self:continue() end)
+		self.buttons.continue_button = menubutton(self, center_x, y, 600, 60, "Continue", function() self:continue() end)
 		y = y + 70
-	  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new_conf() end)
+		self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new_conf() end)
 		y = y + 70
 	else
-	  self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new() end)
+		self.buttons.new_button = menubutton(self, center_x, y, 600, 60, "Start new game", function() self:start_new() end)
 		y = y + 70
 	end
-  self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load game", function() self:start_load() end)
+	self.buttons.load_button = menubutton(self, center_x, y, 600, 60, "Load game", function() self:start_load() end)
 	y = y + 70
-  self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
+	self.buttons.options_button = menubutton(self, center_x, y, 600, 60, "Options", function() self:start_config() end)
 	y = y + 70
-  self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () sol.main.exit() end)
+	self.buttons.quit_button = menubutton(self, center_x, y, 600, 60, "Quit", function () sol.main.exit() end)
 end
 
 function dialog:start_config()

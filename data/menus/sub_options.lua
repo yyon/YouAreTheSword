@@ -12,23 +12,23 @@ local createbox = require "menus/drawbox"
 local dialog = class("dialog")
 
 function dialog:initialize(game)
-  inputhandler:new(self)
+	inputhandler:new(self)
 
-  self.game = game
-  local w, h = sol.video.get_quest_size()
+	self.game = game
+	local w, h = sol.video.get_quest_size()
 	self.screenw, self.screenh = w, h
 	self.w, self.h = self.screenw, self.screenh
 	center_x, center_y = w/2, h/2
-  self.surface = sol.surface.create(self.w, self.h)
+	self.surface = sol.surface.create(self.w, self.h)
 	local y = center_y - 70
 
-  self.buttons = {}
+	self.buttons = {}
 
-  self.buttons.keyconf_button = menubutton(self, center_x, y, 600, 60, "Keybindings", function() self:keyconfigure() end)
-  y = y + 70
-  self.buttons.yes_button = menubutton(self, center_x, y, 600, 60, "Volume", function() self:volume() end)
-  y = y + 70
-  self.buttons.exit_button = menubutton(self, center_x, y, 600, 60, "Exit", function() self:finish() end)
+	self.buttons.keyconf_button = menubutton(self, center_x, y, 600, 60, "Keybindings", function() self:keyconfigure() end)
+	y = y + 70
+	self.buttons.yes_button = menubutton(self, center_x, y, 600, 60, "Volume", function() self:volume() end)
+	y = y + 70
+	self.buttons.exit_button = menubutton(self, center_x, y, 600, 60, "Exit", function() self:finish() end)
 
 end
 

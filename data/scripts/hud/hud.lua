@@ -34,22 +34,22 @@ function hud_manager:create(game)
 	local panel_builder = require("scripts/hud/panel")
 	
 	menu = panel_builder:new(game, "normal")
-	menu:set_dst_position(490,645)
+	menu:set_dst_position(-150,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 
 	local menu = panel_builder:new(game, "block")
-	menu:set_dst_position(565,645)
+	menu:set_dst_position(-75,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 
 	local menu = panel_builder:new(game, "swordtransform")
-	menu:set_dst_position(640,645)
+	menu:set_dst_position(0,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 
 	local menu = panel_builder:new(game, "special")
-	menu:set_dst_position(715,645)
+	menu:set_dst_position(75,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 	
