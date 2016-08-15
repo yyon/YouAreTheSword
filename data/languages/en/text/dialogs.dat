@@ -349,8 +349,8 @@ I keep throwing these swords like the sign tells me to, but nothings happening!
 dialog{
   id = "tutorial2.sign1",
   text = [[
-To go over this cliff, use ${throwallies} to throw your sword.
-This will pass your sword to the closest ally to your mouse pointer.
+To go over this cliff, you need to throw your sword to the knight on top of the cliff.
+Put your mouse over the him, and use ${throwallies} to throw your sword.
 ]]
 }
 

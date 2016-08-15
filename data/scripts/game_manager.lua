@@ -8,6 +8,7 @@ local game_manager = {}
 
 local math = require "math"
 local os = require "os"
+local io = require "io"
 math.randomseed(os.time())
 math.random()
 
@@ -357,9 +358,10 @@ function sol.main:on_key_pressed(key, modifiers)
 				hero.entitydata:throwclosest(true)
 			end
 		elseif key == "h" then
-			configsave()
-		elseif key == "x" then
-			configload()
+			io.write("Teleport: ")
+			io.flush()
+			answer=io.read()
+			teleport(answer)
 		elseif key == "v" then
 			print("started signal")
 			require('signal')
@@ -507,7 +509,7 @@ function sol.main:on_mouse_pressed(button, ...)
 	if result then return end
 end
 
-function teleport(map, name, transition)
+function teleport(map)
 	local hero = game:get_hero()
 	for entity in hero:get_map():get_entities("") do
 		entity.removed = true
@@ -526,11 +528,13 @@ function teleport(map, name, transition)
 
 	local currentmap = hero:get_map():get_id()
 
-	if maptable[currentmap] ~= nil then
-		map = maptable[currentmap]
+	if map == nil then
+		if maptable[currentmap] ~= nil then
+			map = maptable[currentmap]
+		end
 	end
 
-	hero:teleport(map, name, transition)
+	hero:teleport(map, nil, nil)
 end
 
 function tick()
@@ -558,7 +562,7 @@ function tick()
 				if entity.get_destination_map ~= nil then
 					if hero:overlaps(entity) then
 						if game.bypassteleport or hero.entitydata:getremainingmonsters() == 0 then
-							teleport(entity:get_destination_map(), entity:get_destination_name(), entity:get_transition())
+							teleport()
 						end
 					end
 				end
