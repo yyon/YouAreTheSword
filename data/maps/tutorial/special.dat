@@ -21463,8 +21463,8 @@ destination{
 enemy{
   name = "mage",
   layer = 0,
-  x = 1000,
-  y = 373,
+  x = 1520,
+  y = 1053,
   direction = 0,
   breed = "a_mage",
 }
@@ -21472,8 +21472,8 @@ enemy{
 enemy{
   name = "combatdummy",
   layer = 0,
-  x = 1408,
-  y = 653,
+  x = 1072,
+  y = 709,
   direction = 0,
   breed = "m_combat_dummy",
 }
@@ -21489,10 +21489,10 @@ teletransporter{
 
 enemy{
   layer = 0,
-  x = 1488,
-  y = 1037,
+  x = 984,
+  y = 357,
   direction = 0,
-  breed = "a_rogue",
+  breed = "a_knight",
 }
 
 tile{

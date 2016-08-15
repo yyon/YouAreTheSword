@@ -13,11 +13,4 @@ function map:on_opening_transition_finished()
 	function combatdummy.entitydata:isvisible() return false end
 	combatdummy.entitydata.life = 1
 	combatdummy.entitydata.maxlife = 1
-	function combatdummy.entitydata:receivedamage(fromentitydata, damage, aspects)
-		print("DUMMY RECEIVE DAMAGE", aspects)
-		if aspects.fire == nil then
-			return true
-		end
-		return false
-	end
 end
