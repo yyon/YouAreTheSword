@@ -21470,6 +21470,7 @@ enemy{
 }
 
 enemy{
+  name = "combatdummy",
   layer = 0,
   x = 1408,
   y = 653,
