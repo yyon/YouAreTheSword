@@ -93,9 +93,9 @@ end
 function panel:on_draw(dst_surface)
   	local x, y = self.dst_x, self.dst_y
   	local width, height = dst_surface:get_size()
---  	if x < 0 then
-	x = width/2 + x
---  	end
+  	if x < 0 then
+		x = width + x
+  	end
   	if y < 0 then
     		y = height + y
   	end

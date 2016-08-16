@@ -495,8 +495,8 @@ wall{
 
 enemy{
   layer = 0,
-  x = 744,
-  y = 381,
+  x = 920,
+  y = 373,
   direction = 0,
   breed = "e_slime",
 }
@@ -514,8 +514,8 @@ npc{
 npc{
   name = "tutorial3.sign2",
   layer = 0,
-  x = 1112,
-  y = 181,
+  x = 712,
+  y = 565,
   direction = 3,
   subtype = 1,
   sprite = "sign",
@@ -527,5 +527,15 @@ enemy{
   y = 517,
   direction = 0,
   breed = "a_knight",
+}
+
+npc{
+  name = "tutorial3.sign3",
+  layer = 0,
+  x = 1104,
+  y = 197,
+  direction = 3,
+  subtype = 1,
+  sprite = "sign",
 }
 

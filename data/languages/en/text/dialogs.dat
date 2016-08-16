@@ -423,3 +423,74 @@ If your soul bar gets low, switch to a different person!
 ]]
 }
 
+dialog{
+  id = "tutorial3.sign3",
+  text = [[
+This is the end of the tutorial.
+]]
+}
+
+dialog{
+  id = "tutorialspecial.sign1",
+  text = [[
+Heh, you thought I was just a sign telling you how to complete the tutorial?
+WRONG!
+NEWSCREEN
+I've put a dummy on an impossible to reach island! Now you won't be able to leave this level!
+NEWSCREEN
+...
+NEWSCREEN
+...
+NEWSCREEN
+...
+NEWSCREEN
+You're just standing around?
+NEWSCREEN
+...
+NEWSCREEN
+Well then...
+NEWSCREEN
+...
+NEWSCREEN
+OK I'm bored.
+NEWSCREEN
+You're possessing a mage, right? Mages can use lightning as their special attack.
+Just use ${special} to call lightning down upon the target using your mouse pointer to aim.
+NEWSCREEN
+Just hurry up and go already!
+]]
+}
+
+dialog{
+  id = "tutorialswordtransform.sign1",
+  text = [[
+Oh, this combat dummy? I made it invulnerable to everything but fire.
+NEWSCREEN
+Don't blame me! I was just inventing new combat dummies, and ended up making this one, but now I can't get rid of it!
+NEWSCREEN
+Maybe that mage over there can help.
+]]
+}
+
+dialog{
+  id = "tutorialswordtransform.sign2",
+  text = [[
+This mage has the ability to transform swords into fire swords!
+Press ${swordtransform} to use the ability.
+NEWSCREEN
+You can see your current sword transformation in the top right corner.
+When you swing your sword using ${normal}, it will have that effect.
+]]
+}
+
+dialog{
+  id = "tutorialswordtransform.sign3",
+  text = [[
+Different adventurers have different abilities.
+Hold down ${abilityhelp} to see a description of your abilities.
+It will also pause time while you're reading it.
+NEWSCREEN
+Be sure to not misuse this power or you will cause a time paradox.
+]]
+}
+

@@ -21495,6 +21495,16 @@ enemy{
   breed = "a_knight",
 }
 
+npc{
+  name = "sign1",
+  layer = 0,
+  x = 1360,
+  y = 661,
+  direction = 3,
+  subtype = 1,
+  sprite = "sign",
+}
+
 tile{
   layer = 1,
   x = 64,

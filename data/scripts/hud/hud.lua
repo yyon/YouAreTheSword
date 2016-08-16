@@ -33,23 +33,25 @@ function hud_manager:create(game)
 
 	local panel_builder = require("scripts/hud/panel")
 	
+	local w, h = sol.video.get_quest_size()
+
 	menu = panel_builder:new(game, "normal")
-	menu:set_dst_position(-150,-75)
+	menu:set_dst_position(w/2 + -150,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 
 	local menu = panel_builder:new(game, "block")
-	menu:set_dst_position(-75,-75)
+	menu:set_dst_position(w/2 + -75,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 
 	local menu = panel_builder:new(game, "swordtransform")
-	menu:set_dst_position(0,-75)
+	menu:set_dst_position(w/2 + 0,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 
 	local menu = panel_builder:new(game, "special")
-	menu:set_dst_position(75,-75)
+	menu:set_dst_position(w/2 + 75,-75)
 	hud.elements[#hud.elements + 1] = menu
 	menu.group = 2
 	

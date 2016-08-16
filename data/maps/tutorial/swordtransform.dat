@@ -20572,10 +20572,40 @@ enemy{
 enemy{
   name = "mage",
   layer = 0,
-  x = 728,
-  y = 501,
+  x = 648,
+  y = 661,
   direction = 0,
   breed = "a_mage",
+}
+
+npc{
+  name = "sign1",
+  layer = 0,
+  x = 648,
+  y = 981,
+  direction = 3,
+  subtype = 1,
+  sprite = "sign",
+}
+
+npc{
+  name = "sign2",
+  layer = 0,
+  x = 640,
+  y = 573,
+  direction = 3,
+  subtype = 1,
+  sprite = "sign",
+}
+
+npc{
+  name = "sign3",
+  layer = 0,
+  x = 912,
+  y = 165,
+  direction = 3,
+  subtype = 1,
+  sprite = "sign",
 }
 
 tile{
