@@ -75,6 +75,13 @@ Will you return to Duns Mur?
 }
 
 dialog{
+  id = "ianstestdungeon.map2.1",
+  text = [[
+Everything's ... back to normal, I guess?
+]]
+}
+
+dialog{
   id = "mageboss.map1.1",
   text = [[
 ugh, this place is too quiet.
@@ -116,9 +123,18 @@ Taste my tentacle!
 }
 
 dialog{
+  id = "puzzle2.sign1",
+  text = [[
+You can pass your sword to someone who is offscreen.
+]]
+}
+
+dialog{
   id = "puzzletest.3sign",
   text = [[
 Press the key you used to activate the ability again in order to "lock" the targeting system which allows you to freely move your mouse without changing where you are targeting.
+NEWSCREEN
+You can solve this puzzle by having this mage activate his "lightning" ability when you are already next to the door as the knight.
 ]]
 }
 

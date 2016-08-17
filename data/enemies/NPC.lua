@@ -238,7 +238,9 @@ function PickupState:start()
 		if self.npc.entitydata.stats.movementspeed ~= 0 then
 			local tox, toy = self.npc.target:get_position()
 			if not self.npc.entitydata:canmoveto(tox, toy) then
-				movement = self.npc:pathfind(self.npc.target)
+				if not self.npc:get_map():get_floor() == 1 then
+					movement = self.npc:pathfind(self.npc.target)
+				end
 			else
 				movement = sol.movement.create("target") -- "path_finding")
 				movement:set_speed(self.npc.entitydata.stats.movementspeed)

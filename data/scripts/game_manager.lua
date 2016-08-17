@@ -579,6 +579,9 @@ function tick()
 			if map.nomonstersleft or map.nootheradvs then
 				soulsdrop = 0
 			end
+			if map.foundboss then
+				soulsdrop = 0
+			end
 			hero.entitydata.souls = hero.entitydata.souls - soulsdrop
 			if hero.entitydata.souls < 0 then
 				hero.entitydata.souls = 0

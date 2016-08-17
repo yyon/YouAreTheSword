@@ -17,7 +17,7 @@ Ian's Test Dungeon/2
 Ian's Test Dungeon/3
 puzzletest/3
 puzzletest/4
-DunsMurDungeon/templeruins
+DunsMurDungeon/TempleRuins
 CatDungeon/BossMap
 abductiontest
 spaceship/spaceship_1

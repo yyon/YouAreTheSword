@@ -947,13 +947,17 @@ end
 
 function EntityData:emergencyrescuehero(hero)
 	if hero.isdropped then
-		for entity in hero:get_map():get_entities("") do
-			if entity.entitydata ~= nil then
-				local entitydata = entity.entitydata
-				if entitydata.team == "adventurer" then
-					local x, y = hero:get_position()
-					entity:set_position(x,y)
-					return
+		if hero:get_map():get_floor() == 1 then
+			load()
+		else
+			for entity in hero:get_map():get_entities("") do
+				if entity.entitydata ~= nil then
+					local entitydata = entity.entitydata
+						if entitydata.team == "adventurer" then
+						local x, y = hero:get_position()
+						entity:set_position(x,y)
+						return
+					end
 				end
 			end
 		end
@@ -1946,6 +1950,7 @@ function spaceshipboss:initialize(entity)
 	local basestats = {}
 	self.cantcancel = true
 	self.cantpossess=true
+	self.isboss = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
@@ -1981,6 +1986,7 @@ function mageboss:initialize(entity)
 	self.cantpossess = true
 	self.cantcancel = true
 	self.alwaysrandom = true
+	self.isboss = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
@@ -2022,6 +2028,7 @@ function catboss:initialize(entity)
 	local basestats = {movementspeed=150}
 	self.cantdraweyes = true
 	self.cantpossess = true
+	self.isboss = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
 
@@ -2062,6 +2069,7 @@ function dunsmurclass:initialize(entity)
 	local blockabilities = {ShieldAbility:new(self)}
 	local specialabilities = {PossessAbility:new(self)}
 	local basestats = {}
+	self.isboss = true
 --	self.cantcancel = true
 
 	self.stages = {[0.66] = function() self:stage2() end, [0.33] = function() self:stage3() end}
