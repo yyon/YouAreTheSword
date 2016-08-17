@@ -1649,13 +1649,13 @@ allclasses.skeletonclass = skeletonclass
 function skeletonclass:initialize(entity)
 	local class = "skeleton"
 	local main_sprite = "monsters/skeleton"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {FiringBowAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
 	local blockabilities = {ShieldAbility:new(self)}
 	local specialabilities = {ShieldBashAbility:new(self), GrapplingHookAbility:new(self)}
-	local basestats = {damage=1.5}
+	local basestats = {damage=1.5, defense=0.6}
 	self.undead = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1668,13 +1668,13 @@ allclasses.orcclass = orcclass
 function orcclass:initialize(entity)
 	local class = "orc"
 	local main_sprite = "monsters/orc"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {SwordAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
 	local blockabilities = {ShieldAbility:new(self)}
 	local specialabilities = {ShieldBashAbility:new(self), BombThrowAbility:new(self)}
-	local basestats = {damage=2, warmup=1.5}
+	local basestats = {damage=2, warmup=1.5, defense=0.7}
 	self.cantdraweyes = true
 	self.undead = true
 
@@ -1688,7 +1688,7 @@ allclasses.evilmageclass = evilmageclass
 function evilmageclass:initialize(entity)
 	local class = "evil mage"
 	local main_sprite = "monsters/evilmage"
-	local life = 10
+	local life = 35
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {FireballAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "electric"), TransformAbility:new(self, "fire"), TransformAbility:new(self, "poison")}
@@ -1707,7 +1707,7 @@ allclasses.spiderclass = spiderclass
 function spiderclass:initialize(entity)
 	local class = "spider"
 	local main_sprite = "monsters/spiders/spider" .. string.format("%02d", math.random(1,11))
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local aspects = {poison = {weakness=0.4, time=5000}}
 	local normalabilities = {NormalAbility:new(self, "sword", aspects)}
@@ -1727,13 +1727,13 @@ allclasses.mechclass = mechclass
 function mechclass:initialize(entity)
 	local class = "mech"
 	local main_sprite = "monsters/mech"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {GunAbility:new(self)}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {NothingAbility:new(self)}
-	local basestats = {}
+	local basestats = {defense=0.8}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1746,7 +1746,7 @@ allclasses.beetleclass = beetleclass
 function beetleclass:initialize(entity)
 	local class = "beetle"
 	local main_sprite = "monsters/beetle"
-	local life = 10
+	local life = 15
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self)}
 	local transformabilities = {NothingAbility:new(self)}
@@ -1765,7 +1765,7 @@ allclasses.ghostclass = ghostclass
 function ghostclass:initialize(entity)
 	local class = "ghost"
 	local main_sprite = "monsters/ghost"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {FireballAbility:new(self)}
 	local transformabilities = {SwordAbility:new(self, "fire")}
@@ -1785,13 +1785,13 @@ allclasses.flowerclass = flowerclass
 function flowerclass:initialize(entity)
 	local class = "flower"
 	local main_sprite = "monsters/flower"
-	local life = 20
+	local life = 30
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {SeedShootAbility:new(self)}
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {GrapplingHookAbility:new(self, "vine")}
-	local basestats = {movementspeed=0, damage=2}
+	local basestats = {movementspeed=0, damage=2, defense=0.5}
 	self.cantdraweyes = true
 	self.cantcancel = true
 
@@ -1805,7 +1805,7 @@ allclasses.batclass = batclass
 function batclass:initialize(entity)
 	local class = "bat"
 	local main_sprite = "monsters/bat"
-	local life = 5
+	local life = 10
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self, "casting", {lifesteal=true}), HealAbility:new(self)}
 	local transformabilities = {TransformAbility:new(self, "lifesteal")}
@@ -1824,7 +1824,7 @@ allclasses.beeclass = beeclass
 function beeclass:initialize(entity)
 	local class = "bee"
 	local main_sprite = "monsters/bee"
-	local life = 5
+	local life = 10
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self, "casting")}
 	local transformabilities = {NothingAbility:new(self)}
@@ -1843,7 +1843,7 @@ allclasses.wormclass = wormclass
 function wormclass:initialize(entity)
 	local class = "worm"
 	local main_sprite = "monsters/big_worm"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self, "casting")}
 	local transformabilities = {NothingAbility:new(self)}
@@ -1881,7 +1881,7 @@ allclasses.eyeclass = eyeclass
 function eyeclass:initialize(entity)
 	local class = "floating eyeball"
 	local main_sprite = "monsters/eyeball"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {FireballAbility:new(self, "casting")}
 	local transformabilities = {NothingAbility:new(self)}
@@ -1900,13 +1900,13 @@ allclasses.maskmanclass = maskmanclass
 function maskmanclass:initialize(entity)
 	local class = "mask man"
 	local main_sprite = "monsters/maskman"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self, "casting")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {TeleportAbility:new(self), ShieldAbility:new(self)}
 	local specialabilities = {StompAbility:new(self)}
-	local basestats = {damage=2}
+	local basestats = {damage=2, defense=0.6}
 	self.cantdraweyes = true
 	self.undead = true
 
@@ -1920,13 +1920,13 @@ allclasses.wolfclass = wolfclass
 function wolfclass:initialize(entity)
 	local class = "wolf"
 	local main_sprite = "monsters/wolf"
-	local life = 10
+	local life = 20
 	local team = "monster" -- should be either "adventurer" or "monster" in the final version
 	local normalabilities = {NormalAbility:new(self, "sword")}
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {HasteAbility:new(self), DefenseAbility:new(self)}
-	local basestats = {damage=2}
+	local basestats = {damage=2, defense=0.4}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

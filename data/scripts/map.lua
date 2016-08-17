@@ -444,7 +444,7 @@ function map:getgrid(NODESIZE)
 end
 
 function map:onpuzzle()
-	self:puzzleabilities(self:get_hero())
+	self:puzzleabilities(self:get_hero(), true)
 	self:get_hero().swordtransform = nil
 	for entity in self:get_entities("") do
 		self:puzzleabilities(entity)
@@ -457,7 +457,7 @@ local LightningAbility = require "abilities/lightning"
 local SwordAbility = require "abilities/sword"
 local NothingAbility = require "abilities/nothing"
 
-function map:puzzleabilities(entity)
+function map:puzzleabilities(entity, ishero)
 	if entity.ishero then
 		entity.swordtransform = nil
 	end
@@ -491,6 +491,10 @@ function map:puzzleabilities(entity)
 			entitydata.specialability = a
 		elseif entitydata.theclass == "cleric" then
 			entitydata.swordability = SwordAbility:new(entitydata)
+			entitydata.specialability = NothingAbility:new(entitydata)
+		end
+		if ishero then
+			entitydata.swordability = NothingAbility:new(entitydata)
 			entitydata.specialability = NothingAbility:new(entitydata)
 		end
 	end
