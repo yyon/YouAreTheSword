@@ -990,3 +990,13 @@ wall{
   stops_projectiles = true,
 }
 
+npc{
+  name = "sign1",
+  layer = 0,
+  x = 440,
+  y = 173,
+  direction = 3,
+  subtype = 1,
+  sprite = "sign",
+}
+

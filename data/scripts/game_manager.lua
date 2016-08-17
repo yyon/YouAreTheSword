@@ -585,7 +585,8 @@ function tick()
 			hero.entitydata.souls = hero.entitydata.souls - soulsdrop
 			if hero.entitydata.souls < 0 then
 				hero.entitydata.souls = 0
-				if hero.entitydata.team == "monster" and not game.nodeaths then
+				print("AA", hero.entitydata.actualteam, not game.nodeaths)
+				if hero.entitydata.actualteam == "monster" and not game.nodeaths then
 					hero.entitydata:dropsword()
 				end
 			end

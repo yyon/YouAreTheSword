@@ -73,3 +73,39 @@ enemy{
   breed = "a_mage",
 }
 
+teletransporter{
+  layer = 0,
+  x = -16,
+  y = -24,
+  width = 5040,
+  height = 32,
+  destination_map = "dunsmurmap",
+}
+
+teletransporter{
+  layer = 0,
+  x = 4992,
+  y = -24,
+  width = 64,
+  height = 5072,
+  destination_map = "dunsmurmap",
+}
+
+teletransporter{
+  layer = 0,
+  x = -8,
+  y = 5000,
+  width = 5072,
+  height = 32,
+  destination_map = "dunsmurmap",
+}
+
+teletransporter{
+  layer = 0,
+  x = -16,
+  y = -24,
+  width = 32,
+  height = 5072,
+  destination_map = "dunsmurmap",
+}
+

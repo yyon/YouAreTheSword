@@ -75,9 +75,23 @@ Will you return to Duns Mur?
 }
 
 dialog{
+  id = "dunsmur.sign1",
+  text = [[
+You can use ${throwenemies} to possess enemies.
+]]
+}
+
+dialog{
   id = "ianstestdungeon.map2.1",
   text = [[
 Everything's ... back to normal, I guess?
+]]
+}
+
+dialog{
+  id = "ianstestdungeon.map2.sign1",
+  text = [[
+You can use ${throwenemies} to temporarily possess enemies.
 ]]
 }
 

@@ -1655,7 +1655,7 @@ function skeletonclass:initialize(entity)
 	local transformabilities = {TransformAbility:new(self, "ap"), TransformAbility:new(self, "damage")}
 	local blockabilities = {ShieldAbility:new(self)}
 	local specialabilities = {ShieldBashAbility:new(self), GrapplingHookAbility:new(self)}
-	local basestats = {}
+	local basestats = {damage=1.5}
 	self.undead = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1714,7 +1714,7 @@ function spiderclass:initialize(entity)
 	local transformabilities = {TransformAbility:new(self, "poison")}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {NetAbility:new(self, "spiderweb")}
-	local basestats = {}
+	local basestats = {damage=1.5}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1752,7 +1752,7 @@ function beetleclass:initialize(entity)
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {NothingAbility:new(self)}
-	local basestats = {}
+	local basestats = {damage=1.4}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1771,7 +1771,7 @@ function ghostclass:initialize(entity)
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {TeleportAbility:new(self)}
 	local specialabilities = {StealthAbility:new(self)}
-	local basestats = {movementspeed=100}
+	local basestats = {movementspeed=100, damage=1.3}
 	self.cantdraweyes = true
 	self.undead = true
 
@@ -1791,7 +1791,7 @@ function flowerclass:initialize(entity)
 	local transformabilities = {SwordAbility:new(self, "fire")}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {GrapplingHookAbility:new(self, "vine")}
-	local basestats = {movementspeed=0}
+	local basestats = {movementspeed=0, damage=2}
 	self.cantdraweyes = true
 	self.cantcancel = true
 
@@ -1811,7 +1811,7 @@ function batclass:initialize(entity)
 	local transformabilities = {TransformAbility:new(self, "lifesteal")}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {HealExplosionAbility:new(self)}
-	local basestats = {movementspeed=200, damage=0.8}
+	local basestats = {movementspeed=200, damage=1}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1830,7 +1830,7 @@ function beeclass:initialize(entity)
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {SidestepAbility:new(self)}
 	local specialabilities = {BackstabAbility:new(self)}
-	local basestats = {movementspeed=200, damage=0.8}
+	local basestats = {movementspeed=200, damage=1}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1868,7 +1868,7 @@ function slimeclass:initialize(entity)
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {NothingAbility:new(self)}
-	local basestats = {damage=0.5}
+	local basestats = {}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1887,7 +1887,7 @@ function eyeclass:initialize(entity)
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {TeleportAbility:new(self)}
 	local specialabilities = {LightningBallAbility:new(self)}
-	local basestats = {warmup=0.5, cooldown=0.5}
+	local basestats = {warmup=0.5, cooldown=0.5, damage=1.5}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities
@@ -1906,7 +1906,7 @@ function maskmanclass:initialize(entity)
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {TeleportAbility:new(self), ShieldAbility:new(self)}
 	local specialabilities = {StompAbility:new(self)}
-	local basestats = {}
+	local basestats = {damage=2}
 	self.cantdraweyes = true
 	self.undead = true
 
@@ -1926,7 +1926,7 @@ function wolfclass:initialize(entity)
 	local transformabilities = {NothingAbility:new(self)}
 	local blockabilities = {NothingAbility:new(self)}
 	local specialabilities = {HasteAbility:new(self), DefenseAbility:new(self)}
-	local basestats = {}
+	local basestats = {damage=2}
 	self.cantdraweyes = true
 
 	self.normalabilities, self.transformabilities, self.blockabilities, self.specialabilities = normalabilities, transformabilities, blockabilities, specialabilities

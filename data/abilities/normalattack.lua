@@ -14,8 +14,9 @@ function NormalAbility:initialize(entitydata, anim, aspects)
 		aspects = {}
 	end
 	self.aspects = aspects
+	self.anim = anim
 
-	Ability.initialize(self, entitydata, "Attack", 50, "normal", 300, 0, true, anim)
+	Ability.initialize(self, entitydata, "Attack", 50, "normal", 0, 0, true, anim)
 	
 	self.stats = [[7 dmg]]
 	self.desc = [[Generic attack for enemies]]
@@ -35,7 +36,8 @@ function NormalAbility:doability(tox, toy)
 
 	sol.audio.play_sound("punch")
 
-	self:finish()
+	self.entitydata:setanimation(self.anim)
+	self.endtimer = Effects.SimpleTimer(self.entitydata, 300, function() self:finish() end)
 end
 
 return NormalAbility
